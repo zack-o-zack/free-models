@@ -96,9 +96,10 @@ async function reviewOffers(workspace: string): Promise<void> {
     provider: "fixture-z",
     mappings: { "zeta/beta-free": "zeta/beta" },
   });
+  expect(runFixtureCli(workspace, "reconcile").exitCode).toBe(0);
 }
 
-describe("canonical metadata reconciliation", () => {
+describe("canonical metadata refresh", () => {
   test("enriches active models in one batch and publishes protected schema v2 fields", async () => {
     await withWorkspace(async (workspace) => {
       await reviewOffers(workspace);
@@ -115,12 +116,12 @@ describe("canonical metadata reconciliation", () => {
         },
       });
 
-      const reconciliation = runFixtureCli(workspace, "reconcile", {
+      const refresh = runFixtureCli(workspace, "refresh", {
         metadata: true,
         capture: true,
       });
-      expect(reconciliation.exitCode).toBe(0);
-      expect(decoder.decode(reconciliation.stderr)).toBe("");
+      expect(refresh.exitCode).toBe(0);
+      expect(decoder.decode(refresh.stderr)).toBe("");
 
       const capture = await Bun.file(join(workspace, "metadata-capture.json")).json();
       expect(capture).toEqual([
@@ -191,9 +192,9 @@ describe("canonical metadata reconciliation", () => {
         },
       });
 
-      const reconciliation = runFixtureCli(workspace, "reconcile", { metadata: true });
-      expect(reconciliation.exitCode).toBe(0);
-      const warnings = decoder.decode(reconciliation.stderr);
+      const refresh = runFixtureCli(workspace, "refresh", { metadata: true });
+      expect(refresh.exitCode).toBe(0);
+      const warnings = decoder.decode(refresh.stderr);
       expect(warnings).toContain("omitted 1 active model(s)");
       expect(warnings).toContain("zeta/beta");
       expect(warnings).toContain("ignored 2 out-of-scope result(s) (1 unknown, 1 inactive)");
@@ -225,9 +226,9 @@ describe("canonical metadata reconciliation", () => {
       const canonicalPath = join(workspace, "catalogue/canonical-models.json");
       const before = await Bun.file(canonicalPath).text();
 
-      const reconciliation = runFixtureCli(workspace, "reconcile", { metadata: true });
-      expect(reconciliation.exitCode).toBe(0);
-      expect(decoder.decode(reconciliation.stderr).trim().split("\n")).toEqual([
+      const refresh = runFixtureCli(workspace, "refresh", { metadata: true });
+      expect(refresh.exitCode).toBe(0);
+      expect(decoder.decode(refresh.stderr).trim().split("\n")).toEqual([
         "Canonical metadata refresh failed for 2 active model(s); retaining stale metadata for acme/alpha, zeta/beta: fixture source unavailable",
       ]);
       expect(await Bun.file(canonicalPath).text()).toBe(before);
@@ -243,23 +244,41 @@ describe("canonical metadata reconciliation", () => {
       const canonicalPath = join(workspace, "catalogue/canonical-models.json");
       const before = await Bun.file(canonicalPath).text();
 
-      const reconciliation = runFixtureCli(workspace, "reconcile", {
+      const refresh = runFixtureCli(workspace, "refresh", {
         metadata: true,
         capture: true,
       });
-      expect(reconciliation.exitCode).toBe(0);
+      expect(refresh.exitCode).toBe(1);
+      expect(decoder.decode(refresh.stderr)).toContain(
+        "Cannot continue while 2 provider model(s) are unresolved",
+      );
       expect(await Bun.file(join(workspace, "metadata-capture.json")).exists()).toBe(false);
       expect(await Bun.file(canonicalPath).text()).toBe(before);
     });
   });
 
-  test("keeps pre-feature behavior when no metadata provider is configured", async () => {
+  test("keeps reconciliation offline when a metadata provider is configured", async () => {
     await withWorkspace(async (workspace) => {
       await reviewOffers(workspace);
       const canonicalPath = join(workspace, "catalogue/canonical-models.json");
       const before = await Bun.file(canonicalPath).text();
-      expect(runFixtureCli(workspace, "reconcile").exitCode).toBe(0);
+      expect(
+        runFixtureCli(workspace, "reconcile", { metadata: true, capture: true }).exitCode,
+      ).toBe(0);
+      expect(await Bun.file(join(workspace, "metadata-capture.json")).exists()).toBe(false);
       expect(await Bun.file(canonicalPath).text()).toBe(before);
+    });
+  });
+
+  test("requires a metadata provider for explicit refresh", async () => {
+    await withWorkspace(async (workspace) => {
+      await reviewOffers(workspace);
+      expect(runFixtureCli(workspace, "reconcile").exitCode).toBe(0);
+      const refresh = runFixtureCli(workspace, "refresh");
+      expect(refresh.exitCode).toBe(1);
+      expect(decoder.decode(refresh.stderr)).toContain(
+        "No canonical metadata provider is configured",
+      );
     });
   });
 
@@ -272,7 +291,7 @@ describe("canonical metadata reconciliation", () => {
           "zeta/beta": { second: 2, first: 1 },
         },
       });
-      expect(runFixtureCli(workspace, "reconcile", { metadata: true }).exitCode).toBe(0);
+      expect(runFixtureCli(workspace, "refresh", { metadata: true }).exitCode).toBe(0);
       expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
       const canonicalPath = join(workspace, "catalogue/canonical-models.json");
       const publicPath = join(workspace, "free-models.json");
@@ -285,7 +304,7 @@ describe("canonical metadata reconciliation", () => {
           "acme/alpha": { rank: 1, outer: { a: false, z: true } },
         },
       });
-      expect(runFixtureCli(workspace, "reconcile", { metadata: true }).exitCode).toBe(0);
+      expect(runFixtureCli(workspace, "refresh", { metadata: true }).exitCode).toBe(0);
       expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
       expect(await Bun.file(canonicalPath).text()).toBe(firstCanonical);
       expect(await Bun.file(publicPath).text()).toBe(firstPublic);

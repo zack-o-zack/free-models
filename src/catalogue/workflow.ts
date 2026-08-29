@@ -56,16 +56,23 @@ export async function discover(
 export async function reconcile(
   paths: CataloguePaths,
   providers: readonly ModelProvider[],
-  metadataProvider?: CanonicalMetadataProvider,
 ): Promise<number> {
   const state = await loadCatalogueState(paths, providers);
   const unresolved = computeUnresolved(state);
   const unresolvedCount = countUnresolved(unresolved);
 
-  if (unresolvedCount > 0 || !metadataProvider) {
-    await writeTextAtomically(paths.unresolved, serializeJson(unresolved));
-    return unresolvedCount;
-  }
+  await writeTextAtomically(paths.unresolved, serializeJson(unresolved));
+  return unresolvedCount;
+}
+
+export async function refreshMetadata(
+  paths: CataloguePaths,
+  providers: readonly ModelProvider[],
+  metadataProvider: CanonicalMetadataProvider,
+): Promise<void> {
+  const state = await loadCatalogueState(paths, providers);
+  const unresolved = computeUnresolved(state);
+  assertNoUnresolved(unresolved);
 
   const activeModels = activeCanonicalModels(state);
   let results: ReadonlyMap<string, CanonicalMetadata>;
@@ -78,16 +85,11 @@ export async function reconcile(
     console.warn(
       `Canonical metadata refresh failed for ${activeModels.length} active model(s); retaining stale metadata for ${staleIds.join(", ")}: ${detail}`,
     );
-    await writeTextAtomically(paths.unresolved, serializeJson(unresolved));
-    return 0;
+    return;
   }
 
   const enriched = applyMetadataResults(state.canonicalModels, activeModels, results);
-  await writeTextFilesAtomically([
-    { path: paths.unresolved, contents: serializeJson(unresolved) },
-    { path: paths.canonicalModels, contents: serializeJson(enriched) },
-  ]);
-  return 0;
+  await writeTextAtomically(paths.canonicalModels, serializeJson(enriched));
 }
 
 export async function render(

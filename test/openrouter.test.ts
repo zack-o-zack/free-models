@@ -243,7 +243,7 @@ describe("OpenRouter canonical metadata", () => {
     );
   });
 
-  test("enriches and protects source fields through the reconciliation CLI", async () => {
+  test("enriches and protects source fields through the refresh CLI", async () => {
     await withWorkspace(async (workspace) => {
       expect(runFixtureCli(workspace, validFixturePath).exitCode).toBe(0);
       await writeJson(join(workspace, "catalogue/canonical-models.json"), {
@@ -260,14 +260,14 @@ describe("OpenRouter canonical metadata", () => {
         },
       });
 
-      const reconciliation = Bun.spawnSync({
-        cmd: [process.execPath, fixtureCliPath, "reconcile", "--workspace", workspace],
+      const refresh = Bun.spawnSync({
+        cmd: [process.execPath, fixtureCliPath, "refresh", "--workspace", workspace],
         env: { ...process.env, OPENROUTER_FIXTURE_PATH: validFixturePath },
         stdout: "pipe",
         stderr: "pipe",
       });
-      expect(reconciliation.exitCode).toBe(0);
-      expect(decoder.decode(reconciliation.stderr)).toBe("");
+      expect(refresh.exitCode).toBe(0);
+      expect(decoder.decode(refresh.stderr)).toBe("");
 
       const canonical = await Bun.file(join(workspace, "catalogue/canonical-models.json")).json();
       expect(canonical.models[0]).toEqual({

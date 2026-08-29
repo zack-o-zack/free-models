@@ -53,12 +53,12 @@ jobs:
       - name: Discover provider offers
         run: bun run catalogue:discover
 
-      - name: Render resolved catalogue
+      - name: Refresh and render resolved catalogue
         shell: bash
         run: |
           set -euo pipefail
           if bun -e 'const value = await Bun.file("catalogue/unresolved.json").json(); process.exit(Object.values(value.providers).some((ids) => ids.length > 0) ? 1 : 0)'; then
-            bun run catalogue:reconcile
+            bun run catalogue:refresh
             bun run catalogue:render
           else
             echo "Unresolved offers remain; skipping metadata refresh and retaining the last reviewed public catalogue."

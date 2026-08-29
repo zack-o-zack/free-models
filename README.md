@@ -42,18 +42,24 @@ Canonical IDs normally use the OpenRouter-style `owner/model` form. Temporary mo
 identity is deliberately hidden use `stealth:<campaign-id>`, allowing offers from multiple providers
 to share one identity without assigning ownership to any provider.
 
-Rebuild the unresolved report after reviewing mappings:
+Rebuild the unresolved report after reviewing mappings. This command is offline and deterministic:
 
 ```sh
 bun run catalogue:reconcile
 ```
 
-When every current offer is resolved, reconciliation also refreshes top-level canonical model
-metadata through the registered OpenRouter metadata provider. The provider receives all active
-canonical models in one batch and may reuse their resolved offer metadata. `id` and `name` remain
+When every current offer is resolved, refresh top-level canonical model metadata through the
+registered OpenRouter metadata provider:
+
+```sh
+bun run catalogue:refresh
+```
+
+Metadata refresh is the networked part of the workflow. The provider receives all active canonical
+models in one batch and may reuse their resolved offer metadata. `id` and `name` remain
 maintainer-owned. Every other canonical field is generated and is replaced by a successful refresh.
-If OpenRouter fails or omits a model, reconciliation warns and retains that model's complete stale
-record so publication can continue.
+If OpenRouter fails or omits a model, refresh warns and retains that model's complete stale record so
+publication can continue.
 
 Rendering fails while any active offer remains unresolved. Once reconciliation produces an empty
 provider map, render the public catalogue:
@@ -75,6 +81,7 @@ The underlying CLI also accepts explicit paths:
 ```sh
 bun run catalogue discover --workspace ./temporary-workspace
 bun run catalogue reconcile --workspace ./temporary-workspace
+bun run catalogue refresh --workspace ./temporary-workspace
 bun run catalogue render --output ./free-models.json
 bun run catalogue check --input ./free-models.json
 ```
@@ -130,8 +137,10 @@ uses the fixed `automation/free-model-catalogue` branch and updates one pull req
 normalized catalogue changes. Existing commits on that branch are retained, so maintainers can add
 canonical models and mappings directly to the pull request. If unresolved offers remain, the public
 catalogue is not regenerated and pull-request validation stays red until those identities are
-reviewed. After resolution, automation reconciles metadata before rendering and includes canonical
-registry changes in the generated update.
+reviewed. After resolution, scheduled automation refreshes metadata before rendering and includes
+canonical registry changes in the generated update. Pull-request and merged-branch checks only run
+offline reconciliation, rendering, and validation, so changing upstream metadata cannot make a
+reviewed commit fail nondeterministically.
 
 This automation becomes operational only after this private repository has a GitHub remote and
 GitHub Actions is allowed to create branches and pull requests with `GITHUB_TOKEN`. Configure the

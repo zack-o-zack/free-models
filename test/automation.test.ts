@@ -27,17 +27,17 @@ function runGate(workspace: string, script: string) {
 }
 
 describe("catalogue automation", () => {
-  test("scheduled discovery gates reconciliation and renders afterward", async () => {
+  test("scheduled discovery gates metadata refresh and renders afterward", async () => {
     const source = await workflow("catalogue-discovery.yml");
     const discoverIndex = source.indexOf("bun run catalogue:discover");
     const unresolvedGateIndex = source.indexOf("if bun -e");
-    const reconcileIndex = source.indexOf("bun run catalogue:reconcile");
+    const refreshIndex = source.indexOf("bun run catalogue:refresh");
     const renderIndex = source.indexOf("bun run catalogue:render");
 
     expect(discoverIndex).toBeGreaterThan(-1);
     expect(unresolvedGateIndex).toBeGreaterThan(discoverIndex);
-    expect(reconcileIndex).toBeGreaterThan(unresolvedGateIndex);
-    expect(renderIndex).toBeGreaterThan(reconcileIndex);
+    expect(refreshIndex).toBeGreaterThan(unresolvedGateIndex);
+    expect(renderIndex).toBeGreaterThan(refreshIndex);
     expect(source).toContain(
       "catalogue/canonical-models.json catalogue/snapshots catalogue/unresolved.json free-models.json",
     );
@@ -61,19 +61,18 @@ describe("catalogue automation", () => {
     }
   });
 
-  test("review workflows detect uncommitted metadata and render changes", async () => {
+  test("review workflows reconcile and render without live metadata refresh", async () => {
     for (const name of ["pull-request.yml", "merged-catalogue.yml"]) {
       const source = await workflow(name);
       const reconcileIndex = source.indexOf("bun run catalogue:reconcile");
-      const canonicalDiffIndex = source.indexOf(
-        "git diff --quiet -- catalogue/canonical-models.json catalogue/unresolved.json",
-      );
+      const unresolvedDiffIndex = source.indexOf("git diff --quiet -- catalogue/unresolved.json");
       const renderIndex = source.indexOf("bun run catalogue:render");
       const publicDiffIndex = source.indexOf("git diff --quiet -- free-models.json");
 
       expect(reconcileIndex, name).toBeGreaterThan(-1);
-      expect(canonicalDiffIndex, name).toBeGreaterThan(reconcileIndex);
-      expect(renderIndex, name).toBeGreaterThan(canonicalDiffIndex);
+      expect(source, name).not.toContain("bun run catalogue:refresh");
+      expect(unresolvedDiffIndex, name).toBeGreaterThan(reconcileIndex);
+      expect(renderIndex, name).toBeGreaterThan(unresolvedDiffIndex);
       expect(publicDiffIndex, name).toBeGreaterThan(renderIndex);
     }
   });
