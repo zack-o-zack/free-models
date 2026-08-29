@@ -1,3 +1,4 @@
+import type { ActiveCanonicalModel } from "../metadata/provider.ts";
 import type { ModelProvider } from "../providers/provider.ts";
 import type { CataloguePaths } from "./files.ts";
 import { compareStrings, readValidatedJson } from "./files.ts";
@@ -15,6 +16,12 @@ export interface CatalogueState {
   readonly canonicalModels: CanonicalModels;
   readonly mappings: ReadonlyMap<string, ProviderMappings>;
   readonly snapshots: ReadonlyMap<string, ProviderSnapshot>;
+}
+
+export interface ResolvedCatalogueOffer {
+  readonly canonicalId: string;
+  readonly provider: string;
+  readonly offer: ProviderSnapshot["offers"][number];
 }
 
 export async function loadCatalogueState(
@@ -86,6 +93,59 @@ export function countUnresolved(unresolved: Unresolved): number {
     (total, modelIds) => total + modelIds.length,
     0,
   );
+}
+
+export function activeCanonicalModels(state: CatalogueState): readonly ActiveCanonicalModel[] {
+  const canonicalById = new Map(state.canonicalModels.models.map((model) => [model.id, model]));
+  const offersByCanonicalId = new Map<string, ActiveCanonicalModel["offers"][number][]>();
+
+  for (const { canonicalId, provider, offer } of resolvedCatalogueOffers(state)) {
+    const resolvedOffers = offersByCanonicalId.get(canonicalId) ?? [];
+    resolvedOffers.push({ provider, offer });
+    offersByCanonicalId.set(canonicalId, resolvedOffers);
+  }
+
+  return [...offersByCanonicalId]
+    .sort(([left], [right]) => compareStrings(left, right))
+    .map(([canonicalId, offers]) => {
+      const model = canonicalById.get(canonicalId);
+      if (!model) {
+        throw new Error(`Cannot enrich unknown canonical model ${canonicalId}`);
+      }
+      return {
+        model,
+        offers: offers.sort((left, right) => {
+          const providerOrder = compareStrings(left.provider, right.provider);
+          return providerOrder !== 0
+            ? providerOrder
+            : compareStrings(left.offer.model_id, right.offer.model_id);
+        }),
+      };
+    });
+}
+
+export function resolvedCatalogueOffers(state: CatalogueState): readonly ResolvedCatalogueOffer[] {
+  const resolvedOffers: ResolvedCatalogueOffer[] = [];
+
+  for (const [providerId, snapshot] of [...state.snapshots].sort(([left], [right]) =>
+    compareStrings(left, right),
+  )) {
+    const mappings = state.mappings.get(providerId)?.mappings ?? {};
+    for (const offer of snapshot.offers) {
+      const canonicalId = mappings[offer.model_id];
+      if (!canonicalId) {
+        throw new Error(`Cannot resolve offer ${providerId}/${offer.model_id}`);
+      }
+      resolvedOffers.push({ canonicalId, provider: providerId, offer });
+    }
+  }
+
+  return resolvedOffers.sort((left, right) => {
+    const providerOrder = compareStrings(left.provider, right.provider);
+    return providerOrder !== 0
+      ? providerOrder
+      : compareStrings(left.offer.model_id, right.offer.model_id);
+  });
 }
 
 function validateProviderRegistry(providers: readonly ModelProvider[]): void {

@@ -48,6 +48,13 @@ Rebuild the unresolved report after reviewing mappings:
 bun run catalogue:reconcile
 ```
 
+When every current offer is resolved, reconciliation also refreshes top-level canonical model
+metadata through the registered OpenRouter metadata provider. The provider receives all active
+canonical models in one batch and may reuse their resolved offer metadata. `id` and `name` remain
+maintainer-owned. Every other canonical field is generated and is replaced by a successful refresh.
+If OpenRouter fails or omits a model, reconciliation warns and retains that model's complete stale
+record so publication can continue.
+
 Rendering fails while any active offer remains unresolved. Once reconciliation produces an empty
 provider map, render the public catalogue:
 
@@ -84,6 +91,11 @@ Anonymous catalogue access is a current upstream behavior, not a permanence guar
 fails clearly if the request, response envelope, model identity, JSON safety, or model-ID uniqueness
 contract changes.
 
+The same adapter is explicitly registered as the canonical metadata provider. It reuses complete
+metadata from a current, reviewed OpenRouter offer. For an active model offered only by another
+provider, it looks for an exact OpenRouter model ID matching the reviewed canonical ID. It does not
+add, remove, or interpret `:free` suffixes.
+
 ## OpenCode Zen discovery
 
 The registered `opencode` adapter reads the official Zen documentation and anonymous live model
@@ -98,8 +110,11 @@ This strict join includes provider-declared free offers without a `-free` suffix
 Discovery fails when either table changes shape, identities become ambiguous, a documented free row
 does not join, or the live model response is malformed.
 
-The check command validates canonical records, provider snapshots, mappings, the unresolved report,
-the public schema, and the byte-for-byte deterministic render. Run all local checks with:
+The public catalogue uses schema version 2. Each model requires `id`, `name`, and `providers`, and
+may contain additional JSON-safe top-level fields copied from its canonical record. Rendering and
+checking are offline: the check command validates canonical records, provider snapshots, mappings,
+the unresolved report, the public schema, and the byte-for-byte deterministic render. Run all local
+checks with:
 
 ```sh
 bun run check
@@ -115,7 +130,8 @@ uses the fixed `automation/free-model-catalogue` branch and updates one pull req
 normalized catalogue changes. Existing commits on that branch are retained, so maintainers can add
 canonical models and mappings directly to the pull request. If unresolved offers remain, the public
 catalogue is not regenerated and pull-request validation stays red until those identities are
-reviewed.
+reviewed. After resolution, automation reconciles metadata before rendering and includes canonical
+registry changes in the generated update.
 
 This automation becomes operational only after this private repository has a GitHub remote and
 GitHub Actions is allowed to create branches and pull requests with `GITHUB_TOKEN`. Configure the

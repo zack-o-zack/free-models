@@ -30,9 +30,9 @@ jobs:
         run: |
           set -euo pipefail
           bun run catalogue:reconcile
-          if ! git diff --quiet -- catalogue/unresolved.json; then
-            git diff -- catalogue/unresolved.json
-            echo "The unresolved report is stale. Commit the reconciled report." >&2
+          if ! git diff --quiet -- catalogue/canonical-models.json catalogue/unresolved.json; then
+            git diff -- catalogue/canonical-models.json catalogue/unresolved.json
+            echo "The canonical registry or unresolved report is stale. Commit the reconciled files." >&2
             exit 1
           fi
 

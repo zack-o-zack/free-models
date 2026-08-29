@@ -8,19 +8,22 @@ import {
   reconcile,
   render as renderCatalogue,
 } from "./catalogue/workflow.ts";
+import type { CanonicalMetadataProvider } from "./metadata/provider.ts";
 import type { ModelProvider } from "./providers/provider.ts";
-import { providerRegistry } from "./providers/registry.ts";
+import { metadataProvider, providerRegistry } from "./providers/registry.ts";
 
 type Command = "check" | "discover" | "reconcile" | "render";
 
 export interface CliDependencies {
   readonly providers: readonly ModelProvider[];
   readonly renderer: CatalogueRenderer;
+  readonly metadataProvider?: CanonicalMetadataProvider;
 }
 
 const defaultDependencies: CliDependencies = {
   providers: providerRegistry,
   renderer: new JsonCatalogueRenderer(),
+  metadataProvider,
 };
 
 function usage(): string {
@@ -54,7 +57,11 @@ export async function runCli(
   }
 
   if (command === "reconcile") {
-    const unresolvedCount = await reconcile(paths, dependencies.providers);
+    const unresolvedCount = await reconcile(
+      paths,
+      dependencies.providers,
+      dependencies.metadataProvider,
+    );
     console.log(`Reconciled catalogue; ${unresolvedCount} unresolved model(s)`);
     return;
   }

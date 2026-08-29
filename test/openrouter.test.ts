@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import type { ActiveCanonicalModel } from "../src/metadata/provider.ts";
 import {
   OPENROUTER_API_BASE_URL,
   OPENROUTER_MODELS_URL,
@@ -31,7 +32,7 @@ async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "openrouter-catalogue-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
-  await writeJson(join(workspace, "free-models.json"), { schema_version: 1, models: [] });
+  await writeJson(join(workspace, "free-models.json"), { schema_version: 2, models: [] });
   return workspace;
 }
 
@@ -149,5 +150,142 @@ describe("OpenRouter discovery", () => {
       fetch: async () => new Response("private upstream response"),
     });
     expect(invalidJson.discover()).rejects.toThrow("OpenRouter models response is not valid JSON");
+  });
+});
+
+describe("OpenRouter canonical metadata", () => {
+  test("reuses a resolved OpenRouter offer without another request", async () => {
+    const provider = new OpenRouterProvider({
+      fetch: async () => {
+        throw new Error("unexpected request");
+      },
+    });
+    const activeModels: ActiveCanonicalModel[] = [
+      {
+        model: { id: "alpha/model", name: "Reviewed Alpha" },
+        offers: [
+          {
+            provider: "openrouter",
+            offer: {
+              model_id: "alpha/model:free",
+              connection: { base_url: OPENROUTER_API_BASE_URL },
+              metadata: {
+                name: "Source Alpha",
+                description: "Complete source description",
+                nested: { preserved: true },
+              },
+            },
+          },
+        ],
+      },
+    ];
+
+    expect(await provider.enrich(activeModels)).toEqual(
+      new Map([
+        [
+          "alpha/model",
+          {
+            name: "Source Alpha",
+            description: "Complete source description",
+            nested: { preserved: true },
+          },
+        ],
+      ]),
+    );
+  });
+
+  test("retrieves an exact reviewed canonical identity for another offer provider", async () => {
+    const provider = new OpenRouterProvider({
+      fetch: async (url) => {
+        expect(url).toBe(OPENROUTER_MODELS_URL);
+        return new Response(
+          JSON.stringify({
+            data: [
+              {
+                id: "paid/model",
+                name: "OpenRouter source name",
+                description: "Source field",
+                nested: { exact: true },
+              },
+              { id: "paid/model:free", description: "must not be suffix-matched" },
+            ],
+          }),
+        );
+      },
+    });
+    const activeModels: ActiveCanonicalModel[] = [
+      {
+        model: { id: "paid/model", name: "Reviewed name" },
+        offers: [
+          {
+            provider: "another-provider",
+            offer: {
+              model_id: "unrelated-source-id",
+              connection: {},
+              metadata: {},
+            },
+          },
+        ],
+      },
+    ];
+
+    expect(await provider.enrich(activeModels)).toEqual(
+      new Map([
+        [
+          "paid/model",
+          {
+            name: "OpenRouter source name",
+            description: "Source field",
+            nested: { exact: true },
+          },
+        ],
+      ]),
+    );
+  });
+
+  test("enriches and protects source fields through the reconciliation CLI", async () => {
+    await withWorkspace(async (workspace) => {
+      expect(runFixtureCli(workspace, validFixturePath).exitCode).toBe(0);
+      await writeJson(join(workspace, "catalogue/canonical-models.json"), {
+        models: [
+          { id: "zeta/model", name: "Reviewed Zeta" },
+          { id: "alpha/model", name: "Reviewed Alpha", removed: true },
+        ],
+      });
+      await writeJson(join(workspace, "catalogue/mappings/openrouter.json"), {
+        provider: "openrouter",
+        mappings: {
+          "alpha/model:free": "alpha/model",
+          "zeta/model:free": "zeta/model",
+        },
+      });
+
+      const reconciliation = Bun.spawnSync({
+        cmd: [process.execPath, fixtureCliPath, "reconcile", "--workspace", workspace],
+        env: { ...process.env, OPENROUTER_FIXTURE_PATH: validFixturePath },
+        stdout: "pipe",
+        stderr: "pipe",
+      });
+      expect(reconciliation.exitCode).toBe(0);
+      expect(decoder.decode(reconciliation.stderr)).toBe("");
+
+      const canonical = await Bun.file(join(workspace, "catalogue/canonical-models.json")).json();
+      expect(canonical.models[0]).toEqual({
+        id: "alpha/model",
+        name: "Reviewed Alpha",
+        architecture: {
+          input_modalities: ["text", "image"],
+          output_modalities: ["text"],
+        },
+        pricing: { completion: "0", prompt: "0" },
+        supported_parameters: ["tools", "temperature"],
+      });
+      expect(canonical.models[1]).toEqual({
+        id: "zeta/model",
+        name: "Reviewed Zeta",
+        nullable: null,
+        pricing: { completion: "0", prompt: "0" },
+      });
+    });
   });
 });
