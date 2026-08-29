@@ -42,7 +42,7 @@
     },
     "dots-studio/dots-3-note-preview": {
       "architecture": {
-        "input_modalities": ["text", "image"],
+        "input_modalities": ["image", "text"],
         "instruct_type": null,
         "modality": "text+image->text",
         "output_modalities": ["text"],
@@ -240,7 +240,7 @@
     },
     "meta/muse-spark-1.2-contributor": {
       "architecture": {
-        "input_modalities": ["text", "image", "video", "file", "audio"],
+        "input_modalities": ["audio", "file", "image", "text", "video"],
         "instruct_type": null,
         "modality": "text+image+file+audio+video->text",
         "output_modalities": ["text"],
@@ -255,7 +255,7 @@
       "reasoning": {
         "default_effort": "medium",
         "mandatory": true,
-        "supported_efforts": ["xhigh", "high", "medium", "low", "minimal"]
+        "supported_efforts": ["high", "low", "medium", "minimal", "xhigh"]
       },
       "supported_parameters": [
         "include_reasoning",
@@ -377,7 +377,7 @@
     },
     "minimax/minimax-m3": {
       "architecture": {
-        "input_modalities": ["text", "image", "video"],
+        "input_modalities": ["image", "text", "video"],
         "instruct_type": null,
         "modality": "text+image+video->text",
         "output_modalities": ["text"],
@@ -529,7 +529,7 @@
     },
     "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": {
       "architecture": {
-        "input_modalities": ["text", "audio", "image", "video"],
+        "input_modalities": ["audio", "image", "text", "video"],
         "instruct_type": null,
         "modality": "text+image+audio+video->text",
         "output_modalities": ["text"],
@@ -589,7 +589,7 @@
         "default_effort": "medium",
         "default_enabled": true,
         "mandatory": false,
-        "supported_efforts": ["medium", "low"],
+        "supported_efforts": ["low", "medium"],
         "supports_max_tokens": true
       },
       "supported_parameters": [
@@ -723,7 +723,7 @@
     },
     "nvidia/nemotron-3.5-content-safety": {
       "architecture": {
-        "input_modalities": ["text", "image"],
+        "input_modalities": ["image", "text"],
         "instruct_type": null,
         "modality": "text+image->text",
         "output_modalities": ["text"],
@@ -937,7 +937,7 @@
     },
     "thinkingmachines/inkling": {
       "architecture": {
-        "input_modalities": ["text", "image", "audio"],
+        "input_modalities": ["audio", "image", "text"],
         "instruct_type": null,
         "modality": "text+image+audio->text",
         "output_modalities": ["text"],
@@ -1010,7 +1010,7 @@
         "default_effort": "high",
         "default_enabled": true,
         "mandatory": false,
-        "supported_efforts": ["max", "high", "medium", "low", "minimal", "none"]
+        "supported_efforts": ["high", "low", "max", "medium", "minimal", "none"]
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -1034,7 +1034,7 @@
     },
     "thinkingmachines/inkling-small": {
       "architecture": {
-        "input_modalities": ["text", "image", "audio"],
+        "input_modalities": ["audio", "image", "text"],
         "instruct_type": null,
         "modality": "text+image+audio->text",
         "output_modalities": ["text"],
@@ -1057,7 +1057,7 @@
         "default_effort": "high",
         "default_enabled": true,
         "mandatory": false,
-        "supported_efforts": ["max", "high", "medium", "low", "minimal", "none"]
+        "supported_efforts": ["high", "low", "max", "medium", "minimal", "none"]
       },
       "supported_parameters": [
         "frequency_penalty",
@@ -1082,7 +1082,7 @@
     },
     "xiaomi/mimo-v2.5": {
       "architecture": {
-        "input_modalities": ["text", "audio", "image", "video"],
+        "input_modalities": ["audio", "image", "text", "video"],
         "instruct_type": null,
         "modality": "text+image+audio+video->text",
         "output_modalities": ["text"],
@@ -1321,7 +1321,7 @@
         "default_effort": "high",
         "default_enabled": true,
         "mandatory": false,
-        "supported_efforts": ["xhigh", "high"]
+        "supported_efforts": ["high", "xhigh"]
       },
       "supported_parameters": [
         "frequency_penalty",

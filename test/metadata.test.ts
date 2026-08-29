@@ -33,6 +33,11 @@ const providerFixtures = {
         connection: { base_url: "https://z.example.test/v1" },
         metadata: { owned_by: "delta" },
       },
+      {
+        model_id: "stealth/campaign-free",
+        connection: { base_url: "https://z.example.test/v1" },
+        metadata: { owned_by: "stealth" },
+      },
     ],
   },
 };
@@ -47,14 +52,20 @@ const upstreamCatalogue = {
         input_modalities: ["text"],
         modality: "text->text",
       },
-      benchmarks: { artificial_analysis: { coding_index: 55.5, agentic_index: 10.5 } },
+      benchmarks: {
+        artificial_analysis: { coding_index: 55.5, agentic_index: 10.5 },
+        design_arena: [
+          { arena: "models", category: "website", elo: 1322, rank: 5, win_rate: 56.9 },
+          { arena: "agents", category: "webapps", elo: 1252, rank: 11, win_rate: 56.5 },
+        ],
+      },
       context_length: 128000,
       created: 1700000000,
       description: "Alpha model",
       hugging_face_id: "acme/alpha",
       knowledge_cutoff: "2025-01",
       reasoning: { mandatory: false },
-      supported_parameters: ["temperature", "tools"],
+      supported_parameters: ["tools", "temperature", "seed"],
       name: "Acme: Alpha",
       pricing: { prompt: "0", completion: "0" },
       top_provider: { context_length: 128000 },
@@ -94,6 +105,12 @@ const upstreamCatalogue = {
       context_length: 8192,
       description: "Inactive model",
     },
+    {
+      id: "stealth:free",
+      canonical_slug: "stealth-free-20260101",
+      context_length: 4096,
+      description: "Upstream variant sharing the stealth base",
+    },
   ],
 };
 
@@ -106,14 +123,20 @@ const expectedSnapshot = {
         modality: "text->text",
         output_modalities: ["text"],
       },
-      benchmarks: { artificial_analysis: { agentic_index: 10.5, coding_index: 55.5 } },
+      benchmarks: {
+        artificial_analysis: { agentic_index: 10.5, coding_index: 55.5 },
+        design_arena: [
+          { arena: "agents", category: "webapps", elo: 1252, rank: 11, win_rate: 56.5 },
+          { arena: "models", category: "website", elo: 1322, rank: 5, win_rate: 56.9 },
+        ],
+      },
       context_length: 128000,
       created: 1700000000,
       description: "Alpha model",
       hugging_face_id: "acme/alpha",
       knowledge_cutoff: "2025-01",
       reasoning: { mandatory: false },
-      supported_parameters: ["temperature", "tools"],
+      supported_parameters: ["seed", "temperature", "tools"],
     },
     "vendor/gamma": {
       architecture: { input_modalities: ["text"], output_modalities: ["text"] },
@@ -180,6 +203,7 @@ async function reviewAllOffers(workspace: string): Promise<void> {
     models: [
       { id: "acme/alpha", name: "Alpha" },
       { id: "delta/missing", name: "Missing" },
+      { id: "stealth:campaign", name: "Campaign" },
       { id: "stealth/inactive", name: "Inactive" },
       { id: "vendor/gamma", name: "Gamma" },
       { id: "zeta/beta", name: "Beta" },
@@ -196,6 +220,7 @@ async function reviewAllOffers(workspace: string): Promise<void> {
     provider: "fixture-z",
     mappings: {
       "delta/none-free": "delta/missing",
+      "stealth/campaign-free": "stealth:campaign",
       "zeta/beta-free": "zeta/beta",
     },
   });
@@ -222,7 +247,12 @@ describe("canonical metadata enrichment", () => {
 
       const snapshotPath = join(workspace, "catalogue/metadata/openrouter.json");
       const snapshotText = await Bun.file(snapshotPath).text();
-      expect(JSON.parse(snapshotText)).toEqual(expectedSnapshot);
+      const parsedSnapshot = JSON.parse(snapshotText) as {
+        models: Record<string, unknown>;
+      };
+      expect(parsedSnapshot).toEqual(expectedSnapshot);
+      expect(parsedSnapshot.models["stealth:campaign"]).toBeUndefined();
+      expect(parsedSnapshot.models["stealth/inactive"]).toBeUndefined();
 
       expect(runMetadataFixtureCli(workspace, "enrich").exitCode).toBe(0);
       expect(await Bun.file(snapshotPath).text()).toBe(snapshotText);
@@ -317,13 +347,15 @@ describe("canonical metadata enrichment", () => {
       expect(publicCatalogue.models.map((model) => model.id)).toEqual([
         "acme/alpha",
         "delta/missing",
+        "stealth:campaign",
         "vendor/gamma",
         "zeta/beta",
       ]);
       expect(publicCatalogue.models[0]?.metadata).toEqual(expectedSnapshot.models["acme/alpha"]);
       expect(publicCatalogue.models[1]?.metadata).toBeNull();
-      expect(publicCatalogue.models[2]?.metadata).toEqual(expectedSnapshot.models["vendor/gamma"]);
-      expect(publicCatalogue.models[3]?.metadata).toEqual(expectedSnapshot.models["zeta/beta"]);
+      expect(publicCatalogue.models[2]?.metadata).toBeNull();
+      expect(publicCatalogue.models[3]?.metadata).toEqual(expectedSnapshot.models["vendor/gamma"]);
+      expect(publicCatalogue.models[4]?.metadata).toEqual(expectedSnapshot.models["zeta/beta"]);
       expect(publicCatalogue.models[0]?.providers).toEqual({
         "fixture-a": {
           offers: [

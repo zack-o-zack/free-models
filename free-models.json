@@ -225,8 +225,8 @@
       "metadata": {
         "architecture": {
           "input_modalities": [
-            "text",
-            "image"
+            "image",
+            "text"
           ],
           "instruct_type": null,
           "modality": "text+image->text",
@@ -967,11 +967,11 @@
       "metadata": {
         "architecture": {
           "input_modalities": [
-            "text",
-            "image",
-            "video",
+            "audio",
             "file",
-            "audio"
+            "image",
+            "text",
+            "video"
           ],
           "instruct_type": null,
           "modality": "text+image+file+audio+video->text",
@@ -990,11 +990,11 @@
           "default_effort": "medium",
           "mandatory": true,
           "supported_efforts": [
-            "xhigh",
             "high",
-            "medium",
             "low",
-            "minimal"
+            "medium",
+            "minimal",
+            "xhigh"
           ]
         },
         "supported_parameters": [
@@ -1281,8 +1281,8 @@
       "metadata": {
         "architecture": {
           "input_modalities": [
-            "text",
             "image",
+            "text",
             "video"
           ],
           "instruct_type": null,
@@ -1825,9 +1825,9 @@
       "metadata": {
         "architecture": {
           "input_modalities": [
-            "text",
             "audio",
             "image",
+            "text",
             "video"
           ],
           "instruct_type": null,
@@ -1981,8 +1981,8 @@
           "default_enabled": true,
           "mandatory": false,
           "supported_efforts": [
-            "medium",
-            "low"
+            "low",
+            "medium"
           ],
           "supports_max_tokens": true
         },
@@ -2375,8 +2375,8 @@
       "metadata": {
         "architecture": {
           "input_modalities": [
-            "text",
-            "image"
+            "image",
+            "text"
           ],
           "instruct_type": null,
           "modality": "text+image->text",
@@ -2945,9 +2945,9 @@
       "metadata": {
         "architecture": {
           "input_modalities": [
-            "text",
+            "audio",
             "image",
-            "audio"
+            "text"
           ],
           "instruct_type": null,
           "modality": "text+image+audio->text",
@@ -3024,10 +3024,10 @@
           "default_enabled": true,
           "mandatory": false,
           "supported_efforts": [
-            "max",
             "high",
-            "medium",
             "low",
+            "max",
+            "medium",
             "minimal",
             "none"
           ]
@@ -3200,9 +3200,9 @@
       "metadata": {
         "architecture": {
           "input_modalities": [
-            "text",
+            "audio",
             "image",
-            "audio"
+            "text"
           ],
           "instruct_type": null,
           "modality": "text+image+audio->text",
@@ -3229,10 +3229,10 @@
           "default_enabled": true,
           "mandatory": false,
           "supported_efforts": [
-            "max",
             "high",
-            "medium",
             "low",
+            "max",
+            "medium",
             "minimal",
             "none"
           ]
@@ -3356,9 +3356,9 @@
       "metadata": {
         "architecture": {
           "input_modalities": [
-            "text",
             "audio",
             "image",
+            "text",
             "video"
           ],
           "instruct_type": null,
@@ -3627,8 +3627,8 @@
           "default_enabled": true,
           "mandatory": false,
           "supported_efforts": [
-            "xhigh",
-            "high"
+            "high",
+            "xhigh"
           ]
         },
         "supported_parameters": [

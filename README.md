@@ -110,14 +110,16 @@ Each published model in `free-models.json` carries a `metadata` field maintained
 metadata source. The source role is decoupled from offer providers: OpenRouter currently fills it,
 but either side can be swapped without touching the other. Enrichment resolves every currently free
 canonical model against the source catalogue by exact identifier, then exact canonical slug, then a
-unique base-normalized identifier match, and stores the result in a committed
+base-normalized identifier match that deterministically picks the lexically smallest upstream
+variant when several collapse onto one base. Variant suffixes are never stripped from stealth
+campaign identities. The result is stored in a committed
 `catalogue/metadata/<source>.json` snapshot.
 
 The published `metadata` object uses a fixed field set: `architecture`, `benchmarks`,
 `context_length`, `created`, `description`, `hugging_face_id`, `knowledge_cutoff`, `reasoning`, and
-`supported_parameters`. Values are copied verbatim from the source; fields the source did not
-publish are `null`. Models the source cannot resolve publish `metadata: null`. No annotations,
-hints, or timestamps are added to the published values.
+`supported_parameters`. Values are copied verbatim from the source without per-field type
+enforcement; fields the source did not publish are `null`. Models the source cannot resolve publish
+`metadata: null`. No annotations, hints, or timestamps are added to the published values.
 
 Benchmark values are source-published scores mirrored as of the snapshot date. They are indicative
 only and carry no cross-model comparability guarantee. Enrichment never fails the catalogue: when

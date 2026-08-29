@@ -1,6 +1,6 @@
 import type { MetadataEntry } from "../metadata-sources/metadata-source.ts";
-import { compareStrings, sortJsonObject } from "./files.ts";
-import type { MetadataSnapshot, ModelMetadata } from "./schema.ts";
+import { compareStrings } from "./files.ts";
+import type { JsonValue, MetadataSnapshot, ModelMetadata } from "./schema.ts";
 
 export function resolveMetadataEntry(
   canonicalId: string,
@@ -35,7 +35,7 @@ export function buildMetadataSnapshot(
   for (const canonicalId of canonicalIds) {
     const entry = resolveMetadataEntry(canonicalId, entries);
     if (entry) {
-      models[canonicalId] = sortJsonObject(entry.metadata);
+      models[canonicalId] = deepSortJsonValue(entry.metadata) as ModelMetadata;
     }
   }
 
@@ -43,7 +43,25 @@ export function buildMetadataSnapshot(
 }
 
 export function baseModelId(id: string): string {
-  return id.replace(/:[^:]*$/, "").replace(/-\d{8}$/, "");
+  const colonIndex = id.lastIndexOf(":");
+  const withoutVariant =
+    colonIndex > 0 && id.slice(0, colonIndex).includes("/") ? id.slice(0, colonIndex) : id;
+  return withoutVariant.replace(/-\d{8}$/, "");
+}
+
+function deepSortJsonValue<T extends JsonValue>(value: T): T {
+  if (Array.isArray(value)) {
+    const sorted = value.map((child) => deepSortJsonValue(child));
+    const ordered = [...sorted].sort((left, right) =>
+      compareStrings(JSON.stringify(left), JSON.stringify(right)),
+    );
+    return ordered as T;
+  }
+  if (value !== null && typeof value === "object") {
+    const entries = Object.entries(value).sort(([left], [right]) => compareStrings(left, right));
+    return Object.fromEntries(entries.map(([key, child]) => [key, deepSortJsonValue(child)])) as T;
+  }
+  return value;
 }
 
 function lexicalFirst(entries: readonly MetadataEntry[]): MetadataEntry {
