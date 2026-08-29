@@ -1,4 +1,12 @@
 {
   "provider": "opencode",
-  "mappings": {}
+  "mappings": {
+    "big-pickle": "stealth:big-pickle",
+    "hy3-free": "tencent/hy3",
+    "ling-3.0-flash-fin-free": "inclusionai/ling-3.0-flash-fin",
+    "mimo-v2.5-free": "xiaomi/mimo-v2.5",
+    "muse-spark-1.2-contributor-free": "meta/muse-spark-1.2-contributor",
+    "nemotron-3-ultra-free": "nvidia/nemotron-3-ultra-550b-a55b",
+    "nemotron-3.5-lightning-free": "nvidia/nemotron-3.5-lightning"
+  }
 }

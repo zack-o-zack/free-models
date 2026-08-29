@@ -1,4 +1,29 @@
 {
   "provider": "openrouter",
-  "mappings": {}
+  "mappings": {
+    "cohere/north-mini-code:free": "cohere/north-mini-code",
+    "deepgram/flux-tts:free": "deepgram/flux-tts",
+    "dots-studio/dots-3-note-preview:free": "dots-studio/dots-3-note-preview",
+    "fish-audio/s2.1-pro-free:free": "fish-audio/s2.1-pro-free",
+    "google/gemma-4-26b-a4b-it:free": "google/gemma-4-26b-a4b-it",
+    "google/gemma-4-31b-it:free": "google/gemma-4-31b-it",
+    "inclusionai/ling-3.0-flash-fin:free": "inclusionai/ling-3.0-flash-fin",
+    "liquid/lfm-2.5-2.6b:free": "liquid/lfm-2.5-2.6b",
+    "liquid/lfm-2.5-embedding-350m:free": "liquid/lfm-2.5-embedding-350m",
+    "minimax/minimax-m2.7:free": "minimax/minimax-m2.7",
+    "minimax/minimax-m3:free": "minimax/minimax-m3",
+    "nvidia/llama-nemotron-embed-vl-1b-v2:free": "nvidia/llama-nemotron-embed-vl-1b-v2",
+    "nvidia/llama-nemotron-rerank-vl-1b-v2:free": "nvidia/llama-nemotron-rerank-vl-1b-v2",
+    "nvidia/nemotron-3-embed-1b:free": "nvidia/nemotron-3-embed-1b",
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+    "nvidia/nemotron-3-super-120b-a12b:free": "nvidia/nemotron-3-super-120b-a12b",
+    "nvidia/nemotron-3-ultra-550b-a55b:free": "nvidia/nemotron-3-ultra-550b-a55b",
+    "nvidia/nemotron-3.5-content-safety:free": "nvidia/nemotron-3.5-content-safety",
+    "nvidia/nemotron-3.5-lightning:free": "nvidia/nemotron-3.5-lightning",
+    "poolside/laguna-s-2.1:free": "poolside/laguna-s-2.1",
+    "poolside/laguna-xs-2.1:free": "poolside/laguna-xs-2.1",
+    "thinkingmachines/inkling-small:free": "thinkingmachines/inkling-small",
+    "thinkingmachines/inkling:free": "thinkingmachines/inkling",
+    "z-ai/glm-5.2:free": "z-ai/glm-5.2"
+  }
 }
