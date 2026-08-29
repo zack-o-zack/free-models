@@ -1,0 +1,17 @@
+repos:
+  - repo: local
+    hooks:
+      - id: biome-safe-fixes
+        name: Biome safe fixes
+        entry: bun run biome check --write --no-errors-on-unmatched
+        language: system
+        files: '\.(?:js|jsx|ts|tsx|json|jsonc)$'
+
+  - repo: https://github.com/scanaislop/aislop
+    rev: 647c86974f64e0494d0411621b6cf312b114e047
+    hooks:
+      - id: aislop
+        # The source release does not build its dist/ entrypoint in a pre-commit Node environment.
+        # Use the matching exact package version installed by Bun.
+        entry: bun run aislop scan --staged
+        language: system
