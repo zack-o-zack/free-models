@@ -70,6 +70,9 @@ describe("catalogue automation", () => {
       const publicDiffIndex = source.indexOf("git diff --quiet -- free-models.json");
 
       expect(reconcileIndex, name).toBeGreaterThan(-1);
+      expect(source, name).toContain("quality:\n    name: Repository quality gates");
+      expect(source, name).toContain("catalogue:\n    name: Validate catalogue");
+      expect(source, name).not.toContain("needs:");
       expect(source, name).not.toContain("bun run catalogue:refresh");
       expect(unresolvedDiffIndex, name).toBeGreaterThan(reconcileIndex);
       expect(renderIndex, name).toBeGreaterThan(unresolvedDiffIndex);
