@@ -1,8 +1,7 @@
 # Free Model Catalogue
 
-This repository builds a deterministic catalogue of free AI model offers. The first executable
-slice contains the versioned public envelope and an empty model collection. Provider discovery and
-human-owned model mapping are added in later tickets.
+This repository builds a deterministic catalogue of free AI model offers. Provider adapters find
+offers, while maintainers explicitly decide which provider IDs represent the same canonical model.
 
 ## Requirements
 
@@ -18,7 +17,35 @@ pre-commit install
 
 On the first checkout, use `bun install` if the lockfile has not been created yet.
 
-## Catalogue commands
+## Catalogue workflow
+
+Run every registered provider and update its normalized snapshot:
+
+```sh
+bun run catalogue:discover
+```
+
+New provider model IDs appear in `catalogue/unresolved.json`. Define reviewed IDs and display names
+in `catalogue/canonical-models.json`, then map each provider model in
+`catalogue/mappings/<provider>.json`. Mapping files contain only provider-to-canonical identity:
+
+```json
+{
+  "provider": "example",
+  "mappings": {
+    "provider-model-id": "owner/model"
+  }
+}
+```
+
+Rebuild the unresolved report after reviewing mappings:
+
+```sh
+bun run catalogue:reconcile
+```
+
+Rendering fails while any active offer remains unresolved. Once reconciliation produces an empty
+provider map, render the public catalogue:
 
 Render the catalogue to `free-models.json`:
 
@@ -35,11 +62,14 @@ bun run catalogue:check
 The underlying CLI also accepts explicit paths:
 
 ```sh
+bun run catalogue discover --workspace ./temporary-workspace
+bun run catalogue reconcile --workspace ./temporary-workspace
 bun run catalogue render --output ./free-models.json
 bun run catalogue check --input ./free-models.json
 ```
 
-Run all local checks:
+The check command validates canonical records, provider snapshots, mappings, the unresolved report,
+the public schema, and the byte-for-byte deterministic render. Run all local checks with:
 
 ```sh
 bun run check

@@ -6,6 +6,8 @@
   "packageManager": "bun@1.4.0",
   "scripts": {
     "catalogue": "bun run src/cli.ts",
+    "catalogue:discover": "bun run src/cli.ts discover",
+    "catalogue:reconcile": "bun run src/cli.ts reconcile",
     "catalogue:render": "bun run src/cli.ts render",
     "catalogue:check": "bun run src/cli.ts check",
     "format": "biome format --write .",

@@ -60,7 +60,7 @@ describe("catalogue CLI", () => {
       const checkRun = runCli(["check", "--input", invalidPath]);
       expect(checkRun.exitCode).toBe(1);
       expect(decoder.decode(checkRun.stderr)).toContain(
-        "Catalogue does not match schema version 1",
+        "Public catalogue does not match schema version 1",
       );
     });
   });
