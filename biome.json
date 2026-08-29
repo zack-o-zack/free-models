@@ -9,6 +9,7 @@
     "includes": [
       "**",
       "!!.scratch",
+      "!!catalogue/canonical-models.json",
       "!!catalogue/snapshots",
       "!!catalogue/unresolved.json",
       "!!free-models.json"

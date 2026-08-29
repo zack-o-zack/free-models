@@ -1,4 +1,9 @@
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import type {
+  ActiveCanonicalModel,
+  CanonicalMetadata,
+  CanonicalMetadataProvider,
+} from "../metadata/provider.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
@@ -19,7 +24,7 @@ export interface OpenRouterProviderOptions {
   readonly fetch?: FetchModels;
 }
 
-export class OpenRouterProvider implements ModelProvider {
+export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvider {
   readonly id = "openrouter";
 
   readonly #fetch: FetchModels;
@@ -29,6 +34,57 @@ export class OpenRouterProvider implements ModelProvider {
   }
 
   async discover(): Promise<readonly DiscoveredOffer[]> {
+    const models = await this.#loadModels();
+    const offers: DiscoveredOffer[] = [];
+
+    for (const model of models) {
+      const modelId = model.id as string;
+      if (OPENROUTER_NON_MODEL_IDS.has(modelId) || !modelId.endsWith(OPENROUTER_FREE_SUFFIX)) {
+        continue;
+      }
+
+      offers.push({
+        model_id: modelId,
+        connection: { base_url: OPENROUTER_API_BASE_URL },
+        metadata: withoutId(model),
+      });
+    }
+
+    return offers;
+  }
+
+  async enrich(
+    models: readonly ActiveCanonicalModel[],
+  ): Promise<ReadonlyMap<string, CanonicalMetadata>> {
+    const metadataByCanonicalId = new Map<string, CanonicalMetadata>();
+    const modelsWithoutOpenRouterOffer: ActiveCanonicalModel[] = [];
+
+    for (const activeModel of models) {
+      const openRouterOffer = activeModel.offers.find(({ provider }) => provider === this.id);
+      if (openRouterOffer) {
+        metadataByCanonicalId.set(activeModel.model.id, openRouterOffer.offer.metadata);
+      } else {
+        modelsWithoutOpenRouterOffer.push(activeModel);
+      }
+    }
+
+    if (modelsWithoutOpenRouterOffer.length === 0) {
+      return metadataByCanonicalId;
+    }
+
+    const sourceModels = await this.#loadModels();
+    const sourceById = new Map(sourceModels.map((model) => [model.id as string, model]));
+    for (const { model } of modelsWithoutOpenRouterOffer) {
+      const sourceModel = sourceById.get(model.id);
+      if (sourceModel) {
+        metadataByCanonicalId.set(model.id, withoutId(sourceModel));
+      }
+    }
+
+    return metadataByCanonicalId;
+  }
+
+  async #loadModels(): Promise<readonly Record<string, JsonValue>[]> {
     const response = await this.#requestModels();
     const payload = await this.#readPayload(response);
     const envelope = jsonObjectSchema.safeParse(payload);
@@ -41,7 +97,7 @@ export class OpenRouterProvider implements ModelProvider {
     }
 
     const seenModelIds = new Set<string>();
-    const offers: DiscoveredOffer[] = [];
+    const parsedModels: Record<string, JsonValue>[] = [];
 
     for (const [index, candidate] of models.entries()) {
       const modelResult = jsonObjectSchema.safeParse(candidate);
@@ -63,18 +119,10 @@ export class OpenRouterProvider implements ModelProvider {
       }
       seenModelIds.add(modelId);
 
-      if (OPENROUTER_NON_MODEL_IDS.has(modelId) || !modelId.endsWith(OPENROUTER_FREE_SUFFIX)) {
-        continue;
-      }
-
-      offers.push({
-        model_id: modelId,
-        connection: { base_url: OPENROUTER_API_BASE_URL },
-        metadata: withoutId(model),
-      });
+      parsedModels.push(model);
     }
 
-    return offers;
+    return parsedModels;
   }
 
   async #requestModels(): Promise<HttpResponse> {

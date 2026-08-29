@@ -6,21 +6,25 @@ import {
   check as checkCatalogue,
   discover,
   reconcile,
+  refreshMetadata,
   render as renderCatalogue,
 } from "./catalogue/workflow.ts";
+import type { CanonicalMetadataProvider } from "./metadata/provider.ts";
 import type { ModelProvider } from "./providers/provider.ts";
-import { providerRegistry } from "./providers/registry.ts";
+import { metadataProvider, providerRegistry } from "./providers/registry.ts";
 
-type Command = "check" | "discover" | "reconcile" | "render";
+type Command = "check" | "discover" | "reconcile" | "refresh" | "render";
 
 export interface CliDependencies {
   readonly providers: readonly ModelProvider[];
   readonly renderer: CatalogueRenderer;
+  readonly metadataProvider?: CanonicalMetadataProvider;
 }
 
 const defaultDependencies: CliDependencies = {
   providers: providerRegistry,
   renderer: new JsonCatalogueRenderer(),
+  metadataProvider,
 };
 
 function usage(): string {
@@ -28,6 +32,7 @@ function usage(): string {
     "Usage:",
     "  bun run catalogue discover [--workspace <path>]",
     "  bun run catalogue reconcile [--workspace <path>]",
+    "  bun run catalogue refresh [--workspace <path>]",
     "  bun run catalogue render [--workspace <path>] [--output <path>]",
     "  bun run catalogue check [--workspace <path>] [--input <path>]",
   ].join("\n");
@@ -59,6 +64,15 @@ export async function runCli(
     return;
   }
 
+  if (command === "refresh") {
+    if (!dependencies.metadataProvider) {
+      throw new Error("No canonical metadata provider is configured");
+    }
+    await refreshMetadata(paths, dependencies.providers, dependencies.metadataProvider);
+    console.log("Refreshed canonical metadata");
+    return;
+  }
+
   if (command === "render") {
     const outputPath = resolve(
       options.output ?? join(paths.workspace, dependencies.renderer.defaultFileName),
@@ -77,7 +91,11 @@ export async function runCli(
 
 function isCommand(command: string | undefined): command is Command {
   return (
-    command === "check" || command === "discover" || command === "reconcile" || command === "render"
+    command === "check" ||
+    command === "discover" ||
+    command === "reconcile" ||
+    command === "refresh" ||
+    command === "render"
   );
 }
 

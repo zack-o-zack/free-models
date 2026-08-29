@@ -2,6 +2,7 @@ import { join } from "node:path";
 import { JsonCatalogueRenderer } from "../../src/catalogue/render.ts";
 import { runCli } from "../../src/cli.ts";
 import { defineProviderRegistry } from "../../src/providers/provider.ts";
+import { FixtureMetadataProvider } from "./fixture-metadata-provider.ts";
 import { FixtureProvider } from "./fixture-provider.ts";
 
 const fixtureDirectory = process.env.CATALOGUE_FIXTURE_DIRECTORY;
@@ -14,9 +15,15 @@ const providers = defineProviderRegistry(
   new FixtureProvider("fixture-a", join(fixtureDirectory, "fixture-a.json")),
 );
 
+const metadataFixturePath = process.env.CATALOGUE_METADATA_FIXTURE_PATH;
+const metadataProvider = metadataFixturePath
+  ? new FixtureMetadataProvider(metadataFixturePath, process.env.CATALOGUE_METADATA_CAPTURE_PATH)
+  : undefined;
+
 runCli(process.argv.slice(2), {
   providers,
   renderer: new JsonCatalogueRenderer(),
+  ...(metadataProvider ? { metadataProvider } : {}),
 }).catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
   console.error(message);

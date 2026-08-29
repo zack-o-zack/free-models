@@ -24,6 +24,7 @@ const provider = new OpenRouterProvider({
 runCli(process.argv.slice(2), {
   providers: [provider],
   renderer: new JsonCatalogueRenderer(),
+  metadataProvider: provider,
 }).catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
   console.error(message);

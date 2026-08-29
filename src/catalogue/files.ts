@@ -77,11 +77,20 @@ export interface TextFileUpdate {
   readonly contents: string;
 }
 
+export interface AtomicWriteOperations {
+  rename(source: string, destination: string): Promise<void>;
+}
+
+const defaultAtomicWriteOperations: AtomicWriteOperations = { rename };
+
 /**
  * Stages every changed file before replacing any target and restores replaced targets if a rename
  * fails. Byte-identical targets are left untouched.
  */
-export async function writeTextFilesAtomically(updates: readonly TextFileUpdate[]): Promise<void> {
+export async function writeTextFilesAtomically(
+  updates: readonly TextFileUpdate[],
+  operations: AtomicWriteOperations = defaultAtomicWriteOperations,
+): Promise<void> {
   const targetPaths = new Set<string>();
   const changedUpdates: Array<TextFileUpdate & { existed: boolean }> = [];
 
@@ -126,7 +135,7 @@ export async function writeTextFilesAtomically(updates: readonly TextFileUpdate[
     const installed: typeof staged = [];
     try {
       for (const update of staged) {
-        await rename(update.temporaryPath, update.path);
+        await operations.rename(update.temporaryPath, update.path);
         installed.push(update);
       }
     } catch (error) {
@@ -134,7 +143,7 @@ export async function writeTextFilesAtomically(updates: readonly TextFileUpdate[
       for (const update of installed.reverse()) {
         try {
           if (update.existed) {
-            await rename(update.backupPath, update.path);
+            await operations.rename(update.backupPath, update.path);
           } else {
             await rm(update.path, { force: true });
           }

@@ -53,14 +53,15 @@ jobs:
       - name: Discover provider offers
         run: bun run catalogue:discover
 
-      - name: Render resolved catalogue
+      - name: Refresh and render resolved catalogue
         shell: bash
         run: |
           set -euo pipefail
           if bun -e 'const value = await Bun.file("catalogue/unresolved.json").json(); process.exit(Object.values(value.providers).some((ids) => ids.length > 0) ? 1 : 0)'; then
+            bun run catalogue:refresh
             bun run catalogue:render
           else
-            echo "Unresolved offers remain; retaining the last reviewed public catalogue."
+            echo "Unresolved offers remain; skipping metadata refresh and retaining the last reviewed public catalogue."
           fi
 
       - name: Detect semantic changes
@@ -68,7 +69,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          changed=$(git status --porcelain -- catalogue/snapshots catalogue/unresolved.json free-models.json)
+          changed=$(git status --porcelain -- catalogue/canonical-models.json catalogue/snapshots catalogue/unresolved.json free-models.json)
           if [[ -z "$changed" ]]; then
             if git rev-parse --verify --quiet MERGE_HEAD >/dev/null; then
               git merge --abort
@@ -85,7 +86,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- catalogue/snapshots catalogue/unresolved.json free-models.json
+          git add -- catalogue/canonical-models.json catalogue/snapshots catalogue/unresolved.json free-models.json
           git commit -m "chore: update free model catalogue"
           git push origin "$AUTOMATION_BRANCH"
 

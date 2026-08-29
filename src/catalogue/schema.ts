@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const CATALOGUE_SCHEMA_VERSION = 2 as const;
+
 export type JsonValue =
   | boolean
   | null
@@ -8,7 +10,7 @@ export type JsonValue =
   | JsonValue[]
   | { [key: string]: JsonValue };
 
-const jsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
+export const jsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
   z.union([
     z.boolean(),
     z.null(),
@@ -42,16 +44,16 @@ export const providerSnapshotSchema = z
   })
   .strict();
 
+export const canonicalModelSchema = z
+  .object({
+    id: canonicalModelIdSchema,
+    name: z.string().trim().min(1),
+  })
+  .catchall(jsonValueSchema);
+
 export const canonicalModelsSchema = z
   .object({
-    models: z.array(
-      z
-        .object({
-          id: canonicalModelIdSchema,
-          name: z.string().trim().min(1),
-        })
-        .strict(),
-    ),
+    models: z.array(canonicalModelSchema),
   })
   .strict();
 
@@ -70,7 +72,7 @@ export const unresolvedSchema = z
 
 export const catalogueSchema = z
   .object({
-    schema_version: z.literal(1),
+    schema_version: z.literal(CATALOGUE_SCHEMA_VERSION),
     models: z.array(
       z
         .object({
@@ -85,12 +87,13 @@ export const catalogueSchema = z
               .strict(),
           ),
         })
-        .strict(),
+        .catchall(jsonValueSchema),
     ),
   })
   .strict();
 
 export type Catalogue = z.infer<typeof catalogueSchema>;
+export type CanonicalModel = z.infer<typeof canonicalModelSchema>;
 export type CanonicalModels = z.infer<typeof canonicalModelsSchema>;
 export type DiscoveredOffer = z.infer<typeof offerSchema>;
 export type ProviderMappings = z.infer<typeof providerMappingsSchema>;

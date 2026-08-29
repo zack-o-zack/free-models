@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import { catalogueSchema } from "../src/catalogue/schema.ts";
 import { providerRegistry } from "../src/providers/registry.ts";
 
 const cliPath = resolve(import.meta.dir, "../src/cli.ts");
@@ -44,6 +45,29 @@ async function prepareEmptyWorkspace(workspace: string): Promise<void> {
 }
 
 describe("catalogue CLI", () => {
+  test("schema version 2 accepts open JSON fields and requires catalogue-owned fields", () => {
+    const openModel = {
+      id: "acme/model",
+      name: "Acme Model",
+      description: "Source description",
+      nested: { values: [true, null, 3] },
+      providers: {},
+    };
+
+    expect(catalogueSchema.safeParse({ schema_version: 2, models: [openModel] }).success).toBe(
+      true,
+    );
+    expect(
+      catalogueSchema.safeParse({
+        schema_version: 2,
+        models: [{ ...openModel, providers: undefined }],
+      }).success,
+    ).toBe(false);
+    expect(catalogueSchema.safeParse({ schema_version: 1, models: [openModel] }).success).toBe(
+      false,
+    );
+  });
+
   test("render writes a deterministic empty catalogue", async () => {
     await withTemporaryDirectory(async (directory) => {
       const outputPath = join(directory, "free-models.json");
@@ -56,7 +80,7 @@ describe("catalogue CLI", () => {
       expect(secondRun.exitCode).toBe(0);
       const secondOutput = await Bun.file(outputPath).text();
 
-      expect(firstOutput).toBe('{\n  "schema_version": 1,\n  "models": []\n}\n');
+      expect(firstOutput).toBe('{\n  "schema_version": 2,\n  "models": []\n}\n');
       expect(secondOutput).toBe(firstOutput);
     });
   });
@@ -75,12 +99,25 @@ describe("catalogue CLI", () => {
   test("check rejects a structurally invalid catalogue", async () => {
     await withTemporaryDirectory(async (directory) => {
       const invalidPath = join(directory, "invalid.json");
-      await Bun.write(invalidPath, '{"schema_version":1,"models":{}}\n');
+      await Bun.write(invalidPath, '{"schema_version":2,"models":{}}\n');
 
       const checkRun = runCli(directory, ["check", "--input", invalidPath]);
       expect(checkRun.exitCode).toBe(1);
       expect(decoder.decode(checkRun.stderr)).toContain(
-        "Public catalogue does not match schema version 1",
+        "Public catalogue does not match schema version 2",
+      );
+    });
+  });
+
+  test("check rejects the retired version 1 schema", async () => {
+    await withTemporaryDirectory(async (directory) => {
+      const versionOnePath = join(directory, "version-one.json");
+      await Bun.write(versionOnePath, '{"schema_version":1,"models":[]}\n');
+
+      const checkRun = runCli(directory, ["check", "--input", versionOnePath]);
+      expect(checkRun.exitCode).toBe(1);
+      expect(decoder.decode(checkRun.stderr)).toContain(
+        "Public catalogue does not match schema version 2",
       );
     });
   });

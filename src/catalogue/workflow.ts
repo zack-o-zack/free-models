@@ -1,5 +1,11 @@
 import { z } from "zod";
+import type {
+  ActiveCanonicalModel,
+  CanonicalMetadata,
+  CanonicalMetadataProvider,
+} from "../metadata/provider.ts";
 import type { ModelProvider } from "../providers/provider.ts";
+import { canonicalModelWithGeneratedFields } from "./canonical.ts";
 import type { CataloguePaths } from "./files.ts";
 import {
   compareStrings,
@@ -11,14 +17,22 @@ import {
 } from "./files.ts";
 import type { CatalogueRenderer } from "./render.ts";
 import {
+  CATALOGUE_SCHEMA_VERSION,
+  type CanonicalModels,
   catalogueSchema,
   type DiscoveredOffer,
+  jsonObjectSchema,
   offerSchema,
   type ProviderSnapshot,
   providerIdSchema,
   unresolvedSchema,
 } from "./schema.ts";
-import { computeUnresolved, countUnresolved, loadCatalogueState } from "./state.ts";
+import {
+  activeCanonicalModels,
+  computeUnresolved,
+  countUnresolved,
+  loadCatalogueState,
+} from "./state.ts";
 
 export async function discover(
   paths: CataloguePaths,
@@ -45,8 +59,37 @@ export async function reconcile(
 ): Promise<number> {
   const state = await loadCatalogueState(paths, providers);
   const unresolved = computeUnresolved(state);
+  const unresolvedCount = countUnresolved(unresolved);
+
   await writeTextAtomically(paths.unresolved, serializeJson(unresolved));
-  return countUnresolved(unresolved);
+  return unresolvedCount;
+}
+
+export async function refreshMetadata(
+  paths: CataloguePaths,
+  providers: readonly ModelProvider[],
+  metadataProvider: CanonicalMetadataProvider,
+): Promise<void> {
+  const state = await loadCatalogueState(paths, providers);
+  const unresolved = computeUnresolved(state);
+  assertNoUnresolved(unresolved);
+
+  const activeModels = activeCanonicalModels(state);
+  let results: ReadonlyMap<string, CanonicalMetadata>;
+  try {
+    results = await metadataProvider.enrich(activeModels);
+    validateMetadataResults(results);
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : "unknown failure";
+    const staleIds = activeModels.map(({ model }) => model.id).sort(compareStrings);
+    console.warn(
+      `Canonical metadata refresh failed for ${activeModels.length} active model(s); retaining stale metadata for ${staleIds.join(", ")}: ${detail}`,
+    );
+    return;
+  }
+
+  const enriched = applyMetadataResults(state.canonicalModels, activeModels, results);
+  await writeTextAtomically(paths.canonicalModels, serializeJson(enriched));
 }
 
 export async function render(
@@ -93,12 +136,58 @@ export async function check(
 
   const result = catalogueSchema.safeParse(actualPublic);
   if (!result.success) {
-    throw new Error(`Public catalogue does not match schema version 1: ${inputPath}`);
+    throw new Error(
+      `Public catalogue does not match schema version ${CATALOGUE_SCHEMA_VERSION}: ${inputPath}`,
+    );
   }
 
   if (actualPublicText !== renderer.render(state)) {
     throw new Error("Public catalogue is stale; run the render command");
   }
+}
+
+function validateMetadataResults(results: ReadonlyMap<string, CanonicalMetadata>): void {
+  for (const [canonicalId, metadata] of results) {
+    if (typeof canonicalId !== "string" || !jsonObjectSchema.safeParse(metadata).success) {
+      throw new Error(`metadata provider returned invalid metadata for ${String(canonicalId)}`);
+    }
+  }
+}
+
+function applyMetadataResults(
+  canonicalModels: CanonicalModels,
+  activeModels: readonly ActiveCanonicalModel[],
+  results: ReadonlyMap<string, CanonicalMetadata>,
+): CanonicalModels {
+  const activeIds = new Set(activeModels.map(({ model }) => model.id));
+  const knownIds = new Set(canonicalModels.models.map(({ id }) => id));
+  const missingIds = [...activeIds].filter((id) => !results.has(id)).sort(compareStrings);
+  const extraIds = [...results.keys()].filter((id) => !activeIds.has(id)).sort(compareStrings);
+
+  if (missingIds.length > 0) {
+    console.warn(
+      `Canonical metadata refresh omitted ${missingIds.length} active model(s); retaining stale metadata: ${missingIds.join(", ")}`,
+    );
+  }
+  if (extraIds.length > 0) {
+    const unknownCount = extraIds.filter((id) => !knownIds.has(id)).length;
+    const inactiveCount = extraIds.length - unknownCount;
+    console.warn(
+      `Canonical metadata refresh ignored ${extraIds.length} out-of-scope result(s) (${unknownCount} unknown, ${inactiveCount} inactive): ${extraIds.join(", ")}`,
+    );
+  }
+
+  const models = canonicalModels.models
+    .map((model) => {
+      if (!activeIds.has(model.id)) {
+        return model;
+      }
+      const metadata = results.get(model.id);
+      return metadata ? canonicalModelWithGeneratedFields(model, metadata) : model;
+    })
+    .sort((left, right) => compareStrings(left.id, right.id));
+
+  return { models };
 }
 
 async function discoverSnapshots(
