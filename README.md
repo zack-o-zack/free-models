@@ -48,6 +48,12 @@ Rebuild the unresolved report after reviewing mappings:
 bun run catalogue:reconcile
 ```
 
+Refresh canonical model metadata from the registered metadata source:
+
+```sh
+bun run catalogue:enrich
+```
+
 Rendering fails while any active offer remains unresolved. Once reconciliation produces an empty
 provider map, render the public catalogue:
 
@@ -97,6 +103,26 @@ catalogue responses.
 This strict join includes provider-declared free offers without a `-free` suffix, such as Big Pickle.
 Discovery fails when either table changes shape, identities become ambiguous, a documented free row
 does not join, or the live model response is malformed.
+
+## Canonical model metadata
+
+Each published model in `free-models.json` carries a `metadata` field maintained by an independent
+metadata source. The source role is decoupled from offer providers: OpenRouter currently fills it,
+but either side can be swapped without touching the other. Enrichment resolves every currently free
+canonical model against the source catalogue by exact identifier, then exact canonical slug, then a
+unique base-normalized identifier match, and stores the result in a committed
+`catalogue/metadata/<source>.json` snapshot.
+
+The published `metadata` object uses a fixed field set: `architecture`, `benchmarks`,
+`context_length`, `created`, `description`, `hugging_face_id`, `knowledge_cutoff`, `reasoning`, and
+`supported_parameters`. Values are copied verbatim from the source; fields the source did not
+publish are `null`. Models the source cannot resolve publish `metadata: null`. No annotations,
+hints, or timestamps are added to the published values.
+
+Benchmark values are source-published scores mirrored as of the snapshot date. They are indicative
+only and carry no cross-model comparability guarantee. Enrichment never fails the catalogue: when
+the source is unreachable or returns an unexpected shape, the last approved snapshot stays
+authoritative and the transaction continues.
 
 The check command validates canonical records, provider snapshots, mappings, the unresolved report,
 the public schema, and the byte-for-byte deterministic render. Run all local checks with:

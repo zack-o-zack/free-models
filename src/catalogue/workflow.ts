@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { ModelMetadataSource } from "../metadata-sources/metadata-source.ts";
 import type { ModelProvider } from "../providers/provider.ts";
 import type { CataloguePaths } from "./files.ts";
 import {
@@ -6,9 +7,11 @@ import {
   readValidatedJson,
   serializeJson,
   sortJsonObject,
+  type TextFileUpdate,
   writeTextAtomically,
   writeTextFilesAtomically,
 } from "./files.ts";
+import { buildMetadataSnapshot } from "./metadata.ts";
 import type { CatalogueRenderer } from "./render.ts";
 import {
   catalogueSchema,
@@ -18,7 +21,12 @@ import {
   providerIdSchema,
   unresolvedSchema,
 } from "./schema.ts";
-import { computeUnresolved, countUnresolved, loadCatalogueState } from "./state.ts";
+import {
+  type CatalogueState,
+  computeUnresolved,
+  countUnresolved,
+  loadCatalogueState,
+} from "./state.ts";
 
 export async function discover(
   paths: CataloguePaths,
@@ -49,13 +57,68 @@ export async function reconcile(
   return countUnresolved(unresolved);
 }
 
+export interface MetadataSourceFailure {
+  readonly sourceId: string;
+  readonly message: string;
+}
+
+export interface EnrichResult {
+  readonly resolvedCount: number;
+  readonly failures: readonly MetadataSourceFailure[];
+}
+
+export async function enrich(
+  paths: CataloguePaths,
+  providers: readonly ModelProvider[],
+  sources: readonly ModelMetadataSource[],
+): Promise<EnrichResult> {
+  const state = await loadCatalogueState(paths, providers);
+  const canonicalIds = computeFreeCanonicalIds(state);
+
+  const updates: TextFileUpdate[] = [];
+  const failures: MetadataSourceFailure[] = [];
+  let resolvedCount = 0;
+
+  for (const source of [...sources].sort((left, right) => compareStrings(left.id, right.id))) {
+    try {
+      const entries = await source.fetchEntries();
+      const snapshot = buildMetadataSnapshot(source.id, canonicalIds, entries);
+      resolvedCount += Object.keys(snapshot.models).length;
+      updates.push({ path: paths.metadata(source.id), contents: serializeJson(snapshot) });
+    } catch (error) {
+      failures.push({
+        sourceId: source.id,
+        message: error instanceof Error ? error.message : "unknown failure",
+      });
+    }
+  }
+
+  await writeTextFilesAtomically(updates);
+  return { resolvedCount, failures };
+}
+
+function computeFreeCanonicalIds(state: CatalogueState): string[] {
+  const canonicalIds = new Set<string>();
+  for (const [providerId, snapshot] of state.snapshots) {
+    const mappings = state.mappings.get(providerId)?.mappings ?? {};
+    for (const offer of snapshot.offers) {
+      const canonicalId = mappings[offer.model_id];
+      if (canonicalId !== undefined) {
+        canonicalIds.add(canonicalId);
+      }
+    }
+  }
+  return [...canonicalIds].sort(compareStrings);
+}
+
 export async function render(
   paths: CataloguePaths,
   providers: readonly ModelProvider[],
   renderer: CatalogueRenderer,
+  sources: readonly ModelMetadataSource[],
   outputPath: string = paths.publicCatalogue,
 ): Promise<void> {
-  const state = await loadCatalogueState(paths, providers);
+  const state = await loadCatalogueState(paths, providers, new Map(), sources);
   assertNoUnresolved(computeUnresolved(state));
   await writeTextAtomically(outputPath, renderer.render(state));
 }
@@ -64,9 +127,10 @@ export async function check(
   paths: CataloguePaths,
   providers: readonly ModelProvider[],
   renderer: CatalogueRenderer,
+  sources: readonly ModelMetadataSource[],
   inputPath: string = paths.publicCatalogue,
 ): Promise<void> {
-  const state = await loadCatalogueState(paths, providers);
+  const state = await loadCatalogueState(paths, providers, new Map(), sources);
   const expectedUnresolved = computeUnresolved(state);
   const actualUnresolved = await readValidatedJson(
     paths.unresolved,

@@ -133,6 +133,7 @@ describe("manual identity workflow", () => {
           {
             id: "acme/alpha",
             name: "Alpha",
+            metadata: null,
             providers: {
               "fixture-a": {
                 offers: [
@@ -162,6 +163,7 @@ describe("manual identity workflow", () => {
           {
             id: "zeta/beta",
             name: "Beta",
+            metadata: null,
             providers: {
               "fixture-z": {
                 offers: [

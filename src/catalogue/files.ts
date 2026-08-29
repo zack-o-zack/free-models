@@ -7,10 +7,12 @@ export interface CataloguePaths {
   readonly workspace: string;
   readonly canonicalModels: string;
   readonly mappingsDirectory: string;
+  readonly metadataDirectory: string;
   readonly snapshotsDirectory: string;
   readonly unresolved: string;
   readonly publicCatalogue: string;
   mapping(providerId: string): string;
+  metadata(sourceId: string): string;
   snapshot(providerId: string): string;
 }
 
@@ -18,16 +20,19 @@ export function cataloguePaths(workspace: string): CataloguePaths {
   const absoluteWorkspace = resolve(workspace);
   const dataDirectory = join(absoluteWorkspace, "catalogue");
   const mappingsDirectory = join(dataDirectory, "mappings");
+  const metadataDirectory = join(dataDirectory, "metadata");
   const snapshotsDirectory = join(dataDirectory, "snapshots");
 
   return {
     workspace: absoluteWorkspace,
     canonicalModels: join(dataDirectory, "canonical-models.json"),
     mappingsDirectory,
+    metadataDirectory,
     snapshotsDirectory,
     unresolved: join(dataDirectory, "unresolved.json"),
     publicCatalogue: join(absoluteWorkspace, "free-models.json"),
     mapping: (providerId) => join(mappingsDirectory, `${providerId}.json`),
+    metadata: (sourceId) => join(metadataDirectory, `${sourceId}.json`),
     snapshot: (providerId) => join(snapshotsDirectory, `${providerId}.json`),
   };
 }
@@ -170,14 +175,12 @@ export function compareStrings(left: string, right: string): number {
   return left > right ? 1 : 0;
 }
 
-export function sortJsonObject(value: { [key: string]: JsonValue }): {
-  [key: string]: JsonValue;
-} {
+export function sortJsonObject<T extends { [key: string]: JsonValue }>(value: T): T {
   return Object.fromEntries(
     Object.entries(value)
       .sort(([left], [right]) => compareStrings(left, right))
       .map(([key, child]) => [key, sortJsonValue(child)]),
-  );
+  ) as T;
 }
 
 function sortJsonValue(value: JsonValue): JsonValue {

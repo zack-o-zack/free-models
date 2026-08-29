@@ -36,6 +36,13 @@ jobs:
             exit 1
           fi
 
+          bun run catalogue:enrich
+          if ! git diff --quiet -- catalogue/metadata; then
+            git diff -- catalogue/metadata
+            echo "The metadata snapshot is stale. Commit the enriched snapshot." >&2
+            exit 1
+          fi
+
           bun run catalogue:render
           if ! git diff --quiet -- free-models.json; then
             git diff -- free-models.json

@@ -1,9 +1,12 @@
+import type { ModelMetadataSource } from "../metadata-sources/metadata-source.ts";
 import type { ModelProvider } from "../providers/provider.ts";
 import type { CataloguePaths } from "./files.ts";
 import { compareStrings, readValidatedJson } from "./files.ts";
 import {
   type CanonicalModels,
   canonicalModelsSchema,
+  type MetadataSnapshot,
+  metadataSnapshotSchema,
   type ProviderMappings,
   type ProviderSnapshot,
   providerMappingsSchema,
@@ -14,6 +17,7 @@ import {
 export interface CatalogueState {
   readonly canonicalModels: CanonicalModels;
   readonly mappings: ReadonlyMap<string, ProviderMappings>;
+  readonly metadataSnapshots: ReadonlyMap<string, MetadataSnapshot>;
   readonly snapshots: ReadonlyMap<string, ProviderSnapshot>;
 }
 
@@ -21,6 +25,7 @@ export async function loadCatalogueState(
   paths: CataloguePaths,
   providers: readonly ModelProvider[],
   snapshotOverrides: ReadonlyMap<string, ProviderSnapshot> = new Map(),
+  metadataSources: readonly ModelMetadataSource[] = [],
 ): Promise<CatalogueState> {
   validateProviderRegistry(providers);
 
@@ -32,7 +37,28 @@ export async function loadCatalogueState(
   validateUniqueCanonicalModels(canonicalModels);
 
   const mappings = new Map<string, ProviderMappings>();
+  const metadataSnapshots = new Map<string, MetadataSnapshot>();
   const snapshots = new Map<string, ProviderSnapshot>();
+
+  for (const source of [...metadataSources].sort((left, right) =>
+    compareStrings(left.id, right.id),
+  )) {
+    const metadataPath = paths.metadata(source.id);
+    if (!(await Bun.file(metadataPath).exists())) {
+      continue;
+    }
+    const metadataSnapshot = await readValidatedJson(
+      metadataPath,
+      metadataSnapshotSchema,
+      `Metadata snapshot for source ${source.id}`,
+    );
+    if (metadataSnapshot.source !== source.id) {
+      throw new Error(
+        `Metadata snapshot source mismatch: expected ${source.id}, received ${metadataSnapshot.source}`,
+      );
+    }
+    metadataSnapshots.set(source.id, metadataSnapshot);
+  }
 
   for (const provider of [...providers].sort((left, right) => compareStrings(left.id, right.id))) {
     const snapshot =
@@ -58,7 +84,7 @@ export async function loadCatalogueState(
     mappings.set(provider.id, mapping);
   }
 
-  return { canonicalModels, mappings, snapshots };
+  return { canonicalModels, mappings, metadataSnapshots, snapshots };
 }
 
 export function computeUnresolved(state: CatalogueState): Unresolved {

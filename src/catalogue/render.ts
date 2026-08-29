@@ -65,8 +65,26 @@ function buildCatalogue(state: CatalogueState): Catalogue {
           ]),
       );
 
-      return { id: canonical.id, name: canonical.name, providers };
+      return {
+        id: canonical.id,
+        name: canonical.name,
+        metadata: resolveCanonicalMetadata(canonicalId, state),
+        providers,
+      };
     });
 
   return { schema_version: 1, models };
+}
+
+function resolveCanonicalMetadata(
+  canonicalId: string,
+  state: CatalogueState,
+): Catalogue["models"][number]["metadata"] {
+  for (const sourceId of [...state.metadataSnapshots.keys()].sort(compareStrings)) {
+    const metadata = state.metadataSnapshots.get(sourceId)?.models[canonicalId];
+    if (metadata) {
+      return metadata;
+    }
+  }
+  return null;
 }

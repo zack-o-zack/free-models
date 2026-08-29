@@ -68,6 +68,27 @@ export const unresolvedSchema = z
   })
   .strict();
 
+export const modelMetadataSchema = z
+  .object({
+    architecture: jsonValueSchema,
+    benchmarks: jsonValueSchema,
+    context_length: jsonValueSchema,
+    created: jsonValueSchema,
+    description: jsonValueSchema,
+    hugging_face_id: jsonValueSchema,
+    knowledge_cutoff: jsonValueSchema,
+    reasoning: jsonValueSchema,
+    supported_parameters: jsonValueSchema,
+  })
+  .strict();
+
+export const metadataSnapshotSchema = z
+  .object({
+    source: providerIdSchema,
+    models: z.record(canonicalModelIdSchema, modelMetadataSchema),
+  })
+  .strict();
+
 export const catalogueSchema = z
   .object({
     schema_version: z.literal(1),
@@ -76,6 +97,7 @@ export const catalogueSchema = z
         .object({
           id: canonicalModelIdSchema,
           name: z.string().min(1),
+          metadata: modelMetadataSchema.nullable().optional(),
           providers: z.record(
             providerIdSchema,
             z
@@ -93,6 +115,8 @@ export const catalogueSchema = z
 export type Catalogue = z.infer<typeof catalogueSchema>;
 export type CanonicalModels = z.infer<typeof canonicalModelsSchema>;
 export type DiscoveredOffer = z.infer<typeof offerSchema>;
+export type MetadataSnapshot = z.infer<typeof metadataSnapshotSchema>;
+export type ModelMetadata = z.infer<typeof modelMetadataSchema>;
 export type ProviderMappings = z.infer<typeof providerMappingsSchema>;
 export type ProviderSnapshot = z.infer<typeof providerSnapshotSchema>;
 export type Unresolved = z.infer<typeof unresolvedSchema>;

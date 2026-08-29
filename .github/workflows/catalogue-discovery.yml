@@ -53,6 +53,9 @@ jobs:
       - name: Discover provider offers
         run: bun run catalogue:discover
 
+      - name: Enrich canonical metadata
+        run: bun run catalogue:enrich
+
       - name: Render resolved catalogue
         shell: bash
         run: |
@@ -68,7 +71,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          changed=$(git status --porcelain -- catalogue/snapshots catalogue/unresolved.json free-models.json)
+          changed=$(git status --porcelain -- catalogue/snapshots catalogue/metadata catalogue/unresolved.json free-models.json)
           if [[ -z "$changed" ]]; then
             if git rev-parse --verify --quiet MERGE_HEAD >/dev/null; then
               git merge --abort
@@ -85,7 +88,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- catalogue/snapshots catalogue/unresolved.json free-models.json
+          git add -- catalogue/snapshots catalogue/metadata catalogue/unresolved.json free-models.json
           git commit -m "chore: update free model catalogue"
           git push origin "$AUTOMATION_BRANCH"
 

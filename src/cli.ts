@@ -5,21 +5,26 @@ import { type CatalogueRenderer, JsonCatalogueRenderer } from "./catalogue/rende
 import {
   check as checkCatalogue,
   discover,
+  enrich as enrichCatalogue,
   reconcile,
   render as renderCatalogue,
 } from "./catalogue/workflow.ts";
+import type { ModelMetadataSource } from "./metadata-sources/metadata-source.ts";
+import { metadataSourceRegistry } from "./metadata-sources/registry.ts";
 import type { ModelProvider } from "./providers/provider.ts";
 import { providerRegistry } from "./providers/registry.ts";
 
-type Command = "check" | "discover" | "reconcile" | "render";
+type Command = "check" | "discover" | "enrich" | "reconcile" | "render";
 
 export interface CliDependencies {
   readonly providers: readonly ModelProvider[];
+  readonly metadataSources: readonly ModelMetadataSource[];
   readonly renderer: CatalogueRenderer;
 }
 
 const defaultDependencies: CliDependencies = {
   providers: providerRegistry,
+  metadataSources: metadataSourceRegistry,
   renderer: new JsonCatalogueRenderer(),
 };
 
@@ -28,6 +33,7 @@ function usage(): string {
     "Usage:",
     "  bun run catalogue discover [--workspace <path>]",
     "  bun run catalogue reconcile [--workspace <path>]",
+    "  bun run catalogue enrich [--workspace <path>]",
     "  bun run catalogue render [--workspace <path>] [--output <path>]",
     "  bun run catalogue check [--workspace <path>] [--input <path>]",
   ].join("\n");
@@ -59,11 +65,32 @@ export async function runCli(
     return;
   }
 
+  if (command === "enrich") {
+    const result = await enrichCatalogue(
+      paths,
+      dependencies.providers,
+      dependencies.metadataSources,
+    );
+    for (const failure of result.failures) {
+      console.error(`Metadata source ${failure.sourceId} enrichment failed: ${failure.message}`);
+    }
+    console.log(
+      `Enriched metadata for ${result.resolvedCount} canonical model(s); ${result.failures.length} source failure(s)`,
+    );
+    return;
+  }
+
   if (command === "render") {
     const outputPath = resolve(
       options.output ?? join(paths.workspace, dependencies.renderer.defaultFileName),
     );
-    await renderCatalogue(paths, dependencies.providers, dependencies.renderer, outputPath);
+    await renderCatalogue(
+      paths,
+      dependencies.providers,
+      dependencies.renderer,
+      dependencies.metadataSources,
+      outputPath,
+    );
     console.log(`Rendered ${outputPath}`);
     return;
   }
@@ -71,13 +98,23 @@ export async function runCli(
   const inputPath = resolve(
     options.input ?? join(paths.workspace, dependencies.renderer.defaultFileName),
   );
-  await checkCatalogue(paths, dependencies.providers, dependencies.renderer, inputPath);
+  await checkCatalogue(
+    paths,
+    dependencies.providers,
+    dependencies.renderer,
+    dependencies.metadataSources,
+    inputPath,
+  );
   console.log(`Checked ${inputPath}`);
 }
 
 function isCommand(command: string | undefined): command is Command {
   return (
-    command === "check" || command === "discover" || command === "reconcile" || command === "render"
+    command === "check" ||
+    command === "discover" ||
+    command === "enrich" ||
+    command === "reconcile" ||
+    command === "render"
   );
 }
 
