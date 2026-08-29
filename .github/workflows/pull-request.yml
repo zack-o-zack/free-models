@@ -1,0 +1,46 @@
+name: Pull request checks
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate catalogue and repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun ci
+
+      - name: Run repository quality gates
+        run: bun run quality
+
+      - name: Verify reviewed identities and generated files
+        shell: bash
+        run: |
+          set -euo pipefail
+          bun run catalogue:reconcile
+          if ! git diff --quiet -- catalogue/unresolved.json; then
+            git diff -- catalogue/unresolved.json
+            echo "The unresolved report is stale. Commit the reconciled report." >&2
+            exit 1
+          fi
+
+          bun run catalogue:render
+          if ! git diff --quiet -- free-models.json; then
+            git diff -- free-models.json
+            echo "The public catalogue is stale. Commit the rendered catalogue." >&2
+            exit 1
+          fi
+
+          bun run catalogue:check

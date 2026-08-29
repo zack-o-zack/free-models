@@ -23,7 +23,9 @@ export const jsonObjectSchema = z.record(z.string(), jsonValueSchema);
 export const providerIdSchema = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const canonicalModelIdSchema = z
   .string()
-  .regex(/^[a-z0-9]+(?:[._-][a-z0-9]+)*\/[a-z0-9]+(?:[._-][a-z0-9]+)*$/);
+  .regex(
+    /^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\/[a-z0-9]+(?:[._-][a-z0-9]+)*|stealth:[a-z0-9]+(?:[._-][a-z0-9]+)*)$/,
+  );
 
 export const offerSchema = z
   .object({

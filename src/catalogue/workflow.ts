@@ -7,6 +7,7 @@ import {
   serializeJson,
   sortJsonObject,
   writeTextAtomically,
+  writeTextFilesAtomically,
 } from "./files.ts";
 import type { CatalogueRenderer } from "./render.ts";
 import {
@@ -27,10 +28,13 @@ export async function discover(
   const state = await loadCatalogueState(paths, providers, snapshots);
   const unresolved = computeUnresolved(state);
 
-  for (const [providerId, snapshot] of snapshots) {
-    await writeTextAtomically(paths.snapshot(providerId), serializeJson(snapshot));
-  }
-  await writeTextAtomically(paths.unresolved, serializeJson(unresolved));
+  await writeTextFilesAtomically([
+    ...[...snapshots].map(([providerId, snapshot]) => ({
+      path: paths.snapshot(providerId),
+      contents: serializeJson(snapshot),
+    })),
+    { path: paths.unresolved, contents: serializeJson(unresolved) },
+  ]);
 
   return countUnresolved(unresolved);
 }
@@ -114,17 +118,34 @@ async function discoverSnapshots(
 
   const discovered = await Promise.all(
     providers.map(async (provider) => {
-      const result = z.array(offerSchema).safeParse(await provider.discover());
-      if (!result.success) {
-        throw new Error(`Provider ${provider.id} returned invalid offers`);
+      let discoveredOffers: readonly DiscoveredOffer[];
+      try {
+        discoveredOffers = await provider.discover();
+      } catch (error) {
+        throw providerStageError(provider.id, "discovery", error);
       }
 
-      const offers = normalizeOffers(provider.id, result.data);
+      const result = z.array(offerSchema).safeParse(discoveredOffers);
+      if (!result.success) {
+        throw new Error(`Provider ${provider.id} validation failed: returned invalid offers`);
+      }
+
+      let offers: DiscoveredOffer[];
+      try {
+        offers = normalizeOffers(provider.id, result.data);
+      } catch (error) {
+        throw providerStageError(provider.id, "validation", error);
+      }
       return [provider.id, { provider: provider.id, offers }] as const;
     }),
   );
 
   return new Map(discovered.sort(([left], [right]) => compareStrings(left, right)));
+}
+
+function providerStageError(providerId: string, stage: string, error: unknown): Error {
+  const detail = error instanceof Error ? error.message : "unknown failure";
+  return new Error(`Provider ${providerId} ${stage} failed: ${detail}`, { cause: error });
 }
 
 function normalizeOffers(providerId: string, offers: DiscoveredOffer[]): DiscoveredOffer[] {

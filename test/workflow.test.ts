@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import type { DiscoveredOffer } from "../src/catalogue/schema.ts";
 
 const fixtureCliPath = resolve(import.meta.dir, "support/fixture-cli.ts");
 const decoder = new TextDecoder();
@@ -79,7 +80,7 @@ async function withWorkspace(run: (workspace: string) => Promise<void>): Promise
 async function reviewAllOffers(workspace: string): Promise<void> {
   await writeJson(join(workspace, "catalogue/canonical-models.json"), {
     models: [
-      { id: "unused/inactive", name: "Inactive Model" },
+      { id: "stealth:inactive", name: "Inactive Stealth Model" },
       { id: "zeta/beta", name: "Beta" },
       { id: "acme/alpha", name: "Alpha" },
     ],
@@ -221,7 +222,7 @@ describe("manual identity workflow", () => {
     });
   });
 
-  test("rejects canonical IDs outside the lowercase owner/model format", async () => {
+  test("rejects canonical IDs outside the supported lowercase formats", async () => {
     await withWorkspace(async (workspace) => {
       expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
       await writeJson(join(workspace, "catalogue/canonical-models.json"), {
@@ -239,9 +240,11 @@ describe("manual identity workflow", () => {
   test("leaves approved generated files unchanged when discovery validation fails", async () => {
     await withWorkspace(async (workspace) => {
       expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
-      const snapshotPath = join(workspace, "catalogue/snapshots/fixture-a.json");
+      const fixtureASnapshotPath = join(workspace, "catalogue/snapshots/fixture-a.json");
+      const fixtureZSnapshotPath = join(workspace, "catalogue/snapshots/fixture-z.json");
       const unresolvedPath = join(workspace, "catalogue/unresolved.json");
-      const previousSnapshot = await Bun.file(snapshotPath).text();
+      const previousFixtureASnapshot = await Bun.file(fixtureASnapshotPath).text();
+      const previousFixtureZSnapshot = await Bun.file(fixtureZSnapshotPath).text();
       const previousUnresolved = await Bun.file(unresolvedPath).text();
       const publicPath = join(workspace, "free-models.json");
       const previousPublic = await Bun.file(publicPath).text();
@@ -249,12 +252,104 @@ describe("manual identity workflow", () => {
       await writeJson(join(workspace, "provider-fixtures/fixture-a.json"), {
         offers: [fixtureAOffers[0], fixtureAOffers[0]],
       });
+      await writeJson(join(workspace, "provider-fixtures/fixture-z.json"), {
+        offers: [{ ...fixtureZOffers[0], metadata: { upstream_changed: true } }],
+      });
       const discovery = runFixtureCli(workspace, "discover");
       expect(discovery.exitCode).toBe(1);
-      expect(decoder.decode(discovery.stderr)).toContain("Duplicate provider model ID");
-      expect(await Bun.file(snapshotPath).text()).toBe(previousSnapshot);
+      expect(decoder.decode(discovery.stderr)).toContain(
+        "Provider fixture-a validation failed: Duplicate provider model ID",
+      );
+      expect(await Bun.file(fixtureASnapshotPath).text()).toBe(previousFixtureASnapshot);
+      expect(await Bun.file(fixtureZSnapshotPath).text()).toBe(previousFixtureZSnapshot);
       expect(await Bun.file(unresolvedPath).text()).toBe(previousUnresolved);
       expect(await Bun.file(publicPath).text()).toBe(previousPublic);
+    });
+  });
+
+  test("handles removals, metadata changes, and returning mapped offers deterministically", async () => {
+    await withWorkspace(async (workspace) => {
+      expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
+      await reviewAllOffers(workspace);
+      expect(runFixtureCli(workspace, "reconcile").exitCode).toBe(0);
+      expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
+
+      const mappingAPath = join(workspace, "catalogue/mappings/fixture-a.json");
+      const mappingZPath = join(workspace, "catalogue/mappings/fixture-z.json");
+      const originalMappingA = await Bun.file(mappingAPath).text();
+      const originalMappingZ = await Bun.file(mappingZPath).text();
+      const originalSnapshotA = await Bun.file(
+        join(workspace, "catalogue/snapshots/fixture-a.json"),
+      ).text();
+      const originalSnapshotZ = await Bun.file(
+        join(workspace, "catalogue/snapshots/fixture-z.json"),
+      ).text();
+      const originalPublic = await Bun.file(join(workspace, "free-models.json")).text();
+
+      await writeJson(join(workspace, "provider-fixtures/fixture-a.json"), {
+        offers: [
+          {
+            ...fixtureAOffers[0],
+            metadata: { upstream_rank: 22, new_upstream_field: "retained" },
+          },
+        ],
+      });
+      await writeJson(join(workspace, "provider-fixtures/fixture-z.json"), {
+        offers: [fixtureZOffers[1]],
+      });
+
+      expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
+      expect(await Bun.file(join(workspace, "catalogue/unresolved.json")).json()).toEqual({
+        providers: {},
+      });
+      expect(await Bun.file(mappingAPath).text()).toBe(originalMappingA);
+      expect(await Bun.file(mappingZPath).text()).toBe(originalMappingZ);
+      expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
+
+      const changedPublicText = await Bun.file(join(workspace, "free-models.json")).text();
+      expect(changedPublicText).not.toBe(originalPublic);
+      const changedPublic = JSON.parse(changedPublicText) as {
+        models: Array<{
+          id: string;
+          providers: Record<string, { offers: DiscoveredOffer[] }>;
+        }>;
+      };
+      expect(changedPublic.models.map((model) => model.id)).toEqual(["acme/alpha"]);
+      expect(changedPublic.models[0]?.providers["fixture-a"]?.offers[0]?.metadata).toEqual({
+        new_upstream_field: "retained",
+        upstream_rank: 22,
+      });
+      expect(
+        (await Bun.file(join(workspace, "catalogue/canonical-models.json")).json()).models,
+      ).toContainEqual({ id: "zeta/beta", name: "Beta" });
+
+      await writeJson(join(workspace, "provider-fixtures/fixture-a.json"), {
+        offers: [...fixtureAOffers].reverse(),
+      });
+      await writeJson(join(workspace, "provider-fixtures/fixture-z.json"), {
+        offers: [...fixtureZOffers].reverse(),
+      });
+      expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
+      expect(await Bun.file(join(workspace, "catalogue/unresolved.json")).json()).toEqual({
+        providers: {},
+      });
+      expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
+      expect(await Bun.file(join(workspace, "free-models.json")).text()).toBe(originalPublic);
+      expect(await Bun.file(join(workspace, "catalogue/snapshots/fixture-a.json")).text()).toBe(
+        originalSnapshotA,
+      );
+      expect(await Bun.file(join(workspace, "catalogue/snapshots/fixture-z.json")).text()).toBe(
+        originalSnapshotZ,
+      );
+
+      const stableUnresolved = await Bun.file(join(workspace, "catalogue/unresolved.json")).text();
+      expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
+      expect(runFixtureCli(workspace, "reconcile").exitCode).toBe(0);
+      expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
+      expect(await Bun.file(join(workspace, "catalogue/unresolved.json")).text()).toBe(
+        stableUnresolved,
+      );
+      expect(await Bun.file(join(workspace, "free-models.json")).text()).toBe(originalPublic);
     });
   });
 });

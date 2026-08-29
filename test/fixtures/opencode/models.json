@@ -1,0 +1,26 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "paid-model",
+      "object": "model",
+      "created": 100,
+      "owned_by": "opencode"
+    },
+    {
+      "id": "suffix-free",
+      "object": "model",
+      "created": 200,
+      "owned_by": "opencode",
+      "upstream": {
+        "nested": true
+      }
+    },
+    {
+      "id": "big-pickle",
+      "object": "model",
+      "created": 300,
+      "owned_by": "opencode"
+    }
+  ]
+}

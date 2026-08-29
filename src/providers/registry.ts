@@ -1,4 +1,8 @@
+import { OpenCodeProvider } from "./opencode.ts";
+import { OpenRouterProvider } from "./openrouter.ts";
 import { defineProviderRegistry } from "./provider.ts";
 
-// Production provider instances are appended here. Tickets 03 and 04 add the initial adapters.
-export const providerRegistry = defineProviderRegistry();
+export const providerRegistry = defineProviderRegistry(
+  new OpenRouterProvider(),
+  new OpenCodeProvider(),
+);

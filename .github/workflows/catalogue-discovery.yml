@@ -1,0 +1,133 @@
+name: Discover free models
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: free-model-catalogue-discovery
+  cancel-in-progress: false
+
+env:
+  AUTOMATION_BRANCH: automation/free-model-catalogue
+  DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+
+jobs:
+  discover:
+    name: Discover and propose catalogue changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Restore the automation branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "+refs/heads/$DEFAULT_BRANCH:refs/remotes/origin/$DEFAULT_BRANCH"
+
+          if git ls-remote --exit-code --heads origin "$AUTOMATION_BRANCH" >/dev/null; then
+            git fetch origin "+refs/heads/$AUTOMATION_BRANCH:refs/remotes/origin/$AUTOMATION_BRANCH"
+            git switch --create "$AUTOMATION_BRANCH" --track "origin/$AUTOMATION_BRANCH"
+            git merge --no-commit --no-ff "origin/$DEFAULT_BRANCH"
+          else
+            git switch --create "$AUTOMATION_BRANCH" "origin/$DEFAULT_BRANCH"
+          fi
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun ci
+
+      - name: Discover provider offers
+        run: bun run catalogue:discover
+
+      - name: Render resolved catalogue
+        shell: bash
+        run: |
+          set -euo pipefail
+          if bun -e 'const value = await Bun.file("catalogue/unresolved.json").json(); process.exit(Object.values(value.providers).some((ids) => ids.length > 0) ? 1 : 0)'; then
+            bun run catalogue:render
+          else
+            echo "Unresolved offers remain; retaining the last reviewed public catalogue."
+          fi
+
+      - name: Detect semantic changes
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed=$(git status --porcelain -- catalogue/snapshots catalogue/unresolved.json free-models.json)
+          if [[ -z "$changed" ]]; then
+            if git rev-parse --verify --quiet MERGE_HEAD >/dev/null; then
+              git merge --abort
+            fi
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push the update
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- catalogue/snapshots catalogue/unresolved.json free-models.json
+          git commit -m "chore: update free model catalogue"
+          git push origin "$AUTOMATION_BRANCH"
+
+      - name: Build pull request description
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          body_path="$RUNNER_TEMP/catalogue-pull-request.md"
+          bun -e '
+            const report = await Bun.file("catalogue/unresolved.json").json();
+            const entries = Object.entries(report.providers);
+            const lines = [
+              "## Generated catalogue update",
+              "",
+              "This pull request was produced from the current registered provider catalogues.",
+              "",
+              "## Unresolved model IDs",
+              "",
+            ];
+            if (entries.length === 0) {
+              lines.push("None. The public catalogue was regenerated.");
+            } else {
+              for (const [provider, ids] of entries) {
+                lines.push(`### ${provider}`, "", ...ids.map((id) => `- \`${id}\``), "");
+              }
+              lines.push("Add reviewed canonical identities and provider mappings, then rerun discovery or regenerate the catalogue locally.");
+            }
+            lines.push("", "Provider availability is not guaranteed. Review all upstream metadata changes before merging.", "");
+            process.stdout.write(lines.join("\n"));
+          ' > "$body_path"
+
+      - name: Create or update the pull request
+        if: steps.changes.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pull_request=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$AUTOMATION_BRANCH" --state open --json number --jq '.[0].number')
+          if [[ -n "$pull_request" ]]; then
+            gh pr edit "$pull_request" --repo "$GITHUB_REPOSITORY" --title "chore: update free model catalogue" --body-file "$RUNNER_TEMP/catalogue-pull-request.md"
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base "$DEFAULT_BRANCH" --head "$AUTOMATION_BRANCH" --title "chore: update free model catalogue" --body-file "$RUNNER_TEMP/catalogue-pull-request.md"
+          fi

@@ -6,7 +6,13 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!!.scratch"]
+    "includes": [
+      "**",
+      "!!.scratch",
+      "!!catalogue/snapshots",
+      "!!catalogue/unresolved.json",
+      "!!free-models.json"
+    ]
   },
   "formatter": {
     "enabled": true,

@@ -1,4 +1,4 @@
-import { mkdir, rename, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, rename, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import type { z } from "zod";
 import type { JsonValue } from "./schema.ts";
@@ -69,6 +69,93 @@ export async function writeTextAtomically(path: string, contents: string): Promi
       .delete()
       .catch(() => undefined);
     throw error;
+  }
+}
+
+export interface TextFileUpdate {
+  readonly path: string;
+  readonly contents: string;
+}
+
+/**
+ * Stages every changed file before replacing any target and restores replaced targets if a rename
+ * fails. Byte-identical targets are left untouched.
+ */
+export async function writeTextFilesAtomically(updates: readonly TextFileUpdate[]): Promise<void> {
+  const targetPaths = new Set<string>();
+  const changedUpdates: Array<TextFileUpdate & { existed: boolean }> = [];
+
+  for (const update of updates) {
+    if (targetPaths.has(update.path)) {
+      throw new Error(`Atomic file update contains duplicate target: ${update.path}`);
+    }
+    targetPaths.add(update.path);
+
+    const file = Bun.file(update.path);
+    const existed = await file.exists();
+    if (existed && (await file.text()) === update.contents) {
+      continue;
+    }
+    changedUpdates.push({ ...update, existed });
+  }
+
+  if (changedUpdates.length === 0) {
+    return;
+  }
+
+  const transactionId = crypto.randomUUID();
+  const staged = changedUpdates.map((update) => ({
+    ...update,
+    temporaryPath: `${update.path}.${transactionId}.tmp`,
+    backupPath: `${update.path}.${transactionId}.bak`,
+  }));
+  let preserveBackups = false;
+
+  try {
+    for (const update of staged) {
+      await mkdir(dirname(update.path), { recursive: true });
+      await writeFile(update.temporaryPath, update.contents, { encoding: "utf8", flag: "wx" });
+    }
+
+    for (const update of staged) {
+      if (update.existed) {
+        await copyFile(update.path, update.backupPath);
+      }
+    }
+
+    const installed: typeof staged = [];
+    try {
+      for (const update of staged) {
+        await rename(update.temporaryPath, update.path);
+        installed.push(update);
+      }
+    } catch (error) {
+      const rollbackErrors: unknown[] = [];
+      for (const update of installed.reverse()) {
+        try {
+          if (update.existed) {
+            await rename(update.backupPath, update.path);
+          } else {
+            await rm(update.path, { force: true });
+          }
+        } catch (rollbackError) {
+          rollbackErrors.push(rollbackError);
+        }
+      }
+      if (rollbackErrors.length > 0) {
+        preserveBackups = true;
+        throw new AggregateError(
+          [error, ...rollbackErrors],
+          "Atomic file update failed and could not be fully rolled back",
+        );
+      }
+      throw error;
+    }
+  } finally {
+    const cleanupPaths = staged.flatMap((update) =>
+      preserveBackups ? [update.temporaryPath] : [update.temporaryPath, update.backupPath],
+    );
+    await Promise.all(cleanupPaths.map((path) => rm(path, { force: true }).catch(() => undefined)));
   }
 }
 

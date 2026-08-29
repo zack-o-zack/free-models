@@ -1,0 +1,43 @@
+{
+  "data": [
+    {
+      "id": "paid/model",
+      "name": "Paid Model",
+      "pricing": {
+        "completion": "0.000002",
+        "prompt": "0.000001"
+      }
+    },
+    {
+      "id": "openrouter/free",
+      "name": "Free Models Router",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0"
+      }
+    },
+    {
+      "id": "zeta/model:free",
+      "name": "Zeta Model (free)",
+      "nullable": null,
+      "pricing": {
+        "completion": "0",
+        "prompt": "0"
+      }
+    },
+    {
+      "id": "alpha/model:free",
+      "architecture": {
+        "input_modalities": ["text", "image"],
+        "output_modalities": ["text"]
+      },
+      "name": "Alpha Model (free)",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0"
+      },
+      "supported_parameters": ["tools", "temperature"]
+    }
+  ],
+  "total_count": 4
+}

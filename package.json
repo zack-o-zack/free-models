@@ -16,7 +16,8 @@
     "lint:fix": "biome lint --write .",
     "typecheck": "tsc --noEmit",
     "test": "bun test",
-    "check": "bun run format:check && bun run lint && bun run typecheck && bun test && bun run catalogue:check"
+    "quality": "bun run format:check && bun run lint && bun run typecheck && bun test && bun run aislop ci .",
+    "check": "bun run quality && bun run catalogue:check"
   },
   "dependencies": {
     "zod": "4.4.3"
