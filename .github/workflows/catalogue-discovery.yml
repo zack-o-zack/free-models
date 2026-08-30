@@ -34,6 +34,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin "+refs/heads/$DEFAULT_BRANCH:refs/remotes/origin/$DEFAULT_BRANCH"
 
           if git ls-remote --exit-code --heads origin "$AUTOMATION_BRANCH" >/dev/null; then
@@ -85,8 +87,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json
           git commit -m "chore: update free model catalogue"
           git push origin "$AUTOMATION_BRANCH"
