@@ -1,0 +1,19 @@
+{
+  "name": "json",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "catalogue": "bun run src/cli.ts",
+    "catalogue:discover": "bun run src/cli.ts discover",
+    "catalogue:reconcile": "bun run src/cli.ts reconcile",
+    "catalogue:refresh": "bun run src/cli.ts refresh",
+    "catalogue:render": "bun run src/cli.ts render",
+    "catalogue:check": "bun run src/cli.ts check",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "zod": "4.4.3"
+  }
+}

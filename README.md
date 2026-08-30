@@ -1,7 +1,14 @@
-# Free Model Catalogue
+# free-models
 
-This repository builds a deterministic catalogue of free AI model offers. Provider adapters find
-offers, while maintainers explicitly decide which provider IDs represent the same canonical model.
+This monorepo builds and maintains a deterministic catalogue of free AI model offers. It uses
+[Bun workspaces](https://bun.sh/docs/install/workspaces): shared tooling lives at the root and
+each package under `packages/` owns its sources, tests, and data.
+
+## Layout
+
+- `packages/json` — the catalogue application. Provider adapters discover free offers, maintainers
+  review canonical identities, and the package renders the public `free-models.json` artefact. See
+  [`packages/json/README.md`](packages/json/README.md) for the catalogue workflow.
 
 ## Requirements
 
@@ -17,96 +24,32 @@ pre-commit install
 
 On the first checkout, use `bun install` if the lockfile has not been created yet.
 
-## Catalogue workflow
+## Workspace commands
 
-Run every registered provider and update its normalized snapshot:
-
-```sh
-bun run catalogue:discover
-```
-
-New provider model IDs appear in `catalogue/unresolved.json`. Define reviewed IDs and display names
-in `catalogue/canonical-models.json`, then map each provider model in
-`catalogue/mappings/<provider>.json`. Mapping files contain only provider-to-canonical identity:
-
-```json
-{
-  "provider": "example",
-  "mappings": {
-    "provider-model-id": "owner/model"
-  }
-}
-```
-
-Canonical IDs normally use the OpenRouter-style `owner/model` form. Temporary models whose public
-identity is deliberately hidden use `stealth:<campaign-id>`, allowing offers from multiple providers
-to share one identity without assigning ownership to any provider.
-
-Rebuild the unresolved report after reviewing mappings:
+Package scripts run from the root through Bun's `--filter`:
 
 ```sh
-bun run catalogue:reconcile
+bun run --filter json catalogue:discover
 ```
 
-Rendering fails while any active offer remains unresolved. Once reconciliation produces an empty
-provider map, render the public catalogue:
+The catalogue scripts are also aliased at the root (`bun run catalogue:discover`,
+`bun run catalogue:reconcile`, `bun run catalogue:refresh`, `bun run catalogue:render`, and
+`bun run catalogue:check`), so existing automation and habits keep working unchanged.
 
-Render the catalogue to `free-models.json`:
+## Quality gates
+
+Biome formatting and linting run over the whole repository from the root. Type checking and tests
+are delegated to the workspace packages:
 
 ```sh
-bun run catalogue:render
+bun run format        # apply formatting
+bun run format:check  # check formatting
+bun run lint          # lint
+bun run typecheck     # type-check the workspace packages
+bun test              # run every test in the repository
+bun run quality       # all of the above plus the aislop scan
+bun run check         # quality gates plus catalogue validation
 ```
-
-Validate the generated catalogue at runtime:
-
-```sh
-bun run catalogue:check
-```
-
-The underlying CLI also accepts explicit paths:
-
-```sh
-bun run catalogue discover --workspace ./temporary-workspace
-bun run catalogue reconcile --workspace ./temporary-workspace
-bun run catalogue render --output ./free-models.json
-bun run catalogue check --input ./free-models.json
-```
-
-## OpenRouter discovery
-
-The registered `openrouter` adapter reads the official models catalogue without an API key and
-requests all output modalities. It publishes only concrete model IDs ending in `:free`; the
-`openrouter/free` meta-router is excluded inside the adapter. Each offer keeps the documented
-`https://openrouter.ai/api/v1` base URL as connection data and preserves every other model field
-from the upstream response under `metadata`.
-
-Anonymous catalogue access is a current upstream behavior, not a permanence guarantee. Discovery
-fails clearly if the request, response envelope, model identity, JSON safety, or model-ID uniqueness
-contract changes.
-
-## OpenCode Zen discovery
-
-The registered `opencode` adapter reads the official Zen documentation and anonymous live model
-catalogue. A free offer is accepted only when its pricing row marks input and output as `Free`, its
-model name matches exactly one endpoint row, and that row's model ID matches exactly one live model.
-The adapter copies the documented endpoint and AI SDK package into `connection` without adding an
-inferred protocol. Remaining live model fields are preserved under `metadata`, except for the
-response-generated `created` timestamp, which is omitted because it changes between equivalent
-catalogue responses.
-
-This strict join includes provider-declared free offers without a `-free` suffix, such as Big Pickle.
-Discovery fails when either table changes shape, identities become ambiguous, a documented free row
-does not join, or the live model response is malformed.
-
-The check command validates canonical records, provider snapshots, mappings, the unresolved report,
-the public schema, and the byte-for-byte deterministic render. Run all local checks with:
-
-```sh
-bun run check
-```
-
-Individual quality commands are `bun run format`, `bun run format:check`, `bun run lint`,
-`bun run typecheck`, and `bun test`.
 
 ## GitHub automation
 
@@ -115,18 +58,28 @@ uses the fixed `automation/free-model-catalogue` branch and updates one pull req
 normalized catalogue changes. Existing commits on that branch are retained, so maintainers can add
 canonical models and mappings directly to the pull request. If unresolved offers remain, the public
 catalogue is not regenerated and pull-request validation stays red until those identities are
-reviewed.
+reviewed. After resolution, scheduled automation refreshes metadata before rendering and includes
+canonical registry changes in the generated update. Pull-request checks and the merged workflow's
+catalogue validation job run offline reconciliation, rendering, and validation, so changing
+upstream metadata cannot make a reviewed commit fail nondeterministically. After those checks pass,
+the merged workflow's separate publish job uploads the rendered file to R2.
 
 This automation becomes operational only after this private repository has a GitHub remote and
 GitHub Actions is allowed to create branches and pull requests with `GITHUB_TOKEN`. Configure the
 repository's workflow permissions for read and write access and allow GitHub Actions to create pull
 requests. The workflows themselves grant read access to validation jobs and grant write access only
-to the scheduled discovery job.
+to the scheduled discovery job. Scheduled discovery also requires a `MISTRAL_FREE_API_KEY`
+repository secret. The key must belong to a Mistral organization that is still in Free mode; the
+provider uses that organization's current model catalogue as the free-model boundary.
 
 Provider APIs and documentation are used with the accepted risk that their terms, schemas, and
-anonymous-access policies can change. `free-models.json` is a reviewed observation of provider
+anonymous-access policies can change. The generated catalogue is a reviewed observation of provider
 catalogues, not a guarantee of availability or completeness. The repository is intended to remain
-private; only the generated `free-models.json` artifact is designed for public exposure.
+private; the merged-catalogue workflow renders the public JSON temporarily in CI and uploads it to
+[`https://static.zackozack.com/free-models.json`](https://static.zackozack.com/free-models.json).
+That publish job requires the repository secrets `CLOUDFLARE_API_TOKEN` and
+`CLOUDFLARE_ACCOUNT_ID`. It also applies a read-only wildcard CORS policy so browser applications
+can fetch the public JSON.
 
 ## Pre-commit behaviour
 

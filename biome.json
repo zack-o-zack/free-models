@@ -9,9 +9,10 @@
     "includes": [
       "**",
       "!!.scratch",
-      "!!catalogue/snapshots",
-      "!!catalogue/unresolved.json",
-      "!!free-models.json"
+      "!!packages/json/catalogue/canonical-models.json",
+      "!!packages/json/catalogue/snapshots",
+      "!!packages/json/catalogue/unresolved.json",
+      "!!packages/json/free-models.json"
     ]
   },
   "formatter": {

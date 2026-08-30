@@ -34,6 +34,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin "+refs/heads/$DEFAULT_BRANCH:refs/remotes/origin/$DEFAULT_BRANCH"
 
           if git ls-remote --exit-code --heads origin "$AUTOMATION_BRANCH" >/dev/null; then
@@ -51,16 +53,18 @@ jobs:
         run: bun ci
 
       - name: Discover provider offers
+        env:
+          MISTRAL_FREE_API_KEY: ${{ secrets.MISTRAL_FREE_API_KEY }}
         run: bun run catalogue:discover
 
-      - name: Render resolved catalogue
+      - name: Refresh and render resolved catalogue
         shell: bash
         run: |
           set -euo pipefail
-          if bun -e 'const value = await Bun.file("catalogue/unresolved.json").json(); process.exit(Object.values(value.providers).some((ids) => ids.length > 0) ? 1 : 0)'; then
-            bun run catalogue:render
+          if bun -e 'const value = await Bun.file("packages/json/catalogue/unresolved.json").json(); process.exit(Object.values(value.providers).some((ids) => ids.length > 0) ? 1 : 0)'; then
+            bun run catalogue:refresh
           else
-            echo "Unresolved offers remain; retaining the last reviewed public catalogue."
+            echo "Unresolved offers remain; skipping metadata refresh and retaining the last reviewed public catalogue."
           fi
 
       - name: Detect semantic changes
@@ -68,7 +72,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          changed=$(git status --porcelain -- catalogue/snapshots catalogue/unresolved.json free-models.json)
+          changed=$(git status --porcelain -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json)
           if [[ -z "$changed" ]]; then
             if git rev-parse --verify --quiet MERGE_HEAD >/dev/null; then
               git merge --abort
@@ -83,9 +87,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- catalogue/snapshots catalogue/unresolved.json free-models.json
+          git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json
           git commit -m "chore: update free model catalogue"
           git push origin "$AUTOMATION_BRANCH"
 
@@ -96,7 +98,7 @@ jobs:
           set -euo pipefail
           body_path="$RUNNER_TEMP/catalogue-pull-request.md"
           bun -e '
-            const report = await Bun.file("catalogue/unresolved.json").json();
+            const report = await Bun.file("packages/json/catalogue/unresolved.json").json();
             const entries = Object.entries(report.providers);
             const lines = [
               "## Generated catalogue update",
@@ -107,7 +109,7 @@ jobs:
               "",
             ];
             if (entries.length === 0) {
-              lines.push("None. The public catalogue was regenerated.");
+              lines.push("None. The public catalogue will be regenerated and published after merge.");
             } else {
               for (const [provider, ids] of entries) {
                 lines.push(`### ${provider}`, "", ...ids.map((id) => `- \`${id}\``), "");
