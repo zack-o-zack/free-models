@@ -7,8 +7,6 @@ export const CLOUDFLARE_WORKERS_AI_BASE_URL =
 export const CLOUDFLARE_WORKERS_AI_PRICING_URL =
   "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md";
 
-const FREE_ALLOCATION = "10,000 Neurons per day";
-
 export interface CloudflareProviderOptions {
   readonly fetch?: FetchSource;
 }
@@ -17,6 +15,11 @@ interface CloudflareModel {
   readonly modelId: string;
   readonly category: string;
   readonly pricing: Record<string, JsonValue>;
+}
+
+interface CloudflarePricing {
+  readonly freeAllocation: string;
+  readonly models: CloudflareModel[];
 }
 
 export class CloudflareProvider implements ModelProvider {
@@ -35,11 +38,12 @@ export class CloudflareProvider implements ModelProvider {
       "Cloudflare Workers AI pricing",
       { headers: { Accept: "text/markdown,text/plain" } },
     );
-    return parseCloudflarePricing(markdown).map(({ modelId, category, pricing }) => ({
+    const { freeAllocation, models } = parseCloudflarePricing(markdown);
+    return models.map(({ modelId, category, pricing }) => ({
       model_id: modelId,
       connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
       metadata: {
-        free_allocation: FREE_ALLOCATION,
+        free_allocation: freeAllocation,
         pricing_category: category,
         pricing,
       },
@@ -47,10 +51,8 @@ export class CloudflareProvider implements ModelProvider {
   }
 }
 
-export function parseCloudflarePricing(markdown: string): CloudflareModel[] {
-  if (!markdown.includes(`**${FREE_ALLOCATION} at no charge**`)) {
-    throw new Error("Cloudflare Workers AI pricing has no recognized free daily allocation");
-  }
+export function parseCloudflarePricing(markdown: string): CloudflarePricing {
+  const freeAllocation = parseFreeAllocation(markdown);
 
   const paidParagraph = markdown
     .split(/\r?\n/)
@@ -118,7 +120,25 @@ export function parseCloudflarePricing(markdown: string): CloudflareModel[] {
   if (models.length === 0) {
     throw new Error("Cloudflare Workers AI pricing contains no free-allocation models");
   }
-  return models;
+  return { freeAllocation, models };
+}
+
+function parseFreeAllocation(markdown: string): string {
+  const matches = [...markdown.matchAll(/\*\*((([1-9][\d,]*) Neurons per day) at no charge)\*\*/g)];
+  if (matches.length !== 1) {
+    throw new Error("Cloudflare Workers AI pricing has no unique recognized free daily allocation");
+  }
+  const allocation = matches[0]?.[2];
+  const amount = matches[0]?.[3];
+  if (
+    !allocation ||
+    !amount ||
+    !/^(?:[1-9]\d*|[1-9]\d{0,2}(?:,\d{3})+)$/.test(amount) ||
+    Number(amount.replaceAll(",", "")) <= 0
+  ) {
+    throw new Error("Cloudflare Workers AI pricing has an invalid free daily allocation");
+  }
+  return allocation;
 }
 
 function parseMarkdownRow(line: string): string[] {

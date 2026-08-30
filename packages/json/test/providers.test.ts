@@ -161,7 +161,7 @@ describe("Cloudflare Workers AI discovery", () => {
       fetch: async (url) => {
         expect(url).toBe(CLOUDFLARE_WORKERS_AI_PRICING_URL);
         return new Response(`
-Our free allocation allows anyone to use a total of **10,000 Neurons per day at no charge**.
+Our free allocation allows anyone to use a total of **12,345 Neurons per day at no charge**.
 
 Some models require a paid billing method. This applies to \`@cf/paid/model\`.
 
@@ -180,7 +180,7 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
         model_id: "@cf/free/model",
         connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
         metadata: {
-          free_allocation: "10,000 Neurons per day",
+          free_allocation: "12,345 Neurons per day",
           pricing_category: "LLM model pricing",
           pricing: {
             price: "$0.10 per M tokens",
@@ -197,6 +197,17 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
         new Response("Our free allocation is **10,000 Neurons per day at no charge**."),
     });
     expect(provider.discover()).rejects.toThrow("paid-only model declaration");
+  });
+
+  test("fails closed when the free allocation is ambiguous", async () => {
+    const provider = new CloudflareProvider({
+      fetch: async () =>
+        new Response(`
+**10,000 Neurons per day at no charge**
+**20,000 Neurons per day at no charge**
+`),
+    });
+    expect(provider.discover()).rejects.toThrow("no unique recognized free daily allocation");
   });
 });
 
