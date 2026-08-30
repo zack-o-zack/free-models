@@ -18,6 +18,43 @@ import {
 import { NVIDIA_API_BASE_URL, NvidiaProvider, nvidiaModelsUrl } from "../src/providers/nvidia.ts";
 
 describe("Groq discovery", () => {
+  test("rejects a Developer-plan table when no Free Plan section exists", async () => {
+    const provider = new GroqProvider({
+      fetch: async () =>
+        new Response(`
+## Developer Plan Limits
+
+| MODEL ID | RPM | RPD | TPM | TPD | ASH | ASD |
+| --- | --- | --- | --- | --- | --- | --- |
+| paid/model | 30 | 1,000 | 8,000 | 200,000 | \\- | \\- |
+`),
+    });
+
+    expect(provider.discover()).rejects.toThrow("Free Plan Limits");
+  });
+
+  test("ignores column-width divider rows in the free-plan table", async () => {
+    const provider = new GroqProvider({
+      fetch: async () =>
+        new Response(`
+## [Free Plan Limits](#free-plan-limits)
+
+| MODEL ID | RPM | RPD | TPM | TPD | ASH | ASD |
+| --- | --- | --- | --- | --- | --- | --- |
+| alpha/model | 30 | 1,000 | 6,000 | 500,000 | \\- | \\- |
+| ----------- | -- | ----- | ----- | ------- | --- | --- |
+`),
+    });
+
+    expect(await provider.discover()).toEqual([
+      {
+        model_id: "alpha/model",
+        connection: { base_url: GROQ_API_BASE_URL },
+        metadata: { rate_limits: { rpm: "30", rpd: "1,000", tpm: "6,000", tpd: "500,000" } },
+      },
+    ]);
+  });
+
   test("discovers model IDs and quotas from the official free-plan table", async () => {
     const provider = new GroqProvider({
       fetch: async (url) => {
