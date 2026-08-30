@@ -70,10 +70,12 @@ requests. The workflows themselves grant read access to validation jobs and gran
 to the scheduled discovery job.
 
 Provider APIs and documentation are used with the accepted risk that their terms, schemas, and
-anonymous-access policies can change. `packages/json/free-models.json` is a reviewed observation of
-provider catalogues, not a guarantee of availability or completeness. The repository is intended to
-remain private; only the generated `packages/json/free-models.json` artifact is designed for public
-exposure.
+anonymous-access policies can change. The generated catalogue is a reviewed observation of provider
+catalogues, not a guarantee of availability or completeness. The repository is intended to remain
+private; the merged-catalogue workflow renders the public JSON temporarily in CI and uploads it to
+[`https://static.zackozack.com/free-models.json`](https://static.zackozack.com/free-models.json).
+That publish job requires the repository secrets `CLOUDFLARE_API_TOKEN` and
+`CLOUDFLARE_ACCOUNT_ID`.
 
 ## Pre-commit behaviour
 

@@ -51,11 +51,5 @@ jobs:
             exit 1
           fi
 
-          bun run catalogue:render
-          if ! git diff --quiet -- packages/json/free-models.json; then
-            git diff -- packages/json/free-models.json
-            echo "The public catalogue is stale. Commit the rendered catalogue." >&2
-            exit 1
-          fi
-
-          bun run catalogue:check
+          bun run catalogue:render --output "$RUNNER_TEMP/free-models.json"
+          bun run catalogue:check --input "$RUNNER_TEMP/free-models.json"
