@@ -40,7 +40,7 @@ export function parseGroqFreePlan(
     /^#{1,6}\s+(?:Free Plan Limits|\[Free Plan Limits\]\([^)]*\))\s*$/i.test(line.trim()),
   );
   if (sectionIndex < 0) {
-    throw new Error("Groq rate limits documentation has no Free Plan Limits section");
+    return [];
   }
 
   const remainingLines = lines.slice(sectionIndex + 1);

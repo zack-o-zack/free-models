@@ -18,7 +18,7 @@ import {
 import { NVIDIA_API_BASE_URL, NvidiaProvider, nvidiaModelsUrl } from "../src/providers/nvidia.ts";
 
 describe("Groq discovery", () => {
-  test("rejects a Developer-plan table when no Free Plan section exists", async () => {
+  test("returns no offers when only Developer-plan limits are published", async () => {
     const provider = new GroqProvider({
       fetch: async () =>
         new Response(`
@@ -30,7 +30,7 @@ describe("Groq discovery", () => {
 `),
     });
 
-    expect(provider.discover()).rejects.toThrow("Free Plan Limits");
+    expect(await provider.discover()).toEqual([]);
   });
 
   test("ignores column-width divider rows in the free-plan table", async () => {
