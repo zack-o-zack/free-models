@@ -36,7 +36,18 @@ export function parseGroqFreePlan(
   markdown: string,
 ): { modelId: string; rateLimits: Record<string, JsonValue> }[] {
   const lines = markdown.split(/\r?\n/);
-  const headerIndex = lines.findIndex((line) =>
+  const sectionIndex = lines.findIndex((line) =>
+    /^#{1,6}\s+(?:Free Plan Limits|\[Free Plan Limits\]\([^)]*\))\s*$/i.test(line.trim()),
+  );
+  if (sectionIndex < 0) {
+    throw new Error("Groq rate limits documentation has no Free Plan Limits section");
+  }
+
+  const remainingLines = lines.slice(sectionIndex + 1);
+  const nextSectionIndex = remainingLines.findIndex((line) => /^#{1,6}\s+/.test(line.trim()));
+  const sectionLines =
+    nextSectionIndex < 0 ? remainingLines : remainingLines.slice(0, nextSectionIndex);
+  const headerIndex = sectionLines.findIndex((line) =>
     equalStrings(parseMarkdownRow(line), RATE_LIMIT_COLUMNS),
   );
   if (headerIndex < 0) {
@@ -45,7 +56,7 @@ export function parseGroqFreePlan(
 
   const offers: { modelId: string; rateLimits: Record<string, JsonValue> }[] = [];
   const seen = new Set<string>();
-  for (const line of lines.slice(headerIndex + 1)) {
+  for (const line of sectionLines.slice(headerIndex + 1)) {
     const trimmed = line.trim();
     if (trimmed.startsWith("## ") || (offers.length > 0 && trimmed.length === 0)) {
       break;
@@ -94,7 +105,7 @@ function parseMarkdownRow(line: string): string[] {
 }
 
 function isSeparatorRow(cells: readonly string[]): boolean {
-  return cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+  return cells.every((cell) => /^:?-+:?$/.test(cell));
 }
 
 function equalStrings(left: readonly string[], right: readonly string[]): boolean {
