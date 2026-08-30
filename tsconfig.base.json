@@ -13,8 +13,6 @@
     "noUnusedParameters": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext",
-    "types": ["bun"]
-  },
-  "include": ["src/**/*.ts", "test/**/*.ts"]
+    "target": "ESNext"
+  }
 }

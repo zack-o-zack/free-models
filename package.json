@@ -1,27 +1,26 @@
 {
-  "name": "free-models-backend",
-  "version": "0.1.0",
+  "name": "free-models",
   "private": true,
   "type": "module",
   "packageManager": "bun@1.4.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "catalogue": "bun run src/cli.ts",
-    "catalogue:discover": "bun run src/cli.ts discover",
-    "catalogue:reconcile": "bun run src/cli.ts reconcile",
-    "catalogue:refresh": "bun run src/cli.ts refresh",
-    "catalogue:render": "bun run src/cli.ts render",
-    "catalogue:check": "bun run src/cli.ts check",
+    "catalogue": "bun run --filter json catalogue",
+    "catalogue:discover": "bun run --filter json catalogue:discover",
+    "catalogue:reconcile": "bun run --filter json catalogue:reconcile",
+    "catalogue:refresh": "bun run --filter json catalogue:refresh",
+    "catalogue:render": "bun run --filter json catalogue:render",
+    "catalogue:check": "bun run --filter json catalogue:check",
     "format": "biome format --write .",
     "format:check": "biome format .",
     "lint": "biome lint .",
     "lint:fix": "biome lint --write .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "bun run --filter json typecheck",
     "test": "bun test",
     "quality": "bun run format:check && bun run lint && bun run typecheck && bun test && bun run aislop ci .",
     "check": "bun run quality && bun run catalogue:check"
-  },
-  "dependencies": {
-    "zod": "4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.11",

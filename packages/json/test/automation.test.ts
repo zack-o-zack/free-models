@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
 async function workflow(name: string): Promise<string> {
-  return Bun.file(resolve(import.meta.dir, `../.github/workflows/${name}`)).text();
+  return Bun.file(resolve(import.meta.dir, `../../../.github/workflows/${name}`)).text();
 }
 
 function scheduledResolutionGate(source: string): string {
@@ -39,16 +39,16 @@ describe("catalogue automation", () => {
     expect(refreshIndex).toBeGreaterThan(unresolvedGateIndex);
     expect(renderIndex).toBeGreaterThan(refreshIndex);
     expect(source).toContain(
-      "catalogue/canonical-models.json catalogue/snapshots catalogue/unresolved.json free-models.json",
+      "packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json packages/json/free-models.json",
     );
     expect(source).toContain(
-      "git add -- catalogue/canonical-models.json catalogue/snapshots catalogue/unresolved.json free-models.json",
+      "git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json packages/json/free-models.json",
     );
 
     const workspace = await mkdtemp(join(tmpdir(), "catalogue-automation-gate-"));
     try {
-      await mkdir(join(workspace, "catalogue"));
-      const unresolvedPath = join(workspace, "catalogue/unresolved.json");
+      await mkdir(join(workspace, "packages/json/catalogue"), { recursive: true });
+      const unresolvedPath = join(workspace, "packages/json/catalogue/unresolved.json");
       const gate = scheduledResolutionGate(source);
 
       await Bun.write(unresolvedPath, '{"providers":{}}\n');
@@ -65,9 +65,11 @@ describe("catalogue automation", () => {
     for (const name of ["pull-request.yml", "merged-catalogue.yml"]) {
       const source = await workflow(name);
       const reconcileIndex = source.indexOf("bun run catalogue:reconcile");
-      const unresolvedDiffIndex = source.indexOf("git diff --quiet -- catalogue/unresolved.json");
+      const unresolvedDiffIndex = source.indexOf(
+        "git diff --quiet -- packages/json/catalogue/unresolved.json",
+      );
       const renderIndex = source.indexOf("bun run catalogue:render");
-      const publicDiffIndex = source.indexOf("git diff --quiet -- free-models.json");
+      const publicDiffIndex = source.indexOf("git diff --quiet -- packages/json/free-models.json");
 
       expect(reconcileIndex, name).toBeGreaterThan(-1);
       expect(source, name).toContain("quality:\n    name: Repository quality gates");
