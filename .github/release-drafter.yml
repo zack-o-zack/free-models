@@ -34,8 +34,6 @@ version-resolver:
       - documentation
   default: patch
 
-autopr: false
-
 exclude-labels:
   - skip-changelog
 
