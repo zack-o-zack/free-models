@@ -51,6 +51,8 @@ jobs:
         run: bun ci
 
       - name: Discover provider offers
+        env:
+          MISTRAL_FREE_API_KEY: ${{ secrets.MISTRAL_FREE_API_KEY }}
         run: bun run catalogue:discover
 
       - name: Refresh and render resolved catalogue
