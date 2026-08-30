@@ -59,7 +59,6 @@ jobs:
           set -euo pipefail
           if bun -e 'const value = await Bun.file("packages/json/catalogue/unresolved.json").json(); process.exit(Object.values(value.providers).some((ids) => ids.length > 0) ? 1 : 0)'; then
             bun run catalogue:refresh
-            bun run catalogue:render --output "$RUNNER_TEMP/free-models.json"
           else
             echo "Unresolved offers remain; skipping metadata refresh and retaining the last reviewed public catalogue."
           fi

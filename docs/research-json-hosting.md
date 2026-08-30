@@ -22,6 +22,10 @@ that marks this path eligible for caching. Overwriting the stable key can briefl
 response while edge cache entries expire; use a versioned key later if consumers need immutable
 snapshots.
 
+The workflow also applies a read-only wildcard CORS policy (`GET` and `HEAD`) so browser clients can
+fetch the public file from any origin. This is appropriate for this intentionally public catalogue;
+private or credentialed objects should use a narrower origin allowlist.
+
 The equivalent manual upload is:
 
 ```text
@@ -86,6 +90,7 @@ file to the public mirror after the private repository's validation succeeds.
 - [Cloudflare R2 public buckets](https://developers.cloudflare.com/r2/buckets/public-buckets/) — custom domains, caching, and `r2.dev` limitations.
 - [Cloudflare R2 consistency](https://developers.cloudflare.com/r2/reference/consistency/) — stale cached responses after overwriting an object.
 - [Cloudflare R2 upload objects](https://developers.cloudflare.com/r2/objects/upload-objects/) — Wrangler uploads and HTTP metadata flags.
+- [Cloudflare R2 CORS](https://developers.cloudflare.com/r2/buckets/cors/) — browser access, policy format, and Wrangler commands.
 - [Cloudflare Wrangler GitHub Action](https://github.com/cloudflare/wrangler-action/blob/main/README.md) — GitHub Actions authentication and commands.
 - [Cloudflare default cache behavior](https://developers.cloudflare.com/cache/concepts/default-cache-behavior/) — JSON is not cached by extension by default and cache rules/headers can opt it in.
 - [jsDelivr GitHub CDN](https://www.jsdelivr.com/github) — free CDN for public/open-source GitHub files.
