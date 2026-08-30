@@ -3,7 +3,7 @@
   "models": [
     {
       "id": "cohere/north-mini-code",
-      "name": "Cohere: North Mini Code (free)",
+      "name": "Cohere: North Mini Code",
       "providers": {
         "openrouter": {
           "offers": [
@@ -152,7 +152,7 @@
     },
     {
       "id": "deepgram/flux-tts",
-      "name": "Deepgram: Flux TTS (free)",
+      "name": "Deepgram: Flux TTS",
       "providers": {
         "openrouter": {
           "offers": [
@@ -313,7 +313,7 @@
     },
     {
       "id": "dots-studio/dots-3-note-preview",
-      "name": "Dots Studio: Dots3-Note Preview (free)",
+      "name": "Dots Studio: Dots3-Note Preview",
       "providers": {
         "openrouter": {
           "offers": [
@@ -428,7 +428,7 @@
     },
     {
       "id": "fish-audio/s2.1-pro-free",
-      "name": "Fish Audio: S2.1 Pro Free (free)",
+      "name": "Fish Audio: S2.1 Pro",
       "providers": {
         "openrouter": {
           "offers": [
@@ -515,7 +515,7 @@
     },
     {
       "id": "google/gemma-4-26b-a4b-it",
-      "name": "Google: Gemma 4 26B A4B  (free)",
+      "name": "Google: Gemma 4 26B A4B",
       "providers": {
         "openrouter": {
           "offers": [
@@ -658,7 +658,7 @@
     },
     {
       "id": "google/gemma-4-31b-it",
-      "name": "Google: Gemma 4 31B (free)",
+      "name": "Google: Gemma 4 31B",
       "providers": {
         "openrouter": {
           "offers": [
@@ -807,7 +807,7 @@
     },
     {
       "id": "inclusionai/ling-3.0-flash-fin",
-      "name": "Ling 3.0 Flash Fin (free)",
+      "name": "Ling 3.0 Flash Fin",
       "providers": {
         "opencode": {
           "offers": [
@@ -949,7 +949,7 @@
     },
     {
       "id": "liquid/lfm-2.5-2.6b",
-      "name": "LiquidAI: LFM2.5-2.6B (free)",
+      "name": "LiquidAI: LFM2.5-2.6B",
       "providers": {
         "openrouter": {
           "offers": [
@@ -1090,7 +1090,7 @@
     },
     {
       "id": "liquid/lfm-2.5-embedding-350m",
-      "name": "LiquidAI: LFM2.5-Embedding-350M (free)",
+      "name": "LiquidAI: LFM2.5-Embedding-350M",
       "providers": {
         "openrouter": {
           "offers": [
@@ -1199,7 +1199,7 @@
     },
     {
       "id": "meta/muse-spark-1.2-contributor",
-      "name": "Muse Spark 1.2 Contributor Free",
+      "name": "Muse Spark 1.2 Contributor",
       "providers": {
         "opencode": {
           "offers": [
@@ -1284,7 +1284,7 @@
     },
     {
       "id": "minimax/minimax-m2.7",
-      "name": "MiniMax: MiniMax M2.7 (free)",
+      "name": "MiniMax: MiniMax M2.7",
       "providers": {
         "openrouter": {
           "offers": [
@@ -1541,7 +1541,7 @@
     },
     {
       "id": "minimax/minimax-m3",
-      "name": "MiniMax: MiniMax M3 (free)",
+      "name": "MiniMax: MiniMax M3",
       "providers": {
         "openrouter": {
           "offers": [
@@ -1900,7 +1900,7 @@
     },
     {
       "id": "nvidia/llama-nemotron-embed-vl-1b-v2",
-      "name": "NVIDIA: Llama Nemotron Embed VL 1B V2 (free)",
+      "name": "NVIDIA: Llama Nemotron Embed VL 1B V2",
       "providers": {
         "openrouter": {
           "offers": [
@@ -2007,7 +2007,7 @@
     },
     {
       "id": "nvidia/llama-nemotron-rerank-vl-1b-v2",
-      "name": "NVIDIA: Llama Nemotron Rerank VL 1B V2 (free)",
+      "name": "NVIDIA: Llama Nemotron Rerank VL 1B V2",
       "providers": {
         "openrouter": {
           "offers": [
@@ -2120,7 +2120,7 @@
     },
     {
       "id": "nvidia/nemotron-3-embed-1b",
-      "name": "NVIDIA: Nemotron 3 Embed 1B (free)",
+      "name": "NVIDIA: Nemotron 3 Embed 1B",
       "providers": {
         "openrouter": {
           "offers": [
@@ -2231,7 +2231,7 @@
     },
     {
       "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
-      "name": "NVIDIA: Nemotron 3 Nano Omni (free)",
+      "name": "NVIDIA: Nemotron 3 Nano Omni",
       "providers": {
         "openrouter": {
           "offers": [
@@ -2382,7 +2382,7 @@
     },
     {
       "id": "nvidia/nemotron-3-super-120b-a12b",
-      "name": "NVIDIA: Nemotron 3 Super (free)",
+      "name": "NVIDIA: Nemotron 3 Super",
       "providers": {
         "openrouter": {
           "offers": [
@@ -2543,7 +2543,7 @@
     },
     {
       "id": "nvidia/nemotron-3-ultra-550b-a55b",
-      "name": "NVIDIA: Nemotron 3 Ultra (free)",
+      "name": "NVIDIA: Nemotron 3 Ultra",
       "providers": {
         "opencode": {
           "offers": [
@@ -2829,7 +2829,7 @@
     },
     {
       "id": "nvidia/nemotron-3.5-content-safety",
-      "name": "NVIDIA: Nemotron 3.5 Content Safety (free)",
+      "name": "NVIDIA: Nemotron 3.5 Content Safety",
       "providers": {
         "openrouter": {
           "offers": [
@@ -2954,7 +2954,7 @@
     },
     {
       "id": "nvidia/nemotron-3.5-lightning",
-      "name": "NVIDIA: Nemotron 3.5 Lightning (free)",
+      "name": "NVIDIA: Nemotron 3.5 Lightning",
       "providers": {
         "opencode": {
           "offers": [
@@ -3096,7 +3096,7 @@
     },
     {
       "id": "poolside/laguna-s-2.1",
-      "name": "Poolside: Laguna S 2.1 (free)",
+      "name": "Poolside: Laguna S 2.1",
       "providers": {
         "openrouter": {
           "offers": [
@@ -3205,7 +3205,7 @@
     },
     {
       "id": "poolside/laguna-xs-2.1",
-      "name": "Poolside: Laguna XS 2.1 (free)",
+      "name": "Poolside: Laguna XS 2.1",
       "providers": {
         "openrouter": {
           "offers": [
@@ -3335,7 +3335,7 @@
     },
     {
       "id": "tencent/hy3",
-      "name": "Hy3 Free",
+      "name": "Hy3",
       "providers": {
         "opencode": {
           "offers": [
@@ -3490,7 +3490,7 @@
     },
     {
       "id": "thinkingmachines/inkling",
-      "name": "Thinking Machines: Inkling (free)",
+      "name": "Thinking Machines: Inkling",
       "providers": {
         "openrouter": {
           "offers": [
@@ -3761,7 +3761,7 @@
     },
     {
       "id": "thinkingmachines/inkling-small",
-      "name": "Thinking Machines: Inkling Small (free)",
+      "name": "Thinking Machines: Inkling Small",
       "providers": {
         "openrouter": {
           "offers": [
@@ -3932,7 +3932,7 @@
     },
     {
       "id": "xiaomi/mimo-v2.5",
-      "name": "MiMo-V2.5 Free",
+      "name": "MiMo-V2.5",
       "providers": {
         "opencode": {
           "offers": [
@@ -4086,7 +4086,7 @@
     },
     {
       "id": "z-ai/glm-5.2",
-      "name": "Z.ai: GLM 5.2 (free)",
+      "name": "Z.ai: GLM 5.2",
       "providers": {
         "openrouter": {
           "offers": [
