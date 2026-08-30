@@ -9,7 +9,7 @@ import {
   GEMINI_PRICING_URL,
   GeminiProvider,
 } from "../src/providers/gemini.ts";
-import { GROQ_API_BASE_URL, GROQ_RATE_LIMITS_URL, GroqProvider } from "../src/providers/groq.ts";
+import { GROQ_API_BASE_URL, GroqProvider } from "../src/providers/groq.ts";
 import {
   MISTRAL_API_BASE_URL,
   MISTRAL_MODELS_URL,
@@ -22,52 +22,53 @@ describe("Groq discovery", () => {
     const provider = new GroqProvider({
       fetch: async () =>
         new Response(`
-## Developer Plan Limits
-
-| MODEL ID | RPM | RPD | TPM | TPD | ASH | ASD |
-| --- | --- | --- | --- | --- | --- | --- |
-| paid/model | 30 | 1,000 | 8,000 | 200,000 | \\- | \\- |
+<table>
+  <tr><th><button>Free Plan Limits</button><button class="happy">Developer Plan Limits</button></th></tr>
+  <tr><th>MODEL ID</th><th>RPM</th><th>RPD</th><th>TPM</th><th>TPD</th><th>ASH</th><th>ASD</th></tr>
+</table>
+<table>
+  <tr><td>paid/model</td><td>30</td><td>1,000</td><td>8,000</td><td>200,000</td><td>-</td><td>-</td></tr>
+</table>
 `),
     });
 
     expect(await provider.discover()).toEqual([]);
   });
 
-  test("ignores column-width divider rows in the free-plan table", async () => {
+  test("rejects an unlabeled plan limits table", async () => {
     const provider = new GroqProvider({
       fetch: async () =>
         new Response(`
-## [Free Plan Limits](#free-plan-limits)
-
-| MODEL ID | RPM | RPD | TPM | TPD | ASH | ASD |
-| --- | --- | --- | --- | --- | --- | --- |
-| alpha/model | 30 | 1,000 | 6,000 | 500,000 | \\- | \\- |
-| ----------- | -- | ----- | ----- | ------- | --- | --- |
+<table>
+  <tr><th>MODEL ID</th><th>RPM</th><th>RPD</th><th>TPM</th><th>TPD</th><th>ASH</th><th>ASD</th></tr>
+</table>
+<table>
+  <tr><td>unknown/model</td><td>30</td><td>1,000</td><td>6,000</td><td>500,000</td><td>-</td><td>-</td></tr>
+</table>
 `),
     });
 
-    expect(await provider.discover()).toEqual([
-      {
-        model_id: "alpha/model",
-        connection: { base_url: GROQ_API_BASE_URL },
-        metadata: { rate_limits: { rpm: "30", rpd: "1,000", tpm: "6,000", tpd: "500,000" } },
-      },
-    ]);
+    expect(provider.discover()).rejects.toThrow("unique active plan");
   });
 
   test("discovers model IDs and quotas from the official free-plan table", async () => {
     const provider = new GroqProvider({
-      fetch: async (url) => {
-        expect(url).toBe(GROQ_RATE_LIMITS_URL);
+      fetch: async (url, init) => {
+        expect(url).toBe("https://console.groq.com/docs/rate-limits");
+        expect(new Headers(init?.headers).get("accept")).toBe("text/html,application/xhtml+xml");
         return new Response(`
-## Free Plan Limits
-
-| MODEL ID | RPM | RPD | TPM | TPD | ASH | ASD |
-| --- | --- | --- | --- | --- | --- | --- |
-| alpha/model | 30 | 1,000 | 6,000 | 500,000 | \\- | \\- |
-| beta/model | 10 | 100 | 2,000 | 20,000 | 5 | 20 |
-
-## Developer Plan Limits
+<table>
+  <thead>
+    <tr><th><button class="happy">Free Plan Limits</button><button>Developer Plan Limits</button></th></tr>
+    <tr><th>MODEL ID</th><th>RPM</th><th>RPD</th><th>TPM</th><th>TPD</th><th>ASH</th><th>ASD</th></tr>
+  </thead>
+</table>
+<table>
+  <tbody>
+    <tr><td>alpha/model</td><td>30</td><td>1,000</td><td>6,000</td><td>500,000</td><td>-</td><td>-</td></tr>
+    <tr><td>beta/model</td><td>10</td><td>100</td><td>2,000</td><td>20,000</td><td>5</td><td>20</td></tr>
+  </tbody>
+</table>
 `);
       },
     });

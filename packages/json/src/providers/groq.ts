@@ -1,14 +1,24 @@
 import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
 import type { ModelProvider } from "./provider.ts";
-import { type FetchSource, fetchText } from "./source.ts";
+import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
 export const GROQ_API_BASE_URL = "https://api.groq.com/openai/v1";
-export const GROQ_RATE_LIMITS_URL = "https://console.groq.com/docs/rate-limits.md";
+export const GROQ_RATE_LIMITS_URL = "https://console.groq.com/docs/rate-limits";
 
 const RATE_LIMIT_COLUMNS = ["MODEL ID", "RPM", "RPD", "TPM", "TPD", "ASH", "ASD"] as const;
 
 export interface GroqProviderOptions {
   readonly fetch?: FetchSource;
+}
+
+interface ParsedButton {
+  readonly className: string;
+  text: string;
+}
+
+interface ParsedTable {
+  readonly buttons: ParsedButton[];
+  readonly rows: string[][];
 }
 
 export class GroqProvider implements ModelProvider {
@@ -21,10 +31,10 @@ export class GroqProvider implements ModelProvider {
   }
 
   async discover(): Promise<readonly DiscoveredOffer[]> {
-    const markdown = await fetchText(this.#fetch, GROQ_RATE_LIMITS_URL, "Groq rate limits", {
-      headers: { Accept: "text/markdown,text/plain" },
+    const html = await fetchText(this.#fetch, GROQ_RATE_LIMITS_URL, "Groq rate limits", {
+      headers: { Accept: "text/html,application/xhtml+xml" },
     });
-    return parseGroqFreePlan(markdown).map(({ modelId, rateLimits }) => ({
+    return (await parseGroqFreePlan(html)).map(({ modelId, rateLimits }) => ({
       model_id: modelId,
       connection: { base_url: GROQ_API_BASE_URL },
       metadata: { rate_limits: rateLimits },
@@ -32,39 +42,41 @@ export class GroqProvider implements ModelProvider {
   }
 }
 
-export function parseGroqFreePlan(
-  markdown: string,
-): { modelId: string; rateLimits: Record<string, JsonValue> }[] {
-  const lines = markdown.split(/\r?\n/);
-  const sectionIndex = lines.findIndex((line) =>
-    /^#{1,6}\s+(?:Free Plan Limits|\[Free Plan Limits\]\([^)]*\))\s*$/i.test(line.trim()),
+export async function parseGroqFreePlan(
+  html: string,
+): Promise<{ modelId: string; rateLimits: Record<string, JsonValue> }[]> {
+  const tables = await extractTables(html);
+  const headerTables = tables
+    .map((table, index) => ({
+      index,
+      table,
+      header: table.rows.find((row) => equalStrings(row, RATE_LIMIT_COLUMNS)),
+    }))
+    .filter(({ header }) => header !== undefined);
+  const headerTable = headerTables[0];
+  if (headerTables.length !== 1 || !headerTable) {
+    throw new Error("Groq rate limits documentation has no unique plan limits table");
+  }
+
+  const activePlans = headerTable.table.buttons.filter(({ className }) =>
+    className.split(/\s+/).includes("happy"),
   );
-  if (sectionIndex < 0) {
+  const activePlan = activePlans[0];
+  if (activePlans.length !== 1 || !activePlan) {
+    throw new Error("Groq rate limits documentation has no unique active plan");
+  }
+  if (activePlan.text !== "Free Plan Limits") {
     return [];
   }
 
-  const remainingLines = lines.slice(sectionIndex + 1);
-  const nextSectionIndex = remainingLines.findIndex((line) => /^#{1,6}\s+/.test(line.trim()));
-  const sectionLines =
-    nextSectionIndex < 0 ? remainingLines : remainingLines.slice(0, nextSectionIndex);
-  const headerIndex = sectionLines.findIndex((line) =>
-    equalStrings(parseMarkdownRow(line), RATE_LIMIT_COLUMNS),
-  );
-  if (headerIndex < 0) {
-    throw new Error("Groq rate limits documentation has no Free Plan Limits table");
+  const bodyTable = tables[headerTable.index + 1];
+  if (!bodyTable) {
+    throw new Error("Groq Free Plan Limits table has no body");
   }
 
   const offers: { modelId: string; rateLimits: Record<string, JsonValue> }[] = [];
   const seen = new Set<string>();
-  for (const line of sectionLines.slice(headerIndex + 1)) {
-    const trimmed = line.trim();
-    if (trimmed.startsWith("## ") || (offers.length > 0 && trimmed.length === 0)) {
-      break;
-    }
-    const cells = parseMarkdownRow(line);
-    if (cells.length === 0 || isSeparatorRow(cells)) {
-      continue;
-    }
+  for (const cells of bodyTable.rows) {
     if (cells.length !== RATE_LIMIT_COLUMNS.length) {
       throw new Error("Groq Free Plan Limits table contains a malformed row");
     }
@@ -93,19 +105,82 @@ export function parseGroqFreePlan(
   return offers;
 }
 
-function parseMarkdownRow(line: string): string[] {
-  const trimmed = line.trim();
-  if (!trimmed.startsWith("|") || !trimmed.endsWith("|")) {
-    return [];
-  }
-  return trimmed
-    .slice(1, -1)
-    .split("|")
-    .map((cell) => cell.replace(/\\-/g, "-").replace(/`/g, "").trim());
-}
+async function extractTables(html: string): Promise<ParsedTable[]> {
+  const tables: ParsedTable[] = [];
+  let currentTable: ParsedTable | undefined;
+  let currentRow: string[] | undefined;
+  let currentCell: { text: string } | undefined;
+  let currentButton: ParsedButton | undefined;
 
-function isSeparatorRow(cells: readonly string[]): boolean {
-  return cells.every((cell) => /^:?-+:?$/.test(cell));
+  try {
+    const transformed = createHtmlRewriter()
+      .on("table", {
+        element(element) {
+          currentTable = { buttons: [], rows: [] };
+          tables.push(currentTable);
+          element.onEndTag(() => {
+            currentTable = undefined;
+          });
+        },
+      })
+      .on("tr", {
+        element(element) {
+          if (!currentTable) {
+            return;
+          }
+          currentRow = [];
+          currentTable.rows.push(currentRow);
+          element.onEndTag(() => {
+            currentRow = undefined;
+          });
+        },
+      })
+      .on("th, td", {
+        element(element) {
+          if (!currentRow) {
+            return;
+          }
+          currentCell = { text: "" };
+          element.onEndTag(() => {
+            if (currentRow && currentCell) {
+              currentRow.push(normalizeText(currentCell.text));
+            }
+            currentCell = undefined;
+          });
+        },
+        text(chunk) {
+          if (currentCell) {
+            currentCell.text += chunk.text;
+          }
+        },
+      })
+      .on("button", {
+        element(element) {
+          if (!currentTable) {
+            return;
+          }
+          currentButton = { className: element.getAttribute("class") ?? "", text: "" };
+          currentTable.buttons.push(currentButton);
+          element.onEndTag(() => {
+            if (currentButton) {
+              currentButton.text = normalizeText(currentButton.text);
+            }
+            currentButton = undefined;
+          });
+        },
+        text(chunk) {
+          if (currentButton) {
+            currentButton.text += chunk.text;
+          }
+        },
+      })
+      .transform(new Response(html));
+    await transformed.text();
+  } catch (error) {
+    throw new Error("Groq rate limits HTML is malformed", { cause: error });
+  }
+
+  return tables;
 }
 
 function equalStrings(left: readonly string[], right: readonly string[]): boolean {
