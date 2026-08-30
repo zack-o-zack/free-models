@@ -47,15 +47,15 @@ jobs:
         run: |
           set -euo pipefail
           bun run catalogue:reconcile
-          if ! git diff --quiet -- catalogue/unresolved.json; then
-            git diff -- catalogue/unresolved.json
+          if ! git diff --quiet -- packages/json/catalogue/unresolved.json; then
+            git diff -- packages/json/catalogue/unresolved.json
             echo "The merged unresolved report is stale." >&2
             exit 1
           fi
 
           bun run catalogue:render
-          if ! git diff --quiet -- free-models.json; then
-            git diff -- free-models.json
+          if ! git diff --quiet -- packages/json/free-models.json; then
+            git diff -- packages/json/free-models.json
             echo "The merged public catalogue is stale." >&2
             exit 1
           fi
