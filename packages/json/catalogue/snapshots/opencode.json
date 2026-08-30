@@ -13,17 +13,6 @@
       }
     },
     {
-      "model_id": "hy3-free",
-      "connection": {
-        "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions"
-      },
-      "metadata": {
-        "object": "model",
-        "owned_by": "opencode"
-      }
-    },
-    {
       "model_id": "ling-3.0-flash-fin-free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
