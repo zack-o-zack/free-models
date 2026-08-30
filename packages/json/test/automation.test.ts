@@ -32,17 +32,16 @@ describe("catalogue automation", () => {
     const discoverIndex = source.indexOf("bun run catalogue:discover");
     const unresolvedGateIndex = source.indexOf("if bun -e");
     const refreshIndex = source.indexOf("bun run catalogue:refresh");
-    const renderIndex = source.indexOf("bun run catalogue:render");
 
     expect(discoverIndex).toBeGreaterThan(-1);
     expect(unresolvedGateIndex).toBeGreaterThan(discoverIndex);
     expect(refreshIndex).toBeGreaterThan(unresolvedGateIndex);
-    expect(renderIndex).toBeGreaterThan(refreshIndex);
+    expect(source).not.toContain("bun run catalogue:render");
     expect(source).toContain(
-      "packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json packages/json/free-models.json",
+      "packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json",
     );
     expect(source).toContain(
-      "git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json packages/json/free-models.json",
+      "git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json",
     );
 
     const workspace = await mkdtemp(join(tmpdir(), "catalogue-automation-gate-"));
@@ -69,16 +68,33 @@ describe("catalogue automation", () => {
         "git diff --quiet -- packages/json/catalogue/unresolved.json",
       );
       const renderIndex = source.indexOf("bun run catalogue:render");
-      const publicDiffIndex = source.indexOf("git diff --quiet -- packages/json/free-models.json");
+      const inputIndex = source.indexOf("bun run catalogue:check --input");
 
       expect(reconcileIndex, name).toBeGreaterThan(-1);
       expect(source, name).toContain("quality:\n    name: Repository quality gates");
       expect(source, name).toContain("catalogue:\n    name: Validate catalogue");
-      expect(source, name).not.toContain("needs:");
       expect(source, name).not.toContain("bun run catalogue:refresh");
       expect(unresolvedDiffIndex, name).toBeGreaterThan(reconcileIndex);
       expect(renderIndex, name).toBeGreaterThan(unresolvedDiffIndex);
-      expect(publicDiffIndex, name).toBeGreaterThan(renderIndex);
+      expect(inputIndex, name).toBeGreaterThan(renderIndex);
+
+      if (name === "pull-request.yml") {
+        expect(source, name).not.toContain("publish:");
+        expect(source, name).not.toContain("needs:");
+        expect(source, name).not.toContain("packages/json/free-models.json");
+      } else {
+        expect(source, name).toContain("publish:\n    name: Publish catalogue to R2");
+        expect(source, name).toContain("actions/upload-artifact@v4");
+        expect(source, name).toContain("actions/download-artifact@v4");
+        expect(source, name).toContain("cloudflare/wrangler-action@v4");
+        expect(source, name).toContain(
+          "r2 bucket cors set free-models-cdn --file config/r2-cors.json",
+        );
+        expect(source, name).toContain("free-models-cdn/free-models.json");
+        expect(source, name).toContain(`--file ${"$"}{{ runner.temp }}/free-models.json`);
+        expect(source, name).toContain("CLOUDFLARE_API_TOKEN");
+        expect(source, name).toContain("CLOUDFLARE_ACCOUNT_ID");
+      }
     }
   });
 });

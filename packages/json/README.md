@@ -35,7 +35,8 @@ bun run catalogue:refresh
 ## 4. Render
 
 Render creates `free-models.json` in a deterministic way. It uses discovered offers, reviewed
-mappings, and current model metadata. This file is the public catalog.
+mappings, and current model metadata. CI renders this file in a temporary workspace and uploads it
+to the public CDN after a merge; the generated file is not committed to the repository.
 
 ```sh
 bun run catalogue:render
@@ -44,7 +45,7 @@ bun run catalogue:render
 ## 5. Check
 
 Check validates the catalog. It checks schemas, provider-to-canonical mappings, generated reports,
-and the rendered JSON. It also checks that `free-models.json` matches the current catalog data.
+and the rendered JSON. Pass `--input` when the rendered file is in a temporary CI location.
 
 ```sh
 bun run catalogue:check

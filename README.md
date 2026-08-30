@@ -59,9 +59,10 @@ normalized catalogue changes. Existing commits on that branch are retained, so m
 canonical models and mappings directly to the pull request. If unresolved offers remain, the public
 catalogue is not regenerated and pull-request validation stays red until those identities are
 reviewed. After resolution, scheduled automation refreshes metadata before rendering and includes
-canonical registry changes in the generated update. Pull-request and merged-branch checks only run
-offline reconciliation, rendering, and validation, so changing upstream metadata cannot make a
-reviewed commit fail nondeterministically.
+canonical registry changes in the generated update. Pull-request checks and the merged workflow's
+catalogue validation job run offline reconciliation, rendering, and validation, so changing
+upstream metadata cannot make a reviewed commit fail nondeterministically. After those checks pass,
+the merged workflow's separate publish job uploads the rendered file to R2.
 
 This automation becomes operational only after this private repository has a GitHub remote and
 GitHub Actions is allowed to create branches and pull requests with `GITHUB_TOKEN`. Configure the
@@ -70,10 +71,13 @@ requests. The workflows themselves grant read access to validation jobs and gran
 to the scheduled discovery job.
 
 Provider APIs and documentation are used with the accepted risk that their terms, schemas, and
-anonymous-access policies can change. `packages/json/free-models.json` is a reviewed observation of
-provider catalogues, not a guarantee of availability or completeness. The repository is intended to
-remain private; only the generated `packages/json/free-models.json` artifact is designed for public
-exposure.
+anonymous-access policies can change. The generated catalogue is a reviewed observation of provider
+catalogues, not a guarantee of availability or completeness. The repository is intended to remain
+private; the merged-catalogue workflow renders the public JSON temporarily in CI and uploads it to
+[`https://static.zackozack.com/free-models.json`](https://static.zackozack.com/free-models.json).
+That publish job requires the repository secrets `CLOUDFLARE_API_TOKEN` and
+`CLOUDFLARE_ACCOUNT_ID`. It also applies a read-only wildcard CORS policy so browser applications
+can fetch the public JSON.
 
 ## Pre-commit behaviour
 

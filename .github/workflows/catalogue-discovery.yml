@@ -59,7 +59,6 @@ jobs:
           set -euo pipefail
           if bun -e 'const value = await Bun.file("packages/json/catalogue/unresolved.json").json(); process.exit(Object.values(value.providers).some((ids) => ids.length > 0) ? 1 : 0)'; then
             bun run catalogue:refresh
-            bun run catalogue:render
           else
             echo "Unresolved offers remain; skipping metadata refresh and retaining the last reviewed public catalogue."
           fi
@@ -69,7 +68,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          changed=$(git status --porcelain -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json packages/json/free-models.json)
+          changed=$(git status --porcelain -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json)
           if [[ -z "$changed" ]]; then
             if git rev-parse --verify --quiet MERGE_HEAD >/dev/null; then
               git merge --abort
@@ -86,7 +85,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json packages/json/free-models.json
+          git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json
           git commit -m "chore: update free model catalogue"
           git push origin "$AUTOMATION_BRANCH"
 
@@ -108,7 +107,7 @@ jobs:
               "",
             ];
             if (entries.length === 0) {
-              lines.push("None. The public catalogue was regenerated.");
+              lines.push("None. The public catalogue will be regenerated and published after merge.");
             } else {
               for (const [provider, ids] of entries) {
                 lines.push(`### ${provider}`, "", ...ids.map((id) => `- \`${id}\``), "");

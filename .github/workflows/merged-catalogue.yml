@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "packages/json/**"
+      - "package.json"
+      - "bun.lock"
+      - ".github/workflows/merged-catalogue.yml"
 
 permissions:
   contents: read
@@ -53,11 +58,50 @@ jobs:
             exit 1
           fi
 
-          bun run catalogue:render
-          if ! git diff --quiet -- packages/json/free-models.json; then
-            git diff -- packages/json/free-models.json
-            echo "The merged public catalogue is stale." >&2
-            exit 1
-          fi
+          bun run catalogue:render --output "$RUNNER_TEMP/free-models.json"
+          bun run catalogue:check --input "$RUNNER_TEMP/free-models.json"
 
-          bun run catalogue:check
+      - name: Save rendered catalogue for publication
+        uses: actions/upload-artifact@v4
+        with:
+          name: free-models-json
+          path: ${{ runner.temp }}/free-models.json
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    name: Publish catalogue to R2
+    needs:
+      - quality
+      - catalogue
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Download rendered catalogue
+        uses: actions/download-artifact@v4
+        with:
+          name: free-models-json
+          path: ${{ runner.temp }}
+
+      - name: Configure public CORS
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: r2 bucket cors set free-models-cdn --file config/r2-cors.json
+
+      - name: Upload catalogue to Cloudflare R2
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            r2 object put free-models-cdn/free-models.json
+            --remote
+            --file ${{ runner.temp }}/free-models.json
+            --content-type application/json
+            --cache-control "public, max-age=300, s-maxage=300"
