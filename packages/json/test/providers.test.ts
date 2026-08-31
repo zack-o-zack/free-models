@@ -346,6 +346,15 @@ describe("NVIDIA Build discovery", () => {
 describe("Cloudflare Workers AI discovery", () => {
   test("applies the recurring allocation to priced models except paid-only entries", async () => {
     const provider = new CloudflareProvider({
+      modelsDev: new Map([
+        [
+          "cloudflare-workers-ai",
+          {
+            id: "cloudflare-workers-ai",
+            env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+          },
+        ],
+      ]),
       fetch: async (url) => {
         expect(url).toBe(CLOUDFLARE_WORKERS_AI_PRICING_URL);
         return new Response(`
@@ -366,13 +375,29 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
     expect(await provider.discover()).toEqual([
       {
         model_id: "@cf/free/model",
-        connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
+        name: "Free: Model",
+        connection: {
+          auth: {
+            env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+          },
+          base_url: CLOUDFLARE_WORKERS_AI_BASE_URL,
+          protocol: "cloudflare",
+        },
       },
     ]);
   });
 
   test("fails closed when the paid-only declaration disappears", async () => {
     const provider = new CloudflareProvider({
+      modelsDev: new Map([
+        [
+          "cloudflare-workers-ai",
+          {
+            id: "cloudflare-workers-ai",
+            env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+          },
+        ],
+      ]),
       fetch: async () =>
         new Response("Our free allocation is **10,000 Neurons per day at no charge**."),
     });
@@ -381,6 +406,15 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
 
   test("fails closed when the free allocation is ambiguous", async () => {
     const provider = new CloudflareProvider({
+      modelsDev: new Map([
+        [
+          "cloudflare-workers-ai",
+          {
+            id: "cloudflare-workers-ai",
+            env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+          },
+        ],
+      ]),
       fetch: async () =>
         new Response(`
 **10,000 Neurons per day at no charge**

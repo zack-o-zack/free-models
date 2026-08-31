@@ -39,7 +39,7 @@ async function prepareEmptyWorkspace(workspace: string): Promise<void> {
     );
     await Bun.write(
       join(workspace, `catalogue/snapshots/${provider.id}.json`),
-      `${JSON.stringify({ provider: provider.id, offers: [] }, null, 2)}\n`,
+      `${JSON.stringify({ provider: provider.id, name: provider.name ?? provider.id, offers: [] }, null, 2)}\n`,
     );
   }
 }
