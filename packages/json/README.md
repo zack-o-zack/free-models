@@ -13,9 +13,12 @@ Later phases use these snapshots.
 bun run catalogue:discover
 ```
 
-Discovery reads Groq's free-plan rate-limit table, Gemini's per-model standard-tier pricing,
-NVIDIA Build's `Free Endpoint` catalogue labels, and Cloudflare Workers AI's free-allocation model
-pricing without credentials. TokenRouter discovery intersects its public, zero-price `-free` models
+Discovery reads Groq's free-plan rate-limit table (excluding the `groq/` routing
+namespace), Gemini's per-model standard-tier pricing, NVIDIA Build's `Free Endpoint` catalogue
+labels, and Cloudflare Workers AI's free-allocation model pricing without credentials. OpenRouter
+discovery keeps concrete `:free` models only; its `openrouter/` routing namespace is never
+included. TokenRouter discovery intersects its public,
+zero-price `-free` models
 with the models actively served to `TOKENROUTER_API_KEY` and records all supported endpoint types.
 This excludes stale and imported pricing entries without limiting discovery to one API protocol.
 Mistral discovery is account-scoped: set `MISTRAL_FREE_API_KEY` to an API key for an organization in

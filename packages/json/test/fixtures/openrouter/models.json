@@ -17,6 +17,22 @@
       }
     },
     {
+      "id": "openrouter/auto-beta",
+      "name": "Auto Router (Beta)",
+      "pricing": {
+        "completion": "-1",
+        "prompt": "-1"
+      }
+    },
+    {
+      "id": "openrouter/auto:free",
+      "name": "Auto Router (free)",
+      "pricing": {
+        "completion": "0",
+        "prompt": "0"
+      }
+    },
+    {
       "id": "zeta/model:free",
       "name": "Zeta Model (free)",
       "nullable": null,
@@ -39,5 +55,5 @@
       "supported_parameters": ["tools", "temperature"]
     }
   ],
-  "total_count": 4
+  "total_count": 6
 }

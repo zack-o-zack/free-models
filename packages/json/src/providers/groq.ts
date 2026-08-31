@@ -6,6 +6,9 @@ export const GROQ_API_BASE_URL = "https://api.groq.com/openai/v1";
 export const GROQ_RATE_LIMITS_URL = "https://console.groq.com/docs/rate-limits";
 
 const RATE_LIMIT_COLUMNS = ["MODEL ID", "RPM", "RPD", "TPM", "TPD", "ASH", "ASD"] as const;
+// The groq/ namespace holds routing endpoints (compound, ...) that stand in
+// front of other providers' models, not concrete free models of their own.
+const GROQ_ROUTER_PREFIX = "groq/";
 
 export interface GroqProviderOptions {
   readonly fetch?: FetchSource;
@@ -34,10 +37,13 @@ export class GroqProvider implements ModelProvider {
     const html = await fetchText(this.#fetch, GROQ_RATE_LIMITS_URL, "Groq rate limits", {
       headers: { Accept: "text/html,application/xhtml+xml" },
     });
-    return (await parseGroqFreePlan(html)).map(({ modelId }) => ({
-      model_id: modelId,
-      connection: { base_url: GROQ_API_BASE_URL },
-    }));
+    const offers = await parseGroqFreePlan(html);
+    return offers
+      .filter(({ modelId }) => !modelId.startsWith(GROQ_ROUTER_PREFIX))
+      .map(({ modelId }) => ({
+        model_id: modelId,
+        connection: { base_url: GROQ_API_BASE_URL },
+      }));
   }
 }
 
