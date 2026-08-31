@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import { protocolFromAiSdkPackage } from "../src/providers/opencode.ts";
 
 const fixtureCliPath = resolve(import.meta.dir, "support/opencode-fixture-cli.ts");
 const validDocumentationPath = resolve(import.meta.dir, "fixtures/opencode/zen.html");
@@ -307,6 +308,27 @@ describe("OpenCode Zen discovery", () => {
       expect(runFixtureCli(workspace, fixtures).exitCode).toBe(0);
       expect(await Bun.file(snapshotPath).text()).toBe(firstSnapshot);
     });
+  });
+
+  test("maps AI SDK packages to the correct connection protocol", () => {
+    expect(
+      protocolFromAiSdkPackage(
+        "@ai-sdk/openai-compatible",
+        "https://opencode.ai/zen/v1/chat/completions",
+      ),
+    ).toBe("openai");
+    expect(protocolFromAiSdkPackage("@ai-sdk/openai", "https://opencode.ai/zen/v1/responses")).toBe(
+      "openai",
+    );
+    expect(
+      protocolFromAiSdkPackage("@ai-sdk/anthropic", "https://opencode.ai/zen/v1/messages"),
+    ).toBe("anthropic");
+    expect(
+      protocolFromAiSdkPackage(
+        "@ai-sdk/google",
+        "https://opencode.ai/zen/v1/models/gemini-3.7-flash",
+      ),
+    ).toBe("google");
   });
 });
 

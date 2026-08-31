@@ -92,6 +92,11 @@ export class OpenCodeProvider implements ModelProvider {
         );
       }
 
+      const protocol = protocolFromAiSdkPackage(
+        documentedOffer.aiSdkPackage,
+        documentedOffer.endpoint,
+      );
+
       return {
         model_id: documentedOffer.modelId,
         name: documentedOffer.modelName || desluggifyModelId(documentedOffer.modelId),
@@ -100,7 +105,7 @@ export class OpenCodeProvider implements ModelProvider {
           auth: { env },
           base_url: "https://opencode.ai/zen/v1",
           endpoint: documentedOffer.endpoint,
-          protocol: "openai",
+          protocol,
         },
       };
     });
@@ -352,4 +357,17 @@ function normalizeCellText(value: string): string {
 
 function equalStrings(left: readonly string[], right: readonly string[]): boolean {
   return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+export function protocolFromAiSdkPackage(aiSdkPackage: string, endpoint: string): string {
+  const pkg = aiSdkPackage.toLowerCase();
+  const ep = endpoint.toLowerCase();
+
+  if (pkg.includes("anthropic") || ep.includes("/messages")) {
+    return "anthropic";
+  }
+  if (pkg.includes("google") || ep.includes("/models/")) {
+    return "google";
+  }
+  return "openai";
 }
