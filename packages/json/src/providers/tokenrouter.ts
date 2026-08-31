@@ -8,7 +8,11 @@ export const TOKENROUTER_PRICING_URL = "https://api.tokenrouter.com/api/pricing"
 
 const DEFAULT_GROUP = "default";
 const NATIVE_FREE_MODEL_SUFFIX = "-free";
-const OPENAI_ENDPOINT_TYPES = new Set(["openai", "openai-response"]);
+
+export interface TokenRouterFreeModel {
+  readonly modelId: string;
+  readonly supportedEndpointTypes: string[];
+}
 
 export interface TokenRouterProviderOptions {
   readonly fetch?: FetchSource;
@@ -44,15 +48,18 @@ export class TokenRouterProvider implements ModelProvider {
     ]);
 
     const activeModelIds = parseTokenRouterModels(modelsPayload);
-    const freeModelIds = parseTokenRouterPricing(pricingPayload);
-    const activeFreeModelIds = freeModelIds.filter((modelId) => activeModelIds.has(modelId));
-    if (activeFreeModelIds.length === 0) {
-      throw new Error("TokenRouter catalogue contains no active free OpenAI-compatible models");
+    const freeModels = parseTokenRouterPricing(pricingPayload);
+    const activeFreeModels = freeModels.filter(({ modelId }) => activeModelIds.has(modelId));
+    if (activeFreeModels.length === 0) {
+      throw new Error("TokenRouter catalogue contains no active native free models");
     }
 
-    return activeFreeModelIds.map((modelId) => ({
+    return activeFreeModels.map(({ modelId, supportedEndpointTypes }) => ({
       model_id: modelId,
-      connection: { base_url: TOKENROUTER_API_BASE_URL },
+      connection: {
+        base_url: TOKENROUTER_API_BASE_URL,
+        supported_endpoint_types: supportedEndpointTypes,
+      },
     }));
   }
 }
@@ -91,7 +98,7 @@ export function parseTokenRouterModels(payload: unknown): ReadonlySet<string> {
   return modelIds;
 }
 
-export function parseTokenRouterPricing(payload: unknown): string[] {
+export function parseTokenRouterPricing(payload: unknown): TokenRouterFreeModel[] {
   const envelope = jsonObjectSchema.safeParse(payload);
   if (!envelope.success || envelope.data.success !== true || !Array.isArray(envelope.data.data)) {
     throw new Error(
@@ -100,7 +107,7 @@ export function parseTokenRouterPricing(payload: unknown): string[] {
   }
 
   const seenModelIds = new Set<string>();
-  const freeModelIds: string[] = [];
+  const freeModels: TokenRouterFreeModel[] = [];
   for (const [index, candidate] of envelope.data.data.entries()) {
     const parsed = jsonObjectSchema.safeParse(candidate);
     if (!parsed.success) {
@@ -130,17 +137,17 @@ export function parseTokenRouterPricing(payload: unknown): string[] {
     if (
       modelId.endsWith(NATIVE_FREE_MODEL_SUFFIX) &&
       groups.includes(DEFAULT_GROUP) &&
-      endpoints.some((endpoint) => OPENAI_ENDPOINT_TYPES.has(endpoint)) &&
+      endpoints.length > 0 &&
       zeroPrice
     ) {
-      freeModelIds.push(modelId);
+      freeModels.push({ modelId, supportedEndpointTypes: endpoints.sort() });
     }
   }
 
-  if (freeModelIds.length === 0) {
-    throw new Error("TokenRouter pricing response contains no free OpenAI-compatible models");
+  if (freeModels.length === 0) {
+    throw new Error("TokenRouter pricing response contains no native free models with endpoints");
   }
-  return freeModelIds;
+  return freeModels;
 }
 
 function stringArray(value: JsonValue | undefined, modelId: string, field: string): string[] {

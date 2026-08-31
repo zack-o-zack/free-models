@@ -26,9 +26,19 @@ import {
 } from "../src/providers/tokenrouter.ts";
 
 describe("TokenRouter discovery", () => {
-  test("keeps active native free models and rejects stale or imported pricing entries", async () => {
+  test("keeps every endpoint type on active native free models", async () => {
+    const freeModels = [
+      ["vendor/openai-free", ["openai"]],
+      ["vendor/responses-free", ["openai-response"]],
+      ["vendor/anthropic-free", ["anthropic"]],
+      ["vendor/anthropic-compatible-free", ["anthropic-compatible"]],
+      ["vendor/gemini-free", ["gemini"]],
+      ["vendor/audio-free", ["audio-chat"]],
+      ["vendor/image-free", ["image-generation"]],
+      ["vendor/video-free", ["video-generation", "video-fetch"]],
+    ] as const;
     const activeModels = [
-      "z-ai/glm-5.3-free",
+      ...freeModels.map(([modelId]) => modelId),
       "nvidia/nemotron:free",
       "stealth/ox-alpha",
       "paid/model",
@@ -49,13 +59,15 @@ describe("TokenRouter discovery", () => {
           return Response.json({
             success: true,
             data: [
-              tokenRouterPrice("z-ai/glm-5.3-free", 0),
+              ...freeModels.map(([modelId, endpointTypes]) =>
+                tokenRouterPrice(modelId, 0, ["default"], [...endpointTypes].reverse()),
+              ),
               tokenRouterPrice("nvidia/nemotron:free", 0),
               tokenRouterPrice("stealth/ox-alpha", 0),
               tokenRouterPrice("retired/model-free", 0),
               tokenRouterPrice("paid/model", 1),
               tokenRouterPrice("vip/model-free", 0, ["vip"]),
-              tokenRouterPrice("gemini/model-free", 0, ["default"], ["gemini"]),
+              tokenRouterPrice("missing-endpoint/model-free", 0, ["default"], []),
             ],
           });
         }
@@ -63,12 +75,15 @@ describe("TokenRouter discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
-      {
-        model_id: "z-ai/glm-5.3-free",
-        connection: { base_url: TOKENROUTER_API_BASE_URL },
-      },
-    ]);
+    expect(await provider.discover()).toEqual(
+      freeModels.map(([modelId, endpointTypes]) => ({
+        model_id: modelId,
+        connection: {
+          base_url: TOKENROUTER_API_BASE_URL,
+          supported_endpoint_types: [...endpointTypes].sort(),
+        },
+      })),
+    );
   });
 
   test("requires a key so retired public pricing rows cannot stand in for availability", async () => {

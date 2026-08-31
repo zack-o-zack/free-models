@@ -68,9 +68,10 @@ This automation becomes operational only after this private repository has a Git
 GitHub Actions is allowed to create branches and pull requests with `GITHUB_TOKEN`. Configure the
 repository's workflow permissions for read and write access and allow GitHub Actions to create pull
 requests. The workflows themselves grant read access to validation jobs and grant write access only
-to the scheduled discovery job. Scheduled discovery also requires a `MISTRAL_FREE_API_KEY`
-repository secret. The key must belong to a Mistral organization that is still in Free mode; the
-provider uses that organization's current model catalogue as the free-model boundary.
+to the scheduled discovery job. Scheduled discovery also requires `MISTRAL_FREE_API_KEY` and
+`TOKENROUTER_API_KEY` repository secrets. The Mistral key must belong to an organization that is
+still in Free mode. The TokenRouter key verifies that public free-pricing entries remain available
+in the authenticated model catalogue.
 
 Provider APIs and documentation are used with the accepted risk that their terms, schemas, and
 anonymous-access policies can change. The generated catalogue is a reviewed observation of provider
