@@ -311,24 +311,11 @@ describe("OpenCode Zen discovery", () => {
   });
 
   test("maps AI SDK packages to the correct connection protocol", () => {
-    expect(
-      protocolFromAiSdkPackage(
-        "@ai-sdk/openai-compatible",
-        "https://opencode.ai/zen/v1/chat/completions",
-      ),
-    ).toBe("openai");
-    expect(protocolFromAiSdkPackage("@ai-sdk/openai", "https://opencode.ai/zen/v1/responses")).toBe(
-      "openai",
-    );
-    expect(
-      protocolFromAiSdkPackage("@ai-sdk/anthropic", "https://opencode.ai/zen/v1/messages"),
-    ).toBe("anthropic");
-    expect(
-      protocolFromAiSdkPackage(
-        "@ai-sdk/google",
-        "https://opencode.ai/zen/v1/models/gemini-3.7-flash",
-      ),
-    ).toBe("google");
+    expect(protocolFromAiSdkPackage("@ai-sdk/openai-compatible")).toBe("openai");
+    expect(protocolFromAiSdkPackage("@ai-sdk/openai")).toBe("openai");
+    expect(protocolFromAiSdkPackage("@ai-sdk/anthropic")).toBe("anthropic");
+    expect(protocolFromAiSdkPackage("@ai-sdk/google")).toBe("google");
+    expect(() => protocolFromAiSdkPackage("@ai-sdk/unknown")).toThrow("unsupported AI SDK package");
   });
 });
 

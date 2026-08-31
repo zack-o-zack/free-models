@@ -92,10 +92,7 @@ export class OpenCodeProvider implements ModelProvider {
         );
       }
 
-      const protocol = protocolFromAiSdkPackage(
-        documentedOffer.aiSdkPackage,
-        documentedOffer.endpoint,
-      );
+      const protocol = protocolFromAiSdkPackage(documentedOffer.aiSdkPackage);
 
       return {
         model_id: documentedOffer.modelId,
@@ -359,15 +356,18 @@ function equalStrings(left: readonly string[], right: readonly string[]): boolea
   return left.length === right.length && left.every((value, index) => value === right[index]);
 }
 
-export function protocolFromAiSdkPackage(aiSdkPackage: string, endpoint: string): string {
-  const pkg = aiSdkPackage.toLowerCase();
-  const ep = endpoint.toLowerCase();
+const AI_SDK_PACKAGE_PROTOCOLS: Readonly<Record<string, string>> = {
+  "@ai-sdk/openai": "openai",
+  "@ai-sdk/openai-compatible": "openai",
+  "@ai-sdk/anthropic": "anthropic",
+  "@ai-sdk/google": "google",
+};
 
-  if (pkg.includes("anthropic") || ep.includes("/messages")) {
-    return "anthropic";
+export function protocolFromAiSdkPackage(aiSdkPackage: string): string {
+  const normalized = aiSdkPackage.trim().toLowerCase();
+  const protocol = AI_SDK_PACKAGE_PROTOCOLS[normalized];
+  if (!protocol) {
+    throw new Error(`OpenCode Zen encountered unsupported AI SDK package: ${aiSdkPackage}`);
   }
-  if (pkg.includes("google") || ep.includes("/models/")) {
-    return "google";
-  }
-  return "openai";
+  return protocol;
 }
