@@ -1,6 +1,34 @@
 {
   "models": [
     {
+      "id": "baai/bge-base-en-v1.5",
+      "name": "BAAI: bge-base-en-v1.5"
+    },
+    {
+      "id": "baai/bge-large-en-v1.5",
+      "name": "BAAI: bge-large-en-v1.5"
+    },
+    {
+      "id": "baai/bge-m3",
+      "name": "BAAI: bge-m3"
+    },
+    {
+      "id": "black-forest-labs/flux-3-video",
+      "name": "Black Forest Labs: FLUX.3 Video"
+    },
+    {
+      "id": "black-forest-labs/flux.2-flex",
+      "name": "Black Forest Labs: FLUX.2 Flex"
+    },
+    {
+      "id": "black-forest-labs/flux.2-klein-4b",
+      "name": "Black Forest Labs: FLUX.2 Klein 4B"
+    },
+    {
+      "id": "canopylabs/orpheus-3b-0.1-ft",
+      "name": "Canopy Labs: Orpheus 3B"
+    },
+    {
       "id": "cohere/north-mini-code",
       "name": "Cohere: North Mini Code",
       "architecture": {
@@ -68,6 +96,10 @@
         "is_moderated": true,
         "max_completion_tokens": 64000
       }
+    },
+    {
+      "id": "deepgram/aura-2",
+      "name": "Deepgram: Aura-2"
     },
     {
       "id": "deepgram/flux-tts",
@@ -143,6 +175,22 @@
         "is_moderated": false,
         "max_completion_tokens": 0
       }
+    },
+    {
+      "id": "deepgram/nova-3",
+      "name": "Deepgram: Nova-3"
+    },
+    {
+      "id": "deepseek/deepseek-r1-distill-llama-70b",
+      "name": "DeepSeek: R1 Distill Llama 70B"
+    },
+    {
+      "id": "deepseek/deepseek-v4-flash-0731",
+      "name": "DeepSeek: DeepSeek V4 Flash 0731"
+    },
+    {
+      "id": "deepseek/deepseek-v4-pro-0813",
+      "name": "DeepSeek: DeepSeek V4 Pro 0813"
     },
     {
       "id": "dots-studio/dots-3-note-preview",
@@ -233,6 +281,62 @@
         "is_moderated": false,
         "max_completion_tokens": 0
       }
+    },
+    {
+      "id": "google/chirp-3",
+      "name": "Google: Chirp 3"
+    },
+    {
+      "id": "google/gemini-2.5-flash",
+      "name": "Google: Gemini 2.5 Flash"
+    },
+    {
+      "id": "google/gemini-2.5-pro",
+      "name": "Google: Gemini 2.5 Pro"
+    },
+    {
+      "id": "google/gemini-3-flash-preview",
+      "name": "Google: Gemini 3 Flash Preview"
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite",
+      "name": "Google: Gemini 3.1 Flash Lite"
+    },
+    {
+      "id": "google/gemini-3.1-flash-lite-preview",
+      "name": "Google: Gemini 3.1 Flash Lite Preview"
+    },
+    {
+      "id": "google/gemini-3.1-flash-tts-preview",
+      "name": "Google: Gemini 3.1 Flash TTS Preview"
+    },
+    {
+      "id": "google/gemini-3.5-flash",
+      "name": "Google: Gemini 3.5 Flash"
+    },
+    {
+      "id": "google/gemini-3.5-flash-lite",
+      "name": "Google: Gemini 3.5 Flash Lite"
+    },
+    {
+      "id": "google/gemini-3.6-flash",
+      "name": "Google: Gemini 3.6 Flash"
+    },
+    {
+      "id": "google/gemini-3.7-flash",
+      "name": "Google: Gemini 3.7 Flash"
+    },
+    {
+      "id": "google/gemini-embedding-001",
+      "name": "Google: Gemini Embedding 001"
+    },
+    {
+      "id": "google/gemma-3-12b-it",
+      "name": "Google: Gemma 3 12B"
+    },
+    {
+      "id": "google/gemma-3-4b-it",
+      "name": "Google: Gemma 3 4B"
     },
     {
       "id": "google/gemma-4-26b-a4b-it",
@@ -368,6 +472,14 @@
         "is_moderated": false,
         "max_completion_tokens": 32768
       }
+    },
+    {
+      "id": "hexgrad/kokoro-82m",
+      "name": "hexgrad: Kokoro 82M"
+    },
+    {
+      "id": "ibm-granite/granite-4.0-h-micro",
+      "name": "IBM: Granite 4.0 Micro"
     },
     {
       "id": "inclusionai/ling-3.0-flash-fin",
@@ -540,6 +652,38 @@
         "is_moderated": false,
         "max_completion_tokens": 460
       }
+    },
+    {
+      "id": "meta-llama/llama-3.1-70b-instruct",
+      "name": "Meta: Llama 3.1 70B Instruct"
+    },
+    {
+      "id": "meta-llama/llama-3.1-8b-instruct",
+      "name": "Meta: Llama 3.1 8B Instruct"
+    },
+    {
+      "id": "meta-llama/llama-3.2-1b-instruct",
+      "name": "Meta: Llama 3.2 1B Instruct"
+    },
+    {
+      "id": "meta-llama/llama-3.2-3b-instruct",
+      "name": "Meta: Llama 3.2 3B Instruct"
+    },
+    {
+      "id": "meta-llama/llama-3.3-70b-instruct",
+      "name": "Meta: Llama 3.3 70B Instruct"
+    },
+    {
+      "id": "meta-llama/llama-4-scout",
+      "name": "Meta: Llama 4 Scout"
+    },
+    {
+      "id": "meta-llama/llama-guard-4-12b",
+      "name": "Meta: Llama Guard 4 12B"
+    },
+    {
+      "id": "meta/muse-glimmer-30b",
+      "name": "Meta: Muse Glimmer 30B"
     },
     {
       "id": "meta/muse-spark-1.2-contributor",
@@ -907,6 +1051,82 @@
       }
     },
     {
+      "id": "mistralai/codestral-2508",
+      "name": "Mistral: Codestral 2508"
+    },
+    {
+      "id": "mistralai/codestral-embed-2505",
+      "name": "Mistral: Codestral Embed 2505"
+    },
+    {
+      "id": "mistralai/devstral-2512",
+      "name": "Mistral: Devstral 2 2512"
+    },
+    {
+      "id": "mistralai/ministral-14b-2512",
+      "name": "Mistral: Ministral 3 14B 2512"
+    },
+    {
+      "id": "mistralai/ministral-3b-2512",
+      "name": "Mistral: Ministral 3 3B 2512"
+    },
+    {
+      "id": "mistralai/ministral-8b-2512",
+      "name": "Mistral: Ministral 3 8B 2512"
+    },
+    {
+      "id": "mistralai/mistral-embed-2312",
+      "name": "Mistral: Mistral Embed 2312"
+    },
+    {
+      "id": "mistralai/mistral-large-2512",
+      "name": "Mistral: Mistral Large 3 2512"
+    },
+    {
+      "id": "mistralai/mistral-medium-3",
+      "name": "Mistral: Mistral Medium 3"
+    },
+    {
+      "id": "mistralai/mistral-medium-3-5",
+      "name": "Mistral: Mistral Medium 3.5"
+    },
+    {
+      "id": "mistralai/mistral-nemo",
+      "name": "Mistral: Mistral Nemo"
+    },
+    {
+      "id": "mistralai/mistral-small-2603",
+      "name": "Mistral: Mistral Small 4"
+    },
+    {
+      "id": "mistralai/mistral-small-3.1-24b-instruct",
+      "name": "Mistral: Mistral Small 3.1 24B"
+    },
+    {
+      "id": "mistralai/voxtral-mini-3b-2507",
+      "name": "Mistral: Voxtral Mini 3B 2507"
+    },
+    {
+      "id": "mistralai/voxtral-mini-transcribe",
+      "name": "Mistral: Voxtral Mini Transcribe"
+    },
+    {
+      "id": "mistralai/voxtral-mini-tts-2603",
+      "name": "Mistral: Voxtral Mini TTS"
+    },
+    {
+      "id": "mistralai/voxtral-small-24b-2507",
+      "name": "Mistral: Voxtral Small 24B 2507"
+    },
+    {
+      "id": "moonshotai/kimi-k2.5",
+      "name": "MoonshotAI: Kimi K2.5"
+    },
+    {
+      "id": "moonshotai/kimi-k3",
+      "name": "MoonshotAI: Kimi K3"
+    },
+    {
       "id": "nvidia/llama-nemotron-embed-vl-1b-v2",
       "name": "NVIDIA: Llama Nemotron Embed VL 1B V2",
       "architecture": {
@@ -1054,6 +1274,10 @@
         "is_moderated": false,
         "max_completion_tokens": 29491
       }
+    },
+    {
+      "id": "nvidia/nemotron-3-nano-30b-a3b",
+      "name": "NVIDIA: Nemotron 3 Nano 30B A3B"
     },
     {
       "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
@@ -1331,6 +1555,10 @@
       }
     },
     {
+      "id": "nvidia/nemotron-3.5-asr-streaming-multilingual-0.6b",
+      "name": "NVIDIA: Nemotron 3.5 ASR Streaming Multilingual 0.6B"
+    },
+    {
       "id": "nvidia/nemotron-3.5-content-safety",
       "name": "NVIDIA: Nemotron 3.5 Content Safety",
       "architecture": {
@@ -1446,6 +1674,42 @@
       }
     },
     {
+      "id": "openai/gpt-audio-mini",
+      "name": "OpenAI: GPT Audio Mini"
+    },
+    {
+      "id": "openai/gpt-oss-120b",
+      "name": "OpenAI: gpt-oss-120b"
+    },
+    {
+      "id": "openai/gpt-oss-20b",
+      "name": "OpenAI: gpt-oss-20b"
+    },
+    {
+      "id": "openai/gpt-oss-safeguard-20b",
+      "name": "OpenAI: gpt-oss-safeguard-20b"
+    },
+    {
+      "id": "openai/whisper-1",
+      "name": "OpenAI: Whisper 1"
+    },
+    {
+      "id": "openai/whisper-large-v3",
+      "name": "OpenAI: Whisper Large V3"
+    },
+    {
+      "id": "openai/whisper-large-v3-turbo",
+      "name": "OpenAI: Whisper Large V3 Turbo"
+    },
+    {
+      "id": "openrouter/auto-beta",
+      "name": "Auto Router (Beta)"
+    },
+    {
+      "id": "openrouter/fusion",
+      "name": "OpenRouter: Fusion"
+    },
+    {
       "id": "poolside/laguna-s-2.1",
       "name": "Poolside: Laguna S 2.1",
       "architecture": {
@@ -1544,8 +1808,48 @@
       }
     },
     {
+      "id": "qwen/qwen-2.5-coder-32b-instruct",
+      "name": "Qwen2.5 Coder 32B Instruct"
+    },
+    {
+      "id": "qwen/qwen3-30b-a3b",
+      "name": "Qwen: Qwen3 30B A3B"
+    },
+    {
+      "id": "qwen/qwen3-32b",
+      "name": "Qwen: Qwen3 32B"
+    },
+    {
+      "id": "qwen/qwen3-embedding-4b",
+      "name": "Qwen: Qwen3 Embedding 4B"
+    },
+    {
+      "id": "qwen/qwen3-reranker-8b",
+      "name": "Qwen3 Reranker 8B"
+    },
+    {
+      "id": "qwen/qwen3.6-27b",
+      "name": "Qwen: Qwen3.6 27B"
+    },
+    {
+      "id": "qwen/qwen3.8-27b",
+      "name": "Qwen: Qwen3.8 27B"
+    },
+    {
+      "id": "rekaai/reka-edge",
+      "name": "Reka Edge"
+    },
+    {
       "id": "stealth:big-pickle",
       "name": "Big Pickle"
+    },
+    {
+      "id": "tencent/hy-mt2-1.8b",
+      "name": "Tencent: Hy-MT2-1.8B"
+    },
+    {
+      "id": "tencent/hy-mt2-7b",
+      "name": "Tencent: Hy-MT2-7B"
     },
     {
       "id": "tencent/hy3",
@@ -2031,6 +2335,10 @@
         "is_moderated": false,
         "max_completion_tokens": 131072
       }
+    },
+    {
+      "id": "z-ai/glm-4.7-flash",
+      "name": "Z.ai: GLM 4.7 Flash"
     },
     {
       "id": "z-ai/glm-5.2",
