@@ -215,6 +215,15 @@ describe("Mistral discovery", () => {
 describe("Gemini API discovery", () => {
   test("uses only model sections whose standard pricing table offers free inference", async () => {
     const provider = new GeminiProvider({
+      modelsDev: new Map([
+        [
+          "google",
+          {
+            id: "google",
+            env: ["GOOGLE_API_KEY", "GOOGLE_GENERATIVE_AI_API_KEY", "GEMINI_API_KEY"],
+          },
+        ],
+      ]),
       fetch: async (url) => {
         expect(url).toBe(GEMINI_PRICING_URL);
         return new Response(geminiPricingFixture());
@@ -224,7 +233,14 @@ describe("Gemini API discovery", () => {
     expect(await provider.discover()).toEqual([
       {
         model_id: "gemini-free",
-        connection: { base_url: GEMINI_API_BASE_URL },
+        name: "Gemini Free",
+        connection: {
+          auth: {
+            env: ["GOOGLE_API_KEY", "GOOGLE_GENERATIVE_AI_API_KEY", "GEMINI_API_KEY"],
+          },
+          base_url: GEMINI_API_BASE_URL,
+          protocol: "google",
+        },
       },
     ]);
   });
