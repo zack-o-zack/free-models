@@ -1,4 +1,6 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -9,6 +11,7 @@ const PAGE_SIZE = 100;
 
 export interface NvidiaProviderOptions {
   readonly fetch?: FetchSource;
+  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 interface NvidiaPage {
@@ -26,15 +29,18 @@ interface NvidiaModel {
 
 export class NvidiaProvider implements ModelProvider {
   readonly id = "nvidia";
+  readonly name = "NVIDIA";
 
   readonly #fetch: FetchSource;
+  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: NvidiaProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
+    this.#modelsDev = options.modelsDev;
   }
 
   async discover(): Promise<readonly DiscoveredOffer[]> {
-    const firstPage = await this.#loadPage(0);
+    const [firstPage, modelsDev] = await Promise.all([this.#loadPage(0), this.#getModelsDev()]);
     const remainingPages = await Promise.all(
       Array.from({ length: firstPage.pageCount - 1 }, (_, index) => this.#loadPage(index + 1)),
     );
@@ -42,6 +48,16 @@ export class NvidiaProvider implements ModelProvider {
     if (pages.some((page) => page.total !== firstPage.total)) {
       throw new Error("NVIDIA Build catalogue changed while pages were being read");
     }
+
+    const nvidiaMeta = modelsDev.get(this.id);
+    const env =
+      nvidiaMeta?.env && nvidiaMeta.env.length > 0 ? [...nvidiaMeta.env] : ["NVIDIA_API_KEY"];
+
+    const connection = {
+      base_url: NVIDIA_API_BASE_URL,
+      protocol: "openai",
+      auth: { env },
+    };
 
     const models = pages.flatMap((page) => page.models);
     if (models.length === 0) {
@@ -55,7 +71,8 @@ export class NvidiaProvider implements ModelProvider {
       seen.add(model.modelId);
       return {
         model_id: model.modelId,
-        connection: { base_url: NVIDIA_API_BASE_URL },
+        name: model.title || desluggifyModelId(model.modelId),
+        connection,
       };
     });
   }
@@ -65,6 +82,13 @@ export class NvidiaProvider implements ModelProvider {
       headers: { Accept: "application/json" },
     });
     return parseNvidiaModelsPage(payload);
+  }
+
+  async #getModelsDev(): Promise<ModelsDevRegistry> {
+    if (this.#modelsDev) {
+      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
+    }
+    return getCachedModelsDevRegistry(this.#fetch);
   }
 }
 

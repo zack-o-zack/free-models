@@ -284,6 +284,15 @@ describe("Gemini API discovery", () => {
 describe("NVIDIA Build discovery", () => {
   test("keeps only catalogue resources explicitly labeled Free Endpoint", async () => {
     const provider = new NvidiaProvider({
+      modelsDev: new Map([
+        [
+          "nvidia",
+          {
+            id: "nvidia",
+            env: ["NVIDIA_API_KEY"],
+          },
+        ],
+      ]),
       fetch: async (url) => {
         expect(url).toBe(nvidiaModelsUrl(0));
         return Response.json({
@@ -305,7 +314,12 @@ describe("NVIDIA Build discovery", () => {
     expect(await provider.discover()).toEqual([
       {
         model_id: "nvidia/free",
-        connection: { base_url: NVIDIA_API_BASE_URL },
+        name: "Free Model",
+        connection: {
+          auth: { env: ["NVIDIA_API_KEY"] },
+          base_url: NVIDIA_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });
