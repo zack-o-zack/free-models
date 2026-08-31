@@ -15,9 +15,12 @@ bun run catalogue:discover
 
 Discovery reads Groq's free-plan rate-limit table, Gemini's per-model standard-tier pricing,
 NVIDIA Build's `Free Endpoint` catalogue labels, and Cloudflare Workers AI's free-allocation model
-pricing without credentials. Mistral discovery is account-scoped: set `MISTRAL_FREE_API_KEY` to an
-API key for an organization in Free mode before running this command. Mistral keys inherit their
-organization's plan, so do not use a key from a paid organization for catalogue discovery.
+pricing without credentials. TokenRouter discovery intersects its public, zero-price `-free` models
+with the models actively served to `TOKENROUTER_API_KEY` and records all supported endpoint types.
+This excludes stale and imported pricing entries without limiting discovery to one API protocol.
+Mistral discovery is account-scoped: set `MISTRAL_FREE_API_KEY` to an API key for an organization in
+Free mode before running this command. Mistral keys inherit their organization's plan, so do not use
+a key from a paid organization for catalogue discovery.
 
 ## 2. Reconcile
 

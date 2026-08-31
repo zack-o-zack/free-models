@@ -6,6 +6,7 @@ import { NvidiaProvider } from "./nvidia.ts";
 import { OpenCodeProvider } from "./opencode.ts";
 import { OpenRouterProvider } from "./openrouter.ts";
 import { defineProviderRegistry } from "./provider.ts";
+import { TokenRouterProvider } from "./tokenrouter.ts";
 
 const openRouterProvider = new OpenRouterProvider();
 
@@ -17,6 +18,7 @@ export const providerRegistry = defineProviderRegistry(
   new GeminiProvider(),
   new NvidiaProvider(),
   new CloudflareProvider(),
+  new TokenRouterProvider(),
 );
 
 export const metadataProvider = openRouterProvider;
