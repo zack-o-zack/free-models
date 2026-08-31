@@ -205,6 +205,15 @@ describe("Mistral discovery", () => {
   test("uses a free-mode account catalogue and excludes custom or archived models", async () => {
     const provider = new MistralProvider({
       apiKey: "free-mode-secret",
+      modelsDev: new Map([
+        [
+          "mistral",
+          {
+            id: "mistral",
+            env: ["MISTRAL_API_KEY"],
+          },
+        ],
+      ]),
       fetch: async (url, init) => {
         expect(url).toBe(MISTRAL_MODELS_URL);
         expect(new Headers(init?.headers).get("authorization")).toBe("Bearer free-mode-secret");
@@ -222,7 +231,12 @@ describe("Mistral discovery", () => {
     expect(await provider.discover()).toEqual([
       {
         model_id: "mistral-small",
-        connection: { base_url: MISTRAL_API_BASE_URL },
+        name: "Mistral small",
+        connection: {
+          auth: { env: ["MISTRAL_API_KEY"] },
+          base_url: MISTRAL_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });

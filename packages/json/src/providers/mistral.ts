@@ -1,4 +1,6 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -8,17 +10,21 @@ export const MISTRAL_MODELS_URL = `${MISTRAL_API_BASE_URL}/models`;
 export interface MistralProviderOptions {
   readonly fetch?: FetchSource;
   readonly apiKey?: string;
+  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 export class MistralProvider implements ModelProvider {
   readonly id = "mistral";
+  readonly name = "Mistral";
 
   readonly #fetch: FetchSource;
   readonly #apiKey: string | undefined;
+  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: MistralProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
     this.#apiKey = options.apiKey ?? process.env.MISTRAL_FREE_API_KEY;
+    this.#modelsDev = options.modelsDev;
   }
 
   async discover(): Promise<readonly DiscoveredOffer[]> {
@@ -27,16 +33,46 @@ export class MistralProvider implements ModelProvider {
         "Mistral discovery requires MISTRAL_FREE_API_KEY from an organization in Free mode",
       );
     }
-    const payload = await fetchJson(this.#fetch, MISTRAL_MODELS_URL, "Mistral models", {
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${this.#apiKey}`,
-      },
+    const [payload, modelsDev] = await Promise.all([
+      fetchJson(this.#fetch, MISTRAL_MODELS_URL, "Mistral models", {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${this.#apiKey}`,
+        },
+      }),
+      this.#getModelsDev(),
+    ]);
+
+    const mistralMeta = modelsDev.get(this.id);
+    const env =
+      mistralMeta?.env && mistralMeta.env.length > 0 ? [...mistralMeta.env] : ["MISTRAL_API_KEY"];
+
+    const connection = {
+      base_url: MISTRAL_API_BASE_URL,
+      protocol: "openai",
+      auth: { env },
+    };
+
+    return parseMistralModels(payload).map((model) => {
+      const modelId = model.id as string;
+      const modelName =
+        typeof model.name === "string" && model.name.trim().length > 0
+          ? model.name.trim()
+          : desluggifyModelId(modelId);
+
+      return {
+        model_id: modelId,
+        name: modelName,
+        connection,
+      };
     });
-    return parseMistralModels(payload).map((model) => ({
-      model_id: model.id as string,
-      connection: { base_url: MISTRAL_API_BASE_URL },
-    }));
+  }
+
+  async #getModelsDev(): Promise<ModelsDevRegistry> {
+    if (this.#modelsDev) {
+      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
+    }
+    return getCachedModelsDevRegistry(this.#fetch);
   }
 }
 
