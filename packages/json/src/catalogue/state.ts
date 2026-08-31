@@ -133,11 +133,8 @@ export function resolvedCatalogueOffers(state: CatalogueState): readonly Resolve
     const mappings = state.mappings.get(providerId)?.mappings ?? {};
     for (const offer of snapshot.offers) {
       const canonicalId = mappings[offer.model_id];
-      if (canonicalId === undefined) {
+      if (!canonicalId) {
         throw new Error(`Cannot resolve offer ${providerId}/${offer.model_id}`);
-      }
-      if (canonicalId === null) {
-        continue;
       }
       resolvedOffers.push({ canonicalId, provider: providerId, offer });
     }
@@ -200,7 +197,7 @@ function validateMappings(
 
   const canonicalIds = new Set(canonicalModels.models.map((model) => model.id));
   for (const [providerModelId, canonicalModelId] of Object.entries(mappings.mappings)) {
-    if (canonicalModelId !== null && !canonicalIds.has(canonicalModelId)) {
+    if (!canonicalIds.has(canonicalModelId)) {
       throw new Error(
         `Mapping ${providerId}/${providerModelId} targets unknown canonical model ${canonicalModelId}`,
       );

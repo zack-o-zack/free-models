@@ -176,67 +176,6 @@ describe("manual identity workflow", () => {
     });
   });
 
-  test("excludes offers whose reviewed mapping is null", async () => {
-    await withWorkspace(async (workspace) => {
-      expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
-      await writeJson(join(workspace, "catalogue/canonical-models.json"), {
-        models: [
-          { id: "zeta/beta", name: "Beta" },
-          { id: "acme/alpha", name: "Alpha" },
-        ],
-      });
-      await writeJson(join(workspace, "catalogue/mappings/fixture-a.json"), {
-        provider: "fixture-a",
-        mappings: {
-          "alpha/free": "acme/alpha",
-          "alpha/alternate-free": null,
-        },
-      });
-      await writeJson(join(workspace, "catalogue/mappings/fixture-z.json"), {
-        provider: "fixture-z",
-        mappings: {
-          "zeta/alpha-free": "acme/alpha",
-          "zeta/beta-free": null,
-        },
-      });
-
-      expect(runFixtureCli(workspace, "reconcile").exitCode).toBe(0);
-      expect(await Bun.file(join(workspace, "catalogue/unresolved.json")).json()).toEqual({
-        providers: {},
-      });
-
-      expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
-      expect(JSON.parse(await Bun.file(join(workspace, "free-models.json")).text())).toEqual({
-        schema_version: 2,
-        models: [
-          {
-            id: "acme/alpha",
-            name: "Alpha",
-            providers: {
-              "fixture-a": {
-                offers: [
-                  {
-                    model_id: "alpha/free",
-                    connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
-                  },
-                ],
-              },
-              "fixture-z": {
-                offers: [
-                  {
-                    model_id: "zeta/alpha-free",
-                    connection: { base_url: "https://z.example.test/v1" },
-                  },
-                ],
-              },
-            },
-          },
-        ],
-      });
-      expect(runFixtureCli(workspace, "check").exitCode).toBe(0);
-    });
-  });
-
   test("detects an unresolved report that was edited instead of reconciled", async () => {
     await withWorkspace(async (workspace) => {
       expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);

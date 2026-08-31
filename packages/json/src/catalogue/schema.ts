@@ -56,12 +56,10 @@ export const canonicalModelsSchema = z
   })
   .strict();
 
-// A reviewed mapping either targets a canonical model or excludes the offer from the
-// catalogue (null).
 export const providerMappingsSchema = z
   .object({
     provider: providerIdSchema,
-    mappings: z.record(z.string().min(1), z.union([canonicalModelIdSchema, z.null()])),
+    mappings: z.record(z.string().min(1), canonicalModelIdSchema),
   })
   .strict();
 

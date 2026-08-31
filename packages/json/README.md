@@ -29,8 +29,7 @@ a key from a paid organization for catalogue discovery.
 
 Reconcile maps provider model IDs to reviewed canonical model IDs. It records each recognized offer
 and reports offers without a reviewed mapping. This phase identifies the canonical model for each
-provider offer. Mapping a provider model ID to `null` excludes that offer from the catalogue for
-reviewed hold-outs.
+provider offer.
 
 ```sh
 bun run catalogue:reconcile
