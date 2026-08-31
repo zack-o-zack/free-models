@@ -148,7 +148,7 @@
         "rate_limits": {
           "rpd": "1K",
           "rpm": "30",
-          "tpd": "2M",
+          "tpd": "200K",
           "tpm": "8K"
         }
       }
