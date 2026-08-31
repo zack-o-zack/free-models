@@ -10,14 +10,12 @@ const fixtureAOffers = [
   {
     model_id: "alpha/free",
     connection: { base_url: "https://a.example.test/v1" },
-    metadata: { source: "a" },
   },
 ];
 const fixtureZOffers = [
   {
     model_id: "zeta/beta-free",
     connection: { base_url: "https://z.example.test/v1" },
-    metadata: { source: "z" },
   },
 ];
 

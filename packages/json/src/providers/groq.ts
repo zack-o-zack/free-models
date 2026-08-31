@@ -34,10 +34,9 @@ export class GroqProvider implements ModelProvider {
     const html = await fetchText(this.#fetch, GROQ_RATE_LIMITS_URL, "Groq rate limits", {
       headers: { Accept: "text/html,application/xhtml+xml" },
     });
-    return (await parseGroqFreePlan(html)).map(({ modelId, rateLimits }) => ({
+    return (await parseGroqFreePlan(html)).map(({ modelId }) => ({
       model_id: modelId,
       connection: { base_url: GROQ_API_BASE_URL },
-      metadata: { rate_limits: rateLimits },
     }));
   }
 }

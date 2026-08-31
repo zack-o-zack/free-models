@@ -56,13 +56,6 @@ export class NvidiaProvider implements ModelProvider {
       return {
         model_id: model.modelId,
         connection: { base_url: NVIDIA_API_BASE_URL },
-        metadata: {
-          name: model.title,
-          publisher: model.publisher,
-          description: model.description,
-          catalogue_url: `https://build.nvidia.com/${model.modelId}`,
-          endpoint_tier: "Free Endpoint",
-        },
       };
     });
   }

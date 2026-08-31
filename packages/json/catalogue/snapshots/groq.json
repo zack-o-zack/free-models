@@ -5,180 +5,78 @@
       "model_id": "canopylabs/orpheus-arabic-saudi",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "100",
-          "rpm": "10",
-          "tpd": "3.6K",
-          "tpm": "1.2K"
-        }
       }
     },
     {
       "model_id": "canopylabs/orpheus-v1-english",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "100",
-          "rpm": "10",
-          "tpd": "3.6K",
-          "tpm": "1.2K"
-        }
       }
     },
     {
       "model_id": "groq/compound",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "250",
-          "rpm": "30",
-          "tpm": "70K"
-        }
       }
     },
     {
       "model_id": "groq/compound-mini",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "250",
-          "rpm": "30",
-          "tpm": "70K"
-        }
       }
     },
     {
       "model_id": "meta-llama/llama-prompt-guard-2-22m",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "14.4K",
-          "rpm": "30",
-          "tpd": "500K",
-          "tpm": "15K"
-        }
       }
     },
     {
       "model_id": "meta-llama/llama-prompt-guard-2-86m",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "14.4K",
-          "rpm": "30",
-          "tpd": "500K",
-          "tpm": "15K"
-        }
       }
     },
     {
       "model_id": "openai/gpt-oss-120b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "1K",
-          "rpm": "30",
-          "tpd": "200K",
-          "tpm": "8K"
-        }
       }
     },
     {
       "model_id": "openai/gpt-oss-20b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "1K",
-          "rpm": "30",
-          "tpd": "200K",
-          "tpm": "8K"
-        }
       }
     },
     {
       "model_id": "openai/gpt-oss-safeguard-20b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "1K",
-          "rpm": "30",
-          "tpd": "200K",
-          "tpm": "8K"
-        }
       }
     },
     {
       "model_id": "qwen/qwen3.6-27b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "1K",
-          "rpm": "30",
-          "tpd": "200K",
-          "tpm": "8K"
-        }
       }
     },
     {
       "model_id": "qwen/qwen3.8-27b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "rpd": "1K",
-          "rpm": "30",
-          "tpd": "200K",
-          "tpm": "8K"
-        }
       }
     },
     {
       "model_id": "whisper-large-v3",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "asd": "28.8K",
-          "ash": "7.2K",
-          "rpd": "2K",
-          "rpm": "20"
-        }
       }
     },
     {
       "model_id": "whisper-large-v3-turbo",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
-      },
-      "metadata": {
-        "rate_limits": {
-          "asd": "28.8K",
-          "ash": "7.2K",
-          "rpd": "2K",
-          "rpm": "20"
-        }
       }
     }
   ]

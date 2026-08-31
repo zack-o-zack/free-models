@@ -5,520 +5,240 @@
       "model_id": "deepseek-ai/deepseek-v4-flash-0731",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/deepseek-ai/deepseek-v4-flash-0731",
-        "description": "284B MoE (13B active) model ideal for long-context workloads optimized for coding, chat, and agentic workflows",
-        "endpoint_tier": "Free Endpoint",
-        "name": "deepseek-v4-flash-0731",
-        "publisher": "deepseek-ai"
       }
     },
     {
       "model_id": "deepseek-ai/deepseek-v4-pro-0813",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/deepseek-ai/deepseek-v4-pro-0813",
-        "description": "DeepSeek V4 scales to 1M-token context windows with efficient MoE architecture for coding tasks.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "deepseek-v4-pro-0813",
-        "publisher": "deepseek-ai"
       }
     },
     {
       "model_id": "google/diffusiongemma-26b-a4b-it",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/google/diffusiongemma-26b-a4b-it",
-        "description": "Diffusion-based 26B parameter LLM enabling parallel token generation for real-time text apps",
-        "endpoint_tier": "Free Endpoint",
-        "name": "diffusiongemma-26b-a4b-it",
-        "publisher": "google"
       }
     },
     {
       "model_id": "google/gemma-4-31b-it",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/google/gemma-4-31b-it",
-        "description": "Dense 31B model delivering frontier reasoning for coding, agentic workflows, and fine-tuning.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "gemma-4-31b-it",
-        "publisher": "google"
       }
     },
     {
       "model_id": "google/google-paligemma",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/google/google-paligemma",
-        "description": "Vision language model adept at comprehending text and visual inputs to produce informative responses",
-        "endpoint_tier": "Free Endpoint",
-        "name": "paligemma",
-        "publisher": "google"
       }
     },
     {
       "model_id": "meta/llama-3.2-11b-vision-instruct",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/meta/llama-3.2-11b-vision-instruct",
-        "description": "Cutting-edge vision-language model exceling in high-quality reasoning from images.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "llama-3.2-11b-vision-instruct",
-        "publisher": "meta"
       }
     },
     {
       "model_id": "meta/llama-3.2-90b-vision-instruct",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/meta/llama-3.2-90b-vision-instruct",
-        "description": "Cutting-edge vision-Language model exceling in high-quality reasoning from images.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "llama-3.2-90b-vision-instruct",
-        "publisher": "meta"
       }
     },
     {
       "model_id": "meta/llama-guard-4-12b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/meta/llama-guard-4-12b",
-        "description": "Multi-modal model to classify safety for input prompts as well output responses.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "llama-guard-4-12b",
-        "publisher": "meta"
       }
     },
     {
       "model_id": "meta/muse-glimmer-30b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/meta/muse-glimmer-30b",
-        "description": "Muse Glimmer 30B is a multimodal reasoning model accepting text and images, with native tool-calling and separate reasoning output.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "muse-glimmer-30b",
-        "publisher": "meta"
       }
     },
     {
       "model_id": "minimaxai/minimax-m3",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/minimaxai/minimax-m3",
-        "description": "MiniMax M3 Preview is a multimodal MoE vision-language model with strong reasoning, coding, and tool-calling capabilities.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "minimax-m3",
-        "publisher": "minimaxai"
       }
     },
     {
       "model_id": "mistralai/mistral-nemotron",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/mistralai/mistral-nemotron",
-        "description": "Built for agentic workflows, this model excels in coding, instruction following, and function calling",
-        "endpoint_tier": "Free Endpoint",
-        "name": "mistral-nemotron",
-        "publisher": "mistralai"
       }
     },
     {
       "model_id": "moonshotai/kimi-k3",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/moonshotai/kimi-k3",
-        "description": "~2.8T hybrid KDA+MLA multimodal MoE for long-horizon coding, agentic tool use, and image understanding.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "kimi-k3",
-        "publisher": "moonshotai"
       }
     },
     {
       "model_id": "nvidia/active-speaker-detection",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/active-speaker-detection",
-        "description": "Detect and track speaker identities across video frames.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "Active Speaker Detection",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/bevformer",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/bevformer",
-        "description": "Advanced transformer for multi-frame bird's-eye-view 3D perception in autonomous driving.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "bevformer",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/bnr",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/bnr",
-        "description": "Removes unwanted noises from audio improving speech intelligibility.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "Background Noise Removal",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/cosmos-transfer1-7b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/cosmos-transfer1-7b",
-        "description": "Generates physics-aware video world states for physical AI development using text prompts and multiple spatial control inputs derived from real-world data or simulation.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "cosmos-transfer1-7b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/cosmos-transfer2_5-2b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/cosmos-transfer2_5-2b",
-        "description": "Generates physics-aware video world states for physical AI development using text prompts and multiple spatial control inputs derived from real-world data or simulation.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "cosmos-transfer2.5-2b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/cosmos3-nano",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/cosmos3-nano",
-        "description": "Generates physics-aware videos from text prompts or an image prompt for physical AI development.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "cosmos3-nano",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/cosmos3-nano-reasoner",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/cosmos3-nano-reasoner",
-        "description": "Vision language model that excels in understanding the physical world using structured reasoning on videos or images.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "cosmos3-nano-reasoner",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/ising-calibration-1-35b-a3b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/ising-calibration-1-35b-a3b",
-        "description": "Open VLM for quantum computer calibration chart understanding across a range of qubit modalities.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "ising-calibration-1-35b-a3b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/ising-calibration-1.5-31b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/ising-calibration-1.5-31b",
-        "description": "NVIDIA-Ising-Calibration-1.5 is a dense multimodal vision-language model built on Gemma 4 31B. It analyzes quantum computing calibration experiment plots and generates structured technical text.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "ising-calibration-1.5-31b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/llama-3_1-nemotron-safety-guard-8b-v3",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/llama-3_1-nemotron-safety-guard-8b-v3",
-        "description": "Leading multilingual content safety model for enhancing the safety and moderation capabilities of LLMs",
-        "endpoint_tier": "Free Endpoint",
-        "name": "llama-3.1-nemotron-safety-guard-8b-v3",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/magpie-tts-zeroshot",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/magpie-tts-zeroshot",
-        "description": "Expressive and engaging text-to-speech, generated from a short audio sample.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "magpie-tts-zeroshot",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-embed-1b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/nemotron-3-embed-1b",
-        "description": "1B embedding model for semantic search, retrieval, and RAG applications.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "nemotron-3-embed-1b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-nano-30b-a3b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/nemotron-3-nano-30b-a3b",
-        "description": "Open, efficient MoE model with 1M context, excelling in coding, reasoning, instruction following, tool calling, and more",
-        "endpoint_tier": "Free Endpoint",
-        "name": "nemotron-3-nano-30b-a3b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
-        "description": "Nemotron 3 Nano Omni is an omni-modal reasoning model that understands images, video, speech, text.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "nemotron-3-nano-omni-30b-a3b-reasoning",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-super-120b-a12b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/nemotron-3-super-120b-a12b",
-        "description": "Open, efficient hybrid Mamba-Transformer MoE with 1M context, excelling in agentic reasoning, coding, planning, tool calling, and more",
-        "endpoint_tier": "Free Endpoint",
-        "name": "nemotron-3-super-120b-a12b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-ultra-550b-a55b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/nemotron-3-ultra-550b-a55b",
-        "description": "Open, efficient hybrid Mamba-Transformer MoE with 1M context, excelling in agentic reasoning, coding, planning, tool calling, and more",
-        "endpoint_tier": "Free Endpoint",
-        "name": "nemotron-3-ultra-550b-a55b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/nemotron-3.5-content-safety",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/nemotron-3.5-content-safety",
-        "description": "Multilingual, multimodal model for detecting unsafe and toxic content.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "nemotron-3.5-content-safety",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/nemotron-3.5-lightning-30b-a3b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/nemotron-3.5-lightning-30b-a3b",
-        "description": "Fastest 30B A3B MoE model with leading domain accuracy for specialized agentic tasks",
-        "endpoint_tier": "Free Endpoint",
-        "name": "nemotron-3.5-lightning-30b-a3b",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/nemotron-voicechat",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/nemotron-voicechat",
-        "description": "Nemotron 3 Voicechat",
-        "endpoint_tier": "Free Endpoint",
-        "name": "nemotron-voicechat",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/riva-translate-4b-instruct-v1_1",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/riva-translate-4b-instruct-v1_1",
-        "description": "Translation model in 12 languages with few-shots example prompts capability.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "riva-translate-4b-instruct-v1_1",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/riva-translate-4b-instruct-v2",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/riva-translate-4b-instruct-v2",
-        "description": "Translation model in 37 languages with few-shots example prompts capability.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "riva-translate-4b-instruct-v2",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/sparsedrive",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/sparsedrive",
-        "description": "End-to-end autonomous driving stack integrating perception, prediction, and planning with sparse scene representations for efficiency and safety.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "sparsedrive",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/streampetr",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/streampetr",
-        "description": "StreamPETR offers efficient 3D object detection for autonomous driving by propagating sparse object queries temporally.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "streampetr",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/studiovoice",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/studiovoice",
-        "description": "Enhance input speech recorded with low-quality microphones in noisy or reverberant environments, producing studio-quality speech.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "Studio Voice",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "nvidia/synthetic-video-detector",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/nvidia/synthetic-video-detector",
-        "description": "NVIDIA Synthetic Video Detector is an AI-powered micro-service for detecting AI‑generated (synthetic) videos.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "synthetic-video-detector",
-        "publisher": "nvidia"
       }
     },
     {
       "model_id": "openai/gpt-oss-120b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/openai/gpt-oss-120b",
-        "description": "Mixture of Experts (MoE) reasoning LLM (text-only) designed to fit within 80GB GPU.",
-        "endpoint_tier": "Free Endpoint",
-        "name": "gpt-oss-120b",
-        "publisher": "openai"
       }
     },
     {
       "model_id": "openai/gpt-oss-20b",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/openai/gpt-oss-20b",
-        "description": "Smaller Mixture of Experts (MoE) text-only LLM for efficient AI reasoning and math",
-        "endpoint_tier": "Free Endpoint",
-        "name": "gpt-oss-20b",
-        "publisher": "openai"
       }
     },
     {
       "model_id": "poolside/laguna-xs-2.1",
       "connection": {
         "base_url": "https://integrate.api.nvidia.com/v1"
-      },
-      "metadata": {
-        "catalogue_url": "https://build.nvidia.com/poolside/laguna-xs-2.1",
-        "description": "Efficient 33B MoE for local, long-horizon agentic coding and terminal tasks",
-        "endpoint_tier": "Free Endpoint",
-        "name": "laguna-xs-2.1",
-        "publisher": "poolside"
       }
     }
   ]

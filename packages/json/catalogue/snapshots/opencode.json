@@ -6,10 +6,6 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
-      },
-      "metadata": {
-        "object": "model",
-        "owned_by": "opencode"
       }
     },
     {
@@ -17,10 +13,6 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
-      },
-      "metadata": {
-        "object": "model",
-        "owned_by": "opencode"
       }
     },
     {
@@ -28,10 +20,6 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
-      },
-      "metadata": {
-        "object": "model",
-        "owned_by": "opencode"
       }
     },
     {
@@ -39,10 +27,6 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai",
         "endpoint": "https://opencode.ai/zen/v1/responses"
-      },
-      "metadata": {
-        "object": "model",
-        "owned_by": "opencode"
       }
     },
     {
@@ -50,10 +34,6 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
-      },
-      "metadata": {
-        "object": "model",
-        "owned_by": "opencode"
       }
     },
     {
@@ -61,10 +41,6 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
-      },
-      "metadata": {
-        "object": "model",
-        "owned_by": "opencode"
       }
     }
   ]

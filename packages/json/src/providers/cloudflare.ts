@@ -38,15 +38,10 @@ export class CloudflareProvider implements ModelProvider {
       "Cloudflare Workers AI pricing",
       { headers: { Accept: "text/markdown,text/plain" } },
     );
-    const { freeAllocation, models } = parseCloudflarePricing(markdown);
-    return models.map(({ modelId, category, pricing }) => ({
+    const { models } = parseCloudflarePricing(markdown);
+    return models.map(({ modelId }) => ({
       model_id: modelId,
       connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
-      metadata: {
-        free_allocation: freeAllocation,
-        pricing_category: category,
-        pricing,
-      },
     }));
   }
 }

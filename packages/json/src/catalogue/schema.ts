@@ -33,7 +33,6 @@ export const offerSchema = z
   .object({
     model_id: z.string().min(1),
     connection: jsonObjectSchema,
-    metadata: jsonObjectSchema,
   })
   .strict();
 

@@ -6,7 +6,6 @@ export const OPENCODE_ZEN_MODELS_URL = "https://opencode.ai/zen/v1/models";
 
 const ENDPOINT_HEADERS = ["Model", "Model ID", "Endpoint", "AI SDK Package"] as const;
 const PRICING_HEADERS = ["Model", "Input", "Output", "Cached Read", "Cached Write"] as const;
-const VOLATILE_MODEL_FIELDS = new Set(["created", "id"]);
 
 interface HttpResponse {
   readonly ok: boolean;
@@ -85,7 +84,6 @@ export class OpenCodeProvider implements ModelProvider {
           ai_sdk_package: documentedOffer.aiSdkPackage,
           endpoint: documentedOffer.endpoint,
         },
-        metadata: stableMetadata(liveModel),
       };
     });
   }
@@ -329,10 +327,4 @@ function normalizeCellText(value: string): string {
 
 function equalStrings(left: readonly string[], right: readonly string[]): boolean {
   return left.length === right.length && left.every((value, index) => value === right[index]);
-}
-
-function stableMetadata(model: Record<string, JsonValue>): Record<string, JsonValue> {
-  return Object.fromEntries(
-    Object.entries(model).filter(([key]) => !VOLATILE_MODEL_FIELDS.has(key)),
-  );
 }

@@ -37,7 +37,6 @@ function buildCatalogue(state: CatalogueState): Catalogue {
     offers.push({
       model_id: offer.model_id,
       connection: sortJsonObject(offer.connection),
-      metadata: sortJsonObject(offer.metadata),
     });
     providerOffers.set(provider, offers);
     groupedOffers.set(canonicalId, providerOffers);
