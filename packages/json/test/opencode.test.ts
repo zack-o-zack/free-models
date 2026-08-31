@@ -80,19 +80,32 @@ describe("OpenCode Zen discovery", () => {
 
       expect(await Bun.file(join(workspace, "catalogue/snapshots/opencode.json")).json()).toEqual({
         provider: "opencode",
+        name: "OpenCode",
         offers: [
           {
             model_id: "big-pickle",
+            name: "Big Pickle",
             connection: {
               ai_sdk_package: "@ai-sdk/openai-compatible",
+              auth: {
+                env: ["OPENCODE_API_KEY"],
+              },
+              base_url: "https://opencode.ai/zen/v1",
               endpoint: "https://opencode.example.test/zen/v1/chat/completions",
+              protocol: "openai",
             },
           },
           {
             model_id: "suffix-free",
+            name: "Suffix Free",
             connection: {
               ai_sdk_package: "@ai-sdk/openai",
+              auth: {
+                env: ["OPENCODE_API_KEY"],
+              },
+              base_url: "https://opencode.ai/zen/v1",
               endpoint: "https://opencode.example.test/zen/v1/responses",
+              protocol: "openai",
             },
           },
         ],

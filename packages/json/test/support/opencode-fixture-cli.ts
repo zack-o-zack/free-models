@@ -13,6 +13,7 @@ if (!documentationFixturePath || !modelsFixturePath) {
 }
 
 const provider = new OpenCodeProvider({
+  modelsDev: new Map([["opencode", { id: "opencode", env: ["OPENCODE_API_KEY"] }]]),
   fetch: async (url, init) => {
     if (new Headers(init?.headers).has("authorization")) {
       throw new Error("OpenCode Zen discovery requests must be anonymous");
