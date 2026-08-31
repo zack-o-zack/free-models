@@ -114,6 +114,7 @@ describe("TokenRouter discovery", () => {
 describe("Groq discovery", () => {
   test("returns no offers when only Developer-plan limits are published", async () => {
     const provider = new GroqProvider({
+      modelsDev: new Map([["groq", { id: "groq", env: ["GROQ_API_KEY"] }]]),
       fetch: async () =>
         new Response(`
 <table>
@@ -131,6 +132,7 @@ describe("Groq discovery", () => {
 
   test("rejects an unlabeled plan limits table", async () => {
     const provider = new GroqProvider({
+      modelsDev: new Map([["groq", { id: "groq", env: ["GROQ_API_KEY"] }]]),
       fetch: async () =>
         new Response(`
 <table>
@@ -147,6 +149,15 @@ describe("Groq discovery", () => {
 
   test("discovers model IDs from the official free-plan table", async () => {
     const provider = new GroqProvider({
+      modelsDev: new Map([
+        [
+          "groq",
+          {
+            id: "groq",
+            env: ["GROQ_API_KEY"],
+          },
+        ],
+      ]),
       fetch: async (url, init) => {
         expect(url).toBe("https://console.groq.com/docs/rate-limits");
         expect(new Headers(init?.headers).get("accept")).toBe("text/html,application/xhtml+xml");
@@ -170,11 +181,21 @@ describe("Groq discovery", () => {
     expect(await provider.discover()).toEqual([
       {
         model_id: "alpha/model",
-        connection: { base_url: GROQ_API_BASE_URL },
+        name: "Alpha: Model",
+        connection: {
+          auth: { env: ["GROQ_API_KEY"] },
+          base_url: GROQ_API_BASE_URL,
+          protocol: "openai",
+        },
       },
       {
         model_id: "beta/model",
-        connection: { base_url: GROQ_API_BASE_URL },
+        name: "Beta: Model",
+        connection: {
+          auth: { env: ["GROQ_API_KEY"] },
+          base_url: GROQ_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });

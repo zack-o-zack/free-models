@@ -1,4 +1,6 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -12,6 +14,7 @@ const GROQ_ROUTER_PREFIX = "groq/";
 
 export interface GroqProviderOptions {
   readonly fetch?: FetchSource;
+  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 interface ParsedButton {
@@ -26,24 +29,48 @@ interface ParsedTable {
 
 export class GroqProvider implements ModelProvider {
   readonly id = "groq";
+  readonly name = "Groq";
 
   readonly #fetch: FetchSource;
+  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: GroqProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
+    this.#modelsDev = options.modelsDev;
   }
 
   async discover(): Promise<readonly DiscoveredOffer[]> {
-    const html = await fetchText(this.#fetch, GROQ_RATE_LIMITS_URL, "Groq rate limits", {
-      headers: { Accept: "text/html,application/xhtml+xml" },
-    });
+    const [html, modelsDev] = await Promise.all([
+      fetchText(this.#fetch, GROQ_RATE_LIMITS_URL, "Groq rate limits", {
+        headers: { Accept: "text/html,application/xhtml+xml" },
+      }),
+      this.#getModelsDev(),
+    ]);
+
+    const groqMeta = modelsDev.get(this.id);
+    const env = groqMeta?.env && groqMeta.env.length > 0 ? [...groqMeta.env] : ["GROQ_API_KEY"];
+
+    const connection = {
+      base_url: GROQ_API_BASE_URL,
+      protocol: "openai",
+      auth: { env },
+    };
+
     const offers = await parseGroqFreePlan(html);
     return offers
       .filter(({ modelId }) => !modelId.startsWith(GROQ_ROUTER_PREFIX))
       .map(({ modelId }) => ({
         model_id: modelId,
-        connection: { base_url: GROQ_API_BASE_URL },
+        name: desluggifyModelId(modelId),
+        connection,
       }));
+  }
+
+  async #getModelsDev(): Promise<ModelsDevRegistry> {
+    if (this.#modelsDev) {
+      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
+    }
+    return getCachedModelsDevRegistry(this.#fetch);
   }
 }
 
