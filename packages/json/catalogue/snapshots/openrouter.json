@@ -1,149 +1,318 @@
 {
   "provider": "openrouter",
+  "name": "OpenRouter",
   "offers": [
     {
       "model_id": "cohere/north-mini-code:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Cohere: North mini code"
     },
     {
       "model_id": "deepgram/flux-tts:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Deepgram: Flux tts"
     },
     {
       "model_id": "dots-studio/dots-3-note-preview:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Dots studio: Dots 3 note preview"
     },
     {
       "model_id": "fish-audio/s2.1-pro-free:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Fish audio: S2.1 pro free"
     },
     {
       "model_id": "google/gemma-4-26b-a4b-it:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Google: Gemma 4 26b a4b it"
     },
     {
       "model_id": "google/gemma-4-31b-it:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Google: Gemma 4 31b it"
     },
     {
       "model_id": "inclusionai/ling-3.0-flash-fin:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Inclusionai: Ling 3.0 flash fin"
     },
     {
       "model_id": "liquid/lfm-2.5-2.6b:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Liquid: Lfm 2.5 2.6b"
     },
     {
       "model_id": "liquid/lfm-2.5-embedding-350m:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Liquid: Lfm 2.5 embedding 350m"
     },
     {
       "model_id": "minimax/minimax-m2.7:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Minimax: Minimax m2.7"
     },
     {
       "model_id": "minimax/minimax-m3:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Minimax: Minimax m3"
     },
     {
       "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Nvidia: Llama nemotron embed vl 1b v2"
     },
     {
       "model_id": "nvidia/llama-nemotron-rerank-vl-1b-v2:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Nvidia: Llama nemotron rerank vl 1b v2"
     },
     {
       "model_id": "nvidia/nemotron-3-embed-1b:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Nvidia: Nemotron 3 embed 1b"
     },
     {
       "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Nvidia: Nemotron 3 nano omni 30b a3b reasoning"
     },
     {
       "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Nvidia: Nemotron 3 super 120b a12b"
     },
     {
       "model_id": "nvidia/nemotron-3-ultra-550b-a55b:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Nvidia: Nemotron 3 ultra 550b a55b"
     },
     {
       "model_id": "nvidia/nemotron-3.5-content-safety:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Nvidia: Nemotron 3.5 content safety"
     },
     {
       "model_id": "nvidia/nemotron-3.5-lightning:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Nvidia: Nemotron 3.5 lightning"
     },
     {
       "model_id": "poolside/laguna-s-2.1:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Poolside: Laguna s 2.1"
     },
     {
       "model_id": "poolside/laguna-xs-2.1:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Poolside: Laguna xs 2.1"
     },
     {
       "model_id": "thinkingmachines/inkling-small:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Thinkingmachines: Inkling small"
     },
     {
       "model_id": "thinkingmachines/inkling:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Thinkingmachines: Inkling"
     },
     {
       "model_id": "z-ai/glm-5.2:free",
       "connection": {
-        "base_url": "https://openrouter.ai/api/v1"
-      }
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "name": "Z ai: Glm 5.2"
     }
   ]
 }

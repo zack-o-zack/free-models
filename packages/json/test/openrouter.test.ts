@@ -55,14 +55,25 @@ describe("OpenRouter discovery", () => {
       expect(await Bun.file(join(workspace, "catalogue/snapshots/openrouter.json")).json()).toEqual(
         {
           provider: "openrouter",
+          name: "OpenRouter",
           offers: [
             {
               model_id: "alpha/model:free",
-              connection: { base_url: OPENROUTER_API_BASE_URL },
+              name: "Alpha Model (free)",
+              connection: {
+                auth: { env: ["OPENROUTER_API_KEY"] },
+                base_url: OPENROUTER_API_BASE_URL,
+                protocol: "openai",
+              },
             },
             {
               model_id: "zeta/model:free",
-              connection: { base_url: OPENROUTER_API_BASE_URL },
+              name: "Zeta Model (free)",
+              connection: {
+                auth: { env: ["OPENROUTER_API_KEY"] },
+                base_url: OPENROUTER_API_BASE_URL,
+                protocol: "openai",
+              },
             },
           ],
         },
@@ -112,6 +123,8 @@ describe("OpenRouter discovery", () => {
       },
     ];
 
+    const modelsDev = new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]);
+
     for (const testCase of cases) {
       const provider = new OpenRouterProvider({
         fetch: async (url, init) => {
@@ -120,22 +133,25 @@ describe("OpenRouter discovery", () => {
           return new Response(testCase.raw ?? JSON.stringify(testCase.payload));
         },
       });
-      expect(provider.discover()).rejects.toThrow(testCase.message);
+      expect(provider.discover(modelsDev)).rejects.toThrow(testCase.message);
     }
   });
 
   test("reports HTTP and JSON failures without including response content", async () => {
+    const modelsDev = new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]);
     const failedRequest = new OpenRouterProvider({
       fetch: async () => new Response("private upstream response", { status: 503 }),
     });
-    expect(failedRequest.discover()).rejects.toThrow(
+    expect(failedRequest.discover(modelsDev)).rejects.toThrow(
       "OpenRouter models request failed with HTTP status 503",
     );
 
     const invalidJson = new OpenRouterProvider({
       fetch: async () => new Response("private upstream response"),
     });
-    expect(invalidJson.discover()).rejects.toThrow("OpenRouter models response is not valid JSON");
+    expect(invalidJson.discover(modelsDev)).rejects.toThrow(
+      "OpenRouter models response is not valid JSON",
+    );
   });
 });
 
@@ -164,7 +180,11 @@ describe("OpenRouter canonical metadata", () => {
             provider: "openrouter",
             offer: {
               model_id: "alpha/model:free",
-              connection: { base_url: OPENROUTER_API_BASE_URL },
+              name: "Alpha Model (free)",
+              connection: {
+                base_url: OPENROUTER_API_BASE_URL,
+                protocol: "openai",
+              },
             },
           },
         ],
@@ -212,7 +232,11 @@ describe("OpenRouter canonical metadata", () => {
             provider: "another-provider",
             offer: {
               model_id: "unrelated-source-id",
-              connection: {},
+              name: "Unrelated source",
+              connection: {
+                base_url: "https://example.com/v1",
+                protocol: "openai",
+              },
             },
           },
         ],

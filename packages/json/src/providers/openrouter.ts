@@ -1,9 +1,11 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
 import type {
   ActiveCanonicalModel,
   CanonicalMetadata,
   CanonicalMetadataProvider,
 } from "../metadata/provider.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
@@ -28,6 +30,7 @@ export interface OpenRouterProviderOptions {
 
 export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvider {
   readonly id = "openrouter";
+  readonly name = "OpenRouter";
 
   readonly #fetch: FetchModels;
 
@@ -35,8 +38,18 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
     this.#fetch = options.fetch ?? fetch;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     const models = await this.#loadModels();
+    const openRouterMeta = modelsDev.get(this.id);
+    const env =
+      openRouterMeta?.env && openRouterMeta.env.length > 0 ? [...openRouterMeta.env] : undefined;
+
+    const connection = {
+      base_url: OPENROUTER_API_BASE_URL,
+      protocol: "openai",
+      ...(env ? { auth: { env } } : {}),
+    };
+
     const offers: DiscoveredOffer[] = [];
 
     for (const model of models) {
@@ -48,9 +61,15 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
         continue;
       }
 
+      const modelName =
+        typeof model.name === "string" && model.name.trim().length > 0
+          ? model.name.trim()
+          : desluggifyModelId(modelId);
+
       offers.push({
         model_id: modelId,
-        connection: { base_url: OPENROUTER_API_BASE_URL },
+        name: modelName,
+        connection,
       });
     }
 

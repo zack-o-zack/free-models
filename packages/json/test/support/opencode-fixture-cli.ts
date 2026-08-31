@@ -34,6 +34,7 @@ const provider = new OpenCodeProvider({
 runCli(process.argv.slice(2), {
   providers: [provider],
   renderer: new JsonCatalogueRenderer(),
+  modelsDevRegistry: new Map([["opencode", { id: "opencode", env: ["OPENCODE_API_KEY"] }]]),
 }).catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
   console.error(message);

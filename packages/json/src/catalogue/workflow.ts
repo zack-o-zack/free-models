@@ -4,6 +4,7 @@ import type {
   CanonicalMetadata,
   CanonicalMetadataProvider,
 } from "../metadata/provider.ts";
+import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "../providers/models-dev.ts";
 import type { ModelProvider } from "../providers/provider.ts";
 import { canonicalModelWithGeneratedFields } from "./canonical.ts";
 import type { CataloguePaths } from "./files.ts";
@@ -37,8 +38,9 @@ import {
 export async function discover(
   paths: CataloguePaths,
   providers: readonly ModelProvider[],
+  modelsDevRegistry?: ModelsDevRegistry,
 ): Promise<number> {
-  const snapshots = await discoverSnapshots(providers);
+  const snapshots = await discoverSnapshots(providers, modelsDevRegistry);
   const state = await loadCatalogueState(paths, providers, snapshots);
   const unresolved = computeUnresolved(state);
 
@@ -192,11 +194,11 @@ function applyMetadataResults(
 
 async function discoverSnapshots(
   providers: readonly ModelProvider[],
+  modelsDevRegistry?: ModelsDevRegistry,
 ): Promise<ReadonlyMap<string, ProviderSnapshot>> {
   const providerIds = new Set<string>();
   for (const provider of providers) {
-    const parsedId = providerIdSchema.safeParse(provider.id);
-    if (!parsedId.success) {
+    if (!providerIdSchema.safeParse(provider.id).success) {
       throw new Error(`Invalid provider ID in registry: ${provider.id}`);
     }
     if (providerIds.has(provider.id)) {
@@ -205,11 +207,13 @@ async function discoverSnapshots(
     providerIds.add(provider.id);
   }
 
+  const modelsDev = modelsDevRegistry ?? (await getCachedModelsDevRegistry());
+
   const discovered = await Promise.all(
     providers.map(async (provider) => {
       let discoveredOffers: readonly DiscoveredOffer[];
       try {
-        discoveredOffers = await provider.discover();
+        discoveredOffers = await provider.discover(modelsDev);
       } catch (error) {
         throw providerStageError(provider.id, "discovery", error);
       }
@@ -225,7 +229,8 @@ async function discoverSnapshots(
       } catch (error) {
         throw providerStageError(provider.id, "validation", error);
       }
-      return [provider.id, { provider: provider.id, offers }] as const;
+      const providerName = provider.name ?? provider.id;
+      return [provider.id, { provider: provider.id, name: providerName, offers }] as const;
     }),
   );
 
@@ -247,6 +252,7 @@ function normalizeOffers(providerId: string, offers: DiscoveredOffer[]): Discove
       modelIds.add(offer.model_id);
       return {
         model_id: offer.model_id,
+        name: offer.name,
         connection: sortJsonObject(offer.connection),
       };
     })

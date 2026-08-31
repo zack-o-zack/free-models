@@ -1,4 +1,6 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -26,6 +28,7 @@ interface ParsedTable {
 
 export class GroqProvider implements ModelProvider {
   readonly id = "groq";
+  readonly name = "Groq";
 
   readonly #fetch: FetchSource;
 
@@ -33,16 +36,27 @@ export class GroqProvider implements ModelProvider {
     this.#fetch = options.fetch ?? fetch;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     const html = await fetchText(this.#fetch, GROQ_RATE_LIMITS_URL, "Groq rate limits", {
       headers: { Accept: "text/html,application/xhtml+xml" },
     });
+
+    const groqMeta = modelsDev.get(this.id);
+    const env = groqMeta?.env && groqMeta.env.length > 0 ? [...groqMeta.env] : ["GROQ_API_KEY"];
+
+    const connection = {
+      base_url: GROQ_API_BASE_URL,
+      protocol: "openai",
+      auth: { env },
+    };
+
     const offers = await parseGroqFreePlan(html);
     return offers
       .filter(({ modelId }) => !modelId.startsWith(GROQ_ROUTER_PREFIX))
       .map(({ modelId }) => ({
         model_id: modelId,
-        connection: { base_url: GROQ_API_BASE_URL },
+        name: desluggifyModelId(modelId),
+        connection,
       }));
   }
 }

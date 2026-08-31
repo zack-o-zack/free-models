@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { desluggifyModelId } from "../src/catalogue/canonical.ts";
 import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
@@ -43,6 +44,15 @@ describe("TokenRouter discovery", () => {
       "stealth/ox-alpha",
       "paid/model",
     ];
+    const modelsDev = new Map([
+      [
+        "tokenrouter",
+        {
+          id: "tokenrouter",
+          env: ["TOKENROUTER_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new TokenRouterProvider({
       apiKey: "tokenrouter-secret",
       fetch: async (url, init) => {
@@ -75,20 +85,28 @@ describe("TokenRouter discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual(
-      freeModels.map(([modelId, endpointTypes]) => ({
-        model_id: modelId,
-        connection: {
-          base_url: TOKENROUTER_API_BASE_URL,
-          supported_endpoint_types: [...endpointTypes].sort(),
-        },
-      })),
+    expect(await provider.discover(modelsDev)).toEqual(
+      freeModels.map(([modelId, endpointTypes]) => {
+        const sortedEndpoints = [...endpointTypes].sort();
+        return {
+          model_id: modelId,
+          name: desluggifyModelId(modelId),
+          connection: {
+            auth: { env: ["TOKENROUTER_API_KEY"] },
+            base_url: TOKENROUTER_API_BASE_URL,
+            protocol: sortedEndpoints.includes("openai")
+              ? "openai"
+              : (sortedEndpoints[0] ?? "openai"),
+            supported_endpoint_types: sortedEndpoints,
+          },
+        };
+      }),
     );
   });
 
   test("requires a key so retired public pricing rows cannot stand in for availability", async () => {
     const provider = new TokenRouterProvider({ apiKey: "" });
-    expect(provider.discover()).rejects.toThrow("TOKENROUTER_API_KEY");
+    expect(provider.discover(new Map())).rejects.toThrow("TOKENROUTER_API_KEY");
   });
 
   test("rejects duplicate, malformed, and unsupported pricing records", () => {
@@ -113,6 +131,7 @@ describe("TokenRouter discovery", () => {
 
 describe("Groq discovery", () => {
   test("returns no offers when only Developer-plan limits are published", async () => {
+    const modelsDev = new Map([["groq", { id: "groq", env: ["GROQ_API_KEY"] }]]);
     const provider = new GroqProvider({
       fetch: async () =>
         new Response(`
@@ -126,10 +145,11 @@ describe("Groq discovery", () => {
 `),
     });
 
-    expect(await provider.discover()).toEqual([]);
+    expect(await provider.discover(modelsDev)).toEqual([]);
   });
 
   test("rejects an unlabeled plan limits table", async () => {
+    const modelsDev = new Map([["groq", { id: "groq", env: ["GROQ_API_KEY"] }]]);
     const provider = new GroqProvider({
       fetch: async () =>
         new Response(`
@@ -142,10 +162,19 @@ describe("Groq discovery", () => {
 `),
     });
 
-    expect(provider.discover()).rejects.toThrow("unique active plan");
+    expect(provider.discover(modelsDev)).rejects.toThrow("unique active plan");
   });
 
   test("discovers model IDs from the official free-plan table", async () => {
+    const modelsDev = new Map([
+      [
+        "groq",
+        {
+          id: "groq",
+          env: ["GROQ_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new GroqProvider({
       fetch: async (url, init) => {
         expect(url).toBe("https://console.groq.com/docs/rate-limits");
@@ -167,14 +196,24 @@ describe("Groq discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "alpha/model",
-        connection: { base_url: GROQ_API_BASE_URL },
+        name: "Alpha: Model",
+        connection: {
+          auth: { env: ["GROQ_API_KEY"] },
+          base_url: GROQ_API_BASE_URL,
+          protocol: "openai",
+        },
       },
       {
         model_id: "beta/model",
-        connection: { base_url: GROQ_API_BASE_URL },
+        name: "Beta: Model",
+        connection: {
+          auth: { env: ["GROQ_API_KEY"] },
+          base_url: GROQ_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });
@@ -182,6 +221,15 @@ describe("Groq discovery", () => {
 
 describe("Mistral discovery", () => {
   test("uses a free-mode account catalogue and excludes custom or archived models", async () => {
+    const modelsDev = new Map([
+      [
+        "mistral",
+        {
+          id: "mistral",
+          env: ["MISTRAL_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new MistralProvider({
       apiKey: "free-mode-secret",
       fetch: async (url, init) => {
@@ -198,22 +246,36 @@ describe("Mistral discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "mistral-small",
-        connection: { base_url: MISTRAL_API_BASE_URL },
+        name: "Mistral small",
+        connection: {
+          auth: { env: ["MISTRAL_API_KEY"] },
+          base_url: MISTRAL_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });
 
   test("requires a key explicitly scoped to an organization in Free mode", async () => {
     const provider = new MistralProvider({ apiKey: "" });
-    expect(provider.discover()).rejects.toThrow("MISTRAL_FREE_API_KEY");
+    expect(provider.discover(new Map())).rejects.toThrow("MISTRAL_FREE_API_KEY");
   });
 });
 
 describe("Gemini API discovery", () => {
   test("uses only model sections whose standard pricing table offers free inference", async () => {
+    const modelsDev = new Map([
+      [
+        "google",
+        {
+          id: "google",
+          env: ["GOOGLE_API_KEY", "GOOGLE_GENERATIVE_AI_API_KEY", "GEMINI_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new GeminiProvider({
       fetch: async (url) => {
         expect(url).toBe(GEMINI_PRICING_URL);
@@ -221,10 +283,17 @@ describe("Gemini API discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "gemini-free",
-        connection: { base_url: GEMINI_API_BASE_URL },
+        name: "Gemini Free",
+        connection: {
+          auth: {
+            env: ["GOOGLE_API_KEY", "GOOGLE_GENERATIVE_AI_API_KEY", "GEMINI_API_KEY"],
+          },
+          base_url: GEMINI_API_BASE_URL,
+          protocol: "google",
+        },
       },
     ]);
   });
@@ -232,6 +301,15 @@ describe("Gemini API discovery", () => {
 
 describe("NVIDIA Build discovery", () => {
   test("keeps only catalogue resources explicitly labeled Free Endpoint", async () => {
+    const modelsDev = new Map([
+      [
+        "nvidia",
+        {
+          id: "nvidia",
+          env: ["NVIDIA_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new NvidiaProvider({
       fetch: async (url) => {
         expect(url).toBe(nvidiaModelsUrl(0));
@@ -251,10 +329,15 @@ describe("NVIDIA Build discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "nvidia/free",
-        connection: { base_url: NVIDIA_API_BASE_URL },
+        name: "Free Model",
+        connection: {
+          auth: { env: ["NVIDIA_API_KEY"] },
+          base_url: NVIDIA_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });
@@ -262,6 +345,15 @@ describe("NVIDIA Build discovery", () => {
 
 describe("Cloudflare Workers AI discovery", () => {
   test("applies the recurring allocation to priced models except paid-only entries", async () => {
+    const modelsDev = new Map([
+      [
+        "cloudflare-workers-ai",
+        {
+          id: "cloudflare-workers-ai",
+          env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new CloudflareProvider({
       fetch: async (url) => {
         expect(url).toBe(CLOUDFLARE_WORKERS_AI_PRICING_URL);
@@ -280,23 +372,48 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "@cf/free/model",
-        connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
+        name: "Free: Model",
+        connection: {
+          auth: {
+            env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+          },
+          base_url: CLOUDFLARE_WORKERS_AI_BASE_URL,
+          protocol: "cloudflare",
+        },
       },
     ]);
   });
 
   test("fails closed when the paid-only declaration disappears", async () => {
+    const modelsDev = new Map([
+      [
+        "cloudflare-workers-ai",
+        {
+          id: "cloudflare-workers-ai",
+          env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new CloudflareProvider({
       fetch: async () =>
         new Response("Our free allocation is **10,000 Neurons per day at no charge**."),
     });
-    expect(provider.discover()).rejects.toThrow("paid-only model declaration");
+    expect(provider.discover(modelsDev)).rejects.toThrow("paid-only model declaration");
   });
 
   test("fails closed when the free allocation is ambiguous", async () => {
+    const modelsDev = new Map([
+      [
+        "cloudflare-workers-ai",
+        {
+          id: "cloudflare-workers-ai",
+          env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new CloudflareProvider({
       fetch: async () =>
         new Response(`
@@ -304,7 +421,9 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
 **20,000 Neurons per day at no charge**
 `),
     });
-    expect(provider.discover()).rejects.toThrow("no unique recognized free daily allocation");
+    expect(provider.discover(modelsDev)).rejects.toThrow(
+      "no unique recognized free daily allocation",
+    );
   });
 });
 
