@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { desluggifyModelId } from "../src/catalogue/canonical.ts";
 import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
@@ -45,6 +46,15 @@ describe("TokenRouter discovery", () => {
     ];
     const provider = new TokenRouterProvider({
       apiKey: "tokenrouter-secret",
+      modelsDev: new Map([
+        [
+          "tokenrouter",
+          {
+            id: "tokenrouter",
+            env: ["TOKENROUTER_API_KEY"],
+          },
+        ],
+      ]),
       fetch: async (url, init) => {
         expect(new Headers(init?.headers).get("accept")).toBe("application/json");
         if (url === TOKENROUTER_MODELS_URL) {
@@ -76,13 +86,21 @@ describe("TokenRouter discovery", () => {
     });
 
     expect(await provider.discover()).toEqual(
-      freeModels.map(([modelId, endpointTypes]) => ({
-        model_id: modelId,
-        connection: {
-          base_url: TOKENROUTER_API_BASE_URL,
-          supported_endpoint_types: [...endpointTypes].sort(),
-        },
-      })),
+      freeModels.map(([modelId, endpointTypes]) => {
+        const sortedEndpoints = [...endpointTypes].sort();
+        return {
+          model_id: modelId,
+          name: desluggifyModelId(modelId),
+          connection: {
+            auth: { env: ["TOKENROUTER_API_KEY"] },
+            base_url: TOKENROUTER_API_BASE_URL,
+            protocol: sortedEndpoints.includes("openai")
+              ? "openai"
+              : (sortedEndpoints[0] ?? "openai"),
+            supported_endpoint_types: sortedEndpoints,
+          },
+        };
+      }),
     );
   });
 
