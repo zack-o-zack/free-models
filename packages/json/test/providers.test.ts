@@ -16,6 +16,85 @@ import {
   MistralProvider,
 } from "../src/providers/mistral.ts";
 import { NVIDIA_API_BASE_URL, NvidiaProvider, nvidiaModelsUrl } from "../src/providers/nvidia.ts";
+import {
+  parseTokenRouterModels,
+  parseTokenRouterPricing,
+  TOKENROUTER_API_BASE_URL,
+  TOKENROUTER_MODELS_URL,
+  TOKENROUTER_PRICING_URL,
+  TokenRouterProvider,
+} from "../src/providers/tokenrouter.ts";
+
+describe("TokenRouter discovery", () => {
+  test("keeps active native free models and rejects stale or imported pricing entries", async () => {
+    const activeModels = [
+      "z-ai/glm-5.3-free",
+      "nvidia/nemotron:free",
+      "stealth/ox-alpha",
+      "paid/model",
+    ];
+    const provider = new TokenRouterProvider({
+      apiKey: "tokenrouter-secret",
+      fetch: async (url, init) => {
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        if (url === TOKENROUTER_MODELS_URL) {
+          expect(new Headers(init?.headers).get("authorization")).toBe("Bearer tokenrouter-secret");
+          return Response.json({
+            object: "list",
+            data: activeModels.map((id) => ({ id, object: "model" })),
+          });
+        }
+        if (url === TOKENROUTER_PRICING_URL) {
+          expect(new Headers(init?.headers).get("authorization")).toBeNull();
+          return Response.json({
+            success: true,
+            data: [
+              tokenRouterPrice("z-ai/glm-5.3-free", 0),
+              tokenRouterPrice("nvidia/nemotron:free", 0),
+              tokenRouterPrice("stealth/ox-alpha", 0),
+              tokenRouterPrice("retired/model-free", 0),
+              tokenRouterPrice("paid/model", 1),
+              tokenRouterPrice("vip/model-free", 0, ["vip"]),
+              tokenRouterPrice("gemini/model-free", 0, ["default"], ["gemini"]),
+            ],
+          });
+        }
+        throw new Error(`Unexpected URL: ${url}`);
+      },
+    });
+
+    expect(await provider.discover()).toEqual([
+      {
+        model_id: "z-ai/glm-5.3-free",
+        connection: { base_url: TOKENROUTER_API_BASE_URL },
+      },
+    ]);
+  });
+
+  test("requires a key so retired public pricing rows cannot stand in for availability", async () => {
+    const provider = new TokenRouterProvider({ apiKey: "" });
+    expect(provider.discover()).rejects.toThrow("TOKENROUTER_API_KEY");
+  });
+
+  test("rejects duplicate, malformed, and unsupported pricing records", () => {
+    expect(() =>
+      parseTokenRouterModels({ object: "list", data: [{ id: "duplicate" }, { id: "duplicate" }] }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseTokenRouterModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() =>
+      parseTokenRouterPricing({
+        success: true,
+        data: [tokenRouterPrice("duplicate", 0), tokenRouterPrice("duplicate", 0)],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() =>
+      parseTokenRouterPricing({
+        success: true,
+        data: [{ ...tokenRouterPrice("bad-price", 0), model_ratio: -1 }],
+      }),
+    ).toThrow("invalid model_ratio");
+  });
+});
 
 describe("Groq discovery", () => {
   test("returns no offers when only Developer-plan limits are published", async () => {
@@ -245,5 +324,22 @@ function nvidiaResource(name: string, nimTypes: string[]): Record<string, unknow
       { key: "nimType", values: nimTypes, unresolvedValues: [] },
       { key: "publisher", values: ["nvidia"], unresolvedValues: ["nvidia"] },
     ],
+  };
+}
+
+function tokenRouterPrice(
+  modelName: string,
+  modelRatio: number,
+  enableGroups: string[] = ["default"],
+  supportedEndpointTypes: string[] = ["openai"],
+): Record<string, unknown> {
+  return {
+    model_name: modelName,
+    quota_type: 0,
+    model_ratio: modelRatio,
+    model_price: 0,
+    completion_ratio: 1,
+    enable_groups: enableGroups,
+    supported_endpoint_types: supportedEndpointTypes,
   };
 }

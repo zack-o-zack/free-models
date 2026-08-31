@@ -1,0 +1,11 @@
+{
+  "provider": "tokenrouter",
+  "offers": [
+    {
+      "model_id": "z-ai/glm-5.3-free",
+      "connection": {
+        "base_url": "https://api.tokenrouter.com/v1"
+      }
+    }
+  ]
+}

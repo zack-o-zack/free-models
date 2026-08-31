@@ -8598,6 +8598,87 @@
         "is_moderated": false,
         "max_completion_tokens": 230400
       }
+    },
+    {
+      "id": "z-ai/glm-5.3",
+      "name": "Z.ai: GLM 5.3",
+      "architecture": {
+        "input_modalities": [
+          "text"
+        ],
+        "instruct_type": null,
+        "modality": "text->text",
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other"
+      },
+      "benchmarks": {
+        "artificial_analysis": {
+          "agentic_index": 59.1,
+          "coding_index": 74.8,
+          "intelligence_index": 59.5
+        },
+        "design_arena": []
+      },
+      "canonical_slug": "z-ai/glm-5.3-20260816",
+      "context_length": 1310720,
+      "created": 1787086655,
+      "default_parameters": {
+        "temperature": 1,
+        "top_p": 0.95
+      },
+      "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
+      "expiration_date": "2098-12-31",
+      "hugging_face_id": "zai-org/GLM-5.3",
+      "knowledge_cutoff": null,
+      "links": {
+        "details": "/api/v1/models/z-ai/glm-5.3-20260816/endpoints"
+      },
+      "per_request_limits": null,
+      "pricing": {
+        "completion": "0.0000044",
+        "input_cache_read": "0.00000026",
+        "prompt": "0.0000014"
+      },
+      "reasoning": {
+        "default_effort": "max",
+        "default_enabled": true,
+        "mandatory": true,
+        "supported_efforts": [
+          "max",
+          "high",
+          "low"
+        ]
+      },
+      "supported_parameters": [
+        "frequency_penalty",
+        "include_reasoning",
+        "logit_bias",
+        "logprobs",
+        "max_tokens",
+        "min_p",
+        "presence_penalty",
+        "reasoning",
+        "reasoning_effort",
+        "repetition_penalty",
+        "response_format",
+        "seed",
+        "stop",
+        "structured_outputs",
+        "temperature",
+        "tool_choice",
+        "tools",
+        "top_k",
+        "top_logprobs",
+        "top_p"
+      ],
+      "supported_voices": null,
+      "top_provider": {
+        "context_length": 1048576,
+        "is_moderated": false,
+        "max_completion_tokens": 131072
+      }
     }
   ]
 }
