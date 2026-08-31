@@ -14,18 +14,6 @@
       }
     },
     {
-      "model_id": "groq/compound",
-      "connection": {
-        "base_url": "https://api.groq.com/openai/v1"
-      }
-    },
-    {
-      "model_id": "groq/compound-mini",
-      "connection": {
-        "base_url": "https://api.groq.com/openai/v1"
-      }
-    },
-    {
       "model_id": "meta-llama/llama-prompt-guard-2-22m",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"

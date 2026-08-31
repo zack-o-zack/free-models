@@ -10,7 +10,9 @@ export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
 export const OPENROUTER_MODELS_URL = `${OPENROUTER_API_BASE_URL}/models?output_modalities=all`;
 
 const OPENROUTER_FREE_SUFFIX = ":free";
-const OPENROUTER_NON_MODEL_IDS = new Set(["openrouter/free"]);
+// The openrouter/ namespace holds routing endpoints (auto, fusion, free, ...) that stand in
+// front of other providers' models, not concrete free models of their own.
+const OPENROUTER_ROUTER_PREFIX = "openrouter/";
 
 interface HttpResponse {
   readonly ok: boolean;
@@ -39,7 +41,10 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
 
     for (const model of models) {
       const modelId = model.id as string;
-      if (OPENROUTER_NON_MODEL_IDS.has(modelId) || !modelId.endsWith(OPENROUTER_FREE_SUFFIX)) {
+      if (
+        modelId.startsWith(OPENROUTER_ROUTER_PREFIX) ||
+        !modelId.endsWith(OPENROUTER_FREE_SUFFIX)
+      ) {
         continue;
       }
 
