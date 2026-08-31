@@ -46,7 +46,6 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
       offers.push({
         model_id: modelId,
         connection: { base_url: OPENROUTER_API_BASE_URL },
-        metadata: withoutId(model),
       });
     }
 
@@ -57,25 +56,11 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
     models: readonly ActiveCanonicalModel[],
   ): Promise<ReadonlyMap<string, CanonicalMetadata>> {
     const metadataByCanonicalId = new Map<string, CanonicalMetadata>();
-    const modelsWithoutOpenRouterOffer: ActiveCanonicalModel[] = [];
-
-    for (const activeModel of models) {
-      const openRouterOffer = activeModel.offers.find(({ provider }) => provider === this.id);
-      if (openRouterOffer) {
-        metadataByCanonicalId.set(activeModel.model.id, openRouterOffer.offer.metadata);
-      } else {
-        modelsWithoutOpenRouterOffer.push(activeModel);
-      }
-    }
-
-    if (modelsWithoutOpenRouterOffer.length === 0) {
-      return metadataByCanonicalId;
-    }
-
     const sourceModels = await this.#loadModels();
     const sourceById = new Map(sourceModels.map((model) => [model.id as string, model]));
-    for (const { model } of modelsWithoutOpenRouterOffer) {
-      const sourceModel = sourceById.get(model.id);
+    for (const { model, offers } of models) {
+      const openRouterOffer = offers.find(({ provider }) => provider === this.id);
+      const sourceModel = sourceById.get(openRouterOffer?.offer.model_id ?? model.id);
       if (sourceModel) {
         metadataByCanonicalId.set(model.id, withoutId(sourceModel));
       }

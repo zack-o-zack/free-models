@@ -34,10 +34,9 @@ export class GeminiProvider implements ModelProvider {
     const html = await fetchText(this.#fetch, GEMINI_PRICING_URL, "Gemini API pricing", {
       headers: { Accept: "text/html,application/xhtml+xml" },
     });
-    return (await parseGeminiPricing(html)).map(({ modelId, name, freeTier }) => ({
+    return (await parseGeminiPricing(html)).map(({ modelId }) => ({
       model_id: modelId,
       connection: { base_url: GEMINI_API_BASE_URL },
-      metadata: { name, free_tier: freeTier },
     }));
   }
 }

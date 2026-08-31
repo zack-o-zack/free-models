@@ -36,7 +36,6 @@ export class MistralProvider implements ModelProvider {
     return parseMistralModels(payload).map((model) => ({
       model_id: model.id as string,
       connection: { base_url: MISTRAL_API_BASE_URL },
-      metadata: withoutId(model),
     }));
   }
 }
@@ -77,8 +76,4 @@ export function parseMistralModels(payload: unknown): Record<string, JsonValue>[
     throw new Error("Mistral models response contains no active base models");
   }
   return models;
-}
-
-function withoutId(model: Record<string, JsonValue>): Record<string, JsonValue> {
-  return Object.fromEntries(Object.entries(model).filter(([key]) => key !== "id"));
 }

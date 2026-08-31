@@ -69,7 +69,7 @@ async function validFixtureText(): Promise<{ documentation: string; models: stri
 }
 
 describe("OpenCode Zen discovery", () => {
-  test("strictly joins pricing, endpoint, and live-model fixtures through the CLI", async () => {
+  test("discovers connection fields from pricing, endpoint, and live-model fixtures", async () => {
     await withWorkspace(async (workspace) => {
       const discovery = runFixtureCli(workspace, {
         documentation: validDocumentationPath,
@@ -87,18 +87,12 @@ describe("OpenCode Zen discovery", () => {
               ai_sdk_package: "@ai-sdk/openai-compatible",
               endpoint: "https://opencode.example.test/zen/v1/chat/completions",
             },
-            metadata: { object: "model", owned_by: "opencode" },
           },
           {
             model_id: "suffix-free",
             connection: {
               ai_sdk_package: "@ai-sdk/openai",
               endpoint: "https://opencode.example.test/zen/v1/responses",
-            },
-            metadata: {
-              object: "model",
-              owned_by: "opencode",
-              upstream: { nested: true },
             },
           },
         ],

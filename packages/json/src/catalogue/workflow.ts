@@ -248,7 +248,6 @@ function normalizeOffers(providerId: string, offers: DiscoveredOffer[]): Discove
       return {
         model_id: offer.model_id,
         connection: sortJsonObject(offer.connection),
-        metadata: sortJsonObject(offer.metadata),
       };
     })
     .sort((left, right) => compareStrings(left.model_id, right.model_id));

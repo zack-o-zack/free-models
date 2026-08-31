@@ -66,6 +66,18 @@ describe("catalogue CLI", () => {
     expect(catalogueSchema.safeParse({ schema_version: 1, models: [openModel] }).success).toBe(
       false,
     );
+
+    const offerWithMetadata = {
+      ...openModel,
+      providers: {
+        acme: {
+          offers: [{ model_id: "model", connection: {}, metadata: { legacy: true } }],
+        },
+      },
+    };
+    expect(
+      catalogueSchema.safeParse({ schema_version: 2, models: [offerWithMetadata] }).success,
+    ).toBe(false);
   });
 
   test("render writes a deterministic empty catalogue", async () => {

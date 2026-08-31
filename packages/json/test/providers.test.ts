@@ -51,7 +51,7 @@ describe("Groq discovery", () => {
     expect(provider.discover()).rejects.toThrow("unique active plan");
   });
 
-  test("discovers model IDs and quotas from the official free-plan table", async () => {
+  test("discovers model IDs from the official free-plan table", async () => {
     const provider = new GroqProvider({
       fetch: async (url, init) => {
         expect(url).toBe("https://console.groq.com/docs/rate-limits");
@@ -77,21 +77,10 @@ describe("Groq discovery", () => {
       {
         model_id: "alpha/model",
         connection: { base_url: GROQ_API_BASE_URL },
-        metadata: { rate_limits: { rpm: "30", rpd: "1,000", tpm: "6,000", tpd: "500,000" } },
       },
       {
         model_id: "beta/model",
         connection: { base_url: GROQ_API_BASE_URL },
-        metadata: {
-          rate_limits: {
-            rpm: "10",
-            rpd: "100",
-            tpm: "2,000",
-            tpd: "20,000",
-            ash: "5",
-            asd: "20",
-          },
-        },
       },
     ]);
   });
@@ -119,7 +108,6 @@ describe("Mistral discovery", () => {
       {
         model_id: "mistral-small",
         connection: { base_url: MISTRAL_API_BASE_URL },
-        metadata: { object: "model", owned_by: "mistralai" },
       },
     ]);
   });
@@ -143,14 +131,6 @@ describe("Gemini API discovery", () => {
       {
         model_id: "gemini-free",
         connection: { base_url: GEMINI_API_BASE_URL },
-        metadata: {
-          name: "Gemini Free",
-          free_tier: {
-            input_price: "Free of charge",
-            output_price_including_thinking_tokens: "Free of charge",
-            used_to_improve_our_products: "Yes",
-          },
-        },
       },
     ]);
   });
@@ -181,13 +161,6 @@ describe("NVIDIA Build discovery", () => {
       {
         model_id: "nvidia/free",
         connection: { base_url: NVIDIA_API_BASE_URL },
-        metadata: {
-          name: "Free Model",
-          publisher: "nvidia",
-          description: "free description",
-          catalogue_url: "https://build.nvidia.com/nvidia/free",
-          endpoint_tier: "Free Endpoint",
-        },
       },
     ]);
   });
@@ -217,14 +190,6 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
       {
         model_id: "@cf/free/model",
         connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
-        metadata: {
-          free_allocation: "12,345 Neurons per day",
-          pricing_category: "LLM model pricing",
-          pricing: {
-            price: "$0.10 per M tokens",
-            neurons: "9,000 neurons per M tokens",
-          },
-        },
       },
     ]);
   });
