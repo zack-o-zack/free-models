@@ -88,9 +88,9 @@ describe("catalogue automation", () => {
         expect(source, name).toContain("actions/download-artifact@v4");
         expect(source, name).toContain("cloudflare/wrangler-action@v4");
         expect(source, name).toContain(
-          "r2 bucket cors set free-models-cdn --file config/r2-cors.json",
+          "r2 bucket cors set zackozack-cdn --file config/r2-cors.json",
         );
-        expect(source, name).toContain("free-models-cdn/free-models.json");
+        expect(source, name).toContain("zackozack-cdn/free-models.json");
         expect(source, name).toContain(`--file ${"$"}{{ runner.temp }}/free-models.json`);
         expect(source, name).toContain("CLOUDFLARE_API_TOKEN");
         expect(source, name).toContain("CLOUDFLARE_ACCOUNT_ID");

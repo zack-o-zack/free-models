@@ -95,7 +95,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: r2 bucket cors set free-models-cdn --file config/r2-cors.json
+          command: r2 bucket cors set zackozack-cdn --file config/r2-cors.json
 
       - name: Upload catalogue to Cloudflare R2
         uses: cloudflare/wrangler-action@v4
@@ -103,7 +103,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: >-
-            r2 object put free-models-cdn/free-models.json
+            r2 object put zackozack-cdn/free-models.json
             --remote
             --file ${{ runner.temp }}/free-models.json
             --content-type application/json
