@@ -8,6 +8,7 @@ if (!fixturePath) {
 }
 
 const provider = new OpenRouterProvider({
+  modelsDev: new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]),
   fetch: async (url, init) => {
     if (url !== OPENROUTER_MODELS_URL) {
       throw new Error(`Unexpected OpenRouter fixture URL: ${url}`);

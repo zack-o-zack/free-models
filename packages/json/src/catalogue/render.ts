@@ -36,6 +36,7 @@ function buildCatalogue(state: CatalogueState): Catalogue {
     const offers = providerOffers.get(provider) ?? [];
     offers.push({
       model_id: offer.model_id,
+      name: offer.name,
       connection: sortJsonObject(offer.connection),
     });
     providerOffers.set(provider, offers);
@@ -56,6 +57,7 @@ function buildCatalogue(state: CatalogueState): Catalogue {
           .map(([providerId, offers]) => [
             providerId,
             {
+              name: state.snapshots.get(providerId)?.name ?? providerId,
               offers: offers.sort((left, right) => compareStrings(left.model_id, right.model_id)),
             },
           ]),

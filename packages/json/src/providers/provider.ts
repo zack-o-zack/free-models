@@ -2,6 +2,7 @@ import { type DiscoveredOffer, providerIdSchema } from "../catalogue/schema.ts";
 
 export interface ModelProvider {
   readonly id: string;
+  readonly name?: string;
   discover(): Promise<readonly DiscoveredOffer[]>;
 }
 

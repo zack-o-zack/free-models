@@ -225,7 +225,8 @@ async function discoverSnapshots(
       } catch (error) {
         throw providerStageError(provider.id, "validation", error);
       }
-      return [provider.id, { provider: provider.id, offers }] as const;
+      const providerName = provider.name ?? provider.id;
+      return [provider.id, { provider: provider.id, name: providerName, offers }] as const;
     }),
   );
 
@@ -247,6 +248,7 @@ function normalizeOffers(providerId: string, offers: DiscoveredOffer[]): Discove
       modelIds.add(offer.model_id);
       return {
         model_id: offer.model_id,
+        name: offer.name,
         connection: sortJsonObject(offer.connection),
       };
     })
