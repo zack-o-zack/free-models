@@ -1,6 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
-import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENCODE_ZEN_DOCUMENTATION_URL = "https://opencode.ai/docs/zen/";
@@ -20,7 +20,6 @@ type FetchSource = (url: string, init?: RequestInit) => Promise<HttpResponse>;
 
 export interface OpenCodeProviderOptions {
   readonly fetch?: FetchSource;
-  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 interface DocumentedOffer {
@@ -53,22 +52,19 @@ export class OpenCodeProvider implements ModelProvider {
   readonly name = "OpenCode";
 
   readonly #fetch: FetchSource;
-  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: OpenCodeProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
-    this.#modelsDev = options.modelsDev;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
-    const [documentationResponse, modelsResponse, modelsDev] = await Promise.all([
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
+    const [documentationResponse, modelsResponse] = await Promise.all([
       this.#request(
         OPENCODE_ZEN_DOCUMENTATION_URL,
         "documentation",
         "text/html,application/xhtml+xml",
       ),
       this.#request(OPENCODE_ZEN_MODELS_URL, "models", "application/json"),
-      this.#getModelsDev(),
     ]);
     const [documentation, modelsPayload] = await Promise.all([
       this.#readDocumentation(documentationResponse),
@@ -106,13 +102,6 @@ export class OpenCodeProvider implements ModelProvider {
         },
       };
     });
-  }
-
-  async #getModelsDev(): Promise<ModelsDevRegistry> {
-    if (this.#modelsDev) {
-      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
-    }
-    return getCachedModelsDevRegistry(this.#fetch);
   }
 
   async #request(url: string, source: string, accept: string): Promise<HttpResponse> {

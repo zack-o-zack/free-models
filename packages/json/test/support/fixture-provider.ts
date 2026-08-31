@@ -1,4 +1,5 @@
 import type { DiscoveredOffer } from "../../src/catalogue/schema.ts";
+import type { ModelsDevRegistry } from "../../src/providers/models-dev.ts";
 import type { ModelProvider } from "../../src/providers/provider.ts";
 
 interface FixtureDocument {
@@ -12,7 +13,7 @@ export class FixtureProvider implements ModelProvider {
     private readonly fixturePath: string,
   ) {}
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(_modelsDev?: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     const file = Bun.file(this.fixturePath);
     if (!(await file.exists())) {
       throw new Error(`Fixture does not exist: ${this.fixturePath}`);

@@ -57,12 +57,16 @@ export async function fetchModelsDevRegistry(
           )
         : undefined;
 
+      const api = typeof entry.api === "string" ? entry.api : undefined;
+      const npm = typeof entry.npm === "string" ? entry.npm : undefined;
+      const name = typeof entry.name === "string" ? entry.name : undefined;
+
       registry.set(key, {
         id: typeof entry.id === "string" ? entry.id : key,
-        env,
-        api: typeof entry.api === "string" ? entry.api : undefined,
-        npm: typeof entry.npm === "string" ? entry.npm : undefined,
-        name: typeof entry.name === "string" ? entry.name : undefined,
+        ...(env ? { env } : {}),
+        ...(api !== undefined ? { api } : {}),
+        ...(npm !== undefined ? { npm } : {}),
+        ...(name !== undefined ? { name } : {}),
       });
     }
   }

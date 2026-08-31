@@ -123,33 +123,35 @@ describe("OpenRouter discovery", () => {
       },
     ];
 
+    const modelsDev = new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]);
+
     for (const testCase of cases) {
       const provider = new OpenRouterProvider({
-        modelsDev: new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]),
         fetch: async (url, init) => {
           expect(url).toBe(OPENROUTER_MODELS_URL);
           expect(new Headers(init?.headers).has("authorization")).toBe(false);
           return new Response(testCase.raw ?? JSON.stringify(testCase.payload));
         },
       });
-      expect(provider.discover()).rejects.toThrow(testCase.message);
+      expect(provider.discover(modelsDev)).rejects.toThrow(testCase.message);
     }
   });
 
   test("reports HTTP and JSON failures without including response content", async () => {
+    const modelsDev = new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]);
     const failedRequest = new OpenRouterProvider({
-      modelsDev: new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]),
       fetch: async () => new Response("private upstream response", { status: 503 }),
     });
-    expect(failedRequest.discover()).rejects.toThrow(
+    expect(failedRequest.discover(modelsDev)).rejects.toThrow(
       "OpenRouter models request failed with HTTP status 503",
     );
 
     const invalidJson = new OpenRouterProvider({
-      modelsDev: new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]),
       fetch: async () => new Response("private upstream response"),
     });
-    expect(invalidJson.discover()).rejects.toThrow("OpenRouter models response is not valid JSON");
+    expect(invalidJson.discover(modelsDev)).rejects.toThrow(
+      "OpenRouter models response is not valid JSON",
+    );
   });
 });
 

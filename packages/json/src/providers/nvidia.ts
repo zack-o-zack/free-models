@@ -1,6 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
-import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -11,7 +11,6 @@ const PAGE_SIZE = 100;
 
 export interface NvidiaProviderOptions {
   readonly fetch?: FetchSource;
-  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 interface NvidiaPage {
@@ -32,15 +31,13 @@ export class NvidiaProvider implements ModelProvider {
   readonly name = "NVIDIA";
 
   readonly #fetch: FetchSource;
-  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: NvidiaProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
-    this.#modelsDev = options.modelsDev;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
-    const [firstPage, modelsDev] = await Promise.all([this.#loadPage(0), this.#getModelsDev()]);
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
+    const firstPage = await this.#loadPage(0);
     const remainingPages = await Promise.all(
       Array.from({ length: firstPage.pageCount - 1 }, (_, index) => this.#loadPage(index + 1)),
     );
@@ -82,13 +79,6 @@ export class NvidiaProvider implements ModelProvider {
       headers: { Accept: "application/json" },
     });
     return parseNvidiaModelsPage(payload);
-  }
-
-  async #getModelsDev(): Promise<ModelsDevRegistry> {
-    if (this.#modelsDev) {
-      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
-    }
-    return getCachedModelsDevRegistry(this.#fetch);
   }
 }
 

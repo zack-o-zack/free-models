@@ -1,6 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
 import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
-import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -11,7 +11,6 @@ export const CLOUDFLARE_WORKERS_AI_PRICING_URL =
 
 export interface CloudflareProviderOptions {
   readonly fetch?: FetchSource;
-  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 interface CloudflareModel {
@@ -30,20 +29,20 @@ export class CloudflareProvider implements ModelProvider {
   readonly name = "Cloudflare";
 
   readonly #fetch: FetchSource;
-  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: CloudflareProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
-    this.#modelsDev = options.modelsDev;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
-    const [markdown, modelsDev] = await Promise.all([
-      fetchText(this.#fetch, CLOUDFLARE_WORKERS_AI_PRICING_URL, "Cloudflare Workers AI pricing", {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
+    const markdown = await fetchText(
+      this.#fetch,
+      CLOUDFLARE_WORKERS_AI_PRICING_URL,
+      "Cloudflare Workers AI pricing",
+      {
         headers: { Accept: "text/markdown,text/plain" },
-      }),
-      this.#getModelsDev(),
-    ]);
+      },
+    );
 
     const cloudflareMeta = modelsDev.get("cloudflare-workers-ai") ?? modelsDev.get(this.id);
     const env =
@@ -63,13 +62,6 @@ export class CloudflareProvider implements ModelProvider {
       name: desluggifyModelId(modelId),
       connection,
     }));
-  }
-
-  async #getModelsDev(): Promise<ModelsDevRegistry> {
-    if (this.#modelsDev) {
-      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
-    }
-    return getCachedModelsDevRegistry(this.#fetch);
   }
 }
 

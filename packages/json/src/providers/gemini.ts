@@ -1,6 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
 import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
-import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -9,7 +9,6 @@ export const GEMINI_PRICING_URL = "https://ai.google.dev/gemini-api/docs/pricing
 
 export interface GeminiProviderOptions {
   readonly fetch?: FetchSource;
-  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 interface ParsedGeminiSection {
@@ -29,20 +28,15 @@ export class GeminiProvider implements ModelProvider {
   readonly name = "Gemini";
 
   readonly #fetch: FetchSource;
-  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: GeminiProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
-    this.#modelsDev = options.modelsDev;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
-    const [html, modelsDev] = await Promise.all([
-      fetchText(this.#fetch, GEMINI_PRICING_URL, "Gemini API pricing", {
-        headers: { Accept: "text/html,application/xhtml+xml" },
-      }),
-      this.#getModelsDev(),
-    ]);
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
+    const html = await fetchText(this.#fetch, GEMINI_PRICING_URL, "Gemini API pricing", {
+      headers: { Accept: "text/html,application/xhtml+xml" },
+    });
 
     const googleMeta = modelsDev.get("google") ?? modelsDev.get(this.id);
     const env =
@@ -62,13 +56,6 @@ export class GeminiProvider implements ModelProvider {
       name: name || desluggifyModelId(modelId),
       connection,
     }));
-  }
-
-  async #getModelsDev(): Promise<ModelsDevRegistry> {
-    if (this.#modelsDev) {
-      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
-    }
-    return getCachedModelsDevRegistry(this.#fetch);
   }
 }
 

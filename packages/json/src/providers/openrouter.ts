@@ -5,7 +5,7 @@ import type {
   CanonicalMetadata,
   CanonicalMetadataProvider,
 } from "../metadata/provider.ts";
-import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
@@ -26,7 +26,6 @@ type FetchModels = (url: string, init?: RequestInit) => Promise<HttpResponse>;
 
 export interface OpenRouterProviderOptions {
   readonly fetch?: FetchModels;
-  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvider {
@@ -34,15 +33,13 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
   readonly name = "OpenRouter";
 
   readonly #fetch: FetchModels;
-  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: OpenRouterProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
-    this.#modelsDev = options.modelsDev;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
-    const [models, modelsDev] = await Promise.all([this.#loadModels(), this.#getModelsDev()]);
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
+    const models = await this.#loadModels();
     const openRouterMeta = modelsDev.get(this.id);
     const env =
       openRouterMeta?.env && openRouterMeta.env.length > 0 ? [...openRouterMeta.env] : undefined;
@@ -77,13 +74,6 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
     }
 
     return offers;
-  }
-
-  async #getModelsDev(): Promise<ModelsDevRegistry> {
-    if (this.#modelsDev) {
-      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
-    }
-    return getCachedModelsDevRegistry(this.#fetch);
   }
 
   async enrich(

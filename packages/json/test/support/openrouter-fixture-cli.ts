@@ -8,7 +8,6 @@ if (!fixturePath) {
 }
 
 const provider = new OpenRouterProvider({
-  modelsDev: new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]),
   fetch: async (url, init) => {
     if (url !== OPENROUTER_MODELS_URL) {
       throw new Error(`Unexpected OpenRouter fixture URL: ${url}`);
@@ -26,6 +25,7 @@ runCli(process.argv.slice(2), {
   providers: [provider],
   renderer: new JsonCatalogueRenderer(),
   metadataProvider: provider,
+  modelsDevRegistry: new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]),
 }).catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
   console.error(message);

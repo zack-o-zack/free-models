@@ -1,6 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
-import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "./models-dev.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -10,7 +10,6 @@ export const MISTRAL_MODELS_URL = `${MISTRAL_API_BASE_URL}/models`;
 export interface MistralProviderOptions {
   readonly fetch?: FetchSource;
   readonly apiKey?: string;
-  readonly modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 }
 
 export class MistralProvider implements ModelProvider {
@@ -19,29 +18,24 @@ export class MistralProvider implements ModelProvider {
 
   readonly #fetch: FetchSource;
   readonly #apiKey: string | undefined;
-  readonly #modelsDev?: ModelsDevRegistry | (() => Promise<ModelsDevRegistry>);
 
   constructor(options: MistralProviderOptions = {}) {
     this.#fetch = options.fetch ?? fetch;
     this.#apiKey = options.apiKey ?? process.env.MISTRAL_FREE_API_KEY;
-    this.#modelsDev = options.modelsDev;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     if (!this.#apiKey) {
       throw new Error(
         "Mistral discovery requires MISTRAL_FREE_API_KEY from an organization in Free mode",
       );
     }
-    const [payload, modelsDev] = await Promise.all([
-      fetchJson(this.#fetch, MISTRAL_MODELS_URL, "Mistral models", {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${this.#apiKey}`,
-        },
-      }),
-      this.#getModelsDev(),
-    ]);
+    const payload = await fetchJson(this.#fetch, MISTRAL_MODELS_URL, "Mistral models", {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${this.#apiKey}`,
+      },
+    });
 
     const mistralMeta = modelsDev.get(this.id);
     const env =
@@ -66,13 +60,6 @@ export class MistralProvider implements ModelProvider {
         connection,
       };
     });
-  }
-
-  async #getModelsDev(): Promise<ModelsDevRegistry> {
-    if (this.#modelsDev) {
-      return typeof this.#modelsDev === "function" ? await this.#modelsDev() : this.#modelsDev;
-    }
-    return getCachedModelsDevRegistry(this.#fetch);
   }
 }
 
