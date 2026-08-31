@@ -1,4 +1,301 @@
 {
   "provider": "gemini",
-  "offers": []
+  "offers": [
+    {
+      "model_id": "gemini-2.5-flash",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Not available",
+          "grounding_with_google_maps": "500 RPD",
+          "grounding_with_google_search": "Free of charge, up to 500 RPD (limit shared with Flash-Lite RPD)",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 2.5 Flash"
+      }
+    },
+    {
+      "model_id": "gemini-2.5-flash-native-audio-preview-12-2025",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 2.5 Flash Native Audio (Live API)"
+      }
+    },
+    {
+      "model_id": "gemini-2.5-flash-preview-tts",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "input_price": "Free of charge",
+          "output_price": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 2.5 Flash Preview TTS"
+      }
+    },
+    {
+      "model_id": "gemini-2.5-pro",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Not available",
+          "grounding_with_google_maps": "Not available",
+          "grounding_with_google_search": "Not available",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 2.5 Pro"
+      }
+    },
+    {
+      "model_id": "gemini-3-flash-preview",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Free of charge",
+          "grounding_with_google_maps": "Not available**",
+          "grounding_with_google_search": "Not available**",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3 Flash Preview"
+      }
+    },
+    {
+      "model_id": "gemini-3.1-flash-lite",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Not available",
+          "grounding_with_google_maps": "Not available**",
+          "grounding_with_google_search": "Not available**",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.1 Flash-Lite"
+      }
+    },
+    {
+      "model_id": "gemini-3.1-flash-live-preview",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "grounding_with_google_search": "Supported",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.1 Flash Live Preview"
+      }
+    },
+    {
+      "model_id": "gemini-3.1-flash-tts-preview",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "input_price": "Free of charge",
+          "output_price": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.1 Flash TTS Preview"
+      }
+    },
+    {
+      "model_id": "gemini-3.5-flash",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Free of charge",
+          "grounding_with_google_maps": "Not available**",
+          "grounding_with_google_search": "Not available**",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.5 Flash"
+      }
+    },
+    {
+      "model_id": "gemini-3.5-flash-lite",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Not available",
+          "grounding_with_google_maps": "Not available**",
+          "grounding_with_google_search": "Not available**",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.5 Flash-Lite"
+      }
+    },
+    {
+      "model_id": "gemini-3.5-live-translate-preview",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.5 Live Translate"
+      }
+    },
+    {
+      "model_id": "gemini-3.5-transcribe",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "grounding_with_google_search": "Not Supported",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.5 Transcribe"
+      }
+    },
+    {
+      "model_id": "gemini-3.5-transcribe-live",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "grounding_with_google_search": "Not Supported",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.5 Transcribe Live"
+      }
+    },
+    {
+      "model_id": "gemini-3.6-flash",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Free of charge",
+          "grounding_with_google_maps": "Not available**",
+          "grounding_with_google_search": "Not available**",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.6 Flash"
+      }
+    },
+    {
+      "model_id": "gemini-3.7-flash",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Free of charge",
+          "grounding_with_google_maps": "Not available",
+          "grounding_with_google_search": "Not available",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini 3.7 Flash"
+      }
+    },
+    {
+      "model_id": "gemini-embedding-001",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "input_price": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini Embedding"
+      }
+    },
+    {
+      "model_id": "gemini-robotics-er-1.6-preview",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "grounding_with_google_search": "Not available",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini Robotics ER 1.6 Preview"
+      }
+    },
+    {
+      "model_id": "gemini-robotics-er-2-preview",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "context_caching_price": "Not available",
+          "grounding_with_google_search": "Not available",
+          "input_price": "Free of charge",
+          "output_price_including_thinking_tokens": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini Robotics ER 2 Preview"
+      }
+    },
+    {
+      "model_id": "gemini-robotics-er-2-streaming-preview",
+      "connection": {
+        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+      },
+      "metadata": {
+        "free_tier": {
+          "grounding_with_google_search": "Not available",
+          "input_price": "Free of charge",
+          "output_price": "Free of charge",
+          "used_to_improve_our_products": "Yes"
+        },
+        "name": "Gemini Robotics ER 2 Streaming Preview"
+      }
+    }
+  ]
 }
