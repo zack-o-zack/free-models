@@ -3,19 +3,28 @@ import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
   CloudflareProvider,
+  cloudflareOfferLimits,
 } from "../src/providers/cloudflare.ts";
 import {
   GEMINI_API_BASE_URL,
   GEMINI_PRICING_URL,
+  GEMINI_RATE_LIMITS_URL,
   GeminiProvider,
 } from "../src/providers/gemini.ts";
-import { GROQ_API_BASE_URL, GroqProvider } from "../src/providers/groq.ts";
+import { GROQ_API_BASE_URL, GroqProvider, groqOfferLimits } from "../src/providers/groq.ts";
 import {
   MISTRAL_API_BASE_URL,
   MISTRAL_MODELS_URL,
+  MISTRAL_RATE_LIMITS_URL,
   MistralProvider,
 } from "../src/providers/mistral.ts";
-import { NVIDIA_API_BASE_URL, NvidiaProvider, nvidiaModelsUrl } from "../src/providers/nvidia.ts";
+import {
+  NVIDIA_API_BASE_URL,
+  NVIDIA_LIMITS_URL,
+  NvidiaProvider,
+  nvidiaModelsUrl,
+  parseNvidiaLimits,
+} from "../src/providers/nvidia.ts";
 import {
   parseTokenRouterModels,
   parseTokenRouterPricing,
@@ -81,6 +90,12 @@ describe("TokenRouter discovery", () => {
         connection: {
           base_url: TOKENROUTER_API_BASE_URL,
           supported_endpoint_types: [...endpointTypes].sort(),
+        },
+        limits: {
+          status: "unpublished",
+          scope: "account",
+          source_url: TOKENROUTER_PRICING_URL,
+          tiers: [],
         },
       })),
     );
@@ -171,10 +186,19 @@ describe("Groq discovery", () => {
       {
         model_id: "alpha/model",
         connection: { base_url: GROQ_API_BASE_URL },
+        limits: groqOfferLimits({ rpm: "30", rpd: "1,000", tpm: "6,000", tpd: "500,000" }),
       },
       {
         model_id: "beta/model",
         connection: { base_url: GROQ_API_BASE_URL },
+        limits: groqOfferLimits({
+          rpm: "10",
+          rpd: "100",
+          tpm: "2,000",
+          tpd: "20,000",
+          ash: "5",
+          asd: "20",
+        }),
       },
     ]);
   });
@@ -202,6 +226,12 @@ describe("Mistral discovery", () => {
       {
         model_id: "mistral-small",
         connection: { base_url: MISTRAL_API_BASE_URL },
+        limits: {
+          status: "account_specific",
+          scope: "organization",
+          source_url: MISTRAL_RATE_LIMITS_URL,
+          tiers: [],
+        },
       },
     ]);
   });
@@ -225,6 +255,12 @@ describe("Gemini API discovery", () => {
       {
         model_id: "gemini-free",
         connection: { base_url: GEMINI_API_BASE_URL },
+        limits: {
+          status: "account_specific",
+          scope: "project",
+          source_url: GEMINI_RATE_LIMITS_URL,
+          tiers: [],
+        },
       },
     ]);
   });
@@ -234,6 +270,11 @@ describe("NVIDIA Build discovery", () => {
   test("keeps only catalogue resources explicitly labeled Free Endpoint", async () => {
     const provider = new NvidiaProvider({
       fetch: async (url) => {
+        if (url === NVIDIA_LIMITS_URL) {
+          return new Response(
+            '"rateLimits":{"requestsPerMinute":"Up to 40 rpm","requestsPerDay":"10,000 requests per day"}',
+          );
+        }
         expect(url).toBe(nvidiaModelsUrl(0));
         return Response.json({
           resultPageTotal: 1,
@@ -255,6 +296,9 @@ describe("NVIDIA Build discovery", () => {
       {
         model_id: "nvidia/free",
         connection: { base_url: NVIDIA_API_BASE_URL },
+        limits: parseNvidiaLimits(
+          '"rateLimits":{"requestsPerMinute":"Up to 40 rpm","requestsPerDay":"10,000 requests per day"}',
+        ),
       },
     ]);
   });
@@ -284,6 +328,7 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
       {
         model_id: "@cf/free/model",
         connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
+        limits: cloudflareOfferLimits("12,345 Neurons per day"),
       },
     ]);
   });

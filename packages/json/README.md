@@ -25,6 +25,39 @@ Mistral discovery is account-scoped: set `MISTRAL_FREE_API_KEY` to an API key fo
 Free mode before running this command. Mistral keys inherit their organization's plan, so do not use
 a key from a paid organization for catalogue discovery.
 
+### Offer limits
+
+Schema version 3 requires every offer to include a `limits` object:
+
+```json
+{
+  "status": "published",
+  "scope": "account",
+  "source_url": "https://provider.example/limits",
+  "tiers": [
+    {
+      "name": "free",
+      "quotas": [
+        {
+          "metric": "requests",
+          "period": "minute",
+          "max": 20,
+          "qualifier": "exact"
+        }
+      ]
+    }
+  ]
+}
+```
+
+`status` distinguishes public numerical limits (`published`) from values that require the user's
+authenticated account (`account_specific`) and values the provider does not publish
+(`unpublished`). Non-published states have an empty `tiers` array; they do not mean unlimited.
+`scope` identifies the shared quota boundary, so consumers must not multiply account, organization,
+or project limits by the number of offers. A tier can include structured `eligibility`, as used for
+OpenRouter's lifetime-credit threshold. `qualifier` distinguishes exact maxima from documented
+upper bounds such as NVIDIA's “up to 40 RPM.”
+
 ## 2. Reconcile
 
 Reconcile maps provider model IDs to reviewed canonical model IDs. It records each recognized offer

@@ -1,4 +1,5 @@
-import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import type { DiscoveredOffer, JsonValue, OfferLimits } from "../catalogue/schema.ts";
+import { parseCompactInteger } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -40,11 +41,43 @@ export class GroqProvider implements ModelProvider {
     const offers = await parseGroqFreePlan(html);
     return offers
       .filter(({ modelId }) => !modelId.startsWith(GROQ_ROUTER_PREFIX))
-      .map(({ modelId }) => ({
+      .map(({ modelId, rateLimits }) => ({
         model_id: modelId,
         connection: { base_url: GROQ_API_BASE_URL },
+        limits: groqOfferLimits(rateLimits),
       }));
   }
+}
+
+export function groqOfferLimits(rateLimits: Readonly<Record<string, JsonValue>>): OfferLimits {
+  const definitions = {
+    rpm: { metric: "requests", period: "minute" },
+    rpd: { metric: "requests", period: "day" },
+    tpm: { metric: "tokens", period: "minute" },
+    tpd: { metric: "tokens", period: "day" },
+    ash: { metric: "audio_seconds", period: "hour" },
+    asd: { metric: "audio_seconds", period: "day" },
+  } as const;
+  const quotas: OfferLimits["tiers"][number]["quotas"] = [];
+  for (const [key, definition] of Object.entries(definitions)) {
+    const value = rateLimits[key];
+    if (typeof value === "string") {
+      quotas.push({
+        ...definition,
+        max: parseCompactInteger(value, `Groq ${key.toUpperCase()}`),
+        qualifier: "exact",
+      });
+    }
+  }
+  if (quotas.length === 0) {
+    throw new Error("Groq Free Plan model has no published quota values");
+  }
+  return {
+    status: "published",
+    scope: "organization",
+    source_url: GROQ_RATE_LIMITS_URL,
+    tiers: [{ name: "free", quotas }],
+  };
 }
 
 export async function parseGroqFreePlan(

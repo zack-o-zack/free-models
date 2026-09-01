@@ -1,9 +1,11 @@
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import { unavailableLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
 export const MISTRAL_API_BASE_URL = "https://api.mistral.ai/v1";
 export const MISTRAL_MODELS_URL = `${MISTRAL_API_BASE_URL}/models`;
+export const MISTRAL_RATE_LIMITS_URL = "https://docs.mistral.ai/admin/billing-usage/usage-limits";
 
 export interface MistralProviderOptions {
   readonly fetch?: FetchSource;
@@ -36,6 +38,7 @@ export class MistralProvider implements ModelProvider {
     return parseMistralModels(payload).map((model) => ({
       model_id: model.id as string,
       connection: { base_url: MISTRAL_API_BASE_URL },
+      limits: unavailableLimits("account_specific", "organization", MISTRAL_RATE_LIMITS_URL),
     }));
   }
 }

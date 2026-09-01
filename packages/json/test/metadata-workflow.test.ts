@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import { fixtureLimits } from "./support/limits.ts";
 
 const fixtureCliPath = resolve(import.meta.dir, "support/fixture-cli.ts");
 const decoder = new TextDecoder();
@@ -10,12 +11,14 @@ const fixtureAOffers = [
   {
     model_id: "alpha/free",
     connection: { base_url: "https://a.example.test/v1" },
+    limits: fixtureLimits,
   },
 ];
 const fixtureZOffers = [
   {
     model_id: "zeta/beta-free",
     connection: { base_url: "https://z.example.test/v1" },
+    limits: fixtureLimits,
   },
 ];
 
@@ -71,7 +74,7 @@ async function withWorkspace(run: (workspace: string) => Promise<void>): Promise
       ],
     });
     await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
-    await writeJson(join(workspace, "free-models.json"), { schema_version: 2, models: [] });
+    await writeJson(join(workspace, "free-models.json"), { schema_version: 3, models: [] });
     await writeJson(join(workspace, "provider-fixtures/fixture-a.json"), {
       offers: fixtureAOffers,
     });
@@ -98,7 +101,7 @@ async function reviewOffers(workspace: string): Promise<void> {
 }
 
 describe("canonical metadata refresh", () => {
-  test("enriches active models in one batch and publishes protected schema v2 fields", async () => {
+  test("enriches active models in one batch and publishes protected schema v3 fields", async () => {
     await withWorkspace(async (workspace) => {
       await reviewOffers(workspace);
       await writeJson(join(workspace, "metadata-fixture.json"), {
@@ -162,7 +165,7 @@ describe("canonical metadata refresh", () => {
       expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
       expect(runFixtureCli(workspace, "check").exitCode).toBe(0);
       const publicCatalogue = await Bun.file(join(workspace, "free-models.json")).json();
-      expect(publicCatalogue.schema_version).toBe(2);
+      expect(publicCatalogue.schema_version).toBe(3);
       expect(publicCatalogue.models[0]).toMatchObject({
         id: "acme/alpha",
         name: "Alpha",

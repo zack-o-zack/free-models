@@ -5,66 +5,462 @@
       "model_id": "canopylabs/orpheus-arabic-saudi",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 10,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 100,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 1200,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 3600,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "canopylabs/orpheus-v1-english",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 10,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 100,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 1200,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 3600,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "meta-llama/llama-prompt-guard-2-22m",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 30,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 14400,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 15000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 500000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "meta-llama/llama-prompt-guard-2-86m",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 30,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 14400,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 15000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 500000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "openai/gpt-oss-120b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 30,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 8000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 200000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "openai/gpt-oss-20b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 30,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 8000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 200000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "openai/gpt-oss-safeguard-20b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 30,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 8000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 200000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "qwen/qwen3.6-27b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 30,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 8000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 200000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "qwen/qwen3.8-27b",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 30,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "minute",
+                "max": 8000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "tokens",
+                "period": "day",
+                "max": 200000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "whisper-large-v3",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 2000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "audio_seconds",
+                "period": "hour",
+                "max": 7200,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "audio_seconds",
+                "period": "day",
+                "max": 28800,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "whisper-large-v3-turbo",
       "connection": {
         "base_url": "https://api.groq.com/openai/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "organization",
+        "source_url": "https://console.groq.com/docs/rate-limits",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 2000,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "audio_seconds",
+                "period": "hour",
+                "max": 7200,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "audio_seconds",
+                "period": "day",
+                "max": 28800,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     }
   ]

@@ -6,6 +6,12 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+      },
+      "limits": {
+        "status": "unpublished",
+        "scope": "account",
+        "source_url": "https://opencode.ai/docs/zen/",
+        "tiers": []
       }
     },
     {
@@ -13,6 +19,12 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+      },
+      "limits": {
+        "status": "unpublished",
+        "scope": "account",
+        "source_url": "https://opencode.ai/docs/zen/",
+        "tiers": []
       }
     },
     {
@@ -20,6 +32,12 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+      },
+      "limits": {
+        "status": "unpublished",
+        "scope": "account",
+        "source_url": "https://opencode.ai/docs/zen/",
+        "tiers": []
       }
     },
     {
@@ -27,6 +45,12 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai",
         "endpoint": "https://opencode.ai/zen/v1/responses"
+      },
+      "limits": {
+        "status": "unpublished",
+        "scope": "account",
+        "source_url": "https://opencode.ai/docs/zen/",
+        "tiers": []
       }
     },
     {
@@ -34,6 +58,12 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+      },
+      "limits": {
+        "status": "unpublished",
+        "scope": "account",
+        "source_url": "https://opencode.ai/docs/zen/",
+        "tiers": []
       }
     },
     {
@@ -41,6 +71,12 @@
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+      },
+      "limits": {
+        "status": "unpublished",
+        "scope": "account",
+        "source_url": "https://opencode.ai/docs/zen/",
+        "tiers": []
       }
     }
   ]

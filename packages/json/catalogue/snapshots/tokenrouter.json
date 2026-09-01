@@ -8,6 +8,12 @@
         "supported_endpoint_types": [
           "openai"
         ]
+      },
+      "limits": {
+        "status": "unpublished",
+        "scope": "account",
+        "source_url": "https://api.tokenrouter.com/api/pricing",
+        "tiers": []
       }
     }
   ]

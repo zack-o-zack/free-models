@@ -5,348 +5,1392 @@
       "model_id": "@cf/ai4bharat/indictrans2-en-indic-1B",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/aisingapore/gemma-sea-lion-v4-27b-it",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/baai/bge-base-en-v1.5",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/baai/bge-large-en-v1.5",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/baai/bge-m3",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/baai/bge-reranker-base",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/baai/bge-small-en-v1.5",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/black-forest-labs/flux-1-schnell",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/black-forest-labs/flux-2-dev",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/black-forest-labs/flux-2-klein-4b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/black-forest-labs/flux-2-klein-9b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/deepgram/aura-1",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/deepgram/aura-2-en",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/deepgram/aura-2-es",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/deepgram/flux (WebSocket)",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/deepgram/nova-3",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/deepgram/nova-3 (WebSocket)",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/google/gemma-3-12b-it",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/google/gemma-4-26b-a4b-it",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/huggingface/distilbert-sst-2-int8",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/ibm-granite/granite-4.0-h-micro",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/leonardo/lucid-origin",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/leonardo/phoenix-1.0",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-2-7b-chat-fp16",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3-8b-instruct",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3-8b-instruct-awq",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.1-70b-instruct-fp8-fast",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.1-8b-instruct",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.1-8b-instruct-awq",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.1-8b-instruct-fp8",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.1-8b-instruct-fp8-fast",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.2-11b-vision-instruct",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.2-1b-instruct",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.2-3b-instruct",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-4-scout-17b-16e-instruct",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/llama-guard-3-8b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/meta/m2m100-1.2b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/microsoft/resnet-50",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/mistral/mistral-7b-instruct-v0.1",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/mistralai/mistral-small-3.1-24b-instruct",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/moondream/moondream3.1-9B-A2B",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/moonshotai/kimi-k2.5",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/myshell-ai/melotts",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/nvidia/nemotron-3-120b-a12b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/openai/gpt-oss-120b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/openai/gpt-oss-20b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/openai/whisper",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/openai/whisper-large-v3-turbo",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/pfnet/plamo-embedding-1b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/pipecat-ai/smart-turn-v2",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/qwen/qwen2.5-coder-32b-instruct",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/qwen/qwen3-30b-a3b-fp8",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/qwen/qwen3-embedding-0.6b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/qwen/qwen3.8-27b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/qwen/qwq-32b",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "@cf/zai-org/glm-4.7-flash",
       "connection": {
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+        "tiers": [
+          {
+            "name": "free",
+            "quotas": [
+              {
+                "metric": "neurons",
+                "period": "day",
+                "max": 10000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     }
   ]

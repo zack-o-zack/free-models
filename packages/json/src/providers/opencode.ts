@@ -1,4 +1,5 @@
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import { unavailableLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENCODE_ZEN_DOCUMENTATION_URL = "https://opencode.ai/docs/zen/";
@@ -84,6 +85,7 @@ export class OpenCodeProvider implements ModelProvider {
           ai_sdk_package: documentedOffer.aiSdkPackage,
           endpoint: documentedOffer.endpoint,
         },
+        limits: unavailableLimits("unpublished", "account", OPENCODE_ZEN_DOCUMENTATION_URL),
       };
     });
   }

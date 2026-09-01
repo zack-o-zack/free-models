@@ -5,324 +5,648 @@
       "model_id": "codestral-2508",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "codestral-embed",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "codestral-embed-2505",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "codestral-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "devstral-2512",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "devstral-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "devstral-medium-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "labs-leanstral-1-5",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "labs-leanstral-1-5-1",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "magistral-medium-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "magistral-small-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "ministral-14b-2512",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "ministral-14b-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "ministral-3b-2512",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "ministral-3b-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "ministral-8b-2512",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "ministral-8b-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-code-agent-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-code-fim-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-code-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-embed",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-embed-2312",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-large-2512",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-large-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-medium",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-medium-2505",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-medium-2508",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-medium-2604",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-medium-3",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-medium-3-5",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-medium-3.5",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-medium-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-moderation-2603",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-ocr-2512",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-ocr-3",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-ocr-3-0",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-ocr-4",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-ocr-4-0",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-ocr-4-1",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-ocr-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-small-2603",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-small-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-vibe-cli-fast",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-vibe-cli-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "mistral-vibe-cli-with-tools",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-mini-2602",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-mini-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-mini-realtime-2602",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-mini-realtime-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-mini-transcribe-realtime-2602",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-mini-tts-2603",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-mini-tts-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-small-2507",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     },
     {
       "model_id": "voxtral-small-latest",
       "connection": {
         "base_url": "https://api.mistral.ai/v1"
+      },
+      "limits": {
+        "status": "account_specific",
+        "scope": "organization",
+        "source_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+        "tiers": []
       }
     }
   ]

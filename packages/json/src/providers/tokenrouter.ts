@@ -1,4 +1,5 @@
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import { unavailableLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -60,6 +61,7 @@ export class TokenRouterProvider implements ModelProvider {
         base_url: TOKENROUTER_API_BASE_URL,
         supported_endpoint_types: supportedEndpointTypes,
       },
+      limits: unavailableLimits("unpublished", "account", TOKENROUTER_PRICING_URL),
     }));
   }
 }

@@ -1,4 +1,5 @@
-import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import type { DiscoveredOffer, JsonValue, OfferLimits } from "../catalogue/schema.ts";
+import { parseCompactInteger } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -38,12 +39,38 @@ export class CloudflareProvider implements ModelProvider {
       "Cloudflare Workers AI pricing",
       { headers: { Accept: "text/markdown,text/plain" } },
     );
-    const { models } = parseCloudflarePricing(markdown);
+    const { freeAllocation, models } = parseCloudflarePricing(markdown);
     return models.map(({ modelId }) => ({
       model_id: modelId,
       connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
+      limits: cloudflareOfferLimits(freeAllocation),
     }));
   }
+}
+
+export function cloudflareOfferLimits(freeAllocation: string): OfferLimits {
+  const amount = freeAllocation.match(/^([\d,]+) Neurons per day$/)?.[1];
+  if (!amount) {
+    throw new Error("Cloudflare Workers AI has an invalid free allocation");
+  }
+  return {
+    status: "published",
+    scope: "account",
+    source_url: CLOUDFLARE_WORKERS_AI_PRICING_URL,
+    tiers: [
+      {
+        name: "free",
+        quotas: [
+          {
+            metric: "neurons",
+            period: "day",
+            max: parseCompactInteger(amount, "Cloudflare daily Neurons"),
+            qualifier: "exact",
+          },
+        ],
+      },
+    ],
+  };
 }
 
 export function parseCloudflarePricing(markdown: string): CloudflarePricing {

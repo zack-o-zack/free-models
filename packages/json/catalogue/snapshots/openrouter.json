@@ -5,144 +5,1368 @@
       "model_id": "cohere/north-mini-code:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "deepgram/flux-tts:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "dots-studio/dots-3-note-preview:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "fish-audio/s2.1-pro-free:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "google/gemma-4-26b-a4b-it:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "google/gemma-4-31b-it:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "inclusionai/ling-3.0-flash-fin:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "liquid/lfm-2.5-2.6b:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "liquid/lfm-2.5-embedding-350m:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "minimax/minimax-m2.7:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "minimax/minimax-m3:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "nvidia/llama-nemotron-rerank-vl-1b-v2:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "nvidia/nemotron-3-embed-1b:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "nvidia/nemotron-3-ultra-550b-a55b:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "nvidia/nemotron-3.5-content-safety:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "nvidia/nemotron-3.5-lightning:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "poolside/laguna-s-2.1:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "poolside/laguna-xs-2.1:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "thinkingmachines/inkling-small:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "thinkingmachines/inkling:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     },
     {
       "model_id": "z-ai/glm-5.2:free",
       "connection": {
         "base_url": "https://openrouter.ai/api/v1"
+      },
+      "limits": {
+        "status": "published",
+        "scope": "account",
+        "source_url": "https://openrouter.ai/docs/api/reference/limits",
+        "tiers": [
+          {
+            "name": "credits-under-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "lt",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 50,
+                "qualifier": "exact"
+              }
+            ]
+          },
+          {
+            "name": "credits-at-or-above-threshold",
+            "eligibility": {
+              "metric": "lifetime_credits_purchased_usd",
+              "operator": "gte",
+              "value": 10
+            },
+            "quotas": [
+              {
+                "metric": "requests",
+                "period": "minute",
+                "max": 20,
+                "qualifier": "exact"
+              },
+              {
+                "metric": "requests",
+                "period": "day",
+                "max": 1000,
+                "qualifier": "exact"
+              }
+            ]
+          }
+        ]
       }
     }
   ]

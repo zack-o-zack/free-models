@@ -1,4 +1,9 @@
-import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import {
+  type DiscoveredOffer,
+  type JsonValue,
+  jsonObjectSchema,
+  type OfferLimits,
+} from "../catalogue/schema.ts";
 import type {
   ActiveCanonicalModel,
   CanonicalMetadata,
@@ -8,6 +13,7 @@ import type { ModelProvider } from "./provider.ts";
 
 export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
 export const OPENROUTER_MODELS_URL = `${OPENROUTER_API_BASE_URL}/models?output_modalities=all`;
+export const OPENROUTER_LIMITS_URL = "https://openrouter.ai/docs/api/reference/limits";
 
 const OPENROUTER_FREE_SUFFIX = ":free";
 // The openrouter/ namespace holds routing endpoints (auto, fusion, free, ...) that stand in
@@ -18,6 +24,7 @@ interface HttpResponse {
   readonly ok: boolean;
   readonly status: number;
   json(): Promise<unknown>;
+  text?(): Promise<string>;
 }
 
 type FetchModels = (url: string, init?: RequestInit) => Promise<HttpResponse>;
@@ -36,7 +43,7 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
   }
 
   async discover(): Promise<readonly DiscoveredOffer[]> {
-    const models = await this.#loadModels();
+    const [models, limits] = await Promise.all([this.#loadModels(), this.#loadLimits()]);
     const offers: DiscoveredOffer[] = [];
 
     for (const model of models) {
@@ -51,10 +58,35 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
       offers.push({
         model_id: modelId,
         connection: { base_url: OPENROUTER_API_BASE_URL },
+        limits,
       });
     }
 
     return offers;
+  }
+
+  async #loadLimits(): Promise<OfferLimits> {
+    let response: HttpResponse;
+    try {
+      response = await this.#fetch(OPENROUTER_LIMITS_URL, {
+        headers: { Accept: "text/html,application/xhtml+xml" },
+      });
+    } catch (error) {
+      throw new Error("OpenRouter limits request failed", { cause: error });
+    }
+    if (!response.ok) {
+      throw new Error(`OpenRouter limits request failed with HTTP status ${response.status}`);
+    }
+    if (typeof response.text !== "function") {
+      throw new Error("OpenRouter limits response cannot be read as text");
+    }
+    let html: string;
+    try {
+      html = await response.text();
+    } catch (error) {
+      throw new Error("OpenRouter limits response could not be read", { cause: error });
+    }
+    return parseOpenRouterLimits(html);
   }
 
   async enrich(
@@ -138,6 +170,71 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
       throw new Error("OpenRouter models response is not valid JSON", { cause: error });
     }
   }
+}
+
+export function parseOpenRouterLimits(html: string): OfferLimits {
+  const constants = {
+    rpm: readIntegerConstant(html, "FREE_MODEL_RATE_LIMIT_RPM"),
+    noCreditsRpd: readIntegerConstant(html, "FREE_MODEL_NO_CREDITS_RPD"),
+    hasCreditsRpd: readIntegerConstant(html, "FREE_MODEL_HAS_CREDITS_RPD"),
+    creditsThreshold: readIntegerConstant(html, "FREE_MODEL_CREDITS_THRESHOLD"),
+  };
+  const sharedRpm = {
+    metric: "requests",
+    period: "minute",
+    max: constants.rpm,
+    qualifier: "exact",
+  } as const;
+  return {
+    status: "published",
+    scope: "account",
+    source_url: OPENROUTER_LIMITS_URL,
+    tiers: [
+      {
+        name: "credits-under-threshold",
+        eligibility: {
+          metric: "lifetime_credits_purchased_usd",
+          operator: "lt",
+          value: constants.creditsThreshold,
+        },
+        quotas: [
+          sharedRpm,
+          {
+            metric: "requests",
+            period: "day",
+            max: constants.noCreditsRpd,
+            qualifier: "exact",
+          },
+        ],
+      },
+      {
+        name: "credits-at-or-above-threshold",
+        eligibility: {
+          metric: "lifetime_credits_purchased_usd",
+          operator: "gte",
+          value: constants.creditsThreshold,
+        },
+        quotas: [
+          sharedRpm,
+          {
+            metric: "requests",
+            period: "day",
+            max: constants.hasCreditsRpd,
+            qualifier: "exact",
+          },
+        ],
+      },
+    ],
+  };
+}
+
+function readIntegerConstant(source: string, name: string): number {
+  const match = new RegExp(`(?:const|let|var)\\s+${name}\\s*=\\s*(\\d+(?:e\\d+)?)`).exec(source);
+  const value = match?.[1] ? Number(match[1]) : Number.NaN;
+  if (!Number.isSafeInteger(value) || value <= 0) {
+    throw new Error(`OpenRouter limits page has no valid ${name} constant`);
+  }
+  return value;
 }
 
 function withoutId(model: Record<string, JsonValue>): Record<string, JsonValue> {

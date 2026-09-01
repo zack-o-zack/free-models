@@ -37,6 +37,7 @@ function buildCatalogue(state: CatalogueState): Catalogue {
     offers.push({
       model_id: offer.model_id,
       connection: sortJsonObject(offer.connection),
+      limits: offer.limits,
     });
     providerOffers.set(provider, offers);
     groupedOffers.set(canonicalId, providerOffers);
@@ -67,5 +68,5 @@ function buildCatalogue(state: CatalogueState): Catalogue {
       };
     });
 
-  return { schema_version: CATALOGUE_SCHEMA_VERSION, models };
+  return catalogueSchema.parse({ schema_version: CATALOGUE_SCHEMA_VERSION, models });
 }
