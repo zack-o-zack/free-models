@@ -6,6 +6,7 @@ each package under `packages/` owns its sources, tests, and data.
 
 ## Layout
 
+- `apps/web` — the Next.js model catalogue UI, built with the App Router and shadcn/ui.
 - `packages/json` — the catalogue application. Provider adapters discover free offers, maintainers
   review canonical identities, and the package renders the public `free-models.json` artefact. See
   [`packages/json/README.md`](packages/json/README.md) for the catalogue workflow.
@@ -30,6 +31,8 @@ Package scripts run from the root through Bun's `--filter`:
 
 ```sh
 bun run --filter json catalogue:discover
+bun run --filter web dev
+bun run --filter web build
 ```
 
 The catalogue scripts are also aliased at the root (`bun run catalogue:discover`,
