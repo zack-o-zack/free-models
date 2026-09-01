@@ -7,54 +7,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -64,54 +20,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -121,54 +33,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -178,54 +46,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -235,54 +59,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -292,54 +72,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -349,54 +85,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -406,54 +98,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -463,54 +111,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -520,54 +124,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -577,54 +137,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -634,54 +150,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -691,54 +163,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -748,54 +176,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -805,54 +189,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -862,54 +202,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -919,54 +215,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -976,54 +228,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -1033,54 +241,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -1090,54 +254,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -1147,54 +267,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -1204,54 +280,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -1261,54 +293,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     },
@@ -1318,54 +306,10 @@
         "base_url": "https://openrouter.ai/api/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://openrouter.ai/docs/api/reference/limits",
-        "tiers": [
-          {
-            "name": "credits-under-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "lt",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 50,
-                "qualifier": "exact"
-              }
-            ]
-          },
-          {
-            "name": "credits-at-or-above-threshold",
-            "eligibility": {
-              "metric": "lifetime_credits_purchased_usd",
-              "operator": "gte",
-              "value": 10
-            },
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
         ]
       }
     }

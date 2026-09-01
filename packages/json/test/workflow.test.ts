@@ -55,7 +55,7 @@ async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "free-models-workflow-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
-  await writeJson(join(workspace, "free-models.json"), { schema_version: 3, models: [] });
+  await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
   await writeProviderFixtures(workspace);
   return workspace;
 }
@@ -129,7 +129,7 @@ describe("manual identity workflow", () => {
       expect(runFixtureCli(workspace, "check").exitCode).toBe(0);
 
       expect(JSON.parse(firstRender)).toEqual({
-        schema_version: 3,
+        schema_version: 4,
         models: [
           {
             id: "acme/alpha",
@@ -178,7 +178,7 @@ describe("manual identity workflow", () => {
         ],
       });
 
-      await writeJson(join(workspace, "free-models.json"), { schema_version: 3, models: [] });
+      await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
       const staleCheck = runFixtureCli(workspace, "check");
       expect(staleCheck.exitCode).toBe(1);
       expect(decoder.decode(staleCheck.stderr)).toContain("Public catalogue is stale");

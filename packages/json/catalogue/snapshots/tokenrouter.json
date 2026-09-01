@@ -10,10 +10,9 @@
         ]
       },
       "limits": {
-        "status": "unpublished",
-        "scope": "account",
-        "source_url": "https://api.tokenrouter.com/api/pricing",
-        "tiers": []
+        "terms": [
+          "8 req / min"
+        ]
       }
     }
   ]

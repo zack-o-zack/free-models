@@ -40,7 +40,7 @@ async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "openrouter-catalogue-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
-  await writeJson(join(workspace, "free-models.json"), { schema_version: 3, models: [] });
+  await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
   return workspace;
 }
 

@@ -2,14 +2,9 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { OPENCODE_ZEN_DOCUMENTATION_URL } from "../src/providers/opencode.ts";
+import { openCodePublishedLimits } from "../src/providers/limits.ts";
 
-const openCodeLimits = {
-  status: "unpublished",
-  scope: "account",
-  source_url: OPENCODE_ZEN_DOCUMENTATION_URL,
-  tiers: [],
-} as const;
+const openCodeLimits = openCodePublishedLimits();
 
 const fixtureCliPath = resolve(import.meta.dir, "support/opencode-fixture-cli.ts");
 const validDocumentationPath = resolve(import.meta.dir, "fixtures/opencode/zen.html");
@@ -43,7 +38,7 @@ async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "opencode-catalogue-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
-  await writeJson(join(workspace, "free-models.json"), { schema_version: 3, models: [] });
+  await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
   return workspace;
 }
 

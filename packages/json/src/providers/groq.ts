@@ -1,5 +1,5 @@
 import type { DiscoveredOffer, JsonValue, OfferLimits } from "../catalogue/schema.ts";
-import { parseCompactInteger } from "./limits.ts";
+import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -51,33 +51,30 @@ export class GroqProvider implements ModelProvider {
 
 export function groqOfferLimits(rateLimits: Readonly<Record<string, JsonValue>>): OfferLimits {
   const definitions = {
-    rpm: { metric: "requests", period: "minute" },
-    rpd: { metric: "requests", period: "day" },
-    tpm: { metric: "tokens", period: "minute" },
-    tpd: { metric: "tokens", period: "day" },
-    ash: { metric: "audio_seconds", period: "hour" },
-    asd: { metric: "audio_seconds", period: "day" },
+    rpm: { unit: "req", period: "min" },
+    rpd: { unit: "req", period: "day" },
+    tpm: { unit: "tok", period: "min" },
+    tpd: { unit: "tok", period: "day" },
+    ash: { unit: "audio sec", period: "hour" },
+    asd: { unit: "audio sec", period: "day" },
   } as const;
-  const quotas: OfferLimits["tiers"][number]["quotas"] = [];
+  const terms: string[] = [];
   for (const [key, definition] of Object.entries(definitions)) {
     const value = rateLimits[key];
     if (typeof value === "string") {
-      quotas.push({
-        ...definition,
-        max: parseCompactInteger(value, `Groq ${key.toUpperCase()}`),
-        qualifier: "exact",
-      });
+      terms.push(
+        formatLimitTerm(
+          parseCompactInteger(value, `Groq ${key.toUpperCase()}`),
+          definition.unit,
+          definition.period,
+        ),
+      );
     }
   }
-  if (quotas.length === 0) {
+  if (terms.length === 0) {
     throw new Error("Groq Free Plan model has no published quota values");
   }
-  return {
-    status: "published",
-    scope: "organization",
-    source_url: GROQ_RATE_LIMITS_URL,
-    tiers: [{ name: "free", quotas }],
-  };
+  return termsLimits(...terms);
 }
 
 export async function parseGroqFreePlan(

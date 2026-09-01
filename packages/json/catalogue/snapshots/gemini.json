@@ -7,10 +7,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -19,10 +20,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -31,10 +33,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -43,10 +46,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -55,10 +59,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -67,10 +72,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -79,10 +85,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -91,10 +98,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -103,10 +111,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -115,10 +124,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -127,10 +137,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -139,10 +150,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -151,10 +163,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -163,10 +176,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -175,10 +189,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -187,10 +202,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -199,10 +215,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -211,10 +228,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -223,10 +241,11 @@
         "base_url": "https://generativelanguage.googleapis.com/v1beta"
       },
       "limits": {
-        "status": "account_specific",
-        "scope": "project",
-        "source_url": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en",
-        "tiers": []
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     }
   ]

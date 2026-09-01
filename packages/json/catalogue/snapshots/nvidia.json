@@ -7,27 +7,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -37,27 +19,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -67,27 +31,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -97,27 +43,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -127,27 +55,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -157,27 +67,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -187,27 +79,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -217,27 +91,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -247,27 +103,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -277,27 +115,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -307,27 +127,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -337,27 +139,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -367,27 +151,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -397,27 +163,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -427,27 +175,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -457,27 +187,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -487,27 +199,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -517,27 +211,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -547,27 +223,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -577,27 +235,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -607,27 +247,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -637,27 +259,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -667,27 +271,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -697,27 +283,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -727,27 +295,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -757,27 +307,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -787,27 +319,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -817,27 +331,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -847,27 +343,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -877,27 +355,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -907,27 +367,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -937,27 +379,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -967,27 +391,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -997,27 +403,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -1027,27 +415,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -1057,27 +427,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -1087,27 +439,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -1117,27 +451,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -1147,27 +463,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     },
@@ -1177,27 +475,9 @@
         "base_url": "https://integrate.api.nvidia.com/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "account",
-        "source_url": "https://build.nvidia.com/",
-        "tiers": [
-          {
-            "name": "hosted-api",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 40,
-                "qualifier": "up_to"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 10000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "40 req / min",
+          "10k req / day"
         ]
       }
     }

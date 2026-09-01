@@ -1,5 +1,5 @@
 import type { DiscoveredOffer, JsonValue, OfferLimits } from "../catalogue/schema.ts";
-import { parseCompactInteger } from "./limits.ts";
+import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -53,24 +53,9 @@ export function cloudflareOfferLimits(freeAllocation: string): OfferLimits {
   if (!amount) {
     throw new Error("Cloudflare Workers AI has an invalid free allocation");
   }
-  return {
-    status: "published",
-    scope: "account",
-    source_url: CLOUDFLARE_WORKERS_AI_PRICING_URL,
-    tiers: [
-      {
-        name: "free",
-        quotas: [
-          {
-            metric: "neurons",
-            period: "day",
-            max: parseCompactInteger(amount, "Cloudflare daily Neurons"),
-            qualifier: "exact",
-          },
-        ],
-      },
-    ],
-  };
+  return termsLimits(
+    formatLimitTerm(parseCompactInteger(amount, "Cloudflare daily Neurons"), "neurons", "day"),
+  );
 }
 
 export function parseCloudflarePricing(markdown: string): CloudflarePricing {

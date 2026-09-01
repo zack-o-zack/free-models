@@ -7,39 +7,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 10,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 100,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 1200,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 3600,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "10 req / min",
+          "100 req / day",
+          "1.2k tok / min",
+          "3.6k tok / day"
         ]
       }
     },
@@ -49,39 +21,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 10,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 100,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 1200,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 3600,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "10 req / min",
+          "100 req / day",
+          "1.2k tok / min",
+          "3.6k tok / day"
         ]
       }
     },
@@ -91,39 +35,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 30,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 14400,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 15000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 500000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "30 req / min",
+          "14.4k req / day",
+          "15k tok / min",
+          "500k tok / day"
         ]
       }
     },
@@ -133,39 +49,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 30,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 14400,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 15000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 500000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "30 req / min",
+          "14.4k req / day",
+          "15k tok / min",
+          "500k tok / day"
         ]
       }
     },
@@ -175,39 +63,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 30,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 8000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 200000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
         ]
       }
     },
@@ -217,39 +77,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 30,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 8000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 200000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
         ]
       }
     },
@@ -259,39 +91,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 30,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 8000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 200000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
         ]
       }
     },
@@ -301,39 +105,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 30,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 8000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 200000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
         ]
       }
     },
@@ -343,39 +119,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 30,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 1000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "minute",
-                "max": 8000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "tokens",
-                "period": "day",
-                "max": 200000,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
         ]
       }
     },
@@ -385,39 +133,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 2000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "audio_seconds",
-                "period": "hour",
-                "max": 7200,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "audio_seconds",
-                "period": "day",
-                "max": 28800,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "2k req / day",
+          "7.2k audio sec / hour",
+          "28.8k audio sec / day"
         ]
       }
     },
@@ -427,39 +147,11 @@
         "base_url": "https://api.groq.com/openai/v1"
       },
       "limits": {
-        "status": "published",
-        "scope": "organization",
-        "source_url": "https://console.groq.com/docs/rate-limits",
-        "tiers": [
-          {
-            "name": "free",
-            "quotas": [
-              {
-                "metric": "requests",
-                "period": "minute",
-                "max": 20,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "requests",
-                "period": "day",
-                "max": 2000,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "audio_seconds",
-                "period": "hour",
-                "max": 7200,
-                "qualifier": "exact"
-              },
-              {
-                "metric": "audio_seconds",
-                "period": "day",
-                "max": 28800,
-                "qualifier": "exact"
-              }
-            ]
-          }
+        "terms": [
+          "20 req / min",
+          "2k req / day",
+          "7.2k audio sec / hour",
+          "28.8k audio sec / day"
         ]
       }
     }

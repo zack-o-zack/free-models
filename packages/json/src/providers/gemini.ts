@@ -1,5 +1,5 @@
 import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
-import { unavailableLimits } from "./limits.ts";
+import { geminiUnconfirmedLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -39,7 +39,7 @@ export class GeminiProvider implements ModelProvider {
     return (await parseGeminiPricing(html)).map(({ modelId }) => ({
       model_id: modelId,
       connection: { base_url: GEMINI_API_BASE_URL },
-      limits: unavailableLimits("account_specific", "project", GEMINI_RATE_LIMITS_URL),
+      limits: geminiUnconfirmedLimits(modelId),
     }));
   }
 }

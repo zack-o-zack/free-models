@@ -9,6 +9,7 @@ import type {
   CanonicalMetadata,
   CanonicalMetadataProvider,
 } from "../metadata/provider.ts";
+import { formatLimitTerm, termsLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
@@ -179,53 +180,11 @@ export function parseOpenRouterLimits(html: string): OfferLimits {
     hasCreditsRpd: readIntegerConstant(html, "FREE_MODEL_HAS_CREDITS_RPD"),
     creditsThreshold: readIntegerConstant(html, "FREE_MODEL_CREDITS_THRESHOLD"),
   };
-  const sharedRpm = {
-    metric: "requests",
-    period: "minute",
-    max: constants.rpm,
-    qualifier: "exact",
-  } as const;
-  return {
-    status: "published",
-    scope: "account",
-    source_url: OPENROUTER_LIMITS_URL,
-    tiers: [
-      {
-        name: "credits-under-threshold",
-        eligibility: {
-          metric: "lifetime_credits_purchased_usd",
-          operator: "lt",
-          value: constants.creditsThreshold,
-        },
-        quotas: [
-          sharedRpm,
-          {
-            metric: "requests",
-            period: "day",
-            max: constants.noCreditsRpd,
-            qualifier: "exact",
-          },
-        ],
-      },
-      {
-        name: "credits-at-or-above-threshold",
-        eligibility: {
-          metric: "lifetime_credits_purchased_usd",
-          operator: "gte",
-          value: constants.creditsThreshold,
-        },
-        quotas: [
-          sharedRpm,
-          {
-            metric: "requests",
-            period: "day",
-            max: constants.hasCreditsRpd,
-            qualifier: "exact",
-          },
-        ],
-      },
-    ],
-  };
+  return termsLimits(
+    formatLimitTerm(constants.rpm, "req", "min"),
+    `${formatLimitTerm(constants.noCreditsRpd, "req", "day")} (< $${constants.creditsThreshold} credits)`,
+    `${formatLimitTerm(constants.hasCreditsRpd, "req", "day")} (>= $${constants.creditsThreshold} credits)`,
+  );
 }
 
 function readIntegerConstant(source: string, name: string): number {

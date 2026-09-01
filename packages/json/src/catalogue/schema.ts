@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const CATALOGUE_SCHEMA_VERSION = 3 as const;
+export const CATALOGUE_SCHEMA_VERSION = 4 as const;
 
 export type JsonValue =
   | boolean
@@ -29,55 +29,11 @@ export const canonicalModelIdSchema = z
     /^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\/[a-z0-9]+(?:[._-][a-z0-9]+)*|stealth:[a-z0-9]+(?:[._-][a-z0-9]+)*)$/,
   );
 
-export const quotaSchema = z
-  .object({
-    metric: z.enum(["requests", "tokens", "audio_seconds", "neurons"]),
-    period: z.enum(["minute", "hour", "day"]),
-    max: z.number().int().positive(),
-    qualifier: z.enum(["exact", "up_to"]),
-  })
-  .strict();
-
-export const limitEligibilitySchema = z
-  .object({
-    metric: z.enum(["lifetime_credits_purchased_usd"]),
-    operator: z.enum(["lt", "gte"]),
-    value: z.number().nonnegative(),
-  })
-  .strict();
-
-export const limitTierSchema = z
-  .object({
-    name: z.string().min(1),
-    eligibility: limitEligibilitySchema.optional(),
-    quotas: z.array(quotaSchema).min(1),
-  })
-  .strict();
-
 export const limitsSchema = z
   .object({
-    status: z.enum(["published", "account_specific", "unpublished"]),
-    scope: z.enum(["offer", "account", "organization", "project"]),
-    source_url: z.url(),
-    tiers: z.array(limitTierSchema),
+    terms: z.array(z.string().trim().min(1)).min(1),
   })
-  .strict()
-  .superRefine((limits, context) => {
-    if (limits.status === "published" && limits.tiers.length === 0) {
-      context.addIssue({
-        code: "custom",
-        message: "published limits must contain at least one tier",
-        path: ["tiers"],
-      });
-    }
-    if (limits.status !== "published" && limits.tiers.length > 0) {
-      context.addIssue({
-        code: "custom",
-        message: "non-published limits cannot contain quota tiers",
-        path: ["tiers"],
-      });
-    }
-  });
+  .strict();
 
 export const offerSchema = z
   .object({

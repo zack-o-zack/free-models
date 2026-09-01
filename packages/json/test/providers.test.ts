@@ -8,14 +8,18 @@ import {
 import {
   GEMINI_API_BASE_URL,
   GEMINI_PRICING_URL,
-  GEMINI_RATE_LIMITS_URL,
   GeminiProvider,
 } from "../src/providers/gemini.ts";
 import { GROQ_API_BASE_URL, GroqProvider, groqOfferLimits } from "../src/providers/groq.ts";
 import {
+  geminiUnconfirmedLimits,
+  mistralUnconfirmedLimits,
+  openCodePublishedLimits,
+  tokenRouterUnconfirmedLimits,
+} from "../src/providers/limits.ts";
+import {
   MISTRAL_API_BASE_URL,
   MISTRAL_MODELS_URL,
-  MISTRAL_RATE_LIMITS_URL,
   MistralProvider,
 } from "../src/providers/mistral.ts";
 import {
@@ -33,6 +37,30 @@ import {
   TOKENROUTER_PRICING_URL,
   TokenRouterProvider,
 } from "../src/providers/tokenrouter.ts";
+
+describe("compact provider limit terms", () => {
+  test("returns model-specific Gemini terms and a fallback", () => {
+    expect(geminiUnconfirmedLimits("gemini-3.5-flash-lite")).toEqual({
+      terms: ["15 req / min", "250k tok / min", "500 req / day"],
+    });
+    expect(geminiUnconfirmedLimits("gemini-3.5-flash")).toEqual({
+      terms: ["5 req / min", "250k tok / min", "20 req / day"],
+    });
+    expect(geminiUnconfirmedLimits("gemini-specialized")).toEqual({
+      terms: ["15 req / min", "250k tok / min", "500 req / day"],
+    });
+  });
+
+  test("returns hardcoded Mistral, TokenRouter, and OpenCode terms", () => {
+    expect(mistralUnconfirmedLimits()).toEqual({
+      terms: ["50 req / min", "50k tok / min"],
+    });
+    expect(tokenRouterUnconfirmedLimits()).toEqual({ terms: ["8 req / min"] });
+    expect(openCodePublishedLimits()).toEqual({
+      terms: ["200 req / day"],
+    });
+  });
+});
 
 describe("TokenRouter discovery", () => {
   test("keeps every endpoint type on active native free models", async () => {
@@ -91,12 +119,7 @@ describe("TokenRouter discovery", () => {
           base_url: TOKENROUTER_API_BASE_URL,
           supported_endpoint_types: [...endpointTypes].sort(),
         },
-        limits: {
-          status: "unpublished",
-          scope: "account",
-          source_url: TOKENROUTER_PRICING_URL,
-          tiers: [],
-        },
+        limits: tokenRouterUnconfirmedLimits(),
       })),
     );
   });
@@ -226,12 +249,7 @@ describe("Mistral discovery", () => {
       {
         model_id: "mistral-small",
         connection: { base_url: MISTRAL_API_BASE_URL },
-        limits: {
-          status: "account_specific",
-          scope: "organization",
-          source_url: MISTRAL_RATE_LIMITS_URL,
-          tiers: [],
-        },
+        limits: mistralUnconfirmedLimits(),
       },
     ]);
   });
@@ -255,12 +273,7 @@ describe("Gemini API discovery", () => {
       {
         model_id: "gemini-free",
         connection: { base_url: GEMINI_API_BASE_URL },
-        limits: {
-          status: "account_specific",
-          scope: "project",
-          source_url: GEMINI_RATE_LIMITS_URL,
-          tiers: [],
-        },
+        limits: geminiUnconfirmedLimits("gemini-free"),
       },
     ]);
   });

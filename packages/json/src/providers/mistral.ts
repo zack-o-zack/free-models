@@ -1,5 +1,5 @@
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
-import { unavailableLimits } from "./limits.ts";
+import { mistralUnconfirmedLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -35,11 +35,14 @@ export class MistralProvider implements ModelProvider {
         Authorization: `Bearer ${this.#apiKey}`,
       },
     });
-    return parseMistralModels(payload).map((model) => ({
-      model_id: model.id as string,
-      connection: { base_url: MISTRAL_API_BASE_URL },
-      limits: unavailableLimits("account_specific", "organization", MISTRAL_RATE_LIMITS_URL),
-    }));
+    return parseMistralModels(payload).map((model) => {
+      const modelId = model.id as string;
+      return {
+        model_id: modelId,
+        connection: { base_url: MISTRAL_API_BASE_URL },
+        limits: mistralUnconfirmedLimits(),
+      };
+    });
   }
 }
 

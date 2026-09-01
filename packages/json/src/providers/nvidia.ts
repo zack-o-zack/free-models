@@ -4,7 +4,7 @@ import {
   jsonObjectSchema,
   type OfferLimits,
 } from "../catalogue/schema.ts";
-import { parseCompactInteger } from "./limits.ts";
+import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson, fetchText } from "./source.ts";
 
@@ -90,30 +90,10 @@ export function parseNvidiaLimits(html: string): OfferLimits {
   if (!match?.[1] || !match[2]) {
     throw new Error("NVIDIA Build limits page has no recognized request limits");
   }
-  return {
-    status: "published",
-    scope: "account",
-    source_url: NVIDIA_LIMITS_URL,
-    tiers: [
-      {
-        name: "hosted-api",
-        quotas: [
-          {
-            metric: "requests",
-            period: "minute",
-            max: parseCompactInteger(match[1], "NVIDIA requests per minute"),
-            qualifier: "up_to",
-          },
-          {
-            metric: "requests",
-            period: "day",
-            max: parseCompactInteger(match[2], "NVIDIA requests per day"),
-            qualifier: "exact",
-          },
-        ],
-      },
-    ],
-  };
+  return termsLimits(
+    formatLimitTerm(parseCompactInteger(match[1], "NVIDIA requests per minute"), "req", "min"),
+    formatLimitTerm(parseCompactInteger(match[2], "NVIDIA requests per day"), "req", "day"),
+  );
 }
 
 export function nvidiaModelsUrl(page: number): string {

@@ -27,36 +27,19 @@ a key from a paid organization for catalogue discovery.
 
 ### Offer limits
 
-Schema version 3 requires every offer to include a `limits` object:
+Schema version 4 requires every offer to include a `limits` object:
 
 ```json
 {
-  "status": "published",
-  "scope": "account",
-  "source_url": "https://provider.example/limits",
-  "tiers": [
-    {
-      "name": "free",
-      "quotas": [
-        {
-          "metric": "requests",
-          "period": "minute",
-          "max": 20,
-          "qualifier": "exact"
-        }
-      ]
-    }
-  ]
+  "terms": ["20 req / min", "250k tok / min"]
 }
 ```
 
-`status` distinguishes public numerical limits (`published`) from values that require the user's
-authenticated account (`account_specific`) and values the provider does not publish
-(`unpublished`). Non-published states have an empty `tiers` array; they do not mean unlimited.
-`scope` identifies the shared quota boundary, so consumers must not multiply account, organization,
-or project limits by the number of offers. A tier can include structured `eligibility`, as used for
-OpenRouter's lifetime-credit threshold. `qualifier` distinguishes exact maxima from documented
-upper bounds such as NVIDIA's “up to 40 RPM.”
+Terms use short units: `req` for requests, `tok` for tokens, `min` for minutes, and `k` or `m` for
+thousands or millions. Token quotas are normalized to forms such as `250k tok / min`. Limits that
+providers express in other units stay in those units because request, neuron, and audio usage cannot
+be converted to tokens without workload-specific assumptions. OpenRouter keeps its credit-dependent
+daily alternatives as parenthetical text in separate terms.
 
 ## 2. Reconcile
 
