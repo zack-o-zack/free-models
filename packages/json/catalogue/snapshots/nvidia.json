@@ -1,244 +1,525 @@
 {
   "provider": "nvidia",
+  "name": "NVIDIA",
   "offers": [
     {
       "model_id": "deepseek-ai/deepseek-v4-flash-0731",
+      "name": "deepseek-v4-flash-0731",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "deepseek-ai/deepseek-v4-pro-0813",
+      "name": "deepseek-v4-pro-0813",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "google/diffusiongemma-26b-a4b-it",
+      "name": "diffusiongemma-26b-a4b-it",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "google/gemma-4-31b-it",
+      "name": "gemma-4-31b-it",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "google/google-paligemma",
+      "name": "paligemma",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "meta/llama-3.2-11b-vision-instruct",
+      "name": "llama-3.2-11b-vision-instruct",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "meta/llama-3.2-90b-vision-instruct",
+      "name": "llama-3.2-90b-vision-instruct",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "meta/llama-guard-4-12b",
+      "name": "llama-guard-4-12b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "meta/muse-glimmer-30b",
+      "name": "muse-glimmer-30b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "minimaxai/minimax-m3",
+      "name": "minimax-m3",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "mistralai/mistral-nemotron",
+      "name": "mistral-nemotron",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "moonshotai/kimi-k3",
+      "name": "kimi-k3",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/active-speaker-detection",
+      "name": "Active Speaker Detection",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/bevformer",
+      "name": "bevformer",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/bnr",
+      "name": "Background Noise Removal",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/cosmos-transfer1-7b",
+      "name": "cosmos-transfer1-7b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/cosmos-transfer2_5-2b",
+      "name": "cosmos-transfer2.5-2b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/cosmos3-nano",
+      "name": "cosmos3-nano",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/cosmos3-nano-reasoner",
+      "name": "cosmos3-nano-reasoner",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/ising-calibration-1-35b-a3b",
+      "name": "ising-calibration-1-35b-a3b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/ising-calibration-1.5-31b",
+      "name": "ising-calibration-1.5-31b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/llama-3_1-nemotron-safety-guard-8b-v3",
+      "name": "llama-3.1-nemotron-safety-guard-8b-v3",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/magpie-tts-zeroshot",
+      "name": "magpie-tts-zeroshot",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-embed-1b",
+      "name": "nemotron-3-embed-1b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-nano-30b-a3b",
+      "name": "nemotron-3-nano-30b-a3b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "name": "nemotron-3-nano-omni-30b-a3b-reasoning",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-super-120b-a12b",
+      "name": "nemotron-3-super-120b-a12b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "name": "nemotron-3-ultra-550b-a55b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/nemotron-3.5-content-safety",
+      "name": "nemotron-3.5-content-safety",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "name": "nemotron-3.5-lightning-30b-a3b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/nemotron-voicechat",
+      "name": "nemotron-voicechat",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/riva-translate-4b-instruct-v1_1",
+      "name": "riva-translate-4b-instruct-v1_1",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/riva-translate-4b-instruct-v2",
+      "name": "riva-translate-4b-instruct-v2",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/sparsedrive",
+      "name": "sparsedrive",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/streampetr",
+      "name": "streampetr",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/studiovoice",
+      "name": "Studio Voice",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "nvidia/synthetic-video-detector",
+      "name": "synthetic-video-detector",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "openai/gpt-oss-120b",
+      "name": "gpt-oss-120b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "openai/gpt-oss-20b",
+      "name": "gpt-oss-20b",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     },
     {
       "model_id": "poolside/laguna-xs-2.1",
+      "name": "laguna-xs-2.1",
       "connection": {
-        "base_url": "https://integrate.api.nvidia.com/v1"
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
       }
     }
   ]

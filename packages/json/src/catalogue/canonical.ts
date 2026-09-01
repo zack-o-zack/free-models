@@ -28,3 +28,18 @@ export function canonicalModelWithGeneratedFields(
     ...sortJsonObject(generated),
   };
 }
+
+export function desluggifyModelId(slug: string): string {
+  const cleaned = slug
+    .replace(/^@cf\//, "")
+    .replace(/(?::free|-free|\(free\))$/i, "")
+    .trim();
+
+  return cleaned
+    .split("/")
+    .map((part) => {
+      const text = part.replace(/[-_]+/g, " ").trim().toLowerCase();
+      return text.charAt(0).toUpperCase() + text.slice(1);
+    })
+    .join(": ");
+}

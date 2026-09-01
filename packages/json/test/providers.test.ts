@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { desluggifyModelId } from "../src/catalogue/canonical.ts";
 import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
@@ -16,9 +17,121 @@ import {
   MistralProvider,
 } from "../src/providers/mistral.ts";
 import { NVIDIA_API_BASE_URL, NvidiaProvider, nvidiaModelsUrl } from "../src/providers/nvidia.ts";
+import {
+  parseTokenRouterModels,
+  parseTokenRouterPricing,
+  TOKENROUTER_API_BASE_URL,
+  TOKENROUTER_MODELS_URL,
+  TOKENROUTER_PRICING_URL,
+  TokenRouterProvider,
+} from "../src/providers/tokenrouter.ts";
+
+describe("TokenRouter discovery", () => {
+  test("keeps every endpoint type on active native free models", async () => {
+    const freeModels = [
+      ["vendor/openai-free", ["openai"]],
+      ["vendor/responses-free", ["openai-response"]],
+      ["vendor/anthropic-free", ["anthropic"]],
+      ["vendor/anthropic-compatible-free", ["anthropic-compatible"]],
+      ["vendor/gemini-free", ["gemini"]],
+      ["vendor/audio-free", ["audio-chat"]],
+      ["vendor/image-free", ["image-generation"]],
+      ["vendor/video-free", ["video-generation", "video-fetch"]],
+    ] as const;
+    const activeModels = [
+      ...freeModels.map(([modelId]) => modelId),
+      "nvidia/nemotron:free",
+      "stealth/ox-alpha",
+      "paid/model",
+    ];
+    const modelsDev = new Map([
+      [
+        "tokenrouter",
+        {
+          id: "tokenrouter",
+          env: ["TOKENROUTER_API_KEY"],
+        },
+      ],
+    ]);
+    const provider = new TokenRouterProvider({
+      apiKey: "tokenrouter-secret",
+      fetch: async (url, init) => {
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        if (url === TOKENROUTER_MODELS_URL) {
+          expect(new Headers(init?.headers).get("authorization")).toBe("Bearer tokenrouter-secret");
+          return Response.json({
+            object: "list",
+            data: activeModels.map((id) => ({ id, object: "model" })),
+          });
+        }
+        if (url === TOKENROUTER_PRICING_URL) {
+          expect(new Headers(init?.headers).get("authorization")).toBeNull();
+          return Response.json({
+            success: true,
+            data: [
+              ...freeModels.map(([modelId, endpointTypes]) =>
+                tokenRouterPrice(modelId, 0, ["default"], [...endpointTypes].reverse()),
+              ),
+              tokenRouterPrice("nvidia/nemotron:free", 0),
+              tokenRouterPrice("stealth/ox-alpha", 0),
+              tokenRouterPrice("retired/model-free", 0),
+              tokenRouterPrice("paid/model", 1),
+              tokenRouterPrice("vip/model-free", 0, ["vip"]),
+              tokenRouterPrice("missing-endpoint/model-free", 0, ["default"], []),
+            ],
+          });
+        }
+        throw new Error(`Unexpected URL: ${url}`);
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual(
+      freeModels.map(([modelId, endpointTypes]) => {
+        const sortedEndpoints = [...endpointTypes].sort();
+        return {
+          model_id: modelId,
+          name: desluggifyModelId(modelId),
+          connection: {
+            auth: { env: ["TOKENROUTER_API_KEY"] },
+            base_url: TOKENROUTER_API_BASE_URL,
+            protocol: sortedEndpoints.includes("openai")
+              ? "openai"
+              : (sortedEndpoints[0] ?? "openai"),
+            supported_endpoint_types: sortedEndpoints,
+          },
+        };
+      }),
+    );
+  });
+
+  test("requires a key so retired public pricing rows cannot stand in for availability", async () => {
+    const provider = new TokenRouterProvider({ apiKey: "" });
+    expect(provider.discover(new Map())).rejects.toThrow("TOKENROUTER_API_KEY");
+  });
+
+  test("rejects duplicate, malformed, and unsupported pricing records", () => {
+    expect(() =>
+      parseTokenRouterModels({ object: "list", data: [{ id: "duplicate" }, { id: "duplicate" }] }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseTokenRouterModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() =>
+      parseTokenRouterPricing({
+        success: true,
+        data: [tokenRouterPrice("duplicate", 0), tokenRouterPrice("duplicate", 0)],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() =>
+      parseTokenRouterPricing({
+        success: true,
+        data: [{ ...tokenRouterPrice("bad-price", 0), model_ratio: -1 }],
+      }),
+    ).toThrow("invalid model_ratio");
+  });
+});
 
 describe("Groq discovery", () => {
   test("returns no offers when only Developer-plan limits are published", async () => {
+    const modelsDev = new Map([["groq", { id: "groq", env: ["GROQ_API_KEY"] }]]);
     const provider = new GroqProvider({
       fetch: async () =>
         new Response(`
@@ -32,10 +145,11 @@ describe("Groq discovery", () => {
 `),
     });
 
-    expect(await provider.discover()).toEqual([]);
+    expect(await provider.discover(modelsDev)).toEqual([]);
   });
 
   test("rejects an unlabeled plan limits table", async () => {
+    const modelsDev = new Map([["groq", { id: "groq", env: ["GROQ_API_KEY"] }]]);
     const provider = new GroqProvider({
       fetch: async () =>
         new Response(`
@@ -48,10 +162,19 @@ describe("Groq discovery", () => {
 `),
     });
 
-    expect(provider.discover()).rejects.toThrow("unique active plan");
+    expect(provider.discover(modelsDev)).rejects.toThrow("unique active plan");
   });
 
   test("discovers model IDs from the official free-plan table", async () => {
+    const modelsDev = new Map([
+      [
+        "groq",
+        {
+          id: "groq",
+          env: ["GROQ_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new GroqProvider({
       fetch: async (url, init) => {
         expect(url).toBe("https://console.groq.com/docs/rate-limits");
@@ -73,14 +196,24 @@ describe("Groq discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "alpha/model",
-        connection: { base_url: GROQ_API_BASE_URL },
+        name: "Alpha: Model",
+        connection: {
+          auth: { env: ["GROQ_API_KEY"] },
+          base_url: GROQ_API_BASE_URL,
+          protocol: "openai",
+        },
       },
       {
         model_id: "beta/model",
-        connection: { base_url: GROQ_API_BASE_URL },
+        name: "Beta: Model",
+        connection: {
+          auth: { env: ["GROQ_API_KEY"] },
+          base_url: GROQ_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });
@@ -88,6 +221,15 @@ describe("Groq discovery", () => {
 
 describe("Mistral discovery", () => {
   test("uses a free-mode account catalogue and excludes custom or archived models", async () => {
+    const modelsDev = new Map([
+      [
+        "mistral",
+        {
+          id: "mistral",
+          env: ["MISTRAL_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new MistralProvider({
       apiKey: "free-mode-secret",
       fetch: async (url, init) => {
@@ -104,22 +246,36 @@ describe("Mistral discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "mistral-small",
-        connection: { base_url: MISTRAL_API_BASE_URL },
+        name: "Mistral small",
+        connection: {
+          auth: { env: ["MISTRAL_API_KEY"] },
+          base_url: MISTRAL_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });
 
   test("requires a key explicitly scoped to an organization in Free mode", async () => {
     const provider = new MistralProvider({ apiKey: "" });
-    expect(provider.discover()).rejects.toThrow("MISTRAL_FREE_API_KEY");
+    expect(provider.discover(new Map())).rejects.toThrow("MISTRAL_FREE_API_KEY");
   });
 });
 
 describe("Gemini API discovery", () => {
   test("uses only model sections whose standard pricing table offers free inference", async () => {
+    const modelsDev = new Map([
+      [
+        "google",
+        {
+          id: "google",
+          env: ["GOOGLE_API_KEY", "GOOGLE_GENERATIVE_AI_API_KEY", "GEMINI_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new GeminiProvider({
       fetch: async (url) => {
         expect(url).toBe(GEMINI_PRICING_URL);
@@ -127,10 +283,17 @@ describe("Gemini API discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "gemini-free",
-        connection: { base_url: GEMINI_API_BASE_URL },
+        name: "Gemini Free",
+        connection: {
+          auth: {
+            env: ["GOOGLE_API_KEY", "GOOGLE_GENERATIVE_AI_API_KEY", "GEMINI_API_KEY"],
+          },
+          base_url: GEMINI_API_BASE_URL,
+          protocol: "google",
+        },
       },
     ]);
   });
@@ -138,6 +301,15 @@ describe("Gemini API discovery", () => {
 
 describe("NVIDIA Build discovery", () => {
   test("keeps only catalogue resources explicitly labeled Free Endpoint", async () => {
+    const modelsDev = new Map([
+      [
+        "nvidia",
+        {
+          id: "nvidia",
+          env: ["NVIDIA_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new NvidiaProvider({
       fetch: async (url) => {
         expect(url).toBe(nvidiaModelsUrl(0));
@@ -157,10 +329,15 @@ describe("NVIDIA Build discovery", () => {
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "nvidia/free",
-        connection: { base_url: NVIDIA_API_BASE_URL },
+        name: "Free Model",
+        connection: {
+          auth: { env: ["NVIDIA_API_KEY"] },
+          base_url: NVIDIA_API_BASE_URL,
+          protocol: "openai",
+        },
       },
     ]);
   });
@@ -168,6 +345,15 @@ describe("NVIDIA Build discovery", () => {
 
 describe("Cloudflare Workers AI discovery", () => {
   test("applies the recurring allocation to priced models except paid-only entries", async () => {
+    const modelsDev = new Map([
+      [
+        "cloudflare-workers-ai",
+        {
+          id: "cloudflare-workers-ai",
+          env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new CloudflareProvider({
       fetch: async (url) => {
         expect(url).toBe(CLOUDFLARE_WORKERS_AI_PRICING_URL);
@@ -186,23 +372,48 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
       },
     });
 
-    expect(await provider.discover()).toEqual([
+    expect(await provider.discover(modelsDev)).toEqual([
       {
         model_id: "@cf/free/model",
-        connection: { base_url: CLOUDFLARE_WORKERS_AI_BASE_URL },
+        name: "Free: Model",
+        connection: {
+          auth: {
+            env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+          },
+          base_url: CLOUDFLARE_WORKERS_AI_BASE_URL,
+          protocol: "cloudflare",
+        },
       },
     ]);
   });
 
   test("fails closed when the paid-only declaration disappears", async () => {
+    const modelsDev = new Map([
+      [
+        "cloudflare-workers-ai",
+        {
+          id: "cloudflare-workers-ai",
+          env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new CloudflareProvider({
       fetch: async () =>
         new Response("Our free allocation is **10,000 Neurons per day at no charge**."),
     });
-    expect(provider.discover()).rejects.toThrow("paid-only model declaration");
+    expect(provider.discover(modelsDev)).rejects.toThrow("paid-only model declaration");
   });
 
   test("fails closed when the free allocation is ambiguous", async () => {
+    const modelsDev = new Map([
+      [
+        "cloudflare-workers-ai",
+        {
+          id: "cloudflare-workers-ai",
+          env: ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_KEY"],
+        },
+      ],
+    ]);
     const provider = new CloudflareProvider({
       fetch: async () =>
         new Response(`
@@ -210,7 +421,9 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
 **20,000 Neurons per day at no charge**
 `),
     });
-    expect(provider.discover()).rejects.toThrow("no unique recognized free daily allocation");
+    expect(provider.discover(modelsDev)).rejects.toThrow(
+      "no unique recognized free daily allocation",
+    );
   });
 });
 
@@ -245,5 +458,22 @@ function nvidiaResource(name: string, nimTypes: string[]): Record<string, unknow
       { key: "nimType", values: nimTypes, unresolvedValues: [] },
       { key: "publisher", values: ["nvidia"], unresolvedValues: ["nvidia"] },
     ],
+  };
+}
+
+function tokenRouterPrice(
+  modelName: string,
+  modelRatio: number,
+  enableGroups: string[] = ["default"],
+  supportedEndpointTypes: string[] = ["openai"],
+): Record<string, unknown> {
+  return {
+    model_name: modelName,
+    quota_type: 0,
+    model_ratio: modelRatio,
+    model_price: 0,
+    completion_ratio: 1,
+    enable_groups: enableGroups,
+    supported_endpoint_types: supportedEndpointTypes,
   };
 }

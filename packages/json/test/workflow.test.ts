@@ -10,10 +10,12 @@ const decoder = new TextDecoder();
 const fixtureAOffers = [
   {
     model_id: "alpha/alternate-free",
+    name: "Alpha Alternate (free)",
     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
   },
   {
     model_id: "alpha/free",
+    name: "Alpha (free)",
     connection: { protocol: "openai", base_url: "https://a.example.test/v1" },
   },
 ];
@@ -21,11 +23,13 @@ const fixtureAOffers = [
 const fixtureZOffers = [
   {
     model_id: "zeta/beta-free",
-    connection: { base_url: "https://z.example.test/v1" },
+    name: "Zeta Beta (free)",
+    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
   },
   {
     model_id: "zeta/alpha-free",
-    connection: { base_url: "https://z.example.test/v1" },
+    name: "Zeta Alpha (free)",
+    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
   },
 ];
 
@@ -131,22 +135,27 @@ describe("manual identity workflow", () => {
             name: "Alpha",
             providers: {
               "fixture-a": {
+                name: "fixture-a",
                 offers: [
                   {
                     model_id: "alpha/alternate-free",
+                    name: "Alpha Alternate (free)",
                     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
                   },
                   {
                     model_id: "alpha/free",
+                    name: "Alpha (free)",
                     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
                   },
                 ],
               },
               "fixture-z": {
+                name: "fixture-z",
                 offers: [
                   {
                     model_id: "zeta/alpha-free",
-                    connection: { base_url: "https://z.example.test/v1" },
+                    name: "Zeta Alpha (free)",
+                    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
                   },
                 ],
               },
@@ -157,10 +166,12 @@ describe("manual identity workflow", () => {
             name: "Beta",
             providers: {
               "fixture-z": {
+                name: "fixture-z",
                 offers: [
                   {
                     model_id: "zeta/beta-free",
-                    connection: { base_url: "https://z.example.test/v1" },
+                    name: "Zeta Beta (free)",
+                    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
                   },
                 ],
               },
@@ -248,7 +259,7 @@ describe("manual identity workflow", () => {
         offers: [
           {
             ...fixtureZOffers[0],
-            connection: { base_url: "https://changed.example.test/v1" },
+            connection: { base_url: "https://changed.example.test/v1", protocol: "openai" },
           },
         ],
       });

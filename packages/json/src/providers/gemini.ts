@@ -1,4 +1,6 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
@@ -23,6 +25,7 @@ interface FreeGeminiModel {
 
 export class GeminiProvider implements ModelProvider {
   readonly id = "gemini";
+  readonly name = "Gemini";
 
   readonly #fetch: FetchSource;
 
@@ -30,13 +33,28 @@ export class GeminiProvider implements ModelProvider {
     this.#fetch = options.fetch ?? fetch;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     const html = await fetchText(this.#fetch, GEMINI_PRICING_URL, "Gemini API pricing", {
       headers: { Accept: "text/html,application/xhtml+xml" },
     });
-    return (await parseGeminiPricing(html)).map(({ modelId }) => ({
+
+    const googleMeta = modelsDev.get("google") ?? modelsDev.get(this.id);
+    const env =
+      googleMeta?.env && googleMeta.env.length > 0
+        ? [...googleMeta.env]
+        : ["GOOGLE_API_KEY", "GOOGLE_GENERATIVE_AI_API_KEY", "GEMINI_API_KEY"];
+
+    const connection = {
+      base_url: GEMINI_API_BASE_URL,
+      protocol: "google",
+      auth: { env },
+    };
+
+    const models = await parseGeminiPricing(html);
+    return models.map(({ modelId, name }) => ({
       model_id: modelId,
-      connection: { base_url: GEMINI_API_BASE_URL },
+      name: name || desluggifyModelId(modelId),
+      connection,
     }));
   }
 }

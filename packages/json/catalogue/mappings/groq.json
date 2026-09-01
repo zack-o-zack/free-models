@@ -3,8 +3,6 @@
   "mappings": {
     "canopylabs/orpheus-arabic-saudi": "canopylabs/orpheus-3b-0.1-ft",
     "canopylabs/orpheus-v1-english": "canopylabs/orpheus-3b-0.1-ft",
-    "groq/compound": "openrouter/fusion",
-    "groq/compound-mini": "openrouter/auto-beta",
     "meta-llama/llama-prompt-guard-2-22m": "meta-llama/llama-guard-4-12b",
     "meta-llama/llama-prompt-guard-2-86m": "meta-llama/llama-guard-4-12b",
     "openai/gpt-oss-120b": "openai/gpt-oss-120b",

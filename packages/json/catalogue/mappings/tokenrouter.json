@@ -1,0 +1,6 @@
+{
+  "provider": "tokenrouter",
+  "mappings": {
+    "z-ai/glm-5.3-free": "z-ai/glm-5.3"
+  }
+}

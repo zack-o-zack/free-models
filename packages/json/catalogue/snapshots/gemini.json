@@ -1,118 +1,290 @@
 {
   "provider": "gemini",
+  "name": "Gemini",
   "offers": [
     {
       "model_id": "gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-2.5-flash-native-audio-preview-12-2025",
+      "name": "Gemini 2.5 Flash Native Audio (Live API)",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-2.5-flash-preview-tts",
+      "name": "Gemini 2.5 Flash Preview TTS",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-2.5-pro",
+      "name": "Gemini 2.5 Pro",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3-flash-preview",
+      "name": "Gemini 3 Flash Preview",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.1-flash-lite",
+      "name": "Gemini 3.1 Flash-Lite",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.1-flash-live-preview",
+      "name": "Gemini 3.1 Flash Live Preview",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.1-flash-tts-preview",
+      "name": "Gemini 3.1 Flash TTS Preview",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.5-flash",
+      "name": "Gemini 3.5 Flash",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.5-flash-lite",
+      "name": "Gemini 3.5 Flash-Lite",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.5-live-translate-preview",
+      "name": "Gemini 3.5 Live Translate",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.5-transcribe",
+      "name": "Gemini 3.5 Transcribe",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.5-transcribe-live",
+      "name": "Gemini 3.5 Transcribe Live",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.6-flash",
+      "name": "Gemini 3.6 Flash",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-3.7-flash",
+      "name": "Gemini 3.7 Flash",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-embedding-001",
+      "name": "Gemini Embedding",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-robotics-er-1.6-preview",
+      "name": "Gemini Robotics ER 1.6 Preview",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-robotics-er-2-preview",
+      "name": "Gemini Robotics ER 2 Preview",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     },
     {
       "model_id": "gemini-robotics-er-2-streaming-preview",
+      "name": "Gemini Robotics ER 2 Streaming Preview",
       "connection": {
-        "base_url": "https://generativelanguage.googleapis.com/v1beta"
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
       }
     }
   ]

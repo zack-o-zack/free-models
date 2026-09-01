@@ -10,6 +10,7 @@ import {
   render as renderCatalogue,
 } from "./catalogue/workflow.ts";
 import type { CanonicalMetadataProvider } from "./metadata/provider.ts";
+import type { ModelsDevRegistry } from "./providers/models-dev.ts";
 import type { ModelProvider } from "./providers/provider.ts";
 import { metadataProvider, providerRegistry } from "./providers/registry.ts";
 
@@ -19,6 +20,7 @@ export interface CliDependencies {
   readonly providers: readonly ModelProvider[];
   readonly renderer: CatalogueRenderer;
   readonly metadataProvider?: CanonicalMetadataProvider;
+  readonly modelsDevRegistry?: ModelsDevRegistry;
 }
 
 const defaultDependencies: CliDependencies = {
@@ -51,7 +53,11 @@ export async function runCli(
   const paths = cataloguePaths(options.workspace ?? process.cwd());
 
   if (command === "discover") {
-    const unresolvedCount = await discover(paths, dependencies.providers);
+    const unresolvedCount = await discover(
+      paths,
+      dependencies.providers,
+      dependencies.modelsDevRegistry,
+    );
     console.log(
       `Discovered ${dependencies.providers.length} provider(s); ${unresolvedCount} unresolved model(s)`,
     );
