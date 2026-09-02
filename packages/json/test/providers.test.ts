@@ -1,22 +1,37 @@
 import { describe, expect, test } from "bun:test";
 import { desluggifyModelId } from "../src/catalogue/canonical.ts";
+import { providerDocSchema } from "../src/catalogue/schema.ts";
 import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
   CloudflareProvider,
+  cloudflareOfferLimits,
 } from "../src/providers/cloudflare.ts";
 import {
   GEMINI_API_BASE_URL,
   GEMINI_PRICING_URL,
   GeminiProvider,
 } from "../src/providers/gemini.ts";
-import { GROQ_API_BASE_URL, GroqProvider } from "../src/providers/groq.ts";
+import { GROQ_API_BASE_URL, GroqProvider, groqOfferLimits } from "../src/providers/groq.ts";
+import {
+  geminiUnconfirmedLimits,
+  mistralUnconfirmedLimits,
+  openCodePublishedLimits,
+  tokenRouterUnconfirmedLimits,
+} from "../src/providers/limits.ts";
 import {
   MISTRAL_API_BASE_URL,
   MISTRAL_MODELS_URL,
   MistralProvider,
 } from "../src/providers/mistral.ts";
-import { NVIDIA_API_BASE_URL, NvidiaProvider, nvidiaModelsUrl } from "../src/providers/nvidia.ts";
+import {
+  NVIDIA_API_BASE_URL,
+  NVIDIA_LIMITS_URL,
+  NvidiaProvider,
+  nvidiaModelsUrl,
+  parseNvidiaLimits,
+} from "../src/providers/nvidia.ts";
+import { providerRegistry } from "../src/providers/registry.ts";
 import {
   parseTokenRouterModels,
   parseTokenRouterPricing,
@@ -25,6 +40,57 @@ import {
   TOKENROUTER_PRICING_URL,
   TokenRouterProvider,
 } from "../src/providers/tokenrouter.ts";
+
+describe("compact provider limit terms", () => {
+  test("returns model-specific Gemini terms and a fallback", () => {
+    expect(geminiUnconfirmedLimits("gemini-3.5-flash-lite")).toEqual({
+      terms: ["15 req / min", "250k tok / min", "500 req / day"],
+    });
+    expect(geminiUnconfirmedLimits("gemini-3.5-flash")).toEqual({
+      terms: ["5 req / min", "250k tok / min", "20 req / day"],
+    });
+    expect(geminiUnconfirmedLimits("gemini-specialized")).toEqual({
+      terms: ["15 req / min", "250k tok / min", "500 req / day"],
+    });
+  });
+
+  test("returns hardcoded Mistral, TokenRouter, and OpenCode terms", () => {
+    expect(mistralUnconfirmedLimits()).toEqual({
+      terms: ["50 req / min", "50k tok / min"],
+    });
+    expect(tokenRouterUnconfirmedLimits()).toEqual({ terms: ["8 req / min"] });
+    expect(openCodePublishedLimits()).toEqual({
+      terms: ["200 req / day"],
+    });
+  });
+});
+
+describe("provider documentation metadata", () => {
+  test("validates documentation schema on valid and invalid URLs", () => {
+    expect(providerDocSchema.safeParse({}).success).toBe(true);
+    expect(
+      providerDocSchema.safeParse({
+        overview: "https://example.com/docs",
+        rate_limit: "https://example.com/limits",
+      }).success,
+    ).toBe(true);
+    expect(
+      providerDocSchema.safeParse({
+        overview: "not-a-url",
+      }).success,
+    ).toBe(false);
+  });
+
+  test("every registered provider exposes structured documentation URLs", () => {
+    expect(providerRegistry.length).toBeGreaterThan(0);
+    for (const provider of providerRegistry) {
+      expect(provider.doc).toBeDefined();
+      const parseResult = providerDocSchema.safeParse(provider.doc);
+      expect(parseResult.success).toBe(true);
+      expect(Object.keys(provider.doc ?? {}).length).toBeGreaterThan(0);
+    }
+  });
+});
 
 describe("TokenRouter discovery", () => {
   test("keeps every endpoint type on active native free models", async () => {
@@ -99,6 +165,7 @@ describe("TokenRouter discovery", () => {
               : (sortedEndpoints[0] ?? "openai"),
             supported_endpoint_types: sortedEndpoints,
           },
+          limits: tokenRouterUnconfirmedLimits(),
         };
       }),
     );
@@ -205,6 +272,7 @@ describe("Groq discovery", () => {
           base_url: GROQ_API_BASE_URL,
           protocol: "openai",
         },
+        limits: groqOfferLimits({ rpm: "30", rpd: "1,000", tpm: "6,000", tpd: "500,000" }),
       },
       {
         model_id: "beta/model",
@@ -214,6 +282,14 @@ describe("Groq discovery", () => {
           base_url: GROQ_API_BASE_URL,
           protocol: "openai",
         },
+        limits: groqOfferLimits({
+          rpm: "10",
+          rpd: "100",
+          tpm: "2,000",
+          tpd: "20,000",
+          ash: "5",
+          asd: "20",
+        }),
       },
     ]);
   });
@@ -255,6 +331,7 @@ describe("Mistral discovery", () => {
           base_url: MISTRAL_API_BASE_URL,
           protocol: "openai",
         },
+        limits: mistralUnconfirmedLimits(),
       },
     ]);
   });
@@ -294,6 +371,7 @@ describe("Gemini API discovery", () => {
           base_url: GEMINI_API_BASE_URL,
           protocol: "google",
         },
+        limits: geminiUnconfirmedLimits("gemini-free"),
       },
     ]);
   });
@@ -312,6 +390,11 @@ describe("NVIDIA Build discovery", () => {
     ]);
     const provider = new NvidiaProvider({
       fetch: async (url) => {
+        if (url === NVIDIA_LIMITS_URL) {
+          return new Response(
+            '"rateLimits":{"requestsPerMinute":"Up to 40 rpm","requestsPerDay":"10,000 requests per day"}',
+          );
+        }
         expect(url).toBe(nvidiaModelsUrl(0));
         return Response.json({
           resultPageTotal: 1,
@@ -338,6 +421,9 @@ describe("NVIDIA Build discovery", () => {
           base_url: NVIDIA_API_BASE_URL,
           protocol: "openai",
         },
+        limits: parseNvidiaLimits(
+          '"rateLimits":{"requestsPerMinute":"Up to 40 rpm","requestsPerDay":"10,000 requests per day"}',
+        ),
       },
     ]);
   });
@@ -383,6 +469,7 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
           base_url: CLOUDFLARE_WORKERS_AI_BASE_URL,
           protocol: "cloudflare",
         },
+        limits: cloudflareOfferLimits("12,345 Neurons per day"),
       },
     ]);
   });

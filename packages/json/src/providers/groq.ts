@@ -1,5 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
-import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import type { DiscoveredOffer, JsonValue, OfferLimits, ProviderDoc } from "../catalogue/schema.ts";
+import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
@@ -29,6 +30,12 @@ interface ParsedTable {
 export class GroqProvider implements ModelProvider {
   readonly id = "groq";
   readonly name = "Groq";
+  readonly doc: ProviderDoc = {
+    models: "https://console.groq.com/docs/models",
+    overview: "https://console.groq.com/docs/overview",
+    pricing: "https://groq.com/pricing",
+    rate_limit: GROQ_RATE_LIMITS_URL,
+  };
 
   readonly #fetch: FetchSource;
 
@@ -53,12 +60,41 @@ export class GroqProvider implements ModelProvider {
     const offers = await parseGroqFreePlan(html);
     return offers
       .filter(({ modelId }) => !modelId.startsWith(GROQ_ROUTER_PREFIX))
-      .map(({ modelId }) => ({
+      .map(({ modelId, rateLimits }) => ({
         model_id: modelId,
         name: desluggifyModelId(modelId),
         connection,
+        limits: groqOfferLimits(rateLimits),
       }));
   }
+}
+
+export function groqOfferLimits(rateLimits: Readonly<Record<string, JsonValue>>): OfferLimits {
+  const definitions = {
+    rpm: { unit: "req", period: "min" },
+    rpd: { unit: "req", period: "day" },
+    tpm: { unit: "tok", period: "min" },
+    tpd: { unit: "tok", period: "day" },
+    ash: { unit: "audio sec", period: "hour" },
+    asd: { unit: "audio sec", period: "day" },
+  } as const;
+  const terms: string[] = [];
+  for (const [key, definition] of Object.entries(definitions)) {
+    const value = rateLimits[key];
+    if (typeof value === "string") {
+      terms.push(
+        formatLimitTerm(
+          parseCompactInteger(value, `Groq ${key.toUpperCase()}`),
+          definition.unit,
+          definition.period,
+        ),
+      );
+    }
+  }
+  if (terms.length === 0) {
+    throw new Error("Groq Free Plan model has no published quota values");
+  }
+  return termsLimits(...terms);
 }
 
 export async function parseGroqFreePlan(

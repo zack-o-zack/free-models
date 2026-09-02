@@ -5,9 +5,17 @@ import { join, resolve } from "node:path";
 import type { ActiveCanonicalModel } from "../src/metadata/provider.ts";
 import {
   OPENROUTER_API_BASE_URL,
+  OPENROUTER_LIMITS_URL,
   OPENROUTER_MODELS_URL,
   OpenRouterProvider,
+  parseOpenRouterLimits,
 } from "../src/providers/openrouter.ts";
+import { fixtureLimits } from "./support/limits.ts";
+
+const limitsSource =
+  "const FREE_MODEL_RATE_LIMIT_RPM=20;const FREE_MODEL_NO_CREDITS_RPD=50;" +
+  "const FREE_MODEL_HAS_CREDITS_RPD=1e3;const FREE_MODEL_CREDITS_THRESHOLD=10;";
+const openRouterLimits = parseOpenRouterLimits(limitsSource);
 
 const fixtureCliPath = resolve(import.meta.dir, "support/openrouter-fixture-cli.ts");
 const validFixturePath = resolve(import.meta.dir, "fixtures/openrouter/models.json");
@@ -32,7 +40,7 @@ async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "openrouter-catalogue-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
-  await writeJson(join(workspace, "free-models.json"), { schema_version: 2, models: [] });
+  await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
   return workspace;
 }
 
@@ -56,6 +64,12 @@ describe("OpenRouter discovery", () => {
         {
           provider: "openrouter",
           name: "OpenRouter",
+          doc: {
+            models: "https://openrouter.ai/models",
+            overview: "https://openrouter.ai/docs/quickstart",
+            pricing: "https://openrouter.ai/docs/models",
+            rate_limit: "https://openrouter.ai/docs/api/reference/limits",
+          },
           offers: [
             {
               model_id: "alpha/model:free",
@@ -65,6 +79,7 @@ describe("OpenRouter discovery", () => {
                 base_url: OPENROUTER_API_BASE_URL,
                 protocol: "openai",
               },
+              limits: openRouterLimits,
             },
             {
               model_id: "zeta/model:free",
@@ -74,6 +89,7 @@ describe("OpenRouter discovery", () => {
                 base_url: OPENROUTER_API_BASE_URL,
                 protocol: "openai",
               },
+              limits: openRouterLimits,
             },
           ],
         },
@@ -128,8 +144,11 @@ describe("OpenRouter discovery", () => {
     for (const testCase of cases) {
       const provider = new OpenRouterProvider({
         fetch: async (url, init) => {
-          expect(url).toBe(OPENROUTER_MODELS_URL);
           expect(new Headers(init?.headers).has("authorization")).toBe(false);
+          if (url === OPENROUTER_LIMITS_URL) {
+            return new Response(limitsSource);
+          }
+          expect(url).toBe(OPENROUTER_MODELS_URL);
           return new Response(testCase.raw ?? JSON.stringify(testCase.payload));
         },
       });
@@ -140,14 +159,18 @@ describe("OpenRouter discovery", () => {
   test("reports HTTP and JSON failures without including response content", async () => {
     const modelsDev = new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]);
     const failedRequest = new OpenRouterProvider({
-      fetch: async () => new Response("private upstream response", { status: 503 }),
+      fetch: async (url) =>
+        url === OPENROUTER_LIMITS_URL
+          ? new Response(limitsSource)
+          : new Response("private upstream response", { status: 503 }),
     });
     expect(failedRequest.discover(modelsDev)).rejects.toThrow(
       "OpenRouter models request failed with HTTP status 503",
     );
 
     const invalidJson = new OpenRouterProvider({
-      fetch: async () => new Response("private upstream response"),
+      fetch: async (url) =>
+        new Response(url === OPENROUTER_LIMITS_URL ? limitsSource : "private upstream response"),
     });
     expect(invalidJson.discover(modelsDev)).rejects.toThrow(
       "OpenRouter models response is not valid JSON",
@@ -185,6 +208,7 @@ describe("OpenRouter canonical metadata", () => {
                 base_url: OPENROUTER_API_BASE_URL,
                 protocol: "openai",
               },
+              limits: fixtureLimits,
             },
           },
         ],
@@ -237,6 +261,7 @@ describe("OpenRouter canonical metadata", () => {
                 base_url: "https://example.com/v1",
                 protocol: "openai",
               },
+              limits: fixtureLimits,
             },
           },
         ],

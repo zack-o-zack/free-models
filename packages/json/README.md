@@ -25,6 +25,22 @@ Mistral discovery is account-scoped: set `MISTRAL_FREE_API_KEY` to an API key fo
 Free mode before running this command. Mistral keys inherit their organization's plan, so do not use
 a key from a paid organization for catalogue discovery.
 
+### Offer limits
+
+Schema version 4 requires every offer to include a `limits` object:
+
+```json
+{
+  "terms": ["20 req / min", "250k tok / min"]
+}
+```
+
+Terms use short units: `req` for requests, `tok` for tokens, `min` for minutes, and `k` or `m` for
+thousands or millions. Token quotas are normalized to forms such as `250k tok / min`. Limits that
+providers express in other units stay in those units because request, neuron, and audio usage cannot
+be converted to tokens without workload-specific assumptions. OpenRouter keeps its credit-dependent
+daily alternatives as parenthetical text in separate terms.
+
 ## 2. Reconcile
 
 Reconcile maps provider model IDs to reviewed canonical model IDs. It records each recognized offer

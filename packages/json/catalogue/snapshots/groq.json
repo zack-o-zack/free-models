@@ -1,6 +1,12 @@
 {
   "provider": "groq",
   "name": "Groq",
+  "doc": {
+    "models": "https://console.groq.com/docs/models",
+    "overview": "https://console.groq.com/docs/overview",
+    "pricing": "https://groq.com/pricing",
+    "rate_limit": "https://console.groq.com/docs/rate-limits"
+  },
   "offers": [
     {
       "model_id": "canopylabs/orpheus-arabic-saudi",
@@ -13,6 +19,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "100 req / day",
+          "1.2k tok / min",
+          "3.6k tok / day"
+        ]
       }
     },
     {
@@ -26,6 +40,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "100 req / day",
+          "1.2k tok / min",
+          "3.6k tok / day"
+        ]
       }
     },
     {
@@ -39,6 +61,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "30 req / min",
+          "14.4k req / day",
+          "15k tok / min",
+          "500k tok / day"
+        ]
       }
     },
     {
@@ -52,6 +82,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "30 req / min",
+          "14.4k req / day",
+          "15k tok / min",
+          "500k tok / day"
+        ]
       }
     },
     {
@@ -65,6 +103,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
+        ]
       }
     },
     {
@@ -78,6 +124,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
+        ]
       }
     },
     {
@@ -91,6 +145,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
+        ]
       }
     },
     {
@@ -104,6 +166,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
+        ]
       }
     },
     {
@@ -117,6 +187,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "30 req / min",
+          "1k req / day",
+          "8k tok / min",
+          "200k tok / day"
+        ]
       }
     },
     {
@@ -130,6 +208,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "2k req / day",
+          "7.2k audio sec / hour",
+          "28.8k audio sec / day"
+        ]
       }
     },
     {
@@ -143,6 +229,14 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "2k req / day",
+          "7.2k audio sec / hour",
+          "28.8k audio sec / day"
+        ]
       }
     }
   ]

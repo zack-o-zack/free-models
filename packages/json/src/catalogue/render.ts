@@ -38,6 +38,7 @@ function buildCatalogue(state: CatalogueState): Catalogue {
       model_id: offer.model_id,
       name: offer.name,
       connection: sortJsonObject(offer.connection),
+      limits: offer.limits,
     });
     providerOffers.set(provider, offers);
     groupedOffers.set(canonicalId, providerOffers);
@@ -54,13 +55,20 @@ function buildCatalogue(state: CatalogueState): Catalogue {
       const providers = Object.fromEntries(
         [...offersByProvider]
           .sort(([left], [right]) => compareStrings(left, right))
-          .map(([providerId, offers]) => [
-            providerId,
-            {
-              name: state.snapshots.get(providerId)?.name ?? providerId,
-              offers: offers.sort((left, right) => compareStrings(left.model_id, right.model_id)),
-            },
-          ]),
+          .map(([providerId, offers]) => {
+            const snapshot = state.snapshots.get(providerId);
+            if (!snapshot) {
+              throw new Error(`Cannot render unknown snapshot provider ${providerId}`);
+            }
+            return [
+              providerId,
+              {
+                name: snapshot.name,
+                doc: sortJsonObject(snapshot.doc),
+                offers: offers.sort((left, right) => compareStrings(left.model_id, right.model_id)),
+              },
+            ];
+          }),
       );
 
       return {
@@ -69,5 +77,5 @@ function buildCatalogue(state: CatalogueState): Catalogue {
       };
     });
 
-  return { schema_version: CATALOGUE_SCHEMA_VERSION, models };
+  return catalogueSchema.parse({ schema_version: CATALOGUE_SCHEMA_VERSION, models });
 }

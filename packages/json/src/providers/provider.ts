@@ -1,9 +1,10 @@
-import { type DiscoveredOffer, providerIdSchema } from "../catalogue/schema.ts";
+import { type DiscoveredOffer, type ProviderDoc, providerIdSchema } from "../catalogue/schema.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 
 export interface ModelProvider {
   readonly id: string;
   readonly name?: string;
+  readonly doc: ProviderDoc;
   discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]>;
 }
 

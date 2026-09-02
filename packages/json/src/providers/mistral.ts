@@ -1,11 +1,18 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
-import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import {
+  type DiscoveredOffer,
+  type JsonValue,
+  jsonObjectSchema,
+  type ProviderDoc,
+} from "../catalogue/schema.ts";
+import { mistralUnconfirmedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
 export const MISTRAL_API_BASE_URL = "https://api.mistral.ai/v1";
 export const MISTRAL_MODELS_URL = `${MISTRAL_API_BASE_URL}/models`;
+export const MISTRAL_RATE_LIMITS_URL = "https://docs.mistral.ai/admin/billing-usage/usage-limits";
 
 export interface MistralProviderOptions {
   readonly fetch?: FetchSource;
@@ -15,6 +22,12 @@ export interface MistralProviderOptions {
 export class MistralProvider implements ModelProvider {
   readonly id = "mistral";
   readonly name = "Mistral";
+  readonly doc: ProviderDoc = {
+    models: "https://docs.mistral.ai/getting-started/models/",
+    overview: "https://docs.mistral.ai/",
+    pricing: "https://mistral.ai/pricing",
+    rate_limit: MISTRAL_RATE_LIMITS_URL,
+  };
 
   readonly #fetch: FetchSource;
   readonly #apiKey: string | undefined;
@@ -58,6 +71,7 @@ export class MistralProvider implements ModelProvider {
         model_id: modelId,
         name: modelName,
         connection,
+        limits: mistralUnconfirmedLimits(),
       };
     });
   }

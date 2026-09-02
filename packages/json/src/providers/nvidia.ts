@@ -1,11 +1,19 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
-import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import {
+  type DiscoveredOffer,
+  type JsonValue,
+  jsonObjectSchema,
+  type OfferLimits,
+  type ProviderDoc,
+} from "../catalogue/schema.ts";
+import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
-import { type FetchSource, fetchJson } from "./source.ts";
+import { type FetchSource, fetchJson, fetchText } from "./source.ts";
 
 export const NVIDIA_API_BASE_URL = "https://integrate.api.nvidia.com/v1";
 export const NVIDIA_MODELS_URL = "https://api.ngc.nvidia.com/v2/search/catalog/resources/ENDPOINT";
+export const NVIDIA_LIMITS_URL = "https://build.nvidia.com/";
 
 const PAGE_SIZE = 100;
 
@@ -29,6 +37,12 @@ interface NvidiaModel {
 export class NvidiaProvider implements ModelProvider {
   readonly id = "nvidia";
   readonly name = "NVIDIA";
+  readonly doc: ProviderDoc = {
+    models: "https://build.nvidia.com/explore/discover",
+    overview: "https://docs.api.nvidia.com/",
+    pricing: NVIDIA_LIMITS_URL,
+    rate_limit: NVIDIA_LIMITS_URL,
+  };
 
   readonly #fetch: FetchSource;
 
@@ -37,7 +51,13 @@ export class NvidiaProvider implements ModelProvider {
   }
 
   async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
-    const firstPage = await this.#loadPage(0);
+    const [firstPage, limitsHtml] = await Promise.all([
+      this.#loadPage(0),
+      fetchText(this.#fetch, NVIDIA_LIMITS_URL, "NVIDIA Build limits", {
+        headers: { Accept: "text/html,application/xhtml+xml" },
+      }),
+    ]);
+    const limits = parseNvidiaLimits(limitsHtml);
     const remainingPages = await Promise.all(
       Array.from({ length: firstPage.pageCount - 1 }, (_, index) => this.#loadPage(index + 1)),
     );
@@ -70,6 +90,7 @@ export class NvidiaProvider implements ModelProvider {
         model_id: model.modelId,
         name: model.title || desluggifyModelId(model.modelId),
         connection,
+        limits,
       };
     });
   }
@@ -80,6 +101,20 @@ export class NvidiaProvider implements ModelProvider {
     });
     return parseNvidiaModelsPage(payload);
   }
+}
+
+export function parseNvidiaLimits(html: string): OfferLimits {
+  const match =
+    /requestsPerMinute\\?":\\?"Up to ([\d,]+) rpm\\?",\\?"requestsPerDay\\?":\\?"([\d,]+) requests per day/.exec(
+      html,
+    );
+  if (!match?.[1] || !match[2]) {
+    throw new Error("NVIDIA Build limits page has no recognized request limits");
+  }
+  return termsLimits(
+    formatLimitTerm(parseCompactInteger(match[1], "NVIDIA requests per minute"), "req", "min"),
+    formatLimitTerm(parseCompactInteger(match[2], "NVIDIA requests per day"), "req", "day"),
+  );
 }
 
 export function nvidiaModelsUrl(page: number): string {

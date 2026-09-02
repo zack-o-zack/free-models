@@ -1,11 +1,13 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
-import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import type { DiscoveredOffer, JsonValue, ProviderDoc } from "../catalogue/schema.ts";
+import { geminiUnconfirmedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
 
 export const GEMINI_API_BASE_URL = "https://generativelanguage.googleapis.com/v1beta";
 export const GEMINI_PRICING_URL = "https://ai.google.dev/gemini-api/docs/pricing?hl=en";
+export const GEMINI_RATE_LIMITS_URL = "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en";
 
 export interface GeminiProviderOptions {
   readonly fetch?: FetchSource;
@@ -26,6 +28,12 @@ interface FreeGeminiModel {
 export class GeminiProvider implements ModelProvider {
   readonly id = "gemini";
   readonly name = "Gemini";
+  readonly doc: ProviderDoc = {
+    models: "https://ai.google.dev/gemini-api/docs/models/gemini",
+    overview: "https://ai.google.dev/gemini-api/docs",
+    pricing: GEMINI_PRICING_URL,
+    rate_limit: GEMINI_RATE_LIMITS_URL,
+  };
 
   readonly #fetch: FetchSource;
 
@@ -55,6 +63,7 @@ export class GeminiProvider implements ModelProvider {
       model_id: modelId,
       name: name || desluggifyModelId(modelId),
       connection,
+      limits: geminiUnconfirmedLimits(modelId),
     }));
   }
 }

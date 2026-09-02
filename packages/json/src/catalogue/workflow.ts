@@ -230,7 +230,15 @@ async function discoverSnapshots(
         throw providerStageError(provider.id, "validation", error);
       }
       const providerName = provider.name ?? provider.id;
-      return [provider.id, { provider: provider.id, name: providerName, offers }] as const;
+      return [
+        provider.id,
+        {
+          provider: provider.id,
+          name: providerName,
+          doc: sortJsonObject(provider.doc),
+          offers,
+        },
+      ] as const;
     }),
   );
 
@@ -254,6 +262,7 @@ function normalizeOffers(providerId: string, offers: DiscoveredOffer[]): Discove
         model_id: offer.model_id,
         name: offer.name,
         connection: sortJsonObject(offer.connection),
+        limits: offer.limits,
       };
     })
     .sort((left, right) => compareStrings(left.model_id, right.model_id));

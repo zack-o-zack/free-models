@@ -1,6 +1,12 @@
 {
   "provider": "nvidia",
   "name": "NVIDIA",
+  "doc": {
+    "models": "https://build.nvidia.com/explore/discover",
+    "overview": "https://docs.api.nvidia.com/",
+    "pricing": "https://build.nvidia.com/",
+    "rate_limit": "https://build.nvidia.com/"
+  },
   "offers": [
     {
       "model_id": "deepseek-ai/deepseek-v4-flash-0731",
@@ -13,6 +19,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -26,6 +38,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -39,6 +57,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -52,6 +76,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -65,6 +95,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -78,6 +114,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -91,6 +133,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -104,6 +152,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -117,6 +171,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -130,6 +190,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -143,6 +209,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -156,6 +228,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -169,6 +247,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -182,6 +266,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -195,6 +285,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -208,6 +304,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -221,6 +323,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -234,6 +342,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -247,6 +361,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -260,6 +380,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -273,6 +399,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -286,6 +418,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -299,6 +437,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -312,6 +456,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -325,6 +475,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -338,6 +494,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -351,6 +513,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -364,6 +532,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -377,6 +551,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -390,6 +570,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -403,6 +589,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -416,6 +608,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -429,6 +627,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -442,6 +646,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -455,6 +665,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -468,6 +684,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -481,6 +703,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -494,6 +722,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     },
     {
@@ -507,6 +741,12 @@
         },
         "base_url": "https://integrate.api.nvidia.com/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
       }
     }
   ]
