@@ -1,8 +1,10 @@
 {
   "provider": "tokenrouter",
+  "name": "TokenRouter",
   "offers": [
     {
       "model_id": "z-ai/glm-5.3-free",
+      "name": "Z ai: Glm 5.3",
       "connection": {
         "auth": {
           "env": [
@@ -14,9 +16,7 @@
         "supported_endpoint_types": [
           "openai"
         ]
-      },
-      "name": "Z ai: Glm 5.3"
+      }
     }
-  ],
-  "name": "TokenRouter"
+  ]
 }

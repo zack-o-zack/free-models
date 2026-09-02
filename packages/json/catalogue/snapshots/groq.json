@@ -1,8 +1,10 @@
 {
   "provider": "groq",
+  "name": "Groq",
   "offers": [
     {
       "model_id": "canopylabs/orpheus-arabic-saudi",
+      "name": "Canopylabs: Orpheus arabic saudi",
       "connection": {
         "auth": {
           "env": [
@@ -11,11 +13,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Canopylabs: Orpheus arabic saudi"
+      }
     },
     {
       "model_id": "canopylabs/orpheus-v1-english",
+      "name": "Canopylabs: Orpheus v1 english",
       "connection": {
         "auth": {
           "env": [
@@ -24,11 +26,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Canopylabs: Orpheus v1 english"
+      }
     },
     {
       "model_id": "meta-llama/llama-prompt-guard-2-22m",
+      "name": "Meta llama: Llama prompt guard 2 22m",
       "connection": {
         "auth": {
           "env": [
@@ -37,11 +39,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Meta llama: Llama prompt guard 2 22m"
+      }
     },
     {
       "model_id": "meta-llama/llama-prompt-guard-2-86m",
+      "name": "Meta llama: Llama prompt guard 2 86m",
       "connection": {
         "auth": {
           "env": [
@@ -50,11 +52,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Meta llama: Llama prompt guard 2 86m"
+      }
     },
     {
       "model_id": "openai/gpt-oss-120b",
+      "name": "Openai: Gpt oss 120b",
       "connection": {
         "auth": {
           "env": [
@@ -63,11 +65,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Openai: Gpt oss 120b"
+      }
     },
     {
       "model_id": "openai/gpt-oss-20b",
+      "name": "Openai: Gpt oss 20b",
       "connection": {
         "auth": {
           "env": [
@@ -76,11 +78,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Openai: Gpt oss 20b"
+      }
     },
     {
       "model_id": "openai/gpt-oss-safeguard-20b",
+      "name": "Openai: Gpt oss safeguard 20b",
       "connection": {
         "auth": {
           "env": [
@@ -89,11 +91,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Openai: Gpt oss safeguard 20b"
+      }
     },
     {
       "model_id": "qwen/qwen3.6-27b",
+      "name": "Qwen: Qwen3.6 27b",
       "connection": {
         "auth": {
           "env": [
@@ -102,11 +104,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Qwen: Qwen3.6 27b"
+      }
     },
     {
       "model_id": "qwen/qwen3.8-27b",
+      "name": "Qwen: Qwen3.8 27b",
       "connection": {
         "auth": {
           "env": [
@@ -115,11 +117,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Qwen: Qwen3.8 27b"
+      }
     },
     {
       "model_id": "whisper-large-v3",
+      "name": "Whisper large v3",
       "connection": {
         "auth": {
           "env": [
@@ -128,11 +130,11 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Whisper large v3"
+      }
     },
     {
       "model_id": "whisper-large-v3-turbo",
+      "name": "Whisper large v3 turbo",
       "connection": {
         "auth": {
           "env": [
@@ -141,9 +143,7 @@
         },
         "base_url": "https://api.groq.com/openai/v1",
         "protocol": "openai"
-      },
-      "name": "Whisper large v3 turbo"
+      }
     }
-  ],
-  "name": "Groq"
+  ]
 }

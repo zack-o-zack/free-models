@@ -4,6 +4,7 @@
   "offers": [
     {
       "model_id": "gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
       "connection": {
         "auth": {
           "env": [
@@ -14,11 +15,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 2.5 flash"
+      }
     },
     {
       "model_id": "gemini-2.5-flash-native-audio-preview-12-2025",
+      "name": "Gemini 2.5 Flash Native Audio (Live API)",
       "connection": {
         "auth": {
           "env": [
@@ -29,11 +30,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 2.5 flash native audio preview 12 2025"
+      }
     },
     {
       "model_id": "gemini-2.5-flash-preview-tts",
+      "name": "Gemini 2.5 Flash Preview TTS",
       "connection": {
         "auth": {
           "env": [
@@ -44,11 +45,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 2.5 flash preview tts"
+      }
     },
     {
       "model_id": "gemini-2.5-pro",
+      "name": "Gemini 2.5 Pro",
       "connection": {
         "auth": {
           "env": [
@@ -59,11 +60,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 2.5 pro"
+      }
     },
     {
       "model_id": "gemini-3-flash-preview",
+      "name": "Gemini 3 Flash Preview",
       "connection": {
         "auth": {
           "env": [
@@ -74,11 +75,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3 flash preview"
+      }
     },
     {
       "model_id": "gemini-3.1-flash-lite",
+      "name": "Gemini 3.1 Flash-Lite",
       "connection": {
         "auth": {
           "env": [
@@ -89,11 +90,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.1 flash lite"
+      }
     },
     {
       "model_id": "gemini-3.1-flash-live-preview",
+      "name": "Gemini 3.1 Flash Live Preview",
       "connection": {
         "auth": {
           "env": [
@@ -104,11 +105,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.1 flash live preview"
+      }
     },
     {
       "model_id": "gemini-3.1-flash-tts-preview",
+      "name": "Gemini 3.1 Flash TTS Preview",
       "connection": {
         "auth": {
           "env": [
@@ -119,11 +120,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.1 flash tts preview"
+      }
     },
     {
       "model_id": "gemini-3.5-flash",
+      "name": "Gemini 3.5 Flash",
       "connection": {
         "auth": {
           "env": [
@@ -134,11 +135,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.5 flash"
+      }
     },
     {
       "model_id": "gemini-3.5-flash-lite",
+      "name": "Gemini 3.5 Flash-Lite",
       "connection": {
         "auth": {
           "env": [
@@ -149,11 +150,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.5 flash lite"
+      }
     },
     {
       "model_id": "gemini-3.5-live-translate-preview",
+      "name": "Gemini 3.5 Live Translate",
       "connection": {
         "auth": {
           "env": [
@@ -164,11 +165,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.5 live translate preview"
+      }
     },
     {
       "model_id": "gemini-3.5-transcribe",
+      "name": "Gemini 3.5 Transcribe",
       "connection": {
         "auth": {
           "env": [
@@ -179,11 +180,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.5 transcribe"
+      }
     },
     {
       "model_id": "gemini-3.5-transcribe-live",
+      "name": "Gemini 3.5 Transcribe Live",
       "connection": {
         "auth": {
           "env": [
@@ -194,11 +195,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.5 transcribe live"
+      }
     },
     {
       "model_id": "gemini-3.6-flash",
+      "name": "Gemini 3.6 Flash",
       "connection": {
         "auth": {
           "env": [
@@ -209,11 +210,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.6 flash"
+      }
     },
     {
       "model_id": "gemini-3.7-flash",
+      "name": "Gemini 3.7 Flash",
       "connection": {
         "auth": {
           "env": [
@@ -224,11 +225,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini 3.7 flash"
+      }
     },
     {
       "model_id": "gemini-embedding-001",
+      "name": "Gemini Embedding",
       "connection": {
         "auth": {
           "env": [
@@ -239,11 +240,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini embedding 001"
+      }
     },
     {
       "model_id": "gemini-robotics-er-1.6-preview",
+      "name": "Gemini Robotics ER 1.6 Preview",
       "connection": {
         "auth": {
           "env": [
@@ -254,11 +255,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini robotics er 1.6 preview"
+      }
     },
     {
       "model_id": "gemini-robotics-er-2-preview",
+      "name": "Gemini Robotics ER 2 Preview",
       "connection": {
         "auth": {
           "env": [
@@ -269,11 +270,11 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini robotics er 2 preview"
+      }
     },
     {
       "model_id": "gemini-robotics-er-2-streaming-preview",
+      "name": "Gemini Robotics ER 2 Streaming Preview",
       "connection": {
         "auth": {
           "env": [
@@ -284,9 +285,7 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
-      },
-      "name": "Gemini robotics er 2 streaming preview"
+      }
     }
-  ],
-  "name": "Google"
+  ]
 }
