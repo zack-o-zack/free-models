@@ -39,7 +39,7 @@ async function prepareEmptyWorkspace(workspace: string): Promise<void> {
     );
     await Bun.write(
       join(workspace, `catalogue/snapshots/${provider.id}.json`),
-      `${JSON.stringify({ provider: provider.id, offers: [] }, null, 2)}\n`,
+      `${JSON.stringify({ provider: provider.id, name: provider.name ?? provider.id, offers: [] }, null, 2)}\n`,
     );
   }
 }
@@ -66,6 +66,18 @@ describe("catalogue CLI", () => {
     expect(catalogueSchema.safeParse({ schema_version: 1, models: [openModel] }).success).toBe(
       false,
     );
+
+    const offerWithMetadata = {
+      ...openModel,
+      providers: {
+        acme: {
+          offers: [{ model_id: "model", connection: {}, metadata: { legacy: true } }],
+        },
+      },
+    };
+    expect(
+      catalogueSchema.safeParse({ schema_version: 2, models: [offerWithMetadata] }).success,
+    ).toBe(false);
   });
 
   test("render writes a deterministic empty catalogue", async () => {

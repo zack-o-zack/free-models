@@ -55,27 +55,24 @@ describe("OpenRouter discovery", () => {
       expect(await Bun.file(join(workspace, "catalogue/snapshots/openrouter.json")).json()).toEqual(
         {
           provider: "openrouter",
+          name: "OpenRouter",
           offers: [
             {
               model_id: "alpha/model:free",
-              connection: { base_url: OPENROUTER_API_BASE_URL },
-              metadata: {
-                architecture: {
-                  input_modalities: ["text", "image"],
-                  output_modalities: ["text"],
-                },
-                name: "Alpha Model (free)",
-                pricing: { completion: "0", prompt: "0" },
-                supported_parameters: ["tools", "temperature"],
+              name: "Alpha Model (free)",
+              connection: {
+                auth: { env: ["OPENROUTER_API_KEY"] },
+                base_url: OPENROUTER_API_BASE_URL,
+                protocol: "openai",
               },
             },
             {
               model_id: "zeta/model:free",
-              connection: { base_url: OPENROUTER_API_BASE_URL },
-              metadata: {
-                name: "Zeta Model (free)",
-                nullable: null,
-                pricing: { completion: "0", prompt: "0" },
+              name: "Zeta Model (free)",
+              connection: {
+                auth: { env: ["OPENROUTER_API_KEY"] },
+                base_url: OPENROUTER_API_BASE_URL,
+                protocol: "openai",
               },
             },
           ],
@@ -126,6 +123,8 @@ describe("OpenRouter discovery", () => {
       },
     ];
 
+    const modelsDev = new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]);
+
     for (const testCase of cases) {
       const provider = new OpenRouterProvider({
         fetch: async (url, init) => {
@@ -134,30 +133,43 @@ describe("OpenRouter discovery", () => {
           return new Response(testCase.raw ?? JSON.stringify(testCase.payload));
         },
       });
-      expect(provider.discover()).rejects.toThrow(testCase.message);
+      expect(provider.discover(modelsDev)).rejects.toThrow(testCase.message);
     }
   });
 
   test("reports HTTP and JSON failures without including response content", async () => {
+    const modelsDev = new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]);
     const failedRequest = new OpenRouterProvider({
       fetch: async () => new Response("private upstream response", { status: 503 }),
     });
-    expect(failedRequest.discover()).rejects.toThrow(
+    expect(failedRequest.discover(modelsDev)).rejects.toThrow(
       "OpenRouter models request failed with HTTP status 503",
     );
 
     const invalidJson = new OpenRouterProvider({
       fetch: async () => new Response("private upstream response"),
     });
-    expect(invalidJson.discover()).rejects.toThrow("OpenRouter models response is not valid JSON");
+    expect(invalidJson.discover(modelsDev)).rejects.toThrow(
+      "OpenRouter models response is not valid JSON",
+    );
   });
 });
 
 describe("OpenRouter canonical metadata", () => {
-  test("reuses a resolved OpenRouter offer without another request", async () => {
+  test("retrieves source fields by resolved OpenRouter offer ID", async () => {
     const provider = new OpenRouterProvider({
-      fetch: async () => {
-        throw new Error("unexpected request");
+      fetch: async (url) => {
+        expect(url).toBe(OPENROUTER_MODELS_URL);
+        return Response.json({
+          data: [
+            {
+              id: "alpha/model:free",
+              name: "Source Alpha",
+              description: "Complete source description",
+              nested: { preserved: true },
+            },
+          ],
+        });
       },
     });
     const activeModels: ActiveCanonicalModel[] = [
@@ -168,11 +180,10 @@ describe("OpenRouter canonical metadata", () => {
             provider: "openrouter",
             offer: {
               model_id: "alpha/model:free",
-              connection: { base_url: OPENROUTER_API_BASE_URL },
-              metadata: {
-                name: "Source Alpha",
-                description: "Complete source description",
-                nested: { preserved: true },
+              name: "Alpha Model (free)",
+              connection: {
+                base_url: OPENROUTER_API_BASE_URL,
+                protocol: "openai",
               },
             },
           },
@@ -221,8 +232,11 @@ describe("OpenRouter canonical metadata", () => {
             provider: "another-provider",
             offer: {
               model_id: "unrelated-source-id",
-              connection: {},
-              metadata: {},
+              name: "Unrelated source",
+              connection: {
+                base_url: "https://example.com/v1",
+                protocol: "openai",
+              },
             },
           },
         ],

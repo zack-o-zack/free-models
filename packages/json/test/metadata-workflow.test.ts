@@ -9,15 +9,15 @@ const decoder = new TextDecoder();
 const fixtureAOffers = [
   {
     model_id: "alpha/free",
-    connection: { base_url: "https://a.example.test/v1" },
-    metadata: { source: "a" },
+    name: "Alpha (free)",
+    connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
   },
 ];
 const fixtureZOffers = [
   {
     model_id: "zeta/beta-free",
-    connection: { base_url: "https://z.example.test/v1" },
-    metadata: { source: "z" },
+    name: "Zeta Beta (free)",
+    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
   },
 ];
 

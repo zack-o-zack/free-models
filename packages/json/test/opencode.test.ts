@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import { protocolFromAiSdkPackage } from "../src/providers/opencode.ts";
 
 const fixtureCliPath = resolve(import.meta.dir, "support/opencode-fixture-cli.ts");
 const validDocumentationPath = resolve(import.meta.dir, "fixtures/opencode/zen.html");
@@ -69,7 +70,7 @@ async function validFixtureText(): Promise<{ documentation: string; models: stri
 }
 
 describe("OpenCode Zen discovery", () => {
-  test("strictly joins pricing, endpoint, and live-model fixtures through the CLI", async () => {
+  test("discovers connection fields from pricing, endpoint, and live-model fixtures", async () => {
     await withWorkspace(async (workspace) => {
       const discovery = runFixtureCli(workspace, {
         documentation: validDocumentationPath,
@@ -80,25 +81,32 @@ describe("OpenCode Zen discovery", () => {
 
       expect(await Bun.file(join(workspace, "catalogue/snapshots/opencode.json")).json()).toEqual({
         provider: "opencode",
+        name: "OpenCode",
         offers: [
           {
             model_id: "big-pickle",
+            name: "Big Pickle",
             connection: {
               ai_sdk_package: "@ai-sdk/openai-compatible",
+              auth: {
+                env: ["OPENCODE_API_KEY"],
+              },
+              base_url: "https://opencode.ai/zen/v1",
               endpoint: "https://opencode.example.test/zen/v1/chat/completions",
+              protocol: "openai",
             },
-            metadata: { object: "model", owned_by: "opencode" },
           },
           {
             model_id: "suffix-free",
+            name: "Suffix Free",
             connection: {
               ai_sdk_package: "@ai-sdk/openai",
+              auth: {
+                env: ["OPENCODE_API_KEY"],
+              },
+              base_url: "https://opencode.ai/zen/v1",
               endpoint: "https://opencode.example.test/zen/v1/responses",
-            },
-            metadata: {
-              object: "model",
-              owned_by: "opencode",
-              upstream: { nested: true },
+              protocol: "openai",
             },
           },
         ],
@@ -300,6 +308,14 @@ describe("OpenCode Zen discovery", () => {
       expect(runFixtureCli(workspace, fixtures).exitCode).toBe(0);
       expect(await Bun.file(snapshotPath).text()).toBe(firstSnapshot);
     });
+  });
+
+  test("maps AI SDK packages to the correct connection protocol", () => {
+    expect(protocolFromAiSdkPackage("@ai-sdk/openai-compatible")).toBe("openai");
+    expect(protocolFromAiSdkPackage("@ai-sdk/openai")).toBe("openai");
+    expect(protocolFromAiSdkPackage("@ai-sdk/anthropic")).toBe("anthropic");
+    expect(protocolFromAiSdkPackage("@ai-sdk/google")).toBe("google");
+    expect(() => protocolFromAiSdkPackage("@ai-sdk/unknown")).toThrow("unsupported AI SDK package");
   });
 });
 

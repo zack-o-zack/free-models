@@ -1,0 +1,24 @@
+{
+  "provider": "gemini",
+  "mappings": {
+    "gemini-2.5-flash": "google/gemini-2.5-flash",
+    "gemini-2.5-flash-native-audio-preview-12-2025": "google/gemini-2.5-flash",
+    "gemini-2.5-flash-preview-tts": "google/gemini-3.1-flash-tts-preview",
+    "gemini-2.5-pro": "google/gemini-2.5-pro",
+    "gemini-3-flash-preview": "google/gemini-3-flash-preview",
+    "gemini-3.1-flash-lite": "google/gemini-3.1-flash-lite",
+    "gemini-3.1-flash-live-preview": "google/gemini-3.1-flash-lite-preview",
+    "gemini-3.1-flash-tts-preview": "google/gemini-3.1-flash-tts-preview",
+    "gemini-3.5-flash": "google/gemini-3.5-flash",
+    "gemini-3.5-flash-lite": "google/gemini-3.5-flash-lite",
+    "gemini-3.5-live-translate-preview": "google/gemini-3.5-flash",
+    "gemini-3.5-transcribe": "google/chirp-3",
+    "gemini-3.5-transcribe-live": "nvidia/nemotron-3.5-asr-streaming-multilingual-0.6b",
+    "gemini-3.6-flash": "google/gemini-3.6-flash",
+    "gemini-3.7-flash": "google/gemini-3.7-flash",
+    "gemini-embedding-001": "google/gemini-embedding-001",
+    "gemini-robotics-er-1.6-preview": "google/gemini-3-flash-preview",
+    "gemini-robotics-er-2-preview": "google/gemini-3-flash-preview",
+    "gemini-robotics-er-2-streaming-preview": "google/gemini-3.1-flash-lite-preview"
+  }
+}

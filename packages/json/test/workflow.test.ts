@@ -10,26 +10,26 @@ const decoder = new TextDecoder();
 const fixtureAOffers = [
   {
     model_id: "alpha/alternate-free",
+    name: "Alpha Alternate (free)",
     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
-    metadata: { upstream_rank: 2 },
   },
   {
     model_id: "alpha/free",
+    name: "Alpha (free)",
     connection: { protocol: "openai", base_url: "https://a.example.test/v1" },
-    metadata: { upstream_rank: 1, nested: { z: true, a: "preserved" } },
   },
 ];
 
 const fixtureZOffers = [
   {
     model_id: "zeta/beta-free",
-    connection: { base_url: "https://z.example.test/v1" },
-    metadata: { owned_by: "zeta" },
+    name: "Zeta Beta (free)",
+    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
   },
   {
     model_id: "zeta/alpha-free",
-    connection: { base_url: "https://z.example.test/v1" },
-    metadata: { owned_by: "zeta" },
+    name: "Zeta Alpha (free)",
+    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
   },
 ];
 
@@ -135,25 +135,27 @@ describe("manual identity workflow", () => {
             name: "Alpha",
             providers: {
               "fixture-a": {
+                name: "fixture-a",
                 offers: [
                   {
                     model_id: "alpha/alternate-free",
+                    name: "Alpha Alternate (free)",
                     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
-                    metadata: { upstream_rank: 2 },
                   },
                   {
                     model_id: "alpha/free",
+                    name: "Alpha (free)",
                     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
-                    metadata: { nested: { a: "preserved", z: true }, upstream_rank: 1 },
                   },
                 ],
               },
               "fixture-z": {
+                name: "fixture-z",
                 offers: [
                   {
                     model_id: "zeta/alpha-free",
-                    connection: { base_url: "https://z.example.test/v1" },
-                    metadata: { owned_by: "zeta" },
+                    name: "Zeta Alpha (free)",
+                    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
                   },
                 ],
               },
@@ -164,11 +166,12 @@ describe("manual identity workflow", () => {
             name: "Beta",
             providers: {
               "fixture-z": {
+                name: "fixture-z",
                 offers: [
                   {
                     model_id: "zeta/beta-free",
-                    connection: { base_url: "https://z.example.test/v1" },
-                    metadata: { owned_by: "zeta" },
+                    name: "Zeta Beta (free)",
+                    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
                   },
                 ],
               },
@@ -253,7 +256,12 @@ describe("manual identity workflow", () => {
         offers: [fixtureAOffers[0], fixtureAOffers[0]],
       });
       await writeJson(join(workspace, "provider-fixtures/fixture-z.json"), {
-        offers: [{ ...fixtureZOffers[0], metadata: { upstream_changed: true } }],
+        offers: [
+          {
+            ...fixtureZOffers[0],
+            connection: { base_url: "https://changed.example.test/v1", protocol: "openai" },
+          },
+        ],
       });
       const discovery = runFixtureCli(workspace, "discover");
       expect(discovery.exitCode).toBe(1);
@@ -267,7 +275,7 @@ describe("manual identity workflow", () => {
     });
   });
 
-  test("handles removals, metadata changes, and returning mapped offers deterministically", async () => {
+  test("handles removals, connection changes, and returning mapped offers deterministically", async () => {
     await withWorkspace(async (workspace) => {
       expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
       await reviewAllOffers(workspace);
@@ -290,7 +298,11 @@ describe("manual identity workflow", () => {
         offers: [
           {
             ...fixtureAOffers[0],
-            metadata: { upstream_rank: 22, new_upstream_field: "retained" },
+            connection: {
+              base_url: "https://a.example.test/v1",
+              protocol: "openai",
+              region: "global",
+            },
           },
         ],
       });
@@ -315,9 +327,10 @@ describe("manual identity workflow", () => {
         }>;
       };
       expect(changedPublic.models.map((model) => model.id)).toEqual(["acme/alpha"]);
-      expect(changedPublic.models[0]?.providers["fixture-a"]?.offers[0]?.metadata).toEqual({
-        new_upstream_field: "retained",
-        upstream_rank: 22,
+      expect(changedPublic.models[0]?.providers["fixture-a"]?.offers[0]?.connection).toEqual({
+        base_url: "https://a.example.test/v1",
+        protocol: "openai",
+        region: "global",
       });
       expect(
         (await Bun.file(join(workspace, "catalogue/canonical-models.json")).json()).models,

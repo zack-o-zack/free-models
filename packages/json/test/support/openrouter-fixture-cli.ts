@@ -25,6 +25,7 @@ runCli(process.argv.slice(2), {
   providers: [provider],
   renderer: new JsonCatalogueRenderer(),
   metadataProvider: provider,
+  modelsDevRegistry: new Map([["openrouter", { id: "openrouter", env: ["OPENROUTER_API_KEY"] }]]),
 }).catch((error: unknown) => {
   const message = error instanceof Error ? error.message : String(error);
   console.error(message);

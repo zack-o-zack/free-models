@@ -13,6 +13,18 @@ Later phases use these snapshots.
 bun run catalogue:discover
 ```
 
+Discovery reads Groq's free-plan rate-limit table (excluding the `groq/` routing
+namespace), Gemini's per-model standard-tier pricing, NVIDIA Build's `Free Endpoint` catalogue
+labels, and Cloudflare Workers AI's free-allocation model pricing without credentials. OpenRouter
+discovery keeps concrete `:free` models only; its `openrouter/` routing namespace is never
+included. TokenRouter discovery intersects its public,
+zero-price `-free` models
+with the models actively served to `TOKENROUTER_API_KEY` and records all supported endpoint types.
+This excludes stale and imported pricing entries without limiting discovery to one API protocol.
+Mistral discovery is account-scoped: set `MISTRAL_FREE_API_KEY` to an API key for an organization in
+Free mode before running this command. Mistral keys inherit their organization's plan, so do not use
+a key from a paid organization for catalogue discovery.
+
 ## 2. Reconcile
 
 Reconcile maps provider model IDs to reviewed canonical model IDs. It records each recognized offer
@@ -35,7 +47,8 @@ bun run catalogue:refresh
 ## 4. Render
 
 Render creates `free-models.json` in a deterministic way. It uses discovered offers, reviewed
-mappings, and current model metadata. This file is the public catalog.
+mappings, and current model metadata. CI renders this file in a temporary workspace and uploads it
+to the public CDN after a merge; the generated file is not committed to the repository.
 
 ```sh
 bun run catalogue:render
@@ -44,7 +57,7 @@ bun run catalogue:render
 ## 5. Check
 
 Check validates the catalog. It checks schemas, provider-to-canonical mappings, generated reports,
-and the rendered JSON. It also checks that `free-models.json` matches the current catalog data.
+and the rendered JSON. Pass `--input` when the rendered file is in a temporary CI location.
 
 ```sh
 bun run catalogue:check

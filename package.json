@@ -21,7 +21,7 @@
     "typecheck": "bun run --filter json typecheck && bun run --filter web typecheck",
     "test": "bun test",
     "quality": "bun run format:check && bun run lint && bun run typecheck && bun test && bun run aislop ci .",
-    "check": "bun run quality && bun run catalogue:check"
+    "check": "bun run quality && bun run catalogue:render --output .scratch/free-models.json && bun run catalogue:check --input .scratch/free-models.json"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.11",

@@ -1,16 +1,20 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
 import type {
   ActiveCanonicalModel,
   CanonicalMetadata,
   CanonicalMetadataProvider,
 } from "../metadata/provider.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
 export const OPENROUTER_MODELS_URL = `${OPENROUTER_API_BASE_URL}/models?output_modalities=all`;
 
 const OPENROUTER_FREE_SUFFIX = ":free";
-const OPENROUTER_NON_MODEL_IDS = new Set(["openrouter/free"]);
+// The openrouter/ namespace holds routing endpoints (auto, fusion, free, ...) that stand in
+// front of other providers' models, not concrete free models of their own.
+const OPENROUTER_ROUTER_PREFIX = "openrouter/";
 
 interface HttpResponse {
   readonly ok: boolean;
@@ -26,6 +30,7 @@ export interface OpenRouterProviderOptions {
 
 export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvider {
   readonly id = "openrouter";
+  readonly name = "OpenRouter";
 
   readonly #fetch: FetchModels;
 
@@ -33,20 +38,38 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
     this.#fetch = options.fetch ?? fetch;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     const models = await this.#loadModels();
+    const openRouterMeta = modelsDev.get(this.id);
+    const env =
+      openRouterMeta?.env && openRouterMeta.env.length > 0 ? [...openRouterMeta.env] : undefined;
+
+    const connection = {
+      base_url: OPENROUTER_API_BASE_URL,
+      protocol: "openai",
+      ...(env ? { auth: { env } } : {}),
+    };
+
     const offers: DiscoveredOffer[] = [];
 
     for (const model of models) {
       const modelId = model.id as string;
-      if (OPENROUTER_NON_MODEL_IDS.has(modelId) || !modelId.endsWith(OPENROUTER_FREE_SUFFIX)) {
+      if (
+        modelId.startsWith(OPENROUTER_ROUTER_PREFIX) ||
+        !modelId.endsWith(OPENROUTER_FREE_SUFFIX)
+      ) {
         continue;
       }
 
+      const modelName =
+        typeof model.name === "string" && model.name.trim().length > 0
+          ? model.name.trim()
+          : desluggifyModelId(modelId);
+
       offers.push({
         model_id: modelId,
-        connection: { base_url: OPENROUTER_API_BASE_URL },
-        metadata: withoutId(model),
+        name: modelName,
+        connection,
       });
     }
 
@@ -57,25 +80,11 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
     models: readonly ActiveCanonicalModel[],
   ): Promise<ReadonlyMap<string, CanonicalMetadata>> {
     const metadataByCanonicalId = new Map<string, CanonicalMetadata>();
-    const modelsWithoutOpenRouterOffer: ActiveCanonicalModel[] = [];
-
-    for (const activeModel of models) {
-      const openRouterOffer = activeModel.offers.find(({ provider }) => provider === this.id);
-      if (openRouterOffer) {
-        metadataByCanonicalId.set(activeModel.model.id, openRouterOffer.offer.metadata);
-      } else {
-        modelsWithoutOpenRouterOffer.push(activeModel);
-      }
-    }
-
-    if (modelsWithoutOpenRouterOffer.length === 0) {
-      return metadataByCanonicalId;
-    }
-
     const sourceModels = await this.#loadModels();
     const sourceById = new Map(sourceModels.map((model) => [model.id as string, model]));
-    for (const { model } of modelsWithoutOpenRouterOffer) {
-      const sourceModel = sourceById.get(model.id);
+    for (const { model, offers } of models) {
+      const openRouterOffer = offers.find(({ provider }) => provider === this.id);
+      const sourceModel = sourceById.get(openRouterOffer?.offer.model_id ?? model.id);
       if (sourceModel) {
         metadataByCanonicalId.set(model.id, withoutId(sourceModel));
       }

@@ -3,3 +3,4 @@ node_modules/
 coverage/
 *.log
 .scratch/
+packages/json/free-models.json
