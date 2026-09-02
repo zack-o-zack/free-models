@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { DM_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Inter, JetBrains_Mono, Manrope } from "next/font/google";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 import "./globals.css";
 
-const bodyFont = DM_Sans({
+const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
 });
 
-const displayFont = Space_Grotesk({
+const displayFont = Manrope({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
@@ -25,8 +25,8 @@ const codeFont = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Free Models",
-  description: "Browse and compare free AI models across providers.",
+  title: "Free Models — Build more, spend less",
+  description: "Compare genuinely free AI models across providers, capabilities, and context.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

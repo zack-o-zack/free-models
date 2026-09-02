@@ -1,5 +1,8 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { providerFaviconUrl } from "@/lib/provider-logos";
 import { cn } from "@/lib/utils";
 
@@ -28,10 +31,17 @@ export function ProviderBadge({
 
   if (iconOnly) {
     return (
-      <Avatar aria-label={label} className="size-5" title={label}>
-        {logoUrl && <AvatarImage alt="" className="object-contain p-0.5" src={logoUrl} />}
-        <AvatarFallback className="text-[8px]">{initials(label)}</AvatarFallback>
-      </Avatar>
+      <Tooltip>
+        <TooltipTrigger className="inline-flex size-5 shrink-0 rounded-full" render={<span />}>
+          <Avatar aria-hidden="true" className="size-5">
+            {logoUrl && <AvatarImage alt="" className="object-contain p-0.5" src={logoUrl} />}
+            <AvatarFallback className="text-[8px]">{initials(label)}</AvatarFallback>
+          </Avatar>
+        </TooltipTrigger>
+        <TooltipContent side="right" sideOffset={6}>
+          {label}
+        </TooltipContent>
+      </Tooltip>
     );
   }
 

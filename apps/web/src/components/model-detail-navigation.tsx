@@ -1,7 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { BrainCircuit, FileText, ListChecks, Server, Sparkles } from "lucide-react";
+import { BrainCircuit, FileText, Server, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils";
 const sections = [
   { id: "providers", label: "Providers", icon: Server },
   { id: "benchmarks", label: "Benchmarks", icon: BrainCircuit },
-  { id: "capabilities", label: "Capabilities", icon: ListChecks },
   { id: "faq", label: "FAQ", icon: FileText },
   { id: "related", label: "Related", icon: Sparkles },
 ] as const satisfies ReadonlyArray<{ id: string; label: string; icon: LucideIcon }>;
@@ -27,7 +26,7 @@ function useModelPagePosition() {
 
     const updatePosition = () => {
       const hero = document.getElementById("model-hero");
-      setShowModelHeader(Boolean(hero && hero.getBoundingClientRect().bottom <= 56));
+      setShowModelHeader(Boolean(hero && hero.getBoundingClientRect().bottom <= 72));
 
       const activationLine = Math.min(window.innerHeight * 0.3, 240);
       const sectionPositions = sections.flatMap((section) => {
@@ -85,22 +84,24 @@ export function StickyModelHeader({
     <div
       aria-hidden={!showModelHeader}
       className={cn(
-        "fixed inset-x-0 top-14 z-30 border-b bg-background/95 shadow-sm backdrop-blur transition-[transform,opacity] duration-200 supports-backdrop-filter:bg-background/85",
+        "fixed inset-x-0 top-[72px] z-30 border-b border-background/15 bg-foreground/95 text-background backdrop-blur transition-[transform,opacity] duration-200 supports-backdrop-filter:bg-foreground/85",
         showModelHeader
           ? "translate-y-0 opacity-100"
           : "pointer-events-none -translate-y-full opacity-0",
       )}
     >
-      <div className="mx-auto flex h-12 max-w-[1280px] items-center gap-2.5 px-4 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-2.5 px-5 sm:px-8">
         {!isStealth && (
-          <Avatar className="size-6 bg-white ring-1 ring-border">
+          <Avatar className="size-6 bg-white ring-1 ring-background/15">
             {logoUrl && <AvatarImage alt="" className="object-contain p-1" src={logoUrl} />}
             <AvatarFallback className="bg-white text-[10px] font-medium text-black">
               {author.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
         )}
-        <p className="truncate font-heading text-sm font-medium sm:text-base">{name}</p>
+        <p className="truncate font-heading text-sm font-extrabold text-background sm:text-base">
+          {name}
+        </p>
       </div>
     </div>
   );
@@ -118,7 +119,8 @@ export function ModelSectionNav() {
             aria-current={isActive ? "location" : undefined}
             className={cn(
               "justify-start",
-              isActive && "bg-accent text-accent-foreground hover:bg-accent/80",
+              isActive &&
+                "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground dark:hover:text-primary-foreground",
             )}
             key={id}
             nativeButton={false}

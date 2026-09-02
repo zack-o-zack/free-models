@@ -36,17 +36,23 @@ export function ModelCard({ model }: { model: ModelSummary }) {
   const providerLogoUrl = providerFaviconUrl(model.id.split("/")[0]);
   const visibleProviders = model.providers.slice(0, 3);
   const additionalProviderCount = Math.max(model.providers.length - visibleProviders.length, 0);
+  const modelNameSize =
+    model.name.length > 42
+      ? "text-sm sm:text-base"
+      : model.name.length > 30
+        ? "text-base"
+        : "text-lg";
   const providerConnections: ModelConnection[] =
     model.connections.length > 0
       ? model.connections
       : model.providers.map((provider) => ({ provider, modelId: model.id }));
 
   return (
-    <Card className="transition-colors hover:bg-muted/20">
+    <Card className="bg-background transition-all duration-200 hover:-translate-y-0.5 hover:bg-secondary dark:hover:bg-muted">
       <CardHeader>
-        <div className="flex min-w-0 items-start gap-3">
+        <div className="flex min-w-0 items-start gap-4">
           {!model.isStealth && (
-            <Avatar size="lg">
+            <Avatar className="bg-card ring-1 ring-foreground/10" size="lg">
               {providerLogoUrl && (
                 <AvatarImage
                   alt={`${model.author} logo`}
@@ -54,15 +60,17 @@ export function ModelCard({ model }: { model: ModelSummary }) {
                   src={providerLogoUrl}
                 />
               )}
-              <AvatarFallback className="font-heading font-medium text-foreground">
+              <AvatarFallback className="bg-card font-heading font-bold text-foreground">
                 {initials(model.author)}
               </AvatarFallback>
             </Avatar>
           )}
           <div className="min-w-0 flex-1">
-            <CardTitle className="flex items-center gap-1.5">
+            <CardTitle
+              className={`flex flex-wrap items-center gap-2 font-extrabold tracking-[-0.025em] ${modelNameSize}`}
+            >
               <Link
-                className="min-w-0 truncate underline-offset-4 hover:text-primary hover:underline"
+                className="line-clamp-2 min-w-0 max-w-full leading-tight underline-offset-4 hover:underline"
                 href={modelHref(model.id)}
               >
                 {model.name}
@@ -74,7 +82,7 @@ export function ModelCard({ model }: { model: ModelSummary }) {
               )}
               <ModalityMetric input={model.inputModalities} output={model.outputModalities} />
             </CardTitle>
-            <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-muted-foreground">
               <BenchmarkMetric
                 icon={Server}
                 label="Providers offering this model for free"
@@ -114,10 +122,12 @@ export function ModelCard({ model }: { model: ModelSummary }) {
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        <p className="line-clamp-2 leading-6 text-muted-foreground">{model.description}</p>
+        <p className="line-clamp-2 max-w-4xl text-[15px] leading-6 text-muted-foreground">
+          {model.description}
+        </p>
         <Accordion>
           <AccordionItem className="border-b-0" value="providers">
-            <AccordionTrigger className="py-1.5 hover:no-underline">
+            <AccordionTrigger className="py-1.5 font-semibold hover:no-underline">
               <span className="flex min-w-0 flex-1 flex-wrap items-center gap-1.5 pr-2">
                 <span className="mr-1 shrink-0 text-xs text-muted-foreground">
                   {model.providers.length} {model.providers.length === 1 ? "provider" : "providers"}

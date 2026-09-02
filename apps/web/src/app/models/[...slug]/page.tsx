@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ModelDetail } from "@/components/model-detail";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getModels } from "@/lib/model-data";
 import { modelIdFromRouteSegments, modelRouteSegments } from "@/lib/model-path";
@@ -48,6 +49,7 @@ export default async function ModelPage({ params }: ModelPageProps) {
       <main>
         <ModelDetail model={model} relatedModels={relatedModels} />
       </main>
+      <SiteFooter />
     </div>
   );
 }

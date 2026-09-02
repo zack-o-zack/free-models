@@ -50,36 +50,31 @@
 }
 
 :root {
-  /* OpenRouter light palette: or-cloud, or-grape, and their neutral alpha steps. */
-  --background: hsl(240 50% 99.2%);
-  --foreground: hsl(197.1 53.8% 2.5%);
-
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(197.1 53.8% 2.5%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(197.1 53.8% 2.5%);
-  --secondary: hsl(263.7 90.4% 54.9% / 0.078);
-  --secondary-foreground: hsl(263.7 90.4% 54.9%);
-  --muted: hsl(197.1 53.8% 2.5% / 0.031);
-  --muted-foreground: hsl(197.1 53.8% 2.5% / 0.69);
-
-  /* 10% accent: OpenRouter grape for light-mode actions and active states. */
-  --primary: hsl(263.7 90.4% 54.9%);
-  --primary-foreground: hsl(240 50% 99.2%);
-  --accent: hsl(263.7 90.4% 54.9% / 0.078);
-  --accent-foreground: hsl(263.7 90.4% 54.9%);
-  --ring: hsl(263.7 90.4% 54.9%);
-
-  --destructive: hsl(346.8 77.2% 49.8%);
-  --destructive-foreground: hsl(240 50% 99.2%);
-  --border: hsl(197.1 53.8% 2.5% / 0.078);
-  --input: hsl(197.1 53.8% 2.5% / 0.078);
+  --background: #e8ebe6;
+  --foreground: #0e0f0c;
+  --card: #ffffff;
+  --card-foreground: #0e0f0c;
+  --popover: #ffffff;
+  --popover-foreground: #0e0f0c;
+  --secondary: #e2f6d5;
+  --secondary-foreground: #163300;
+  --muted: #f1f3ef;
+  --muted-foreground: #62645f;
+  --primary: #9fe870;
+  --primary-foreground: #163300;
+  --accent: #9fe870;
+  --accent-foreground: #163300;
+  --ring: #163300;
+  --destructive: #d03238;
+  --destructive-foreground: #ffffff;
+  --border: #cdd1ca;
+  --input: #0e0f0c;
   --chart-1: #0088fe;
   --chart-2: #00c49f;
   --chart-3: #ffbb28;
   --chart-4: #ff8042;
   --chart-5: tomato;
-  --radius: 0.75rem;
+  --radius: 1.5rem;
   --sidebar: #fafafa;
   --sidebar-foreground: #09090b;
   --sidebar-primary: #6467f2;
@@ -91,30 +86,25 @@
 }
 
 .dark {
-  /* OpenRouter dark palette: or-ink, or-cloud, and royal blue. */
-  --background: hsl(197.1 53.8% 2.5%);
-  --foreground: hsl(240 50% 99.2%);
-
-  --card: hsl(197 30% 4.5%);
-  --card-foreground: hsl(240 50% 99.2%);
-  --popover: hsl(197 30% 4.5%);
-  --popover-foreground: hsl(240 50% 99.2%);
-  --secondary: #035ade14;
-  --secondary-foreground: #4d8dff;
-  --muted: hsl(240 50% 99.2% / 0.031);
-  --muted-foreground: hsl(240 50% 99.2% / 0.627);
-
-  /* 10% accent: OpenRouter royal blue for dark-mode actions and active states. */
-  --primary: #4d8dff;
-  --primary-foreground: hsl(197.1 53.8% 2.5%);
-  --accent: #035ade14;
-  --accent-foreground: #4d8dff;
-  --ring: #4d8dff;
-
-  --destructive: hsl(346.8 77.2% 49.8%);
-  --destructive-foreground: hsl(240 50% 99.2%);
-  --border: hsl(240 50% 99.2% / 0.078);
-  --input: hsl(240 50% 99.2% / 0.078);
+  --background: #0e0f0c;
+  --foreground: #f5f6f1;
+  --card: #191b16;
+  --card-foreground: #f5f6f1;
+  --popover: #191b16;
+  --popover-foreground: #f5f6f1;
+  --secondary: #26381d;
+  --secondary-foreground: #c5edab;
+  --muted: #242720;
+  --muted-foreground: #afb2aa;
+  --primary: #9fe870;
+  --primary-foreground: #163300;
+  --accent: #9fe870;
+  --accent-foreground: #163300;
+  --ring: #9fe870;
+  --destructive: #d03238;
+  --destructive-foreground: #ffffff;
+  --border: #3b3e36;
+  --input: #d8dbd3;
   --chart-1: #0088fe;
   --chart-2: #00c49f;
   --chart-3: #ffbb28;
@@ -136,8 +126,14 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "calt";
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 }

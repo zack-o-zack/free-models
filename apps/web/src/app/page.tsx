@@ -1,4 +1,5 @@
 import { ModelExplorer } from "@/components/model-explorer";
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getModels } from "@/lib/model-data";
 
@@ -14,6 +15,7 @@ export default async function Home() {
       <main id="top">
         <ModelExplorer models={models} />
       </main>
+      <SiteFooter />
     </div>
   );
 }

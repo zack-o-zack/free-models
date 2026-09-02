@@ -46,11 +46,28 @@ interface RawCatalogue {
   models: RawModel[];
 }
 
+const publisherNames: Record<string, string> = {
+  baai: "BAAI",
+  deepseek: "DeepSeek",
+  "ibm-granite": "IBM Granite",
+  inclusionai: "InclusionAI",
+  minimax: "MiniMax",
+  mistralai: "Mistral AI",
+  moonshotai: "Moonshot AI",
+  nvidia: "NVIDIA",
+  openai: "OpenAI",
+  rekaai: "Reka AI",
+  thinkingmachines: "Thinking Machines",
+  "z-ai": "Z.ai",
+};
+
 function humanizeAuthor(id: string): string {
-  return id
-    .split("/")[0]
-    .replaceAll("-", " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  const publisher = id.split("/")[0];
+
+  return (
+    publisherNames[publisher] ??
+    publisher.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase())
+  );
 }
 
 function toModelSummary(model: RawModel): ModelSummary {

@@ -32,7 +32,7 @@ function PopoverContent({
         <PopoverPrimitive.Popup
           data-slot="popover-content"
           className={cn(
-            "relative max-h-[min(70vh,40rem)] w-[min(36rem,calc(100vw-2rem))] overflow-y-auto origin-(--transform-origin) rounded-xl border bg-popover p-4 text-popover-foreground shadow-lg outline-none transition data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
+            "relative max-h-[min(70vh,40rem)] w-[min(36rem,calc(100vw-2rem))] overflow-y-auto origin-(--transform-origin) rounded-[24px] border border-foreground/15 bg-popover p-4 text-popover-foreground shadow-lg outline-none transition data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
             className,
           )}
           {...props}

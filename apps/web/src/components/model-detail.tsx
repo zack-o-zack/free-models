@@ -8,11 +8,9 @@ import {
   FileText,
   Gauge,
   Layers,
-  ListChecks,
   Server,
   Sparkles,
   Swords,
-  Wrench,
 } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -20,6 +18,7 @@ import type { ReactNode } from "react";
 import { ModalityMetric } from "@/components/benchmark-metric";
 import { CopyButton } from "@/components/copy-button";
 import { DesignArenaTable } from "@/components/design-arena-popover";
+import { ExpandableModelDescription } from "@/components/expandable-model-description";
 import { ModelSectionNav, StickyModelHeader } from "@/components/model-detail-navigation";
 import { ProviderBadge } from "@/components/provider-badge";
 import {
@@ -41,6 +40,8 @@ import { modelHref } from "@/lib/model-path";
 import type { ModelConnection, ModelSummary } from "@/lib/model-types";
 import { providerFaviconUrl } from "@/lib/provider-logos";
 
+const MAX_SUMMARY_PROVIDERS = 4;
+
 function initials(value: string): string {
   return value
     .split(" ")
@@ -59,10 +60,6 @@ function formatDate(timestamp: number): string {
   }).format(new Date(timestamp * 1000));
 }
 
-function formatParameter(parameter: string): string {
-  return parameter.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
-}
-
 function SectionHeading({
   icon: Icon,
   title,
@@ -73,14 +70,18 @@ function SectionHeading({
   description: string;
 }) {
   return (
-    <div className="space-y-1.5">
-      <div className="flex items-center gap-2">
-        <span className="flex size-8 items-center justify-center rounded-lg bg-muted">
-          <Icon className="size-4" />
+    <div className="space-y-2">
+      <div className="flex items-center gap-3">
+        <span className="flex size-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
+          <Icon className="size-4.5" />
         </span>
-        <h2 className="font-heading text-xl font-semibold">{title}</h2>
+        <h2 className="font-heading text-2xl font-extrabold tracking-[-0.035em] sm:text-3xl">
+          {title}
+        </h2>
       </div>
-      <p className="max-w-3xl text-sm leading-6 text-muted-foreground">{description}</p>
+      <p className="max-w-3xl text-sm leading-6 text-muted-foreground sm:text-base">
+        {description}
+      </p>
     </div>
   );
 }
@@ -95,11 +96,13 @@ function SummaryItem({
   children: ReactNode;
 }) {
   return (
-    <div className="space-y-1 rounded-lg border bg-card p-3">
-      <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+    <div className="space-y-1 rounded-2xl bg-background/10 px-6 py-4">
+      <p className="flex items-center gap-1.5 text-xs text-background/60">
         <Icon className="size-3.5" /> {label}
       </p>
-      <div className="flex min-h-6 items-center font-heading text-base font-medium">{children}</div>
+      <div className="flex min-h-6 items-center font-heading text-base font-extrabold text-background">
+        {children}
+      </div>
     </div>
   );
 }
@@ -114,13 +117,13 @@ function BenchmarkCard({
   value: number;
 }) {
   return (
-    <Card size="sm">
+    <Card className="bg-background" size="sm">
       <CardHeader>
         <div className="flex items-center justify-between gap-3">
           <p className="text-xs text-muted-foreground">{label}</p>
           <Icon className="size-4 text-muted-foreground" />
         </div>
-        <CardTitle className="text-2xl tabular-nums">{formatBenchmarkScore(value)}</CardTitle>
+        <CardTitle className="text-3xl tabular-nums">{formatBenchmarkScore(value)}</CardTitle>
       </CardHeader>
     </Card>
   );
@@ -134,9 +137,17 @@ export function ModelDetail({
   relatedModels: ModelSummary[];
 }) {
   const modelLogoUrl = providerFaviconUrl(model.id.split("/")[0]);
+  const modelNameSize =
+    model.name.length > 44
+      ? "text-[1.75rem] leading-[1.02] sm:text-5xl lg:text-[3.5rem]"
+      : model.name.length > 30
+        ? "text-3xl leading-none sm:text-5xl lg:text-6xl"
+        : "text-4xl leading-none sm:text-6xl lg:text-7xl";
   const providerConnections = model.connections.length
     ? model.connections
     : model.providers.map((provider) => ({ provider, modelId: model.id }));
+  const summaryProviders = model.providers.slice(0, MAX_SUMMARY_PROVIDERS);
+  const additionalSummaryProviders = model.providers.length - summaryProviders.length;
   const connectionsByProvider = providerConnections.reduce<Map<string, ModelConnection[]>>(
     (groups, connection) => {
       const group = groups.get(connection.provider) ?? [];
@@ -154,9 +165,9 @@ export function ModelDetail({
   const hasBenchmarks = artificialAnalysisBenchmarks > 0 || model.designArena.length > 0;
 
   return (
-    <div className="mx-auto max-w-[1280px] px-4 py-6 sm:px-6 sm:py-8">
+    <div className="mx-auto max-w-[1440px] px-5 py-8 sm:px-8 sm:py-10">
       <nav
-        className="mb-6 flex items-center gap-2 text-sm text-muted-foreground"
+        className="mb-6 flex items-center gap-2 text-sm font-medium text-muted-foreground"
         aria-label="Breadcrumb"
       >
         <Link className="hover:text-primary" href="/#models">
@@ -166,10 +177,13 @@ export function ModelDetail({
         <span>{model.author}</span>
       </nav>
 
-      <section className="border-b pb-8" id="model-hero">
+      <section
+        className="overflow-hidden rounded-[32px] bg-foreground p-6 text-background sm:p-10 lg:p-12"
+        id="model-hero"
+      >
         <div className="flex min-w-0 items-start gap-4">
           {!model.isStealth && (
-            <Avatar className="size-14 sm:size-16">
+            <Avatar className="size-14 bg-white ring-4 ring-background/10 sm:size-16">
               {modelLogoUrl && (
                 <AvatarImage
                   alt={`${model.author} logo`}
@@ -177,14 +191,14 @@ export function ModelDetail({
                   src={modelLogoUrl}
                 />
               )}
-              <AvatarFallback className="font-heading text-lg font-medium text-foreground">
+              <AvatarFallback className="bg-white font-heading text-lg font-bold text-black">
                 {initials(model.author)}
               </AvatarFallback>
             </Avatar>
           )}
           <div className="min-w-0 space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h1 className={`font-heading font-extrabold tracking-[-0.055em] ${modelNameSize}`}>
                 {model.name}
               </h1>
               {model.isStealth && (
@@ -193,20 +207,27 @@ export function ModelDetail({
                 </Badge>
               )}
             </div>
-            <div className="flex min-w-0 items-center gap-1 text-sm text-muted-foreground">
+            <div className="flex min-w-0 items-center gap-1 text-sm text-background/60">
               <code className="truncate font-code text-xs sm:text-sm">{model.id}</code>
               <CopyButton label="Copy model ID" value={model.id} />
             </div>
           </div>
         </div>
 
-        <p className="mt-6 max-w-4xl text-base leading-7 text-muted-foreground">
-          {model.description}
-        </p>
+        <ExpandableModelDescription description={model.description} key={model.id} />
 
-        <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
           <SummaryItem icon={Server} label="Free providers">
-            {model.providers.length}
+            <div className="flex max-w-full items-center gap-1">
+              {summaryProviders.map((provider) => (
+                <ProviderBadge iconOnly key={provider} provider={provider} />
+              ))}
+              {additionalSummaryProviders > 0 && (
+                <span className="inline-flex h-5 items-center rounded-full bg-background/15 px-2 font-sans text-[11px] font-bold text-background">
+                  +{additionalSummaryProviders} more
+                </span>
+              )}
+            </div>
           </SummaryItem>
           {model.contextLength > 0 && (
             <SummaryItem icon={Gauge} label="Context window">
@@ -220,7 +241,11 @@ export function ModelDetail({
           )}
           {(model.inputModalities.length > 0 || model.outputModalities.length > 0) && (
             <SummaryItem icon={Layers} label="Modalities">
-              <ModalityMetric input={model.inputModalities} output={model.outputModalities} />
+              <ModalityMetric
+                input={model.inputModalities}
+                output={model.outputModalities}
+                tone="hero"
+              />
             </SummaryItem>
           )}
         </div>
@@ -233,8 +258,8 @@ export function ModelDetail({
         name={model.name}
       />
 
-      <div className="grid items-start gap-10 py-8 lg:grid-cols-[190px_minmax(0,1fr)]">
-        <aside className="sticky top-32 hidden lg:block">
+      <div className="mt-8 grid items-start gap-10 rounded-[40px] bg-card px-5 py-10 sm:px-8 lg:grid-cols-[210px_minmax(0,1fr)] lg:px-10 lg:py-14">
+        <aside className="sticky top-36 hidden rounded-[24px] bg-background p-3 lg:block">
           <ModelSectionNav />
         </aside>
 
@@ -245,7 +270,7 @@ export function ModelDetail({
               icon={Server}
               title="Providers"
             />
-            <Card className="px-4 py-2 sm:px-6">
+            <Card className="bg-background px-4 py-2 sm:px-6">
               <Accordion defaultValue={Array.from(connectionsByProvider.keys())} multiple>
                 {Array.from(connectionsByProvider.entries()).map(([provider, connections]) => (
                   <AccordionItem key={provider} value={provider}>
@@ -350,7 +375,7 @@ export function ModelDetail({
                   </div>
                 )}
                 {model.designArena.length > 0 && (
-                  <Card>
+                  <Card className="bg-background">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Swords className="size-4" /> Design Arena
@@ -363,44 +388,12 @@ export function ModelDetail({
                 )}
               </div>
             ) : (
-              <Card className="border-dashed">
+              <Card className="bg-background">
                 <CardContent className="text-muted-foreground">
                   No benchmark results are available for this model yet.
                 </CardContent>
               </Card>
             )}
-          </section>
-
-          <section className="scroll-mt-32 space-y-5" id="capabilities" tabIndex={-1}>
-            <SectionHeading
-              description="The request features exposed by this model across its listed offering."
-              icon={ListChecks}
-              title="Capabilities"
-            />
-            <div className="flex flex-wrap gap-2">
-              {model.supportsReasoning && (
-                <Badge variant="secondary">
-                  <BrainCircuit /> Reasoning
-                </Badge>
-              )}
-              {model.supportsTools && (
-                <Badge variant="secondary">
-                  <Wrench /> Tool calling
-                </Badge>
-              )}
-              {model.supportedParameters.map((parameter) => (
-                <Badge key={parameter} variant="outline">
-                  {formatParameter(parameter)}
-                </Badge>
-              ))}
-              {!model.supportsReasoning &&
-                !model.supportsTools &&
-                model.supportedParameters.length === 0 && (
-                  <p className="text-sm text-muted-foreground">
-                    No capability metadata is available for this model yet.
-                  </p>
-                )}
-            </div>
           </section>
 
           <section className="scroll-mt-32 space-y-5" id="faq" tabIndex={-1}>
@@ -409,31 +402,39 @@ export function ModelDetail({
               icon={FileText}
               title="Frequently asked questions"
             />
-            <Accordion>
+            <Accordion className="rounded-[24px] bg-background px-6 sm:px-8">
               <AccordionItem value="what-is-it">
-                <AccordionTrigger>What is {model.name}?</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionTrigger className="py-5 font-heading text-base font-bold leading-snug hover:no-underline sm:text-lg">
+                  What is {model.name}?
+                </AccordionTrigger>
+                <AccordionContent className="pb-5 text-[15px] leading-7 text-muted-foreground sm:text-base">
                   {model.description}
                 </AccordionContent>
               </AccordionItem>
               {model.contextLength > 0 && (
                 <AccordionItem value="context">
-                  <AccordionTrigger>What is the context window?</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionTrigger className="py-5 font-heading text-base font-bold leading-snug hover:no-underline sm:text-lg">
+                    What is the context window?
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5 text-[15px] leading-7 text-muted-foreground sm:text-base">
                     {model.name} has a {formatContext(model.contextLength)} token context window.
                   </AccordionContent>
                 </AccordionItem>
               )}
               <AccordionItem value="providers">
-                <AccordionTrigger>Where can I use this model for free?</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionTrigger className="py-5 font-heading text-base font-bold leading-snug hover:no-underline sm:text-lg">
+                  Where can I use this model for free?
+                </AccordionTrigger>
+                <AccordionContent className="pb-5 text-[15px] leading-7 text-muted-foreground sm:text-base">
                   It is currently listed by {model.providers.join(", ")}. Use the connection ID in
                   the Providers section and confirm exact availability in the provider docs.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="benchmarks">
-                <AccordionTrigger>Are benchmark results available?</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionTrigger className="py-5 font-heading text-base font-bold leading-snug hover:no-underline sm:text-lg">
+                  Are benchmark results available?
+                </AccordionTrigger>
+                <AccordionContent className="pb-5 text-[15px] leading-7 text-muted-foreground sm:text-base">
                   {hasBenchmarks
                     ? `${artificialAnalysisBenchmarks} Artificial Analysis scores and ${model.designArena.length} Design Arena results are listed above.`
                     : "No benchmark results are included in the catalogue for this model yet."}
@@ -452,7 +453,10 @@ export function ModelDetail({
               <div className="grid gap-3 sm:grid-cols-2">
                 {relatedModels.map((relatedModel) => (
                   <Link href={modelHref(relatedModel.id)} key={relatedModel.id}>
-                    <Card className="h-full transition-colors hover:bg-muted/30" size="sm">
+                    <Card
+                      className="h-full bg-background transition-all hover:-translate-y-0.5 hover:bg-secondary"
+                      size="sm"
+                    >
                       <CardHeader>
                         <CardTitle>{relatedModel.name}</CardTitle>
                         <p className="line-clamp-2 text-sm leading-6 text-muted-foreground">

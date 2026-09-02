@@ -19,6 +19,11 @@ export interface ProviderFilterOption {
   label: string;
 }
 
+export interface PublisherFilterOption {
+  value: string;
+  label: string;
+}
+
 export const CONTEXT_STEPS = [
   0, 4_000, 8_000, 16_000, 32_000, 64_000, 128_000, 256_000, 512_000, 1_000_000, 2_000_000,
 ];
@@ -32,11 +37,14 @@ export function formatStepLabel(value: number): string {
 interface ModelFiltersProps {
   idPrefix: string;
   selectedInputs: string[];
+  selectedPublishers: string[];
   selectedProviders: string[];
   contextRange: [number, number];
+  publisherOptions: PublisherFilterOption[];
   providerOptions: ProviderFilterOption[];
   activeFilterCount: number;
   onToggleInput: (modality: string) => void;
+  onTogglePublisher: (publisher: string) => void;
   onToggleProvider: (provider: string) => void;
   onContextRangeChange: (range: [number, number]) => void;
   onClear: () => void;
@@ -53,11 +61,14 @@ const inputOptions: Array<{ value: string; label: string; icon: LucideIcon }> = 
 export function ModelFilters({
   idPrefix,
   selectedInputs,
+  selectedPublishers,
   selectedProviders,
   contextRange,
+  publisherOptions,
   providerOptions,
   activeFilterCount,
   onToggleInput,
+  onTogglePublisher,
   onToggleProvider,
   onContextRangeChange,
   onClear,
@@ -66,9 +77,9 @@ export function ModelFilters({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center justify-between px-1 pb-3">
+      <div className="flex items-center justify-between px-1 pb-4">
         <div>
-          <p className="font-heading text-sm font-medium">Filters</p>
+          <p className="font-heading text-base font-extrabold tracking-[-0.02em]">Filters</p>
           <p className="text-xs text-muted-foreground">
             {activeFilterCount === 0 ? "Showing everything" : `${activeFilterCount} active`}
           </p>
@@ -81,7 +92,7 @@ export function ModelFilters({
 
       <Accordion
         className="min-h-0 flex-1"
-        defaultValue={["context", "inputs", "providers"]}
+        defaultValue={["context", "inputs", "publishers", "providers"]}
         multiple
       >
         <AccordionItem value="context">
@@ -120,7 +131,7 @@ export function ModelFilters({
           <AccordionContent className="grid gap-3 px-1 pt-1">
             {inputOptions.map(({ value, label, icon: Icon }) => (
               <label
-                className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:text-primary"
+                className="flex cursor-pointer items-center gap-3 text-sm font-medium text-muted-foreground hover:text-foreground"
                 htmlFor={`${idPrefix}-input-${value}`}
                 key={value}
               >
@@ -141,7 +152,7 @@ export function ModelFilters({
           <AccordionContent className="grid gap-3 px-1 pt-1">
             {providerOptions.map(({ value, label }) => (
               <label
-                className="flex cursor-pointer items-center gap-3 text-sm text-muted-foreground hover:text-primary"
+                className="flex cursor-pointer items-center gap-3 text-sm font-medium text-muted-foreground hover:text-foreground"
                 htmlFor={`${idPrefix}-provider-${value}`}
                 key={value}
               >
@@ -152,6 +163,26 @@ export function ModelFilters({
                 />
                 <Server className="size-4" />
                 {label}
+              </label>
+            ))}
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="publishers">
+          <AccordionTrigger>Publishers</AccordionTrigger>
+          <AccordionContent className="grid gap-3 px-1 pt-1">
+            {publisherOptions.map(({ value, label }) => (
+              <label
+                className="flex cursor-pointer items-center gap-3 text-sm font-medium text-muted-foreground hover:text-foreground"
+                htmlFor={`${idPrefix}-publisher-${value}`}
+                key={value}
+              >
+                <Checkbox
+                  checked={selectedPublishers.includes(value)}
+                  id={`${idPrefix}-publisher-${value}`}
+                  onCheckedChange={() => onTogglePublisher(value)}
+                />
+                <span className="min-w-0 flex-1 truncate">{label}</span>
               </label>
             ))}
           </AccordionContent>

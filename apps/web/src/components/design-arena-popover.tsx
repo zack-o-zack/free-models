@@ -38,7 +38,7 @@ export function DesignArenaPopover({ benchmarks }: { benchmarks: DesignArenaBenc
         aria-label="View Design Arena benchmarks"
         render={
           <Button
-            className="rounded-full text-muted-foreground hover:text-primary"
+            className="rounded-full border-foreground/15 text-muted-foreground hover:border-primary hover:bg-primary hover:text-primary-foreground dark:border-foreground/15 dark:hover:border-primary dark:hover:bg-primary dark:hover:text-primary-foreground"
             size="icon-xs"
             title="View Design Arena benchmarks"
             variant="outline"
@@ -70,84 +70,86 @@ export function DesignArenaTable({ benchmarks }: { benchmarks: DesignArenaBenchm
   }, new Map());
 
   return (
-    <Table className="min-w-[30rem] text-xs">
-      <TableHeader>
-        <TableRow>
-          <TableHead>Category</TableHead>
-          <TableHead>
-            <span className="inline-flex items-center gap-1.5">
-              <Swords className="size-3.5" /> Elo
-            </span>
-          </TableHead>
-          <TableHead>
-            <span className="inline-flex items-center gap-1.5">
-              <Medal className="size-3.5" /> Rank
-            </span>
-          </TableHead>
-          <TableHead>
-            <span className="inline-flex items-center gap-1.5">
-              <Target className="size-3.5" /> Win rate
-            </span>
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {Array.from(groups.entries()).map(([arena, entries]) => (
-          <Fragment key={arena}>
-            <TableRow className="hover:bg-transparent">
-              <TableHead
-                className="pt-3 pb-1 text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
-                colSpan={4}
-              >
-                {formatDesignArenaName(arena)}
-              </TableHead>
-            </TableRow>
-            {entries.map((entry) => {
-              const category = formatDesignArenaCategory(entry.category);
-              const prefix = `Design Arena · ${formatDesignArenaName(arena)} · ${category}`;
+    <div className="overflow-hidden rounded-[16px] border border-foreground/10">
+      <Table className="min-w-[30rem] text-xs">
+        <TableHeader className="bg-background/70">
+          <TableRow>
+            <TableHead>Category</TableHead>
+            <TableHead>
+              <span className="inline-flex items-center gap-1.5">
+                <Swords className="size-3.5" /> Elo
+              </span>
+            </TableHead>
+            <TableHead>
+              <span className="inline-flex items-center gap-1.5">
+                <Medal className="size-3.5" /> Rank
+              </span>
+            </TableHead>
+            <TableHead>
+              <span className="inline-flex items-center gap-1.5">
+                <Target className="size-3.5" /> Win rate
+              </span>
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {Array.from(groups.entries()).map(([arena, entries]) => (
+            <Fragment key={arena}>
+              <TableRow className="hover:bg-transparent">
+                <TableHead
+                  className="pt-3 pb-1 text-[10px] tracking-[0.12em] text-muted-foreground uppercase"
+                  colSpan={4}
+                >
+                  {formatDesignArenaName(arena)}
+                </TableHead>
+              </TableRow>
+              {entries.map((entry) => {
+                const category = formatDesignArenaCategory(entry.category);
+                const prefix = `Design Arena · ${formatDesignArenaName(arena)} · ${category}`;
 
-              return (
-                <TableRow key={`${arena}:${entry.category}`}>
-                  <TableCell className="font-medium">{category}</TableCell>
-                  <TableCell>
-                    {entry.elo === null ? (
-                      "—"
-                    ) : (
-                      <BenchmarkMetric
-                        icon={Swords}
-                        label={`${prefix} Elo`}
-                        value={formatBenchmarkElo(entry.elo)}
-                      />
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {entry.rank === null ? (
-                      "—"
-                    ) : (
-                      <BenchmarkMetric
-                        icon={Medal}
-                        label={`${prefix} rank`}
-                        value={formatBenchmarkRank(entry.rank)}
-                      />
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {entry.winRate === null ? (
-                      "—"
-                    ) : (
-                      <BenchmarkMetric
-                        icon={Target}
-                        label={`${prefix} win rate`}
-                        value={formatBenchmarkWinRate(entry.winRate)}
-                      />
-                    )}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </Fragment>
-        ))}
-      </TableBody>
-    </Table>
+                return (
+                  <TableRow key={`${arena}:${entry.category}`}>
+                    <TableCell className="font-medium">{category}</TableCell>
+                    <TableCell>
+                      {entry.elo === null ? (
+                        "—"
+                      ) : (
+                        <BenchmarkMetric
+                          icon={Swords}
+                          label={`${prefix} Elo`}
+                          value={formatBenchmarkElo(entry.elo)}
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {entry.rank === null ? (
+                        "—"
+                      ) : (
+                        <BenchmarkMetric
+                          icon={Medal}
+                          label={`${prefix} rank`}
+                          value={formatBenchmarkRank(entry.rank)}
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {entry.winRate === null ? (
+                        "—"
+                      ) : (
+                        <BenchmarkMetric
+                          icon={Target}
+                          label={`${prefix} win rate`}
+                          value={formatBenchmarkWinRate(entry.winRate)}
+                        />
+                      )}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </Fragment>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

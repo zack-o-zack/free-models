@@ -9,6 +9,7 @@ import {
   FileText,
   Image as ImageIcon,
   ListFilter,
+  Mic,
   Minus,
   Type,
   Video,
@@ -17,12 +18,13 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatModalities } from "@/lib/model-format";
+import { cn } from "@/lib/utils";
 
 const triggerClassName =
   "inline-flex shrink-0 cursor-help items-center gap-1.5 border-0 bg-transparent p-0 text-inherit focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
 
 const modalityBadgeClass =
-  "h-6 gap-1 border-primary/20 bg-secondary px-1.5 text-primary [&>svg]:size-3.5!";
+  "h-6 gap-1 border-primary/20 bg-secondary px-1.5 text-secondary-foreground [&>svg]:size-3.5!";
 
 export function BenchmarkMetric({
   icon: Icon,
@@ -55,6 +57,8 @@ const modalityIcons: Record<string, LucideIcon> = {
   rerank: ListFilter,
   speech: AudioLines,
   text: Type,
+  transcript: Mic,
+  transcription: Mic,
   video: Video,
 };
 
@@ -69,11 +73,23 @@ function ModalityIcons({ values, side }: { values: string[]; side: "input" | "ou
   });
 }
 
-export function ModalityMetric({ input, output }: { input: string[]; output: string[] }) {
+export function ModalityMetric({
+  input,
+  output,
+  tone = "default",
+}: {
+  input: string[];
+  output: string[];
+  tone?: "default" | "hero";
+}) {
   const value = formatModalities(input, output);
   if (!value) return null;
 
   const label = `Modalities — ${value}`;
+  const badgeClassName = cn(
+    modalityBadgeClass,
+    tone === "hero" && "border-background/15 bg-background/10 text-background",
+  );
 
   return (
     <Tooltip>
@@ -82,11 +98,16 @@ export function ModalityMetric({ input, output }: { input: string[]; output: str
         render={<button className={triggerClassName} type="button" />}
       >
         <span aria-hidden="true" className="inline-flex items-center gap-1">
-          <Badge className={modalityBadgeClass} variant="secondary">
+          <Badge className={badgeClassName} variant="secondary">
             <ModalityIcons side="input" values={input} />
           </Badge>
-          <ArrowRight className="size-3.5 text-muted-foreground" />
-          <Badge className={modalityBadgeClass} variant="secondary">
+          <ArrowRight
+            className={cn(
+              "size-3.5",
+              tone === "hero" ? "text-background/60" : "text-muted-foreground",
+            )}
+          />
+          <Badge className={badgeClassName} variant="secondary">
             <ModalityIcons side="output" values={output} />
           </Badge>
         </span>
