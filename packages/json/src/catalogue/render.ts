@@ -54,12 +54,19 @@ function buildCatalogue(state: CatalogueState): Catalogue {
       const providers = Object.fromEntries(
         [...offersByProvider]
           .sort(([left], [right]) => compareStrings(left, right))
-          .map(([providerId, offers]) => [
-            providerId,
-            {
-              offers: offers.sort((left, right) => compareStrings(left.model_id, right.model_id)),
-            },
-          ]),
+          .map(([providerId, offers]) => {
+            const snapshot = state.snapshots.get(providerId);
+            if (!snapshot) {
+              throw new Error(`Cannot render unknown snapshot provider ${providerId}`);
+            }
+            return [
+              providerId,
+              {
+                doc: sortJsonObject(snapshot.doc),
+                offers: offers.sort((left, right) => compareStrings(left.model_id, right.model_id)),
+              },
+            ];
+          }),
       );
 
       return {

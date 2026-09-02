@@ -225,7 +225,14 @@ async function discoverSnapshots(
       } catch (error) {
         throw providerStageError(provider.id, "validation", error);
       }
-      return [provider.id, { provider: provider.id, offers }] as const;
+      return [
+        provider.id,
+        {
+          provider: provider.id,
+          doc: sortJsonObject(provider.doc),
+          offers,
+        },
+      ] as const;
     }),
   );
 

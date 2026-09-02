@@ -1,4 +1,9 @@
-import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import {
+  type DiscoveredOffer,
+  type JsonValue,
+  jsonObjectSchema,
+  type ProviderDoc,
+} from "../catalogue/schema.ts";
 import { openCodePublishedLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 
@@ -47,6 +52,12 @@ type BunHtmlRewriterConstructor = new () => BunHtmlRewriter;
 
 export class OpenCodeProvider implements ModelProvider {
   readonly id = "opencode";
+  readonly doc: ProviderDoc = {
+    models: "https://opencode.ai/docs/zen/#models",
+    overview: OPENCODE_ZEN_DOCUMENTATION_URL,
+    pricing: "https://opencode.ai/docs/zen/#pricing",
+    rate_limit: OPENCODE_ZEN_DOCUMENTATION_URL,
+  };
 
   readonly #fetch: FetchSource;
 

@@ -1,5 +1,11 @@
 {
   "provider": "mistral",
+  "doc": {
+    "models": "https://docs.mistral.ai/getting-started/models/",
+    "overview": "https://docs.mistral.ai/",
+    "pricing": "https://mistral.ai/pricing",
+    "rate_limit": "https://docs.mistral.ai/admin/billing-usage/usage-limits"
+  },
   "offers": [
     {
       "model_id": "codestral-2508",

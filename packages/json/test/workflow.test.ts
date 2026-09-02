@@ -136,6 +136,7 @@ describe("manual identity workflow", () => {
             name: "Alpha",
             providers: {
               "fixture-a": {
+                doc: {},
                 offers: [
                   {
                     model_id: "alpha/alternate-free",
@@ -150,6 +151,7 @@ describe("manual identity workflow", () => {
                 ],
               },
               "fixture-z": {
+                doc: {},
                 offers: [
                   {
                     model_id: "zeta/alpha-free",
@@ -165,6 +167,7 @@ describe("manual identity workflow", () => {
             name: "Beta",
             providers: {
               "fixture-z": {
+                doc: {},
                 offers: [
                   {
                     model_id: "zeta/beta-free",

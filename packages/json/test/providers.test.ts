@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { providerDocSchema } from "../src/catalogue/schema.ts";
 import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
@@ -29,6 +30,7 @@ import {
   nvidiaModelsUrl,
   parseNvidiaLimits,
 } from "../src/providers/nvidia.ts";
+import { providerRegistry } from "../src/providers/registry.ts";
 import {
   parseTokenRouterModels,
   parseTokenRouterPricing,
@@ -59,6 +61,33 @@ describe("compact provider limit terms", () => {
     expect(openCodePublishedLimits()).toEqual({
       terms: ["200 req / day"],
     });
+  });
+});
+
+describe("provider documentation metadata", () => {
+  test("validates documentation schema on valid and invalid URLs", () => {
+    expect(providerDocSchema.safeParse({}).success).toBe(true);
+    expect(
+      providerDocSchema.safeParse({
+        overview: "https://example.com/docs",
+        rate_limit: "https://example.com/limits",
+      }).success,
+    ).toBe(true);
+    expect(
+      providerDocSchema.safeParse({
+        overview: "not-a-url",
+      }).success,
+    ).toBe(false);
+  });
+
+  test("every registered provider exposes structured documentation URLs", () => {
+    expect(providerRegistry.length).toBeGreaterThan(0);
+    for (const provider of providerRegistry) {
+      expect(provider.doc).toBeDefined();
+      const parseResult = providerDocSchema.safeParse(provider.doc);
+      expect(parseResult.success).toBe(true);
+      expect(Object.keys(provider.doc ?? {}).length).toBeGreaterThan(0);
+    }
   });
 });
 

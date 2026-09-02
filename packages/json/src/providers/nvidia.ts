@@ -3,6 +3,7 @@ import {
   type JsonValue,
   jsonObjectSchema,
   type OfferLimits,
+  type ProviderDoc,
 } from "../catalogue/schema.ts";
 import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
@@ -33,6 +34,12 @@ interface NvidiaModel {
 
 export class NvidiaProvider implements ModelProvider {
   readonly id = "nvidia";
+  readonly doc: ProviderDoc = {
+    models: "https://build.nvidia.com/explore/discover",
+    overview: "https://docs.api.nvidia.com/",
+    pricing: NVIDIA_LIMITS_URL,
+    rate_limit: NVIDIA_LIMITS_URL,
+  };
 
   readonly #fetch: FetchSource;
 

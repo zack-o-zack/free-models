@@ -83,6 +83,12 @@ describe("OpenCode Zen discovery", () => {
 
       expect(await Bun.file(join(workspace, "catalogue/snapshots/opencode.json")).json()).toEqual({
         provider: "opencode",
+        doc: {
+          models: "https://opencode.ai/docs/zen/#models",
+          overview: "https://opencode.ai/docs/zen/",
+          pricing: "https://opencode.ai/docs/zen/#pricing",
+          rate_limit: "https://opencode.ai/docs/zen/",
+        },
         offers: [
           {
             model_id: "big-pickle",

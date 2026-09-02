@@ -1,5 +1,11 @@
 {
   "provider": "groq",
+  "doc": {
+    "models": "https://console.groq.com/docs/models",
+    "overview": "https://console.groq.com/docs/overview",
+    "pricing": "https://groq.com/pricing",
+    "rate_limit": "https://console.groq.com/docs/rate-limits"
+  },
   "offers": [
     {
       "model_id": "canopylabs/orpheus-arabic-saudi",

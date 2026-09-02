@@ -43,9 +43,19 @@ export const offerSchema = z
   })
   .strict();
 
+export const providerDocSchema = z
+  .object({
+    models: z.string().url().optional(),
+    overview: z.string().url().optional(),
+    pricing: z.string().url().optional(),
+    rate_limit: z.string().url().optional(),
+  })
+  .catchall(z.string().url());
+
 export const providerSnapshotSchema = z
   .object({
     provider: providerIdSchema,
+    doc: providerDocSchema,
     offers: z.array(offerSchema),
   })
   .strict();
@@ -88,6 +98,7 @@ export const catalogueSchema = z
             providerIdSchema,
             z
               .object({
+                doc: providerDocSchema,
                 offers: z.array(offerSchema),
               })
               .strict(),
@@ -103,6 +114,7 @@ export type CanonicalModel = z.infer<typeof canonicalModelSchema>;
 export type CanonicalModels = z.infer<typeof canonicalModelsSchema>;
 export type DiscoveredOffer = z.infer<typeof offerSchema>;
 export type OfferLimits = z.infer<typeof limitsSchema>;
+export type ProviderDoc = z.infer<typeof providerDocSchema>;
 export type ProviderMappings = z.infer<typeof providerMappingsSchema>;
 export type ProviderSnapshot = z.infer<typeof providerSnapshotSchema>;
 export type Unresolved = z.infer<typeof unresolvedSchema>;

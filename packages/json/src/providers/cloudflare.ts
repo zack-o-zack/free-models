@@ -1,4 +1,4 @@
-import type { DiscoveredOffer, JsonValue, OfferLimits } from "../catalogue/schema.ts";
+import type { DiscoveredOffer, JsonValue, OfferLimits, ProviderDoc } from "../catalogue/schema.ts";
 import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchText, normalizeText } from "./source.ts";
@@ -25,6 +25,12 @@ interface CloudflarePricing {
 
 export class CloudflareProvider implements ModelProvider {
   readonly id = "cloudflare";
+  readonly doc: ProviderDoc = {
+    models: "https://developers.cloudflare.com/workers-ai/models/",
+    overview: "https://developers.cloudflare.com/workers-ai/",
+    pricing: CLOUDFLARE_WORKERS_AI_PRICING_URL,
+    rate_limit: "https://developers.cloudflare.com/workers-ai/platform/limits/",
+  };
 
   readonly #fetch: FetchSource;
 

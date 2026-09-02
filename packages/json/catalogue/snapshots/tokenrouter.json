@@ -1,5 +1,11 @@
 {
   "provider": "tokenrouter",
+  "doc": {
+    "models": "https://www.tokenrouter.com/models/",
+    "overview": "https://www.tokenrouter.com/docs/",
+    "pricing": "https://api.tokenrouter.com/api/pricing",
+    "rate_limit": "https://www.tokenrouter.com/docs/"
+  },
   "offers": [
     {
       "model_id": "z-ai/glm-5.3-free",

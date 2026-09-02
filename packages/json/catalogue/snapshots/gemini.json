@@ -1,5 +1,11 @@
 {
   "provider": "gemini",
+  "doc": {
+    "models": "https://ai.google.dev/gemini-api/docs/models/gemini",
+    "overview": "https://ai.google.dev/gemini-api/docs",
+    "pricing": "https://ai.google.dev/gemini-api/docs/pricing?hl=en",
+    "rate_limit": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en"
+  },
   "offers": [
     {
       "model_id": "gemini-2.5-flash",

@@ -3,6 +3,7 @@ import {
   type JsonValue,
   jsonObjectSchema,
   type OfferLimits,
+  type ProviderDoc,
 } from "../catalogue/schema.ts";
 import type {
   ActiveCanonicalModel,
@@ -36,6 +37,12 @@ export interface OpenRouterProviderOptions {
 
 export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvider {
   readonly id = "openrouter";
+  readonly doc: ProviderDoc = {
+    models: "https://openrouter.ai/models",
+    overview: "https://openrouter.ai/docs/quickstart",
+    pricing: "https://openrouter.ai/docs/models",
+    rate_limit: OPENROUTER_LIMITS_URL,
+  };
 
   readonly #fetch: FetchModels;
 

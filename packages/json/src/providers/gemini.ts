@@ -1,4 +1,4 @@
-import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import type { DiscoveredOffer, JsonValue, ProviderDoc } from "../catalogue/schema.ts";
 import { geminiUnconfirmedLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
@@ -25,6 +25,12 @@ interface FreeGeminiModel {
 
 export class GeminiProvider implements ModelProvider {
   readonly id = "gemini";
+  readonly doc: ProviderDoc = {
+    models: "https://ai.google.dev/gemini-api/docs/models/gemini",
+    overview: "https://ai.google.dev/gemini-api/docs",
+    pricing: GEMINI_PRICING_URL,
+    rate_limit: GEMINI_RATE_LIMITS_URL,
+  };
 
   readonly #fetch: FetchSource;
 

@@ -1,4 +1,9 @@
-import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import {
+  type DiscoveredOffer,
+  type JsonValue,
+  jsonObjectSchema,
+  type ProviderDoc,
+} from "../catalogue/schema.ts";
 import { mistralUnconfirmedLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
@@ -14,6 +19,12 @@ export interface MistralProviderOptions {
 
 export class MistralProvider implements ModelProvider {
   readonly id = "mistral";
+  readonly doc: ProviderDoc = {
+    models: "https://docs.mistral.ai/getting-started/models/",
+    overview: "https://docs.mistral.ai/",
+    pricing: "https://mistral.ai/pricing",
+    rate_limit: MISTRAL_RATE_LIMITS_URL,
+  };
 
   readonly #fetch: FetchSource;
   readonly #apiKey: string | undefined;

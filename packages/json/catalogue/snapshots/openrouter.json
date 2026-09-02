@@ -1,5 +1,11 @@
 {
   "provider": "openrouter",
+  "doc": {
+    "models": "https://openrouter.ai/models",
+    "overview": "https://openrouter.ai/docs/quickstart",
+    "pricing": "https://openrouter.ai/docs/models",
+    "rate_limit": "https://openrouter.ai/docs/api/reference/limits"
+  },
   "offers": [
     {
       "model_id": "cohere/north-mini-code:free",

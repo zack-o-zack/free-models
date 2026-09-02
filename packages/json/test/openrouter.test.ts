@@ -63,6 +63,12 @@ describe("OpenRouter discovery", () => {
       expect(await Bun.file(join(workspace, "catalogue/snapshots/openrouter.json")).json()).toEqual(
         {
           provider: "openrouter",
+          doc: {
+            models: "https://openrouter.ai/models",
+            overview: "https://openrouter.ai/docs/quickstart",
+            pricing: "https://openrouter.ai/docs/models",
+            rate_limit: "https://openrouter.ai/docs/api/reference/limits",
+          },
           offers: [
             {
               model_id: "alpha/model:free",

@@ -1,5 +1,11 @@
 {
   "provider": "nvidia",
+  "doc": {
+    "models": "https://build.nvidia.com/explore/discover",
+    "overview": "https://docs.api.nvidia.com/",
+    "pricing": "https://build.nvidia.com/",
+    "rate_limit": "https://build.nvidia.com/"
+  },
   "offers": [
     {
       "model_id": "deepseek-ai/deepseek-v4-flash-0731",

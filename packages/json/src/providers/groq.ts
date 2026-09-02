@@ -1,4 +1,4 @@
-import type { DiscoveredOffer, JsonValue, OfferLimits } from "../catalogue/schema.ts";
+import type { DiscoveredOffer, JsonValue, OfferLimits, ProviderDoc } from "../catalogue/schema.ts";
 import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
@@ -27,6 +27,12 @@ interface ParsedTable {
 
 export class GroqProvider implements ModelProvider {
   readonly id = "groq";
+  readonly doc: ProviderDoc = {
+    models: "https://console.groq.com/docs/models",
+    overview: "https://console.groq.com/docs/overview",
+    pricing: "https://groq.com/pricing",
+    rate_limit: GROQ_RATE_LIMITS_URL,
+  };
 
   readonly #fetch: FetchSource;
 
