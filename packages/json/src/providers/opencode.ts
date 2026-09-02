@@ -1,3 +1,4 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import {
   type DiscoveredOffer,
   type JsonValue,
@@ -5,6 +6,7 @@ import {
   type ProviderDoc,
 } from "../catalogue/schema.ts";
 import { openCodePublishedLimits } from "./limits.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENCODE_ZEN_DOCUMENTATION_URL = "https://opencode.ai/docs/zen/";
@@ -27,6 +29,7 @@ export interface OpenCodeProviderOptions {
 }
 
 interface DocumentedOffer {
+  readonly modelName: string;
   readonly modelId: string;
   readonly endpoint: string;
   readonly aiSdkPackage: string;
@@ -52,6 +55,7 @@ type BunHtmlRewriterConstructor = new () => BunHtmlRewriter;
 
 export class OpenCodeProvider implements ModelProvider {
   readonly id = "opencode";
+  readonly name = "OpenCode";
   readonly doc: ProviderDoc = {
     models: "https://opencode.ai/docs/zen/#models",
     overview: OPENCODE_ZEN_DOCUMENTATION_URL,
@@ -65,7 +69,7 @@ export class OpenCodeProvider implements ModelProvider {
     this.#fetch = options.fetch ?? fetch;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     const [documentationResponse, modelsResponse] = await Promise.all([
       this.#request(
         OPENCODE_ZEN_DOCUMENTATION_URL,
@@ -82,6 +86,12 @@ export class OpenCodeProvider implements ModelProvider {
     const documentedOffers = await parseOpenCodeDocumentation(documentation);
     const liveModels = parseOpenCodeModels(modelsPayload);
 
+    const openCodeMeta = modelsDev.get(this.id);
+    const env =
+      openCodeMeta?.env && openCodeMeta.env.length > 0
+        ? [...openCodeMeta.env]
+        : ["OPENCODE_API_KEY"];
+
     return documentedOffers.map((documentedOffer) => {
       const liveModel = liveModels.get(documentedOffer.modelId);
       if (!liveModel) {
@@ -90,11 +100,17 @@ export class OpenCodeProvider implements ModelProvider {
         );
       }
 
+      const protocol = protocolFromAiSdkPackage(documentedOffer.aiSdkPackage);
+
       return {
         model_id: documentedOffer.modelId,
+        name: documentedOffer.modelName || desluggifyModelId(documentedOffer.modelId),
         connection: {
           ai_sdk_package: documentedOffer.aiSdkPackage,
+          auth: { env },
+          base_url: "https://opencode.ai/zen/v1",
           endpoint: documentedOffer.endpoint,
+          protocol,
         },
         limits: openCodePublishedLimits(),
       };
@@ -148,7 +164,7 @@ export async function parseOpenCodeDocumentation(html: string): Promise<Document
     if (endpointModelIds.has(modelId)) {
       throw new Error(`OpenCode Zen endpoint table contains duplicate model ID: ${modelId}`);
     }
-    endpointsByName.set(modelName, { modelId, endpoint, aiSdkPackage });
+    endpointsByName.set(modelName, { modelName, modelId, endpoint, aiSdkPackage });
     endpointModelIds.add(modelId);
   }
 
@@ -340,4 +356,20 @@ function normalizeCellText(value: string): string {
 
 function equalStrings(left: readonly string[], right: readonly string[]): boolean {
   return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+const AI_SDK_PACKAGE_PROTOCOLS: Readonly<Record<string, string>> = {
+  "@ai-sdk/openai": "openai",
+  "@ai-sdk/openai-compatible": "openai",
+  "@ai-sdk/anthropic": "anthropic",
+  "@ai-sdk/google": "google",
+};
+
+export function protocolFromAiSdkPackage(aiSdkPackage: string): string {
+  const normalized = aiSdkPackage.trim().toLowerCase();
+  const protocol = AI_SDK_PACKAGE_PROTOCOLS[normalized];
+  if (!protocol) {
+    throw new Error(`OpenCode Zen encountered unsupported AI SDK package: ${aiSdkPackage}`);
+  }
+  return protocol;
 }

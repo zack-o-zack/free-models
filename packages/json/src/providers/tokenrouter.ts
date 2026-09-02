@@ -1,3 +1,4 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import {
   type DiscoveredOffer,
   type JsonValue,
@@ -5,6 +6,7 @@ import {
   type ProviderDoc,
 } from "../catalogue/schema.ts";
 import { tokenRouterUnconfirmedLimits } from "./limits.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -27,6 +29,7 @@ export interface TokenRouterProviderOptions {
 
 export class TokenRouterProvider implements ModelProvider {
   readonly id = "tokenrouter";
+  readonly name = "TokenRouter";
   readonly doc: ProviderDoc = {
     models: "https://www.tokenrouter.com/models/",
     overview: "https://www.tokenrouter.com/docs/",
@@ -42,7 +45,7 @@ export class TokenRouterProvider implements ModelProvider {
     this.#apiKey = options.apiKey ?? process.env.TOKENROUTER_API_KEY;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     if (!this.#apiKey) {
       throw new Error("TokenRouter discovery requires TOKENROUTER_API_KEY");
     }
@@ -66,10 +69,21 @@ export class TokenRouterProvider implements ModelProvider {
       throw new Error("TokenRouter catalogue contains no active native free models");
     }
 
+    const tokenRouterMeta = modelsDev.get(this.id);
+    const env =
+      tokenRouterMeta?.env && tokenRouterMeta.env.length > 0
+        ? [...tokenRouterMeta.env]
+        : ["TOKENROUTER_API_KEY"];
+
     return activeFreeModels.map(({ modelId, supportedEndpointTypes }) => ({
       model_id: modelId,
+      name: desluggifyModelId(modelId),
       connection: {
+        auth: { env },
         base_url: TOKENROUTER_API_BASE_URL,
+        protocol: supportedEndpointTypes.includes("openai")
+          ? "openai"
+          : (supportedEndpointTypes[0] ?? "openai"),
         supported_endpoint_types: supportedEndpointTypes,
       },
       limits: tokenRouterUnconfirmedLimits(),

@@ -1,5 +1,6 @@
 {
   "provider": "opencode",
+  "name": "OpenCode",
   "doc": {
     "models": "https://opencode.ai/docs/zen/#models",
     "overview": "https://opencode.ai/docs/zen/",
@@ -9,9 +10,17 @@
   "offers": [
     {
       "model_id": "big-pickle",
+      "name": "Big Pickle",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/zen/v1",
+        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -21,9 +30,17 @@
     },
     {
       "model_id": "ling-3.0-flash-fin-free",
+      "name": "Ling 3.0 Flash Fin Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/zen/v1",
+        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -33,9 +50,17 @@
     },
     {
       "model_id": "mimo-v2.5-free",
+      "name": "MiMo-V2.5 Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/zen/v1",
+        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -45,9 +70,17 @@
     },
     {
       "model_id": "muse-spark-1.2-contributor-free",
+      "name": "Muse Spark 1.2 Contributor Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai",
-        "endpoint": "https://opencode.ai/zen/v1/responses"
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/zen/v1",
+        "endpoint": "https://opencode.ai/zen/v1/responses",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -57,9 +90,17 @@
     },
     {
       "model_id": "nemotron-3-ultra-free",
+      "name": "Nemotron 3 Ultra Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/zen/v1",
+        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -69,9 +110,17 @@
     },
     {
       "model_id": "nemotron-3.5-lightning-free",
+      "name": "Nemotron 3.5 Lightning Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions"
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/zen/v1",
+        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [

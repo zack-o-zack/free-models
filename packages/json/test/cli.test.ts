@@ -39,7 +39,7 @@ async function prepareEmptyWorkspace(workspace: string): Promise<void> {
     );
     await Bun.write(
       join(workspace, `catalogue/snapshots/${provider.id}.json`),
-      `${JSON.stringify({ provider: provider.id, doc: provider.doc, offers: [] }, null, 2)}\n`,
+      `${JSON.stringify({ provider: provider.id, name: provider.name ?? provider.id, doc: provider.doc, offers: [] }, null, 2)}\n`,
     );
   }
 }
@@ -81,8 +81,17 @@ describe("catalogue CLI", () => {
       ...openModel,
       providers: {
         acme: {
+          name: "Acme",
           doc: {},
-          offers: [{ model_id: "model", connection: {}, metadata: { legacy: true } }],
+          offers: [
+            {
+              model_id: "model",
+              name: "Model",
+              connection: { base_url: "https://example.com", protocol: "openai" },
+              limits: { terms: ["1 req / min"] },
+              metadata: { legacy: true },
+            },
+          ],
         },
       },
     };
@@ -94,10 +103,18 @@ describe("catalogue CLI", () => {
       ...openModel,
       providers: {
         acme: {
+          name: "Acme",
           doc: {
             overview: "https://example.com/docs",
           },
-          offers: [{ model_id: "model", connection: {}, limits: { terms: ["1 req / min"] } }],
+          offers: [
+            {
+              model_id: "model",
+              name: "Model",
+              connection: { base_url: "https://example.com", protocol: "openai" },
+              limits: { terms: ["1 req / min"] },
+            },
+          ],
         },
       },
     };

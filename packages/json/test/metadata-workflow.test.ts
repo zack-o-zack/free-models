@@ -10,14 +10,16 @@ const decoder = new TextDecoder();
 const fixtureAOffers = [
   {
     model_id: "alpha/free",
-    connection: { base_url: "https://a.example.test/v1" },
+    name: "Alpha (free)",
+    connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
     limits: fixtureLimits,
   },
 ];
 const fixtureZOffers = [
   {
     model_id: "zeta/beta-free",
-    connection: { base_url: "https://z.example.test/v1" },
+    name: "Zeta Beta (free)",
+    connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
     limits: fixtureLimits,
   },
 ];

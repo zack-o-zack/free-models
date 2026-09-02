@@ -1,3 +1,4 @@
+import { desluggifyModelId } from "../catalogue/canonical.ts";
 import {
   type DiscoveredOffer,
   type JsonValue,
@@ -5,6 +6,7 @@ import {
   type ProviderDoc,
 } from "../catalogue/schema.ts";
 import { mistralUnconfirmedLimits } from "./limits.ts";
+import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -19,6 +21,7 @@ export interface MistralProviderOptions {
 
 export class MistralProvider implements ModelProvider {
   readonly id = "mistral";
+  readonly name = "Mistral";
   readonly doc: ProviderDoc = {
     models: "https://docs.mistral.ai/getting-started/models/",
     overview: "https://docs.mistral.ai/",
@@ -34,7 +37,7 @@ export class MistralProvider implements ModelProvider {
     this.#apiKey = options.apiKey ?? process.env.MISTRAL_FREE_API_KEY;
   }
 
-  async discover(): Promise<readonly DiscoveredOffer[]> {
+  async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
     if (!this.#apiKey) {
       throw new Error(
         "Mistral discovery requires MISTRAL_FREE_API_KEY from an organization in Free mode",
@@ -46,11 +49,28 @@ export class MistralProvider implements ModelProvider {
         Authorization: `Bearer ${this.#apiKey}`,
       },
     });
+
+    const mistralMeta = modelsDev.get(this.id);
+    const env =
+      mistralMeta?.env && mistralMeta.env.length > 0 ? [...mistralMeta.env] : ["MISTRAL_API_KEY"];
+
+    const connection = {
+      base_url: MISTRAL_API_BASE_URL,
+      protocol: "openai",
+      auth: { env },
+    };
+
     return parseMistralModels(payload).map((model) => {
       const modelId = model.id as string;
+      const modelName =
+        typeof model.name === "string" && model.name.trim().length > 0
+          ? model.name.trim()
+          : desluggifyModelId(modelId);
+
       return {
         model_id: modelId,
-        connection: { base_url: MISTRAL_API_BASE_URL },
+        name: modelName,
+        connection,
         limits: mistralUnconfirmedLimits(),
       };
     });

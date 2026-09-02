@@ -179,14 +179,12 @@ export function compareStrings(left: string, right: string): number {
   return left > right ? 1 : 0;
 }
 
-export function sortJsonObject(value: { [key: string]: JsonValue }): {
-  [key: string]: JsonValue;
-} {
+export function sortJsonObject<T extends { [key: string]: JsonValue }>(value: T): T {
   return Object.fromEntries(
     Object.entries(value)
       .sort(([left], [right]) => compareStrings(left, right))
       .map(([key, child]) => [key, sortJsonValue(child)]),
-  );
+  ) as T;
 }
 
 function sortJsonValue(value: JsonValue): JsonValue {
