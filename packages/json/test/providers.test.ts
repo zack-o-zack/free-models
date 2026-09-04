@@ -8,12 +8,21 @@ import {
   cloudflareOfferLimits,
 } from "../src/providers/cloudflare.ts";
 import {
+  COHERE_API_BASE_URL,
+  COHERE_MODELS_URL,
+  CohereProvider,
+  cohereConnection,
+  cohereModelsUrl,
+  parseCohereModelsPage,
+} from "../src/providers/cohere.ts";
+import {
   GEMINI_API_BASE_URL,
   GEMINI_PRICING_URL,
   GeminiProvider,
 } from "../src/providers/gemini.ts";
 import { GROQ_API_BASE_URL, GroqProvider, groqOfferLimits } from "../src/providers/groq.ts";
 import {
+  cohereOfferLimits,
   geminiUnconfirmedLimits,
   mistralUnconfirmedLimits,
   openCodePublishedLimits,
@@ -62,6 +71,28 @@ describe("compact provider limit terms", () => {
     expect(openCodePublishedLimits()).toEqual({
       terms: ["200 req / day"],
     });
+  });
+
+  test("returns per-endpoint Cohere trial terms with a monthly cap", () => {
+    expect(cohereOfferLimits(["chat"])).toEqual({
+      terms: ["20 req / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["rerank"])).toEqual({
+      terms: ["10 req / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["embed"])).toEqual({
+      terms: ["2k inputs / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["embed_image"])).toEqual({
+      terms: ["5 inputs / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["transcriptions"])).toEqual({
+      terms: ["5 req / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["generate"])).toEqual({
+      terms: ["500 req / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["chat", "generate"])).toEqual(cohereOfferLimits(["chat"]));
   });
 });
 
@@ -339,6 +370,105 @@ describe("Mistral discovery", () => {
   test("requires a key explicitly scoped to an organization in Free mode", async () => {
     const provider = new MistralProvider({ apiKey: "" });
     expect(provider.discover(new Map())).rejects.toThrow("MISTRAL_FREE_API_KEY");
+  });
+});
+
+describe("Cohere discovery", () => {
+  test("routes native-only endpoints to the Cohere API", () => {
+    const env = ["COHERE_API_KEY"];
+    expect(cohereConnection(["chat"], env)).toEqual({
+      base_url: COHERE_API_BASE_URL,
+      protocol: "openai",
+      auth: { env },
+    });
+    expect(cohereConnection(["embed"], env)).toEqual(cohereConnection(["chat"], env));
+    expect(cohereConnection(["transcriptions"], env)).toEqual(cohereConnection(["chat"], env));
+    expect(cohereConnection(["rerank"], env)).toEqual({
+      base_url: "https://api.cohere.com/v1",
+      protocol: "cohere",
+      auth: { env },
+    });
+    expect(cohereConnection(["embed_image"], env)).toEqual(cohereConnection(["rerank"], env));
+    expect(cohereConnection(["parse"], env)).toEqual({
+      base_url: "https://api.cohere.com/v2",
+      protocol: "cohere",
+      auth: { env },
+    });
+  });
+
+  test("follows pagination while skipping deprecated and fine-tuned models", async () => {
+    const modelsDev = new Map([
+      [
+        "cohere",
+        {
+          id: "cohere",
+          env: ["COHERE_API_KEY"],
+        },
+      ],
+    ]);
+    const provider = new CohereProvider({
+      apiKey: "cohere-trial-secret",
+      fetch: async (url, init) => {
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        expect(new Headers(init?.headers).get("authorization")).toBe("Bearer cohere-trial-secret");
+        if (url === cohereModelsUrl()) {
+          expect(url).toContain(COHERE_MODELS_URL);
+          return Response.json({
+            models: [
+              { name: "command-a-03-2025", endpoints: ["chat"], finetuned: false },
+              { name: "deprecated-model", is_deprecated: true, endpoints: ["chat"] },
+              { name: "custom-model", finetuned: true, endpoints: ["chat"] },
+            ],
+            next_page_token: "page-2",
+          });
+        }
+        if (url === cohereModelsUrl("page-2")) {
+          return Response.json({
+            models: [
+              { name: "embed-v4.0", endpoints: ["embed"] },
+              { name: "rerank-v3.0", endpoints: ["rerank"] },
+              { name: "parse-v5.0", endpoints: ["parse"] },
+              { name: "cohere-transcribe-03-2026", endpoints: ["transcriptions"] },
+            ],
+          });
+        }
+        throw new Error(`Unexpected URL: ${url}`);
+      },
+    });
+
+    const expected = [
+      { modelId: "command-a-03-2025", endpoints: ["chat"] },
+      { modelId: "embed-v4.0", endpoints: ["embed"] },
+      { modelId: "rerank-v3.0", endpoints: ["rerank"] },
+      { modelId: "parse-v5.0", endpoints: ["parse"] },
+      { modelId: "cohere-transcribe-03-2026", endpoints: ["transcriptions"] },
+    ];
+    expect(await provider.discover(modelsDev)).toEqual(
+      expected.map(({ modelId, endpoints }) => ({
+        model_id: modelId,
+        name: desluggifyModelId(modelId),
+        connection: cohereConnection(endpoints, ["COHERE_API_KEY"]),
+        limits: cohereOfferLimits(endpoints),
+      })),
+    );
+  });
+
+  test("requires a trial key because listing models is authenticated", async () => {
+    const provider = new CohereProvider({ apiKey: "" });
+    expect(provider.discover(new Map())).rejects.toThrow("COHERE_API_KEY");
+  });
+
+  test("rejects duplicate, malformed, and empty model records", () => {
+    expect(() =>
+      parseCohereModelsPage({ models: [{ name: "duplicate" }, { name: "duplicate" }] }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseCohereModelsPage({ models: [{}] })).toThrow("no valid name");
+    expect(() => parseCohereModelsPage({ models: "not-an-array" })).toThrow(
+      "expected a JSON-safe models array",
+    );
+    expect(() =>
+      parseCohereModelsPage({ models: [{ name: "bad-endpoints", endpoints: "chat" }] }),
+    ).toThrow("invalid endpoints");
   });
 });
 

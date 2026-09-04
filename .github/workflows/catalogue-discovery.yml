@@ -54,6 +54,7 @@ jobs:
 
       - name: Discover provider offers
         env:
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
           MISTRAL_FREE_API_KEY: ${{ secrets.MISTRAL_FREE_API_KEY }}
           TOKENROUTER_API_KEY: ${{ secrets.TOKENROUTER_API_KEY }}
         run: bun run catalogue:discover

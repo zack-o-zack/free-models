@@ -30,6 +30,27 @@ export function tokenRouterUnconfirmedLimits(): OfferLimits {
   return termsLimits("8 req / min");
 }
 
+export function cohereOfferLimits(endpoints: readonly string[]): OfferLimits {
+  const monthly = formatLimitTerm(1_000, "req", "month");
+  const normalized = new Set(endpoints.map((endpoint) => endpoint.trim().toLowerCase()));
+  if (normalized.has("chat")) {
+    return termsLimits(formatLimitTerm(20, "req", "min"), monthly);
+  }
+  if (normalized.has("rerank")) {
+    return termsLimits(formatLimitTerm(10, "req", "min"), monthly);
+  }
+  if (normalized.has("embed")) {
+    return termsLimits(formatLimitTerm(2_000, "inputs", "min"), monthly);
+  }
+  if (normalized.has("embed_image")) {
+    return termsLimits(formatLimitTerm(5, "inputs", "min"), monthly);
+  }
+  if (normalized.has("transcriptions")) {
+    return termsLimits(formatLimitTerm(5, "req", "min"), monthly);
+  }
+  return termsLimits(formatLimitTerm(500, "req", "min"), monthly);
+}
+
 export function openCodePublishedLimits(): OfferLimits {
   return termsLimits("200 req / day");
 }
