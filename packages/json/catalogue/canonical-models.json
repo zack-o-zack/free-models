@@ -2714,6 +2714,10 @@
       }
     },
     {
+      "id": "google/gemini-3.8-flash",
+      "name": "Google: Gemini 3.8 Flash"
+    },
+    {
       "id": "google/gemini-embedding-001",
       "name": "Google: Gemini Embedding 001",
       "architecture": {
@@ -3999,6 +4003,10 @@
         "is_moderated": true,
         "max_completion_tokens": 943718
       }
+    },
+    {
+      "id": "meta/muse-spark-1.3-contributor",
+      "name": "Muse Spark 1.3 Contributor"
     },
     {
       "id": "microsoft/resnet-50",

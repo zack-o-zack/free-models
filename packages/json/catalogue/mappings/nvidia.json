@@ -37,7 +37,6 @@
     "nvidia/streampetr": "nvidia/streampetr",
     "nvidia/studiovoice": "nvidia/studiovoice",
     "nvidia/synthetic-video-detector": "nvidia/synthetic-video-detector",
-    "openai/gpt-oss-120b": "openai/gpt-oss-120b",
     "openai/gpt-oss-20b": "openai/gpt-oss-20b",
     "poolside/laguna-xs-2.1": "poolside/laguna-xs-2.1"
   }

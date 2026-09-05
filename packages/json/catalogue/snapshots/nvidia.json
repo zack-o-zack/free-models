@@ -693,25 +693,6 @@
       }
     },
     {
-      "model_id": "openai/gpt-oss-120b",
-      "name": "gpt-oss-120b",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      }
-    },
-    {
       "model_id": "openai/gpt-oss-20b",
       "name": "gpt-oss-20b",
       "connection": {
