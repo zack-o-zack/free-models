@@ -209,10 +209,11 @@ export async function parseBazaarLinkLimits(html: string): Promise<OfferLimits> 
 
 function parseRate(value: string, label: string, expectedPeriod: string): number {
   const match = /^(.+?)\s*\/\s*([A-Za-z]+)$/.exec(value.trim());
-  if (!match) {
+  const amount = match?.[1];
+  const period = match?.[2];
+  if (amount === undefined || period === undefined) {
     throw new Error(`BazaarLink ${label} has an invalid rate: ${value}`);
   }
-  const [, amount, period] = match as [string, string, string];
   if (period.toLowerCase() !== expectedPeriod) {
     throw new Error(`BazaarLink ${label} has an unexpected period: ${value}`);
   }
@@ -221,10 +222,11 @@ function parseRate(value: string, label: string, expectedPeriod: string): number
 
 function parseMultiplier(value: string, label: string): number {
   const match = /^×\s*(.+)$/.exec(value.trim());
-  if (!match) {
+  const amount = match?.[1];
+  if (amount === undefined) {
     throw new Error(`BazaarLink ${label} has an invalid multiplier: ${value}`);
   }
-  return parseCompactInteger((match as [string, string])[1], `BazaarLink ${label}`);
+  return parseCompactInteger(amount, `BazaarLink ${label}`);
 }
 
 function multiplyUnits(budget: number, multiplier: number, label: string): number {
