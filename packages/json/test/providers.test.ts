@@ -26,6 +26,7 @@ import {
   geminiUnconfirmedLimits,
   mistralUnconfirmedLimits,
   openCodePublishedLimits,
+  requestyPublishedLimits,
   tokenRouterUnconfirmedLimits,
 } from "../src/providers/limits.ts";
 import {
@@ -41,6 +42,13 @@ import {
   parseNvidiaLimits,
 } from "../src/providers/nvidia.ts";
 import { providerRegistry } from "../src/providers/registry.ts";
+import {
+  isFreeRequestyModel,
+  parseRequestyModels,
+  REQUESTY_API_BASE_URL,
+  REQUESTY_MODELS_URL,
+  RequestyProvider,
+} from "../src/providers/requesty.ts";
 import {
   parseTokenRouterModels,
   parseTokenRouterPricing,
@@ -63,11 +71,19 @@ describe("compact provider limit terms", () => {
     });
   });
 
-  test("returns hardcoded Mistral, TokenRouter, and OpenCode terms", () => {
+  test("returns hardcoded Mistral, TokenRouter, Requesty, and OpenCode terms", () => {
     expect(mistralUnconfirmedLimits()).toEqual({
       terms: ["50 req / min", "50k tok / min"],
     });
     expect(tokenRouterUnconfirmedLimits()).toEqual({ terms: ["8 req / min"] });
+    expect(requestyPublishedLimits()).toEqual({
+      terms: [
+        "20 req / min (new orgs)",
+        "200 req / day (new orgs)",
+        "60 req / min (paying orgs)",
+        "1k req / day (paying orgs)",
+      ],
+    });
     expect(openCodePublishedLimits()).toEqual({
       terms: ["200 req / day"],
     });
@@ -224,6 +240,75 @@ describe("TokenRouter discovery", () => {
         data: [{ ...tokenRouterPrice("bad-price", 0), model_ratio: -1 }],
       }),
     ).toThrow("invalid model_ratio");
+  });
+});
+
+describe("Requesty discovery", () => {
+  test("keeps only zero-priced models and skips routing policies", async () => {
+    const modelsDev = new Map([
+      [
+        "requesty",
+        {
+          id: "requesty",
+          env: ["REQUESTY_API_KEY"],
+        },
+      ],
+    ]);
+    const provider = new RequestyProvider({
+      fetch: async (url, init) => {
+        expect(url).toBe(REQUESTY_MODELS_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        return Response.json({
+          object: "list",
+          data: [
+            requestyModel("nvidia/nemotron-3-super-120b-a12b", 0, 0),
+            requestyModel("policy/fallback", 0, 0),
+            requestyModel("openai/gpt-4o", 0.005, 0.015),
+            requestyModel("tiered/free", 0, 0, [
+              { prompt_tokens_threshold: 0, input_price: 0, output_price: 0 },
+              { prompt_tokens_threshold: 200000, input_price: 0, output_price: 0 },
+            ]),
+            requestyModel("tiered/paid", 0, 0, [
+              { prompt_tokens_threshold: 0, input_price: 0, output_price: 0 },
+              { prompt_tokens_threshold: 200000, input_price: 0.006, output_price: 0.02 },
+            ]),
+          ],
+        });
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual(
+      ["nvidia/nemotron-3-super-120b-a12b", "tiered/free"].map((modelId) => ({
+        model_id: modelId,
+        name: desluggifyModelId(modelId),
+        connection: {
+          auth: { env: ["REQUESTY_API_KEY"] },
+          base_url: REQUESTY_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: requestyPublishedLimits(),
+      })),
+    );
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseRequestyModels({
+        object: "list",
+        data: [requestyModel("duplicate", 0, 0), requestyModel("duplicate", 0, 0)],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseRequestyModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseRequestyModels({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseRequestyModels({
+        object: "list",
+        data: [requestyModel("openai/gpt-4o", 0.005, 0.015)],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseRequestyModels({ object: "list" })).toThrow("data array");
+    expect(isFreeRequestyModel({ id: "no-prices" })).toBe(false);
+    expect(isFreeRequestyModel({ id: "bad-tier", pricing: ["not-an-object"] })).toBe(false);
   });
 });
 
@@ -675,6 +760,21 @@ function nvidiaResource(name: string, nimTypes: string[]): Record<string, unknow
       { key: "nimType", values: nimTypes, unresolvedValues: [] },
       { key: "publisher", values: ["nvidia"], unresolvedValues: ["nvidia"] },
     ],
+  };
+}
+
+function requestyModel(
+  id: string,
+  input_price: number,
+  output_price: number,
+  pricing?: Record<string, unknown>[],
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    input_price,
+    output_price,
+    pricing: pricing ?? [{ prompt_tokens_threshold: 0, input_price, output_price }],
   };
 }
 

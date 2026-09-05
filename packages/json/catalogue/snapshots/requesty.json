@@ -1,0 +1,264 @@
+{
+  "provider": "requesty",
+  "name": "Requesty",
+  "doc": {
+    "models": "https://app.requesty.ai/model-library",
+    "overview": "https://docs.requesty.ai/quickstart",
+    "pricing": "https://docs.requesty.ai/features/free-models",
+    "rate_limit": "https://docs.requesty.ai/features/free-models"
+  },
+  "offers": [
+    {
+      "model_id": "google/gemma-4-31b-it",
+      "name": "Google: Gemma 4 31b it",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/leanstral-1-5",
+      "name": "Mistral: Leanstral 1 5",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "novita/inclusionai/ling-3.0-tiny",
+      "name": "Novita: Inclusionai: Ling 3.0 tiny",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/muse-glimmer-30b",
+      "name": "Nvidia: Muse glimmer 30b",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3-nano-30b-a3b",
+      "name": "Nvidia: Nemotron 3 nano 30b a3b",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+      "name": "Nvidia: Nemotron 3 nano omni 30b a3b reasoning",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3-super-120b-a12b",
+      "name": "Nvidia: Nemotron 3 super 120b a12b",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "name": "Nvidia: Nemotron 3 ultra 550b a55b",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3.5-content-safety",
+      "name": "Nvidia: Nemotron 3.5 content safety",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "name": "Nvidia: Nemotron 3.5 lightning 30b a3b",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "poolside/laguna-m.1",
+      "name": "Poolside: Laguna m.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
+      "model_id": "poolside/laguna-xs.2",
+      "name": "Poolside: Laguna xs.2",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    }
+  ]
+}

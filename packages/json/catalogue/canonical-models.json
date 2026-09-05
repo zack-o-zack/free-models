@@ -3268,6 +3268,10 @@
       }
     },
     {
+      "id": "inclusionai/ling-3.0-tiny",
+      "name": "Inclusionai: Ling 3.0 tiny"
+    },
+    {
       "id": "leonardo/lucid-origin",
       "name": "Leonardo: Lucid Origin"
     },
@@ -7239,6 +7243,10 @@
       "name": "Pipecat AI: Smart Turn V2"
     },
     {
+      "id": "poolside/laguna-m.1",
+      "name": "Poolside: Laguna m.1"
+    },
+    {
       "id": "poolside/laguna-s-2.1",
       "name": "Poolside: Laguna S 2.1",
       "architecture": {
@@ -7335,6 +7343,10 @@
         "is_moderated": false,
         "max_completion_tokens": 32768
       }
+    },
+    {
+      "id": "poolside/laguna-xs.2",
+      "name": "Poolside: Laguna xs.2"
     },
     {
       "id": "qwen/qwen-2.5-coder-32b-instruct",
