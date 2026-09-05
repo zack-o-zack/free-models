@@ -38,10 +38,10 @@ describe("catalogue automation", () => {
     expect(refreshIndex).toBeGreaterThan(unresolvedGateIndex);
     expect(source).not.toContain("bun run catalogue:render");
     expect(source).toContain(
-      "packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json",
+      "packages/json/catalogue/canonical-metadata.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json",
     );
     expect(source).toContain(
-      "git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json",
+      "git add -- packages/json/catalogue/canonical-metadata.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json",
     );
 
     const workspace = await mkdtemp(join(tmpdir(), "catalogue-automation-gate-"));

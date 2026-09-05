@@ -123,8 +123,7 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
     const sourceModels = await this.#loadModels();
     const sourceById = new Map(sourceModels.map((model) => [model.id as string, model]));
     for (const { model, offers } of models) {
-      const openRouterOffer = offers.find(({ provider }) => provider === this.id);
-      const sourceModel = sourceById.get(openRouterOffer?.offer.model_id ?? model.id);
+      const sourceModel = findSourceModel(sourceById, model.id, offers);
       if (sourceModel) {
         metadataByCanonicalId.set(model.id, withoutId(sourceModel));
       }
@@ -224,4 +223,52 @@ function readIntegerConstant(source: string, name: string): number {
 
 function withoutId(model: Record<string, JsonValue>): Record<string, JsonValue> {
   return Object.fromEntries(Object.entries(model).filter(([key]) => key !== "id"));
+}
+
+/**
+ * Resolve the OpenRouter source record for a canonical model, always preferring
+ * the paid canonical entry over any `:free` alias.
+ *
+ * Candidate order:
+ * 1. paid variant of the resolved OpenRouter offer (strip `:free`)
+ * 2. canonical model ID as-is (paid)
+ * 3. OpenRouter offer ID as-is (`:free` record, free pricing/limits)
+ * 4. canonical ID with `:free` suffix (last resort)
+ */
+function findSourceModel(
+  sourceById: ReadonlyMap<string, Record<string, JsonValue>>,
+  canonicalId: string,
+  offers: readonly { provider: string; offer: { model_id: string } }[],
+): Record<string, JsonValue> | undefined {
+  const openRouterOffer = offers.find(({ provider }) => provider === "openrouter");
+  const candidates: string[] = [];
+
+  const push = (id: string | undefined) => {
+    if (id && !candidates.includes(id)) {
+      candidates.push(id);
+    }
+  };
+
+  if (openRouterOffer) {
+    push(stripFreeSuffix(openRouterOffer.offer.model_id));
+  }
+  push(canonicalId);
+  if (openRouterOffer) {
+    push(openRouterOffer.offer.model_id);
+  }
+  push(`${canonicalId}${OPENROUTER_FREE_SUFFIX}`);
+
+  for (const id of candidates) {
+    const source = sourceById.get(id);
+    if (source) {
+      return source;
+    }
+  }
+  return undefined;
+}
+
+function stripFreeSuffix(modelId: string): string {
+  return modelId.endsWith(OPENROUTER_FREE_SUFFIX)
+    ? modelId.slice(0, -OPENROUTER_FREE_SUFFIX.length)
+    : modelId;
 }

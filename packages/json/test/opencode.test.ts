@@ -38,6 +38,7 @@ async function writeJson(path: string, value: unknown): Promise<void> {
 async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "opencode-catalogue-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
+  await writeJson(join(workspace, "catalogue/canonical-metadata.json"), { metadata: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
   await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
   return workspace;

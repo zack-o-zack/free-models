@@ -85,11 +85,24 @@ export const canonicalModelSchema = z
     id: canonicalModelIdSchema,
     name: z.string().trim().min(1),
   })
-  .catchall(jsonValueSchema);
+  .strict();
 
 export const canonicalModelsSchema = z
   .object({
     models: z.array(canonicalModelSchema),
+  })
+  .strict();
+
+export const canonicalMetadataEntrySchema = z
+  .object({
+    id: canonicalModelIdSchema,
+    metadata: jsonObjectSchema,
+  })
+  .strict();
+
+export const canonicalMetadataSchema = z
+  .object({
+    metadata: z.array(canonicalMetadataEntrySchema),
   })
   .strict();
 
@@ -133,6 +146,8 @@ export const catalogueSchema = z
 export type Catalogue = z.infer<typeof catalogueSchema>;
 export type CanonicalModel = z.infer<typeof canonicalModelSchema>;
 export type CanonicalModels = z.infer<typeof canonicalModelsSchema>;
+export type CanonicalMetadataEntry = z.infer<typeof canonicalMetadataEntrySchema>;
+export type CanonicalMetadataFile = z.infer<typeof canonicalMetadataSchema>;
 export type Connection = z.infer<typeof connectionSchema>;
 export type ConnectionAuth = z.infer<typeof connectionAuthSchema>;
 export type ConnectionProtocol = z.infer<typeof connectionProtocolSchema>;

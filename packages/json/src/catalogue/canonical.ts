@@ -1,7 +1,7 @@
 import { sortJsonObject } from "./files.ts";
 import type { CanonicalModel, JsonValue } from "./schema.ts";
 
-const RESERVED_CANONICAL_FIELDS = new Set(["id", "name", "providers"]);
+export const RESERVED_CANONICAL_FIELDS = new Set(["id", "name", "providers"]);
 const NON_IDENTITY_NAME_SUFFIX = /(?:\s*\(\s*free\s*\)|\s+free|[-:]\s*free)$/i;
 
 export function normalizeCanonicalModelName(name: string): string {
@@ -17,7 +17,7 @@ export function normalizeCanonicalModelName(name: string): string {
 export function canonicalModelWithGeneratedFields(
   identity: Pick<CanonicalModel, "id" | "name">,
   generatedFields: Readonly<Record<string, JsonValue>>,
-): CanonicalModel {
+): CanonicalModel & Record<string, JsonValue> {
   const generated = Object.fromEntries(
     Object.entries(generatedFields).filter(([key]) => !RESERVED_CANONICAL_FIELDS.has(key)),
   );
