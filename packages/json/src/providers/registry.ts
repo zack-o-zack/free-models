@@ -1,4 +1,5 @@
 import { CloudflareProvider } from "./cloudflare.ts";
+import { CohereProvider } from "./cohere.ts";
 import { GeminiProvider } from "./gemini.ts";
 import { GroqProvider } from "./groq.ts";
 import { MistralProvider } from "./mistral.ts";
@@ -18,6 +19,7 @@ export const providerRegistry = defineProviderRegistry(
   new GeminiProvider(),
   new NvidiaProvider(),
   new CloudflareProvider(),
+  new CohereProvider(),
   new TokenRouterProvider(),
 );
 

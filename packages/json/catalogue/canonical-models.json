@@ -413,6 +413,90 @@
       }
     },
     {
+      "id": "cohere/c4ai-aya-expanse-32b",
+      "name": "Cohere: C4AI Aya Expanse 32B"
+    },
+    {
+      "id": "cohere/c4ai-aya-vision-32b",
+      "name": "Cohere: C4AI Aya Vision 32B"
+    },
+    {
+      "id": "cohere/cohere-transcribe-03-2026",
+      "name": "Cohere: Transcribe 03-2026"
+    },
+    {
+      "id": "cohere/command-a-03-2025",
+      "name": "Cohere: Command A 03-2025"
+    },
+    {
+      "id": "cohere/command-a-plus-05-2026",
+      "name": "Cohere: Command A Plus 05-2026"
+    },
+    {
+      "id": "cohere/command-a-reasoning-08-2025",
+      "name": "Cohere: Command A Reasoning 08-2025"
+    },
+    {
+      "id": "cohere/command-a-translate-08-2025",
+      "name": "Cohere: Command A Translate 08-2025"
+    },
+    {
+      "id": "cohere/command-a-vision-07-2025",
+      "name": "Cohere: Command A Vision 07-2025"
+    },
+    {
+      "id": "cohere/command-r-08-2024",
+      "name": "Cohere: Command R 08-2024"
+    },
+    {
+      "id": "cohere/command-r-plus-08-2024",
+      "name": "Cohere: Command R Plus 08-2024"
+    },
+    {
+      "id": "cohere/command-r7b-12-2024",
+      "name": "Cohere: Command R7B 12-2024"
+    },
+    {
+      "id": "cohere/command-r7b-arabic-02-2025",
+      "name": "Cohere: Command R7B Arabic 02-2025"
+    },
+    {
+      "id": "cohere/embed-english-light-v3.0",
+      "name": "Cohere: Embed English Light V3.0"
+    },
+    {
+      "id": "cohere/embed-english-light-v3.0-image",
+      "name": "Cohere: Embed English Light V3.0 Image"
+    },
+    {
+      "id": "cohere/embed-english-v3.0",
+      "name": "Cohere: Embed English V3.0"
+    },
+    {
+      "id": "cohere/embed-english-v3.0-image",
+      "name": "Cohere: Embed English V3.0 Image"
+    },
+    {
+      "id": "cohere/embed-multilingual-light-v3.0",
+      "name": "Cohere: Embed Multilingual Light V3.0"
+    },
+    {
+      "id": "cohere/embed-multilingual-light-v3.0-image",
+      "name": "Cohere: Embed Multilingual Light V3.0 Image"
+    },
+    {
+      "id": "cohere/embed-multilingual-v3.0",
+      "name": "Cohere: Embed Multilingual V3.0"
+    },
+    {
+      "id": "cohere/embed-multilingual-v3.0-image",
+      "name": "Cohere: Embed Multilingual V3.0 Image"
+    },
+    {
+      "id": "cohere/embed-v4.0",
+      "name": "Cohere: Embed V4.0"
+    },
+    {
       "id": "cohere/north-mini-code",
       "name": "Cohere: North Mini Code",
       "architecture": {
@@ -480,6 +564,46 @@
         "is_moderated": true,
         "max_completion_tokens": 64000
       }
+    },
+    {
+      "id": "cohere/parse-v5.0",
+      "name": "Cohere: Parse V5.0"
+    },
+    {
+      "id": "cohere/rerank-english-v3.0",
+      "name": "Cohere: Rerank English V3.0"
+    },
+    {
+      "id": "cohere/rerank-multilingual-v3.0",
+      "name": "Cohere: Rerank Multilingual V3.0"
+    },
+    {
+      "id": "cohere/rerank-v3.5",
+      "name": "Cohere: Rerank V3.5"
+    },
+    {
+      "id": "cohere/rerank-v4.0-fast",
+      "name": "Cohere: Rerank V4.0 Fast"
+    },
+    {
+      "id": "cohere/rerank-v4.0-pro",
+      "name": "Cohere: Rerank V4.0 Pro"
+    },
+    {
+      "id": "cohere/tiny-aya-earth",
+      "name": "Cohere: Tiny Aya Earth"
+    },
+    {
+      "id": "cohere/tiny-aya-fire",
+      "name": "Cohere: Tiny Aya Fire"
+    },
+    {
+      "id": "cohere/tiny-aya-global",
+      "name": "Cohere: Tiny Aya Global"
+    },
+    {
+      "id": "cohere/tiny-aya-water",
+      "name": "Cohere: Tiny Aya Water"
     },
     {
       "id": "deepgram/aura-2",
