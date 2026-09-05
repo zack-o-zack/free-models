@@ -3268,6 +3268,10 @@
       }
     },
     {
+      "id": "inclusionai/ling-3.0-flash-sante",
+      "name": "Ling 3.0 Flash Sante"
+    },
+    {
       "id": "inclusionai/ling-3.0-tiny",
       "name": "Inclusionai: Ling 3.0 tiny"
     },
