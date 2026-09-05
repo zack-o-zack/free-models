@@ -1,22 +1,64 @@
 import { describe, expect, test } from "bun:test";
 import { desluggifyModelId } from "../src/catalogue/canonical.ts";
+import { providerDocSchema } from "../src/catalogue/schema.ts";
+import {
+  BAZAARLINK_API_BASE_URL,
+  BAZAARLINK_FREE_URL,
+  BAZAARLINK_MODELS_URL,
+  BazaarLinkProvider,
+  isFreeBazaarLinkModel,
+  parseBazaarLinkLimits,
+  parseBazaarLinkModels,
+} from "../src/providers/bazaarlink.ts";
 import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
   CloudflareProvider,
+  cloudflareOfferLimits,
 } from "../src/providers/cloudflare.ts";
+import {
+  COHERE_API_BASE_URL,
+  COHERE_MODELS_URL,
+  CohereProvider,
+  cohereConnection,
+  cohereModelsUrl,
+  parseCohereModelsPage,
+} from "../src/providers/cohere.ts";
 import {
   GEMINI_API_BASE_URL,
   GEMINI_PRICING_URL,
   GeminiProvider,
 } from "../src/providers/gemini.ts";
-import { GROQ_API_BASE_URL, GroqProvider } from "../src/providers/groq.ts";
+import { GROQ_API_BASE_URL, GroqProvider, groqOfferLimits } from "../src/providers/groq.ts";
+import {
+  cohereOfferLimits,
+  geminiUnconfirmedLimits,
+  mistralUnconfirmedLimits,
+  openCodePublishedLimits,
+  tokenRouterUnconfirmedLimits,
+} from "../src/providers/limits.ts";
 import {
   MISTRAL_API_BASE_URL,
   MISTRAL_MODELS_URL,
   MistralProvider,
 } from "../src/providers/mistral.ts";
-import { NVIDIA_API_BASE_URL, NvidiaProvider, nvidiaModelsUrl } from "../src/providers/nvidia.ts";
+import {
+  NVIDIA_API_BASE_URL,
+  NVIDIA_LIMITS_URL,
+  NvidiaProvider,
+  nvidiaModelsUrl,
+  parseNvidiaLimits,
+} from "../src/providers/nvidia.ts";
+import { providerRegistry } from "../src/providers/registry.ts";
+import {
+  isFreeRequestyModel,
+  parseRequestyLimits,
+  parseRequestyModels,
+  REQUESTY_API_BASE_URL,
+  REQUESTY_FREE_MODELS_URL,
+  REQUESTY_MODELS_URL,
+  RequestyProvider,
+} from "../src/providers/requesty.ts";
 import {
   parseTokenRouterModels,
   parseTokenRouterPricing,
@@ -25,6 +67,79 @@ import {
   TOKENROUTER_PRICING_URL,
   TokenRouterProvider,
 } from "../src/providers/tokenrouter.ts";
+
+describe("compact provider limit terms", () => {
+  test("returns model-specific Gemini terms and a fallback", () => {
+    expect(geminiUnconfirmedLimits("gemini-3.5-flash-lite")).toEqual({
+      terms: ["15 req / min", "250k tok / min", "500 req / day"],
+    });
+    expect(geminiUnconfirmedLimits("gemini-3.5-flash")).toEqual({
+      terms: ["5 req / min", "250k tok / min", "20 req / day"],
+    });
+    expect(geminiUnconfirmedLimits("gemini-specialized")).toEqual({
+      terms: ["15 req / min", "250k tok / min", "500 req / day"],
+    });
+  });
+
+  test("returns hardcoded Mistral, TokenRouter, and OpenCode terms", () => {
+    expect(mistralUnconfirmedLimits()).toEqual({
+      terms: ["50 req / min", "50k tok / min"],
+    });
+    expect(tokenRouterUnconfirmedLimits()).toEqual({ terms: ["8 req / min"] });
+    expect(openCodePublishedLimits()).toEqual({
+      terms: ["200 req / day"],
+    });
+  });
+
+  test("returns per-endpoint Cohere trial terms with a monthly cap", () => {
+    expect(cohereOfferLimits(["chat"])).toEqual({
+      terms: ["20 req / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["rerank"])).toEqual({
+      terms: ["10 req / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["embed"])).toEqual({
+      terms: ["2k inputs / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["embed_image"])).toEqual({
+      terms: ["5 inputs / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["transcriptions"])).toEqual({
+      terms: ["5 req / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["generate"])).toEqual({
+      terms: ["500 req / min", "1k req / month"],
+    });
+    expect(cohereOfferLimits(["chat", "generate"])).toEqual(cohereOfferLimits(["chat"]));
+  });
+});
+
+describe("provider documentation metadata", () => {
+  test("validates documentation schema on valid and invalid URLs", () => {
+    expect(providerDocSchema.safeParse({}).success).toBe(true);
+    expect(
+      providerDocSchema.safeParse({
+        overview: "https://example.com/docs",
+        rate_limit: "https://example.com/limits",
+      }).success,
+    ).toBe(true);
+    expect(
+      providerDocSchema.safeParse({
+        overview: "not-a-url",
+      }).success,
+    ).toBe(false);
+  });
+
+  test("every registered provider exposes structured documentation URLs", () => {
+    expect(providerRegistry.length).toBeGreaterThan(0);
+    for (const provider of providerRegistry) {
+      expect(provider.doc).toBeDefined();
+      const parseResult = providerDocSchema.safeParse(provider.doc);
+      expect(parseResult.success).toBe(true);
+      expect(Object.keys(provider.doc ?? {}).length).toBeGreaterThan(0);
+    }
+  });
+});
 
 describe("TokenRouter discovery", () => {
   test("keeps every endpoint type on active native free models", async () => {
@@ -99,6 +214,7 @@ describe("TokenRouter discovery", () => {
               : (sortedEndpoints[0] ?? "openai"),
             supported_endpoint_types: sortedEndpoints,
           },
+          limits: tokenRouterUnconfirmedLimits(),
         };
       }),
     );
@@ -126,6 +242,282 @@ describe("TokenRouter discovery", () => {
         data: [{ ...tokenRouterPrice("bad-price", 0), model_ratio: -1 }],
       }),
     ).toThrow("invalid model_ratio");
+  });
+});
+
+describe("Requesty discovery", () => {
+  test("keeps only zero-priced models and skips routing policies", async () => {
+    const modelsDev = new Map([
+      [
+        "requesty",
+        {
+          id: "requesty",
+          env: ["REQUESTY_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: [
+        "20 req / min (new orgs)",
+        "200 req / day (new orgs)",
+        "60 req / min (paying orgs)",
+        "1k req / day (paying orgs)",
+      ],
+    };
+    const provider = new RequestyProvider({
+      fetch: async (url, init) => {
+        if (url === REQUESTY_MODELS_URL) {
+          expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+          return Response.json({
+            object: "list",
+            data: [
+              requestyModel("nvidia/nemotron-3-super-120b-a12b", 0, 0),
+              requestyModel("policy/fallback", 0, 0),
+              requestyModel("openai/gpt-4o", 0.005, 0.015),
+              requestyModel("tiered/free", 0, 0, [
+                { prompt_tokens_threshold: 0, input_price: 0, output_price: 0 },
+                { prompt_tokens_threshold: 200000, input_price: 0, output_price: 0 },
+              ]),
+              requestyModel("tiered/paid", 0, 0, [
+                { prompt_tokens_threshold: 0, input_price: 0, output_price: 0 },
+                { prompt_tokens_threshold: 200000, input_price: 0.006, output_price: 0.02 },
+              ]),
+            ],
+          });
+        }
+        expect(url).toBe(REQUESTY_FREE_MODELS_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("text/html,application/xhtml+xml");
+        return new Response(requestyLimitsFixture());
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual(
+      ["nvidia/nemotron-3-super-120b-a12b", "tiered/free"].map((modelId) => ({
+        model_id: modelId,
+        name: desluggifyModelId(modelId),
+        connection: {
+          auth: { env: ["REQUESTY_API_KEY"] },
+          base_url: REQUESTY_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      })),
+    );
+  });
+
+  test("parses per-organization request limits from the documentation table", async () => {
+    await expect(parseRequestyLimits(requestyLimitsFixture())).resolves.toEqual({
+      terms: [
+        "20 req / min (new orgs)",
+        "200 req / day (new orgs)",
+        "60 req / min (paying orgs)",
+        "1k req / day (paying orgs)",
+      ],
+    });
+  });
+
+  test("rejects ambiguous, incomplete, and malformed limits tables", async () => {
+    await expect(parseRequestyLimits("<main></main>")).rejects.toThrow("no unique request limits");
+    await expect(
+      parseRequestyLimits(requestyLimitsFixture() + requestyLimitsFixture()),
+    ).rejects.toThrow("no unique request limits");
+    await expect(
+      parseRequestyLimits(requestyLimitsTable([["New organizations", "200", "20"]])),
+    ).rejects.toThrow("no Paying organizations row");
+    await expect(
+      parseRequestyLimits(requestyLimitsTable([["Paying organizations", "1,000", "60"]])),
+    ).rejects.toThrow("no New organizations row");
+    await expect(
+      parseRequestyLimits(
+        requestyLimitsTable([
+          ["New organizations", "200", "20"],
+          ["New organizations", "200", "20"],
+          ["Paying organizations", "1,000", "60"],
+        ]),
+      ),
+    ).rejects.toThrow("duplicate organization");
+    await expect(
+      parseRequestyLimits(
+        requestyLimitsTable([
+          ["New organizations", "200"],
+          ["Paying organizations", "1,000", "60"],
+        ]),
+      ),
+    ).rejects.toThrow("malformed row");
+    await expect(
+      parseRequestyLimits(
+        requestyLimitsTable([
+          ["New organizations", "unlimited", "20"],
+          ["Paying organizations", "1,000", "60"],
+        ]),
+      ),
+    ).rejects.toThrow("invalid numeric amount");
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseRequestyModels({
+        object: "list",
+        data: [requestyModel("duplicate", 0, 0), requestyModel("duplicate", 0, 0)],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseRequestyModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseRequestyModels({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseRequestyModels({
+        object: "list",
+        data: [requestyModel("openai/gpt-4o", 0.005, 0.015)],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseRequestyModels({ object: "list" })).toThrow("data array");
+    expect(isFreeRequestyModel({ id: "no-prices" })).toBe(false);
+    expect(isFreeRequestyModel({ id: "bad-tier", pricing: ["not-an-object"] })).toBe(false);
+  });
+});
+
+describe("BazaarLink discovery", () => {
+  test("keeps only zero-priced :free aliases and skips routing endpoints", async () => {
+    const modelsDev = new Map([
+      [
+        "bazaarlink",
+        {
+          id: "bazaarlink",
+          env: ["BAZAARLINK_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: ["10 req / min", "50 req / day (no credit)", "100 req / day (with credit)"],
+    };
+    const provider = new BazaarLinkProvider({
+      fetch: async (url, init) => {
+        if (url === BAZAARLINK_MODELS_URL) {
+          expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+          return Response.json({
+            object: "list",
+            data: [
+              bazaarLinkModel("qwen/qwen3.7-flash:free", "Qwen3.7 Flash (free)", "0", "0"),
+              bazaarLinkModel("qwen/qwen3.7-flash", "Qwen3.7 Flash", "3e-8", "1.3e-7"),
+              bazaarLinkModel("auto:free", "Auto Router (free)", "0", "0"),
+              bazaarLinkModel("auto", "Auto Router", "-1", "-1"),
+              bazaarLinkModel("paid/suffixed:free", "Paid Suffixed", "0.001", "0.002"),
+            ],
+          });
+        }
+        expect(url).toBe(BAZAARLINK_FREE_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("text/html,application/xhtml+xml");
+        return new Response(bazaarLinkLimitsFixture());
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual([
+      {
+        model_id: "qwen/qwen3.7-flash:free",
+        name: "Qwen3.7 Flash (free)",
+        connection: {
+          auth: { env: ["BAZAARLINK_API_KEY"] },
+          base_url: BAZAARLINK_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      },
+    ]);
+  });
+
+  test("parses live free tier limits from the free page section", async () => {
+    await expect(parseBazaarLinkLimits(bazaarLinkLimitsFixture())).resolves.toEqual({
+      terms: ["10 req / min", "50 req / day (no credit)", "100 req / day (with credit)"],
+    });
+  });
+
+  test("rejects ambiguous, incomplete, and malformed limits sections", async () => {
+    await expect(parseBazaarLinkLimits("<main></main>")).rejects.toThrow(
+      "no unique free tier limits section",
+    );
+    await expect(
+      parseBazaarLinkLimits(bazaarLinkLimitsFixture() + bazaarLinkLimitsFixture()),
+    ).rejects.toThrow("no unique free tier limits section");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 / min"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "× 1"],
+        ]),
+      ),
+    ).rejects.toThrow("no Accounts with credit entry");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 / min"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "× 1"],
+          ["Accounts without credit", "× 1"],
+          ["Accounts with credit", "× 2"],
+        ]),
+      ),
+    ).rejects.toThrow("duplicate entry");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 per min"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "× 1"],
+          ["Accounts with credit", "× 2"],
+        ]),
+      ),
+    ).rejects.toThrow("invalid rate");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 / hour"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "× 1"],
+          ["Accounts with credit", "× 2"],
+        ]),
+      ),
+    ).rejects.toThrow("unexpected period");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 / min"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "x1"],
+          ["Accounts with credit", "× 2"],
+        ]),
+      ),
+    ).rejects.toThrow("invalid multiplier");
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseBazaarLinkModels({
+        object: "list",
+        data: [
+          bazaarLinkModel("duplicate:free", "Duplicate", "0", "0"),
+          bazaarLinkModel("duplicate:free", "Duplicate", "0", "0"),
+        ],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseBazaarLinkModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseBazaarLinkModels({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseBazaarLinkModels({
+        object: "list",
+        data: [bazaarLinkModel("qwen/qwen3.7-flash", "Qwen3.7 Flash", "3e-8", "1.3e-7")],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseBazaarLinkModels({ object: "list" })).toThrow("data array");
+    expect(
+      isFreeBazaarLinkModel({ id: "qwen/model", pricing: { prompt: "0", completion: "0" } }),
+    ).toBe(false);
+    expect(
+      isFreeBazaarLinkModel({
+        id: "paid/suffixed:free",
+        pricing: { prompt: "0.001", completion: "0" },
+      }),
+    ).toBe(false);
+    expect(isFreeBazaarLinkModel({ id: "missing/pricing:free" })).toBe(false);
   });
 });
 
@@ -205,6 +597,7 @@ describe("Groq discovery", () => {
           base_url: GROQ_API_BASE_URL,
           protocol: "openai",
         },
+        limits: groqOfferLimits({ rpm: "30", rpd: "1,000", tpm: "6,000", tpd: "500,000" }),
       },
       {
         model_id: "beta/model",
@@ -214,6 +607,14 @@ describe("Groq discovery", () => {
           base_url: GROQ_API_BASE_URL,
           protocol: "openai",
         },
+        limits: groqOfferLimits({
+          rpm: "10",
+          rpd: "100",
+          tpm: "2,000",
+          tpd: "20,000",
+          ash: "5",
+          asd: "20",
+        }),
       },
     ]);
   });
@@ -255,6 +656,7 @@ describe("Mistral discovery", () => {
           base_url: MISTRAL_API_BASE_URL,
           protocol: "openai",
         },
+        limits: mistralUnconfirmedLimits(),
       },
     ]);
   });
@@ -262,6 +664,105 @@ describe("Mistral discovery", () => {
   test("requires a key explicitly scoped to an organization in Free mode", async () => {
     const provider = new MistralProvider({ apiKey: "" });
     expect(provider.discover(new Map())).rejects.toThrow("MISTRAL_FREE_API_KEY");
+  });
+});
+
+describe("Cohere discovery", () => {
+  test("routes native-only endpoints to the Cohere API", () => {
+    const env = ["COHERE_API_KEY"];
+    expect(cohereConnection(["chat"], env)).toEqual({
+      base_url: COHERE_API_BASE_URL,
+      protocol: "openai",
+      auth: { env },
+    });
+    expect(cohereConnection(["embed"], env)).toEqual(cohereConnection(["chat"], env));
+    expect(cohereConnection(["transcriptions"], env)).toEqual(cohereConnection(["chat"], env));
+    expect(cohereConnection(["rerank"], env)).toEqual({
+      base_url: "https://api.cohere.com/v1",
+      protocol: "cohere",
+      auth: { env },
+    });
+    expect(cohereConnection(["embed_image"], env)).toEqual(cohereConnection(["rerank"], env));
+    expect(cohereConnection(["parse"], env)).toEqual({
+      base_url: "https://api.cohere.com/v2",
+      protocol: "cohere",
+      auth: { env },
+    });
+  });
+
+  test("follows pagination while skipping deprecated and fine-tuned models", async () => {
+    const modelsDev = new Map([
+      [
+        "cohere",
+        {
+          id: "cohere",
+          env: ["COHERE_API_KEY"],
+        },
+      ],
+    ]);
+    const provider = new CohereProvider({
+      apiKey: "cohere-trial-secret",
+      fetch: async (url, init) => {
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        expect(new Headers(init?.headers).get("authorization")).toBe("Bearer cohere-trial-secret");
+        if (url === cohereModelsUrl()) {
+          expect(url).toContain(COHERE_MODELS_URL);
+          return Response.json({
+            models: [
+              { name: "command-a-03-2025", endpoints: ["chat"], finetuned: false },
+              { name: "deprecated-model", is_deprecated: true, endpoints: ["chat"] },
+              { name: "custom-model", finetuned: true, endpoints: ["chat"] },
+            ],
+            next_page_token: "page-2",
+          });
+        }
+        if (url === cohereModelsUrl("page-2")) {
+          return Response.json({
+            models: [
+              { name: "embed-v4.0", endpoints: ["embed"] },
+              { name: "rerank-v3.0", endpoints: ["rerank"] },
+              { name: "parse-v5.0", endpoints: ["parse"] },
+              { name: "cohere-transcribe-03-2026", endpoints: ["transcriptions"] },
+            ],
+          });
+        }
+        throw new Error(`Unexpected URL: ${url}`);
+      },
+    });
+
+    const expected = [
+      { modelId: "command-a-03-2025", endpoints: ["chat"] },
+      { modelId: "embed-v4.0", endpoints: ["embed"] },
+      { modelId: "rerank-v3.0", endpoints: ["rerank"] },
+      { modelId: "parse-v5.0", endpoints: ["parse"] },
+      { modelId: "cohere-transcribe-03-2026", endpoints: ["transcriptions"] },
+    ];
+    expect(await provider.discover(modelsDev)).toEqual(
+      expected.map(({ modelId, endpoints }) => ({
+        model_id: modelId,
+        name: desluggifyModelId(modelId),
+        connection: cohereConnection(endpoints, ["COHERE_API_KEY"]),
+        limits: cohereOfferLimits(endpoints),
+      })),
+    );
+  });
+
+  test("requires a trial key because listing models is authenticated", async () => {
+    const provider = new CohereProvider({ apiKey: "" });
+    expect(provider.discover(new Map())).rejects.toThrow("COHERE_API_KEY");
+  });
+
+  test("rejects duplicate, malformed, and empty model records", () => {
+    expect(() =>
+      parseCohereModelsPage({ models: [{ name: "duplicate" }, { name: "duplicate" }] }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseCohereModelsPage({ models: [{}] })).toThrow("no valid name");
+    expect(() => parseCohereModelsPage({ models: "not-an-array" })).toThrow(
+      "expected a JSON-safe models array",
+    );
+    expect(() =>
+      parseCohereModelsPage({ models: [{ name: "bad-endpoints", endpoints: "chat" }] }),
+    ).toThrow("invalid endpoints");
   });
 });
 
@@ -294,6 +795,7 @@ describe("Gemini API discovery", () => {
           base_url: GEMINI_API_BASE_URL,
           protocol: "google",
         },
+        limits: geminiUnconfirmedLimits("gemini-free"),
       },
     ]);
   });
@@ -312,6 +814,11 @@ describe("NVIDIA Build discovery", () => {
     ]);
     const provider = new NvidiaProvider({
       fetch: async (url) => {
+        if (url === NVIDIA_LIMITS_URL) {
+          return new Response(
+            '"rateLimits":{"requestsPerMinute":"Up to 40 rpm","requestsPerDay":"10,000 requests per day"}',
+          );
+        }
         expect(url).toBe(nvidiaModelsUrl(0));
         return Response.json({
           resultPageTotal: 1,
@@ -338,6 +845,9 @@ describe("NVIDIA Build discovery", () => {
           base_url: NVIDIA_API_BASE_URL,
           protocol: "openai",
         },
+        limits: parseNvidiaLimits(
+          '"rateLimits":{"requestsPerMinute":"Up to 40 rpm","requestsPerDay":"10,000 requests per day"}',
+        ),
       },
     ]);
   });
@@ -383,6 +893,7 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
           base_url: CLOUDFLARE_WORKERS_AI_BASE_URL,
           protocol: "cloudflare",
         },
+        limits: cloudflareOfferLimits("12,345 Neurons per day"),
       },
     ]);
   });
@@ -427,6 +938,36 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
   });
 });
 
+function bazaarLinkLimitsFixture(): string {
+  return bazaarLinkLimitsPage([
+    ["Requests per minute", "10 / min"],
+    ["Requests per day", "50 / day"],
+    ["Accounts without credit", "× 1"],
+    ["Accounts with credit", "× 2"],
+  ]);
+}
+
+function bazaarLinkLimitsPage(rows: string[][]): string {
+  return `
+<section><h2>Free Tier Limits</h2><div>
+  ${rows.map(([label, value]) => `<div><span>${label}</span><code>${value}</code></div>`).join("")}
+</div></section>`;
+}
+
+function bazaarLinkModel(
+  id: string,
+  name: string,
+  prompt: string,
+  completion: string,
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    name,
+    pricing: { prompt, completion },
+  };
+}
+
 function geminiPricingFixture(): string {
   return `
 <main>
@@ -458,6 +999,38 @@ function nvidiaResource(name: string, nimTypes: string[]): Record<string, unknow
       { key: "nimType", values: nimTypes, unresolvedValues: [] },
       { key: "publisher", values: ["nvidia"], unresolvedValues: ["nvidia"] },
     ],
+  };
+}
+
+function requestyLimitsFixture(): string {
+  return requestyLimitsTable([
+    ["New organizations", "200", "20"],
+    ["Paying organizations", "1,000", "60"],
+  ]);
+}
+
+function requestyLimitsTable(rows: string[][]): string {
+  return `
+<table>
+  <thead><tr><th>Organization</th><th>Requests per day</th><th>Requests per minute</th></tr></thead>
+  <tbody>
+    ${rows.map((cells) => `<tr>${cells.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("")}
+  </tbody>
+</table>`;
+}
+
+function requestyModel(
+  id: string,
+  input_price: number,
+  output_price: number,
+  pricing?: Record<string, unknown>[],
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    input_price,
+    output_price,
+    pricing: pricing ?? [{ prompt_tokens_threshold: 0, input_price, output_price }],
   };
 }
 

@@ -1,8 +1,6 @@
 # json
 
-These five phases maintain the catalog:
-
-The phases run in this order: discover, reconcile, refresh, render, and check.
+Five phases maintain the catalog. Run them in this order: discover, reconcile, refresh, render, and check.
 
 ## 1. Discover
 
@@ -13,23 +11,27 @@ Later phases use these snapshots.
 bun run catalogue:discover
 ```
 
-Discovery reads Groq's free-plan rate-limit table (excluding the `groq/` routing
-namespace), Gemini's per-model standard-tier pricing, NVIDIA Build's `Free Endpoint` catalogue
-labels, and Cloudflare Workers AI's free-allocation model pricing without credentials. OpenRouter
-discovery keeps concrete `:free` models only; its `openrouter/` routing namespace is never
-included. TokenRouter discovery intersects its public,
-zero-price `-free` models
-with the models actively served to `TOKENROUTER_API_KEY` and records all supported endpoint types.
-This excludes stale and imported pricing entries without limiting discovery to one API protocol.
-Mistral discovery is account-scoped: set `MISTRAL_FREE_API_KEY` to an API key for an organization in
-Free mode before running this command. Mistral keys inherit their organization's plan, so do not use
-a key from a paid organization for catalogue discovery.
+Some providers need an API key. The command stops and names the missing key when the key is absent. Set the key and run the command again. Each discovered offer records its trial limits.
+
+### Offer limits
+
+Schema version 4 requires every offer to include a `limits` object:
+
+```json
+{
+  "terms": ["20 req / min", "250k tok / min"]
+}
+```
+
+Terms use short units: `req` for requests, `tok` for tokens, `min` for minutes, and `k` or `m` for
+thousands or millions. Token quotas are normalized to forms such as `250k tok / min`. Limits that
+providers express in other units stay in those units because request, neuron, and audio usage cannot
+be converted to tokens without workload-specific assumptions. A term that applies only under a
+condition keeps the condition as parenthetical text in a separate term.
 
 ## 2. Reconcile
 
-Reconcile maps provider model IDs to reviewed canonical model IDs. It records each recognized offer
-and reports offers without a reviewed mapping. This phase identifies the canonical model for each
-provider offer.
+Reconcile maps each provider model ID to a reviewed canonical model ID. It reports offers without a reviewed mapping.
 
 ```sh
 bun run catalogue:reconcile
@@ -37,8 +39,7 @@ bun run catalogue:reconcile
 
 ## 3. Refresh
 
-Refresh adds current metadata to canonical model records. This phase keeps model descriptions and
-other model information current.
+Refresh updates canonical model records with current metadata.
 
 ```sh
 bun run catalogue:refresh
@@ -46,7 +47,7 @@ bun run catalogue:refresh
 
 ## 4. Render
 
-Render creates `free-models.json` in a deterministic way. It uses discovered offers, reviewed
+Render builds `free-models.json` from discovered offers, reviewed
 mappings, and current model metadata. CI renders this file in a temporary workspace and uploads it
 to the public CDN after a merge; the generated file is not committed to the repository.
 

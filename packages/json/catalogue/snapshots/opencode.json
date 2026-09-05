@@ -1,6 +1,12 @@
 {
   "provider": "opencode",
   "name": "OpenCode",
+  "doc": {
+    "models": "https://opencode.ai/docs/zen/#models",
+    "overview": "https://opencode.ai/docs/zen/",
+    "pricing": "https://opencode.ai/docs/zen/#pricing",
+    "rate_limit": "https://opencode.ai/docs/zen/"
+  },
   "offers": [
     {
       "model_id": "big-pickle",
@@ -15,6 +21,11 @@
         "base_url": "https://opencode.ai/zen/v1",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
       }
     },
     {
@@ -30,6 +41,11 @@
         "base_url": "https://opencode.ai/zen/v1",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
       }
     },
     {
@@ -45,11 +61,16 @@
         "base_url": "https://opencode.ai/zen/v1",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
       }
     },
     {
-      "model_id": "muse-spark-1.2-contributor-free",
-      "name": "Muse Spark 1.2 Contributor Free",
+      "model_id": "muse-spark-1.3-contributor-free",
+      "name": "Muse Spark 1.3 Contributor Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai",
         "auth": {
@@ -60,6 +81,11 @@
         "base_url": "https://opencode.ai/zen/v1",
         "endpoint": "https://opencode.ai/zen/v1/responses",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
       }
     },
     {
@@ -75,6 +101,11 @@
         "base_url": "https://opencode.ai/zen/v1",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
       }
     },
     {
@@ -90,6 +121,11 @@
         "base_url": "https://opencode.ai/zen/v1",
         "endpoint": "https://opencode.ai/zen/v1/chat/completions",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
       }
     }
   ]

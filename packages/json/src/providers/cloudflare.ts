@@ -1,5 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
-import type { DiscoveredOffer, JsonValue } from "../catalogue/schema.ts";
+import type { DiscoveredOffer, JsonValue, OfferLimits, ProviderDoc } from "../catalogue/schema.ts";
+import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchText, normalizeText } from "./source.ts";
@@ -27,6 +28,12 @@ interface CloudflarePricing {
 export class CloudflareProvider implements ModelProvider {
   readonly id = "cloudflare";
   readonly name = "Cloudflare";
+  readonly doc: ProviderDoc = {
+    models: "https://developers.cloudflare.com/workers-ai/models/",
+    overview: "https://developers.cloudflare.com/workers-ai/",
+    pricing: CLOUDFLARE_WORKERS_AI_PRICING_URL,
+    rate_limit: "https://developers.cloudflare.com/workers-ai/platform/limits/",
+  };
 
   readonly #fetch: FetchSource;
 
@@ -56,13 +63,24 @@ export class CloudflareProvider implements ModelProvider {
       auth: { env },
     };
 
-    const { models } = parseCloudflarePricing(markdown);
+    const { freeAllocation, models } = parseCloudflarePricing(markdown);
     return models.map(({ modelId }) => ({
       model_id: modelId,
       name: desluggifyModelId(modelId),
       connection,
+      limits: cloudflareOfferLimits(freeAllocation),
     }));
   }
+}
+
+export function cloudflareOfferLimits(freeAllocation: string): OfferLimits {
+  const amount = freeAllocation.match(/^([\d,]+) Neurons per day$/)?.[1];
+  if (!amount) {
+    throw new Error("Cloudflare Workers AI has an invalid free allocation");
+  }
+  return termsLimits(
+    formatLimitTerm(parseCompactInteger(amount, "Cloudflare daily Neurons"), "neurons", "day"),
+  );
 }
 
 export function parseCloudflarePricing(markdown: string): CloudflarePricing {

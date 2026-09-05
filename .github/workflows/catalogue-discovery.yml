@@ -54,6 +54,7 @@ jobs:
 
       - name: Discover provider offers
         env:
+          COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
           MISTRAL_FREE_API_KEY: ${{ secrets.MISTRAL_FREE_API_KEY }}
           TOKENROUTER_API_KEY: ${{ secrets.TOKENROUTER_API_KEY }}
         run: bun run catalogue:discover
@@ -73,7 +74,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          changed=$(git status --porcelain -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json)
+          changed=$(git status --porcelain -- packages/json/catalogue/canonical-metadata.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json)
           if [[ -z "$changed" ]]; then
             if git rev-parse --verify --quiet MERGE_HEAD >/dev/null; then
               git merge --abort
@@ -88,7 +89,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git add -- packages/json/catalogue/canonical-models.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json
+          git add -- packages/json/catalogue/canonical-metadata.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json
           git commit -m "chore: update free model catalogue"
           git push origin "$AUTOMATION_BRANCH"
 

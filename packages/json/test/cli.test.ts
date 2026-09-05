@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { catalogueSchema } from "../src/catalogue/schema.ts";
+import { catalogueSchema, limitsSchema, offerSchema } from "../src/catalogue/schema.ts";
 import { providerRegistry } from "../src/providers/registry.ts";
 
 const cliPath = resolve(import.meta.dir, "../src/cli.ts");
@@ -30,6 +30,7 @@ async function prepareEmptyWorkspace(workspace: string): Promise<void> {
   await mkdir(join(workspace, "catalogue/mappings"), { recursive: true });
   await mkdir(join(workspace, "catalogue/snapshots"), { recursive: true });
   await Bun.write(join(workspace, "catalogue/canonical-models.json"), '{\n  "models": []\n}\n');
+  await Bun.write(join(workspace, "catalogue/canonical-metadata.json"), '{\n  "metadata": []\n}\n');
   await Bun.write(join(workspace, "catalogue/unresolved.json"), '{\n  "providers": {}\n}\n');
 
   for (const provider of providerRegistry) {
@@ -39,13 +40,23 @@ async function prepareEmptyWorkspace(workspace: string): Promise<void> {
     );
     await Bun.write(
       join(workspace, `catalogue/snapshots/${provider.id}.json`),
-      `${JSON.stringify({ provider: provider.id, name: provider.name ?? provider.id, offers: [] }, null, 2)}\n`,
+      `${JSON.stringify({ provider: provider.id, name: provider.name ?? provider.id, doc: provider.doc, offers: [] }, null, 2)}\n`,
     );
   }
 }
 
 describe("catalogue CLI", () => {
-  test("schema version 2 accepts open JSON fields and requires catalogue-owned fields", () => {
+  test("requires nonempty limit terms on every offer", () => {
+    expect(offerSchema.safeParse({ model_id: "model", connection: {} }).success).toBe(false);
+    expect(limitsSchema.safeParse({ terms: [] }).success).toBe(false);
+    expect(limitsSchema.safeParse({ terms: [""] }).success).toBe(false);
+    expect(limitsSchema.safeParse({ terms: ["8 req / min"] }).success).toBe(true);
+    expect(limitsSchema.safeParse({ terms: ["8 req / min"], source_url: "extra" }).success).toBe(
+      false,
+    );
+  });
+
+  test("schema version 4 accepts open JSON fields and requires catalogue-owned fields", () => {
     const openModel = {
       id: "acme/model",
       name: "Acme Model",
@@ -54,12 +65,12 @@ describe("catalogue CLI", () => {
       providers: {},
     };
 
-    expect(catalogueSchema.safeParse({ schema_version: 2, models: [openModel] }).success).toBe(
+    expect(catalogueSchema.safeParse({ schema_version: 4, models: [openModel] }).success).toBe(
       true,
     );
     expect(
       catalogueSchema.safeParse({
-        schema_version: 2,
+        schema_version: 4,
         models: [{ ...openModel, providers: undefined }],
       }).success,
     ).toBe(false);
@@ -71,13 +82,46 @@ describe("catalogue CLI", () => {
       ...openModel,
       providers: {
         acme: {
-          offers: [{ model_id: "model", connection: {}, metadata: { legacy: true } }],
+          name: "Acme",
+          doc: {},
+          offers: [
+            {
+              model_id: "model",
+              name: "Model",
+              connection: { base_url: "https://example.com", protocol: "openai" },
+              limits: { terms: ["1 req / min"] },
+              metadata: { legacy: true },
+            },
+          ],
         },
       },
     };
     expect(
-      catalogueSchema.safeParse({ schema_version: 2, models: [offerWithMetadata] }).success,
+      catalogueSchema.safeParse({ schema_version: 4, models: [offerWithMetadata] }).success,
     ).toBe(false);
+
+    const validProviderModel = {
+      ...openModel,
+      providers: {
+        acme: {
+          name: "Acme",
+          doc: {
+            overview: "https://example.com/docs",
+          },
+          offers: [
+            {
+              model_id: "model",
+              name: "Model",
+              connection: { base_url: "https://example.com", protocol: "openai" },
+              limits: { terms: ["1 req / min"] },
+            },
+          ],
+        },
+      },
+    };
+    expect(
+      catalogueSchema.safeParse({ schema_version: 4, models: [validProviderModel] }).success,
+    ).toBe(true);
   });
 
   test("render writes a deterministic empty catalogue", async () => {
@@ -92,7 +136,7 @@ describe("catalogue CLI", () => {
       expect(secondRun.exitCode).toBe(0);
       const secondOutput = await Bun.file(outputPath).text();
 
-      expect(firstOutput).toBe('{\n  "schema_version": 2,\n  "models": []\n}\n');
+      expect(firstOutput).toBe('{\n  "schema_version": 4,\n  "models": []\n}\n');
       expect(secondOutput).toBe(firstOutput);
     });
   });
@@ -111,25 +155,25 @@ describe("catalogue CLI", () => {
   test("check rejects a structurally invalid catalogue", async () => {
     await withTemporaryDirectory(async (directory) => {
       const invalidPath = join(directory, "invalid.json");
-      await Bun.write(invalidPath, '{"schema_version":2,"models":{}}\n');
+      await Bun.write(invalidPath, '{"schema_version":4,"models":{}}\n');
 
       const checkRun = runCli(directory, ["check", "--input", invalidPath]);
       expect(checkRun.exitCode).toBe(1);
       expect(decoder.decode(checkRun.stderr)).toContain(
-        "Public catalogue does not match schema version 2",
+        "Public catalogue does not match schema version 4",
       );
     });
   });
 
-  test("check rejects the retired version 1 schema", async () => {
+  test("check rejects the retired version 3 schema", async () => {
     await withTemporaryDirectory(async (directory) => {
-      const versionOnePath = join(directory, "version-one.json");
-      await Bun.write(versionOnePath, '{"schema_version":1,"models":[]}\n');
+      const versionThreePath = join(directory, "version-three.json");
+      await Bun.write(versionThreePath, '{"schema_version":3,"models":[]}\n');
 
-      const checkRun = runCli(directory, ["check", "--input", versionOnePath]);
+      const checkRun = runCli(directory, ["check", "--input", versionThreePath]);
       expect(checkRun.exitCode).toBe(1);
       expect(decoder.decode(checkRun.stderr)).toContain(
-        "Public catalogue does not match schema version 2",
+        "Public catalogue does not match schema version 4",
       );
     });
   });

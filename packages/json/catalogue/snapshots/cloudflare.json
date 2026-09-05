@@ -1,6 +1,12 @@
 {
   "provider": "cloudflare",
   "name": "Cloudflare",
+  "doc": {
+    "models": "https://developers.cloudflare.com/workers-ai/models/",
+    "overview": "https://developers.cloudflare.com/workers-ai/",
+    "pricing": "https://developers.cloudflare.com/workers-ai/platform/pricing/index.md",
+    "rate_limit": "https://developers.cloudflare.com/workers-ai/platform/limits/"
+  },
   "offers": [
     {
       "model_id": "@cf/ai4bharat/indictrans2-en-indic-1B",
@@ -14,6 +20,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -28,6 +39,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -42,6 +58,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -56,6 +77,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -70,6 +96,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -84,6 +115,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -98,6 +134,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -112,6 +153,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -126,6 +172,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -140,6 +191,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -154,6 +210,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -168,6 +229,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -182,6 +248,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -196,6 +267,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -210,6 +286,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -224,6 +305,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -238,6 +324,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -252,6 +343,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -266,6 +362,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -280,6 +381,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -294,6 +400,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -308,6 +419,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -322,6 +438,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -336,6 +457,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -350,6 +476,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -364,6 +495,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -378,6 +514,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -392,6 +533,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -406,6 +552,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -420,6 +571,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -434,6 +590,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -448,6 +609,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -462,6 +628,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -476,6 +647,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -490,6 +666,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -504,6 +685,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -518,6 +704,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -532,6 +723,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -546,6 +742,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -560,6 +761,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -574,6 +780,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -588,6 +799,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -602,6 +818,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -616,6 +837,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -630,6 +856,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -644,6 +875,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -658,6 +894,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -672,6 +913,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -686,6 +932,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -700,6 +951,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -714,6 +970,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -728,6 +989,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -742,6 +1008,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -756,6 +1027,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -770,6 +1046,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -784,6 +1065,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -798,6 +1084,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     },
     {
@@ -812,6 +1103,11 @@
         },
         "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
         "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
       }
     }
   ]

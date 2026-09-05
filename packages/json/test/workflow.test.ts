@@ -3,6 +3,7 @@ import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import type { DiscoveredOffer } from "../src/catalogue/schema.ts";
+import { fixtureLimits } from "./support/limits.ts";
 
 const fixtureCliPath = resolve(import.meta.dir, "support/fixture-cli.ts");
 const decoder = new TextDecoder();
@@ -12,11 +13,13 @@ const fixtureAOffers = [
     model_id: "alpha/alternate-free",
     name: "Alpha Alternate (free)",
     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
+    limits: fixtureLimits,
   },
   {
     model_id: "alpha/free",
     name: "Alpha (free)",
     connection: { protocol: "openai", base_url: "https://a.example.test/v1" },
+    limits: fixtureLimits,
   },
 ];
 
@@ -25,11 +28,13 @@ const fixtureZOffers = [
     model_id: "zeta/beta-free",
     name: "Zeta Beta (free)",
     connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
+    limits: fixtureLimits,
   },
   {
     model_id: "zeta/alpha-free",
     name: "Zeta Alpha (free)",
     connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
+    limits: fixtureLimits,
   },
 ];
 
@@ -53,8 +58,9 @@ async function writeJson(path: string, value: unknown): Promise<void> {
 async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "free-models-workflow-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
+  await writeJson(join(workspace, "catalogue/canonical-metadata.json"), { metadata: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
-  await writeJson(join(workspace, "free-models.json"), { schema_version: 2, models: [] });
+  await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
   await writeProviderFixtures(workspace);
   return workspace;
 }
@@ -128,7 +134,7 @@ describe("manual identity workflow", () => {
       expect(runFixtureCli(workspace, "check").exitCode).toBe(0);
 
       expect(JSON.parse(firstRender)).toEqual({
-        schema_version: 2,
+        schema_version: 4,
         models: [
           {
             id: "acme/alpha",
@@ -136,26 +142,31 @@ describe("manual identity workflow", () => {
             providers: {
               "fixture-a": {
                 name: "fixture-a",
+                doc: {},
                 offers: [
                   {
                     model_id: "alpha/alternate-free",
                     name: "Alpha Alternate (free)",
                     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
+                    limits: fixtureLimits,
                   },
                   {
                     model_id: "alpha/free",
                     name: "Alpha (free)",
                     connection: { base_url: "https://a.example.test/v1", protocol: "openai" },
+                    limits: fixtureLimits,
                   },
                 ],
               },
               "fixture-z": {
                 name: "fixture-z",
+                doc: {},
                 offers: [
                   {
                     model_id: "zeta/alpha-free",
                     name: "Zeta Alpha (free)",
                     connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
+                    limits: fixtureLimits,
                   },
                 ],
               },
@@ -167,11 +178,13 @@ describe("manual identity workflow", () => {
             providers: {
               "fixture-z": {
                 name: "fixture-z",
+                doc: {},
                 offers: [
                   {
                     model_id: "zeta/beta-free",
                     name: "Zeta Beta (free)",
                     connection: { base_url: "https://z.example.test/v1", protocol: "openai" },
+                    limits: fixtureLimits,
                   },
                 ],
               },
@@ -180,7 +193,7 @@ describe("manual identity workflow", () => {
         ],
       });
 
-      await writeJson(join(workspace, "free-models.json"), { schema_version: 2, models: [] });
+      await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
       const staleCheck = runFixtureCli(workspace, "check");
       expect(staleCheck.exitCode).toBe(1);
       expect(decoder.decode(staleCheck.stderr)).toContain("Public catalogue is stale");
@@ -364,5 +377,5 @@ describe("manual identity workflow", () => {
       );
       expect(await Bun.file(join(workspace, "free-models.json")).text()).toBe(originalPublic);
     });
-  });
+  }, 15000);
 });

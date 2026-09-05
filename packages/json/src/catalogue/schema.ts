@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const CATALOGUE_SCHEMA_VERSION = 2 as const;
+export const CATALOGUE_SCHEMA_VERSION = 4 as const;
 
 export type JsonValue =
   | boolean
@@ -29,6 +29,12 @@ export const canonicalModelIdSchema = z
     /^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\/[a-z0-9]+(?:[._-][a-z0-9]+)*|stealth:[a-z0-9]+(?:[._-][a-z0-9]+)*)$/,
   );
 
+export const limitsSchema = z
+  .object({
+    terms: z.array(z.string().trim().min(1)).min(1),
+  })
+  .strict();
+
 export const connectionAuthSchema = z
   .object({
     env: z.array(z.string().min(1)).optional(),
@@ -52,13 +58,24 @@ export const offerSchema = z
     model_id: z.string().min(1),
     name: z.string().min(1),
     connection: connectionSchema,
+    limits: limitsSchema,
   })
   .strict();
+
+export const providerDocSchema = z
+  .object({
+    models: z.string().url().optional(),
+    overview: z.string().url().optional(),
+    pricing: z.string().url().optional(),
+    rate_limit: z.string().url().optional(),
+  })
+  .catchall(z.string().url());
 
 export const providerSnapshotSchema = z
   .object({
     provider: providerIdSchema,
     name: z.string().min(1),
+    doc: providerDocSchema,
     offers: z.array(offerSchema),
   })
   .strict();
@@ -68,11 +85,24 @@ export const canonicalModelSchema = z
     id: canonicalModelIdSchema,
     name: z.string().trim().min(1),
   })
-  .catchall(jsonValueSchema);
+  .strict();
 
 export const canonicalModelsSchema = z
   .object({
     models: z.array(canonicalModelSchema),
+  })
+  .strict();
+
+export const canonicalMetadataEntrySchema = z
+  .object({
+    id: canonicalModelIdSchema,
+    metadata: jsonObjectSchema,
+  })
+  .strict();
+
+export const canonicalMetadataSchema = z
+  .object({
+    metadata: z.array(canonicalMetadataEntrySchema),
   })
   .strict();
 
@@ -102,6 +132,7 @@ export const catalogueSchema = z
             z
               .object({
                 name: z.string().min(1),
+                doc: providerDocSchema,
                 offers: z.array(offerSchema),
               })
               .strict(),
@@ -115,10 +146,14 @@ export const catalogueSchema = z
 export type Catalogue = z.infer<typeof catalogueSchema>;
 export type CanonicalModel = z.infer<typeof canonicalModelSchema>;
 export type CanonicalModels = z.infer<typeof canonicalModelsSchema>;
+export type CanonicalMetadataEntry = z.infer<typeof canonicalMetadataEntrySchema>;
+export type CanonicalMetadataFile = z.infer<typeof canonicalMetadataSchema>;
 export type Connection = z.infer<typeof connectionSchema>;
 export type ConnectionAuth = z.infer<typeof connectionAuthSchema>;
 export type ConnectionProtocol = z.infer<typeof connectionProtocolSchema>;
 export type DiscoveredOffer = z.infer<typeof offerSchema>;
+export type OfferLimits = z.infer<typeof limitsSchema>;
+export type ProviderDoc = z.infer<typeof providerDocSchema>;
 export type ProviderMappings = z.infer<typeof providerMappingsSchema>;
 export type ProviderSnapshot = z.infer<typeof providerSnapshotSchema>;
 export type Unresolved = z.infer<typeof unresolvedSchema>;

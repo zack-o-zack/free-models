@@ -8,6 +8,7 @@
     "google/gemma-4-26b-a4b-it:free": "google/gemma-4-26b-a4b-it",
     "google/gemma-4-31b-it:free": "google/gemma-4-31b-it",
     "inclusionai/ling-3.0-flash-fin:free": "inclusionai/ling-3.0-flash-fin",
+    "inclusionai/ling-3.0-flash-sante:free": "inclusionai/ling-3.0-flash-sante",
     "liquid/lfm-2.5-2.6b:free": "liquid/lfm-2.5-2.6b",
     "liquid/lfm-2.5-embedding-350m:free": "liquid/lfm-2.5-embedding-350m",
     "minimax/minimax-m2.7:free": "minimax/minimax-m2.7",

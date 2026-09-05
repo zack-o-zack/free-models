@@ -2,7 +2,10 @@ import { describe, expect, test } from "bun:test";
 import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
+import { openCodePublishedLimits } from "../src/providers/limits.ts";
 import { protocolFromAiSdkPackage } from "../src/providers/opencode.ts";
+
+const openCodeLimits = openCodePublishedLimits();
 
 const fixtureCliPath = resolve(import.meta.dir, "support/opencode-fixture-cli.ts");
 const validDocumentationPath = resolve(import.meta.dir, "fixtures/opencode/zen.html");
@@ -35,8 +38,9 @@ async function writeJson(path: string, value: unknown): Promise<void> {
 async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "opencode-catalogue-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
+  await writeJson(join(workspace, "catalogue/canonical-metadata.json"), { metadata: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
-  await writeJson(join(workspace, "free-models.json"), { schema_version: 2, models: [] });
+  await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
   return workspace;
 }
 
@@ -82,6 +86,12 @@ describe("OpenCode Zen discovery", () => {
       expect(await Bun.file(join(workspace, "catalogue/snapshots/opencode.json")).json()).toEqual({
         provider: "opencode",
         name: "OpenCode",
+        doc: {
+          models: "https://opencode.ai/docs/zen/#models",
+          overview: "https://opencode.ai/docs/zen/",
+          pricing: "https://opencode.ai/docs/zen/#pricing",
+          rate_limit: "https://opencode.ai/docs/zen/",
+        },
         offers: [
           {
             model_id: "big-pickle",
@@ -95,6 +105,7 @@ describe("OpenCode Zen discovery", () => {
               endpoint: "https://opencode.example.test/zen/v1/chat/completions",
               protocol: "openai",
             },
+            limits: openCodeLimits,
           },
           {
             model_id: "suffix-free",
@@ -108,6 +119,7 @@ describe("OpenCode Zen discovery", () => {
               endpoint: "https://opencode.example.test/zen/v1/responses",
               protocol: "openai",
             },
+            limits: openCodeLimits,
           },
         ],
       });

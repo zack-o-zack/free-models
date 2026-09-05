@@ -1,5 +1,11 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
-import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import {
+  type DiscoveredOffer,
+  type JsonValue,
+  jsonObjectSchema,
+  type ProviderDoc,
+} from "../catalogue/schema.ts";
+import { tokenRouterUnconfirmedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
@@ -24,6 +30,12 @@ export interface TokenRouterProviderOptions {
 export class TokenRouterProvider implements ModelProvider {
   readonly id = "tokenrouter";
   readonly name = "TokenRouter";
+  readonly doc: ProviderDoc = {
+    models: "https://www.tokenrouter.com/models/",
+    overview: "https://www.tokenrouter.com/docs/",
+    pricing: TOKENROUTER_PRICING_URL,
+    rate_limit: "https://www.tokenrouter.com/docs/",
+  };
 
   readonly #fetch: FetchSource;
   readonly #apiKey: string | undefined;
@@ -74,6 +86,7 @@ export class TokenRouterProvider implements ModelProvider {
           : (supportedEndpointTypes[0] ?? "openai"),
         supported_endpoint_types: supportedEndpointTypes,
       },
+      limits: tokenRouterUnconfirmedLimits(),
     }));
   }
 }

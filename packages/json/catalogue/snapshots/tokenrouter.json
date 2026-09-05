@@ -1,6 +1,12 @@
 {
   "provider": "tokenrouter",
   "name": "TokenRouter",
+  "doc": {
+    "models": "https://www.tokenrouter.com/models/",
+    "overview": "https://www.tokenrouter.com/docs/",
+    "pricing": "https://api.tokenrouter.com/api/pricing",
+    "rate_limit": "https://www.tokenrouter.com/docs/"
+  },
   "offers": [
     {
       "model_id": "z-ai/glm-5.3-free",
@@ -15,6 +21,11 @@
         "protocol": "openai",
         "supported_endpoint_types": [
           "openai"
+        ]
+      },
+      "limits": {
+        "terms": [
+          "8 req / min"
         ]
       }
     }

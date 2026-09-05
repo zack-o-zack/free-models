@@ -3,7 +3,9 @@ import type { ModelProvider } from "../providers/provider.ts";
 import type { CataloguePaths } from "./files.ts";
 import { compareStrings, readValidatedJson } from "./files.ts";
 import {
+  type CanonicalMetadataFile,
   type CanonicalModels,
+  canonicalMetadataSchema,
   canonicalModelsSchema,
   type ProviderMappings,
   type ProviderSnapshot,
@@ -14,6 +16,7 @@ import {
 
 export interface CatalogueState {
   readonly canonicalModels: CanonicalModels;
+  readonly metadata: CanonicalMetadataFile;
   readonly mappings: ReadonlyMap<string, ProviderMappings>;
   readonly snapshots: ReadonlyMap<string, ProviderSnapshot>;
 }
@@ -37,6 +40,16 @@ export async function loadCatalogueState(
     "Canonical model registry",
   );
   validateUniqueCanonicalModels(canonicalModels);
+
+  const metadataFile = Bun.file(paths.canonicalMetadata);
+  const metadata: CanonicalMetadataFile = (await metadataFile.exists())
+    ? await readValidatedJson(
+        paths.canonicalMetadata,
+        canonicalMetadataSchema,
+        "Canonical metadata",
+      )
+    : { metadata: [] };
+  validateUniqueMetadataEntries(metadata);
 
   const mappings = new Map<string, ProviderMappings>();
   const snapshots = new Map<string, ProviderSnapshot>();
@@ -65,7 +78,7 @@ export async function loadCatalogueState(
     mappings.set(provider.id, mapping);
   }
 
-  return { canonicalModels, mappings, snapshots };
+  return { canonicalModels, metadata, mappings, snapshots };
 }
 
 export function computeUnresolved(state: CatalogueState): Unresolved {
@@ -165,6 +178,22 @@ function validateUniqueCanonicalModels(canonicalModels: CanonicalModels): void {
       throw new Error(`Duplicate canonical model ID: ${model.id}`);
     }
     ids.add(model.id);
+  }
+}
+
+export function metadataById(
+  metadata: CanonicalMetadataFile,
+): ReadonlyMap<string, Readonly<Record<string, import("./schema.ts").JsonValue>>> {
+  return new Map(metadata.metadata.map((entry) => [entry.id, entry.metadata]));
+}
+
+function validateUniqueMetadataEntries(metadata: CanonicalMetadataFile): void {
+  const ids = new Set<string>();
+  for (const entry of metadata.metadata) {
+    if (ids.has(entry.id)) {
+      throw new Error(`Duplicate canonical metadata ID: ${entry.id}`);
+    }
+    ids.add(entry.id);
   }
 }
 

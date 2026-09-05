@@ -1,15 +1,23 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
-import { type DiscoveredOffer, type JsonValue, jsonObjectSchema } from "../catalogue/schema.ts";
+import {
+  type DiscoveredOffer,
+  type JsonValue,
+  jsonObjectSchema,
+  type OfferLimits,
+  type ProviderDoc,
+} from "../catalogue/schema.ts";
 import type {
   ActiveCanonicalModel,
   CanonicalMetadata,
   CanonicalMetadataProvider,
 } from "../metadata/provider.ts";
+import { formatLimitTerm, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
 export const OPENROUTER_MODELS_URL = `${OPENROUTER_API_BASE_URL}/models?output_modalities=all`;
+export const OPENROUTER_LIMITS_URL = "https://openrouter.ai/docs/api/reference/limits";
 
 const OPENROUTER_FREE_SUFFIX = ":free";
 // The openrouter/ namespace holds routing endpoints (auto, fusion, free, ...) that stand in
@@ -20,6 +28,7 @@ interface HttpResponse {
   readonly ok: boolean;
   readonly status: number;
   json(): Promise<unknown>;
+  text?(): Promise<string>;
 }
 
 type FetchModels = (url: string, init?: RequestInit) => Promise<HttpResponse>;
@@ -31,6 +40,12 @@ export interface OpenRouterProviderOptions {
 export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvider {
   readonly id = "openrouter";
   readonly name = "OpenRouter";
+  readonly doc: ProviderDoc = {
+    models: "https://openrouter.ai/models",
+    overview: "https://openrouter.ai/docs/quickstart",
+    pricing: "https://openrouter.ai/docs/models",
+    rate_limit: OPENROUTER_LIMITS_URL,
+  };
 
   readonly #fetch: FetchModels;
 
@@ -39,7 +54,7 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
   }
 
   async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
-    const models = await this.#loadModels();
+    const [models, limits] = await Promise.all([this.#loadModels(), this.#loadLimits()]);
     const openRouterMeta = modelsDev.get(this.id);
     const env =
       openRouterMeta?.env && openRouterMeta.env.length > 0 ? [...openRouterMeta.env] : undefined;
@@ -70,10 +85,35 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
         model_id: modelId,
         name: modelName,
         connection,
+        limits,
       });
     }
 
     return offers;
+  }
+
+  async #loadLimits(): Promise<OfferLimits> {
+    let response: HttpResponse;
+    try {
+      response = await this.#fetch(OPENROUTER_LIMITS_URL, {
+        headers: { Accept: "text/html,application/xhtml+xml" },
+      });
+    } catch (error) {
+      throw new Error("OpenRouter limits request failed", { cause: error });
+    }
+    if (!response.ok) {
+      throw new Error(`OpenRouter limits request failed with HTTP status ${response.status}`);
+    }
+    if (typeof response.text !== "function") {
+      throw new Error("OpenRouter limits response cannot be read as text");
+    }
+    let html: string;
+    try {
+      html = await response.text();
+    } catch (error) {
+      throw new Error("OpenRouter limits response could not be read", { cause: error });
+    }
+    return parseOpenRouterLimits(html);
   }
 
   async enrich(
@@ -83,8 +123,7 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
     const sourceModels = await this.#loadModels();
     const sourceById = new Map(sourceModels.map((model) => [model.id as string, model]));
     for (const { model, offers } of models) {
-      const openRouterOffer = offers.find(({ provider }) => provider === this.id);
-      const sourceModel = sourceById.get(openRouterOffer?.offer.model_id ?? model.id);
+      const sourceModel = findSourceModel(sourceById, model.id, offers);
       if (sourceModel) {
         metadataByCanonicalId.set(model.id, withoutId(sourceModel));
       }
@@ -159,6 +198,77 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
   }
 }
 
+export function parseOpenRouterLimits(html: string): OfferLimits {
+  const constants = {
+    rpm: readIntegerConstant(html, "FREE_MODEL_RATE_LIMIT_RPM"),
+    noCreditsRpd: readIntegerConstant(html, "FREE_MODEL_NO_CREDITS_RPD"),
+    hasCreditsRpd: readIntegerConstant(html, "FREE_MODEL_HAS_CREDITS_RPD"),
+    creditsThreshold: readIntegerConstant(html, "FREE_MODEL_CREDITS_THRESHOLD"),
+  };
+  return termsLimits(
+    formatLimitTerm(constants.rpm, "req", "min"),
+    `${formatLimitTerm(constants.noCreditsRpd, "req", "day")} (< $${constants.creditsThreshold} credits)`,
+    `${formatLimitTerm(constants.hasCreditsRpd, "req", "day")} (>= $${constants.creditsThreshold} credits)`,
+  );
+}
+
+function readIntegerConstant(source: string, name: string): number {
+  const match = new RegExp(`(?:const|let|var)\\s+${name}\\s*=\\s*(\\d+(?:e\\d+)?)`).exec(source);
+  const value = match?.[1] ? Number(match[1]) : Number.NaN;
+  if (!Number.isSafeInteger(value) || value <= 0) {
+    throw new Error(`OpenRouter limits page has no valid ${name} constant`);
+  }
+  return value;
+}
+
 function withoutId(model: Record<string, JsonValue>): Record<string, JsonValue> {
   return Object.fromEntries(Object.entries(model).filter(([key]) => key !== "id"));
+}
+
+/**
+ * Resolve the OpenRouter source record for a canonical model, always preferring
+ * the paid canonical entry over any `:free` alias.
+ *
+ * Candidate order:
+ * 1. paid variant of the resolved OpenRouter offer (strip `:free`)
+ * 2. canonical model ID as-is (paid)
+ * 3. OpenRouter offer ID as-is (`:free` record, free pricing/limits)
+ * 4. canonical ID with `:free` suffix (last resort)
+ */
+function findSourceModel(
+  sourceById: ReadonlyMap<string, Record<string, JsonValue>>,
+  canonicalId: string,
+  offers: readonly { provider: string; offer: { model_id: string } }[],
+): Record<string, JsonValue> | undefined {
+  const openRouterOffer = offers.find(({ provider }) => provider === "openrouter");
+  const candidates: string[] = [];
+
+  const push = (id: string | undefined) => {
+    if (id && !candidates.includes(id)) {
+      candidates.push(id);
+    }
+  };
+
+  if (openRouterOffer) {
+    push(stripFreeSuffix(openRouterOffer.offer.model_id));
+  }
+  push(canonicalId);
+  if (openRouterOffer) {
+    push(openRouterOffer.offer.model_id);
+  }
+  push(`${canonicalId}${OPENROUTER_FREE_SUFFIX}`);
+
+  for (const id of candidates) {
+    const source = sourceById.get(id);
+    if (source) {
+      return source;
+    }
+  }
+  return undefined;
+}
+
+function stripFreeSuffix(modelId: string): string {
+  return modelId.endsWith(OPENROUTER_FREE_SUFFIX)
+    ? modelId.slice(0, -OPENROUTER_FREE_SUFFIX.length)
+    : modelId;
 }

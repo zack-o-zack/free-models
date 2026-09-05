@@ -1,6 +1,12 @@
 {
   "provider": "gemini",
   "name": "Gemini",
+  "doc": {
+    "models": "https://ai.google.dev/gemini-api/docs/models/gemini",
+    "overview": "https://ai.google.dev/gemini-api/docs",
+    "pricing": "https://ai.google.dev/gemini-api/docs/pricing?hl=en",
+    "rate_limit": "https://ai.google.dev/gemini-api/docs/rate-limits?hl=en"
+  },
   "offers": [
     {
       "model_id": "gemini-2.5-flash",
@@ -15,6 +21,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -30,6 +43,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -45,6 +65,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -60,6 +87,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -75,6 +109,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -90,6 +131,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -105,6 +153,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -120,6 +175,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -135,6 +197,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -150,6 +219,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -165,6 +241,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -180,6 +263,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -195,6 +285,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -210,6 +307,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
       }
     },
     {
@@ -225,6 +329,35 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "5 req / min",
+          "250k tok / min",
+          "20 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 Flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -240,6 +373,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -255,6 +395,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -270,6 +417,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     },
     {
@@ -285,6 +439,13 @@
         },
         "base_url": "https://generativelanguage.googleapis.com/v1beta",
         "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
       }
     }
   ]
