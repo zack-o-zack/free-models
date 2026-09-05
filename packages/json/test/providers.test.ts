@@ -2,6 +2,15 @@ import { describe, expect, test } from "bun:test";
 import { desluggifyModelId } from "../src/catalogue/canonical.ts";
 import { providerDocSchema } from "../src/catalogue/schema.ts";
 import {
+  BAZAARLINK_API_BASE_URL,
+  BAZAARLINK_FREE_URL,
+  BAZAARLINK_MODELS_URL,
+  BazaarLinkProvider,
+  isFreeBazaarLinkModel,
+  parseBazaarLinkLimits,
+  parseBazaarLinkModels,
+} from "../src/providers/bazaarlink.ts";
+import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
   CloudflareProvider,
@@ -363,6 +372,152 @@ describe("Requesty discovery", () => {
     expect(() => parseRequestyModels({ object: "list" })).toThrow("data array");
     expect(isFreeRequestyModel({ id: "no-prices" })).toBe(false);
     expect(isFreeRequestyModel({ id: "bad-tier", pricing: ["not-an-object"] })).toBe(false);
+  });
+});
+
+describe("BazaarLink discovery", () => {
+  test("keeps only zero-priced :free aliases and skips routing endpoints", async () => {
+    const modelsDev = new Map([
+      [
+        "bazaarlink",
+        {
+          id: "bazaarlink",
+          env: ["BAZAARLINK_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: ["10 req / min", "50 req / day (no credit)", "100 req / day (with credit)"],
+    };
+    const provider = new BazaarLinkProvider({
+      fetch: async (url, init) => {
+        if (url === BAZAARLINK_MODELS_URL) {
+          expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+          return Response.json({
+            object: "list",
+            data: [
+              bazaarLinkModel("qwen/qwen3.7-flash:free", "Qwen3.7 Flash (free)", "0", "0"),
+              bazaarLinkModel("qwen/qwen3.7-flash", "Qwen3.7 Flash", "3e-8", "1.3e-7"),
+              bazaarLinkModel("auto:free", "Auto Router (free)", "0", "0"),
+              bazaarLinkModel("auto", "Auto Router", "-1", "-1"),
+              bazaarLinkModel("paid/suffixed:free", "Paid Suffixed", "0.001", "0.002"),
+            ],
+          });
+        }
+        expect(url).toBe(BAZAARLINK_FREE_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("text/html,application/xhtml+xml");
+        return new Response(bazaarLinkLimitsFixture());
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual([
+      {
+        model_id: "qwen/qwen3.7-flash:free",
+        name: "Qwen3.7 Flash (free)",
+        connection: {
+          auth: { env: ["BAZAARLINK_API_KEY"] },
+          base_url: BAZAARLINK_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      },
+    ]);
+  });
+
+  test("parses live free tier limits from the free page section", async () => {
+    await expect(parseBazaarLinkLimits(bazaarLinkLimitsFixture())).resolves.toEqual({
+      terms: ["10 req / min", "50 req / day (no credit)", "100 req / day (with credit)"],
+    });
+  });
+
+  test("rejects ambiguous, incomplete, and malformed limits sections", async () => {
+    await expect(parseBazaarLinkLimits("<main></main>")).rejects.toThrow(
+      "no unique free tier limits section",
+    );
+    await expect(
+      parseBazaarLinkLimits(bazaarLinkLimitsFixture() + bazaarLinkLimitsFixture()),
+    ).rejects.toThrow("no unique free tier limits section");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 / min"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "× 1"],
+        ]),
+      ),
+    ).rejects.toThrow("no Accounts with credit entry");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 / min"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "× 1"],
+          ["Accounts without credit", "× 1"],
+          ["Accounts with credit", "× 2"],
+        ]),
+      ),
+    ).rejects.toThrow("duplicate entry");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 per min"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "× 1"],
+          ["Accounts with credit", "× 2"],
+        ]),
+      ),
+    ).rejects.toThrow("invalid rate");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 / hour"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "× 1"],
+          ["Accounts with credit", "× 2"],
+        ]),
+      ),
+    ).rejects.toThrow("unexpected period");
+    await expect(
+      parseBazaarLinkLimits(
+        bazaarLinkLimitsPage([
+          ["Requests per minute", "10 / min"],
+          ["Requests per day", "50 / day"],
+          ["Accounts without credit", "x1"],
+          ["Accounts with credit", "× 2"],
+        ]),
+      ),
+    ).rejects.toThrow("invalid multiplier");
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseBazaarLinkModels({
+        object: "list",
+        data: [
+          bazaarLinkModel("duplicate:free", "Duplicate", "0", "0"),
+          bazaarLinkModel("duplicate:free", "Duplicate", "0", "0"),
+        ],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseBazaarLinkModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseBazaarLinkModels({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseBazaarLinkModels({
+        object: "list",
+        data: [bazaarLinkModel("qwen/qwen3.7-flash", "Qwen3.7 Flash", "3e-8", "1.3e-7")],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseBazaarLinkModels({ object: "list" })).toThrow("data array");
+    expect(
+      isFreeBazaarLinkModel({ id: "qwen/model", pricing: { prompt: "0", completion: "0" } }),
+    ).toBe(false);
+    expect(
+      isFreeBazaarLinkModel({
+        id: "paid/suffixed:free",
+        pricing: { prompt: "0.001", completion: "0" },
+      }),
+    ).toBe(false);
+    expect(isFreeBazaarLinkModel({ id: "missing/pricing:free" })).toBe(false);
   });
 });
 
@@ -782,6 +937,36 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
     );
   });
 });
+
+function bazaarLinkLimitsFixture(): string {
+  return bazaarLinkLimitsPage([
+    ["Requests per minute", "10 / min"],
+    ["Requests per day", "50 / day"],
+    ["Accounts without credit", "× 1"],
+    ["Accounts with credit", "× 2"],
+  ]);
+}
+
+function bazaarLinkLimitsPage(rows: string[][]): string {
+  return `
+<section><h2>Free Tier Limits</h2><div>
+  ${rows.map(([label, value]) => `<div><span>${label}</span><code>${value}</code></div>`).join("")}
+</div></section>`;
+}
+
+function bazaarLinkModel(
+  id: string,
+  name: string,
+  prompt: string,
+  completion: string,
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    name,
+    pricing: { prompt, completion },
+  };
+}
 
 function geminiPricingFixture(): string {
   return `

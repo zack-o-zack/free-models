@@ -1,0 +1,6 @@
+{
+  "provider": "bazaarlink",
+  "mappings": {
+    "qwen/qwen3.7-flash:free": "qwen/qwen3.7-flash"
+  }
+}

@@ -7758,6 +7758,10 @@
       }
     },
     {
+      "id": "qwen/qwen3.7-flash",
+      "name": "Qwen: Qwen3.7 flash"
+    },
+    {
       "id": "qwen/qwen3.8-27b",
       "name": "Qwen: Qwen3.8 27B",
       "architecture": {

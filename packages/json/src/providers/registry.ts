@@ -1,3 +1,4 @@
+import { BazaarLinkProvider } from "./bazaarlink.ts";
 import { CloudflareProvider } from "./cloudflare.ts";
 import { CohereProvider } from "./cohere.ts";
 import { GeminiProvider } from "./gemini.ts";
@@ -23,6 +24,7 @@ export const providerRegistry = defineProviderRegistry(
   new CohereProvider(),
   new TokenRouterProvider(),
   new RequestyProvider(),
+  new BazaarLinkProvider(),
 );
 
 export const metadataProvider = openRouterProvider;
