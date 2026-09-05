@@ -1,7 +1,3 @@
 {
-  "providers": {
-    "openrouter": [
-      "inclusionai/ling-3.0-flash-sante:free"
-    ]
-  }
+  "providers": {}
 }
