@@ -16,6 +16,7 @@
     "gemini-3.5-transcribe-live": "nvidia/nemotron-3.5-asr-streaming-multilingual-0.6b",
     "gemini-3.6-flash": "google/gemini-3.6-flash",
     "gemini-3.7-flash": "google/gemini-3.7-flash",
+    "gemini-3.8-flash": "google/gemini-3.8-flash",
     "gemini-embedding-001": "google/gemini-embedding-001",
     "gemini-robotics-er-1.6-preview": "google/gemini-3-flash-preview",
     "gemini-robotics-er-2-preview": "google/gemini-3-flash-preview",
