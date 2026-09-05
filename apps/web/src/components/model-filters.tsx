@@ -1,8 +1,8 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { AudioLines, FileText, ImageIcon, Server, Type, Video } from "lucide-react";
-
+import { AudioLines, FileText, ImageIcon, Type, Video } from "lucide-react";
+import { ProviderBadge } from "@/components/provider-badge";
 import {
   Accordion,
   AccordionContent,
@@ -42,6 +42,7 @@ interface ModelFiltersProps {
   contextRange: [number, number];
   publisherOptions: PublisherFilterOption[];
   providerOptions: ProviderFilterOption[];
+  providerNames: Record<string, string>;
   activeFilterCount: number;
   onToggleInput: (modality: string) => void;
   onTogglePublisher: (publisher: string) => void;
@@ -66,6 +67,7 @@ export function ModelFilters({
   contextRange,
   publisherOptions,
   providerOptions,
+  providerNames,
   activeFilterCount,
   onToggleInput,
   onTogglePublisher,
@@ -150,7 +152,7 @@ export function ModelFilters({
         <AccordionItem value="providers">
           <AccordionTrigger>Providers</AccordionTrigger>
           <AccordionContent className="grid gap-3 px-1 pt-1">
-            {providerOptions.map(({ value, label }) => (
+            {providerOptions.map(({ value }) => (
               <label
                 className="flex cursor-pointer items-center gap-3 text-sm font-medium text-muted-foreground hover:text-foreground"
                 htmlFor={`${idPrefix}-provider-${value}`}
@@ -161,8 +163,7 @@ export function ModelFilters({
                   id={`${idPrefix}-provider-${value}`}
                   onCheckedChange={() => onToggleProvider(value)}
                 />
-                <Server className="size-4" />
-                {label}
+                <ProviderBadge plain names={providerNames} provider={value} />
               </label>
             ))}
           </AccordionContent>

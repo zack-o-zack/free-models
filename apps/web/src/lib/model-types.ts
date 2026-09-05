@@ -6,10 +6,18 @@ export interface DesignArenaBenchmark {
   winRate: number | null;
 }
 
+export interface ProviderDoc {
+  overview?: string;
+  models?: string;
+  pricing?: string;
+  rateLimit?: string;
+}
+
 export interface ModelConnection {
   provider: string;
   modelId: string;
   connection?: Record<string, unknown>;
+  limits: string[];
 }
 
 export interface ModelSummary {
@@ -22,7 +30,9 @@ export interface ModelSummary {
   inputModalities: string[];
   outputModalities: string[];
   providers: string[];
+  providerNames: Record<string, string>;
   connections: ModelConnection[];
+  providerDocs: Record<string, ProviderDoc>;
   supportedParameters: string[];
   supportsReasoning: boolean;
   supportsTools: boolean;

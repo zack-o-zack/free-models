@@ -2,25 +2,18 @@
 
 import { Bot, BrainCircuit, Code2, EyeOff, Gauge, Server } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import type { MouseEvent } from "react";
 
 import { BenchmarkMetric, ModalityMetric } from "@/components/benchmark-metric";
-import { CopyButton } from "@/components/copy-button";
 import { DesignArenaPopover } from "@/components/design-arena-popover";
 import { ProviderBadge } from "@/components/provider-badge";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import { modelHref } from "@/lib/model-path";
-import type { ModelConnection, ModelSummary } from "@/lib/model-types";
+import type { ModelSummary } from "@/lib/model-types";
 import { providerFaviconUrl } from "@/lib/provider-logos";
 
 function initials(value: string): string {
@@ -33,22 +26,29 @@ function initials(value: string): string {
 }
 
 export function ModelCard({ model }: { model: ModelSummary }) {
+  const router = useRouter();
+  const href = modelHref(model.id);
   const providerLogoUrl = providerFaviconUrl(model.id.split("/")[0]);
-  const visibleProviders = model.providers.slice(0, 3);
-  const additionalProviderCount = Math.max(model.providers.length - visibleProviders.length, 0);
+
+  function handleCardClick(event: MouseEvent<HTMLDivElement>) {
+    if (
+      (event.target as HTMLElement).closest(
+        'a, button, [role="dialog"], [data-slot="popover-content"], [data-slot="tooltip-content"]',
+      )
+    ) {
+      return;
+    }
+    router.push(href);
+  }
   const modelNameSize =
     model.name.length > 42
       ? "text-sm sm:text-base"
       : model.name.length > 30
         ? "text-base"
         : "text-lg";
-  const providerConnections: ModelConnection[] =
-    model.connections.length > 0
-      ? model.connections
-      : model.providers.map((provider) => ({ provider, modelId: model.id }));
 
   return (
-    <Card className="bg-background transition-all duration-200 hover:-translate-y-0.5 hover:bg-secondary dark:hover:bg-muted">
+    <Card className="cursor-pointer bg-background" onClick={handleCardClick}>
       <CardHeader>
         <div className="flex min-w-0 items-start gap-4">
           {!model.isStealth && (
@@ -69,10 +69,7 @@ export function ModelCard({ model }: { model: ModelSummary }) {
             <CardTitle
               className={`flex flex-wrap items-center gap-2 font-extrabold tracking-[-0.025em] ${modelNameSize}`}
             >
-              <Link
-                className="line-clamp-2 min-w-0 max-w-full leading-tight underline-offset-4 hover:underline"
-                href={modelHref(model.id)}
-              >
+              <Link className="line-clamp-2 min-w-0 max-w-full leading-tight" href={href}>
                 {model.name}
               </Link>
               {model.isStealth && (
@@ -125,59 +122,16 @@ export function ModelCard({ model }: { model: ModelSummary }) {
         <p className="line-clamp-2 max-w-4xl text-[15px] leading-6 text-muted-foreground">
           {model.description}
         </p>
-        <Accordion>
-          <AccordionItem className="border-b-0" value="providers">
-            <AccordionTrigger className="py-1.5 font-semibold hover:no-underline">
-              <span className="flex min-w-0 flex-1 flex-wrap items-center gap-1.5 pr-2">
-                <span className="mr-1 shrink-0 text-xs text-muted-foreground">
-                  {model.providers.length} {model.providers.length === 1 ? "provider" : "providers"}
-                </span>
-                {visibleProviders.map((provider) => (
-                  <ProviderBadge key={provider} iconOnly provider={provider} />
-                ))}
-                {additionalProviderCount > 0 && (
-                  <Badge variant="outline">+{additionalProviderCount}</Badge>
-                )}
-              </span>
-            </AccordionTrigger>
-            <AccordionContent>
-              <Table>
-                <TableBody>
-                  {providerConnections.map((providerConnection) => (
-                    <TableRow key={`${providerConnection.provider}-${providerConnection.modelId}`}>
-                      <TableCell>
-                        <ProviderBadge plain provider={providerConnection.provider} size="lg" />
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex max-w-64 items-center gap-1">
-                          <Tooltip>
-                            <TooltipTrigger
-                              aria-label={`Model ID — ${providerConnection.modelId}`}
-                              className="min-w-0 flex-1 truncate text-left"
-                              render={<span />}
-                            >
-                              <code className="font-code text-xs">
-                                {providerConnection.modelId}
-                              </code>
-                            </TooltipTrigger>
-                            <TooltipContent>{providerConnection.modelId}</TooltipContent>
-                          </Tooltip>
-                          <CopyButton
-                            label={`Copy ${providerConnection.provider} model ID`}
-                            value={providerConnection.modelId}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-              <p className="px-2 pt-1 text-xs text-muted-foreground">
-                * Closest provider match, not an exact offering. Check provider docs for details.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+        <div className="flex flex-wrap items-center gap-1.5">
+          {model.providers.map((provider) => (
+            <ProviderBadge
+              key={provider}
+              iconOnly
+              names={model.providerNames}
+              provider={provider}
+            />
+          ))}
+        </div>
       </CardContent>
     </Card>
   );

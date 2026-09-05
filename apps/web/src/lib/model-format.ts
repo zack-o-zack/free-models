@@ -73,9 +73,12 @@ export function formatDesignArenaName(arena: string): string {
 }
 
 const connectionKeyLabels: Record<string, string> = {
+  auth: "Auth",
   base_url: "Base URL",
   ai_sdk_package: "AI SDK Package",
   endpoint: "Endpoint",
+  env: "Env",
+  protocol: "Protocol",
   supported_endpoint_types: "Supported Endpoint Types",
 };
 
@@ -89,7 +92,48 @@ export function formatConnectionKey(key: string): string {
 export function formatConnectionValue(value: unknown): string {
   if (typeof value === "string") return value;
   if (typeof value === "number" || typeof value === "boolean") return String(value);
-  if (Array.isArray(value)) return value.map(formatConnectionValue).join(", ");
-  if (value && typeof value === "object") return JSON.stringify(value);
   return "";
+}
+
+export interface ConnectionEntry {
+  key: string;
+  value: string;
+}
+
+export function flattenConnectionEntries(record: Record<string, unknown>): ConnectionEntry[] {
+  const entries: ConnectionEntry[] = [];
+
+  for (const [rawKey, rawValue] of Object.entries(record)) {
+    const key = formatConnectionKey(rawKey);
+    collect(key, rawValue, entries);
+  }
+
+  return entries;
+}
+
+function collect(key: string, value: unknown, out: ConnectionEntry[]): void {
+  if (value === null || value === undefined) return;
+
+  const leaf = formatConnectionValue(value);
+  if (leaf) {
+    out.push({ key, value: leaf });
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    if (value.every((item) => typeof item === "string" || typeof item === "number")) {
+      out.push({ key, value: value.join(", ") });
+      return;
+    }
+    for (const item of value) {
+      collect(key, item, out);
+    }
+    return;
+  }
+
+  if (typeof value === "object") {
+    for (const [childKey, childValue] of Object.entries(value as Record<string, unknown>)) {
+      collect(`${key} ${formatConnectionKey(childKey)}`, childValue, out);
+    }
+  }
 }

@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-
 import { BenchmarkMetric } from "@/components/benchmark-metric";
 import { DesignArenaPopover } from "@/components/design-arena-popover";
 import { ModelCard } from "@/components/model-card";
@@ -60,7 +59,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
-import { providerFaviconUrl } from "@/lib/provider-logos";
+import { getProviderName, providerFaviconUrl } from "@/lib/provider-logos";
 
 type SortOption = "newest" | "oldest" | "context" | "name" | "intelligence" | "coding" | "agentic";
 type ViewMode = "list" | "table";
@@ -136,13 +135,21 @@ export function ModelExplorer({ models }: { models: ModelSummary[] }) {
   const [selectedProviders, setSelectedProviders] = useState<string[]>([]);
   const [contextRange, setContextRange] = useState<[number, number]>([0, CONTEXT_STEPS.length - 1]);
 
+  const liveProviderNames = useMemo(() => {
+    const merged: Record<string, string> = {};
+    for (const model of models) {
+      Object.assign(merged, model.providerNames);
+    }
+    return merged;
+  }, [models]);
+
   const providerOptions = useMemo<ProviderFilterOption[]>(() => {
     const providers = new Set(models.flatMap((model) => model.providers));
 
     return Array.from(providers)
-      .sort((left, right) => left.localeCompare(right))
-      .map((value) => ({ value, label: value }));
-  }, [models]);
+      .map((value) => ({ value, label: getProviderName(value, liveProviderNames) }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [models, liveProviderNames]);
 
   const publisherOptions = useMemo<PublisherFilterOption[]>(() => {
     const publishers = new Map<string, PublisherFilterOption>();
@@ -280,6 +287,7 @@ export function ModelExplorer({ models }: { models: ModelSummary[] }) {
     contextRange,
     publisherOptions,
     providerOptions,
+    providerNames: liveProviderNames,
     activeFilterCount,
     onToggleInput: toggleInput,
     onTogglePublisher: togglePublisher,
@@ -299,7 +307,7 @@ export function ModelExplorer({ models }: { models: ModelSummary[] }) {
             <h1 className="mt-6 max-w-4xl font-heading text-[clamp(3.5rem,8vw,7.5rem)] leading-[0.86] font-extrabold tracking-[-0.075em]">
               Build more.
               <br />
-              Spend <span className="text-[#2ead4b] dark:text-primary">less.</span>
+              Spend <span className="text-positive">less.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">
               Compare genuinely free AI models across providers, modalities, context windows, and
@@ -353,7 +361,7 @@ export function ModelExplorer({ models }: { models: ModelSummary[] }) {
       <section className="rounded-t-[40px] bg-card text-card-foreground" id="models">
         <div className="mx-auto max-w-[1440px] px-5 py-14 sm:px-8 sm:py-20">
           <div className="mb-10 max-w-2xl">
-            <p className="text-sm font-bold tracking-[0.14em] text-[#2ead4b] uppercase dark:text-primary">
+            <p className="text-sm font-bold tracking-[0.14em] text-positive uppercase">
               The catalogue
             </p>
             <h2 className="mt-3 font-heading text-4xl font-extrabold tracking-[-0.05em] sm:text-6xl">
@@ -432,32 +440,32 @@ export function ModelExplorer({ models }: { models: ModelSummary[] }) {
                     <SelectItem value="agentic">Agentic score</SelectItem>
                   </SelectContent>
                 </Select>
-                <div className="flex rounded-full bg-background p-1">
+                <div className="flex items-center gap-1 rounded-full bg-background p-1">
                   <Button
                     aria-label="List view"
                     className={
                       view === "list"
-                        ? "flex-1 bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground dark:hover:text-primary-foreground"
-                        : "flex-1"
+                        ? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground dark:hover:text-primary-foreground"
+                        : ""
                     }
                     onClick={() => setView("list")}
-                    size="sm"
+                    size="icon-sm"
                     variant="ghost"
                   >
-                    <LayoutList /> <span className="md:hidden xl:inline">List</span>
+                    <LayoutList />
                   </Button>
                   <Button
                     aria-label="Table view"
                     className={
                       view === "table"
-                        ? "flex-1 bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground dark:hover:text-primary-foreground"
-                        : "flex-1"
+                        ? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground dark:hover:text-primary-foreground"
+                        : ""
                     }
                     onClick={() => setView("table")}
-                    size="sm"
+                    size="icon-sm"
                     variant="ghost"
                   >
-                    <TableProperties /> <span className="md:hidden xl:inline">Table</span>
+                    <TableProperties />
                   </Button>
                 </div>
               </div>
@@ -470,7 +478,7 @@ export function ModelExplorer({ models }: { models: ModelSummary[] }) {
                   >
                     {outputTabs.map(({ value, label, icon: Icon }) => (
                       <TabsTrigger
-                        className="h-10 flex-none rounded-[20px] px-4 shadow-none! hover:bg-card hover:text-foreground data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-[#cdffad] data-active:hover:text-primary-foreground dark:hover:bg-card dark:hover:text-foreground dark:data-active:bg-primary dark:data-active:text-primary-foreground dark:data-active:hover:bg-[#cdffad] dark:data-active:hover:text-primary-foreground"
+                        className="h-10 flex-none rounded-[20px] px-4 shadow-none! hover:bg-card hover:text-foreground data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-primary-hover data-active:hover:text-primary-foreground dark:hover:bg-card dark:hover:text-foreground dark:data-active:bg-primary dark:data-active:text-primary-foreground dark:data-active:hover:bg-primary-hover dark:data-active:hover:text-primary-foreground"
                         key={value}
                         value={value}
                       >
@@ -555,7 +563,11 @@ export function ModelExplorer({ models }: { models: ModelSummary[] }) {
                             <TableCell>
                               <div className="flex gap-1">
                                 {model.providers.map((item) => (
-                                  <ProviderBadge key={item} provider={item} />
+                                  <ProviderBadge
+                                    key={item}
+                                    names={model.providerNames}
+                                    provider={item}
+                                  />
                                 ))}
                               </div>
                             </TableCell>

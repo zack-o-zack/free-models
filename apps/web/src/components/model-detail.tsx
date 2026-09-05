@@ -4,6 +4,7 @@ import {
   BrainCircuit,
   CalendarDays,
   Code2,
+  ExternalLink,
   EyeOff,
   FileText,
   Gauge,
@@ -19,6 +20,7 @@ import { ModalityMetric } from "@/components/benchmark-metric";
 import { CopyButton } from "@/components/copy-button";
 import { DesignArenaTable } from "@/components/design-arena-popover";
 import { ExpandableModelDescription } from "@/components/expandable-model-description";
+import { LimitTerm } from "@/components/limit-term";
 import { ModelSectionNav, StickyModelHeader } from "@/components/model-detail-navigation";
 import { ProviderBadge } from "@/components/provider-badge";
 import {
@@ -30,15 +32,10 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  formatBenchmarkScore,
-  formatConnectionKey,
-  formatConnectionValue,
-  formatContext,
-} from "@/lib/model-format";
+import { flattenConnectionEntries, formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import { modelHref } from "@/lib/model-path";
 import type { ModelConnection, ModelSummary } from "@/lib/model-types";
-import { providerFaviconUrl } from "@/lib/provider-logos";
+import { getProviderName, providerFaviconUrl } from "@/lib/provider-logos";
 
 const MAX_SUMMARY_PROVIDERS = 4;
 
@@ -145,7 +142,7 @@ export function ModelDetail({
         : "text-4xl leading-none sm:text-6xl lg:text-7xl";
   const providerConnections = model.connections.length
     ? model.connections
-    : model.providers.map((provider) => ({ provider, modelId: model.id }));
+    : model.providers.map((provider) => ({ provider, modelId: model.id, limits: [] as string[] }));
   const summaryProviders = model.providers.slice(0, MAX_SUMMARY_PROVIDERS);
   const additionalSummaryProviders = model.providers.length - summaryProviders.length;
   const connectionsByProvider = providerConnections.reduce<Map<string, ModelConnection[]>>(
@@ -220,7 +217,12 @@ export function ModelDetail({
           <SummaryItem icon={Server} label="Free providers">
             <div className="flex max-w-full items-center gap-1">
               {summaryProviders.map((provider) => (
-                <ProviderBadge iconOnly key={provider} provider={provider} />
+                <ProviderBadge
+                  iconOnly
+                  key={provider}
+                  names={model.providerNames}
+                  provider={provider}
+                />
               ))}
               {additionalSummaryProviders > 0 && (
                 <span className="inline-flex h-5 items-center rounded-full bg-background/15 px-2 font-sans text-[11px] font-bold text-background">
@@ -270,80 +272,140 @@ export function ModelDetail({
               icon={Server}
               title="Providers"
             />
-            <Card className="bg-background px-4 py-2 sm:px-6">
-              <Accordion defaultValue={Array.from(connectionsByProvider.keys())} multiple>
-                {Array.from(connectionsByProvider.entries()).map(([provider, connections]) => (
-                  <AccordionItem key={provider} value={provider}>
-                    <AccordionTrigger className="py-3 hover:no-underline">
-                      <div className="flex items-center gap-2">
-                        <ProviderBadge plain provider={provider} size="lg" />
+            <div className="space-y-6">
+              {Array.from(connectionsByProvider.entries()).map(([provider, connections]) => {
+                const docs = model.providerDocs[provider];
+                const docEntries: { label: string; url: string }[] = [];
+                if (docs?.overview) docEntries.push({ label: "Overview", url: docs.overview });
+                if (docs?.models) docEntries.push({ label: "Models", url: docs.models });
+                if (docs?.pricing) docEntries.push({ label: "Pricing", url: docs.pricing });
+                if (docs?.rateLimit) docEntries.push({ label: "Rate limits", url: docs.rateLimit });
+
+                return (
+                  <div className="space-y-3" key={provider}>
+                    <div className="flex flex-col justify-between gap-4 px-1 sm:flex-row sm:items-center">
+                      <div className="flex items-center gap-3">
+                        <ProviderBadge
+                          plain
+                          names={model.providerNames}
+                          provider={provider}
+                          size="xl"
+                        />
                         {connections.length > 1 && (
-                          <span className="text-xs text-muted-foreground">
-                            ({connections.length} offerings)
+                          <span className="rounded-full bg-muted/50 px-2 py-1 text-xs font-medium text-muted-foreground">
+                            {connections.length} offerings
                           </span>
                         )}
                       </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="pb-4">
-                      <div className="space-y-3 pt-1">
-                        {connections.map((connection) => (
-                          <div
-                            className="space-y-1.5 border-t pt-3 first:border-t-0 first:pt-0"
-                            key={connection.modelId}
-                          >
-                            <div className="flex min-w-0 items-center justify-between gap-2 rounded-md bg-muted/50 px-3 py-2">
-                              <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-3">
-                                <span className="shrink-0 text-xs font-medium text-muted-foreground sm:w-36">
-                                  Model ID
-                                </span>
+                      {docEntries.length > 0 && (
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
+                          {docEntries.map((entry) => (
+                            <a
+                              className="inline-flex items-center gap-1.5 font-medium text-muted-foreground transition-colors hover:text-foreground"
+                              href={entry.url}
+                              key={entry.label}
+                              rel="noopener noreferrer"
+                              target="_blank"
+                            >
+                              {entry.label}
+                              <ExternalLink className="size-3.5" />
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <Card className="flex flex-col overflow-hidden bg-background py-2 px-1">
+                      <div className="space-y-8 p-3">
+                        {connections.map((connection, idx) => (
+                          <div className="space-y-3" key={connection.modelId}>
+                            {connections.length > 1 && (
+                              <h4 className="flex min-w-0 items-baseline gap-2 font-heading text-sm font-bold text-foreground">
+                                <span className="shrink-0">Option {idx + 1}:</span>
                                 <code
-                                  className="min-w-0 flex-1 truncate font-code text-xs sm:text-sm"
+                                  className="min-w-0 truncate font-code text-xs font-normal text-muted-foreground"
                                   title={connection.modelId}
                                 >
                                   {connection.modelId}
                                 </code>
-                              </div>
-                              <CopyButton
-                                label={`Copy ${provider} model ID`}
-                                value={connection.modelId}
-                              />
-                            </div>
+                              </h4>
+                            )}
 
-                            {Object.entries(connection.connection ?? {}).map(([key, rawValue]) => {
-                              const formattedKey = formatConnectionKey(key);
-                              const formattedValue = formatConnectionValue(rawValue);
-                              if (!formattedValue) return null;
-                              return (
-                                <div
-                                  className="flex min-w-0 items-center justify-between gap-2 rounded-md bg-muted/50 px-3 py-2"
-                                  key={key}
-                                >
-                                  <div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:gap-3">
-                                    <span className="shrink-0 text-xs font-medium text-muted-foreground sm:w-36">
-                                      {formattedKey}
+                            <div className="space-y-3">
+                              <h5 className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80">
+                                Connection Details
+                              </h5>
+                              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                                <div className="flex min-w-0 flex-col gap-1 rounded-xl bg-card p-4 shadow-sm">
+                                  <div className="flex items-center justify-between gap-2">
+                                    <span className="text-xs font-semibold text-muted-foreground">
+                                      model_id
                                     </span>
-                                    <code
-                                      className="min-w-0 flex-1 truncate font-code text-xs sm:text-sm"
-                                      title={formattedValue}
-                                    >
-                                      {formattedValue}
-                                    </code>
+                                    <CopyButton
+                                      label={`Copy ${provider} model ID`}
+                                      value={connection.modelId}
+                                    />
                                   </div>
-                                  <CopyButton
-                                    label={`Copy ${provider} ${formattedKey}`}
-                                    value={formattedValue}
-                                  />
+                                  <div className="relative">
+                                    <code
+                                      className="block overflow-x-auto whitespace-nowrap pb-1 pr-8 font-code text-xs text-foreground sm:text-sm"
+                                      title={connection.modelId}
+                                    >
+                                      {connection.modelId}
+                                    </code>
+                                    <div className="pointer-events-none absolute bottom-1 right-0 top-0 w-8 bg-gradient-to-l from-card to-transparent" />
+                                  </div>
                                 </div>
-                              );
-                            })}
+
+                                {connection.connection &&
+                                  flattenConnectionEntries(connection.connection).map((entry) => {
+                                    return (
+                                      <div
+                                        className="flex min-w-0 flex-col gap-1 rounded-xl bg-card p-4 shadow-sm"
+                                        key={`${connection.modelId}-${entry.key}-${entry.value}`}
+                                      >
+                                        <div className="flex items-center justify-between gap-2">
+                                          <span className="text-xs font-semibold text-muted-foreground">
+                                            {entry.key}
+                                          </span>
+                                          <CopyButton
+                                            label={`Copy ${provider} ${entry.key}`}
+                                            value={entry.value}
+                                          />
+                                        </div>
+                                        <div className="relative">
+                                          <code
+                                            className="block overflow-x-auto whitespace-nowrap pb-1 pr-8 font-code text-xs text-foreground sm:text-sm"
+                                            title={entry.value}
+                                          >
+                                            {entry.value}
+                                          </code>
+                                          <div className="pointer-events-none absolute bottom-1 right-0 top-0 w-8 bg-gradient-to-l from-card to-transparent" />
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                              </div>
+                            </div>
+                            {connection.limits.length > 0 && (
+                              <div className="space-y-3">
+                                <h5 className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80">
+                                  Rate Limits
+                                </h5>
+                                <div className="flex flex-wrap gap-3">
+                                  {connection.limits.map((term) => (
+                                    <LimitTerm key={term} term={term} />
+                                  ))}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </Card>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
             <p className="px-1 text-xs text-muted-foreground">
               * Closest provider match, not an exact offering. Check provider docs for details.
             </p>
@@ -351,7 +413,7 @@ export function ModelDetail({
 
           <section className="scroll-mt-32 space-y-5" id="benchmarks" tabIndex={-1}>
             <SectionHeading
-              description="Independent benchmark results available for this model. Higher scores are better; rank values use a # prefix."
+              description="Independent benchmark results available for this model."
               icon={BrainCircuit}
               title="Benchmarks"
             />
@@ -426,8 +488,12 @@ export function ModelDetail({
                   Where can I use this model for free?
                 </AccordionTrigger>
                 <AccordionContent className="pb-5 text-[15px] leading-7 text-muted-foreground sm:text-base">
-                  It is currently listed by {model.providers.join(", ")}. Use the connection ID in
-                  the Providers section and confirm exact availability in the provider docs.
+                  It is currently listed by{" "}
+                  {model.providers
+                    .map((provider) => getProviderName(provider, model.providerNames))
+                    .join(", ")}
+                  . Use the connection ID in the Providers section and confirm exact availability in
+                  the provider docs.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="benchmarks">
