@@ -1,0 +1,620 @@
+{
+  "provider": "cohere",
+  "name": "Cohere",
+  "doc": {
+    "models": "https://cohere.com/models-overview",
+    "overview": "https://docs.cohere.com/docs/models",
+    "pricing": "https://cohere.com/pricing",
+    "rate_limit": "https://docs.cohere.com/docs/rate-limits"
+  },
+  "offers": [
+    {
+      "model_id": "c4ai-aya-expanse-32b",
+      "name": "C4ai aya expanse 32b",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "c4ai-aya-vision-32b",
+      "name": "C4ai aya vision 32b",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "cohere-transcribe-03-2026",
+      "name": "Cohere transcribe 03 2026",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "5 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-a-03-2025",
+      "name": "Command a 03 2025",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-a-plus-05-2026",
+      "name": "Command a plus 05 2026",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-a-reasoning-08-2025",
+      "name": "Command a reasoning 08 2025",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-a-translate-08-2025",
+      "name": "Command a translate 08 2025",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-a-vision-07-2025",
+      "name": "Command a vision 07 2025",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-r-08-2024",
+      "name": "Command r 08 2024",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-r-plus-08-2024",
+      "name": "Command r plus 08 2024",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-r7b-12-2024",
+      "name": "Command r7b 12 2024",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "command-r7b-arabic-02-2025",
+      "name": "Command r7b arabic 02 2025",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-english-light-v3.0",
+      "name": "Embed english light v3.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "2k inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-english-light-v3.0-image",
+      "name": "Embed english light v3.0 image",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "5 inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-english-v3.0",
+      "name": "Embed english v3.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "2k inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-english-v3.0-image",
+      "name": "Embed english v3.0 image",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "5 inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-multilingual-light-v3.0",
+      "name": "Embed multilingual light v3.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "2k inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-multilingual-light-v3.0-image",
+      "name": "Embed multilingual light v3.0 image",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "5 inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-multilingual-v3.0",
+      "name": "Embed multilingual v3.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "2k inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-multilingual-v3.0-image",
+      "name": "Embed multilingual v3.0 image",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "5 inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-v4.0",
+      "name": "Embed v4.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "2k inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "north-mini-code-1-0",
+      "name": "North mini code 1 0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "parse-v5.0",
+      "name": "Parse v5.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v2",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "500 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "rerank-english-v3.0",
+      "name": "Rerank english v3.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "rerank-multilingual-v3.0",
+      "name": "Rerank multilingual v3.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "rerank-v3.5",
+      "name": "Rerank v3.5",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "rerank-v4.0-fast",
+      "name": "Rerank v4.0 fast",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "rerank-v4.0-pro",
+      "name": "Rerank v4.0 pro",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "tiny-aya-earth",
+      "name": "Tiny aya earth",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "tiny-aya-fire",
+      "name": "Tiny aya fire",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "tiny-aya-global",
+      "name": "Tiny aya global",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "tiny-aya-water",
+      "name": "Tiny aya water",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    }
+  ]
+}
