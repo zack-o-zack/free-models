@@ -55,15 +55,6 @@ export function openCodePublishedLimits(): OfferLimits {
   return termsLimits("200 req / day");
 }
 
-export function requestyPublishedLimits(): OfferLimits {
-  return termsLimits(
-    `${formatLimitTerm(20, "req", "min")} (new orgs)`,
-    `${formatLimitTerm(200, "req", "day")} (new orgs)`,
-    `${formatLimitTerm(60, "req", "min")} (paying orgs)`,
-    `${formatLimitTerm(1_000, "req", "day")} (paying orgs)`,
-  );
-}
-
 export function termsLimits(...terms: string[]): OfferLimits {
   return { terms };
 }

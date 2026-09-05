@@ -3,12 +3,19 @@ import {
   type DiscoveredOffer,
   type JsonValue,
   jsonObjectSchema,
+  type OfferLimits,
   type ProviderDoc,
 } from "../catalogue/schema.ts";
-import { requestyPublishedLimits } from "./limits.ts";
+import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
-import { type FetchSource, fetchJson } from "./source.ts";
+import {
+  createHtmlRewriter,
+  type FetchSource,
+  fetchJson,
+  fetchText,
+  normalizeText,
+} from "./source.ts";
 
 export const REQUESTY_API_BASE_URL = "https://router.requesty.ai/v1";
 export const REQUESTY_MODELS_URL = `${REQUESTY_API_BASE_URL}/models`;
@@ -18,6 +25,10 @@ export const REQUESTY_FREE_MODELS_URL = "https://docs.requesty.ai/features/free-
 // balancing, ...) that stand in front of other providers' models, not concrete
 // free models of their own.
 const REQUESTY_ROUTER_PREFIX = "policy/";
+
+const REQUEST_LIMIT_COLUMNS = ["Organization", "Requests per day", "Requests per minute"] as const;
+const NEW_ORGANIZATIONS_ROW = "New organizations";
+const PAYING_ORGANIZATIONS_ROW = "Paying organizations";
 
 export interface RequestyProviderOptions {
   readonly fetch?: FetchSource;
@@ -40,9 +51,15 @@ export class RequestyProvider implements ModelProvider {
   }
 
   async discover(modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
-    const payload = await fetchJson(this.#fetch, REQUESTY_MODELS_URL, "Requesty models", {
-      headers: { Accept: "application/json" },
-    });
+    const [payload, limitsHtml] = await Promise.all([
+      fetchJson(this.#fetch, REQUESTY_MODELS_URL, "Requesty models", {
+        headers: { Accept: "application/json" },
+      }),
+      fetchText(this.#fetch, REQUESTY_FREE_MODELS_URL, "Requesty free models", {
+        headers: { Accept: "text/html,application/xhtml+xml" },
+      }),
+    ]);
+    const limits = await parseRequestyLimits(limitsHtml);
 
     const requestyMeta = modelsDev.get(this.id);
     const env =
@@ -67,7 +84,7 @@ export class RequestyProvider implements ModelProvider {
         model_id: modelId,
         name: modelName,
         connection,
-        limits: requestyPublishedLimits(),
+        limits,
       };
     });
   }
@@ -132,4 +149,112 @@ export function isFreeRequestyModel(model: Record<string, JsonValue>): boolean {
 
 function isZeroPrice(value: JsonValue | undefined): boolean {
   return typeof value === "number" && value === 0;
+}
+
+export async function parseRequestyLimits(html: string): Promise<OfferLimits> {
+  const tables = await extractTables(html);
+  const matchingTables = tables.filter((rows) =>
+    equalStrings(rows[0] ?? [], REQUEST_LIMIT_COLUMNS),
+  );
+  if (matchingTables.length !== 1) {
+    throw new Error("Requesty free models documentation has no unique request limits table");
+  }
+  const rows = matchingTables[0]?.slice(1) ?? [];
+  const limitsByOrganization = new Map<string, { rpd: number; rpm: number }>();
+  for (const cells of rows) {
+    if (cells.length !== REQUEST_LIMIT_COLUMNS.length) {
+      throw new Error("Requesty request limits table contains a malformed row");
+    }
+    const [organization, perDay, perMinute] = cells as [string, string, string];
+    if (limitsByOrganization.has(organization)) {
+      throw new Error(
+        `Requesty request limits table contains a duplicate organization: ${organization}`,
+      );
+    }
+    limitsByOrganization.set(organization, {
+      rpd: parseCompactInteger(perDay, `Requesty requests per day for ${organization}`),
+      rpm: parseCompactInteger(perMinute, `Requesty requests per minute for ${organization}`),
+    });
+  }
+
+  const tiers = [NEW_ORGANIZATIONS_ROW, PAYING_ORGANIZATIONS_ROW].map((organization) => {
+    const tier = limitsByOrganization.get(organization);
+    if (!tier) {
+      throw new Error(`Requesty request limits table has no ${organization} row`);
+    }
+    const qualifier = organization === NEW_ORGANIZATIONS_ROW ? "new orgs" : "paying orgs";
+    return {
+      qualifier,
+      rpm: formatLimitTerm(tier.rpm, "req", "min"),
+      rpd: formatLimitTerm(tier.rpd, "req", "day"),
+    };
+  });
+
+  return termsLimits(
+    ...tiers.flatMap(({ qualifier, rpm, rpd }) => [
+      `${rpm} (${qualifier})`,
+      `${rpd} (${qualifier})`,
+    ]),
+  );
+}
+
+async function extractTables(html: string): Promise<string[][][]> {
+  const tables: string[][][] = [];
+  let currentTable: string[][] | undefined;
+  let currentRow: string[] | undefined;
+  let currentCell: { text: string } | undefined;
+
+  try {
+    const transformed = createHtmlRewriter()
+      .on("table", {
+        element(element) {
+          currentTable = [];
+          tables.push(currentTable);
+          element.onEndTag(() => {
+            currentTable = undefined;
+          });
+        },
+      })
+      .on("tr", {
+        element(element) {
+          if (!currentTable) {
+            return;
+          }
+          currentRow = [];
+          currentTable.push(currentRow);
+          element.onEndTag(() => {
+            currentRow = undefined;
+          });
+        },
+      })
+      .on("th, td", {
+        element(element) {
+          if (!currentRow) {
+            return;
+          }
+          currentCell = { text: "" };
+          element.onEndTag(() => {
+            if (currentRow && currentCell) {
+              currentRow.push(normalizeText(currentCell.text));
+            }
+            currentCell = undefined;
+          });
+        },
+        text(chunk) {
+          if (currentCell) {
+            currentCell.text += chunk.text;
+          }
+        },
+      })
+      .transform(new Response(html));
+    await transformed.text();
+  } catch (error) {
+    throw new Error("Requesty free models HTML is malformed", { cause: error });
+  }
+
+  return tables;
+}
+
+function equalStrings(left: readonly string[], right: readonly string[]): boolean {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
 }
