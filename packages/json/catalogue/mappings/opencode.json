@@ -2,7 +2,6 @@
   "provider": "opencode",
   "mappings": {
     "big-pickle": "stealth:big-pickle",
-    "hy3-free": "tencent/hy3",
     "ling-3.0-flash-fin-free": "inclusionai/ling-3.0-flash-fin",
     "mimo-v2.5-free": "xiaomi/mimo-v2.5",
     "muse-spark-1.2-contributor-free": "meta/muse-spark-1.2-contributor",
