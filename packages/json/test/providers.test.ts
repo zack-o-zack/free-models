@@ -42,6 +42,15 @@ import {
 } from "../src/providers/nvidia.ts";
 import { providerRegistry } from "../src/providers/registry.ts";
 import {
+  isFreeRequestyModel,
+  parseRequestyLimits,
+  parseRequestyModels,
+  REQUESTY_API_BASE_URL,
+  REQUESTY_FREE_MODELS_URL,
+  REQUESTY_MODELS_URL,
+  RequestyProvider,
+} from "../src/providers/requesty.ts";
+import {
   parseTokenRouterModels,
   parseTokenRouterPricing,
   TOKENROUTER_API_BASE_URL,
@@ -224,6 +233,136 @@ describe("TokenRouter discovery", () => {
         data: [{ ...tokenRouterPrice("bad-price", 0), model_ratio: -1 }],
       }),
     ).toThrow("invalid model_ratio");
+  });
+});
+
+describe("Requesty discovery", () => {
+  test("keeps only zero-priced models and skips routing policies", async () => {
+    const modelsDev = new Map([
+      [
+        "requesty",
+        {
+          id: "requesty",
+          env: ["REQUESTY_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: [
+        "20 req / min (new orgs)",
+        "200 req / day (new orgs)",
+        "60 req / min (paying orgs)",
+        "1k req / day (paying orgs)",
+      ],
+    };
+    const provider = new RequestyProvider({
+      fetch: async (url, init) => {
+        if (url === REQUESTY_MODELS_URL) {
+          expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+          return Response.json({
+            object: "list",
+            data: [
+              requestyModel("nvidia/nemotron-3-super-120b-a12b", 0, 0),
+              requestyModel("policy/fallback", 0, 0),
+              requestyModel("openai/gpt-4o", 0.005, 0.015),
+              requestyModel("tiered/free", 0, 0, [
+                { prompt_tokens_threshold: 0, input_price: 0, output_price: 0 },
+                { prompt_tokens_threshold: 200000, input_price: 0, output_price: 0 },
+              ]),
+              requestyModel("tiered/paid", 0, 0, [
+                { prompt_tokens_threshold: 0, input_price: 0, output_price: 0 },
+                { prompt_tokens_threshold: 200000, input_price: 0.006, output_price: 0.02 },
+              ]),
+            ],
+          });
+        }
+        expect(url).toBe(REQUESTY_FREE_MODELS_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("text/html,application/xhtml+xml");
+        return new Response(requestyLimitsFixture());
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual(
+      ["nvidia/nemotron-3-super-120b-a12b", "tiered/free"].map((modelId) => ({
+        model_id: modelId,
+        name: desluggifyModelId(modelId),
+        connection: {
+          auth: { env: ["REQUESTY_API_KEY"] },
+          base_url: REQUESTY_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      })),
+    );
+  });
+
+  test("parses per-organization request limits from the documentation table", async () => {
+    await expect(parseRequestyLimits(requestyLimitsFixture())).resolves.toEqual({
+      terms: [
+        "20 req / min (new orgs)",
+        "200 req / day (new orgs)",
+        "60 req / min (paying orgs)",
+        "1k req / day (paying orgs)",
+      ],
+    });
+  });
+
+  test("rejects ambiguous, incomplete, and malformed limits tables", async () => {
+    await expect(parseRequestyLimits("<main></main>")).rejects.toThrow("no unique request limits");
+    await expect(
+      parseRequestyLimits(requestyLimitsFixture() + requestyLimitsFixture()),
+    ).rejects.toThrow("no unique request limits");
+    await expect(
+      parseRequestyLimits(requestyLimitsTable([["New organizations", "200", "20"]])),
+    ).rejects.toThrow("no Paying organizations row");
+    await expect(
+      parseRequestyLimits(requestyLimitsTable([["Paying organizations", "1,000", "60"]])),
+    ).rejects.toThrow("no New organizations row");
+    await expect(
+      parseRequestyLimits(
+        requestyLimitsTable([
+          ["New organizations", "200", "20"],
+          ["New organizations", "200", "20"],
+          ["Paying organizations", "1,000", "60"],
+        ]),
+      ),
+    ).rejects.toThrow("duplicate organization");
+    await expect(
+      parseRequestyLimits(
+        requestyLimitsTable([
+          ["New organizations", "200"],
+          ["Paying organizations", "1,000", "60"],
+        ]),
+      ),
+    ).rejects.toThrow("malformed row");
+    await expect(
+      parseRequestyLimits(
+        requestyLimitsTable([
+          ["New organizations", "unlimited", "20"],
+          ["Paying organizations", "1,000", "60"],
+        ]),
+      ),
+    ).rejects.toThrow("invalid numeric amount");
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseRequestyModels({
+        object: "list",
+        data: [requestyModel("duplicate", 0, 0), requestyModel("duplicate", 0, 0)],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseRequestyModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseRequestyModels({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseRequestyModels({
+        object: "list",
+        data: [requestyModel("openai/gpt-4o", 0.005, 0.015)],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseRequestyModels({ object: "list" })).toThrow("data array");
+    expect(isFreeRequestyModel({ id: "no-prices" })).toBe(false);
+    expect(isFreeRequestyModel({ id: "bad-tier", pricing: ["not-an-object"] })).toBe(false);
   });
 });
 
@@ -675,6 +814,38 @@ function nvidiaResource(name: string, nimTypes: string[]): Record<string, unknow
       { key: "nimType", values: nimTypes, unresolvedValues: [] },
       { key: "publisher", values: ["nvidia"], unresolvedValues: ["nvidia"] },
     ],
+  };
+}
+
+function requestyLimitsFixture(): string {
+  return requestyLimitsTable([
+    ["New organizations", "200", "20"],
+    ["Paying organizations", "1,000", "60"],
+  ]);
+}
+
+function requestyLimitsTable(rows: string[][]): string {
+  return `
+<table>
+  <thead><tr><th>Organization</th><th>Requests per day</th><th>Requests per minute</th></tr></thead>
+  <tbody>
+    ${rows.map((cells) => `<tr>${cells.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("")}
+  </tbody>
+</table>`;
+}
+
+function requestyModel(
+  id: string,
+  input_price: number,
+  output_price: number,
+  pricing?: Record<string, unknown>[],
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    input_price,
+    output_price,
+    pricing: pricing ?? [{ prompt_tokens_threshold: 0, input_price, output_price }],
   };
 }
 

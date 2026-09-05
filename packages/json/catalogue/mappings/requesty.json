@@ -1,0 +1,17 @@
+{
+  "provider": "requesty",
+  "mappings": {
+    "google/gemma-4-31b-it": "google/gemma-4-31b-it",
+    "mistral/leanstral-1-5": "mistralai/leanstral-1-5",
+    "novita/inclusionai/ling-3.0-tiny": "inclusionai/ling-3.0-tiny",
+    "nvidia/muse-glimmer-30b": "meta/muse-glimmer-30b",
+    "nvidia/nemotron-3-nano-30b-a3b": "nvidia/nemotron-3-nano-30b-a3b",
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+    "nvidia/nemotron-3-super-120b-a12b": "nvidia/nemotron-3-super-120b-a12b",
+    "nvidia/nemotron-3-ultra-550b-a55b": "nvidia/nemotron-3-ultra-550b-a55b",
+    "nvidia/nemotron-3.5-content-safety": "nvidia/nemotron-3.5-content-safety",
+    "nvidia/nemotron-3.5-lightning-30b-a3b": "nvidia/nemotron-3.5-lightning",
+    "poolside/laguna-m.1": "poolside/laguna-m.1",
+    "poolside/laguna-xs.2": "poolside/laguna-xs.2"
+  }
+}
