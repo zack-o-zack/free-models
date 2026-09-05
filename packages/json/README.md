@@ -13,23 +13,7 @@ Later phases use these snapshots.
 bun run catalogue:discover
 ```
 
-Discovery reads Groq's free-plan rate-limit table (excluding the `groq/` routing
-namespace), Gemini's per-model standard-tier pricing, NVIDIA Build's `Free Endpoint` catalogue
-labels, and Cloudflare Workers AI's free-allocation model pricing without credentials. OpenRouter
-discovery keeps concrete `:free` models only; its `openrouter/` routing namespace is never
-included. TokenRouter discovery intersects its public,
-zero-price `-free` models
-with the models actively served to `TOKENROUTER_API_KEY` and records all supported endpoint types.
-This excludes stale and imported pricing entries without limiting discovery to one API protocol.
-Cohere discovery lists the models visible to `COHERE_API_KEY` (a trial key is sufficient; trial
-keys are free, rate limited to 1,000 calls per month, and not permitted for production use),
-skipping deprecated and fine-tuned entries. Chat, text embed, and transcription models resolve to
-the OpenAI-compatible `https://api.cohere.ai/compatibility/v1` endpoint; rerank, image embed,
-and other native-only endpoints resolve to the Cohere API directly (parse lives on v2, the rest
-on v1). Per-endpoint trial limits are recorded per offer.
-Mistral discovery is account-scoped: set `MISTRAL_FREE_API_KEY` to an API key for an organization in
-Free mode before running this command. Mistral keys inherit their organization's plan, so do not use
-a key from a paid organization for catalogue discovery.
+Some providers need an API key. The command stops and names the missing key when the key is absent. Set the key and run the command again. Each discovered offer records its trial limits.
 
 ### Offer limits
 
