@@ -29,7 +29,11 @@ export const metadata: Metadata = {
   description: "Compare genuinely free AI models across providers, capabilities, and context.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="en"
