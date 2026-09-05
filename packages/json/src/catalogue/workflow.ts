@@ -6,7 +6,7 @@ import type {
 } from "../metadata/provider.ts";
 import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "../providers/models-dev.ts";
 import type { ModelProvider } from "../providers/provider.ts";
-import { canonicalModelWithGeneratedFields } from "./canonical.ts";
+import { RESERVED_CANONICAL_FIELDS } from "./canonical.ts";
 import type { CataloguePaths } from "./files.ts";
 import {
   compareStrings,
@@ -19,7 +19,7 @@ import {
 import type { CatalogueRenderer } from "./render.ts";
 import {
   CATALOGUE_SCHEMA_VERSION,
-  type CanonicalModels,
+  type CanonicalMetadataFile,
   catalogueSchema,
   type DiscoveredOffer,
   jsonObjectSchema,
@@ -90,8 +90,8 @@ export async function refreshMetadata(
     return;
   }
 
-  const enriched = applyMetadataResults(state.canonicalModels, activeModels, results);
-  await writeTextAtomically(paths.canonicalModels, serializeJson(enriched));
+  const enriched = applyMetadataResults(state.metadata, activeModels, results);
+  await writeTextAtomically(paths.canonicalMetadata, serializeJson(enriched));
 }
 
 export async function render(
@@ -157,12 +157,12 @@ function validateMetadataResults(results: ReadonlyMap<string, CanonicalMetadata>
 }
 
 function applyMetadataResults(
-  canonicalModels: CanonicalModels,
+  metadataFile: CanonicalMetadataFile,
   activeModels: readonly ActiveCanonicalModel[],
   results: ReadonlyMap<string, CanonicalMetadata>,
-): CanonicalModels {
+): CanonicalMetadataFile {
   const activeIds = new Set(activeModels.map(({ model }) => model.id));
-  const knownIds = new Set(canonicalModels.models.map(({ id }) => id));
+  const knownIds = new Set(metadataFile.metadata.map(({ id }) => id));
   const missingIds = [...activeIds].filter((id) => !results.has(id)).sort(compareStrings);
   const extraIds = [...results.keys()].filter((id) => !activeIds.has(id)).sort(compareStrings);
 
@@ -179,17 +179,27 @@ function applyMetadataResults(
     );
   }
 
-  const models = canonicalModels.models
-    .map((model) => {
-      if (!activeIds.has(model.id)) {
-        return model;
-      }
-      const metadata = results.get(model.id);
-      return metadata ? canonicalModelWithGeneratedFields(model, metadata) : model;
-    })
-    .sort((left, right) => compareStrings(left.id, right.id));
+  const byId = new Map(metadataFile.metadata.map((entry) => [entry.id, entry.metadata]));
+  for (const { model } of activeModels) {
+    const fresh = results.get(model.id);
+    if (fresh) {
+      byId.set(model.id, sortJsonObject(stripReservedMetadataFields(fresh)));
+    }
+  }
 
-  return { models };
+  const metadata = [...byId]
+    .sort(([left], [right]) => compareStrings(left, right))
+    .map(([id, metadata]) => ({ id, metadata }));
+
+  return { metadata };
+}
+
+function stripReservedMetadataFields(
+  metadata: CanonicalMetadata,
+): Record<string, import("./schema.ts").JsonValue> {
+  return Object.fromEntries(
+    Object.entries(metadata).filter(([key]) => !RESERVED_CANONICAL_FIELDS.has(key)),
+  ) as Record<string, import("./schema.ts").JsonValue>;
 }
 
 async function discoverSnapshots(

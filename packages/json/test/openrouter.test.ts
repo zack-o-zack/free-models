@@ -39,6 +39,7 @@ async function writeJson(path: string, value: unknown): Promise<void> {
 async function createWorkspace(): Promise<string> {
   const workspace = await mkdtemp(join(tmpdir(), "openrouter-catalogue-"));
   await writeJson(join(workspace, "catalogue/canonical-models.json"), { models: [] });
+  await writeJson(join(workspace, "catalogue/canonical-metadata.json"), { metadata: [] });
   await writeJson(join(workspace, "catalogue/unresolved.json"), { providers: {} });
   await writeJson(join(workspace, "free-models.json"), { schema_version: 4, models: [] });
   return workspace;
@@ -282,15 +283,125 @@ describe("OpenRouter canonical metadata", () => {
     );
   });
 
+  test("prefers paid source record over the :free alias", async () => {
+    const provider = new OpenRouterProvider({
+      fetch: async (url) => {
+        expect(url).toBe(OPENROUTER_MODELS_URL);
+        return Response.json({
+          data: [
+            {
+              id: "alpha/model",
+              name: "Paid Alpha",
+              description: "Paid record",
+              pricing: { prompt: "0.001", completion: "0.002" },
+              context_length: 1000000,
+            },
+            {
+              id: "alpha/model:free",
+              name: "Paid Alpha (free)",
+              description: "Free alias",
+              pricing: { prompt: "0", completion: "0" },
+              context_length: 10000,
+            },
+          ],
+        });
+      },
+    });
+    const activeModels: ActiveCanonicalModel[] = [
+      {
+        model: { id: "alpha/model", name: "Reviewed Alpha" },
+        offers: [
+          {
+            provider: "openrouter",
+            offer: {
+              model_id: "alpha/model:free",
+              name: "Alpha Model (free)",
+              connection: {
+                base_url: OPENROUTER_API_BASE_URL,
+                protocol: "openai",
+              },
+              limits: fixtureLimits,
+            },
+          },
+        ],
+      },
+    ];
+
+    expect(await provider.enrich(activeModels)).toEqual(
+      new Map([
+        [
+          "alpha/model",
+          {
+            name: "Paid Alpha",
+            description: "Paid record",
+            pricing: { prompt: "0.001", completion: "0.002" },
+            context_length: 1000000,
+          },
+        ],
+      ]),
+    );
+  });
+
+  test("resolves non-OpenRouter offers through the paid canonical ID", async () => {
+    const provider = new OpenRouterProvider({
+      fetch: async (url) => {
+        expect(url).toBe(OPENROUTER_MODELS_URL);
+        return Response.json({
+          data: [
+            {
+              id: "qwen/qwen3.7-flash",
+              name: "Qwen: Qwen3.7 Flash",
+              description: "Paid record",
+              context_length: 1000000,
+            },
+          ],
+        });
+      },
+    });
+    const activeModels: ActiveCanonicalModel[] = [
+      {
+        model: { id: "qwen/qwen3.7-flash", name: "Qwen: Qwen3.7 flash" },
+        offers: [
+          {
+            provider: "bazaarlink",
+            offer: {
+              model_id: "qwen/qwen3.7-flash:free",
+              name: "Qwen3.7 Flash (free)",
+              connection: {
+                base_url: "https://api.bazaarlink.ai/v1",
+                protocol: "openai",
+              },
+              limits: fixtureLimits,
+            },
+          },
+        ],
+      },
+    ];
+
+    expect(await provider.enrich(activeModels)).toEqual(
+      new Map([
+        [
+          "qwen/qwen3.7-flash",
+          {
+            name: "Qwen: Qwen3.7 Flash",
+            description: "Paid record",
+            context_length: 1000000,
+          },
+        ],
+      ]),
+    );
+  });
+
   test("enriches and protects source fields through the refresh CLI", async () => {
     await withWorkspace(async (workspace) => {
       expect(runFixtureCli(workspace, validFixturePath).exitCode).toBe(0);
       await writeJson(join(workspace, "catalogue/canonical-models.json"), {
         models: [
           { id: "zeta/model", name: "Reviewed Zeta" },
-          { id: "alpha/model", name: "Reviewed Alpha", removed: true },
+          { id: "alpha/model", name: "Reviewed Alpha" },
         ],
       });
+      await writeJson(join(workspace, "catalogue/canonical-metadata.json"), { metadata: [] });
       await writeJson(join(workspace, "catalogue/mappings/openrouter.json"), {
         provider: "openrouter",
         mappings: {
@@ -308,22 +419,31 @@ describe("OpenRouter canonical metadata", () => {
       expect(refresh.exitCode).toBe(0);
       expect(decoder.decode(refresh.stderr)).toBe("");
 
-      const canonical = await Bun.file(join(workspace, "catalogue/canonical-models.json")).json();
-      expect(canonical.models[0]).toEqual({
-        id: "alpha/model",
-        name: "Reviewed Alpha",
-        architecture: {
-          input_modalities: ["text", "image"],
-          output_modalities: ["text"],
-        },
-        pricing: { completion: "0", prompt: "0" },
-        supported_parameters: ["tools", "temperature"],
+      // Catalogue stays identity-only.
+      expect(await Bun.file(join(workspace, "catalogue/canonical-models.json")).json()).toEqual({
+        models: [
+          { id: "zeta/model", name: "Reviewed Zeta" },
+          { id: "alpha/model", name: "Reviewed Alpha" },
+        ],
       });
-      expect(canonical.models[1]).toEqual({
+      const metadata = await Bun.file(join(workspace, "catalogue/canonical-metadata.json")).json();
+      expect(metadata.metadata[0]).toEqual({
+        id: "alpha/model",
+        metadata: {
+          architecture: {
+            input_modalities: ["text", "image"],
+            output_modalities: ["text"],
+          },
+          pricing: { completion: "0", prompt: "0" },
+          supported_parameters: ["tools", "temperature"],
+        },
+      });
+      expect(metadata.metadata[1]).toEqual({
         id: "zeta/model",
-        name: "Reviewed Zeta",
-        nullable: null,
-        pricing: { completion: "0", prompt: "0" },
+        metadata: {
+          nullable: null,
+          pricing: { completion: "0", prompt: "0" },
+        },
       });
     });
   });

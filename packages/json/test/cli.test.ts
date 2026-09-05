@@ -30,6 +30,7 @@ async function prepareEmptyWorkspace(workspace: string): Promise<void> {
   await mkdir(join(workspace, "catalogue/mappings"), { recursive: true });
   await mkdir(join(workspace, "catalogue/snapshots"), { recursive: true });
   await Bun.write(join(workspace, "catalogue/canonical-models.json"), '{\n  "models": []\n}\n');
+  await Bun.write(join(workspace, "catalogue/canonical-metadata.json"), '{\n  "metadata": []\n}\n');
   await Bun.write(join(workspace, "catalogue/unresolved.json"), '{\n  "providers": {}\n}\n');
 
   for (const provider of providerRegistry) {

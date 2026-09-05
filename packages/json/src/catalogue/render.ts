@@ -29,6 +29,7 @@ export function renderCatalogue(catalogue: Catalogue): string {
 
 function buildCatalogue(state: CatalogueState): Catalogue {
   const canonicalById = new Map(state.canonicalModels.models.map((model) => [model.id, model]));
+  const metadataById = new Map(state.metadata.metadata.map((entry) => [entry.id, entry.metadata]));
   const groupedOffers = new Map<string, Map<string, DiscoveredOffer[]>>();
 
   for (const { canonicalId, provider, offer } of resolvedCatalogueOffers(state)) {
@@ -72,7 +73,7 @@ function buildCatalogue(state: CatalogueState): Catalogue {
       );
 
       return {
-        ...canonicalModelWithGeneratedFields(canonical, canonical),
+        ...canonicalModelWithGeneratedFields(canonical, metadataById.get(canonicalId) ?? {}),
         providers,
       };
     });

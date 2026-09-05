@@ -6,6 +6,7 @@ import type { JsonValue } from "./schema.ts";
 export interface CataloguePaths {
   readonly workspace: string;
   readonly canonicalModels: string;
+  readonly canonicalMetadata: string;
   readonly mappingsDirectory: string;
   readonly snapshotsDirectory: string;
   readonly unresolved: string;
@@ -23,6 +24,7 @@ export function cataloguePaths(workspace: string): CataloguePaths {
   return {
     workspace: absoluteWorkspace,
     canonicalModels: join(dataDirectory, "canonical-models.json"),
+    canonicalMetadata: join(dataDirectory, "canonical-metadata.json"),
     mappingsDirectory,
     snapshotsDirectory,
     unresolved: join(dataDirectory, "unresolved.json"),
