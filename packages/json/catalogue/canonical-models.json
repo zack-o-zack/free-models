@@ -793,6 +793,10 @@
       "name": "Big Pickle"
     },
     {
+      "id": "stepfun/step-3.7-flash",
+      "name": "StepFun: Step 3.7 Flash"
+    },
+    {
       "id": "tencent/hy-mt2-1.8b",
       "name": "Tencent: Hy-MT2-1.8B"
     },

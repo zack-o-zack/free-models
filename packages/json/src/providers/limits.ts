@@ -55,6 +55,10 @@ export function openCodePublishedLimits(): OfferLimits {
   return termsLimits("200 req / day");
 }
 
+export function kiloPublishedLimits(): OfferLimits {
+  return termsLimits(formatLimitTerm(200, "req", "hour"));
+}
+
 export function termsLimits(...terms: string[]): OfferLimits {
   return { terms };
 }
