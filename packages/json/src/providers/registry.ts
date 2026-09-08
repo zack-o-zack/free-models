@@ -3,6 +3,7 @@ import { CloudflareProvider } from "./cloudflare.ts";
 import { CohereProvider } from "./cohere.ts";
 import { GeminiProvider } from "./gemini.ts";
 import { GroqProvider } from "./groq.ts";
+import { KiloProvider } from "./kilo.ts";
 import { MistralProvider } from "./mistral.ts";
 import { NvidiaProvider } from "./nvidia.ts";
 import { OpenCodeProvider } from "./opencode.ts";
@@ -25,6 +26,7 @@ export const providerRegistry = defineProviderRegistry(
   new TokenRouterProvider(),
   new RequestyProvider(),
   new BazaarLinkProvider(),
+  new KiloProvider(),
 );
 
 export const metadataProvider = openRouterProvider;

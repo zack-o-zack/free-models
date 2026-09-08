@@ -31,8 +31,16 @@ import {
 } from "../src/providers/gemini.ts";
 import { GROQ_API_BASE_URL, GroqProvider, groqOfferLimits } from "../src/providers/groq.ts";
 import {
+  isFreeKiloModel,
+  KILO_API_BASE_URL,
+  KILO_MODELS_URL,
+  KiloProvider,
+  parseKiloModels,
+} from "../src/providers/kilo.ts";
+import {
   cohereOfferLimits,
   geminiUnconfirmedLimits,
+  kiloPublishedLimits,
   mistralUnconfirmedLimits,
   openCodePublishedLimits,
   tokenRouterUnconfirmedLimits,
@@ -81,13 +89,16 @@ describe("compact provider limit terms", () => {
     });
   });
 
-  test("returns hardcoded Mistral, TokenRouter, and OpenCode terms", () => {
+  test("returns hardcoded Mistral, TokenRouter, OpenCode, and Kilo terms", () => {
     expect(mistralUnconfirmedLimits()).toEqual({
       terms: ["50 req / min", "50k tok / min"],
     });
     expect(tokenRouterUnconfirmedLimits()).toEqual({ terms: ["8 req / min"] });
     expect(openCodePublishedLimits()).toEqual({
       terms: ["200 req / day"],
+    });
+    expect(kiloPublishedLimits()).toEqual({
+      terms: ["200 req / hour"],
     });
   });
 
@@ -518,6 +529,130 @@ describe("BazaarLink discovery", () => {
       }),
     ).toBe(false);
     expect(isFreeBazaarLinkModel({ id: "missing/pricing:free" })).toBe(false);
+  });
+});
+
+describe("Kilo discovery", () => {
+  test("keeps only free models with zero pricing and skips routing tiers", async () => {
+    const modelsDev = new Map([
+      [
+        "kilo",
+        {
+          id: "kilo",
+          env: ["KILO_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: ["200 req / hour"],
+    };
+    const provider = new KiloProvider({
+      fetch: async (url, init) => {
+        expect(url).toBe(KILO_MODELS_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        return Response.json({
+          object: "list",
+          data: [
+            kiloModel(
+              "stepfun/step-3.7-flash:free",
+              "StepFun: Step 3.7 Flash (free)",
+              true,
+              "0",
+              "0",
+            ),
+            kiloModel("poolside/laguna-s-2.1:free", "Poolside: Laguna S 2.1 (free)", true, 0, 0),
+            kiloModel("kilo-auto/free", "Auto Free", true, "0", "0"),
+            kiloModel("openrouter/free", "OpenRouter Free Models Router", true, "0", "0"),
+            kiloModel("anthropic/claude-sonnet-4.5", "Claude Sonnet 4.5", false, "0.003", "0.015"),
+            kiloModel("paid/free-flag", "Paid Flag", true, "0.001", "0"),
+          ],
+        });
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual(
+      ["stepfun/step-3.7-flash:free", "poolside/laguna-s-2.1:free"].map((modelId) => ({
+        model_id: modelId,
+        name:
+          modelId === "stepfun/step-3.7-flash:free"
+            ? "StepFun: Step 3.7 Flash (free)"
+            : "Poolside: Laguna S 2.1 (free)",
+        connection: {
+          auth: { env: ["KILO_API_KEY"] },
+          base_url: KILO_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      })),
+    );
+  });
+
+  test("omits auth when models.dev exposes no Kilo env and falls back to the model ID", async () => {
+    const provider = new KiloProvider({
+      fetch: async () =>
+        Response.json({
+          object: "list",
+          data: [kiloModel("vendor/model:free", "", true, "0", "0")],
+        }),
+    });
+
+    expect(await provider.discover(new Map())).toEqual([
+      {
+        model_id: "vendor/model:free",
+        name: desluggifyModelId("vendor/model:free"),
+        connection: {
+          base_url: KILO_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: kiloPublishedLimits(),
+      },
+    ]);
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseKiloModels({
+        object: "list",
+        data: [
+          kiloModel("duplicate:free", "Duplicate", true, "0", "0"),
+          kiloModel("duplicate:free", "Duplicate", true, "0", "0"),
+        ],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseKiloModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseKiloModels({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseKiloModels({
+        object: "list",
+        data: [kiloModel("anthropic/paid", "Paid", false, "1", "2")],
+      }),
+    ).toThrow("no free models");
+    expect(() =>
+      parseKiloModels({
+        object: "list",
+        data: [
+          kiloModel("kilo-auto/free", "Auto Free", true, "0", "0"),
+          kiloModel("openrouter/free", "Router", true, "0", "0"),
+        ],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseKiloModels({ object: "list" })).toThrow("data array");
+    expect(isFreeKiloModel({ id: "vendor/model:free", isFree: false })).toBe(false);
+    expect(
+      isFreeKiloModel({
+        id: "vendor/model:free",
+        isFree: true,
+        pricing: { prompt: "0.001", completion: "0" },
+      }),
+    ).toBe(false);
+    expect(
+      isFreeKiloModel({
+        id: "vendor/model:free",
+        isFree: true,
+        pricing: { prompt: "0", completion: "0.002" },
+      }),
+    ).toBe(false);
+    expect(isFreeKiloModel({ id: "vendor/model:free", isFree: true })).toBe(true);
   });
 });
 
@@ -1048,5 +1183,21 @@ function tokenRouterPrice(
     completion_ratio: 1,
     enable_groups: enableGroups,
     supported_endpoint_types: supportedEndpointTypes,
+  };
+}
+
+function kiloModel(
+  id: string,
+  name: string,
+  isFree: boolean,
+  prompt: string | number,
+  completion: string | number,
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    name,
+    pricing: { prompt, completion },
+    isFree,
   };
 }
