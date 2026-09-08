@@ -10,6 +10,7 @@ import { OpenCodeProvider } from "./opencode.ts";
 import { OpenRouterProvider } from "./openrouter.ts";
 import { defineProviderRegistry } from "./provider.ts";
 import { RequestyProvider } from "./requesty.ts";
+import { RoutewayProvider } from "./routeway.ts";
 import { TokenRouterProvider } from "./tokenrouter.ts";
 
 const openRouterProvider = new OpenRouterProvider();
@@ -25,6 +26,7 @@ export const providerRegistry = defineProviderRegistry(
   new CohereProvider(),
   new TokenRouterProvider(),
   new RequestyProvider(),
+  new RoutewayProvider(),
   new BazaarLinkProvider(),
   new KiloProvider(),
 );
