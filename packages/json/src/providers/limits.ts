@@ -59,6 +59,10 @@ export function kiloPublishedLimits(): OfferLimits {
   return termsLimits(formatLimitTerm(200, "req", "hour"));
 }
 
+export function routewayPublishedLimits(): OfferLimits {
+  return termsLimits(formatLimitTerm(20, "req", "min"), formatLimitTerm(200, "req", "day"));
+}
+
 export function termsLimits(...terms: string[]): OfferLimits {
   return { terms };
 }

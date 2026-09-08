@@ -1,0 +1,9 @@
+{
+  "provider": "routeway",
+  "mappings": {
+    "deepseek-v4-flash:free": "deepseek/deepseek-v4-flash",
+    "kimi-k2.6:free": "moonshotai/kimi-k2.6",
+    "minimax-m2.7:free": "minimax/minimax-m2.7",
+    "muse-glimmer-30b:free": "meta/muse-glimmer-30b"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "provider": "routeway",
+  "name": "Routeway",
+  "doc": {
+    "models": "https://routeway.ai/models",
+    "overview": "https://docs.routeway.ai/getting-started/introduction",
+    "pricing": "https://routeway.ai/models",
+    "rate_limit": "https://docs.routeway.ai/getting-started/rate-limits"
+  },
+  "offers": [
+    {
+      "model_id": "deepseek-v4-flash:free",
+      "name": "DeepSeek: DeepSeek V4 Flash (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "kimi-k2.6:free",
+      "name": "Moonshot AI: Kimi K2.6 (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax-m2.7:free",
+      "name": "MiniMax: MiniMax M2.7 (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "muse-glimmer-30b:free",
+      "name": "Meta: Glimmer 30B (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    }
+  ]
+}
