@@ -427,6 +427,25 @@
       }
     },
     {
+      "model_id": "north-small-translate-09-2026",
+      "name": "North small translate 09 2026",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
       "model_id": "parse-v5.0",
       "name": "Parse v5.0",
       "connection": {

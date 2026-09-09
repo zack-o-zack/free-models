@@ -99,6 +99,42 @@
       }
     },
     {
+      "model_id": "nex-agi/nex-n2.5-mini:free",
+      "name": "Nex AGI: Nex-N2.5-Mini (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "KILO_API_KEY"
+          ]
+        },
+        "base_url": "https://api.kilo.ai/api/gateway",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / hour"
+        ]
+      }
+    },
+    {
+      "model_id": "nex-agi/nex-n2.5-pro:free",
+      "name": "Nex AGI: Nex-N2.5-Pro (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "KILO_API_KEY"
+          ]
+        },
+        "base_url": "https://api.kilo.ai/api/gateway",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / hour"
+        ]
+      }
+    },
+    {
       "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       "name": "NVIDIA: Nemotron 3 Nano Omni (free)",
       "connection": {

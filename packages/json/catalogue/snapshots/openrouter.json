@@ -209,6 +209,46 @@
       }
     },
     {
+      "model_id": "nex-agi/nex-n2.5-mini:free",
+      "name": "Nex AGI: Nex-N2.5-Mini (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
+      }
+    },
+    {
+      "model_id": "nex-agi/nex-n2.5-pro:free",
+      "name": "Nex AGI: Nex-N2.5-Pro (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
+      }
+    },
+    {
       "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2:free",
       "name": "NVIDIA: Llama Nemotron Embed VL 1B V2 (free)",
       "connection": {
