@@ -23,6 +23,7 @@
     "embed-multilingual-v3.0-image": "cohere/embed-multilingual-v3.0-image",
     "embed-v4.0": "cohere/embed-v4.0",
     "north-mini-code-1-0": "cohere/north-mini-code",
+    "north-small-translate-09-2026": "cohere/north-small-translate-09-2026",
     "parse-v5.0": "cohere/parse-v5.0",
     "rerank-english-v3.0": "cohere/rerank-english-v3.0",
     "rerank-multilingual-v3.0": "cohere/rerank-multilingual-v3.0",
