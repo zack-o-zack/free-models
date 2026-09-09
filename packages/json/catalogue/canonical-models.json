@@ -145,6 +145,10 @@
       "name": "Cohere: North Mini Code"
     },
     {
+      "id": "cohere/north-small-translate-09-2026",
+      "name": "Cohere: North Small Translate 09-2026"
+    },
+    {
       "id": "cohere/parse-v5.0",
       "name": "Cohere: Parse V5.0"
     },
@@ -587,6 +591,14 @@
     {
       "id": "myshell-ai/melotts",
       "name": "Myshell AI: MeloTTS"
+    },
+    {
+      "id": "nex-agi/nex-n2.5-mini",
+      "name": "Nex AGI: Nex-N2.5-Mini"
+    },
+    {
+      "id": "nex-agi/nex-n2.5-pro",
+      "name": "Nex AGI: Nex-N2.5-Pro"
     },
     {
       "id": "nvidia/active-speaker-detection",

@@ -1,15 +1,3 @@
 {
-  "providers": {
-    "cohere": [
-      "north-small-translate-09-2026"
-    ],
-    "kilo": [
-      "nex-agi/nex-n2.5-mini:free",
-      "nex-agi/nex-n2.5-pro:free"
-    ],
-    "openrouter": [
-      "nex-agi/nex-n2.5-mini:free",
-      "nex-agi/nex-n2.5-pro:free"
-    ]
-  }
+  "providers": {}
 }
