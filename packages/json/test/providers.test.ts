@@ -42,6 +42,7 @@ import {
   geminiUnconfirmedLimits,
   kiloPublishedLimits,
   mistralUnconfirmedLimits,
+  ollamaPublishedLimits,
   openCodePublishedLimits,
   routewayPublishedLimits,
   tokenRouterUnconfirmedLimits,
@@ -58,6 +59,12 @@ import {
   nvidiaModelsUrl,
   parseNvidiaLimits,
 } from "../src/providers/nvidia.ts";
+import {
+  OLLAMA_API_BASE_URL,
+  OLLAMA_MODELS_URL,
+  OllamaProvider,
+  parseOllamaModels,
+} from "../src/providers/ollama.ts";
 import { providerRegistry } from "../src/providers/registry.ts";
 import {
   isFreeRequestyModel,
@@ -97,7 +104,7 @@ describe("compact provider limit terms", () => {
     });
   });
 
-  test("returns hardcoded Mistral, TokenRouter, OpenCode, Kilo, and Routeway terms", () => {
+  test("returns hardcoded Mistral, TokenRouter, OpenCode, Kilo, Routeway, and Ollama terms", () => {
     expect(mistralUnconfirmedLimits()).toEqual({
       terms: ["50 req / min", "50k tok / min"],
     });
@@ -110,6 +117,9 @@ describe("compact provider limit terms", () => {
     });
     expect(routewayPublishedLimits()).toEqual({
       terms: ["20 req / min", "200 req / day"],
+    });
+    expect(ollamaPublishedLimits()).toEqual({
+      terms: ["5m tok / week"],
     });
   });
 
@@ -540,6 +550,84 @@ describe("Routeway discovery", () => {
         },
       }),
     ).toBe(false);
+  });
+});
+
+describe("Ollama discovery", () => {
+  test("discovers cloud models from the OpenAI list with the Free plan limit", async () => {
+    const modelsDev = new Map([
+      [
+        "ollama-cloud",
+        {
+          id: "ollama-cloud",
+          env: ["OLLAMA_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: ["5m tok / week"],
+    };
+    const provider = new OllamaProvider({
+      fetch: async (url, init) => {
+        expect(url).toBe(OLLAMA_MODELS_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        return Response.json({
+          object: "list",
+          data: [
+            { id: "gpt-oss:20b", object: "model", owned_by: "ollama" },
+            { id: "qwen3.5:397b", object: "model", owned_by: "ollama" },
+          ],
+        });
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual(
+      ["gpt-oss:20b", "qwen3.5:397b"].map((modelId) => ({
+        model_id: modelId,
+        name: desluggifyModelId(modelId),
+        connection: {
+          auth: { env: ["OLLAMA_API_KEY"] },
+          base_url: OLLAMA_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      })),
+    );
+  });
+
+  test("falls back to OLLAMA_API_KEY when models.dev exposes no Ollama env", async () => {
+    const provider = new OllamaProvider({
+      fetch: async () =>
+        Response.json({
+          object: "list",
+          data: [{ id: "gpt-oss:20b", object: "model" }],
+        }),
+    });
+
+    expect(await provider.discover(new Map())).toEqual([
+      {
+        model_id: "gpt-oss:20b",
+        name: desluggifyModelId("gpt-oss:20b"),
+        connection: {
+          auth: { env: ["OLLAMA_API_KEY"] },
+          base_url: OLLAMA_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: ollamaPublishedLimits(),
+      },
+    ]);
+  });
+
+  test("rejects duplicate, malformed, and empty catalogues", () => {
+    expect(() =>
+      parseOllamaModels({
+        object: "list",
+        data: [{ id: "duplicate" }, { id: "duplicate" }],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseOllamaModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseOllamaModels({ object: "list", data: [] })).toThrow("no cloud models");
+    expect(() => parseOllamaModels({ object: "list" })).toThrow("data array");
   });
 });
 

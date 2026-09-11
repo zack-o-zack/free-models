@@ -6,6 +6,7 @@ import { GroqProvider } from "./groq.ts";
 import { KiloProvider } from "./kilo.ts";
 import { MistralProvider } from "./mistral.ts";
 import { NvidiaProvider } from "./nvidia.ts";
+import { OllamaProvider } from "./ollama.ts";
 import { OpenCodeProvider } from "./opencode.ts";
 import { OpenRouterProvider } from "./openrouter.ts";
 import { defineProviderRegistry } from "./provider.ts";
@@ -22,6 +23,7 @@ export const providerRegistry = defineProviderRegistry(
   new MistralProvider(),
   new GeminiProvider(),
   new NvidiaProvider(),
+  new OllamaProvider(),
   new CloudflareProvider(),
   new CohereProvider(),
   new TokenRouterProvider(),

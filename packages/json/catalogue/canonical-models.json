@@ -225,6 +225,10 @@
       "name": "DeepSeek: DeepSeek V4 Pro 0813"
     },
     {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "name": "DeepSeek: DeepSeek V4.1 Flash"
+    },
+    {
       "id": "dots-studio/dots-3-note-preview",
       "name": "Dots Studio: Dots3-Note Preview"
     },
@@ -521,6 +525,10 @@
       "name": "Mistral: Mistral Large 3 2512"
     },
     {
+      "id": "mistralai/mistral-large-3-675b",
+      "name": "Mistral: Mistral Large 3 675B"
+    },
+    {
       "id": "mistralai/mistral-medium-3",
       "name": "Mistral: Mistral Medium 3"
     },
@@ -587,6 +595,10 @@
     {
       "id": "moonshotai/kimi-k2.6",
       "name": "MoonshotAI: Kimi K2.6"
+    },
+    {
+      "id": "moonshotai/kimi-k2.7-code",
+      "name": "MoonshotAI: Kimi K2.7 Code"
     },
     {
       "id": "moonshotai/kimi-k3",
@@ -793,6 +805,10 @@
       "name": "Qwen3 Reranker 8B"
     },
     {
+      "id": "qwen/qwen3.5-397b",
+      "name": "Qwen: Qwen3.5 397B"
+    },
+    {
       "id": "qwen/qwen3.6-27b",
       "name": "Qwen: Qwen3.6 27B"
     },
@@ -849,12 +865,20 @@
       "name": "Z.ai: GLM 4.7 Flash"
     },
     {
+      "id": "z-ai/glm-5.1",
+      "name": "Z.ai: GLM 5.1"
+    },
+    {
       "id": "z-ai/glm-5.2",
       "name": "Z.ai: GLM 5.2"
     },
     {
       "id": "z-ai/glm-5.3",
       "name": "Z.ai: GLM 5.3"
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "name": "Z.ai: GLM 5.3 Flash"
     }
   ]
 }
