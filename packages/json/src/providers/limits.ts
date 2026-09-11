@@ -63,13 +63,6 @@ export function routewayPublishedLimits(): OfferLimits {
   return termsLimits(formatLimitTerm(20, "req", "min"), formatLimitTerm(200, "req", "day"));
 }
 
-export function ollamaPublishedLimits(): OfferLimits {
-  // Ollama publishes no numeric request caps for the Free tier; the weekly
-  // token figure below is an observed free-tier allowance, not an
-  // officially published quota (see https://ollama.com/pricing).
-  return termsLimits(formatLimitTerm(5_000_000, "tok", "week"));
-}
-
 export function termsLimits(...terms: string[]): OfferLimits {
   return { terms };
 }
