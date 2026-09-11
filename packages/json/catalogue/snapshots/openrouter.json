@@ -169,6 +169,26 @@
       }
     },
     {
+      "model_id": "inclusionai/ling-3.0-flash-vl:free",
+      "name": "inclusionAI: Ling 3.0 Flash VL (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
+      }
+    },
+    {
       "model_id": "liquid/lfm-2.5-2.6b:free",
       "name": "LiquidAI: LFM2.5-2.6B (free)",
       "connection": {
