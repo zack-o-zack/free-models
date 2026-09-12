@@ -361,50 +361,6 @@
       }
     },
     {
-      "model_id": "gemini-embedding-001",
-      "name": "Gemini Embedding",
-      "connection": {
-        "auth": {
-          "env": [
-            "GOOGLE_API_KEY",
-            "GOOGLE_GENERATIVE_AI_API_KEY",
-            "GEMINI_API_KEY"
-          ]
-        },
-        "base_url": "https://generativelanguage.googleapis.com/v1beta",
-        "protocol": "google"
-      },
-      "limits": {
-        "terms": [
-          "15 req / min",
-          "250k tok / min",
-          "500 req / day"
-        ]
-      }
-    },
-    {
-      "model_id": "gemini-robotics-er-1.6-preview",
-      "name": "Gemini Robotics ER 1.6 Preview",
-      "connection": {
-        "auth": {
-          "env": [
-            "GOOGLE_API_KEY",
-            "GOOGLE_GENERATIVE_AI_API_KEY",
-            "GEMINI_API_KEY"
-          ]
-        },
-        "base_url": "https://generativelanguage.googleapis.com/v1beta",
-        "protocol": "google"
-      },
-      "limits": {
-        "terms": [
-          "15 req / min",
-          "250k tok / min",
-          "500 req / day"
-        ]
-      }
-    },
-    {
       "model_id": "gemini-robotics-er-2-preview",
       "name": "Gemini Robotics ER 2 Preview",
       "connection": {

@@ -313,24 +313,6 @@
           "200 req / hour"
         ]
       }
-    },
-    {
-      "model_id": "thinkingmachines/inkling:free",
-      "name": "Thinking Machines: Inkling (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "KILO_API_KEY"
-          ]
-        },
-        "base_url": "https://api.kilo.ai/api/gateway",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / hour"
-        ]
-      }
     }
   ]
 }

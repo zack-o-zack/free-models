@@ -22,6 +22,7 @@
     "nvidia/cosmos3-nano-reasoner": "nvidia/cosmos3-nano-reasoner",
     "nvidia/ising-calibration-1-35b-a3b": "nvidia/ising-calibration-1-35b-a3b",
     "nvidia/ising-calibration-1.5-31b": "nvidia/ising-calibration-1.5-31b",
+    "nvidia/kumo-relational": "nvidia/kumo-relational",
     "nvidia/llama-3_1-nemotron-safety-guard-8b-v3": "nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
     "nvidia/magpie-tts-zeroshot": "nvidia/magpie-tts-zeroshot",
     "nvidia/nemotron-3-embed-1b": "nvidia/nemotron-3-embed-1b",
