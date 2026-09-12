@@ -1,7 +1,3 @@
 {
-  "providers": {
-    "nvidia": [
-      "nvidia/kumo-relational"
-    ]
-  }
+  "providers": {}
 }
