@@ -180,25 +180,6 @@
       }
     },
     {
-      "model_id": "minimaxai/minimax-m3",
-      "name": "minimax-m3",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      }
-    },
-    {
       "model_id": "mistralai/mistral-nemotron",
       "name": "mistral-nemotron",
       "connection": {
@@ -294,25 +275,6 @@
       }
     },
     {
-      "model_id": "nvidia/cosmos-transfer1-7b",
-      "name": "cosmos-transfer1-7b",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      }
-    },
-    {
       "model_id": "nvidia/cosmos-transfer2_5-2b",
       "name": "cosmos-transfer2.5-2b",
       "connection": {
@@ -391,6 +353,25 @@
     {
       "model_id": "nvidia/ising-calibration-1.5-31b",
       "name": "ising-calibration-1.5-31b",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/kumo-relational",
+      "name": "Kumo Relational",
       "connection": {
         "auth": {
           "env": [
