@@ -28,25 +28,6 @@
       }
     },
     {
-      "model_id": "kimi-k2.6:free",
-      "name": "Moonshot AI: Kimi K2.6 (Free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "ROUTEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://api.routeway.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "200 req / day"
-        ]
-      }
-    },
-    {
       "model_id": "minimax-m2.7:free",
       "name": "MiniMax: MiniMax M2.7 (Free)",
       "connection": {
