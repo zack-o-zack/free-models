@@ -1105,9 +1105,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.00000013076",
-          "input_cache_read": "0.000000013076",
-          "prompt": "0.00000006538"
+          "completion": "0.00000009912",
+          "input_cache_read": "0.000000009912",
+          "prompt": "0.00000004956"
         },
         "reasoning": {
           "default_effort": "high",
@@ -3807,8 +3807,7 @@
           "tool_choice",
           "tools",
           "top_k",
-          "top_logprobs",
-          "top_p"
+          "top_logprobs"
         ],
         "supported_voices": null,
         "top_provider": {
