@@ -9,6 +9,26 @@
   },
   "offers": [
     {
+      "model_id": "deepseek/deepseek-v4-flash-0731free:free",
+      "name": "Deepseek V4 Flash 0731free (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "BAZAARLINK_API_KEY"
+          ]
+        },
+        "base_url": "https://api.bazaarlink.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "50 req / day (no credit)",
+          "100 req / day (with credit)"
+        ]
+      }
+    },
+    {
       "model_id": "qwen/qwen3.7-flash:free",
       "name": "Qwen3.7 Flash (free)",
       "connection": {
