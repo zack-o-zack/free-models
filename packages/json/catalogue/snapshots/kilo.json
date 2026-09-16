@@ -313,6 +313,24 @@
           "200 req / hour"
         ]
       }
+    },
+    {
+      "model_id": "z-ai/glm-5.2:free",
+      "name": "Z.ai: GLM 5.2 (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "KILO_API_KEY"
+          ]
+        },
+        "base_url": "https://api.kilo.ai/api/gateway",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / hour"
+        ]
+      }
     }
   ]
 }

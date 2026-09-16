@@ -18,6 +18,7 @@
     "poolside/laguna-xs-2.1:free": "poolside/laguna-xs-2.1",
     "stepfun/step-3.7-flash:free": "stepfun/step-3.7-flash",
     "thinkingmachines/inkling-small:free": "thinkingmachines/inkling-small",
-    "thinkingmachines/inkling:free": "thinkingmachines/inkling"
+    "thinkingmachines/inkling:free": "thinkingmachines/inkling",
+    "z-ai/glm-5.2:free": "z-ai/glm-5.2"
   }
 }
