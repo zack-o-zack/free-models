@@ -127,6 +127,26 @@
           "200 req / day"
         ]
       }
+    },
+    {
+      "model_id": "union-alpha",
+      "name": "Union Alpha Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/anthropic",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/zen/v1",
+        "endpoint": "https://opencode.ai/zen/v1/messages",
+        "protocol": "anthropic"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
     }
   ]
 }

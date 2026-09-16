@@ -28,25 +28,6 @@
       }
     },
     {
-      "model_id": "deepseek-ai/deepseek-v4-pro-0813",
-      "name": "deepseek-v4-pro-0813",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      }
-    },
-    {
       "model_id": "google/diffusiongemma-26b-a4b-it",
       "name": "diffusiongemma-26b-a4b-it",
       "connection": {
@@ -695,6 +676,25 @@
     {
       "model_id": "poolside/laguna-xs-2.1",
       "name": "laguna-xs-2.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "z-ai/glm-5-3",
+      "name": "glm-5-3",
       "connection": {
         "auth": {
           "env": [

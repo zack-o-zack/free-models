@@ -142,7 +142,7 @@
     },
     {
       "model_id": "gemini-3.1-flash-live-preview",
-      "name": "Gemini 3.1 Flash Live Preview",
+      "name": "Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking, and Gemini 3.1 Flash Live Preview",
       "connection": {
         "auth": {
           "env": [
@@ -341,6 +341,50 @@
     {
       "model_id": "gemini-3.8-flash",
       "name": "Gemini 3.8 Flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemini-3.8-live",
+      "name": "Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking, and Gemini 3.1 Flash Live Preview",
+      "connection": {
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemini-3.8-live-extended-thinking",
+      "name": "Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking, and Gemini 3.1 Flash Live Preview",
       "connection": {
         "auth": {
           "env": [
