@@ -65,9 +65,6 @@ export class TokenRouterProvider implements ModelProvider {
     const activeModelIds = parseTokenRouterModels(modelsPayload);
     const freeModels = parseTokenRouterPricing(pricingPayload);
     const activeFreeModels = freeModels.filter(({ modelId }) => activeModelIds.has(modelId));
-    if (activeFreeModels.length === 0) {
-      throw new Error("TokenRouter catalogue contains no active native free models");
-    }
 
     const tokenRouterMeta = modelsDev.get(this.id);
     const env =
@@ -171,9 +168,6 @@ export function parseTokenRouterPricing(payload: unknown): TokenRouterFreeModel[
     }
   }
 
-  if (freeModels.length === 0) {
-    throw new Error("TokenRouter pricing response contains no native free models with endpoints");
-  }
   return freeModels;
 }
 

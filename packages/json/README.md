@@ -63,3 +63,18 @@ and the rendered JSON. Pass `--input` when the rendered file is in a temporary C
 ```sh
 bun run catalogue:check
 ```
+
+## Verify live discovery in GitHub Actions
+
+Run **Discover free models** manually with `dry_run` enabled and select the repair branch.
+This uses the configured provider secrets, saves a `discovered-catalogue` artifact, and does
+not push an automation branch or open a catalogue pull request. Download the artifact to review
+snapshots and unresolved IDs. The scheduled run continues to propose changes for review.
+
+```sh
+gh workflow run catalogue-discovery.yml --ref <branch> -f dry_run=true
+```
+
+Run `bun run check` for offline quality and catalogue validation. Run `bun audit` after dependency
+updates. Live discovery requires `COHERE_API_KEY`, `MISTRAL_FREE_API_KEY`, and `TOKENROUTER_API_KEY`.
+A successful discovery checks catalogue availability and pricing; it does not make inference calls.

@@ -164,6 +164,26 @@ describe("provider documentation metadata", () => {
 });
 
 describe("TokenRouter discovery", () => {
+  test("returns no offers when native free models retire or become paid", async () => {
+    for (const prices of [
+      [tokenRouterPrice("retired/model-free", 0)],
+      [tokenRouterPrice("paid/model-free", 1)],
+      [tokenRouterPrice("upstream/model:free", 0)],
+    ]) {
+      const provider = new TokenRouterProvider({
+        apiKey: "fixture-key",
+        fetch: async (url) =>
+          Response.json(
+            url === TOKENROUTER_MODELS_URL
+              ? { object: "list", data: [{ id: "paid/model-free" }, { id: "upstream/model:free" }] }
+              : { success: true, data: prices },
+          ),
+      });
+      await expect(provider.discover(new Map())).resolves.toEqual([]);
+    }
+    expect(() => parseTokenRouterPricing({ success: false, data: [] })).toThrow("malformed");
+  });
+
   test("keeps every endpoint type on active native free models", async () => {
     const freeModels = [
       ["vendor/openai-free", ["openai"]],
