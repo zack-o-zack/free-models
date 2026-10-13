@@ -5,6 +5,7 @@ import {
   CircleHelp,
   Database,
   FileText,
+  GitBranch,
   Image,
   ListFilter,
   Mic,
@@ -13,6 +14,7 @@ import {
 } from "lucide-react";
 
 const icons: Record<string, LucideIcon> = {
+  decisions: GitBranch,
   audio: AudioLines,
   embeddings: Database,
   file: FileText,

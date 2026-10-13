@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   AudioLines,
   Database,
+  GitBranch,
   Image as ImageIcon,
   LayoutGrid,
   LayoutList,
@@ -51,6 +52,7 @@ import { getProviderName } from "@/lib/provider-logos";
 
 type ViewMode = "list" | "table";
 const outputIcons: Record<string, LucideIcon> = {
+  decisions: GitBranch,
   text: TextIcon,
   image: ImageIcon,
   audio: AudioLines,

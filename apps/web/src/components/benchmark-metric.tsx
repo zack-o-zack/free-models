@@ -7,6 +7,7 @@ import {
   CircleHelp,
   Database,
   FileText,
+  GitBranch,
   Image as ImageIcon,
   ListFilter,
   Mic,
@@ -50,6 +51,7 @@ export function BenchmarkMetric({
 }
 
 const modalityIcons: Record<string, LucideIcon> = {
+  decisions: GitBranch,
   audio: AudioLines,
   embeddings: Database,
   file: FileText,
