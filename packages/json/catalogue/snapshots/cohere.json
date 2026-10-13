@@ -408,8 +408,65 @@
       }
     },
     {
+      "model_id": "embed-v5.0-fast",
+      "name": "Embed v5.0 fast",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "2k inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "embed-v5.0-pro",
+      "name": "Embed v5.0 pro",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "2k inputs / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
       "model_id": "north-mini-code-1-0",
       "name": "North mini code 1 0",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.ai/compatibility/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "north-small-translate-09-2026",
+      "name": "North small translate 09 2026",
       "connection": {
         "auth": {
           "env": [

@@ -9,8 +9,8 @@
   },
   "offers": [
     {
-      "model_id": "cohere/north-mini-code:free",
-      "name": "Cohere: North Mini Code (free)",
+      "model_id": "apodex/apodex-1.1-mini:free",
+      "name": "Apodex: Apodex 1.1 Mini (free)",
       "connection": {
         "auth": {
           "env": [
@@ -29,8 +29,8 @@
       }
     },
     {
-      "model_id": "deepgram/flux-tts:free",
-      "name": "Deepgram: Flux TTS (free)",
+      "model_id": "cohere/north-mini-code:free",
+      "name": "Cohere: North Mini Code (free)",
       "connection": {
         "auth": {
           "env": [
@@ -129,28 +129,8 @@
       }
     },
     {
-      "model_id": "inclusionai/ling-3.0-flash-fin:free",
-      "name": "inclusionAI: Ling 3.0 Flash Fin (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      }
-    },
-    {
-      "model_id": "inclusionai/ling-3.0-flash-sante:free",
-      "name": "inclusionAI: Ling 3.0 Flash Sante (free)",
+      "model_id": "inception/mercury-decide:free",
+      "name": "Inception: Mercury Decide (free)",
       "connection": {
         "auth": {
           "env": [
@@ -191,46 +171,6 @@
     {
       "model_id": "liquid/lfm-2.5-embedding-350m:free",
       "name": "LiquidAI: LFM2.5-Embedding-350M (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      }
-    },
-    {
-      "model_id": "minimax/minimax-m2.7:free",
-      "name": "MiniMax: MiniMax M2.7 (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      }
-    },
-    {
-      "model_id": "minimax/minimax-m3:free",
-      "name": "MiniMax: MiniMax M3 (free)",
       "connection": {
         "auth": {
           "env": [
@@ -449,6 +389,26 @@
       }
     },
     {
+      "model_id": "respan/span-01-lite:free",
+      "name": "Respan: Span-01 Lite (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
+      }
+    },
+    {
       "model_id": "thinkingmachines/inkling-small:free",
       "name": "Thinking Machines: Inkling Small (free)",
       "connection": {
@@ -471,26 +431,6 @@
     {
       "model_id": "thinkingmachines/inkling:free",
       "name": "Thinking Machines: Inkling (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      }
-    },
-    {
-      "model_id": "z-ai/glm-5.2:free",
-      "name": "Z.ai: GLM 5.2 (free)",
       "connection": {
         "auth": {
           "env": [

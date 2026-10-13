@@ -31,10 +31,19 @@ import {
 } from "../src/providers/gemini.ts";
 import { GROQ_API_BASE_URL, GroqProvider, groqOfferLimits } from "../src/providers/groq.ts";
 import {
+  isFreeKiloModel,
+  KILO_API_BASE_URL,
+  KILO_MODELS_URL,
+  KiloProvider,
+  parseKiloModels,
+} from "../src/providers/kilo.ts";
+import {
   cohereOfferLimits,
   geminiUnconfirmedLimits,
+  kiloPublishedLimits,
   mistralUnconfirmedLimits,
   openCodePublishedLimits,
+  routewayPublishedLimits,
   tokenRouterUnconfirmedLimits,
 } from "../src/providers/limits.ts";
 import {
@@ -60,6 +69,13 @@ import {
   RequestyProvider,
 } from "../src/providers/requesty.ts";
 import {
+  isFreeRoutewayModel,
+  parseRoutewayModels,
+  ROUTEWAY_API_BASE_URL,
+  ROUTEWAY_MODELS_URL,
+  RoutewayProvider,
+} from "../src/providers/routeway.ts";
+import {
   parseTokenRouterModels,
   parseTokenRouterPricing,
   TOKENROUTER_API_BASE_URL,
@@ -81,13 +97,19 @@ describe("compact provider limit terms", () => {
     });
   });
 
-  test("returns hardcoded Mistral, TokenRouter, and OpenCode terms", () => {
+  test("returns hardcoded Mistral, TokenRouter, OpenCode, Kilo, and Routeway terms", () => {
     expect(mistralUnconfirmedLimits()).toEqual({
       terms: ["50 req / min", "50k tok / min"],
     });
     expect(tokenRouterUnconfirmedLimits()).toEqual({ terms: ["8 req / min"] });
     expect(openCodePublishedLimits()).toEqual({
       terms: ["200 req / day"],
+    });
+    expect(kiloPublishedLimits()).toEqual({
+      terms: ["200 req / hour"],
+    });
+    expect(routewayPublishedLimits()).toEqual({
+      terms: ["20 req / min", "200 req / day"],
     });
   });
 
@@ -142,6 +164,26 @@ describe("provider documentation metadata", () => {
 });
 
 describe("TokenRouter discovery", () => {
+  test("returns no offers when native free models retire or become paid", async () => {
+    for (const prices of [
+      [tokenRouterPrice("retired/model-free", 0)],
+      [tokenRouterPrice("paid/model-free", 1)],
+      [tokenRouterPrice("upstream/model:free", 0)],
+    ]) {
+      const provider = new TokenRouterProvider({
+        apiKey: "fixture-key",
+        fetch: async (url) =>
+          Response.json(
+            url === TOKENROUTER_MODELS_URL
+              ? { object: "list", data: [{ id: "paid/model-free" }, { id: "upstream/model:free" }] }
+              : { success: true, data: prices },
+          ),
+      });
+      await expect(provider.discover(new Map())).resolves.toEqual([]);
+    }
+    expect(() => parseTokenRouterPricing({ success: false, data: [] })).toThrow("malformed");
+  });
+
   test("keeps every endpoint type on active native free models", async () => {
     const freeModels = [
       ["vendor/openai-free", ["openai"]],
@@ -375,7 +417,179 @@ describe("Requesty discovery", () => {
   });
 });
 
+describe("Routeway discovery", () => {
+  test("keeps only zero-priced :free models and prefers the full display name", async () => {
+    const modelsDev = new Map([
+      [
+        "routeway",
+        {
+          id: "routeway",
+          env: ["ROUTEWAY_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: ["20 req / min", "200 req / day"],
+    };
+    const provider = new RoutewayProvider({
+      fetch: async (url, init) => {
+        expect(url).toBe(ROUTEWAY_MODELS_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        return Response.json({
+          object: "list",
+          data: [
+            routewayModel(
+              "deepseek-v4-flash:free",
+              "DeepSeek: DeepSeek V4 Flash (Free)",
+              "DeepSeek V4 Flash (Free)",
+              0,
+              0,
+            ),
+            routewayModel("kimi-k2.6:free", "", "Kimi K2.6 (Free)", 0, 0),
+            routewayModel("unnamed:free", "", "", 0, 0),
+            routewayModel(
+              "deepseek-v4-flash",
+              "DeepSeek: DeepSeek V4 Flash",
+              "DeepSeek V4 Flash",
+              0.23,
+              0.64,
+            ),
+            routewayModel("paid/suffixed:free", "Paid Suffixed", "Paid Suffixed", 0.001, 0),
+          ],
+        });
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual([
+      {
+        model_id: "deepseek-v4-flash:free",
+        name: "DeepSeek: DeepSeek V4 Flash (Free)",
+        connection: {
+          auth: { env: ["ROUTEWAY_API_KEY"] },
+          base_url: ROUTEWAY_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      },
+      {
+        model_id: "kimi-k2.6:free",
+        name: "Kimi K2.6 (Free)",
+        connection: {
+          auth: { env: ["ROUTEWAY_API_KEY"] },
+          base_url: ROUTEWAY_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      },
+      {
+        model_id: "unnamed:free",
+        name: "Unnamed",
+        connection: {
+          auth: { env: ["ROUTEWAY_API_KEY"] },
+          base_url: ROUTEWAY_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      },
+    ]);
+  });
+
+  test("falls back to ROUTEWAY_API_KEY when models.dev exposes no Routeway env", async () => {
+    const provider = new RoutewayProvider({
+      fetch: async () =>
+        Response.json({
+          object: "list",
+          data: [
+            routewayModel("vendor/model:free", "Vendor Model (Free)", "Vendor Model (Free)", 0, 0),
+          ],
+        }),
+    });
+
+    expect(await provider.discover(new Map())).toEqual([
+      {
+        model_id: "vendor/model:free",
+        name: "Vendor Model (Free)",
+        connection: {
+          auth: { env: ["ROUTEWAY_API_KEY"] },
+          base_url: ROUTEWAY_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: routewayPublishedLimits(),
+      },
+    ]);
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseRoutewayModels({
+        object: "list",
+        data: [
+          routewayModel("duplicate:free", "Duplicate", "Duplicate", 0, 0),
+          routewayModel("duplicate:free", "Duplicate", "Duplicate", 0, 0),
+        ],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseRoutewayModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseRoutewayModels({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseRoutewayModels({
+        object: "list",
+        data: [
+          routewayModel("deepseek-v4-flash", "DeepSeek V4 Flash", "DeepSeek V4 Flash", 0.23, 0.64),
+        ],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseRoutewayModels({ object: "list" })).toThrow("data array");
+    expect(isFreeRoutewayModel({ id: "deepseek-v4-flash" })).toBe(false);
+    expect(
+      isFreeRoutewayModel({
+        id: "paid/suffixed:free",
+        pricing: {
+          input: { unit: "1M tokens", price_per_million_t: 0.001 },
+          output: { unit: "1M tokens", price_per_million_t: 0 },
+        },
+      }),
+    ).toBe(false);
+    expect(isFreeRoutewayModel({ id: "missing/pricing:free" })).toBe(false);
+    expect(
+      isFreeRoutewayModel({
+        id: "zero/input:free",
+        pricing: {
+          input: { unit: "1M tokens", price_per_million_t: 0 },
+          output: { unit: "1M tokens", price_per_million_t: "0" },
+        },
+      }),
+    ).toBe(false);
+  });
+});
+
 describe("BazaarLink discovery", () => {
+  test("reads weighted daily budgets and shared limits from the current free tier", async () => {
+    const html = bazaarLinkLimitsPage([
+      ["Accounts without credit", "10 RPM · 60 weighted units/day"],
+      ["Accounts with credit", "20 RPM · 120 weighted units/day"],
+      ["Site-wide free RPM cap", "15 RPM"],
+      ["Concurrent free requests per account", "2"],
+    ]);
+    await expect(parseBazaarLinkLimits(html)).resolves.toEqual({
+      terms: [
+        "10 req / min (no credit)",
+        "60 weighted units / day (no credit)",
+        "20 req / min (with credit)",
+        "120 weighted units / day (with credit)",
+        "15 req / min (site-wide)",
+        "2 concurrent req / account",
+      ],
+    });
+    await expect(parseBazaarLinkLimits(html.replace("15 RPM", "unlimited"))).rejects.toThrow();
+    await expect(
+      parseBazaarLinkLimits(html.replace("weighted units/day", "requests/day")),
+    ).rejects.toThrow();
+    await expect(
+      parseBazaarLinkLimits(html.replace("Site-wide free RPM cap", "Unknown cap")),
+    ).rejects.toThrow();
+  });
+
   test("keeps only zero-priced :free aliases and skips routing endpoints", async () => {
     const modelsDev = new Map([
       [
@@ -518,6 +732,130 @@ describe("BazaarLink discovery", () => {
       }),
     ).toBe(false);
     expect(isFreeBazaarLinkModel({ id: "missing/pricing:free" })).toBe(false);
+  });
+});
+
+describe("Kilo discovery", () => {
+  test("keeps only free models with zero pricing and skips routing tiers", async () => {
+    const modelsDev = new Map([
+      [
+        "kilo",
+        {
+          id: "kilo",
+          env: ["KILO_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: ["200 req / hour"],
+    };
+    const provider = new KiloProvider({
+      fetch: async (url, init) => {
+        expect(url).toBe(KILO_MODELS_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        return Response.json({
+          object: "list",
+          data: [
+            kiloModel(
+              "stepfun/step-3.7-flash:free",
+              "StepFun: Step 3.7 Flash (free)",
+              true,
+              "0",
+              "0",
+            ),
+            kiloModel("poolside/laguna-s-2.1:free", "Poolside: Laguna S 2.1 (free)", true, 0, 0),
+            kiloModel("kilo-auto/free", "Auto Free", true, "0", "0"),
+            kiloModel("openrouter/free", "OpenRouter Free Models Router", true, "0", "0"),
+            kiloModel("anthropic/claude-sonnet-4.5", "Claude Sonnet 4.5", false, "0.003", "0.015"),
+            kiloModel("paid/free-flag", "Paid Flag", true, "0.001", "0"),
+          ],
+        });
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual(
+      ["stepfun/step-3.7-flash:free", "poolside/laguna-s-2.1:free"].map((modelId) => ({
+        model_id: modelId,
+        name:
+          modelId === "stepfun/step-3.7-flash:free"
+            ? "StepFun: Step 3.7 Flash (free)"
+            : "Poolside: Laguna S 2.1 (free)",
+        connection: {
+          auth: { env: ["KILO_API_KEY"] },
+          base_url: KILO_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      })),
+    );
+  });
+
+  test("omits auth when models.dev exposes no Kilo env and falls back to the model ID", async () => {
+    const provider = new KiloProvider({
+      fetch: async () =>
+        Response.json({
+          object: "list",
+          data: [kiloModel("vendor/model:free", "", true, "0", "0")],
+        }),
+    });
+
+    expect(await provider.discover(new Map())).toEqual([
+      {
+        model_id: "vendor/model:free",
+        name: desluggifyModelId("vendor/model:free"),
+        connection: {
+          base_url: KILO_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: kiloPublishedLimits(),
+      },
+    ]);
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseKiloModels({
+        object: "list",
+        data: [
+          kiloModel("duplicate:free", "Duplicate", true, "0", "0"),
+          kiloModel("duplicate:free", "Duplicate", true, "0", "0"),
+        ],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseKiloModels({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseKiloModels({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseKiloModels({
+        object: "list",
+        data: [kiloModel("anthropic/paid", "Paid", false, "1", "2")],
+      }),
+    ).toThrow("no free models");
+    expect(() =>
+      parseKiloModels({
+        object: "list",
+        data: [
+          kiloModel("kilo-auto/free", "Auto Free", true, "0", "0"),
+          kiloModel("openrouter/free", "Router", true, "0", "0"),
+        ],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseKiloModels({ object: "list" })).toThrow("data array");
+    expect(isFreeKiloModel({ id: "vendor/model:free", isFree: false })).toBe(false);
+    expect(
+      isFreeKiloModel({
+        id: "vendor/model:free",
+        isFree: true,
+        pricing: { prompt: "0.001", completion: "0" },
+      }),
+    ).toBe(false);
+    expect(
+      isFreeKiloModel({
+        id: "vendor/model:free",
+        isFree: true,
+        pricing: { prompt: "0", completion: "0.002" },
+      }),
+    ).toBe(false);
+    expect(isFreeKiloModel({ id: "vendor/model:free", isFree: true })).toBe(true);
   });
 });
 
@@ -1048,5 +1386,40 @@ function tokenRouterPrice(
     completion_ratio: 1,
     enable_groups: enableGroups,
     supported_endpoint_types: supportedEndpointTypes,
+  };
+}
+
+function kiloModel(
+  id: string,
+  name: string,
+  isFree: boolean,
+  prompt: string | number,
+  completion: string | number,
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    name,
+    pricing: { prompt, completion },
+    isFree,
+  };
+}
+
+function routewayModel(
+  id: string,
+  name: string,
+  shortName: string | undefined,
+  input: number | string,
+  output: number | string,
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    name,
+    ...(shortName === undefined ? {} : { short_name: shortName }),
+    pricing: {
+      input: { unit: "1M tokens", price_per_million_t: input },
+      output: { unit: "1M tokens", price_per_million_t: output },
+    },
   };
 }

@@ -26,7 +26,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.11",
     "@types/bun": "1.3.10",
-    "aislop": "0.15.0",
+    "aislop": "0.18.1",
     "typescript": "5.9.3"
   }
 }

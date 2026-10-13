@@ -18,8 +18,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/zen/v1",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -29,8 +29,8 @@
       }
     },
     {
-      "model_id": "ling-3.0-flash-fin-free",
-      "name": "Ling 3.0 Flash Fin Free",
+      "model_id": "cat-jam-free",
+      "name": "Cat Jam Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "auth": {
@@ -38,8 +38,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/zen/v1",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -49,8 +49,27 @@
       }
     },
     {
-      "model_id": "mimo-v2.5-free",
-      "name": "MiMo-V2.5 Free",
+      "model_id": "jev-1.13-free",
+      "name": "Jev 1.13 Free",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/systemone",
+        "protocol": "systemone"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "ling-3.1-flash-free",
+      "name": "Ling 3.1 Flash Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "auth": {
@@ -58,8 +77,48 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/zen/v1",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "longcat-2.5-preview-free",
+      "name": "LongCat 2.5 Preview Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/openai-compatible",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "mimo-v2.6-flash-free",
+      "name": "MiMo-V2.6-Flash Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/openai-compatible",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -78,28 +137,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/zen/v1",
-        "endpoint": "https://opencode.ai/zen/v1/responses",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / day"
-        ]
-      }
-    },
-    {
-      "model_id": "nemotron-3-ultra-free",
-      "name": "Nemotron 3 Ultra Free",
-      "connection": {
-        "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "auth": {
-          "env": [
-            "OPENCODE_API_KEY"
-          ]
-        },
-        "base_url": "https://opencode.ai/zen/v1",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/responses",
         "protocol": "openai"
       },
       "limits": {
@@ -118,8 +157,48 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/zen/v1",
-        "endpoint": "https://opencode.ai/zen/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "space-bunny-free",
+      "name": "Space Bunny Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/openai-compatible",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "step-5-preview-free",
+      "name": "Step 5 Preview Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/openai-compatible",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {

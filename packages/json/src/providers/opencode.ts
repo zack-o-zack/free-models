@@ -92,29 +92,36 @@ export class OpenCodeProvider implements ModelProvider {
         ? [...openCodeMeta.env]
         : ["OPENCODE_API_KEY"];
 
-    return documentedOffers.map((documentedOffer) => {
-      const liveModel = liveModels.get(documentedOffer.modelId);
-      if (!liveModel) {
-        throw new Error(
-          `OpenCode Zen free model is missing from the live catalogue: ${documentedOffer.modelId}`,
-        );
-      }
+    // Documentation can outlive retired models; only publish offers still served by the API.
+    return documentedOffers
+      .filter((offer) => liveModels.has(offer.modelId))
+      .map((documentedOffer) => {
+        const nativeSystemOne =
+          documentedOffer.aiSdkPackage === "-" && documentedOffer.endpoint.endsWith("/systemone");
+        const protocol = nativeSystemOne
+          ? "systemone"
+          : protocolFromAiSdkPackage(documentedOffer.aiSdkPackage);
+        const endpointUrl = new URL(documentedOffer.endpoint);
+        const basePath = /^(.*\/v1(?:beta)?)(?:\/|$)/.exec(endpointUrl.pathname)?.[1];
+        if (!basePath) {
+          throw new Error(
+            `OpenCode endpoint has no supported API base: ${documentedOffer.endpoint}`,
+          );
+        }
 
-      const protocol = protocolFromAiSdkPackage(documentedOffer.aiSdkPackage);
-
-      return {
-        model_id: documentedOffer.modelId,
-        name: documentedOffer.modelName || desluggifyModelId(documentedOffer.modelId),
-        connection: {
-          ai_sdk_package: documentedOffer.aiSdkPackage,
-          auth: { env },
-          base_url: "https://opencode.ai/zen/v1",
-          endpoint: documentedOffer.endpoint,
-          protocol,
-        },
-        limits: openCodePublishedLimits(),
-      };
-    });
+        return {
+          model_id: documentedOffer.modelId,
+          name: documentedOffer.modelName || desluggifyModelId(documentedOffer.modelId),
+          connection: {
+            ...(nativeSystemOne ? {} : { ai_sdk_package: documentedOffer.aiSdkPackage }),
+            auth: { env },
+            base_url: `${endpointUrl.origin}${basePath}`,
+            endpoint: documentedOffer.endpoint,
+            protocol,
+          },
+          limits: openCodePublishedLimits(),
+        };
+      });
   }
 
   async #request(url: string, source: string, accept: string): Promise<HttpResponse> {
