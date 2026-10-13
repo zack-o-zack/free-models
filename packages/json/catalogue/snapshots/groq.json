@@ -148,9 +148,9 @@
       },
       "limits": {
         "terms": [
-          "30 req / min",
+          "3 req / min",
           "1k req / day",
-          "8k tok / min",
+          "2k tok / min",
           "200k tok / day"
         ]
       }

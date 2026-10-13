@@ -2,12 +2,19 @@
   "provider": "opencode",
   "mappings": {
     "big-pickle": "stealth:big-pickle",
+    "cat-jam-free": "stealth:cat-jam",
+    "jev-1.13-free": "typesafe/jev-1.13",
     "ling-3.0-flash-fin-free": "inclusionai/ling-3.0-flash-fin",
+    "ling-3.1-flash-free": "inclusionai/ling-3.1-flash",
+    "longcat-2.5-preview-free": "meituan/longcat-2.5-preview",
     "mimo-v2.5-free": "xiaomi/mimo-v2.5",
+    "mimo-v2.6-flash-free": "xiaomi/mimo-v2.6-flash",
     "muse-spark-1.2-contributor-free": "meta/muse-spark-1.2-contributor",
     "muse-spark-1.3-contributor-free": "meta/muse-spark-1.3-contributor",
     "nemotron-3-ultra-free": "nvidia/nemotron-3-ultra-550b-a55b",
     "nemotron-3.5-lightning-free": "nvidia/nemotron-3.5-lightning",
+    "space-bunny-free": "stealth:space-bunny",
+    "step-5-preview-free": "stepfun/step-5-preview",
     "union-alpha": "stealth:union-alpha"
   }
 }

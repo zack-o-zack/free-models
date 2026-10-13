@@ -9,6 +9,10 @@
       "name": "AISingapore: Gemma Sea Lion V4 27B"
     },
     {
+      "id": "apodex/apodex-1.1-mini",
+      "name": "Apodex: Apodex 1.1 Mini"
+    },
+    {
       "id": "baai/bge-base-en-v1.5",
       "name": "BAAI: bge-base-en-v1.5"
     },
@@ -55,6 +59,18 @@
     {
       "id": "canopylabs/orpheus-3b-0.1-ft",
       "name": "Canopy Labs: Orpheus 3B"
+    },
+    {
+      "id": "cloudflare/clef",
+      "name": "Cloudflare: Clef"
+    },
+    {
+      "id": "cloudflare/clef-flash",
+      "name": "Cloudflare: Clef flash"
+    },
+    {
+      "id": "cloudflare/clef-omni",
+      "name": "Cloudflare: Clef omni"
     },
     {
       "id": "cohere/c4ai-aya-expanse-32b",
@@ -141,6 +157,14 @@
       "name": "Cohere: Embed V4.0"
     },
     {
+      "id": "cohere/embed-v5.0-fast",
+      "name": "Embed v5.0 fast"
+    },
+    {
+      "id": "cohere/embed-v5.0-pro",
+      "name": "Embed v5.0 pro"
+    },
+    {
       "id": "cohere/north-mini-code",
       "name": "Cohere: North Mini Code"
     },
@@ -223,6 +247,10 @@
     {
       "id": "deepseek/deepseek-v4-pro-0813",
       "name": "DeepSeek: DeepSeek V4 Pro 0813"
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "name": "DeepSeek: DeepSeek V4.1 Flash"
     },
     {
       "id": "dots-studio/dots-3-note-preview",
@@ -309,6 +337,14 @@
       "name": "Google: Gemini 3.8 Flash"
     },
     {
+      "id": "google/gemini-3.8-flash-lite-tts",
+      "name": "Gemini 3.8 Flash-Lite TTS"
+    },
+    {
+      "id": "google/gemini-3.8-flash-tts",
+      "name": "Gemini 3.8 Flash TTS"
+    },
+    {
       "id": "google/gemini-3.8-live",
       "name": "Google: Gemini 3.8 Live"
     },
@@ -365,6 +401,10 @@
       "name": "IBM: Granite 4.0 Micro"
     },
     {
+      "id": "inception/mercury-decide",
+      "name": "Inception: Mercury Decide"
+    },
+    {
       "id": "inclusionai/ling-3.0-flash-fin",
       "name": "Ling 3.0 Flash Fin"
     },
@@ -381,6 +421,10 @@
       "name": "Inclusionai: Ling 3.0 tiny"
     },
     {
+      "id": "inclusionai/ling-3.1-flash",
+      "name": "inclusionAI: Ling 3.1 Flash"
+    },
+    {
       "id": "leonardo/lucid-origin",
       "name": "Leonardo: Lucid Origin"
     },
@@ -395,6 +439,10 @@
     {
       "id": "liquid/lfm-2.5-embedding-350m",
       "name": "LiquidAI: LFM2.5-Embedding-350M"
+    },
+    {
+      "id": "meituan/longcat-2.5-preview",
+      "name": "LongCat 2.5 Preview"
     },
     {
       "id": "meta-llama/llama-2-7b-chat",
@@ -625,6 +673,10 @@
       "name": "NVIDIA: Background Noise Removal"
     },
     {
+      "id": "nvidia/body-pose",
+      "name": "3D Body Pose"
+    },
+    {
       "id": "nvidia/cosmos-transfer1-7b",
       "name": "NVIDIA: Cosmos Transfer1 7B"
     },
@@ -651,6 +703,10 @@
     {
       "id": "nvidia/kumo-relational",
       "name": "NVIDIA: Kumo Relational"
+    },
+    {
+      "id": "nvidia/kumo-tabular",
+      "name": "Kumo Tabular"
     },
     {
       "id": "nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
@@ -825,8 +881,48 @@
       "name": "Reka Edge"
     },
     {
+      "id": "respan/span-01-lite",
+      "name": "Respan: Span-01 Lite"
+    },
+    {
+      "id": "routeway/gemma-4-26b-a4b-it-chimerax",
+      "name": "Gemma 4 26b A4b It Chimerax"
+    },
+    {
+      "id": "routeway/gemma-4-26b-a4b-it-darksoul",
+      "name": "Gemma 4 26b A4b It Darksoul"
+    },
+    {
+      "id": "routeway/gemma-4-26b-a4b-it-luminous",
+      "name": "Gemma 4 26b A4b It Luminous"
+    },
+    {
+      "id": "routeway/gemma-4-26b-a4b-it-meromero",
+      "name": "Gemma 4 26B A4B IT MeroMero"
+    },
+    {
+      "id": "routeway/gemma-4-26b-a4b-it-moonlight",
+      "name": "Gemma 4 26b A4b It Moonlight"
+    },
+    {
+      "id": "routeway/gemma-4-26b-a4b-it-musica",
+      "name": "Gemma 4 26b A4b It Musica"
+    },
+    {
       "id": "stealth:big-pickle",
       "name": "Big Pickle"
+    },
+    {
+      "id": "stealth:cat-jam",
+      "name": "Cat Jam"
+    },
+    {
+      "id": "stealth:glyph-cluster",
+      "name": "Stealth: Glyph Cluster"
+    },
+    {
+      "id": "stealth:space-bunny",
+      "name": "Space Bunny"
     },
     {
       "id": "stealth:union-alpha",
@@ -835,6 +931,10 @@
     {
       "id": "stepfun/step-3.7-flash",
       "name": "StepFun: Step 3.7 Flash"
+    },
+    {
+      "id": "stepfun/step-5-preview",
+      "name": "StepFun: Step 5 Preview"
     },
     {
       "id": "tencent/hy-mt2-1.8b",
@@ -857,8 +957,16 @@
       "name": "Thinking Machines: Inkling Small"
     },
     {
+      "id": "typesafe/jev-1.13",
+      "name": "Jev 1.13"
+    },
+    {
       "id": "xiaomi/mimo-v2.5",
       "name": "MiMo-V2.5"
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-flash",
+      "name": "Xiaomi: MiMo-V2.6-Flash"
     },
     {
       "id": "z-ai/glm-4.7-flash",
@@ -871,6 +979,10 @@
     {
       "id": "z-ai/glm-5.3",
       "name": "Z.ai: GLM 5.3"
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "name": "Z.ai: GLM 5.3 Flash"
     }
   ]
 }

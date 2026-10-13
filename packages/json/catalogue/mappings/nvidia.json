@@ -3,6 +3,7 @@
   "mappings": {
     "deepseek-ai/deepseek-v4-flash-0731": "deepseek/deepseek-v4-flash-0731",
     "deepseek-ai/deepseek-v4-pro-0813": "deepseek/deepseek-v4-pro-0813",
+    "deepseek-ai/deepseek-v4.1-flash": "deepseek/deepseek-v4.1-flash",
     "google/diffusiongemma-26b-a4b-it": "google/diffusiongemma-26b-a4b-it",
     "google/gemma-4-31b-it": "google/gemma-4-31b-it",
     "google/google-paligemma": "google/paligemma",
@@ -16,6 +17,7 @@
     "nvidia/active-speaker-detection": "nvidia/active-speaker-detection",
     "nvidia/bevformer": "nvidia/bevformer",
     "nvidia/bnr": "nvidia/bnr",
+    "nvidia/body-pose": "nvidia/body-pose",
     "nvidia/cosmos-transfer1-7b": "nvidia/cosmos-transfer1-7b",
     "nvidia/cosmos-transfer2_5-2b": "nvidia/cosmos-transfer2_5-2b",
     "nvidia/cosmos3-nano": "nvidia/cosmos3-nano",
@@ -23,6 +25,7 @@
     "nvidia/ising-calibration-1-35b-a3b": "nvidia/ising-calibration-1-35b-a3b",
     "nvidia/ising-calibration-1.5-31b": "nvidia/ising-calibration-1.5-31b",
     "nvidia/kumo-relational": "nvidia/kumo-relational",
+    "nvidia/kumo-tabular": "nvidia/kumo-tabular",
     "nvidia/llama-3_1-nemotron-safety-guard-8b-v3": "nvidia/llama-3.1-nemotron-safety-guard-8b-v3",
     "nvidia/magpie-tts-zeroshot": "nvidia/magpie-tts-zeroshot",
     "nvidia/nemotron-3-embed-1b": "nvidia/nemotron-3-embed-1b",
@@ -40,6 +43,7 @@
     "nvidia/synthetic-video-detector": "nvidia/synthetic-video-detector",
     "openai/gpt-oss-20b": "openai/gpt-oss-20b",
     "poolside/laguna-xs-2.1": "poolside/laguna-xs-2.1",
-    "z-ai/glm-5-3": "z-ai/glm-5.3"
+    "z-ai/glm-5-3": "z-ai/glm-5.3",
+    "z-ai/glm-5-3-flash": "z-ai/glm-5.3-flash"
   }
 }

@@ -1,6 +1,64 @@
 {
   "metadata": [
     {
+      "id": "apodex/apodex-1.1-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->text",
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "apodex/apodex-1.1-mini-20261001",
+        "context_length": 262144,
+        "created": 1790875335,
+        "default_parameters": {},
+        "description": "Apodex 1.1 Mini is a reasoning-first model from Apodex, built for complex, long-horizon research and forecasting tasks. It works directly with files, data, code, and tools to produce verifiable results,...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/apodex/apodex-1.1-mini-20261001/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0"
+        },
+        "reasoning": {
+          "mandatory": false
+        },
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "max_tokens",
+          "presence_penalty",
+          "reasoning",
+          "repetition_penalty",
+          "response_format",
+          "seed",
+          "stop",
+          "structured_outputs",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_k",
+          "top_p"
+        ],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 262144,
+          "is_moderated": false,
+          "max_completion_tokens": 235929
+        }
+      }
+    },
+    {
       "id": "baai/bge-base-en-v1.5",
       "metadata": {
         "architecture": {
@@ -270,23 +328,23 @@
             {
               "arena": "models",
               "category": "image",
-              "elo": 1066,
+              "elo": 1063,
               "rank": 12,
-              "win_rate": 38.9
+              "win_rate": 38.8
             },
             {
               "arena": "models",
               "category": "logo",
               "elo": 1059,
               "rank": 12,
-              "win_rate": 37.9
+              "win_rate": 38
             },
             {
               "arena": "models",
               "category": "imageediting",
-              "elo": 1057,
+              "elo": 1056,
               "rank": 8,
-              "win_rate": 39.4
+              "win_rate": 39.2
             }
           ]
         },
@@ -366,6 +424,126 @@
           "context_length": 4096,
           "is_moderated": false,
           "max_completion_tokens": 3686
+        }
+      }
+    },
+    {
+      "id": "cloudflare/clef",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "instruct_type": null,
+          "modality": "text+image->decisions",
+          "output_modalities": [
+            "decisions"
+          ],
+          "tokenizer": "Qwen"
+        },
+        "canonical_slug": "cloudflare/clef",
+        "context_length": 65536,
+        "created": 1790870972,
+        "default_parameters": {},
+        "description": "Clef is Cloudflare's open-source 27B multimodal decision model, a fine-tune of Qwen3.8-27B served on Workers AI. It turns a state (text or structured JSON) plus a schema of typed questions...",
+        "expiration_date": null,
+        "hugging_face_id": "Cloudflare/clef",
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/cloudflare/clef/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0.000000042"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 16384,
+          "is_moderated": false,
+          "max_completion_tokens": 14745
+        }
+      }
+    },
+    {
+      "id": "cloudflare/clef-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "instruct_type": null,
+          "modality": "text+image->decisions",
+          "output_modalities": [
+            "decisions"
+          ],
+          "tokenizer": "Qwen"
+        },
+        "canonical_slug": "cloudflare/clef-flash",
+        "context_length": 24576,
+        "created": 1790870973,
+        "default_parameters": {},
+        "description": "Clef-flash is the fast 9B member of Cloudflare's open-source Clef decision model family, a fine-tune of Qwen3.5-9B served on Workers AI. It turns a state (text or structured JSON) plus...",
+        "expiration_date": null,
+        "hugging_face_id": "Cloudflare/clef-flash",
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/cloudflare/clef-flash/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0.000000021"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 16384,
+          "is_moderated": false,
+          "max_completion_tokens": 14745
+        }
+      }
+    },
+    {
+      "id": "cloudflare/clef-omni",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "instruct_type": null,
+          "modality": "text+image->decisions",
+          "output_modalities": [
+            "decisions"
+          ],
+          "tokenizer": "Qwen"
+        },
+        "canonical_slug": "cloudflare/clef-omni-20261009",
+        "context_length": 65536,
+        "created": 1791577078,
+        "default_parameters": {},
+        "description": "Clef Omni is the mixture-of-experts member of Cloudflare's open-source Clef decision model family, a fine-tune of Qwen3-Omni-30B-A3B (30B total, 3B active parameters) served on Workers AI. It turns a state...",
+        "expiration_date": null,
+        "hugging_face_id": "Cloudflare/clef-omni",
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/cloudflare/clef-omni-20261009/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0.00000015"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 65536,
+          "is_moderated": false,
+          "max_completion_tokens": 58982
         }
       }
     },
@@ -804,7 +982,7 @@
         "per_request_limits": null,
         "pricing": {
           "completion": "0",
-          "prompt": "0"
+          "prompt": "0.000045"
         },
         "supported_parameters": [],
         "supported_voices": [
@@ -887,7 +1065,7 @@
         "per_request_limits": null,
         "pricing": {
           "completion": "0",
-          "prompt": "0.0043"
+          "prompt": "0.0000716666666667"
         },
         "supported_parameters": [],
         "supported_voices": null,
@@ -968,65 +1146,65 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 27.9,
+            "agentic_index": 26.3,
             "coding_index": 52,
-            "intelligence_index": 24.8
+            "intelligence_index": 24.4
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1216,
-              "rank": 44,
+              "elo": 1192,
+              "rank": 52,
               "win_rate": 49.3
             },
             {
               "arena": "models",
               "category": "asciiart",
-              "elo": 1128,
-              "rank": 53,
+              "elo": 1112,
+              "rank": 57,
               "win_rate": 42.8
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1220,
-              "rank": 47,
+              "elo": 1209,
+              "rank": 54,
               "win_rate": 48.9
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1143,
-              "rank": 79,
+              "elo": 1130,
+              "rank": 87,
               "win_rate": 40.7
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1220,
-              "rank": 43,
+              "elo": 1202,
+              "rank": 51,
               "win_rate": 50.2
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1181,
-              "rank": 36,
+              "elo": 1155,
+              "rank": 41,
               "win_rate": 48.4
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1179,
-              "rank": 62,
+              "elo": 1168,
+              "rank": 69,
               "win_rate": 44.7
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1220,
-              "rank": 48,
+              "elo": 1211,
+              "rank": 56,
               "win_rate": 49.1
             }
           ]
@@ -1044,9 +1222,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.000000168",
-          "input_cache_read": "0.0000000168",
-          "prompt": "0.000000084"
+          "completion": "0.00000128",
+          "input_cache_read": "0.0000000491",
+          "prompt": "0.0000000491"
         },
         "reasoning": {
           "default_effort": "high",
@@ -1082,9 +1260,9 @@
         ],
         "supported_voices": null,
         "top_provider": {
-          "context_length": 1024000,
+          "context_length": 1048576,
           "is_moderated": false,
-          "max_completion_tokens": 384000
+          "max_completion_tokens": 943718
         }
       }
     },
@@ -1104,71 +1282,71 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 41.7,
+            "agentic_index": 41,
             "coding_index": 69.1,
-            "intelligence_index": 34.5
+            "intelligence_index": 34.3
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1237,
-              "rank": 36,
+              "elo": 1210,
+              "rank": 42,
               "win_rate": 48.6
             },
             {
               "arena": "models",
               "category": "asciiart",
-              "elo": 1110,
-              "rank": 58,
+              "elo": 1093,
+              "rank": 62,
               "win_rate": 33.3
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1245,
-              "rank": 40,
-              "win_rate": 46.5
+              "elo": 1233,
+              "rank": 47,
+              "win_rate": 46.4
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1198,
-              "rank": 53,
-              "win_rate": 41.2
+              "elo": 1184,
+              "rank": 61,
+              "win_rate": 41.1
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1233,
-              "rank": 38,
-              "win_rate": 44.7
+              "elo": 1214,
+              "rank": 47,
+              "win_rate": 44.6
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1213,
-              "rank": 25,
+              "elo": 1186,
+              "rank": 31,
               "win_rate": 45.1
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1253,
-              "rank": 35,
-              "win_rate": 47
+              "elo": 1239,
+              "rank": 44,
+              "win_rate": 46.8
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1251,
-              "rank": 38,
-              "win_rate": 46.8
+              "elo": 1240,
+              "rank": 46,
+              "win_rate": 46.7
             }
           ]
         },
         "canonical_slug": "deepseek/deepseek-v4-flash-20260731",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "created": 1785478908,
         "default_parameters": {},
         "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
@@ -1180,9 +1358,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.00000012",
-          "input_cache_read": "0.000000012",
-          "prompt": "0.00000006"
+          "completion": "0.00000064",
+          "input_cache_read": "0.000000016",
+          "prompt": "0.000000016"
         },
         "reasoning": {
           "default_effort": "high",
@@ -1308,6 +1486,167 @@
       }
     },
     {
+      "id": "deepseek/deepseek-v4.1-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "instruct_type": null,
+          "modality": "text+image->text",
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "DeepSeek"
+        },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 39.5
+          },
+          "design_arena": []
+        },
+        "canonical_slug": "deepseek/deepseek-v4.1-flash-20260910",
+        "context_length": 1048576,
+        "created": 1789021285,
+        "default_parameters": {},
+        "description": "DeepSeek V4.1 Flash is a sparse mixture-of-experts model from DeepSeek, and the first built on the company's Causal Encoder-Decoder (CED) architecture. It activates 8B parameters on input and 16B on...",
+        "expiration_date": null,
+        "hugging_face_id": "deepseek-ai/DeepSeek-V4.1-Flash",
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/deepseek/deepseek-v4.1-flash-20260910/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.0000006",
+          "input_cache_read": "0.000000003",
+          "overrides": [
+            {
+              "completion": "0.0000006",
+              "input_cache_read": "0.000000003",
+              "prompt": "0.00000015",
+              "utc_days": [
+                "saturday",
+                "sunday"
+              ]
+            },
+            {
+              "completion": "0.0000006",
+              "input_cache_read": "0.000000003",
+              "prompt": "0.00000015",
+              "utc_days": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday"
+              ],
+              "utc_end": 100,
+              "utc_start": 0
+            },
+            {
+              "completion": "0.0000012",
+              "input_cache_read": "0.000000006",
+              "prompt": "0.0000003",
+              "utc_days": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday"
+              ],
+              "utc_end": 400,
+              "utc_start": 100
+            },
+            {
+              "completion": "0.0000006",
+              "input_cache_read": "0.000000003",
+              "prompt": "0.00000015",
+              "utc_days": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday"
+              ],
+              "utc_end": 600,
+              "utc_start": 400
+            },
+            {
+              "completion": "0.0000012",
+              "input_cache_read": "0.000000006",
+              "prompt": "0.0000003",
+              "utc_days": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday"
+              ],
+              "utc_end": 1000,
+              "utc_start": 600
+            },
+            {
+              "completion": "0.0000006",
+              "input_cache_read": "0.000000003",
+              "prompt": "0.00000015",
+              "utc_days": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday"
+              ],
+              "utc_end": 0,
+              "utc_start": 1000
+            }
+          ],
+          "prompt": "0.00000015"
+        },
+        "reasoning": {
+          "default_effort": "high",
+          "default_enabled": true,
+          "mandatory": false,
+          "supported_efforts": [
+            "max",
+            "high",
+            "low"
+          ]
+        },
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "logit_bias",
+          "logprobs",
+          "max_tokens",
+          "min_p",
+          "presence_penalty",
+          "reasoning",
+          "reasoning_effort",
+          "repetition_penalty",
+          "response_format",
+          "seed",
+          "stop",
+          "structured_outputs",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_k",
+          "top_logprobs",
+          "top_p"
+        ],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 1048576,
+          "is_moderated": false,
+          "max_completion_tokens": 393216
+        }
+      }
+    },
+    {
       "id": "dots-studio/dots-3-note-preview",
       "metadata": {
         "architecture": {
@@ -1327,7 +1666,7 @@
         "created": 1786680361,
         "default_parameters": {},
         "description": "Dots3-Note Preview is an open-weight mixture-of-experts model from Dots Studio, with 16B active parameters out of 280B total. It is the lightest model in the Dots 3 family and is...",
-        "expiration_date": "2026-09-30",
+        "expiration_date": "2026-12-31",
         "hugging_face_id": null,
         "knowledge_cutoff": null,
         "links": {
@@ -1463,54 +1802,59 @@
           "tokenizer": "Gemini"
         },
         "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 15.5
+          },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1099,
-              "rank": 89,
+              "elo": 1074,
+              "rank": 97,
               "win_rate": 47.4
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1119,
-              "rank": 90,
+              "elo": 1108,
+              "rank": 97,
               "win_rate": 46.9
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1149,
-              "rank": 77,
+              "elo": 1137,
+              "rank": 85,
               "win_rate": 49.1
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1088,
-              "rank": 93,
+              "elo": 1071,
+              "rank": 101,
               "win_rate": 44.3
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1108,
-              "rank": 85,
+              "elo": 1096,
+              "rank": 93,
               "win_rate": 48.9
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1127,
-              "rank": 90,
+              "elo": 1118,
+              "rank": 99,
               "win_rate": 47.1
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1045,
-              "rank": 74,
+              "elo": 1019,
+              "rank": 81,
               "win_rate": 43.1
             }
           ]
@@ -1527,7 +1871,7 @@
           "top_p": null
         },
         "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
-        "expiration_date": null,
+        "expiration_date": "2026-10-20",
         "hugging_face_id": "",
         "knowledge_cutoff": "2025-01-31",
         "links": {
@@ -1589,51 +1933,51 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 3.5,
+            "agentic_index": 1.6,
             "coding_index": 33.3,
-            "intelligence_index": 16.7
+            "intelligence_index": 16.1
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1108,
-              "rank": 84,
+              "elo": 1082,
+              "rank": 91,
               "win_rate": 50.6
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1167,
-              "rank": 71,
+              "elo": 1156,
+              "rank": 77,
               "win_rate": 57.5
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1237,
-              "rank": 39,
+              "elo": 1225,
+              "rank": 47,
               "win_rate": 68.2
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1134,
-              "rank": 76,
+              "elo": 1117,
+              "rank": 86,
               "win_rate": 54.2
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1155,
-              "rank": 70,
+              "elo": 1143,
+              "rank": 78,
               "win_rate": 57.5
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1179,
-              "rank": 69,
+              "elo": 1170,
+              "rank": 78,
               "win_rate": 58.4
             }
           ]
@@ -1647,7 +1991,7 @@
           "top_p": null
         },
         "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
-        "expiration_date": null,
+        "expiration_date": "2026-10-20",
         "hugging_face_id": "",
         "knowledge_cutoff": "2025-01-31",
         "links": {
@@ -1718,6 +2062,11 @@
           "tokenizer": "Gemini"
         },
         "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 26.3
+          },
           "design_arena": [
             {
               "arena": "agents",
@@ -1736,14 +2085,14 @@
             {
               "arena": "agents",
               "category": "androidnative",
-              "elo": 1066,
-              "rank": 32,
+              "elo": 1065,
+              "rank": 33,
               "win_rate": 48.1
             },
             {
               "arena": "agents",
               "category": "fullstack",
-              "elo": 1073,
+              "elo": 1063,
               "rank": 33,
               "win_rate": 47.4
             },
@@ -1751,14 +2100,14 @@
               "arena": "agents",
               "category": "godotgamedev",
               "elo": 1161,
-              "rank": 13,
+              "rank": 19,
               "win_rate": 50.6
             },
             {
               "arena": "agents",
               "category": "mobileapps",
-              "elo": 1119,
-              "rank": 37,
+              "elo": 1087,
+              "rank": 39,
               "win_rate": 46.6
             },
             {
@@ -1771,36 +2120,36 @@
             {
               "arena": "agents",
               "category": "webapps",
-              "elo": 1126,
-              "rank": 32,
+              "elo": 1103,
+              "rank": 34,
               "win_rate": 48.5
             },
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1212,
-              "rank": 45,
+              "elo": 1187,
+              "rank": 53,
               "win_rate": 62.7
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1204,
-              "rank": 51,
+              "elo": 1193,
+              "rank": 58,
               "win_rate": 57.6
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1189,
-              "rank": 57,
+              "elo": 1171,
+              "rank": 64,
               "win_rate": 58.3
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1208,
-              "rank": 51,
+              "elo": 1199,
+              "rank": 59,
               "win_rate": 57
             }
           ]
@@ -2423,9 +2772,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 15.9,
+            "agentic_index": 14.3,
             "coding_index": 49.3,
-            "intelligence_index": 22.7
+            "intelligence_index": 22.2
           },
           "design_arena": []
         },
@@ -2493,6 +2842,45 @@
       }
     },
     {
+      "id": "google/gemini-3.5-transcribe",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "instruct_type": null,
+          "modality": "audio->transcription",
+          "output_modalities": [
+            "transcription"
+          ],
+          "tokenizer": "Gemini"
+        },
+        "canonical_slug": "google/gemini-3.5-transcribe-20260827",
+        "context_length": 98304,
+        "created": 1790295820,
+        "default_parameters": {},
+        "description": "Gemini 3.5 Transcribe is a speech-to-text model from Google. It is suited for synchronous transcription that needs word-level timestamps or speaker diarization, with support for up to eight speakers. Audio...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/google/gemini-3.5-transcribe-20260827/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.000012",
+          "prompt": "0.000002"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 98304,
+          "is_moderated": false,
+          "max_completion_tokens": 32768
+        }
+      }
+    },
+    {
       "id": "google/gemini-3.6-flash",
       "metadata": {
         "architecture": {
@@ -2512,9 +2900,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 30.2,
+            "agentic_index": 29,
             "coding_index": 69.2,
-            "intelligence_index": 34.3
+            "intelligence_index": 34
           },
           "design_arena": [
             {
@@ -2527,30 +2915,30 @@
             {
               "arena": "agents",
               "category": "androidnative",
-              "elo": 1213,
-              "rank": 12,
-              "win_rate": 53.4
+              "elo": 1217,
+              "rank": 11,
+              "win_rate": 53.7
             },
             {
               "arena": "agents",
               "category": "fullstack",
-              "elo": 1191,
+              "elo": 1181,
               "rank": 21,
-              "win_rate": 45.1
+              "win_rate": 44.3
             },
             {
               "arena": "agents",
               "category": "htmlslides",
-              "elo": 1152,
+              "elo": 1148,
               "rank": 17,
               "win_rate": 41.9
             },
             {
               "arena": "agents",
               "category": "mobileapps",
-              "elo": 1229,
-              "rank": 14,
-              "win_rate": 51.4
+              "elo": 1195,
+              "rank": 16,
+              "win_rate": 50.2
             },
             {
               "arena": "agents",
@@ -2562,58 +2950,58 @@
             {
               "arena": "agents",
               "category": "webapps",
-              "elo": 1213,
-              "rank": 21,
-              "win_rate": 46.4
+              "elo": 1187,
+              "rank": 23,
+              "win_rate": 45.4
             },
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1302,
-              "rank": 16,
-              "win_rate": 53.2
+              "elo": 1275,
+              "rank": 21,
+              "win_rate": 53
             },
             {
               "arena": "models",
               "category": "asciiart",
-              "elo": 1302,
-              "rank": 5,
-              "win_rate": 56.8
+              "elo": 1281,
+              "rank": 6,
+              "win_rate": 57.1
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1305,
-              "rank": 13,
-              "win_rate": 53.7
+              "elo": 1293,
+              "rank": 17,
+              "win_rate": 53.4
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1312,
-              "rank": 9,
-              "win_rate": 53.5
+              "elo": 1293,
+              "rank": 14,
+              "win_rate": 52.4
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1284,
-              "rank": 24,
+              "elo": 1269,
+              "rank": 27,
               "win_rate": 51.1
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1318,
-              "rank": 11,
-              "win_rate": 55.3
+              "elo": 1299,
+              "rank": 17,
+              "win_rate": 53.7
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1313,
-              "rank": 9,
-              "win_rate": 55.7
+              "elo": 1302,
+              "rank": 13,
+              "win_rate": 55.4
             }
           ]
         },
@@ -2866,80 +3254,108 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 41.1,
+            "agentic_index": 40.2,
             "coding_index": 76.3,
-            "intelligence_index": 41.2
+            "intelligence_index": 40.9
           },
           "design_arena": [
             {
               "arena": "agents",
+              "category": "androidnative",
+              "elo": 1080,
+              "rank": 31,
+              "win_rate": 33.7
+            },
+            {
+              "arena": "agents",
               "category": "fullstack",
-              "elo": 1252,
+              "elo": 1244,
               "rank": 11,
-              "win_rate": 48.9
+              "win_rate": 48.1
+            },
+            {
+              "arena": "agents",
+              "category": "godotgamedev",
+              "elo": 1273,
+              "rank": 5,
+              "win_rate": 53
             },
             {
               "arena": "agents",
               "category": "mobileapps",
-              "elo": 1263,
+              "elo": 1233,
               "rank": 6,
-              "win_rate": 56.6
+              "win_rate": 54.3
             },
             {
               "arena": "agents",
               "category": "python-pptxslides",
-              "elo": 1176,
+              "elo": 1178,
               "rank": 19,
-              "win_rate": 39.5
+              "win_rate": 39.8
             },
             {
               "arena": "agents",
               "category": "webapps",
-              "elo": 1255,
-              "rank": 10,
-              "win_rate": 46.6
+              "elo": 1230,
+              "rank": 11,
+              "win_rate": 46.1
             },
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1324,
-              "rank": 12,
-              "win_rate": 51.2
+              "elo": 1297,
+              "rank": 17,
+              "win_rate": 50
+            },
+            {
+              "arena": "models",
+              "category": "asciiart",
+              "elo": 1251,
+              "rank": 16,
+              "win_rate": 51
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1323,
-              "rank": 9,
-              "win_rate": 52.8
+              "elo": 1308,
+              "rank": 13,
+              "win_rate": 50.4
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1258,
-              "rank": 28,
-              "win_rate": 48.9
+              "elo": 1263,
+              "rank": 29,
+              "win_rate": 50
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1340,
-              "rank": 9,
-              "win_rate": 54
+              "elo": 1312,
+              "rank": 13,
+              "win_rate": 51
+            },
+            {
+              "arena": "models",
+              "category": "svg",
+              "elo": 1294,
+              "rank": 7,
+              "win_rate": 54.7
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1339,
-              "rank": 6,
+              "elo": 1323,
+              "rank": 10,
               "win_rate": 53.9
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1315,
-              "rank": 8,
-              "win_rate": 52.6
+              "elo": 1304,
+              "rank": 12,
+              "win_rate": 50
             }
           ]
         },
@@ -2995,6 +3411,164 @@
           "context_length": 1048576,
           "is_moderated": false,
           "max_completion_tokens": 65536
+        }
+      }
+    },
+    {
+      "id": "google/gemini-3.8-flash-lite-tts",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->speech",
+          "output_modalities": [
+            "speech"
+          ],
+          "tokenizer": "Gemini"
+        },
+        "canonical_slug": "google/gemini-3.8-flash-lite-tts-20260922",
+        "context_length": 32768,
+        "created": 1790200276,
+        "default_parameters": {},
+        "description": "Gemini 3.8 Flash Lite TTS is a text-to-speech model from Google and the fast, high-throughput member of the 3.8 TTS family alongside [Gemini 3.8 Flash TTS](https://openrouter.ai/google/gemini-3.8-flash-tts). It is suited for...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/google/gemini-3.8-flash-lite-tts-20260922/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.000006",
+          "prompt": "0.0000005"
+        },
+        "supported_parameters": [],
+        "supported_voices": [
+          "Zephyr",
+          "Puck",
+          "Charon",
+          "Kore",
+          "Fenrir",
+          "Leda",
+          "Orus",
+          "Aoede",
+          "Callirrhoe",
+          "Autonoe",
+          "Enceladus",
+          "Iapetus",
+          "Umbriel",
+          "Algieba",
+          "Despina",
+          "Erinome",
+          "Algenib",
+          "Rasalgethi",
+          "Laomedeia",
+          "Achernar",
+          "Alnilam",
+          "Schedar",
+          "Gacrux",
+          "Pulcherrima",
+          "Achird",
+          "Zubenelgenubi",
+          "Vindemiatrix",
+          "Sadachbia",
+          "Sadaltager",
+          "Sulafat"
+        ],
+        "top_provider": {
+          "context_length": 32768,
+          "is_moderated": false,
+          "max_completion_tokens": 16384
+        }
+      }
+    },
+    {
+      "id": "google/gemini-3.8-flash-tts",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->speech",
+          "output_modalities": [
+            "speech"
+          ],
+          "tokenizer": "Gemini"
+        },
+        "benchmarks": {
+          "design_arena": [
+            {
+              "arena": "models",
+              "category": "audiorealism",
+              "elo": 1070,
+              "rank": 3,
+              "win_rate": 46.7
+            },
+            {
+              "arena": "models",
+              "category": "text-to-speech",
+              "elo": 1449,
+              "rank": 1,
+              "win_rate": 76.2
+            }
+          ]
+        },
+        "canonical_slug": "google/gemini-3.8-flash-tts-20260922",
+        "context_length": 32768,
+        "created": 1790200266,
+        "default_parameters": {},
+        "description": "Gemini 3.8 Flash TTS is a text-to-speech model from Google and the successor to [Gemini 3.1 Flash TTS Preview](https://openrouter.ai/google/gemini-3.1-flash-tts-preview). It is the creative tier of the 3.8 TTS family, suited...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/google/gemini-3.8-flash-tts-20260922/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.000009",
+          "prompt": "0.0000005"
+        },
+        "supported_parameters": [],
+        "supported_voices": [
+          "Zephyr",
+          "Puck",
+          "Charon",
+          "Kore",
+          "Fenrir",
+          "Leda",
+          "Orus",
+          "Aoede",
+          "Callirrhoe",
+          "Autonoe",
+          "Enceladus",
+          "Iapetus",
+          "Umbriel",
+          "Algieba",
+          "Despina",
+          "Erinome",
+          "Algenib",
+          "Rasalgethi",
+          "Laomedeia",
+          "Achernar",
+          "Alnilam",
+          "Schedar",
+          "Gacrux",
+          "Pulcherrima",
+          "Achird",
+          "Zubenelgenubi",
+          "Vindemiatrix",
+          "Sadachbia",
+          "Sadaltager",
+          "Sulafat"
+        ],
+        "top_provider": {
+          "context_length": 32768,
+          "is_moderated": false,
+          "max_completion_tokens": 16384
         }
       }
     },
@@ -3193,9 +3767,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": null,
+            "agentic_index": 2.9,
             "coding_index": 39.3,
-            "intelligence_index": null
+            "intelligence_index": 16.7
           },
           "design_arena": []
         },
@@ -3271,9 +3845,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 6.7,
+            "agentic_index": 4.2,
             "coding_index": 43.4,
-            "intelligence_index": 15.4
+            "intelligence_index": 14.7
           },
           "design_arena": []
         },
@@ -3455,6 +4029,14 @@
           ],
           "tokenizer": "Other"
         },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 5.1
+          },
+          "design_arena": []
+        },
         "canonical_slug": "ibm-granite/granite-4.0-h-micro",
         "context_length": 131000,
         "created": 1760927695,
@@ -3496,6 +4078,46 @@
           "context_length": 131000,
           "is_moderated": false,
           "max_completion_tokens": 117900
+        }
+      }
+    },
+    {
+      "id": "inception/mercury-decide",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->decisions",
+          "output_modalities": [
+            "decisions"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "inception/mercury-decide-20260930",
+        "context_length": 65536,
+        "created": 1790789334,
+        "default_parameters": {},
+        "description": "Mercury Decide is Inception's structured decision model, served as a System One endpoint. Send a state along with typed questions, and it returns a choice, a score, or a yes/no...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/inception/mercury-decide-20260930/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "input_cache_read": "0",
+          "prompt": "0.00000002"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 65536,
+          "is_moderated": false,
+          "max_completion_tokens": 58982
         }
       }
     },
@@ -3692,6 +4314,73 @@
       }
     },
     {
+      "id": "inclusionai/ling-3.1-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->text",
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Other"
+        },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 41.1
+          },
+          "design_arena": []
+        },
+        "canonical_slug": "inclusionai/ling-3.1-flash-20261002",
+        "context_length": 262144,
+        "created": 1790950024,
+        "default_parameters": {},
+        "description": "Ling 3.1 Flash is a hybrid reasoning mixture-of-experts model from inclusionAI, with 25B active parameters out of 560B total.",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/inclusionai/ling-3.1-flash-20261002/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0"
+        },
+        "reasoning": {
+          "default_enabled": true,
+          "mandatory": false
+        },
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "logprobs",
+          "max_tokens",
+          "presence_penalty",
+          "reasoning",
+          "repetition_penalty",
+          "seed",
+          "stop",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_k",
+          "top_logprobs",
+          "top_p"
+        ],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 262144,
+          "is_moderated": false,
+          "max_completion_tokens": 235929
+        }
+      }
+    },
+    {
       "id": "liquid/lfm-2.5-2.6b",
       "metadata": {
         "architecture": {
@@ -3704,6 +4393,14 @@
             "text"
           ],
           "tokenizer": "Other"
+        },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": 7.7,
+            "intelligence_index": 8.4
+          },
+          "design_arena": []
         },
         "canonical_slug": "liquid/lfm-2.5-2.6b-20260811",
         "context_length": 65536,
@@ -3746,7 +4443,8 @@
           "tool_choice",
           "tools",
           "top_k",
-          "top_logprobs"
+          "top_logprobs",
+          "top_p"
         ],
         "supported_voices": null,
         "top_provider": {
@@ -3809,6 +4507,14 @@
           ],
           "tokenizer": "Llama3"
         },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 6.6
+          },
+          "design_arena": []
+        },
         "canonical_slug": "meta-llama/llama-3.1-70b-instruct",
         "context_length": 131072,
         "created": 1721692800,
@@ -3868,7 +4574,7 @@
           "artificial_analysis": {
             "agentic_index": null,
             "coding_index": 5.4,
-            "intelligence_index": null
+            "intelligence_index": 6.9
           },
           "design_arena": []
         },
@@ -3930,6 +4636,14 @@
           ],
           "tokenizer": "Llama3"
         },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 4.8
+          },
+          "design_arena": []
+        },
         "canonical_slug": "meta-llama/llama-3.2-1b-instruct",
         "context_length": 60000,
         "created": 1727222400,
@@ -3980,6 +4694,14 @@
             "text"
           ],
           "tokenizer": "Llama3"
+        },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 5.7
+          },
+          "design_arena": []
         },
         "canonical_slug": "meta-llama/llama-3.2-3b-instruct",
         "context_length": 131072,
@@ -4039,7 +4761,7 @@
           "artificial_analysis": {
             "agentic_index": null,
             "coding_index": 11.9,
-            "intelligence_index": null
+            "intelligence_index": 7.7
           },
           "design_arena": []
         },
@@ -4056,8 +4778,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.00000032",
-          "prompt": "0.0000001"
+          "completion": "0.00000079",
+          "input_cache_read": "0.000000295",
+          "prompt": "0.00000059"
         },
         "supported_parameters": [
           "frequency_penalty",
@@ -4082,7 +4805,7 @@
         "top_provider": {
           "context_length": 131072,
           "is_moderated": false,
-          "max_completion_tokens": 16384
+          "max_completion_tokens": 32768
         }
       }
     },
@@ -4105,42 +4828,42 @@
           "artificial_analysis": {
             "agentic_index": 0.5,
             "coding_index": 8.2,
-            "intelligence_index": 6.5
+            "intelligence_index": 8.1
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 805,
-              "rank": 125,
+              "elo": 793,
+              "rank": 132,
               "win_rate": 26.6
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 909,
-              "rank": 117,
+              "elo": 898,
+              "rank": 124,
               "win_rate": 39.3
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 796,
-              "rank": 124,
+              "elo": 778,
+              "rank": 132,
               "win_rate": 27.4
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 783,
-              "rank": 120,
+              "elo": 771,
+              "rank": 127,
               "win_rate": 25.5
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 763,
-              "rank": 131,
+              "elo": 753,
+              "rank": 140,
               "win_rate": 22.7
             }
           ]
@@ -4158,8 +4881,8 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.0000003",
-          "prompt": "0.0000001"
+          "completion": "0.00000059",
+          "prompt": "0.00000018"
         },
         "supported_parameters": [
           "frequency_penalty",
@@ -4180,9 +4903,9 @@
         ],
         "supported_voices": null,
         "top_provider": {
-          "context_length": 327680,
+          "context_length": 131072,
           "is_moderated": false,
-          "max_completion_tokens": 16384
+          "max_completion_tokens": 117964
         }
       }
     },
@@ -4253,6 +4976,14 @@
           ],
           "tokenizer": "Other"
         },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": 8.5,
+            "coding_index": 49,
+            "intelligence_index": 17.5
+          },
+          "design_arena": []
+        },
         "canonical_slug": "meta/muse-glimmer-30b-20260810",
         "context_length": 131072,
         "created": 1786302394,
@@ -4270,9 +5001,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.0000015",
+          "completion": "0.0000012",
           "input_cache_read": "0.00000004",
-          "prompt": "0.00000035"
+          "prompt": "0.0000003"
         },
         "reasoning": {
           "default_effort": "medium",
@@ -4288,7 +5019,6 @@
           "frequency_penalty",
           "include_reasoning",
           "logit_bias",
-          "logprobs",
           "max_tokens",
           "min_p",
           "presence_penalty",
@@ -4303,14 +5033,13 @@
           "tool_choice",
           "tools",
           "top_k",
-          "top_logprobs",
           "top_p"
         ],
         "supported_voices": null,
         "top_provider": {
           "context_length": 131072,
           "is_moderated": false,
-          "max_completion_tokens": 117964
+          "max_completion_tokens": 16384
         }
       }
     },
@@ -4391,11 +5120,10 @@
             "text",
             "image",
             "video",
-            "file",
-            "audio"
+            "file"
           ],
           "instruct_type": null,
-          "modality": "text+image+file+audio+video->text",
+          "modality": "text+image+file+video->text",
           "output_modalities": [
             "text"
           ],
@@ -4469,66 +5197,66 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 16.8,
+            "agentic_index": 15.3,
             "coding_index": 52.6,
-            "intelligence_index": 23.2
+            "intelligence_index": 22.8
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1221,
-              "rank": 41,
-              "win_rate": 50.3
+              "elo": 1196,
+              "rank": 48,
+              "win_rate": 49.9
             },
             {
               "arena": "models",
               "category": "asciiart",
-              "elo": 1158,
-              "rank": 41,
-              "win_rate": 47.4
+              "elo": 1138,
+              "rank": 50,
+              "win_rate": 46.7
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1250,
-              "rank": 37,
-              "win_rate": 51.7
+              "elo": 1236,
+              "rank": 45,
+              "win_rate": 51
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1249,
-              "rank": 33,
-              "win_rate": 52.8
+              "elo": 1237,
+              "rank": 40,
+              "win_rate": 52.4
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1230,
-              "rank": 40,
-              "win_rate": 50.9
+              "elo": 1216,
+              "rank": 46,
+              "win_rate": 50
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1162,
-              "rank": 46,
-              "win_rate": 48.5
+              "elo": 1136,
+              "rank": 52,
+              "win_rate": 47.4
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1225,
-              "rank": 44,
-              "win_rate": 49.1
+              "elo": 1213,
+              "rank": 51,
+              "win_rate": 48.5
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1257,
-              "rank": 36,
-              "win_rate": 52.2
+              "elo": 1246,
+              "rank": 44,
+              "win_rate": 51.5
             }
           ]
         },
@@ -4563,7 +5291,6 @@
           "frequency_penalty",
           "include_reasoning",
           "logit_bias",
-          "logprobs",
           "max_tokens",
           "min_p",
           "presence_penalty",
@@ -4572,12 +5299,10 @@
           "response_format",
           "seed",
           "stop",
-          "structured_outputs",
           "temperature",
           "tool_choice",
           "tools",
           "top_k",
-          "top_logprobs",
           "top_p"
         ],
         "supported_voices": null,
@@ -4794,43 +5519,43 @@
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1022,
-              "rank": 111,
+              "elo": 1011,
+              "rank": 118,
               "win_rate": 38.5
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1032,
-              "rank": 102,
+              "elo": 1021,
+              "rank": 109,
               "win_rate": 41.1
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 990,
-              "rank": 112,
+              "elo": 973,
+              "rank": 120,
               "win_rate": 36.3
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1032,
-              "rank": 101,
+              "elo": 1020,
+              "rank": 108,
               "win_rate": 46.7
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1025,
-              "rank": 113,
+              "elo": 1015,
+              "rank": 123,
               "win_rate": 37.8
             },
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1048,
-              "rank": 97,
+              "elo": 1023,
+              "rank": 105,
               "win_rate": 45.4
             }
           ]
@@ -5009,29 +5734,29 @@
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1018,
-              "rank": 102,
+              "elo": 993,
+              "rank": 109,
               "win_rate": 39.6
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1080,
-              "rank": 98,
+              "elo": 1069,
+              "rank": 105,
               "win_rate": 44
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1061,
-              "rank": 98,
+              "elo": 1043,
+              "rank": 108,
               "win_rate": 43.6
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1094,
-              "rank": 99,
+              "elo": 1084,
+              "rank": 108,
               "win_rate": 44.8
             }
           ]
@@ -5103,29 +5828,29 @@
             {
               "arena": "models",
               "category": "3d",
-              "elo": 991,
-              "rank": 107,
+              "elo": 966,
+              "rank": 114,
               "win_rate": 35.9
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1025,
-              "rank": 109,
+              "elo": 1014,
+              "rank": 117,
               "win_rate": 37.3
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 971,
-              "rank": 115,
+              "elo": 954,
+              "rank": 123,
               "win_rate": 33
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1040,
-              "rank": 110,
+              "elo": 1030,
+              "rank": 121,
               "win_rate": 38.2
             }
           ]
@@ -5197,29 +5922,29 @@
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1060,
-              "rank": 96,
+              "elo": 1035,
+              "rank": 103,
               "win_rate": 46.2
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1068,
-              "rank": 99,
+              "elo": 1057,
+              "rank": 108,
               "win_rate": 42.9
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1013,
-              "rank": 108,
+              "elo": 996,
+              "rank": 116,
               "win_rate": 38.7
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1077,
-              "rank": 101,
+              "elo": 1068,
+              "rank": 110,
               "win_rate": 42.9
             }
           ]
@@ -5552,9 +6277,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 9.4,
+            "agentic_index": 7,
             "coding_index": 46.9,
-            "intelligence_index": 14.9
+            "intelligence_index": 14.2
           },
           "design_arena": []
         },
@@ -5689,9 +6414,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 1.4,
+            "agentic_index": 0.8,
             "coding_index": 26.6,
-            "intelligence_index": 11.5
+            "intelligence_index": 11.3
           },
           "design_arena": []
         },
@@ -5742,7 +6467,6 @@
           "temperature",
           "tool_choice",
           "tools",
-          "top_k",
           "top_p"
         ],
         "supported_voices": null,
@@ -5796,7 +6520,10 @@
           "repetition_penalty",
           "seed",
           "stop",
+          "structured_outputs",
           "temperature",
+          "tool_choice",
+          "tools",
           "top_k",
           "top_logprobs",
           "top_p"
@@ -5875,7 +6602,7 @@
           "tokenizer": "Mistral"
         },
         "canonical_slug": "mistralai/voxtral-mini-transcribe-2602",
-        "context_length": 0,
+        "context_length": 16384,
         "created": 1778877024,
         "default_parameters": {},
         "description": "Voxtral Mini Transcribe is Mistral's speech-to-text model, derived from the Voxtral Mini family. It accepts audio input and returns transcribed text via the standard transcription API. Suited for transcribing meetings,...",
@@ -5888,14 +6615,14 @@
         "per_request_limits": null,
         "pricing": {
           "completion": "0",
-          "prompt": "0.003"
+          "prompt": "0.00005"
         },
         "supported_parameters": [],
         "supported_voices": null,
         "top_provider": {
-          "context_length": 0,
+          "context_length": 16384,
           "is_moderated": false,
-          "max_completion_tokens": 0
+          "max_completion_tokens": 13107
         }
       }
     },
@@ -6054,20 +6781,20 @@
           "artificial_analysis": {
             "agentic_index": null,
             "coding_index": 46.8,
-            "intelligence_index": null
+            "intelligence_index": 23.5
           },
           "design_arena": [
             {
               "arena": "agents",
               "category": "androidnative",
-              "elo": 1134,
+              "elo": 1133,
               "rank": 26,
               "win_rate": 57.8
             },
             {
               "arena": "agents",
               "category": "fullstack",
-              "elo": 1123,
+              "elo": 1114,
               "rank": 28,
               "win_rate": 54.5
             },
@@ -6075,77 +6802,77 @@
               "arena": "agents",
               "category": "godotgamedev",
               "elo": 1219,
-              "rank": 8,
+              "rank": 15,
               "win_rate": 59.8
             },
             {
               "arena": "agents",
               "category": "mobileapps",
-              "elo": 1176,
-              "rank": 26,
-              "win_rate": 54.6
+              "elo": 1144,
+              "rank": 28,
+              "win_rate": 54.7
             },
             {
               "arena": "agents",
               "category": "webapps",
-              "elo": 1151,
-              "rank": 27,
+              "elo": 1129,
+              "rank": 29,
               "win_rate": 51.6
             },
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1233,
-              "rank": 38,
+              "elo": 1208,
+              "rank": 45,
               "win_rate": 53.1
             },
             {
               "arena": "models",
               "category": "asciiart",
-              "elo": 1184,
-              "rank": 28,
+              "elo": 1167,
+              "rank": 33,
               "win_rate": 46.4
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1252,
-              "rank": 36,
+              "elo": 1240,
+              "rank": 43,
               "win_rate": 54.1
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1235,
-              "rank": 41,
+              "elo": 1222,
+              "rank": 49,
               "win_rate": 51.3
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1229,
-              "rank": 41,
+              "elo": 1212,
+              "rank": 48,
               "win_rate": 53.4
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1175,
-              "rank": 39,
+              "elo": 1149,
+              "rank": 44,
               "win_rate": 48.4
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1252,
-              "rank": 37,
+              "elo": 1240,
+              "rank": 43,
               "win_rate": 53.6
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1261,
-              "rank": 33,
+              "elo": 1252,
+              "rank": 41,
               "win_rate": 55.2
             }
           ]
@@ -6170,9 +6897,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.00000225",
-          "input_cache_read": "0.00000007",
-          "prompt": "0.00000045"
+          "completion": "0.0000025",
+          "input_cache_read": "0.00000015",
+          "prompt": "0.0000005"
         },
         "reasoning": {
           "default_enabled": true,
@@ -6454,9 +7181,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 50.6,
+            "agentic_index": 50,
             "coding_index": 76.2,
-            "intelligence_index": 43.8
+            "intelligence_index": 43.6
           },
           "design_arena": [
             {
@@ -6464,42 +7191,42 @@
               "category": "agenticgamedev",
               "elo": 1252,
               "rank": 3,
-              "win_rate": 54.9
-            },
-            {
-              "arena": "agents",
-              "category": "androidnative",
-              "elo": 1258,
-              "rank": 5,
               "win_rate": 55
             },
             {
               "arena": "agents",
+              "category": "androidnative",
+              "elo": 1262,
+              "rank": 5,
+              "win_rate": 55.4
+            },
+            {
+              "arena": "agents",
               "category": "fullstack",
-              "elo": 1332,
+              "elo": 1315,
               "rank": 2,
-              "win_rate": 63.6
+              "win_rate": 61.8
             },
             {
               "arena": "agents",
               "category": "godotgamedev",
-              "elo": 1199,
-              "rank": 10,
-              "win_rate": 48.5
+              "elo": 1223,
+              "rank": 14,
+              "win_rate": 48.2
             },
             {
               "arena": "agents",
               "category": "htmlslides",
-              "elo": 1259,
+              "elo": 1256,
               "rank": 2,
               "win_rate": 59.6
             },
             {
               "arena": "agents",
               "category": "mobileapps",
-              "elo": 1279,
-              "rank": 3,
-              "win_rate": 57.8
+              "elo": 1263,
+              "rank": 4,
+              "win_rate": 56.9
             },
             {
               "arena": "agents",
@@ -6511,58 +7238,58 @@
             {
               "arena": "agents",
               "category": "webapps",
-              "elo": 1309,
+              "elo": 1285,
               "rank": 4,
-              "win_rate": 59.9
+              "win_rate": 59.1
             },
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1425,
-              "rank": 2,
-              "win_rate": 68.9
+              "elo": 1392,
+              "rank": 6,
+              "win_rate": 67.5
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1388,
-              "rank": 1,
-              "win_rate": 64.7
+              "elo": 1365,
+              "rank": 3,
+              "win_rate": 62.5
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1365,
-              "rank": 3,
-              "win_rate": 64.1
+              "elo": 1353,
+              "rank": 4,
+              "win_rate": 63.2
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1400,
-              "rank": 2,
-              "win_rate": 62.6
+              "elo": 1367,
+              "rank": 5,
+              "win_rate": 61.1
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1335,
-              "rank": 3,
-              "win_rate": 63
+              "elo": 1302,
+              "rank": 6,
+              "win_rate": 59.4
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1369,
-              "rank": 2,
-              "win_rate": 63
+              "elo": 1348,
+              "rank": 6,
+              "win_rate": 60.2
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1353,
-              "rank": 2,
-              "win_rate": 60.9
+              "elo": 1337,
+              "rank": 3,
+              "win_rate": 59.3
             }
           ]
         },
@@ -6586,9 +7313,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.000015",
-          "input_cache_read": "0.0000003",
-          "prompt": "0.000003"
+          "completion": "0.00001",
+          "input_cache_read": "0.00000055",
+          "prompt": "0.00000073"
         },
         "reasoning": {
           "default_effort": "max",
@@ -6940,9 +7667,8 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.0000002",
-          "input_cache_read": "0.00000003",
-          "prompt": "0.00000005"
+          "completion": "0.00000024",
+          "prompt": "0.00000006"
         },
         "reasoning": {
           "mandatory": false
@@ -6953,7 +7679,6 @@
           "logit_bias",
           "logprobs",
           "max_tokens",
-          "min_p",
           "presence_penalty",
           "reasoning",
           "repetition_penalty",
@@ -6997,7 +7722,7 @@
           "artificial_analysis": {
             "agentic_index": null,
             "coding_index": 13.8,
-            "intelligence_index": null
+            "intelligence_index": 10.3
           },
           "design_arena": []
         },
@@ -7063,9 +7788,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 4.1,
+            "agentic_index": 1.7,
             "coding_index": 37.7,
-            "intelligence_index": 13.6
+            "intelligence_index": 12.8
           },
           "design_arena": []
         },
@@ -7148,66 +7873,66 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 21.7,
+            "agentic_index": 20.1,
             "coding_index": 49.3,
-            "intelligence_index": 23.4
+            "intelligence_index": 22.9
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1163,
-              "rank": 62,
-              "win_rate": 40.5
+              "elo": 1133,
+              "rank": 73,
+              "win_rate": 39
             },
             {
               "arena": "models",
               "category": "asciiart",
-              "elo": 1097,
+              "elo": 1098,
               "rank": 60,
-              "win_rate": 36.5
+              "win_rate": 37.5
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1155,
+              "elo": 1148,
+              "rank": 82,
+              "win_rate": 36.1
+            },
+            {
+              "arena": "models",
+              "category": "dataviz",
+              "elo": 1142,
+              "rank": 82,
+              "win_rate": 37.3
+            },
+            {
+              "arena": "models",
+              "category": "gamedev",
+              "elo": 1143,
+              "rank": 75,
+              "win_rate": 36.3
+            },
+            {
+              "arena": "models",
+              "category": "svg",
+              "elo": 1069,
+              "rank": 69,
+              "win_rate": 32.5
+            },
+            {
+              "arena": "models",
+              "category": "uicomponent",
+              "elo": 1144,
               "rank": 77,
               "win_rate": 36.3
             },
             {
               "arena": "models",
-              "category": "dataviz",
-              "elo": 1157,
-              "rank": 73,
-              "win_rate": 38.5
-            },
-            {
-              "arena": "models",
-              "category": "gamedev",
-              "elo": 1155,
-              "rank": 70,
-              "win_rate": 36.9
-            },
-            {
-              "arena": "models",
-              "category": "svg",
-              "elo": 1099,
-              "rank": 60,
-              "win_rate": 35.5
-            },
-            {
-              "arena": "models",
-              "category": "uicomponent",
-              "elo": 1151,
-              "rank": 73,
-              "win_rate": 37.2
-            },
-            {
-              "arena": "models",
               "category": "website",
               "elo": 1145,
-              "rank": 84,
-              "win_rate": 34.5
+              "rank": 91,
+              "win_rate": 35
             }
           ]
         },
@@ -7231,9 +7956,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.000003125",
-          "input_cache_read": "0.0000001875",
-          "prompt": "0.000000625"
+          "completion": "0.0000024",
+          "input_cache_read": "0.00000012",
+          "prompt": "0.0000006"
         },
         "reasoning": {
           "default_effort": "high",
@@ -7267,9 +7992,9 @@
         ],
         "supported_voices": null,
         "top_provider": {
-          "context_length": 256000,
+          "context_length": 202800,
           "is_moderated": false,
-          "max_completion_tokens": 32768
+          "max_completion_tokens": 182520
         }
       }
     },
@@ -7405,9 +8130,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 6.1,
+            "agentic_index": 3.5,
             "coding_index": 26.8,
-            "intelligence_index": 13.6
+            "intelligence_index": 12.9
           },
           "design_arena": []
         },
@@ -7426,7 +8151,7 @@
         "pricing": {
           "completion": "0.0000002",
           "input_cache_read": "0.00000004",
-          "prompt": "0.00000008"
+          "prompt": "0.00000007"
         },
         "reasoning": {
           "mandatory": false
@@ -7456,7 +8181,7 @@
         "top_provider": {
           "context_length": 262144,
           "is_moderated": false,
-          "max_completion_tokens": 131072
+          "max_completion_tokens": 235929
         }
       }
     },
@@ -7538,51 +8263,51 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 6.2,
+            "agentic_index": 3.7,
             "coding_index": 30.4,
-            "intelligence_index": 12.3
+            "intelligence_index": 11.6
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 929,
-              "rank": 109,
+              "elo": 903,
+              "rank": 117,
               "win_rate": 29.4
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 978,
-              "rank": 117,
+              "elo": 967,
+              "rank": 125,
               "win_rate": 33.4
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1002,
-              "rank": 107,
+              "elo": 990,
+              "rank": 114,
               "win_rate": 43.6
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1015,
-              "rank": 106,
+              "elo": 997,
+              "rank": 115,
               "win_rate": 40.5
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 942,
-              "rank": 112,
+              "elo": 930,
+              "rank": 119,
               "win_rate": 35.7
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 980,
-              "rank": 118,
+              "elo": 970,
+              "rank": 129,
               "win_rate": 32.5
             }
           ]
@@ -7604,8 +8329,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.00000017",
-          "prompt": "0.000000037"
+          "completion": "0.0000006",
+          "input_cache_read": "0.000000075",
+          "prompt": "0.00000015"
         },
         "reasoning": {
           "default_effort": "medium",
@@ -7643,7 +8369,7 @@
         "top_provider": {
           "context_length": 131072,
           "is_moderated": false,
-          "max_completion_tokens": 117964
+          "max_completion_tokens": 65536
         }
       }
     },
@@ -7663,23 +8389,23 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 1.4,
-            "coding_index": 20.7,
-            "intelligence_index": 9
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 10
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 947,
-              "rank": 112,
+              "elo": 935,
+              "rank": 120,
               "win_rate": 39.7
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 865,
-              "rank": 126,
+              "elo": 855,
+              "rank": 135,
               "win_rate": 27.9
             }
           ]
@@ -7701,9 +8427,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.00000013",
-          "input_cache_read": "0.00000003",
-          "prompt": "0.00000003"
+          "completion": "0.00000009",
+          "input_cache_read": "0.000000009",
+          "prompt": "0.000000018"
         },
         "reasoning": {
           "default_effort": "medium",
@@ -7740,7 +8466,7 @@
         "top_provider": {
           "context_length": 131072,
           "is_moderated": false,
-          "max_completion_tokens": 117964
+          "max_completion_tokens": 32768
         }
       }
     },
@@ -7834,7 +8560,7 @@
         "per_request_limits": null,
         "pricing": {
           "completion": "0",
-          "prompt": "0.006"
+          "prompt": "0.0001"
         },
         "supported_parameters": [],
         "supported_voices": [],
@@ -7942,7 +8668,7 @@
         "created": 1784652683,
         "default_parameters": {},
         "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
-        "expiration_date": null,
+        "expiration_date": "2026-10-31",
         "hugging_face_id": "poolside/Laguna-S-2.1",
         "knowledge_cutoff": null,
         "links": {
@@ -7993,7 +8719,7 @@
         "created": 1783002429,
         "default_parameters": {},
         "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
-        "expiration_date": null,
+        "expiration_date": "2026-10-31",
         "hugging_face_id": "poolside/Laguna-XS-2.1",
         "knowledge_cutoff": null,
         "links": {
@@ -8039,6 +8765,14 @@
           ],
           "tokenizer": "Qwen"
         },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 6.7
+          },
+          "design_arena": []
+        },
         "canonical_slug": "qwen/qwen-2.5-coder-32b-instruct",
         "context_length": 32768,
         "created": 1731368400,
@@ -8062,6 +8796,7 @@
           "min_p",
           "presence_penalty",
           "repetition_penalty",
+          "response_format",
           "seed",
           "stop",
           "temperature",
@@ -8091,46 +8826,51 @@
           "tokenizer": "Qwen3"
         },
         "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 7.6
+          },
           "design_arena": [
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 957,
-              "rank": 119,
+              "elo": 946,
+              "rank": 126,
               "win_rate": 37.5
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 981,
-              "rank": 109,
+              "elo": 969,
+              "rank": 116,
               "win_rate": 39
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 921,
-              "rank": 120,
+              "elo": 904,
+              "rank": 128,
               "win_rate": 33.9
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 960,
-              "rank": 110,
+              "elo": 949,
+              "rank": 116,
               "win_rate": 42.4
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 967,
-              "rank": 121,
+              "elo": 957,
+              "rank": 130,
               "win_rate": 37.7
             }
           ]
         },
         "canonical_slug": "qwen/qwen3-30b-a3b-04-28",
-        "context_length": 131072,
+        "context_length": 40960,
         "created": 1745878604,
         "default_parameters": {
           "frequency_penalty": null,
@@ -8539,9 +9279,9 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 46.5,
+            "agentic_index": 45.8,
             "coding_index": 68.1,
-            "intelligence_index": 33.9
+            "intelligence_index": 33.7
           },
           "design_arena": []
         },
@@ -8562,9 +9302,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.00000255",
-          "input_cache_read": "0.00000015",
-          "prompt": "0.000000214"
+          "completion": "0.0000023",
+          "input_cache_read": "0.0000000198",
+          "prompt": "0.00000004"
         },
         "reasoning": {
           "default_effort": "xhigh",
@@ -8603,7 +9343,7 @@
         "top_provider": {
           "context_length": 262144,
           "is_moderated": false,
-          "max_completion_tokens": 131072
+          "max_completion_tokens": 235929
         }
       }
     },
@@ -8669,6 +9409,45 @@
           "context_length": 16384,
           "is_moderated": false,
           "max_completion_tokens": 14745
+        }
+      }
+    },
+    {
+      "id": "respan/span-01-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->decisions",
+          "output_modalities": [
+            "decisions"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "respan/span-01-lite-20260925",
+        "context_length": 0,
+        "created": 1790387542,
+        "default_parameters": {},
+        "description": "Span-01 Lite is the free, lighter tier of Span-01, a behavior scoring model from Respan. It returns, for each plain-language behavior you define, the probability that the behavior is present...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/respan/span-01-lite-20260925/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 0,
+          "is_moderated": false,
+          "max_completion_tokens": 0
         }
       }
     },
@@ -8813,6 +9592,78 @@
           "context_length": 256000,
           "is_moderated": false,
           "max_completion_tokens": 230400
+        }
+      }
+    },
+    {
+      "id": "stepfun/step-5-preview",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "video"
+          ],
+          "instruct_type": null,
+          "modality": "text+image+video->text",
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "stepfun/step-5-preview-20261008",
+        "context_length": 1000000,
+        "created": 1791462849,
+        "default_parameters": {
+          "frequency_penalty": null,
+          "presence_penalty": null,
+          "repetition_penalty": null,
+          "temperature": null,
+          "top_k": null,
+          "top_p": null
+        },
+        "description": "Step 5 Preview is StepFun's flagship model for agentic work, built on a sparse Mixture-of-Experts architecture (27B active / 600B total parameters). It performs strongly in software engineering and professional...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/stepfun/step-5-preview-20261008/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.0000027",
+          "input_cache_read": "0.00000005",
+          "prompt": "0.000001"
+        },
+        "reasoning": {
+          "default_effort": "medium",
+          "mandatory": true,
+          "supported_efforts": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "logprobs",
+          "max_tokens",
+          "reasoning",
+          "reasoning_effort",
+          "response_format",
+          "stop",
+          "structured_outputs",
+          "temperature",
+          "tools",
+          "top_logprobs",
+          "top_p"
+        ],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 1000000,
+          "is_moderated": false,
+          "max_completion_tokens": 64000
         }
       }
     },
@@ -9063,71 +9914,78 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 24.3,
+            "agentic_index": 22.5,
             "coding_index": 52.1,
-            "intelligence_index": 25.5
+            "intelligence_index": 25
           },
           "design_arena": [
             {
+              "arena": "agents",
+              "category": "webapps",
+              "elo": 1189,
+              "rank": 22,
+              "win_rate": 48.6
+            },
+            {
               "arena": "models",
               "category": "3d",
-              "elo": 1186,
-              "rank": 54,
-              "win_rate": 41.3
+              "elo": 1164,
+              "rank": 60,
+              "win_rate": 40.5
             },
             {
               "arena": "models",
               "category": "asciiart",
-              "elo": 1119,
-              "rank": 55,
-              "win_rate": 34.6
+              "elo": 1092,
+              "rank": 63,
+              "win_rate": 34
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1216,
-              "rank": 48,
-              "win_rate": 42.1
+              "elo": 1208,
+              "rank": 55,
+              "win_rate": 42.3
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1191,
-              "rank": 57,
-              "win_rate": 40.1
+              "elo": 1164,
+              "rank": 73,
+              "win_rate": 37.9
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1177,
-              "rank": 59,
-              "win_rate": 37.1
+              "elo": 1170,
+              "rank": 65,
+              "win_rate": 37.8
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1134,
-              "rank": 52,
-              "win_rate": 34.8
+              "elo": 1113,
+              "rank": 57,
+              "win_rate": 35.1
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1212,
-              "rank": 48,
-              "win_rate": 42.1
+              "elo": 1201,
+              "rank": 56,
+              "win_rate": 40.2
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1229,
-              "rank": 47,
-              "win_rate": 43.7
+              "elo": 1226,
+              "rank": 52,
+              "win_rate": 44.6
             }
           ]
         },
         "canonical_slug": "thinkingmachines/inkling-20260715",
-        "context_length": 1048576,
+        "context_length": 524288,
         "created": 1784325956,
         "default_parameters": {
           "frequency_penalty": null,
@@ -9207,14 +10065,14 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 25,
+            "agentic_index": 23.5,
             "coding_index": 52.9,
-            "intelligence_index": 26.1
+            "intelligence_index": 25.7
           },
           "design_arena": []
         },
         "canonical_slug": "thinkingmachines/inkling-small-20260730",
-        "context_length": 1048576,
+        "context_length": 524288,
         "created": 1785443117,
         "default_parameters": {
           "frequency_penalty": null,
@@ -9254,7 +10112,6 @@
           "frequency_penalty",
           "include_reasoning",
           "logit_bias",
-          "logprobs",
           "max_tokens",
           "min_p",
           "presence_penalty",
@@ -9267,7 +10124,6 @@
           "tool_choice",
           "tools",
           "top_k",
-          "top_logprobs",
           "top_p"
         ],
         "supported_voices": null,
@@ -9275,6 +10131,45 @@
           "context_length": 524288,
           "is_moderated": false,
           "max_completion_tokens": 262144
+        }
+      }
+    },
+    {
+      "id": "typesafe/jev-1.13",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->decisions",
+          "output_modalities": [
+            "decisions"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "typesafe/jev-1.13-20260917",
+        "context_length": 64000,
+        "created": 1789689684,
+        "default_parameters": {},
+        "description": "Jev is a structured decision model from TypeSafe, and the first of its System One models. System One models make fast, structured decisions for software, returning a typed choice rather...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/typesafe/jev-1.13-20260917/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0.000000042"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 64000,
+          "is_moderated": false,
+          "max_completion_tokens": 57600
         }
       }
     },
@@ -9415,6 +10310,84 @@
       }
     },
     {
+      "id": "xiaomi/mimo-v2.6-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "video",
+            "audio"
+          ],
+          "instruct_type": null,
+          "modality": "text+image+audio+video->text",
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Other"
+        },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 37.9
+          },
+          "design_arena": []
+        },
+        "canonical_slug": "xiaomi/mimo-v2.6-flash-20260921",
+        "context_length": 1050000,
+        "created": 1790021264,
+        "default_parameters": {
+          "frequency_penalty": 0,
+          "temperature": 1,
+          "top_p": 0.95
+        },
+        "description": "MiMo-V2.6-Flash is an open-source foundation model developed by Xiaomi. Built on a Mixture-of-Experts architecture with 309B total parameters and 15B activated per token, it employs a hybrid attention mechanism for...",
+        "expiration_date": null,
+        "hugging_face_id": "XiaomiMiMo/MiMo-V2.6-Flash-RL",
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/xiaomi/mimo-v2.6-flash-20260921/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.00000028",
+          "input_cache_read": "0.0000000028",
+          "prompt": "0.00000014"
+        },
+        "reasoning": {
+          "mandatory": false
+        },
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "logit_bias",
+          "logprobs",
+          "max_tokens",
+          "min_p",
+          "presence_penalty",
+          "reasoning",
+          "repetition_penalty",
+          "response_format",
+          "seed",
+          "stop",
+          "structured_outputs",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_k",
+          "top_logprobs",
+          "top_p"
+        ],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 1048576,
+          "is_moderated": false,
+          "max_completion_tokens": 131072
+        }
+      }
+    },
+    {
       "id": "z-ai/glm-4.7-flash",
       "metadata": {
         "architecture": {
@@ -9429,54 +10402,59 @@
           "tokenizer": "Other"
         },
         "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 14.9
+          },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1149,
-              "rank": 68,
+              "elo": 1124,
+              "rank": 80,
               "win_rate": 51.2
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1193,
-              "rank": 57,
+              "elo": 1181,
+              "rank": 64,
               "win_rate": 53.1
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1139,
-              "rank": 83,
+              "elo": 1126,
+              "rank": 91,
               "win_rate": 45.3
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1158,
-              "rank": 68,
+              "elo": 1140,
+              "rank": 78,
               "win_rate": 49.7
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1062,
-              "rank": 69,
+              "elo": 1037,
+              "rank": 76,
               "win_rate": 44.2
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1223,
-              "rank": 45,
+              "elo": 1211,
+              "rank": 52,
               "win_rate": 57.6
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1207,
-              "rank": 53,
+              "elo": 1197,
+              "rank": 63,
               "win_rate": 54
             }
           ]
@@ -9749,59 +10727,66 @@
         },
         "benchmarks": {
           "artificial_analysis": {
-            "agentic_index": 53.4,
+            "agentic_index": 53.1,
             "coding_index": 74.8,
-            "intelligence_index": 44.9
+            "intelligence_index": 44.8
           },
           "design_arena": [
             {
               "arena": "models",
               "category": "3d",
-              "elo": 1392,
-              "rank": 4,
-              "win_rate": 67.8
+              "elo": 1336,
+              "rank": 10,
+              "win_rate": 59.7
+            },
+            {
+              "arena": "models",
+              "category": "asciiart",
+              "elo": 1209,
+              "rank": 21,
+              "win_rate": 46.6
             },
             {
               "arena": "models",
               "category": "codecategories",
-              "elo": 1330,
-              "rank": 5,
-              "win_rate": 57.7
+              "elo": 1309,
+              "rank": 12,
+              "win_rate": 54.4
             },
             {
               "arena": "models",
               "category": "dataviz",
-              "elo": 1265,
-              "rank": 25,
-              "win_rate": 51.6
+              "elo": 1264,
+              "rank": 27,
+              "win_rate": 52.1
             },
             {
               "arena": "models",
               "category": "gamedev",
-              "elo": 1375,
-              "rank": 3,
-              "win_rate": 64.1
+              "elo": 1319,
+              "rank": 11,
+              "win_rate": 52.7
             },
             {
               "arena": "models",
               "category": "svg",
-              "elo": 1324,
-              "rank": 5,
-              "win_rate": 59.3
+              "elo": 1293,
+              "rank": 8,
+              "win_rate": 56.7
             },
             {
               "arena": "models",
               "category": "uicomponent",
-              "elo": 1347,
-              "rank": 5,
-              "win_rate": 59.9
+              "elo": 1320,
+              "rank": 13,
+              "win_rate": 57.2
             },
             {
               "arena": "models",
               "category": "website",
-              "elo": 1317,
-              "rank": 6,
-              "win_rate": 55.7
+              "elo": 1300,
+              "rank": 14,
+              "win_rate": 54.3
             },
             {
               "arena": "agents",
@@ -9813,21 +10798,21 @@
             {
               "arena": "agents",
               "category": "mobileapps",
-              "elo": 1231,
-              "rank": 13,
-              "win_rate": 54.4
+              "elo": 1191,
+              "rank": 17,
+              "win_rate": 52.2
             },
             {
               "arena": "agents",
               "category": "python-pptxslides",
-              "elo": 1259,
-              "rank": 6,
-              "win_rate": 51.6
+              "elo": 1255,
+              "rank": 8,
+              "win_rate": 51.2
             }
           ]
         },
         "canonical_slug": "z-ai/glm-5.3-20260816",
-        "context_length": 1310720,
+        "context_length": 1048576,
         "created": 1787086655,
         "default_parameters": {
           "temperature": 1,
@@ -9842,9 +10827,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.0000044",
-          "input_cache_read": "0.00000026",
-          "prompt": "0.0000014"
+          "completion": "0.0000048",
+          "input_cache_read": "0.000000059",
+          "prompt": "0.000000079"
         },
         "reasoning": {
           "default_effort": "max",
@@ -9881,9 +10866,151 @@
         ],
         "supported_voices": null,
         "top_provider": {
-          "context_length": 1048575,
+          "context_length": 1048576,
           "is_moderated": false,
-          "max_completion_tokens": 943717
+          "max_completion_tokens": 943718
+        }
+      }
+    },
+    {
+      "id": "z-ai/glm-5.3-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "video"
+          ],
+          "instruct_type": null,
+          "modality": "text+image+video->text",
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Other"
+        },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": 50.9,
+            "coding_index": 71.5,
+            "intelligence_index": 41.8
+          },
+          "design_arena": [
+            {
+              "arena": "models",
+              "category": "3d",
+              "elo": 1319,
+              "rank": 14,
+              "win_rate": 56.4
+            },
+            {
+              "arena": "models",
+              "category": "asciiart",
+              "elo": 1268,
+              "rank": 11,
+              "win_rate": 55
+            },
+            {
+              "arena": "models",
+              "category": "codecategories",
+              "elo": 1286,
+              "rank": 19,
+              "win_rate": 49.4
+            },
+            {
+              "arena": "models",
+              "category": "dataviz",
+              "elo": 1264,
+              "rank": 28,
+              "win_rate": 50.3
+            },
+            {
+              "arena": "models",
+              "category": "gamedev",
+              "elo": 1287,
+              "rank": 20,
+              "win_rate": 47.3
+            },
+            {
+              "arena": "models",
+              "category": "svg",
+              "elo": 1288,
+              "rank": 10,
+              "win_rate": 57
+            },
+            {
+              "arena": "models",
+              "category": "uicomponent",
+              "elo": 1323,
+              "rank": 11,
+              "win_rate": 54.9
+            },
+            {
+              "arena": "models",
+              "category": "website",
+              "elo": 1275,
+              "rank": 25,
+              "win_rate": 48.5
+            }
+          ]
+        },
+        "canonical_slug": "z-ai/glm-5.3-flash-20260826",
+        "context_length": 1048576,
+        "created": 1787752741,
+        "default_parameters": {
+          "temperature": 1,
+          "top_p": 0.95
+        },
+        "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
+        "expiration_date": null,
+        "hugging_face_id": "zai-org/GLM-5.3-Flash",
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/z-ai/glm-5.3-flash-20260826/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.0000009",
+          "input_cache_read": "0.0000000108",
+          "prompt": "0.0000000261"
+        },
+        "reasoning": {
+          "default_effort": "max",
+          "default_enabled": true,
+          "mandatory": true,
+          "supported_efforts": [
+            "max",
+            "high",
+            "low"
+          ]
+        },
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "logit_bias",
+          "logprobs",
+          "max_tokens",
+          "min_p",
+          "parallel_tool_calls",
+          "presence_penalty",
+          "reasoning",
+          "reasoning_effort",
+          "repetition_penalty",
+          "response_format",
+          "seed",
+          "stop",
+          "structured_outputs",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_k",
+          "top_logprobs",
+          "top_p"
+        ],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 1048576,
+          "is_moderated": false,
+          "max_completion_tokens": 943718
         }
       }
     }
