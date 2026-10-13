@@ -20,7 +20,7 @@
     "lint:fix": "biome lint --write .",
     "typecheck": "bun run --filter json typecheck && bun run --filter web typecheck",
     "test": "bun test",
-    "quality": "bun run format:check && bun run lint && bun run typecheck && bun test && bun run aislop ci .",
+    "quality": "bun run format:check && bun run lint && bun run typecheck && bun test && bun scripts/quality-gate.ts .",
     "check": "bun run quality && bun run catalogue:render --output .scratch/free-models.json && bun run catalogue:check --input .scratch/free-models.json"
   },
   "devDependencies": {

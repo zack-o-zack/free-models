@@ -13,5 +13,5 @@ repos:
       - id: aislop
         # The source release does not build its dist/ entrypoint in a pre-commit Node environment.
         # Use the matching exact package version installed by Bun.
-        entry: bun run aislop scan --staged
+        entry: bun scripts/quality-gate.ts --staged
         language: system
