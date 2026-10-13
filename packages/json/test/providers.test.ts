@@ -544,6 +544,32 @@ describe("Routeway discovery", () => {
 });
 
 describe("BazaarLink discovery", () => {
+  test("reads weighted daily budgets and shared limits from the current free tier", async () => {
+    const html = bazaarLinkLimitsPage([
+      ["Accounts without credit", "10 RPM · 60 weighted units/day"],
+      ["Accounts with credit", "20 RPM · 120 weighted units/day"],
+      ["Site-wide free RPM cap", "15 RPM"],
+      ["Concurrent free requests per account", "2"],
+    ]);
+    await expect(parseBazaarLinkLimits(html)).resolves.toEqual({
+      terms: [
+        "10 req / min (no credit)",
+        "60 weighted units / day (no credit)",
+        "20 req / min (with credit)",
+        "120 weighted units / day (with credit)",
+        "15 req / min (site-wide)",
+        "2 concurrent req / account",
+      ],
+    });
+    await expect(parseBazaarLinkLimits(html.replace("15 RPM", "unlimited"))).rejects.toThrow();
+    await expect(
+      parseBazaarLinkLimits(html.replace("weighted units/day", "requests/day")),
+    ).rejects.toThrow();
+    await expect(
+      parseBazaarLinkLimits(html.replace("Site-wide free RPM cap", "Unknown cap")),
+    ).rejects.toThrow();
+  });
+
   test("keeps only zero-priced :free aliases and skips routing endpoints", async () => {
     const modelsDev = new Map([
       [

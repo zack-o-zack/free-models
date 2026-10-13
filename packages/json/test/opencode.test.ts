@@ -101,7 +101,7 @@ describe("OpenCode Zen discovery", () => {
               auth: {
                 env: ["OPENCODE_API_KEY"],
               },
-              base_url: "https://opencode.ai/zen/v1",
+              base_url: "https://opencode.example.test/zen/v1",
               endpoint: "https://opencode.example.test/zen/v1/chat/completions",
               protocol: "openai",
             },
@@ -115,7 +115,7 @@ describe("OpenCode Zen discovery", () => {
               auth: {
                 env: ["OPENCODE_API_KEY"],
               },
-              base_url: "https://opencode.ai/zen/v1",
+              base_url: "https://opencode.example.test/zen/v1",
               endpoint: "https://opencode.example.test/zen/v1/responses",
               protocol: "openai",
             },
@@ -232,6 +232,51 @@ describe("OpenCode Zen discovery", () => {
     });
   });
 
+  test("discovers native System One offers without inventing an AI SDK package", async () => {
+    await withWorkspace(async (workspace) => {
+      const valid = await validFixtureText();
+      const documentation = valid.documentation
+        .replace("/zen/v1/responses", "/inference/v1/systemone")
+        .replace("<code>@ai-sdk/openai</code>", "-");
+      const fixtures = await customFixtures(workspace, documentation, valid.models);
+      const discovery = runFixtureCli(workspace, fixtures);
+      expect(decoder.decode(discovery.stderr)).toBe("");
+      expect(discovery.exitCode).toBe(0);
+      const snapshot = await Bun.file(join(workspace, "catalogue/snapshots/opencode.json")).json();
+      expect(snapshot.offers[1].connection).toEqual({
+        auth: { env: ["OPENCODE_API_KEY"] },
+        base_url: "https://opencode.example.test/inference/v1",
+        endpoint: "https://opencode.example.test/inference/v1/systemone",
+        protocol: "systemone",
+      });
+    });
+  });
+
+  test("removes retired documented offers while retaining live free offers", async () => {
+    await withWorkspace(async (workspace) => {
+      const valid = await validFixtureText();
+      const models = JSON.parse(valid.models) as { data: { id: string }[] };
+      expect(
+        runFixtureCli(workspace, {
+          documentation: validDocumentationPath,
+          models: validModelsPath,
+        }).exitCode,
+      ).toBe(0);
+      models.data = models.data.filter((model) => model.id !== "big-pickle");
+      const fixtures = await customFixtures(workspace, valid.documentation, JSON.stringify(models));
+      const discovery = runFixtureCli(workspace, fixtures);
+      expect(decoder.decode(discovery.stderr)).toBe("");
+      expect(discovery.exitCode).toBe(0);
+      const snapshot = await Bun.file(join(workspace, "catalogue/snapshots/opencode.json")).json();
+      expect(snapshot.offers.map((offer: { model_id: string }) => offer.model_id)).toEqual([
+        "suffix-free",
+      ]);
+      expect(await Bun.file(join(workspace, "catalogue/unresolved.json")).json()).toEqual({
+        providers: { opencode: ["suffix-free"] },
+      });
+    });
+  });
+
   test("rejects malformed, duplicate, and incomplete live model data", async () => {
     await withWorkspace(async (workspace) => {
       const valid = await validFixtureText();
@@ -259,19 +304,6 @@ describe("OpenCode Zen discovery", () => {
         {
           models: '{"object":"list","data":[{"id":"unsafe","created":1e400}]}',
           message: "expected a JSON-safe object",
-        },
-        {
-          models: JSON.stringify({
-            ...parsedModels,
-            data: parsedModels.data.filter(
-              (model) =>
-                typeof model !== "object" ||
-                model === null ||
-                !("id" in model) ||
-                model.id !== "big-pickle",
-            ),
-          }),
-          message: "free model is missing from the live catalogue: big-pickle",
         },
       ];
 
