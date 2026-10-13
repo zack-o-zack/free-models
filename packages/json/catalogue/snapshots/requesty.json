@@ -72,6 +72,27 @@
       }
     },
     {
+      "model_id": "novita/ling-3.1-flash",
+      "name": "Novita: Ling 3.1 flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "REQUESTY_API_KEY"
+          ]
+        },
+        "base_url": "https://router.requesty.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min (new orgs)",
+          "200 req / day (new orgs)",
+          "60 req / min (paying orgs)",
+          "1k req / day (paying orgs)"
+        ]
+      }
+    },
+    {
       "model_id": "nvidia/muse-glimmer-30b",
       "name": "Nvidia: Muse glimmer 30b",
       "connection": {

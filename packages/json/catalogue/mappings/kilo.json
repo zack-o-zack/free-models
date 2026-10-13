@@ -6,6 +6,7 @@
     "inclusionai/ling-3.0-flash-fin:free": "inclusionai/ling-3.0-flash-fin",
     "inclusionai/ling-3.0-flash-sante:free": "inclusionai/ling-3.0-flash-sante",
     "inclusionai/ling-3.0-flash-vl:free": "inclusionai/ling-3.0-flash-vl",
+    "inclusionai/ling-3.1-flash": "inclusionai/ling-3.1-flash",
     "liquid/lfm-2.5-2.6b:free": "liquid/lfm-2.5-2.6b",
     "nex-agi/nex-n2.5-mini:free": "nex-agi/nex-n2.5-mini",
     "nex-agi/nex-n2.5-pro:free": "nex-agi/nex-n2.5-pro",
@@ -16,7 +17,9 @@
     "nvidia/nemotron-3.5-lightning:free": "nvidia/nemotron-3.5-lightning",
     "poolside/laguna-s-2.1:free": "poolside/laguna-s-2.1",
     "poolside/laguna-xs-2.1:free": "poolside/laguna-xs-2.1",
+    "stealth/glyph-cluster": "stealth:glyph-cluster",
     "stepfun/step-3.7-flash:free": "stepfun/step-3.7-flash",
+    "stepfun/step-5-preview-free": "stepfun/step-5-preview",
     "thinkingmachines/inkling-small:free": "thinkingmachines/inkling-small",
     "thinkingmachines/inkling:free": "thinkingmachines/inkling",
     "z-ai/glm-5.2:free": "z-ai/glm-5.2"

@@ -28,6 +28,120 @@
       }
     },
     {
+      "model_id": "gemma-4-26b-a4b-it-chimerax:free",
+      "name": "Gemma 4 26b A4b It Chimerax (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemma-4-26b-a4b-it-darksoul:free",
+      "name": "Gemma 4 26b A4b It Darksoul (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemma-4-26b-a4b-it-luminous:free",
+      "name": "Gemma 4 26b A4b It Luminous (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemma-4-26b-a4b-it-meromero:free",
+      "name": "Gemma 4 26B A4B IT MeroMero (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemma-4-26b-a4b-it-moonlight:free",
+      "name": "Gemma 4 26b A4b It Moonlight (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemma-4-26b-a4b-it-musica:free",
+      "name": "Gemma 4 26b A4b It Musica (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "ROUTEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://api.routeway.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "200 req / day"
+        ]
+      }
+    },
+    {
       "model_id": "minimax-m2.7:free",
       "name": "MiniMax: MiniMax M2.7 (Free)",
       "connection": {

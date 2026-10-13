@@ -185,28 +185,6 @@
       }
     },
     {
-      "model_id": "gemini-3.5-flash",
-      "name": "Gemini 3.5 Flash",
-      "connection": {
-        "auth": {
-          "env": [
-            "GOOGLE_API_KEY",
-            "GOOGLE_GENERATIVE_AI_API_KEY",
-            "GEMINI_API_KEY"
-          ]
-        },
-        "base_url": "https://generativelanguage.googleapis.com/v1beta",
-        "protocol": "google"
-      },
-      "limits": {
-        "terms": [
-          "5 req / min",
-          "250k tok / min",
-          "20 req / day"
-        ]
-      }
-    },
-    {
       "model_id": "gemini-3.5-flash-lite",
       "name": "Gemini 3.5 Flash-Lite",
       "connection": {
@@ -317,8 +295,8 @@
       }
     },
     {
-      "model_id": "gemini-3.7-flash",
-      "name": "Gemini 3.7 Flash",
+      "model_id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 Flash",
       "connection": {
         "auth": {
           "env": [
@@ -332,15 +310,37 @@
       },
       "limits": {
         "terms": [
-          "5 req / min",
+          "15 req / min",
           "250k tok / min",
-          "20 req / day"
+          "500 req / day"
         ]
       }
     },
     {
-      "model_id": "gemini-3.8-flash",
-      "name": "Gemini 3.8 Flash",
+      "model_id": "gemini-3.8-flash-lite-tts",
+      "name": "Gemini 3.8 Flash-Lite TTS",
+      "connection": {
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "gemini-3.8-flash-tts",
+      "name": "Gemini 3.8 Flash TTS",
       "connection": {
         "auth": {
           "env": [

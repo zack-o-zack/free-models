@@ -2,6 +2,12 @@
   "provider": "routeway",
   "mappings": {
     "deepseek-v4-flash:free": "deepseek/deepseek-v4-flash",
+    "gemma-4-26b-a4b-it-chimerax:free": "routeway/gemma-4-26b-a4b-it-chimerax",
+    "gemma-4-26b-a4b-it-darksoul:free": "routeway/gemma-4-26b-a4b-it-darksoul",
+    "gemma-4-26b-a4b-it-luminous:free": "routeway/gemma-4-26b-a4b-it-luminous",
+    "gemma-4-26b-a4b-it-meromero:free": "routeway/gemma-4-26b-a4b-it-meromero",
+    "gemma-4-26b-a4b-it-moonlight:free": "routeway/gemma-4-26b-a4b-it-moonlight",
+    "gemma-4-26b-a4b-it-musica:free": "routeway/gemma-4-26b-a4b-it-musica",
     "kimi-k2.6:free": "moonshotai/kimi-k2.6",
     "minimax-m2.7:free": "minimax/minimax-m2.7",
     "muse-glimmer-30b:free": "meta/muse-glimmer-30b"

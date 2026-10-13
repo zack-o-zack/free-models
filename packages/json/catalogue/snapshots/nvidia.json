@@ -9,8 +9,8 @@
   },
   "offers": [
     {
-      "model_id": "deepseek-ai/deepseek-v4-flash-0731",
-      "name": "deepseek-v4-flash-0731",
+      "model_id": "deepseek-ai/deepseek-v4.1-flash",
+      "name": "deepseek-v4.1-flash",
       "connection": {
         "auth": {
           "env": [
@@ -161,25 +161,6 @@
       }
     },
     {
-      "model_id": "mistralai/mistral-nemotron",
-      "name": "mistral-nemotron",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      }
-    },
-    {
       "model_id": "moonshotai/kimi-k3",
       "name": "kimi-k3",
       "connection": {
@@ -239,6 +220,25 @@
     {
       "model_id": "nvidia/bnr",
       "name": "Background Noise Removal",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/body-pose",
+      "name": "3D Body Pose",
       "connection": {
         "auth": {
           "env": [
@@ -353,6 +353,25 @@
     {
       "model_id": "nvidia/kumo-relational",
       "name": "Kumo Relational",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/kumo-tabular",
+      "name": "Kumo Tabular",
       "connection": {
         "auth": {
           "env": [
@@ -541,25 +560,6 @@
       }
     },
     {
-      "model_id": "nvidia/riva-translate-4b-instruct-v1_1",
-      "name": "riva-translate-4b-instruct-v1_1",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      }
-    },
-    {
       "model_id": "nvidia/riva-translate-4b-instruct-v2",
       "name": "riva-translate-4b-instruct-v2",
       "connection": {
@@ -695,6 +695,25 @@
     {
       "model_id": "z-ai/glm-5-3",
       "name": "glm-5-3",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "z-ai/glm-5-3-flash",
+      "name": "glm-5-3-flash",
       "connection": {
         "auth": {
           "env": [

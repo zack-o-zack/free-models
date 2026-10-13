@@ -22,6 +22,8 @@
     "embed-multilingual-v3.0": "cohere/embed-multilingual-v3.0",
     "embed-multilingual-v3.0-image": "cohere/embed-multilingual-v3.0-image",
     "embed-v4.0": "cohere/embed-v4.0",
+    "embed-v5.0-fast": "cohere/embed-v5.0-fast",
+    "embed-v5.0-pro": "cohere/embed-v5.0-pro",
     "north-mini-code-1-0": "cohere/north-mini-code",
     "north-small-translate-09-2026": "cohere/north-small-translate-09-2026",
     "parse-v5.0": "cohere/parse-v5.0",

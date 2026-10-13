@@ -33,6 +33,8 @@ const RPM_LABEL = "Requests per minute";
 const RPD_LABEL = "Requests per day";
 const NO_CREDIT_LABEL = "Accounts without credit";
 const WITH_CREDIT_LABEL = "Accounts with credit";
+const SITE_RPM_LABEL = "Site-wide free RPM cap";
+const CONCURRENCY_LABEL = "Concurrent free requests per account";
 
 export interface BazaarLinkProviderOptions {
   readonly fetch?: FetchSource;
@@ -173,13 +175,19 @@ export async function parseBazaarLinkLimits(html: string): Promise<OfferLimits> 
       label === RPM_LABEL ||
       label === RPD_LABEL ||
       label === NO_CREDIT_LABEL ||
-      label === WITH_CREDIT_LABEL
+      label === WITH_CREDIT_LABEL ||
+      label === SITE_RPM_LABEL ||
+      label === CONCURRENCY_LABEL
     ) {
       if (valuesByLabel.has(label)) {
         throw new Error(`BazaarLink free tier limits contain a duplicate entry: ${label}`);
       }
       valuesByLabel.set(label, value);
     }
+  }
+
+  if (valuesByLabel.get(NO_CREDIT_LABEL)?.includes("RPM")) {
+    return parseWeightedLimits(valuesByLabel);
   }
 
   const missing = [RPM_LABEL, RPD_LABEL, NO_CREDIT_LABEL, WITH_CREDIT_LABEL].filter(
@@ -204,6 +212,36 @@ export async function parseBazaarLinkLimits(html: string): Promise<OfferLimits> 
     formatLimitTerm(rpm, "req", "min"),
     `${formatLimitTerm(multiplyUnits(rpd, noCreditMultiplier, RPD_LABEL), "req", "day")} (no credit)`,
     `${formatLimitTerm(multiplyUnits(rpd, withCreditMultiplier, RPD_LABEL), "req", "day")} (with credit)`,
+  );
+}
+
+function parseWeightedLimits(values: ReadonlyMap<string, string>): OfferLimits {
+  const terms: string[] = [];
+  for (const [label, condition] of [
+    [NO_CREDIT_LABEL, "no credit"],
+    [WITH_CREDIT_LABEL, "with credit"],
+  ] as const) {
+    const match = /^(.+?) RPM · (.+?) weighted units\/day$/.exec(values.get(label) ?? "");
+    if (!match?.[1] || !match[2]) {
+      throw new Error(`BazaarLink ${label} has an invalid weighted budget`);
+    }
+    const rpm = parseCompactInteger(match[1], label);
+    const units = parseCompactInteger(match[2], label);
+    terms.push(
+      `${formatLimitTerm(rpm, "req", "min")} (${condition})`,
+      `${units} weighted units / day (${condition})`,
+    );
+  }
+  const siteRate = /^(.+?) RPM$/.exec(values.get(SITE_RPM_LABEL) ?? "");
+  if (!siteRate?.[1]) {
+    throw new Error("BazaarLink site-wide RPM cap is missing or invalid");
+  }
+  const siteRpm = parseCompactInteger(siteRate[1], SITE_RPM_LABEL);
+  const concurrency = parseCompactInteger(values.get(CONCURRENCY_LABEL) ?? "", CONCURRENCY_LABEL);
+  return termsLimits(
+    ...terms,
+    `${formatLimitTerm(siteRpm, "req", "min")} (site-wide)`,
+    `${concurrency} concurrent req / account`,
   );
 }
 
