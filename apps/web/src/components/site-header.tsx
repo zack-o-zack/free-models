@@ -1,54 +1,47 @@
-import { ArrowDownRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
+import { CatalogueNavigation } from "@/components/catalogue-navigation";
 import { GitHubLink } from "@/components/github-link";
 import { ModeToggle } from "@/components/mode-toggle";
+import { SiteLogo } from "@/components/site-logo";
 import { Button } from "@/components/ui/button";
 
-function BrandMark() {
-  return (
-    <span
-      aria-hidden="true"
-      className="relative flex size-10 items-center justify-center overflow-hidden rounded-full bg-primary text-primary-foreground"
-    >
-      <span className="absolute h-2.5 w-6 -translate-x-1 -skew-x-[28deg] rounded-sm bg-current" />
-      <span className="absolute h-2.5 w-6 translate-x-1 translate-y-2 -skew-x-[28deg] rounded-sm bg-current" />
-    </span>
-  );
+interface SiteHeaderProps {
+  modelCount: number;
+  githubStars: number;
 }
 
-export function SiteHeader({ modelCount }: { modelCount: number }) {
+export function SiteHeader({ modelCount, githubStars }: SiteHeaderProps) {
   return (
-    <header className="sticky top-0 z-40 border-b border-foreground/10 bg-background/90 backdrop-blur-xl supports-backdrop-filter:bg-background/75">
-      <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 sm:px-8">
-        <Link className="flex items-center gap-3" href="/">
-          <BrandMark />
-          <span className="font-heading text-lg font-extrabold tracking-[-0.03em]">
-            Free Models
-          </span>
-          <span className="hidden rounded-full bg-card px-3 py-1 text-xs font-semibold text-muted-foreground sm:inline-flex">
-            {modelCount} live
-          </span>
-        </Link>
-        <nav className="flex items-center gap-1.5" aria-label="Primary navigation">
-          <Button
-            className="hidden sm:inline-flex"
-            render={<Link href="/#models" />}
-            nativeButton={false}
-            variant="ghost"
-            size="sm"
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-card/95 backdrop-blur-xl">
+      <div className="container flex h-20 items-center justify-between gap-3 sm:h-24">
+        <div className="flex items-center gap-6">
+          <Link
+            className="rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            href="/"
+            aria-label="Free Models home"
           >
-            Explore models
-          </Button>
+            <SiteLogo />
+          </Link>
+          <span className="hidden border-l border-border pl-6 text-xs leading-5 text-muted-foreground 2xl:block">
+            Compare free AI models.
+            <br />
+            {modelCount} models to choose from.
+          </span>
+        </div>
+        <nav className="flex items-center gap-1.5 sm:gap-3" aria-label="Primary navigation">
+          <CatalogueNavigation />
+          <div className="hidden sm:block">
+            <GitHubLink stars={githubStars} />
+          </div>
           <ModeToggle />
-          <GitHubLink />
           <Button
-            className="ml-1 hidden md:inline-flex"
+            className="ml-2 hidden h-12 gap-4 rounded-[24px] px-5 hover:bg-primary-hover md:inline-flex"
             render={<Link href="/#models" />}
             nativeButton={false}
-            size="sm"
           >
-            Start exploring <ArrowDownRight />
+            Browse models <ArrowUpRight aria-hidden="true" />
           </Button>
         </nav>
       </div>

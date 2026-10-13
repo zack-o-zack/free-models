@@ -11,10 +11,11 @@ import { ProviderBadge } from "@/components/provider-badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { entityHref, publisherSlug } from "@/lib/catalogue-entities";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
-import { providerFaviconUrl } from "@/lib/provider-logos";
+import { publisherFaviconUrl } from "@/lib/provider-logos";
 
 function initials(value: string): string {
   return value
@@ -27,8 +28,9 @@ function initials(value: string): string {
 
 export function ModelCard({ model }: { model: ModelSummary }) {
   const router = useRouter();
+  const publisher = publisherSlug(model);
   const href = modelHref(model.id);
-  const providerLogoUrl = providerFaviconUrl(model.id.split("/")[0]);
+  const providerLogoUrl = publisherFaviconUrl(model.id.split("/")[0]);
 
   function handleCardClick(event: MouseEvent<HTMLDivElement>) {
     if (
@@ -48,7 +50,7 @@ export function ModelCard({ model }: { model: ModelSummary }) {
         : "text-lg";
 
   return (
-    <Card className="cursor-pointer bg-background" onClick={handleCardClick}>
+    <Card className="model-catalogue-card cursor-pointer bg-background" onClick={handleCardClick}>
       <CardHeader>
         <div className="flex min-w-0 items-start gap-4">
           {!model.isStealth && (
@@ -69,7 +71,11 @@ export function ModelCard({ model }: { model: ModelSummary }) {
             <CardTitle
               className={`flex flex-wrap items-center gap-2 font-extrabold tracking-[-0.025em] ${modelNameSize}`}
             >
-              <Link className="line-clamp-2 min-w-0 max-w-full leading-tight" href={href}>
+              <Link
+                className="line-clamp-2 min-w-0 max-w-full leading-tight"
+                href={href}
+                prefetch={false}
+              >
                 {model.name}
               </Link>
               {model.isStealth && (
@@ -79,41 +85,54 @@ export function ModelCard({ model }: { model: ModelSummary }) {
               )}
               <ModalityMetric input={model.inputModalities} output={model.outputModalities} />
             </CardTitle>
-            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-muted-foreground">
-              <BenchmarkMetric
-                icon={Server}
-                label="Providers offering this model for free"
-                value={String(model.providers.length)}
-              />
-              {model.contextLength > 0 && (
-                <BenchmarkMetric
-                  icon={Gauge}
-                  label="Context window"
-                  value={formatContext(model.contextLength)}
-                />
+            <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted-foreground">
+              {publisher && (
+                <>
+                  <Link
+                    href={entityHref("publishers", publisher)}
+                    className="font-medium underline-offset-4 hover:underline"
+                  >
+                    {model.author}
+                  </Link>
+                  <span aria-hidden="true" className="h-3 w-px shrink-0 bg-border" />
+                </>
               )}
-              {model.intelligenceScore !== null && (
+              <span className="flex flex-wrap items-center gap-x-4 gap-y-2 font-medium">
                 <BenchmarkMetric
-                  icon={BrainCircuit}
-                  label="Artificial Analysis Intelligence Index"
-                  value={formatBenchmarkScore(model.intelligenceScore)}
+                  icon={Server}
+                  label="Providers offering this model for free"
+                  value={String(model.providers.length)}
                 />
-              )}
-              {model.codingScore !== null && (
-                <BenchmarkMetric
-                  icon={Code2}
-                  label="Artificial Analysis Coding Index"
-                  value={formatBenchmarkScore(model.codingScore)}
-                />
-              )}
-              {model.agenticScore !== null && (
-                <BenchmarkMetric
-                  icon={Bot}
-                  label="Artificial Analysis Agentic Index"
-                  value={formatBenchmarkScore(model.agenticScore)}
-                />
-              )}
-              <DesignArenaPopover benchmarks={model.designArena} />
+                {model.contextLength > 0 && (
+                  <BenchmarkMetric
+                    icon={Gauge}
+                    label="Context window"
+                    value={formatContext(model.contextLength)}
+                  />
+                )}
+                {model.intelligenceScore !== null && (
+                  <BenchmarkMetric
+                    icon={BrainCircuit}
+                    label="Artificial Analysis Intelligence Index"
+                    value={formatBenchmarkScore(model.intelligenceScore)}
+                  />
+                )}
+                {model.codingScore !== null && (
+                  <BenchmarkMetric
+                    icon={Code2}
+                    label="Artificial Analysis Coding Index"
+                    value={formatBenchmarkScore(model.codingScore)}
+                  />
+                )}
+                {model.agenticScore !== null && (
+                  <BenchmarkMetric
+                    icon={Bot}
+                    label="Artificial Analysis Agentic Index"
+                    value={formatBenchmarkScore(model.agenticScore)}
+                  />
+                )}
+                <DesignArenaPopover benchmarks={model.designArena} />
+              </span>
             </div>
           </div>
         </div>
@@ -126,8 +145,10 @@ export function ModelCard({ model }: { model: ModelSummary }) {
           {model.providers.map((provider) => (
             <ProviderBadge
               key={provider}
+              href={entityHref("providers", provider)}
               iconOnly
               names={model.providerNames}
+              docs={model.providerDocs[provider]}
               provider={provider}
             />
           ))}

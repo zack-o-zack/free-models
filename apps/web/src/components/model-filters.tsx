@@ -1,7 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { AudioLines, FileText, ImageIcon, Type, Video } from "lucide-react";
+import { AudioLines, CircleHelp, FileText, ImageIcon, Type, Video } from "lucide-react";
 import { ProviderBadge } from "@/components/provider-badge";
 import {
   Accordion,
@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
+import type { ProviderDoc } from "@/lib/model-types";
 
 export interface ProviderFilterOption {
   value: string;
@@ -24,14 +25,11 @@ export interface PublisherFilterOption {
   label: string;
 }
 
-export const CONTEXT_STEPS = [
-  0, 4_000, 8_000, 16_000, 32_000, 64_000, 128_000, 256_000, 512_000, 1_000_000, 2_000_000,
-];
-
 export function formatStepLabel(value: number): string {
   if (value === 0) return "0";
   if (value >= 1_000_000) return `${value / 1_000_000}M`;
-  return `${value / 1_000}K`;
+  if (value >= 1_000) return `${value / 1_000}K`;
+  return String(value);
 }
 
 interface ModelFiltersProps {
@@ -40,9 +38,12 @@ interface ModelFiltersProps {
   selectedPublishers: string[];
   selectedProviders: string[];
   contextRange: [number, number];
+  contextSteps: number[];
+  inputOptions: Array<{ value: string; label: string }>;
   publisherOptions: PublisherFilterOption[];
   providerOptions: ProviderFilterOption[];
   providerNames: Record<string, string>;
+  providerDocs: Record<string, ProviderDoc>;
   activeFilterCount: number;
   onToggleInput: (modality: string) => void;
   onTogglePublisher: (publisher: string) => void;
@@ -51,13 +52,13 @@ interface ModelFiltersProps {
   onClear: () => void;
 }
 
-const inputOptions: Array<{ value: string; label: string; icon: LucideIcon }> = [
-  { value: "text", label: "Text", icon: Type },
-  { value: "image", label: "Image", icon: ImageIcon },
-  { value: "file", label: "File", icon: FileText },
-  { value: "audio", label: "Audio", icon: AudioLines },
-  { value: "video", label: "Video", icon: Video },
-];
+const inputIcons: Record<string, LucideIcon> = {
+  text: Type,
+  image: ImageIcon,
+  file: FileText,
+  audio: AudioLines,
+  video: Video,
+};
 
 export function ModelFilters({
   idPrefix,
@@ -65,9 +66,12 @@ export function ModelFilters({
   selectedPublishers,
   selectedProviders,
   contextRange,
+  contextSteps,
+  inputOptions,
   publisherOptions,
   providerOptions,
   providerNames,
+  providerDocs,
   activeFilterCount,
   onToggleInput,
   onTogglePublisher,
@@ -75,7 +79,7 @@ export function ModelFilters({
   onContextRangeChange,
   onClear,
 }: ModelFiltersProps) {
-  const isContextFiltered = contextRange[0] > 0 || contextRange[1] < CONTEXT_STEPS.length - 1;
+  const isContextFiltered = contextRange[0] > 0 || contextRange[1] < contextSteps.length - 1;
 
   return (
     <div className="flex h-full flex-col">
@@ -104,13 +108,14 @@ export function ModelFilters({
               <span className="text-muted-foreground">Range</span>
               <span className="rounded bg-muted px-1.5 py-0.5 font-code text-xs text-foreground">
                 {!isContextFiltered
-                  ? "All (0 – 2M+)"
-                  : `${formatStepLabel(CONTEXT_STEPS[contextRange[0]])} – ${formatStepLabel(CONTEXT_STEPS[contextRange[1]])}`}
+                  ? `All (0 – ${formatStepLabel(contextSteps[contextSteps.length - 1])})`
+                  : `${formatStepLabel(contextSteps[contextRange[0]])} – ${formatStepLabel(contextSteps[contextRange[1]])}`}
               </span>
             </div>
             <Slider
               aria-label="Context window range"
-              max={CONTEXT_STEPS.length - 1}
+              disabled={contextSteps.length < 2}
+              max={Math.max(1, contextSteps.length - 1)}
               min={0}
               onValueChange={(val) => {
                 if (Array.isArray(val) && val.length === 2) {
@@ -122,8 +127,10 @@ export function ModelFilters({
             />
             <div className="flex justify-between font-code text-[10px] text-muted-foreground">
               <span>0</span>
-              <span>64K</span>
-              <span>2M+</span>
+              <span>
+                {formatStepLabel(contextSteps[Math.floor((contextSteps.length - 1) / 2)])}
+              </span>
+              <span>{formatStepLabel(contextSteps[contextSteps.length - 1])}</span>
             </div>
           </AccordionContent>
         </AccordionItem>
@@ -131,21 +138,24 @@ export function ModelFilters({
         <AccordionItem value="inputs">
           <AccordionTrigger>Input modalities</AccordionTrigger>
           <AccordionContent className="grid gap-3 px-1 pt-1">
-            {inputOptions.map(({ value, label, icon: Icon }) => (
-              <label
-                className="flex cursor-pointer items-center gap-3 text-sm font-medium text-muted-foreground hover:text-foreground"
-                htmlFor={`${idPrefix}-input-${value}`}
-                key={value}
-              >
-                <Checkbox
-                  checked={selectedInputs.includes(value)}
-                  id={`${idPrefix}-input-${value}`}
-                  onCheckedChange={() => onToggleInput(value)}
-                />
-                <Icon className="size-4" />
-                {label}
-              </label>
-            ))}
+            {inputOptions.map(({ value, label }) => {
+              const Icon = inputIcons[value] ?? CircleHelp;
+              return (
+                <label
+                  className="flex cursor-pointer items-center gap-3 text-sm font-medium text-muted-foreground hover:text-foreground"
+                  htmlFor={`${idPrefix}-input-${value}`}
+                  key={value}
+                >
+                  <Checkbox
+                    checked={selectedInputs.includes(value)}
+                    id={`${idPrefix}-input-${value}`}
+                    onCheckedChange={() => onToggleInput(value)}
+                  />
+                  <Icon className="size-4" />
+                  {label}
+                </label>
+              );
+            })}
           </AccordionContent>
         </AccordionItem>
 
@@ -163,7 +173,12 @@ export function ModelFilters({
                   id={`${idPrefix}-provider-${value}`}
                   onCheckedChange={() => onToggleProvider(value)}
                 />
-                <ProviderBadge plain names={providerNames} provider={value} />
+                <ProviderBadge
+                  plain
+                  names={providerNames}
+                  docs={providerDocs[value]}
+                  provider={value}
+                />
               </label>
             ))}
           </AccordionContent>

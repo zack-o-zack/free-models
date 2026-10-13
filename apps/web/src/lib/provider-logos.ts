@@ -1,19 +1,17 @@
-const providerWebsites: Record<string, string> = {
+import type { ProviderDoc } from "@/lib/model-types";
+
+const publisherWebsites: Record<string, string> = {
   ai4bharat: "https://ai4bharat.iitm.ac.in/",
   aisingapore: "https://aisingapore.org/",
   baai: "https://bge.baai.ac.cn/",
-  bazaarlink: "https://bazaarlink.ai/",
   "black-forest-labs": "https://bfl.ai/",
   canopylabs: "https://canopylabs.ai/",
-  cloudflare: "https://www.cloudflare.com/",
   cohere: "https://cohere.com/",
   deepgram: "https://deepgram.com/",
   deepseek: "https://www.deepseek.com/",
   "dots-studio": "https://dots-studio.com/",
   "fish-audio": "https://fish.audio/",
-  gemini: "https://gemini.google.com/",
   google: "https://ai.google.dev/",
-  groq: "https://groq.com/",
   hexgrad: "https://github.com/hexgrad/kokoro",
   huggingface: "https://huggingface.co/",
   "ibm-granite": "https://www.ibm.com/granite",
@@ -31,23 +29,23 @@ const providerWebsites: Record<string, string> = {
   "myshell-ai": "https://myshell.ai/",
   nvidia: "https://www.nvidia.com/en-us/",
   openai: "https://openai.com/",
-  openrouter: "https://openrouter.ai/",
-  opencode: "https://opencode.ai/",
   pfnet: "https://www.pfnet.co.jp/",
   "pipecat-ai": "https://www.pipecat.ai/",
   poolside: "https://poolside.ai/",
   qwen: "https://qwen.ai/",
   rekaai: "https://www.reka.ai/",
-  requesty: "https://www.requesty.ai/",
+  stepfun: "https://www.stepfun.com/",
   tencent: "https://www.tencentcloud.com/",
-  tokenrouter: "https://www.tokenrouter.com/",
   thinkingmachines: "https://thinkingmachines.ai/",
   xiaomi: "https://www.mi.com/",
   "z-ai": "https://z.ai/",
 };
 
 export const providerNames: Record<string, string> = {
+  ai4bharat: "AI4Bharat",
+  aisingapore: "AI Singapore",
   baai: "BAAI",
+  bazaarlink: "BazaarLink",
   "black-forest-labs": "Black Forest Labs",
   canopylabs: "Canopy Labs",
   cloudflare: "Cloudflare",
@@ -60,22 +58,33 @@ export const providerNames: Record<string, string> = {
   google: "Google",
   groq: "Groq",
   hexgrad: "Hexgrad",
+  huggingface: "Hugging Face",
   "ibm-granite": "IBM Granite",
   inclusionai: "InclusionAI",
+  kilo: "Kilo",
+  leonardo: "Leonardo",
   liquid: "Liquid",
   meta: "Meta",
   "meta-llama": "Meta Llama",
+  microsoft: "Microsoft",
   minimax: "MiniMax",
   mistral: "Mistral",
   mistralai: "Mistral AI",
+  moondream: "Moondream",
   moonshotai: "Moonshot AI",
+  "myshell-ai": "MyShell",
   nvidia: "NVIDIA",
   openai: "OpenAI",
   openrouter: "OpenRouter",
   opencode: "OpenCode",
+  pfnet: "PFNet",
+  "pipecat-ai": "Pipecat",
   poolside: "Poolside",
   qwen: "Qwen",
   rekaai: "Reka AI",
+  requesty: "Requesty",
+  routeway: "Routeway",
+  stepfun: "StepFun",
   tencent: "Tencent",
   tokenrouter: "TokenRouter",
   thinkingmachines: "Thinking Machines",
@@ -93,19 +102,33 @@ export function getProviderName(providerSlug: string, liveNames?: Record<string,
   );
 }
 
-export function providerFaviconUrl(providerSlug: string): string | null {
-  const normalizedSlug = providerSlug.toLowerCase();
-  const website =
-    providerWebsites[normalizedSlug] ?? providerWebsites[normalizedSlug.split(":", 1)[0]];
+export function publisherFaviconUrl(publisherSlug: string, size: 64 | 128 = 64): string | null {
+  const website = publisherWebsites[publisherSlug.toLowerCase()];
+  return faviconUrl(website, size);
+}
 
+export function providerFaviconUrl(docs?: ProviderDoc, size: 64 | 128 = 64): string | null {
+  for (const url of [docs?.overview, docs?.models, docs?.pricing, docs?.rateLimit]) {
+    const favicon = faviconUrl(url, size);
+    if (favicon) return favicon;
+  }
+  return null;
+}
+
+function faviconUrl(website: string | undefined, size: 64 | 128): string | null {
   if (!website) return null;
+  try {
+    if (!["https:", "http:"].includes(new URL(website).protocol)) return null;
+  } catch {
+    return null;
+  }
 
   const params = new URLSearchParams({
     client: "SOCIAL",
     type: "FAVICON",
     fallback_opts: "TYPE,SIZE,URL",
     url: website,
-    size: "256",
+    size: String(size),
   });
 
   return `https://t0.gstatic.com/faviconV2?${params.toString()}`;

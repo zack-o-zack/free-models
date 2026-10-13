@@ -73,8 +73,8 @@ export function formatDesignArenaName(arena: string): string {
 }
 
 const connectionKeyLabels: Record<string, string> = {
-  auth: "Auth",
   base_url: "Base URL",
+  model_id: "Model ID",
   ai_sdk_package: "AI SDK Package",
   endpoint: "Endpoint",
   env: "Env",
@@ -104,6 +104,7 @@ export function flattenConnectionEntries(record: Record<string, unknown>): Conne
   const entries: ConnectionEntry[] = [];
 
   for (const [rawKey, rawValue] of Object.entries(record)) {
+    if (rawKey === "auth") continue;
     const key = formatConnectionKey(rawKey);
     collect(key, rawValue, entries);
   }

@@ -56,6 +56,8 @@ interface RawCatalogue {
   models: RawModel[];
 }
 
+const GITHUB_REPO = "zack-o-zack/free-models-backend";
+
 const publisherNames: Record<string, string> = {
   ai4bharat: "AI4Bharat",
   aisingapore: "AI Singapore",
@@ -121,7 +123,7 @@ function toModelSummary(model: RawModel): ModelSummary {
     author: humanizeAuthor(model.id, model.name),
     description:
       model.description?.replace(/\[([^\]]+)\]\(<?[^)]+>?\)/g, "$1") ??
-      "Model details are not yet available in the catalogue.",
+      "No description available yet.",
     contextLength: model.context_length ?? 0,
     created: model.created ?? null,
     inputModalities: model.architecture?.input_modalities ?? [],
@@ -165,24 +167,44 @@ function toModelSummary(model: RawModel): ModelSummary {
   };
 }
 
-export async function getModels(): Promise<ModelSummary[]> {
-  // Production builds pin the catalogue snapshot (SSG + force-cache).
-  // In dev, always refetch so catalogue updates show without a restart.
+async function getGitHubStars(): Promise<number> {
   const init =
     process.env.NODE_ENV === "development"
       ? { cache: "no-store" as const }
       : { cache: "force-cache" as const };
-  const response = await fetch(MODEL_CATALOGUE_URL, init);
+  const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`, init);
 
   if (!response.ok) {
-    throw new Error(`Model catalogue request failed with HTTP status ${response.status}`);
+    return 0;
   }
 
-  const catalogue = (await response.json()) as RawCatalogue;
+  const data = await response.json();
+  return data.stargazers_count ?? 0;
+}
+
+export async function getModels(): Promise<{ models: ModelSummary[]; githubStars: number }> {
+  const init =
+    process.env.NODE_ENV === "development"
+      ? { cache: "no-store" as const }
+      : { cache: "force-cache" as const };
+
+  const [catalogueResponse, stars] = await Promise.all([
+    fetch(MODEL_CATALOGUE_URL, init),
+    getGitHubStars(),
+  ]);
+
+  if (!catalogueResponse.ok) {
+    throw new Error(`Model catalogue request failed with HTTP status ${catalogueResponse.status}`);
+  }
+
+  const catalogue = (await catalogueResponse.json()) as RawCatalogue;
 
   if (!Array.isArray(catalogue.models)) {
     throw new Error("Model catalogue response is malformed: expected a models array");
   }
 
-  return catalogue.models.map(toModelSummary);
+  return {
+    models: catalogue.models.map(toModelSummary),
+    githubStars: stars,
+  };
 }

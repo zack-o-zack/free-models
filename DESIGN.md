@@ -1,5 +1,11 @@
 ## Overview
 
+### Icon preference
+
+Never use sparkle icons or sparkle emoji in the interface. Choose icons that describe the content: Compass for exploration, Layers for related models, and CircleCheck for highlights.
+
+Homepage orbit: use task glyphs with gentle internal SVG animation on small, neutral circular backgrounds. Keep the orbit paths separated so glyphs and brand logos have room. Publisher/provider logos stay bare. No icon container borders or shadows, task labels, or motion button. Honor reduced-motion preferences and pause while keyboard focus is inside the hero.
+
 The design system wears its identity in a single signature pairing: a vivid lime-green `{colors.primary}` (`#9fe870`) used as the CTA pill and brand accent, set against a pale sage-tinted canvas `{colors.canvas-soft}` (`#e8ebe6`) that runs across the hero band, and a near-black ink `{colors.ink}` (`#0e0f0c`) with a hint of warmth from an underlying olive cast. The interface reads like a calm, modern editorial publication — generous whitespace, large rounded cards, and an unusually heavy display sans set at weight 900 carrying every hero headline.
 
 Display typography is the second decisive voice. A geometric display sans (such as Manrope or Inter Display at weight 900) carries hero displays in scales from 64 px up to 126 px on the largest hero. The system pairs this with Inter at weight 600 for sub-displays — the contrast between the chunky display face and Inter's neutrality creates a clean hierarchy: heavy geometric display for hero moments, Inter for everything else.

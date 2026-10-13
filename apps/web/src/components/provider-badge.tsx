@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { getProviderName, providerFaviconUrl } from "@/lib/provider-logos";
+import type { ProviderDoc } from "@/lib/model-types";
+import { getProviderName, providerFaviconUrl, publisherFaviconUrl } from "@/lib/provider-logos";
 import { cn } from "@/lib/utils";
 
 function initials(value: string): string {
@@ -17,27 +19,33 @@ function initials(value: string): string {
 
 export function ProviderBadge({
   provider,
+  docs,
+  publisher = false,
   iconOnly = false,
   plain = false,
   size = "default",
   names,
+  href,
 }: {
   provider: string;
+  docs?: ProviderDoc;
+  publisher?: boolean;
   iconOnly?: boolean;
   plain?: boolean;
   size?: "default" | "lg" | "xl";
   names?: Record<string, string>;
+  href?: string;
 }) {
   const label = getProviderName(provider, names);
-  const logoUrl = providerFaviconUrl(provider);
+  const logoUrl = publisher ? publisherFaviconUrl(provider) : providerFaviconUrl(docs);
 
   if (iconOnly) {
     return (
       <Tooltip>
         <TooltipTrigger
           aria-label={label}
-          className="inline-flex size-5 shrink-0 cursor-help rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          render={<button type="button" />}
+          className="inline-flex size-5 shrink-0 rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          render={href ? <Link href={href} /> : <button type="button" />}
         >
           <Avatar aria-hidden="true" className="size-5">
             {logoUrl && <AvatarImage alt="" className="object-contain p-0.5" src={logoUrl} />}
@@ -53,7 +61,7 @@ export function ProviderBadge({
     return (
       <div
         className={cn(
-          "inline-flex items-center text-foreground",
+          "inline-flex min-w-0 items-center text-foreground",
           size === "xl"
             ? "gap-3 font-heading text-xl font-extrabold tracking-tight"
             : size === "lg"
@@ -71,7 +79,7 @@ export function ProviderBadge({
             {initials(label)}
           </AvatarFallback>
         </Avatar>
-        <span>{label}</span>
+        <span className="min-w-0 break-words">{label}</span>
       </div>
     );
   }

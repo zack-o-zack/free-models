@@ -5,7 +5,13 @@ import { useEffect, useId, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-export function ExpandableModelDescription({ description }: { description: string }) {
+export function ExpandableModelDescription({
+  description,
+  className,
+}: {
+  description: string;
+  className?: string;
+}) {
   const [expanded, setExpanded] = useState(false);
   const [canToggle, setCanToggle] = useState(false);
   const descriptionId = useId();
@@ -31,12 +37,9 @@ export function ExpandableModelDescription({ description }: { description: strin
   const ToggleIcon = expanded ? ChevronUp : ChevronDown;
 
   return (
-    <div className="mt-8 max-w-4xl">
+    <div className={cn("mt-6 max-w-4xl text-muted-foreground", className)}>
       <p
-        className={cn(
-          "text-base leading-7 text-background/70 sm:text-lg sm:leading-8",
-          !expanded && "line-clamp-2",
-        )}
+        className={cn("text-base leading-7 sm:text-lg sm:leading-8", !expanded && "line-clamp-3")}
         id={descriptionId}
         ref={descriptionRef}
       >
@@ -46,7 +49,7 @@ export function ExpandableModelDescription({ description }: { description: strin
         <button
           aria-controls={descriptionId}
           aria-expanded={expanded}
-          className="mt-1 inline-flex cursor-pointer items-center gap-1 text-xs font-medium text-background/60 transition-colors hover:text-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+          className="mt-1 inline-flex min-h-11 cursor-pointer items-center gap-1 text-xs font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
           onClick={() => setExpanded((current) => !current)}
           type="button"
         >

@@ -38,7 +38,7 @@ export function BenchmarkMetric({
   return (
     <Tooltip>
       <TooltipTrigger
-        aria-label={label}
+        aria-label={`${label}: ${value}`}
         render={<button className={triggerClassName} type="button" />}
       >
         <Icon className="size-3.5" />

@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono, Manrope } from "next/font/google";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { siteConfig } from "@/lib/config";
+import { homeTitle, isIndexable, siteUrl } from "@/lib/seo";
 
 import "./globals.css";
 
@@ -25,8 +27,13 @@ const codeFont = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Free Models — Build more, spend less",
-  description: "Compare genuinely free AI models across providers, capabilities, and context.",
+  metadataBase: new URL(siteUrl),
+  title: { default: homeTitle, template: "%s | Free Models" },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  robots: isIndexable
+    ? { index: true, follow: true, googleBot: { "max-image-preview": "large" } }
+    : { index: false, follow: false },
 };
 
 export default function RootLayout({
@@ -41,6 +48,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        <div id="site-top" aria-hidden="true" className="h-0 shrink-0" />
+        <a
+          href="#top"
+          className="fixed top-3 left-3 z-50 -translate-y-24 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground focus:translate-y-0"
+        >
+          Skip to content
+        </a>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

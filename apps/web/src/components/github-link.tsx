@@ -4,7 +4,17 @@ import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config";
 
-export function GitHubLink() {
+function formatCount(count: number): string {
+  if (count >= 1_000_000) return `${(count / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
+  if (count >= 1_000) return `${(count / 1_000).toFixed(1).replace(/\.0$/, "")}K`;
+  return count.toString();
+}
+
+interface GitHubLinkProps {
+  stars: number;
+}
+
+export function GitHubLink({ stars }: GitHubLinkProps) {
   return (
     <Button
       render={
@@ -12,16 +22,20 @@ export function GitHubLink() {
           href={siteConfig.links.github}
           target="_blank"
           rel="noreferrer"
-          aria-label="GitHub repository"
+          aria-label={stars > 0 ? `GitHub repository, ${stars} stars` : "GitHub repository"}
         />
       }
       nativeButton={false}
-      size="sm"
       variant="ghost"
-      className="h-8 shadow-none hover:text-primary"
+      className="size-12 gap-2 p-0 sm:w-auto sm:px-4"
     >
       <Icons.gitHub />
-      <span className="sr-only">GitHub repository</span>
+      <span className="hidden sm:inline">GitHub</span>
+      {stars > 0 && (
+        <span className="hidden border-l border-current/20 pl-2 text-xs tabular-nums text-muted-foreground sm:inline">
+          {formatCount(stars)}
+        </span>
+      )}
     </Button>
   );
 }
