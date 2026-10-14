@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { BrandImage } from "@/components/brand-image";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { ProviderDoc } from "@/lib/model-types";
@@ -48,7 +49,7 @@ export function ProviderBadge({
           render={href ? <Link href={href} /> : <button type="button" />}
         >
           <Avatar aria-hidden="true" className="size-5">
-            {logoUrl && <AvatarImage alt="" className="object-contain p-0.5" src={logoUrl} />}
+            {logoUrl && <BrandImage alt="" className="object-contain p-0.5" src={logoUrl} />}
             <AvatarFallback className="text-[8px]">{initials(label)}</AvatarFallback>
           </Avatar>
         </TooltipTrigger>
@@ -70,7 +71,7 @@ export function ProviderBadge({
         )}
       >
         <Avatar className={size === "xl" ? "size-8" : size === "lg" ? "size-5" : "size-4"}>
-          {logoUrl && <AvatarImage alt="" className="object-contain p-0.5" src={logoUrl} />}
+          {logoUrl && <BrandImage alt="" className="object-contain p-0.5" src={logoUrl} />}
           <AvatarFallback
             className={
               size === "xl" ? "text-xs font-bold" : size === "lg" ? "text-[8px]" : "text-[6px]"
@@ -97,7 +98,7 @@ export function ProviderBadge({
     >
       {logoUrl && (
         <Avatar className={size === "xl" ? "size-7" : size === "lg" ? "size-5" : "size-3.5"}>
-          <AvatarImage alt="" className="object-contain p-0.5" src={logoUrl} />
+          <BrandImage alt="" className="object-contain p-0.5" src={logoUrl} />
           <AvatarFallback
             className={size === "xl" ? "text-xs" : size === "lg" ? "text-[9px]" : "text-[7px]"}
           >

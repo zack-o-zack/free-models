@@ -103,8 +103,16 @@ export function getProviderName(providerSlug: string, liveNames?: Record<string,
 }
 
 export function publisherFaviconUrl(publisherSlug: string, size: 64 | 128 = 64): string | null {
-  const website = publisherWebsites[publisherSlug.toLowerCase()];
-  return faviconUrl(website, size);
+  const slug = publisherSlug.toLowerCase();
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null;
+  const website = publisherWebsites[slug];
+  if (website) return faviconUrl(website, size);
+
+  const assetName = slug.replace(
+    /(^|-)([a-z])/g,
+    (_, separator, letter) => `${separator}${letter.toUpperCase()}`,
+  );
+  return `https://openrouter.ai/images/icons/${assetName}.svg`;
 }
 
 export function providerFaviconUrl(docs?: ProviderDoc, size: 64 | 128 = 64): string | null {

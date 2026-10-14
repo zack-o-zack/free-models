@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 import type { MouseEvent } from "react";
 
 import { BenchmarkMetric, ModalityMetric } from "@/components/benchmark-metric";
+import { BrandImage } from "@/components/brand-image";
 import { DesignArenaPopover } from "@/components/design-arena-popover";
 import { ProviderBadge } from "@/components/provider-badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { entityHref, publisherSlug } from "@/lib/catalogue-entities";
@@ -56,7 +57,7 @@ export function ModelCard({ model }: { model: ModelSummary }) {
           {!model.isStealth && (
             <Avatar className="bg-card ring-1 ring-foreground/10" size="lg">
               {providerLogoUrl && (
-                <AvatarImage
+                <BrandImage
                   alt={`${model.author} logo`}
                   className="object-contain p-1.5"
                   src={providerLogoUrl}

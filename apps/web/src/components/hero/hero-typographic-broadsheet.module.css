@@ -1,0 +1,411 @@
+.hero {
+  overflow: clip;
+  background: var(--background);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 24px;
+  padding-block: 56px 64px;
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+}
+
+.title {
+  margin-top: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(110px, 12.5vw, 180px);
+  line-height: 0.78;
+  font-weight: 900;
+  letter-spacing: -0.085em;
+}
+
+.period {
+  color: var(--positive);
+}
+
+.subhead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.handwritten {
+  font-family: Georgia, serif;
+  font-size: clamp(36px, 3.5vw, 50px);
+  font-style: italic;
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+}
+
+.subhead svg {
+  width: 110px;
+  height: 40px;
+  stroke: var(--muted-foreground);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.description {
+  max-width: 365px;
+  margin-top: 25px;
+  color: var(--muted-foreground);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: 28px;
+}
+
+.browse {
+  height: 56px;
+  padding-inline: 25px;
+  border-radius: 999px;
+  gap: 28px;
+}
+
+.browse:hover {
+  background: var(--primary-hover);
+}
+
+.requestFlow {
+  width: 100%;
+  min-width: 0;
+  align-self: center;
+}
+.flowCaption {
+  font-family: var(--font-code), monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.flowCanvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  margin-block: 18px 30px;
+}
+
+.flowLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.flowTrack,
+.arrowHead {
+  stroke: color-mix(in srgb, var(--foreground) 25%, var(--background));
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.flowPacket {
+  stroke: var(--positive);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 0.025 0.975;
+  animation: request-travel 5s linear infinite;
+}
+
+@keyframes request-travel {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.requestFlow:hover .flowPacket,
+.requestFlow:focus-within .flowPacket {
+  animation-play-state: paused;
+}
+
+.destination {
+  position: absolute;
+  left: 17%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -38px);
+  text-align: center;
+  border-radius: 12px;
+}
+
+.destinationLogo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.freeTag {
+  position: absolute;
+  bottom: -2px;
+  right: -8px;
+  border: 3px solid var(--background);
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-family: var(--font-code), monospace;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.destinationName {
+  margin-top: 10px;
+  max-width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  background: var(--background);
+}
+
+.destination:hover .destinationName {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.destination:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 5px;
+}
+
+.requestOrigin {
+  position: absolute;
+  left: 80%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 88px;
+  height: 88px;
+  color: var(--foreground);
+  font-size: 12px;
+  font-weight: 600;
+}
+.flowCaption {
+  letter-spacing: 0;
+  line-height: 1.8;
+}
+.flowCaption span {
+  display: block;
+}
+
+@media (max-width: 1023px) {
+  .flowCanvas {
+    aspect-ratio: 0.8;
+  }
+  .layout {
+    gap: 16px;
+    padding-block: 48px;
+  }
+  .title {
+    font-size: 120px;
+  }
+  .destination {
+    transform: translate(-50%, -26px);
+  }
+  .destinationLogo {
+    width: 52px;
+    height: 52px;
+  }
+  .destinationName {
+    font-size: 10px;
+    margin-top: 6px;
+  }
+  .requestOrigin {
+    width: 80px;
+    height: 80px;
+    gap: 7px;
+    font-size: 10px;
+  }
+  .freeTag {
+    font-size: 9px;
+    padding: 2px 5px;
+    right: -10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding-block: 35px 40px;
+  }
+  .title {
+    margin-top: 0;
+    font-size: clamp(100px, 28vw, 155px);
+  }
+  .subhead {
+    margin-top: 25px;
+  }
+  .handwritten {
+    font-size: 38px;
+  }
+  .subhead svg {
+    width: 90px;
+  }
+  .description {
+    margin-top: 21px;
+    max-width: 350px;
+    font-size: 14px;
+  }
+  .actions {
+    gap: 10px 18px;
+    margin-top: 22px;
+  }
+  .browse {
+    height: 52px;
+    gap: 17px;
+    padding-inline: 22px;
+  }
+  .requestFlow {
+    max-width: 460px;
+    margin-inline: auto;
+  }
+  .flowCanvas {
+    margin-block: 20px 30px;
+  }
+  .flowPacket {
+    stroke-width: 7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flowPacket {
+    animation: none;
+    stroke-dashoffset: 0.5;
+  }
+}
+
+.logoHit {
+  animation: logo-impact 550ms ease-out;
+}
+
+@keyframes logo-impact {
+  0% {
+    transform: translateX(0);
+    background: var(--primary);
+  }
+  18% {
+    transform: translateX(-2px) rotate(-2deg);
+    background: var(--primary);
+  }
+  38% {
+    transform: translateX(2px) rotate(2deg);
+  }
+  60% {
+    transform: translateX(-1px) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(0);
+    background: var(--card);
+  }
+}
+
+.freeTag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  right: -27px;
+  white-space: nowrap;
+}
+
+.freeTag s {
+  opacity: 0.65;
+  font-size: 0.85em;
+  text-decoration-thickness: 1px;
+}
+
+.clientCycle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: client-cycle 4s ease-in-out infinite;
+}
+
+@keyframes client-cycle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  8%,
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.requestFlow:hover .clientCycle,
+.requestFlow:focus-within .clientCycle {
+  animation-play-state: paused;
+}
+
+@media (max-width: 1023px) {
+  .flowCanvas {
+    aspect-ratio: 0.72;
+  }
+  .destinationName {
+    margin-top: 12px;
+  }
+  .clientCycle {
+    gap: 6px;
+  }
+  .freeTag {
+    right: -24px;
+    gap: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoHit,
+  .clientCycle {
+    animation: none;
+  }
+}
+
+.requestOrigin::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 24px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--primary);
+}
+
+.clientCycle img[src="/brands/codex.png"] {
+  filter: brightness(0);
+}
+
+[class~="dark"] .clientCycle img[src="/brands/codex.png"] {
+  filter: none;
+}

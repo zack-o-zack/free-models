@@ -2,9 +2,10 @@
 
 import { ArrowDown, ArrowUp, ArrowUpDown, EyeOff, MoveHorizontal } from "lucide-react";
 import Link from "next/link";
+import { BrandImage } from "@/components/brand-image";
 import { DesignArenaPopover } from "@/components/design-arena-popover";
 import { ProviderBadge } from "@/components/provider-badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { entityHref } from "@/lib/catalogue-entities";
@@ -220,7 +221,7 @@ export function ModelTable({
                   >
                     <Avatar aria-hidden="true" className="hidden size-8 shrink-0 sm:flex">
                       {!model.isStealth && (
-                        <AvatarImage
+                        <BrandImage
                           alt=""
                           src={publisherFaviconUrl(model.id.split("/")[0]) ?? undefined}
                           className="object-contain p-1"
