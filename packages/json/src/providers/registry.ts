@@ -1,3 +1,4 @@
+import { AnyApiProvider } from "./anyapi.ts";
 import { BazaarLinkProvider } from "./bazaarlink.ts";
 import { CloudflareProvider } from "./cloudflare.ts";
 import { CohereProvider } from "./cohere.ts";
@@ -13,6 +14,7 @@ import { defineProviderRegistry } from "./provider.ts";
 import { RequestyProvider } from "./requesty.ts";
 import { RoutewayProvider } from "./routeway.ts";
 import { TokenRouterProvider } from "./tokenrouter.ts";
+import { ZaiProvider } from "./zai.ts";
 
 const openRouterProvider = new OpenRouterProvider();
 
@@ -31,6 +33,8 @@ export const providerRegistry = defineProviderRegistry(
   new BazaarLinkProvider(),
   new KiloProvider(),
   new LLM7Provider(),
+  new ZaiProvider(),
+  new AnyApiProvider(),
 );
 
 export const metadataProvider = openRouterProvider;

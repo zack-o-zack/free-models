@@ -1,0 +1,64 @@
+{
+  "provider": "z-ai",
+  "name": "Z.ai",
+  "doc": {
+    "overview": "https://docs.z.ai/guides/overview/quick-start",
+    "pricing": "https://docs.z.ai/guides/overview/pricing"
+  },
+  "offers": [
+    {
+      "model_id": "glm-4.5-flash",
+      "name": "GLM-4.5-Flash",
+      "connection": {
+        "base_url": "https://api.z.ai/api/paas/v4",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "ZAI_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "terms": [
+          "Rate limits vary by account; check the Z.ai console"
+        ]
+      }
+    },
+    {
+      "model_id": "glm-4.6v-flash",
+      "name": "GLM-4.6V-Flash",
+      "connection": {
+        "base_url": "https://api.z.ai/api/paas/v4",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "ZAI_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "terms": [
+          "Rate limits vary by account; check the Z.ai console"
+        ]
+      }
+    },
+    {
+      "model_id": "glm-4.7-flash",
+      "name": "GLM-4.7-Flash",
+      "connection": {
+        "base_url": "https://api.z.ai/api/paas/v4",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "ZAI_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "terms": [
+          "Rate limits vary by account; check the Z.ai console"
+        ]
+      }
+    }
+  ]
+}
