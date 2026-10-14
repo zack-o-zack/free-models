@@ -45,24 +45,6 @@
       }
     },
     {
-      "model_id": "inclusionai/ling-3.1-flash",
-      "name": "inclusionAI: Ling 3.1 Flash",
-      "connection": {
-        "auth": {
-          "env": [
-            "KILO_API_KEY"
-          ]
-        },
-        "base_url": "https://api.kilo.ai/api/gateway",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / hour"
-        ]
-      }
-    },
-    {
       "model_id": "liquid/lfm-2.5-2.6b:free",
       "name": "LiquidAI: LFM2.5-2.6B (free)",
       "connection": {
