@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import type { ModelSummary } from "@/lib/model-types";
 
 export const MODEL_CATALOGUE_URL = "https://static.zackozack.com/free-models.json";
@@ -183,21 +185,12 @@ async function getGitHubStars(): Promise<number> {
 }
 
 export async function getModels(): Promise<{ models: ModelSummary[]; githubStars: number }> {
-  const init =
-    process.env.NODE_ENV === "development"
-      ? { cache: "no-store" as const }
-      : { cache: "force-cache" as const };
-
-  const [catalogueResponse, stars] = await Promise.all([
-    fetch(MODEL_CATALOGUE_URL, init),
+  const [catalogueText, stars] = await Promise.all([
+    readFile(join(process.cwd(), ".generated/free-models.json"), "utf8"),
     getGitHubStars(),
   ]);
 
-  if (!catalogueResponse.ok) {
-    throw new Error(`Model catalogue request failed with HTTP status ${catalogueResponse.status}`);
-  }
-
-  const catalogue = (await catalogueResponse.json()) as RawCatalogue;
+  const catalogue = JSON.parse(catalogueText) as RawCatalogue;
 
   if (!Array.isArray(catalogue.models)) {
     throw new Error("Model catalogue response is malformed: expected a models array");

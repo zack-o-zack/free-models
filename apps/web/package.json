@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "catalogue:render": "bun ../../packages/json/src/cli.ts render --workspace ../../packages/json --output .generated/free-models.json",
+    "dev": "bun run catalogue:render && next dev",
+    "build": "bun run catalogue:render && next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",

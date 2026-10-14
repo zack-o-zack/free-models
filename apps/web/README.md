@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Catalogue data and builds
+
+Run `bun run build` from `apps/web` (or `bun run --filter web build` from the repository root).
+The build first renders `.generated/free-models.json` from the checked-out `packages/json`
+catalogue, then generates the static pages from that file. Rendering uses the committed
+snapshots and metadata; it does not fetch upstream model data. A render failure stops the build.
+
+Use `bun run build` as the deployment build command, and make the repository files outside
+`apps/web` available to the build. SSG no longer depends on the R2 publication workflow or
+the CDN cache becoming fresh. The public JSON download URL still points to the CDN.
+
+`bun run dev` also renders the catalogue on startup. After editing catalogue inputs during
+development, run `bun run catalogue:render` again or restart the dev server.
+
 ## Getting Started
 
 First, run the development server:
