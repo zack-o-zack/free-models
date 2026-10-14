@@ -32,6 +32,7 @@ export const canonicalModelIdSchema = z
 export const limitsSchema = z
   .object({
     terms: z.array(z.string().trim().min(1)).min(1),
+    funding: z.enum(["no_credits", "monthly_credits"]).optional(),
   })
   .strict();
 

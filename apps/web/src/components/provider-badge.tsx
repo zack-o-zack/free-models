@@ -27,6 +27,7 @@ export function ProviderBadge({
   size = "default",
   names,
   href,
+  fundingLabel,
 }: {
   provider: string;
   docs?: ProviderDoc;
@@ -36,6 +37,7 @@ export function ProviderBadge({
   size?: "default" | "lg" | "xl";
   names?: Record<string, string>;
   href?: string;
+  fundingLabel?: string;
 }) {
   const label = getProviderName(provider, names);
   const logoUrl = publisher ? publisherFaviconUrl(provider) : providerFaviconUrl(docs);
@@ -44,7 +46,7 @@ export function ProviderBadge({
     return (
       <Tooltip>
         <TooltipTrigger
-          aria-label={label}
+          aria-label={fundingLabel ? `${label}: ${fundingLabel}` : label}
           className="inline-flex size-6 shrink-0 rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           render={href ? <Link href={href} /> : <button type="button" />}
         >
@@ -53,7 +55,10 @@ export function ProviderBadge({
             <AvatarFallback className="text-[8px]">{initials(label)}</AvatarFallback>
           </Avatar>
         </TooltipTrigger>
-        <TooltipContent>{label}</TooltipContent>
+        <TooltipContent>
+          {label}
+          {fundingLabel && ` · ${fundingLabel}`}
+        </TooltipContent>
       </Tooltip>
     );
   }
@@ -80,7 +85,12 @@ export function ProviderBadge({
             {initials(label)}
           </AvatarFallback>
         </Avatar>
-        <span className="min-w-0 break-words">{label}</span>
+        <span className="min-w-0 break-words">
+          {label}
+          {fundingLabel && (
+            <span className="block text-xs font-normal text-muted-foreground">{fundingLabel}</span>
+          )}
+        </span>
       </div>
     );
   }

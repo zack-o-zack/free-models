@@ -18,6 +18,7 @@ export interface ModelConnection {
   modelId: string;
   connection?: Record<string, unknown>;
   limits: string[];
+  funding?: "no_credits" | "monthly_credits";
 }
 
 export interface ModelSummary {

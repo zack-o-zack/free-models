@@ -2,8 +2,11 @@ import { z } from "zod";
 import type { DiscoveredOffer, ProviderDoc } from "../catalogue/schema.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
-import { type FetchSource, fetchJson } from "./source.ts";
+import { type FetchSource, fetchJson, fetchText } from "./source.ts";
 
+import { parseVercelCatalogue } from "./vercel-catalogue.ts";
+
+export const VERCEL_CATALOGUE_URL = "https://vercel.com/ai-gateway/models?freeTier=true";
 export const VERCEL_API_BASE_URL = "https://ai-gateway.vercel.sh/v1";
 export const VERCEL_MODELS_URL = `${VERCEL_API_BASE_URL}/models`;
 export const VERCEL_PRICING_URL = "https://vercel.com/docs/ai-gateway/pricing";
@@ -36,36 +39,57 @@ export class VercelProvider implements ModelProvider {
   }
 
   async discover(_modelsDev: ModelsDevRegistry): Promise<readonly DiscoveredOffer[]> {
-    const payload = await fetchJson(this.#fetch, VERCEL_MODELS_URL, "Vercel AI Gateway models");
+    const [payload, html] = await Promise.all([
+      fetchJson(this.#fetch, VERCEL_MODELS_URL, "Vercel AI Gateway models"),
+      fetchText(this.#fetch, VERCEL_CATALOGUE_URL, "Vercel model eligibility"),
+    ]);
     const models = modelsSchema.parse(payload);
     const seen = new Set<string>();
-    return models.data
-      .filter((model) => {
-        if (seen.has(model.id)) throw new Error(`Vercel models contains duplicate ID: ${model.id}`);
-        seen.add(model.id);
-        // Evaluation, image, and embedding endpoints are not OpenAI chat completions.
-        if (model.type !== "language" || !model.pricing) return false;
-        const { input, output, ...extra } = model.pricing;
-        return (
-          isZeroPrice(input) &&
-          isZeroPrice(output) &&
-          Object.entries(extra).every(([key, value]) =>
-            key === "varies_by_provider" ? value === false : isZeroPrice(value),
-          )
-        );
-      })
-      .map((model) => ({
-        model_id: model.id,
-        name: model.name,
-        connection: {
-          base_url: VERCEL_API_BASE_URL,
-          protocol: "openai",
-          auth: { env: ["AI_GATEWAY_API_KEY"] },
-        },
-        limits: {
-          terms: ["Rate limits vary by model and account; check the Vercel AI Gateway dashboard"],
-        },
-      }));
+    const zeroPriceIds = new Set<string>();
+    for (const model of models.data) {
+      if (seen.has(model.id)) throw new Error(`Vercel models contains duplicate ID: ${model.id}`);
+      seen.add(model.id);
+      if (!model.pricing) continue;
+      const { input, output, ...extra } = model.pricing;
+      if (
+        isZeroPrice(input) &&
+        isZeroPrice(output) &&
+        Object.entries(extra).every(([key, value]) =>
+          key === "varies_by_provider" ? value === false : isZeroPrice(value),
+        )
+      )
+        zeroPriceIds.add(model.id);
+    }
+    const catalogue = await parseVercelCatalogue(html);
+    return catalogue
+      .filter((model) => model.availableToFreeTier || zeroPriceIds.has(model.copyString))
+      .map((model) => {
+        const noCredits = zeroPriceIds.has(model.copyString);
+        return {
+          model_id: model.copyString,
+          name: model.displayName,
+          connection: {
+            base_url: model.type === "chat" ? VERCEL_API_BASE_URL : "https://ai-gateway.vercel.sh",
+            protocol: model.type === "chat" ? "openai" : "vercel-ai-gateway",
+            auth: { env: ["AI_GATEWAY_API_KEY"] },
+            ...(model.type === "chat" ? {} : { model_type: model.type }),
+          },
+          limits: {
+            funding: noCredits ? ("no_credits" as const) : ("monthly_credits" as const),
+            terms: noCredits
+              ? [
+                  "Free — no credits used",
+                  "Rate limits vary by model and account; check the Vercel AI Gateway dashboard",
+                ]
+              : [
+                  "Free with $5 monthly credits",
+                  "$5 / month shared across all eligible models in the Vercel team",
+                  "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+                  "Free-tier rate limits vary by model; BYOK is not included",
+                ],
+          },
+        };
+      });
   }
 }
 

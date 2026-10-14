@@ -10,6 +10,7 @@ import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "@/compone
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { entityHref } from "@/lib/catalogue-entities";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
+import { getProviderFundingLabel } from "@/lib/model-funding";
 import { modelHref } from "@/lib/model-path";
 import type { SortDirection, SortOption } from "@/lib/model-sort";
 import type { ModelSummary } from "@/lib/model-types";
@@ -37,6 +38,7 @@ function Providers({ model }: { model: ModelSummary }) {
           plain
           docs={model.providerDocs[model.providers[0]]}
           provider={model.providers[0]}
+          fundingLabel={getProviderFundingLabel(model.connections, model.providers[0])}
           names={model.providerNames}
         />
       </Link>
@@ -62,6 +64,7 @@ function Providers({ model }: { model: ModelSummary }) {
                       size="lg"
                       docs={model.providerDocs[provider]}
                       provider={provider}
+                      fundingLabel={getProviderFundingLabel(model.connections, provider)}
                       names={model.providerNames}
                     />
                   </Link>
