@@ -59,7 +59,7 @@ export function ModelCard({ model }: { model: ModelSummary }) {
               {providerLogoUrl && (
                 <BrandImage
                   alt={`${model.author} logo`}
-                  className="object-contain p-1.5"
+                  className="object-contain p-1"
                   src={providerLogoUrl}
                 />
               )}

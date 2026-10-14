@@ -159,9 +159,6 @@ export function HeroTypographicBroadsheet({ models }: HeroProps) {
             </h1>
             <div className={styles.subhead}>
               <span className={styles.handwritten}>Spend less.</span>
-              <svg viewBox="0 0 150 45" fill="none" aria-hidden="true">
-                <path d="M3 18C40 5 88 6 132 23M114 7l22 18-28 12" />
-              </svg>
             </div>
             <p className={styles.description}>Free AI models for whatever you’re building.</p>
             <div className={styles.actions}>

@@ -45,11 +45,11 @@ export function ProviderBadge({
       <Tooltip>
         <TooltipTrigger
           aria-label={label}
-          className="inline-flex size-5 shrink-0 rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          className="inline-flex size-6 shrink-0 rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           render={href ? <Link href={href} /> : <button type="button" />}
         >
-          <Avatar aria-hidden="true" className="size-5">
-            {logoUrl && <BrandImage alt="" className="object-contain p-0.5" src={logoUrl} />}
+          <Avatar aria-hidden="true" className="size-6">
+            {logoUrl && <BrandImage alt="" className="object-contain" src={logoUrl} />}
             <AvatarFallback className="text-[8px]">{initials(label)}</AvatarFallback>
           </Avatar>
         </TooltipTrigger>
@@ -71,7 +71,7 @@ export function ProviderBadge({
         )}
       >
         <Avatar className={size === "xl" ? "size-8" : size === "lg" ? "size-5" : "size-4"}>
-          {logoUrl && <BrandImage alt="" className="object-contain p-0.5" src={logoUrl} />}
+          {logoUrl && <BrandImage alt="" className="object-contain" src={logoUrl} />}
           <AvatarFallback
             className={
               size === "xl" ? "text-xs font-bold" : size === "lg" ? "text-[8px]" : "text-[6px]"
@@ -98,7 +98,7 @@ export function ProviderBadge({
     >
       {logoUrl && (
         <Avatar className={size === "xl" ? "size-7" : size === "lg" ? "size-5" : "size-3.5"}>
-          <BrandImage alt="" className="object-contain p-0.5" src={logoUrl} />
+          <BrandImage alt="" className="object-contain" src={logoUrl} />
           <AvatarFallback
             className={size === "xl" ? "text-xs" : size === "lg" ? "text-[9px]" : "text-[7px]"}
           >

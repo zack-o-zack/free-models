@@ -58,8 +58,7 @@
 }
 
 :root {
-  --logo-surface: #ffffff;
-  --logo-outline: #0e0f0c;
+  --logo-surface: #e8ebe6;
   --background: #e8ebe6;
   --foreground: #0e0f0c;
   --card: #ffffff;
@@ -500,5 +499,4 @@
 
 .brand-image {
   position: relative;
-  filter: drop-shadow(0 0 0.5px var(--logo-outline));
 }
