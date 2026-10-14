@@ -136,7 +136,7 @@ function RequestFlow({ models }: HeroProps) {
             aria-hidden="true"
           >
             <Avatar key={client.name} className="size-12 rounded-none bg-transparent sm:size-14">
-              <AvatarImage src={client.icon} alt="" className="object-contain" />
+              <AvatarImage src={client.icon} alt="" className="rounded-none object-contain" />
             </Avatar>
           </div>
         </div>
