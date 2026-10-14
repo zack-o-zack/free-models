@@ -1,0 +1,10 @@
+{
+  "provider": "anyapi",
+  "mappings": {
+    "google/gemma-4-26b-a4b-it:free": "google/gemma-4-26b-a4b-it",
+    "inclusionai/ling-3.0-flash-fin:free": "inclusionai/ling-3.0-flash-fin",
+    "inclusionai/ling-3.0-flash-sante:free": "inclusionai/ling-3.0-flash-sante",
+    "qwen/qwen-2.5-coder-32b-instruct": "qwen/qwen-2.5-coder-32b-instruct",
+    "qwen/qwen3.8-27b:free": "qwen/qwen3.8-27b"
+  }
+}
