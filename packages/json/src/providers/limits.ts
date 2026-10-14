@@ -63,6 +63,15 @@ export function routewayPublishedLimits(): OfferLimits {
   return termsLimits(formatLimitTerm(20, "req", "min"), formatLimitTerm(200, "req", "day"));
 }
 
+export function llm7PublishedLimits(): OfferLimits {
+  return termsLimits(
+    formatLimitTerm(1, "req", "sec"),
+    formatLimitTerm(60, "req", "min"),
+    formatLimitTerm(250, "req", "hour"),
+    formatLimitTerm(100_000, "tok", "day"),
+  );
+}
+
 export function termsLimits(...terms: string[]): OfferLimits {
   return { terms };
 }

@@ -64,6 +64,7 @@ export const providerNames: Record<string, string> = {
   kilo: "Kilo",
   leonardo: "Leonardo",
   liquid: "Liquid",
+  llm7: "LLM7",
   meta: "Meta",
   "meta-llama": "Meta Llama",
   microsoft: "Microsoft",
