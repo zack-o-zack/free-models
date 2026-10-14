@@ -129,11 +129,6 @@
   }
 }
 
-.requestFlow:hover .flowPacket,
-.requestFlow:focus-within .flowPacket {
-  animation-play-state: paused;
-}
-
 .destination {
   position: absolute;
   left: 17%;
@@ -355,11 +350,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.requestFlow:hover .clientCycle,
-.requestFlow:focus-within .clientCycle {
-  animation-play-state: paused;
 }
 
 @media (max-width: 1023px) {
