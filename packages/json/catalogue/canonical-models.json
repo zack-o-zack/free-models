@@ -969,6 +969,14 @@
       "name": "Xiaomi: MiMo-V2.6-Flash"
     },
     {
+      "id": "z-ai/glm-4.5-flash",
+      "name": "Z.ai: GLM-4.5-Flash"
+    },
+    {
+      "id": "z-ai/glm-4.6v-flash",
+      "name": "Z.ai: GLM-4.6V-Flash"
+    },
+    {
       "id": "z-ai/glm-4.7-flash",
       "name": "Z.ai: GLM 4.7 Flash"
     },

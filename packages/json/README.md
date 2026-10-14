@@ -13,6 +13,14 @@ bun run catalogue:discover
 
 Some providers need an API key. The command stops and names the missing key when the key is absent. Set the key and run the command again. Each discovered offer records its trial limits.
 
+### Z.ai
+
+Z.ai discovery reads the public [pricing tables](https://docs.z.ai/guides/overview/pricing)
+and includes models only when input, output, and cache prices are all free. Discovery does not
+need credentials; inference uses `ZAI_API_KEY` with `https://api.z.ai/api/paas/v4`.
+The pricing page does not publish numeric rate limits, so offers direct users to their account
+console instead of assuming a quota.
+
 ### Offer limits
 
 Schema version 4 requires every offer to include a `limits` object:

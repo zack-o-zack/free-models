@@ -1,0 +1,8 @@
+{
+  "provider": "z-ai",
+  "mappings": {
+    "glm-4.5-flash": "z-ai/glm-4.5-flash",
+    "glm-4.6v-flash": "z-ai/glm-4.6v-flash",
+    "glm-4.7-flash": "z-ai/glm-4.7-flash"
+  }
+}

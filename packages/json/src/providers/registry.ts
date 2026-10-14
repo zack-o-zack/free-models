@@ -13,6 +13,7 @@ import { defineProviderRegistry } from "./provider.ts";
 import { RequestyProvider } from "./requesty.ts";
 import { RoutewayProvider } from "./routeway.ts";
 import { TokenRouterProvider } from "./tokenrouter.ts";
+import { ZaiProvider } from "./zai.ts";
 
 const openRouterProvider = new OpenRouterProvider();
 
@@ -31,6 +32,7 @@ export const providerRegistry = defineProviderRegistry(
   new BazaarLinkProvider(),
   new KiloProvider(),
   new LLM7Provider(),
+  new ZaiProvider(),
 );
 
 export const metadataProvider = openRouterProvider;
