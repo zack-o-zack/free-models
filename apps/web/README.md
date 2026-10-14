@@ -11,10 +11,6 @@ Use `bun run build` as the deployment build command, and make the repository fil
 `apps/web` available to the build. SSG no longer depends on the R2 publication workflow or
 the CDN cache becoming fresh. The public JSON download URL still points to the CDN.
 
-The web package declares `json` as a workspace dependency so Vercel rebuilds the site when
-catalogue snapshots, mappings, or metadata change. Keep this dependency even though the
-renderer runs through a relative CLI path; Vercel cannot infer that dependency from the script.
-
 `bun run dev` also renders the catalogue on startup. After editing catalogue inputs during
 development, run `bun run catalogue:render` again or restart the dev server.
 
