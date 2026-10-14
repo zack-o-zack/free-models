@@ -4,6 +4,7 @@ import { CohereProvider } from "./cohere.ts";
 import { GeminiProvider } from "./gemini.ts";
 import { GroqProvider } from "./groq.ts";
 import { KiloProvider } from "./kilo.ts";
+import { LLM7Provider } from "./llm7.ts";
 import { MistralProvider } from "./mistral.ts";
 import { NvidiaProvider } from "./nvidia.ts";
 import { OpenCodeProvider } from "./opencode.ts";
@@ -29,6 +30,7 @@ export const providerRegistry = defineProviderRegistry(
   new RoutewayProvider(),
   new BazaarLinkProvider(),
   new KiloProvider(),
+  new LLM7Provider(),
 );
 
 export const metadataProvider = openRouterProvider;

@@ -41,11 +41,19 @@ import {
   cohereOfferLimits,
   geminiUnconfirmedLimits,
   kiloPublishedLimits,
+  llm7PublishedLimits,
   mistralUnconfirmedLimits,
   openCodePublishedLimits,
   routewayPublishedLimits,
   tokenRouterUnconfirmedLimits,
 } from "../src/providers/limits.ts";
+import {
+  isFreeLLM7Model,
+  LLM7_API_BASE_URL,
+  LLM7_MODELS_URL,
+  LLM7Provider,
+  parseLLM7Models,
+} from "../src/providers/llm7.ts";
 import {
   MISTRAL_API_BASE_URL,
   MISTRAL_MODELS_URL,
@@ -97,7 +105,7 @@ describe("compact provider limit terms", () => {
     });
   });
 
-  test("returns hardcoded Mistral, TokenRouter, OpenCode, Kilo, and Routeway terms", () => {
+  test("returns hardcoded Mistral, TokenRouter, OpenCode, Kilo, Routeway, and LLM7 terms", () => {
     expect(mistralUnconfirmedLimits()).toEqual({
       terms: ["50 req / min", "50k tok / min"],
     });
@@ -110,6 +118,9 @@ describe("compact provider limit terms", () => {
     });
     expect(routewayPublishedLimits()).toEqual({
       terms: ["20 req / min", "200 req / day"],
+    });
+    expect(llm7PublishedLimits()).toEqual({
+      terms: ["1 req / sec", "60 req / min", "250 req / hour", "100k tok / day"],
     });
   });
 
@@ -859,6 +870,107 @@ describe("Kilo discovery", () => {
   });
 });
 
+describe("LLM7 discovery", () => {
+  test("keeps only turbo-tier chat models and skips pro, video, and audio types", async () => {
+    const modelsDev = new Map([
+      [
+        "llm7",
+        {
+          id: "llm7",
+          env: ["LLM7_API_KEY"],
+        },
+      ],
+    ]);
+    const expectedLimits = {
+      terms: ["1 req / sec", "60 req / min", "250 req / hour", "100k tok / day"],
+    };
+    const provider = new LLM7Provider({
+      fetch: async (url, init) => {
+        expect(url).toBe(LLM7_MODELS_URL);
+        expect(new Headers(init?.headers).get("accept")).toBe("application/json");
+        return Response.json({
+          object: "list",
+          data: [
+            llm7Model("DeepSeek-V4-Flash-0731", "chat", "turbo", "DeepSeek V4 Flash"),
+            llm7Model("GLM-5.3-Flash", "chat", "turbo"),
+            llm7Model("gpt-5.4", "chat", "pro", "GPT 5.4"),
+            llm7Model("seedance-2.0-fast", "video", "pro"),
+            llm7Model("whisper-large-v3", "audio_to_text", "pro"),
+            llm7Model("gpt-image-2", "image", "pro"),
+          ],
+        });
+      },
+    });
+
+    expect(await provider.discover(modelsDev)).toEqual([
+      {
+        model_id: "DeepSeek-V4-Flash-0731",
+        name: "DeepSeek V4 Flash",
+        connection: {
+          auth: { env: ["LLM7_API_KEY"] },
+          base_url: LLM7_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      },
+      {
+        model_id: "GLM-5.3-Flash",
+        name: desluggifyModelId("GLM-5.3-Flash"),
+        connection: {
+          auth: { env: ["LLM7_API_KEY"] },
+          base_url: LLM7_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: expectedLimits,
+      },
+    ]);
+  });
+
+  test("falls back to LLM7_API_KEY when models.dev exposes no LLM7 env", async () => {
+    const provider = new LLM7Provider({
+      fetch: async () =>
+        Response.json({
+          object: "list",
+          data: [llm7Model("vendor/model", "chat", "turbo")],
+        }),
+    });
+
+    expect(await provider.discover(new Map())).toEqual([
+      {
+        model_id: "vendor/model",
+        name: desluggifyModelId("vendor/model"),
+        connection: {
+          auth: { env: ["LLM7_API_KEY"] },
+          base_url: LLM7_API_BASE_URL,
+          protocol: "openai",
+        },
+        limits: llm7PublishedLimits(),
+      },
+    ]);
+  });
+
+  test("rejects duplicate, malformed, and free-less catalogues", () => {
+    expect(() =>
+      parseLLM7Models({
+        object: "list",
+        data: [llm7Model("duplicate", "chat", "turbo"), llm7Model("duplicate", "chat", "turbo")],
+      }),
+    ).toThrow("duplicate model ID");
+    expect(() => parseLLM7Models({ object: "list", data: [{}] })).toThrow("no valid id");
+    expect(() => parseLLM7Models({ object: "list", data: [] })).toThrow("no free models");
+    expect(() =>
+      parseLLM7Models({
+        object: "list",
+        data: [llm7Model("gpt-5.4", "chat", "pro")],
+      }),
+    ).toThrow("no free models");
+    expect(() => parseLLM7Models({ object: "list" })).toThrow("data array");
+    expect(isFreeLLM7Model({ id: "gpt-5.4", model_type: "chat", tier: "pro" })).toBe(false);
+    expect(isFreeLLM7Model({ id: "seedance", model_type: "video", tier: "turbo" })).toBe(false);
+    expect(isFreeLLM7Model({ id: "model", model_type: "chat", tier: "turbo" })).toBe(true);
+  });
+});
+
 describe("Groq discovery", () => {
   test("returns no offers when only Developer-plan limits are published", async () => {
     const modelsDev = new Map([["groq", { id: "groq", env: ["GROQ_API_KEY"] }]]);
@@ -1421,5 +1533,20 @@ function routewayModel(
       input: { unit: "1M tokens", price_per_million_t: input },
       output: { unit: "1M tokens", price_per_million_t: output },
     },
+  };
+}
+
+function llm7Model(
+  id: string,
+  modelType: string,
+  tier: string,
+  name?: string,
+): Record<string, unknown> {
+  return {
+    id,
+    object: "model",
+    model_type: modelType,
+    tier,
+    ...(name !== undefined ? { name } : {}),
   };
 }
