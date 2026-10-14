@@ -36,3 +36,13 @@ test("SSG uses the local catalogue even while the CDN still serves the previous 
     await rm(workspace, { recursive: true, force: true });
   }
 });
+
+test("catalogue changes affect the web deployment's workspace dependency graph", async () => {
+  const web = await Bun.file(new URL("../package.json", import.meta.url)).json();
+  const catalogue = await Bun.file(
+    new URL("../../../packages/json/package.json", import.meta.url),
+  ).json();
+
+  // Vercel's affected-project detection cannot infer the CLI's relative file reads.
+  expect(web.dependencies[catalogue.name]).toBe("workspace:*");
+});
