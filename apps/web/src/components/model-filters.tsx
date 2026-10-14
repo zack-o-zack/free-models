@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
+import { formatContext } from "@/lib/model-format";
 import type { ProviderDoc } from "@/lib/model-types";
 
 export interface ProviderFilterOption {
@@ -26,10 +27,7 @@ export interface PublisherFilterOption {
 }
 
 export function formatStepLabel(value: number): string {
-  if (value === 0) return "0";
-  if (value >= 1_000_000) return `${value / 1_000_000}M`;
-  if (value >= 1_000) return `${value / 1_000}K`;
-  return String(value);
+  return value === 0 ? "0" : formatContext(value);
 }
 
 interface ModelFiltersProps {

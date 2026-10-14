@@ -1,7 +1,7 @@
 export function formatContext(value: number): string {
   if (value <= 0) return "Not listed";
   if (value >= 1_000_000) {
-    return `${new Intl.NumberFormat("en", { maximumFractionDigits: 2 }).format(value / 1_000_000)}M`;
+    return `${new Intl.NumberFormat("en", { maximumFractionDigits: 1 }).format(value / 1_000_000)}M`;
   }
   if (value >= 1_000) {
     return `${new Intl.NumberFormat("en", { maximumFractionDigits: 0 }).format(value / 1_000)}K`;

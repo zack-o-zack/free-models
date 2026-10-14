@@ -94,7 +94,6 @@ export function ModelExplorer({
     outputs,
     contextSteps,
   } = useMemo(() => getModelFilterOptions(models), [models]);
-  const outputTabs = useMemo(() => [{ value: "all", label: "All" }, ...outputs], [outputs]);
   const [selectedContextRange, setContextRange] = useState<[number, number] | null>(null);
   const contextRange = useMemo<[number, number]>(
     () =>
@@ -155,14 +154,25 @@ export function ModelExplorer({
 
   const counts = useMemo(() => {
     return Object.fromEntries(
-      outputTabs.map((tab) => [
+      [{ value: "all" }, ...outputs].map((tab) => [
         tab.value,
         tab.value === "all"
           ? models.length
           : models.filter((model) => model.outputModalities.includes(tab.value)).length,
       ]),
     ) as Record<string, number>;
-  }, [models, outputTabs]);
+  }, [models, outputs]);
+
+  const outputTabs = useMemo(
+    () => [
+      { value: "all", label: "All" },
+      ...[...outputs].sort(
+        (left, right) =>
+          counts[right.value] - counts[left.value] || left.label.localeCompare(right.label),
+      ),
+    ],
+    [outputs, counts],
+  );
 
   const visibleModels = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();

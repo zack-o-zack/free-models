@@ -10,12 +10,12 @@ import { Button } from "@/components/ui/button";
 import {
   type CatalogueEntity,
   type EntityKind,
-  entityDescription,
   entityHref,
   getCatalogueEntities,
   getEntityDocs,
 } from "@/lib/catalogue-entities";
-import { formatContext } from "@/lib/model-format";
+import { getEntityHighlight } from "@/lib/entity-highlight";
+import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import type { ModelSummary } from "@/lib/model-types";
 import { entityJsonLd } from "@/lib/seo";
 
@@ -71,7 +71,7 @@ export function CatalogueEntityPage({
   const label = isProvider ? "Provider" : "Publisher";
   const relatedKind = isProvider ? "publishers" : "providers";
   const related = getCatalogueEntities(entity.models, relatedKind);
-  const context = Math.max(...entity.models.map((model) => model.contextLength));
+  const highlight = getEntityHighlight(entity.models);
   const docs = isProvider ? getEntityDocs(entity) : [];
   const explorerModels = isProvider
     ? entity.models.map((model) => ({
@@ -113,23 +113,13 @@ export function CatalogueEntityPage({
                 {isProvider ? <Server className="size-4" /> : <BookOpen className="size-4" />}{" "}
                 {label}
               </p>
-              <ProviderBadge
-                plain
-                provider={entity.slug}
-                publisher={kind === "publishers"}
-                docs={
-                  entity.models.find((model) => model.providerDocs[entity.slug])?.providerDocs[
-                    entity.slug
-                  ]
-                }
-                names={{ [entity.slug]: entity.name }}
-                size="lg"
-              />
-              <h1 className="mt-4 font-heading text-5xl leading-[0.98] font-black tracking-[-0.055em] [overflow-wrap:anywhere] sm:text-7xl xl:text-8xl">
+              <h1 className="font-heading text-5xl leading-[0.98] font-black tracking-[-0.055em] [overflow-wrap:anywhere] sm:text-7xl xl:text-8xl">
                 {entity.name}
               </h1>
               <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
-                {entityDescription(entity, kind)}
+                {isProvider
+                  ? "Compare free AI models, capabilities, benchmarks, and model-specific API limits."
+                  : "Explore free AI models, compare capabilities and benchmarks, and find API providers offering them."}
               </p>
               <Button
                 className="mt-8 h-12 gap-4 px-6"
@@ -157,12 +147,18 @@ export function CatalogueEntityPage({
                   </div>
                 ))}
               </dl>
-              <div className="mt-8 flex flex-wrap items-baseline justify-between gap-2 rounded-2xl bg-background p-4">
-                <span className="text-sm text-muted-foreground">Largest context window</span>
-                <span className="text-lg font-semibold">
-                  {context > 0 ? `${formatContext(context)} tokens` : "Not listed"}
-                </span>
-              </div>
+              {highlight && (
+                <div className="mt-8 flex flex-wrap items-baseline justify-between gap-2 rounded-2xl bg-background p-4">
+                  <span className="text-sm text-muted-foreground">{highlight.label}</span>
+                  <span className="text-lg font-semibold">
+                    {highlight.unit === "tokens"
+                      ? `${formatContext(highlight.value)} tokens`
+                      : highlight.unit === "models"
+                        ? `${highlight.value} ${highlight.value === 1 ? "model" : "models"}`
+                        : formatBenchmarkScore(highlight.value)}
+                  </span>
+                </div>
+              )}
               <p className="mt-4 text-xs leading-5 text-muted-foreground">
                 Based on models in this catalogue. Availability and free limits vary by model.
               </p>

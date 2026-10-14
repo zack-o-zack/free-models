@@ -10,6 +10,7 @@
 }
 
 @theme inline {
+  --color-logo-surface: var(--logo-surface);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
@@ -57,6 +58,7 @@
 }
 
 :root {
+  --logo-surface: #e8ebe6;
   --background: #e8ebe6;
   --foreground: #0e0f0c;
   --card: #ffffff;
@@ -493,4 +495,8 @@
     animation-iteration-count: 1;
     transition-duration: 0.01ms;
   }
+}
+
+.brand-image {
+  position: relative;
 }

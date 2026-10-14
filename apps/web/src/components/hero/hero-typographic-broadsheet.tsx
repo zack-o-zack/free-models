@@ -1,77 +1,179 @@
 "use client";
 
 import { ArrowDown } from "lucide-react";
-import { useState } from "react";
-import { HeroOrbit } from "@/components/hero/hero-orbit";
+import { type CSSProperties, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { formatContext } from "@/lib/model-format";
+import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
+import { publisherFaviconUrl } from "@/lib/provider-logos";
+import styles from "./hero-typographic-broadsheet.module.css";
 
 export interface HeroProps {
   models: ModelSummary[];
 }
 
-export function HeroTypographicBroadsheet({ models }: HeroProps) {
-  const [focused, setFocused] = useState(false);
-  const providers = new Set(models.flatMap((model) => model.providers)).size;
-  const reasoning = models.filter((model) => model.supportsReasoning).length;
-  const maxContext = models.reduce((max, model) => Math.max(max, model.contextLength), 0);
+const destinations = [
+  { publisher: "google", costCents: 2, y: 72, path: "M 446 300 C 338 300 350 72 153 72" },
+  { publisher: "openai", costCents: 4, y: 224, path: "M 446 300 C 334 300 282 224 153 224" },
+  { publisher: "deepseek", costCents: 1, y: 376, path: "M 446 300 C 334 300 282 376 153 376" },
+  { publisher: "moonshotai", costCents: 3, y: 528, path: "M 446 300 C 338 300 350 528 153 528" },
+];
+
+const maxIllustratedCostCents = 900;
+
+const requestClients = [
+  { name: "OpenCode", icon: "/brands/opencode.png" },
+  { name: "Claude Code", icon: "/brands/claude-code.svg" },
+  { name: "Codex", icon: "/brands/codex.png" },
+  { name: "Python", icon: "/brands/python.svg" },
+  { name: "Pi", icon: "/brands/pi.svg" },
+];
+
+function RequestFlow({ models }: HeroProps) {
+  const [hits, setHits] = useState<Record<string, number>>({});
+  const [clientIndex, setClientIndex] = useState(0);
+  const client = requestClients[clientIndex];
+
+  function receiveRequest(publisher: string, costCents: number) {
+    const maxIllustratedHits = Math.ceil(maxIllustratedCostCents / costCents);
+    setHits((current) => ({
+      ...current,
+      [publisher]: ((current[publisher] ?? 0) + 1) % (maxIllustratedHits + 1),
+    }));
+  }
+
+  const featured = destinations.flatMap((destination) => {
+    const model = models
+      .filter((candidate) => candidate.id.startsWith(`${destination.publisher}/`))
+      .sort(
+        (a, b) =>
+          (b.intelligenceScore ?? -1) - (a.intelligenceScore ?? -1) || a.id.localeCompare(b.id),
+      )[0];
+    return model ? [{ ...destination, model }] : [];
+  });
 
   return (
-    <section aria-labelledby="hero-title" className="bg-background">
-      <div
-        className="hero-orbit-stage relative isolate flex items-center justify-center overflow-hidden"
-        onFocusCapture={() => setFocused(true)}
-        onBlurCapture={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
-        }}
-      >
-        <HeroOrbit models={models} focused={focused} />
-        <div className="relative z-10 mx-auto flex w-full max-w-[290px] flex-col items-center px-3 text-center min-[400px]:max-w-[340px] sm:max-w-[540px] sm:px-5">
-          <p className="mb-5 text-[10px] font-semibold tracking-[0.14em] text-muted-foreground uppercase sm:mb-6 sm:text-xs">
-            {models.length} free models. Endless possibilities.
-          </p>
-          <h1
-            id="hero-title"
-            className="font-heading text-[clamp(3.4rem,7.4vw,6.5rem)] leading-[0.97] font-black tracking-[-0.065em]"
+    <div className={styles.requestFlow}>
+      <div className={styles.flowCanvas}>
+        <svg
+          viewBox="0 0 600 600"
+          preserveAspectRatio="none"
+          fill="none"
+          className={styles.flowLines}
+          aria-hidden="true"
+        >
+          <defs>
+            <marker
+              id="hero-request-arrow"
+              viewBox="0 0 10 10"
+              refX="8"
+              refY="5"
+              markerWidth="6"
+              markerHeight="6"
+              orient="auto-start-reverse"
+            >
+              <path d="M 2 1 L 8 5 L 2 9" className={styles.arrowHead} />
+            </marker>
+          </defs>
+          {featured.map(({ publisher, path, costCents }, index) => (
+            <g key={publisher}>
+              <path d={path} className={styles.flowTrack} markerEnd="url(#hero-request-arrow)" />
+              <path
+                d={path}
+                pathLength="1"
+                className={styles.flowPacket}
+                onAnimationIteration={() => receiveRequest(publisher, costCents)}
+                style={{ animationDelay: `${-index * 1.2}s` } as CSSProperties}
+              />
+            </g>
+          ))}
+        </svg>
+        {featured.map(({ publisher, y, model, costCents }) => (
+          <a
+            key={publisher}
+            href={modelHref(model.id)}
+            className={styles.destination}
+            style={{ top: `${y / 6}%` }}
           >
-            Big ideas.
-            <br />
-            Free AI<span className="text-positive">.</span>
-          </h1>
-          <p className="mt-5 max-w-[430px] text-sm leading-6 text-muted-foreground sm:mt-6 sm:text-base sm:leading-7">
-            Write code. Create images, audio, and video. Transcribe speech. Build search with
-            embeddings.
-          </p>
-          <Button
-            render={<a href="#models" />}
-            nativeButton={false}
-            size="lg"
-            className="mt-7 h-13 gap-5 rounded-full px-7 hover:bg-primary-hover sm:mt-8 sm:h-14"
+            <span
+              key={hits[publisher] ?? 0}
+              className={`${styles.destinationLogo} ${hits[publisher] ? styles.logoHit : ""}`}
+            >
+              <Avatar className="size-8 rounded-none bg-transparent sm:size-10">
+                <AvatarImage
+                  src={publisherFaviconUrl(publisher, 128) ?? undefined}
+                  alt=""
+                  className="object-contain"
+                />
+                <AvatarFallback className="bg-transparent text-lg font-bold">
+                  {model.author.slice(0, 1)}
+                </AvatarFallback>
+              </Avatar>
+              <span className={styles.freeTag}>
+                <s aria-hidden="true">
+                  $
+                  {(
+                    Math.min((hits[publisher] ?? 0) * costCents, maxIllustratedCostCents) / 100
+                  ).toFixed(2)}
+                </s>
+                <strong>$0</strong>
+              </span>
+            </span>
+            <span className={styles.destinationName}>{model.name.replace(/^[^:]+:\s*/, "")}</span>
+          </a>
+        ))}
+        <div
+          className={styles.requestOrigin}
+          role="img"
+          aria-label="Request from OpenCode, Claude Code, Codex, Python, or Pi"
+        >
+          <div
+            className={styles.clientCycle}
+            onAnimationIteration={() =>
+              setClientIndex((current) => (current + 1) % requestClients.length)
+            }
+            aria-hidden="true"
           >
-            Find your model <ArrowDown className="size-4" aria-hidden="true" />
-          </Button>
-          <p className="mt-4 text-[11px] text-muted-foreground sm:text-xs">
-            Compare free AI models, API providers, and usage limits.
-          </p>
+            <Avatar key={client.name} className="size-12 rounded-none bg-transparent sm:size-14">
+              <AvatarImage src={client.icon} alt="" className="rounded-none object-contain" />
+            </Avatar>
+          </div>
         </div>
       </div>
-      <div className="container pb-8 sm:pb-10">
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-foreground/15 pt-7 sm:grid-cols-4">
-          {[
-            { value: models.length, label: "Free models" },
-            { value: providers, label: "API providers" },
-            { value: reasoning, label: "Models with reasoning" },
-            { value: formatContext(maxContext), label: "Largest context window" },
-          ].map(({ value, label }) => (
-            <div key={label} className="flex flex-col-reverse gap-1">
-              <dt className="text-xs leading-5 text-muted-foreground sm:text-sm">{label}</dt>
-              <dd className="font-heading text-3xl font-extrabold tracking-[-0.05em] sm:text-4xl">
-                {value}
-              </dd>
+      <p className={styles.flowCaption}>Your tools, zero cost</p>
+    </div>
+  );
+}
+
+export function HeroTypographicBroadsheet({ models }: HeroProps) {
+  return (
+    <section aria-labelledby="hero-title" className={styles.hero}>
+      <div className="container">
+        <div className={styles.layout}>
+          <div className={styles.copy}>
+            <h1 id="hero-title" className={styles.title}>
+              Make
+              <br />
+              more<span className={styles.period}>.</span>
+            </h1>
+            <div className={styles.subhead}>
+              <span className={styles.handwritten}>Spend less.</span>
             </div>
-          ))}
-        </dl>
+            <p className={styles.description}>Free AI models for whatever you’re building.</p>
+            <div className={styles.actions}>
+              <Button
+                render={<a href="#models" />}
+                nativeButton={false}
+                size="lg"
+                className={styles.browse}
+              >
+                Find your model <ArrowDown size={18} aria-hidden="true" />
+              </Button>
+            </div>
+          </div>
+          <RequestFlow models={models} />
+        </div>
       </div>
     </section>
   );
