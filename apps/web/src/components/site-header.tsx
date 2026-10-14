@@ -25,9 +25,7 @@ export function SiteHeader({ modelCount, githubStars }: SiteHeaderProps) {
             <SiteLogo />
           </Link>
           <span className="hidden border-l border-border pl-6 text-xs leading-5 text-muted-foreground 2xl:block">
-            Compare free AI models.
-            <br />
-            {modelCount} models to choose from.
+            {modelCount} free models
           </span>
         </div>
         <nav className="flex items-center gap-1.5 sm:gap-3" aria-label="Primary navigation">
