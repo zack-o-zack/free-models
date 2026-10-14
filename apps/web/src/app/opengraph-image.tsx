@@ -1,9 +1,18 @@
 import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
-export const alt = "Free Models — Compare free AI models, API providers, limits, and benchmarks";
+export const alt = "Free Models — Make more. Spend less. 0$.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+const colors = {
+  canvas: "#e8ebe6",
+  card: "#ffffff",
+  ink: "#0e0f0c",
+  body: "#454745",
+  primary: "#9fe870",
+  onPrimary: "#163300",
+};
 
 export default function OpenGraphImage() {
   return new ImageResponse(
@@ -14,36 +23,65 @@ export default function OpenGraphImage() {
         justifyContent: "space-between",
         width: "100%",
         height: "100%",
-        padding: 72,
-        background: "#0e0f0c",
-        color: "#e8ebe6",
+        padding: "48px 64px",
+        background: colors.canvas,
+        color: colors.ink,
         fontFamily: "sans-serif",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
+        <svg aria-hidden="true" width="80" height="80" viewBox="0 0 48 48" fill="none">
+          <rect width="48" height="48" rx="15" fill={colors.primary} />
+          <path
+            d="M11 32V16h10M11 23h8M25 32V17l6 7 6-7v15"
+            stroke={colors.onPrimary}
+            strokeWidth="3.5"
+            strokeLinecap="square"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <div style={{ fontSize: 48, fontWeight: 900, letterSpacing: -2.5 }}>free models.</div>
+      </div>
+
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              fontSize: 126,
+              fontWeight: 900,
+              lineHeight: 0.95,
+              letterSpacing: -7,
+            }}
+          >
+            <div>Make more.</div>
+            <div style={{ color: colors.body, fontSize: 100, letterSpacing: -5, marginTop: 24 }}>
+              Spend less.
+            </div>
+          </div>
+        </div>
+
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            flexDirection: "column",
             justifyContent: "center",
-            width: 76,
-            height: 76,
+            alignItems: "center",
+            width: 330,
+            height: 330,
+            padding: 28,
             borderRadius: 24,
-            background: "#9fe870",
-            color: "#163300",
-            fontSize: 34,
-            fontWeight: 700,
+            background: colors.card,
           }}
         >
-          FM
+          <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+            <span style={{ fontSize: 180, fontWeight: 900, lineHeight: 1, letterSpacing: -10 }}>
+              0$
+            </span>
+          </div>
         </div>
-        <div style={{ fontSize: 34 }}>Free Models</div>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", fontSize: 92, fontWeight: 700 }}>
-        <div>Big ideas.</div>
-        <div style={{ color: "#9fe870" }}>Free AI models.</div>
-      </div>
-      <div style={{ fontSize: 28 }}>Compare API providers, usage limits, and benchmarks.</div>
     </div>,
     size,
   );
