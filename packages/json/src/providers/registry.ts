@@ -7,6 +7,7 @@ import { GroqProvider } from "./groq.ts";
 import { KiloProvider } from "./kilo.ts";
 import { LLM7Provider } from "./llm7.ts";
 import { MistralProvider } from "./mistral.ts";
+import { NovitaProvider } from "./novita.ts";
 import { NvidiaProvider } from "./nvidia.ts";
 import { OpenCodeProvider } from "./opencode.ts";
 import { OpenRouterProvider } from "./openrouter.ts";
@@ -14,6 +15,7 @@ import { defineProviderRegistry } from "./provider.ts";
 import { RequestyProvider } from "./requesty.ts";
 import { RoutewayProvider } from "./routeway.ts";
 import { TokenRouterProvider } from "./tokenrouter.ts";
+import { VercelProvider } from "./vercel.ts";
 import { ZaiProvider } from "./zai.ts";
 
 const openRouterProvider = new OpenRouterProvider();
@@ -35,6 +37,8 @@ export const providerRegistry = defineProviderRegistry(
   new LLM7Provider(),
   new ZaiProvider(),
   new AnyApiProvider(),
+  new NovitaProvider(),
+  new VercelProvider(),
 );
 
 export const metadataProvider = openRouterProvider;
