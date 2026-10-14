@@ -1,0 +1,8 @@
+{
+  "provider": "vercel",
+  "mappings": {
+    "nvidia/nemotron-3.5-lightning-free": "nvidia/nemotron-3.5-lightning",
+    "poolside/laguna-s-2.1-free": "poolside/laguna-s-2.1",
+    "stealth/glyph-cluster": "stealth:glyph-cluster"
+  }
+}

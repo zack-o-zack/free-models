@@ -1,0 +1,66 @@
+{
+  "provider": "vercel",
+  "name": "Vercel AI Gateway",
+  "doc": {
+    "overview": "https://vercel.com/docs/ai-gateway",
+    "models": "https://vercel.com/ai-gateway/models",
+    "pricing": "https://vercel.com/docs/ai-gateway/pricing",
+    "rate_limit": "https://vercel.com/docs/ai-gateway/limits"
+  },
+  "offers": [
+    {
+      "model_id": "nvidia/nemotron-3.5-lightning-free",
+      "name": "Nemotron 3.5 Lightning Free",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "terms": [
+          "Rate limits vary by model and account; check the Vercel AI Gateway dashboard"
+        ]
+      }
+    },
+    {
+      "model_id": "poolside/laguna-s-2.1-free",
+      "name": "Laguna S 2.1 Free",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "terms": [
+          "Rate limits vary by model and account; check the Vercel AI Gateway dashboard"
+        ]
+      }
+    },
+    {
+      "model_id": "stealth/glyph-cluster",
+      "name": "Glyph Cluster",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "terms": [
+          "Rate limits vary by model and account; check the Vercel AI Gateway dashboard"
+        ]
+      }
+    }
+  ]
+}

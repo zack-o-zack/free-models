@@ -1,0 +1,29 @@
+{
+  "provider": "novita",
+  "name": "Novita AI",
+  "doc": {
+    "overview": "https://novita.ai/",
+    "models": "https://api.novita.ai/openai/v1/models",
+    "pricing": "https://novita.ai/pricing"
+  },
+  "offers": [
+    {
+      "model_id": "apodex/apodex-1.1-mini",
+      "name": "Apodex 1.1 Mini",
+      "connection": {
+        "base_url": "https://api.novita.ai/openai",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "NOVITA_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "terms": [
+          "Rate limits vary by model and account; check the Novita console"
+        ]
+      }
+    }
+  ]
+}

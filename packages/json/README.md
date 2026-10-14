@@ -95,3 +95,16 @@ gh workflow run catalogue-discovery.yml --ref <branch> -f dry_run=true
 Run `bun run check` for offline quality and catalogue validation. Run `bun audit` after dependency
 updates. Live discovery requires `COHERE_API_KEY`, `MISTRAL_FREE_API_KEY`, and `TOKENROUTER_API_KEY`.
 A successful discovery checks catalogue availability and pricing; it does not make inference calls.
+
+### Novita AI and Vercel AI Gateway
+
+Discovery uses the public model APIs and needs no credentials. Novita offers must have zero
+input and output prices, use non-tiered billing, and appear on its public
+[pricing page](https://novita.ai/pricing). This excludes internal model IDs with placeholder
+zero prices. Inference uses `NOVITA_API_KEY` with `https://api.novita.ai/openai`.
+
+Vercel discovery includes language models with zero input, output, and any additional prices.
+Inference uses `AI_GATEWAY_API_KEY` with `https://ai-gateway.vercel.sh/v1`. The
+[$5 monthly credit allowance](https://vercel.com/docs/ai-gateway/pricing) applies only to eligible
+models; it is not used to classify paid models as free. Non-chat endpoints are excluded.
+Both providers have account- or model-dependent limits; offers direct users to their dashboards.
