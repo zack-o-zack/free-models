@@ -44,9 +44,8 @@ export function getCatalogueEntities(models: ModelSummary[], kind: EntityKind): 
 }
 
 export function entityDescription(entity: CatalogueEntity, kind: EntityKind): string {
-  return kind === "providers"
-    ? `Explore ${entity.models.length} free AI models available through ${entity.name}. Compare capabilities, benchmarks, and model-specific API limits.`
-    : `Explore ${entity.models.length} free AI models published by ${entity.name}. Compare capabilities, benchmarks, and the API providers offering them.`;
+  const count = entity.models.length;
+  return `Explore ${count} free AI ${count === 1 ? "model" : "models"} ${kind === "providers" ? "available through" : "published by"} ${entity.name}.`;
 }
 
 export function getEntityDocs(entity: CatalogueEntity): Array<{ label: string; url: string }> {
@@ -73,4 +72,33 @@ export function getEntityDocs(entity: CatalogueEntity): Array<{ label: string; u
     }
   }
   return links;
+}
+
+export const directoryContent = {
+  providers: {
+    title: "Find your API provider.",
+    description:
+      "Browse the services offering free model access. Explore their models, capabilities, and API documentation.",
+  },
+  publishers: {
+    title: "Meet the model makers.",
+    description:
+      "Explore the organisations behind the models. Find their free models and the providers that make them available.",
+  },
+};
+
+export function entityBreadcrumbs(entity: CatalogueEntity, kind: EntityKind) {
+  return [
+    { name: "Home", href: "/" },
+    { name: kind === "providers" ? "Providers" : "Publishers", href: `/${kind}` },
+    { name: entity.name, href: entityHref(kind, entity.slug) },
+  ];
+}
+
+export function entityLabel(kind: EntityKind): string {
+  return kind === "providers" ? "Provider" : "Publisher";
+}
+
+export function entityTitle(entity: CatalogueEntity, kind: EntityKind): string {
+  return `${entity.name} — ${entityLabel(kind)}`;
 }

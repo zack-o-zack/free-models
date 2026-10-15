@@ -8,7 +8,13 @@ test("SSG uses the local catalogue even while the CDN still serves the previous 
   try {
     await Bun.write(
       join(workspace, ".generated/free-models.json"),
-      JSON.stringify({ models: [{ id: "maker/new", name: "New model", providers: {} }] }),
+      JSON.stringify({
+        models: [
+          { id: "maker/new", name: "New model", providers: {} },
+          { id: "maker/empty", name: "Empty", description: "", providers: {} },
+          { id: "maker/blank", name: "Blank", description: "  ", providers: {} },
+        ],
+      }),
     );
     const modulePath = new URL("../src/lib/model-data.ts", import.meta.url).pathname;
     const child = Bun.spawn(
@@ -23,7 +29,7 @@ test("SSG uses the local catalogue even while the CDN still serves the previous 
               : { models: [{ id: "maker/old", name: "Old model", providers: {} }] }
           );
           const result = await getModels();
-          console.log(JSON.stringify({ ids: result.models.map(model => model.id), stars: result.githubStars }));
+          console.log(JSON.stringify({ ids: result.models.map(model => model.id), stars: result.githubStars, descriptions: result.models.map(model => model.description) }));
         `,
       ],
       { cwd: workspace, stdout: "pipe", stderr: "pipe" },
@@ -31,7 +37,11 @@ test("SSG uses the local catalogue even while the CDN still serves the previous 
     const output = await new Response(child.stdout).text();
     const errors = await new Response(child.stderr).text();
     expect(await child.exited, errors).toBe(0);
-    expect(JSON.parse(output)).toEqual({ ids: ["maker/new"], stars: 42 });
+    expect(JSON.parse(output)).toEqual({
+      ids: ["maker/new", "maker/empty", "maker/blank"],
+      stars: 42,
+      descriptions: Array(3).fill("No description available yet."),
+    });
   } finally {
     await rm(workspace, { recursive: true, force: true });
   }

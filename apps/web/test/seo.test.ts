@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
 import { modelHref, modelIdFromRouteSegments, modelRouteSegments } from "../src/lib/model-path";
-import type { ModelSummary } from "../src/lib/model-types";
 import { modelDescription, serializeJsonLd } from "../src/lib/seo";
 
 describe("SEO catalogue boundaries", () => {
@@ -22,12 +21,25 @@ describe("SEO catalogue boundaries", () => {
     expect(JSON.parse(serialized)).toEqual(data);
   });
 
-  test("long names produce bounded, readable descriptions without losing the API context", () => {
-    const model = { name: `Publisher: ${"Long model name ".repeat(20)}` } as ModelSummary;
-    const description = modelDescription(model);
+  test("snippets use only the displayed model name and description", () => {
+    const description = modelDescription({
+      name: "Example",
+      description: "No description available yet.",
+    });
+    expect(description).toBe("Example. No description available yet.");
+    expect(description).not.toContain("benchmarks");
+    expect(description).not.toContain("context window");
+    expect(description).not.toContain("usage limits");
+  });
+
+  test("long names and descriptions remain bounded and preserve displayed wording", () => {
+    const description = modelDescription({
+      name: `Publisher: ${"Long model name ".repeat(20)}`,
+      description: "A model for translation. ".repeat(30),
+    });
     expect(description.length).toBeLessThanOrEqual(160);
-    expect(description).toStartWith("Compare Publisher:");
-    expect(description).toEndWith("supported formats, and benchmarks.");
+    expect(description).toStartWith("Publisher:");
+    expect(description).toContain("A model for translation.");
     expect(description).not.toContain("  ");
   });
 });

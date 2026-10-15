@@ -39,6 +39,7 @@ export function ExpandableModelDescription({
   return (
     <div className={cn("mt-6 max-w-4xl text-muted-foreground", className)}>
       <p
+        data-page-description
         className={cn("text-base leading-7 sm:text-lg sm:leading-8", !expanded && "line-clamp-3")}
         id={descriptionId}
         ref={descriptionRef}

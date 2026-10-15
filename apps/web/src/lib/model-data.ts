@@ -126,7 +126,7 @@ function toModelSummary(model: RawModel): ModelSummary {
     name: model.name,
     author: humanizeAuthor(model.id, model.name),
     description:
-      model.description?.replace(/\[([^\]]+)\]\(<?[^)]+>?\)/g, "$1") ??
+      model.description?.replace(/\[([^\]]+)\]\(<?[^)]+>?\)/g, "$1").trim() ||
       "No description available yet.",
     contextLength: model.context_length ?? 0,
     created: model.created ?? null,

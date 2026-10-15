@@ -4,6 +4,7 @@ import { ArrowDown } from "lucide-react";
 import { type CSSProperties, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/config";
 import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
 import { publisherFaviconUrl } from "@/lib/provider-logos";
@@ -153,14 +154,18 @@ export function HeroTypographicBroadsheet({ models }: HeroProps) {
         <div className={styles.layout}>
           <div className={styles.copy}>
             <h1 id="hero-title" className={styles.title}>
-              Make
-              <br />
-              more<span className={styles.period}>.</span>
+              {siteConfig.headline.first} <br />
+              {siteConfig.headline.second}
+              <span className={styles.period}>{siteConfig.headline.punctuation}</span>
             </h1>
             <div className={styles.subhead}>
-              <span className={styles.handwritten}>Spend less.</span>
+              <span data-page-subtitle className={styles.handwritten}>
+                {siteConfig.tagline}
+              </span>
             </div>
-            <p className={styles.description}>Free AI models for whatever you’re building.</p>
+            <p data-page-description className={styles.description}>
+              {siteConfig.description}
+            </p>
             <div className={styles.actions}>
               <Button
                 render={<a href="#models" />}

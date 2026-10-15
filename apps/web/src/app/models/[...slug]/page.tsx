@@ -30,11 +30,7 @@ export async function generateMetadata({ params }: ModelPageProps): Promise<Meta
 
   if (!model) notFound();
 
-  return pageMetadata(
-    `${model.name} — Free API Providers & Limits`,
-    modelDescription(model),
-    modelHref(model.id),
-  );
+  return pageMetadata(model.name, modelDescription(model), modelHref(model.id));
 }
 
 export default async function ModelPage({ params }: ModelPageProps) {
