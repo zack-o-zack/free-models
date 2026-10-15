@@ -10,6 +10,9 @@ export type SortOption =
   | "agentic";
 export type SortDirection = "ascending" | "descending";
 
+export const defaultModelSort: SortOption = "newest";
+export const defaultModelDirection: SortDirection = "descending";
+
 export function defaultSortDirection(sort: SortOption): SortDirection {
   return sort === "name" || sort === "oldest" ? "ascending" : "descending";
 }
@@ -43,4 +46,10 @@ export function compareModels(
   if (a === null) return b === null ? 0 : 1;
   if (b === null) return -1;
   return sign * (a - b);
+}
+
+export function sortCatalogue(models: ModelSummary[]): ModelSummary[] {
+  return [...models].sort((left, right) =>
+    compareModels(left, right, defaultModelSort, defaultModelDirection),
+  );
 }

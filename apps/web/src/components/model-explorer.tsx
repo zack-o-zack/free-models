@@ -43,6 +43,8 @@ import type { EntityKind } from "@/lib/catalogue-entities";
 import { getModelFilterOptions } from "@/lib/model-filter-options";
 import {
   compareModels,
+  defaultModelDirection,
+  defaultModelSort,
   defaultSortDirection,
   type SortDirection,
   type SortOption,
@@ -82,8 +84,8 @@ export function ModelExplorer({
   collection?: { name: string; kind: EntityKind };
 }) {
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState<SortOption>("newest");
-  const [direction, setDirection] = useState<SortDirection>("descending");
+  const [sort, setSort] = useState<SortOption>(defaultModelSort);
+  const [direction, setDirection] = useState<SortDirection>(defaultModelDirection);
   const [view, setView] = useState<ViewMode>("list");
   const [output, setOutput] = useState<string>("all");
   const [selectedInputs, setSelectedInputs] = useState<string[]>([]);

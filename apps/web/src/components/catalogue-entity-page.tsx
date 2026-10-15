@@ -1,16 +1,20 @@
 import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Layers, Server } from "lucide-react";
 import Link from "next/link";
-
 import { JsonLd } from "@/components/json-ld";
 import { ModelExplorer } from "@/components/model-explorer";
+import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
 import { ProviderBadge } from "@/components/provider-badge";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
 import {
   type CatalogueEntity,
+  directoryContent,
   type EntityKind,
+  entityBreadcrumbs,
+  entityDescription,
   entityHref,
+  entityLabel,
   getCatalogueEntities,
   getEntityDocs,
 } from "@/lib/catalogue-entities";
@@ -68,7 +72,7 @@ export function CatalogueEntityPage({
   githubStars: number;
 }) {
   const isProvider = kind === "providers";
-  const label = isProvider ? "Provider" : "Publisher";
+  const label = entityLabel(kind);
   const relatedKind = isProvider ? "publishers" : "providers";
   const related = getCatalogueEntities(entity.models, relatedKind);
   const highlight = getEntityHighlight(entity.models);
@@ -88,38 +92,24 @@ export function CatalogueEntityPage({
       <SiteHeader modelCount={models.length} githubStars={githubStars} />
       <main id="top" tabIndex={-1}>
         <section className="container py-8 sm:py-12">
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-10 flex flex-wrap items-center gap-2 text-sm text-muted-foreground"
-          >
-            <Link className="underline-offset-4 hover:text-foreground hover:underline" href="/">
-              Home
-            </Link>
-            <span aria-hidden="true">/</span>
-            <Link
-              className="capitalize underline-offset-4 hover:text-foreground hover:underline"
-              href={`/${kind}`}
-            >
-              {kind}
-            </Link>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page" className="break-words text-foreground">
-              {entity.name}
-            </span>
-          </nav>
+          <PageBreadcrumbs items={entityBreadcrumbs(entity, kind)} className="mb-10" />
           <div className="grid items-center gap-10 pb-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-16">
             <div className="min-w-0">
-              <p className="mb-5 flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase">
+              <p
+                data-page-title-context
+                className="mb-5 flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase"
+              >
                 {isProvider ? <Server className="size-4" /> : <BookOpen className="size-4" />}{" "}
                 {label}
               </p>
               <h1 className="font-heading text-5xl leading-[0.98] font-black tracking-[-0.055em] [overflow-wrap:anywhere] sm:text-7xl xl:text-8xl">
                 {entity.name}
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
-                {isProvider
-                  ? "Compare free AI models, capabilities, benchmarks, and model-specific API limits."
-                  : "Explore free AI models, compare capabilities and benchmarks, and find API providers offering them."}
+              <p
+                data-page-description
+                className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground"
+              >
+                {entityDescription(entity, kind)}
               </p>
               <Button
                 className="mt-8 h-12 gap-4 px-6"
@@ -237,12 +227,13 @@ export function CatalogueDirectoryPage({
           {entities.length} {kind}
         </p>
         <h1 className="mt-4 max-w-4xl font-heading text-5xl leading-none font-black tracking-[-0.055em] sm:text-7xl">
-          {kind === "providers" ? "Find your API provider." : "Meet the model makers."}
+          {directoryContent[kind].title}
         </h1>
-        <p className="mt-6 mb-10 max-w-2xl text-lg leading-8 text-muted-foreground">
-          {kind === "providers"
-            ? "Browse the services offering free model access. Explore their models, capabilities, and API documentation."
-            : "Explore the organisations behind the models. Find their free models and the providers that make them available."}
+        <p
+          data-page-description
+          className="mt-6 mb-10 max-w-2xl text-lg leading-8 text-muted-foreground"
+        >
+          {directoryContent[kind].description}
         </p>
         <EntityCards entities={entities} kind={kind} />
       </main>

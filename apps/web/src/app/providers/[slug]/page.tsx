@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CatalogueEntityPage } from "@/components/catalogue-entity-page";
-import { entityDescription, entityHref, getCatalogueEntities } from "@/lib/catalogue-entities";
+import {
+  entityDescription,
+  entityHref,
+  entityTitle,
+  getCatalogueEntities,
+} from "@/lib/catalogue-entities";
 import { getModels } from "@/lib/model-data";
 import { pageMetadata } from "@/lib/seo";
 
@@ -23,7 +28,7 @@ export async function generateMetadata({ params }: EntityPageProps): Promise<Met
   const entity = getCatalogueEntities(models, "providers").find((entry) => entry.slug === slug);
   if (!entity) notFound();
   return pageMetadata(
-    `${entity.name} — Free AI Models & API Access`,
+    entityTitle(entity, "providers"),
     entityDescription(entity, "providers"),
     entityHref("providers", slug),
   );

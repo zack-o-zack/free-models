@@ -1,21 +1,22 @@
 import type { LucideIcon } from "lucide-react";
 import { BrainCircuit, ExternalLink, FileText, Gauge, Layers, Server } from "lucide-react";
 import Link from "next/link";
-
 import { CopyButton } from "@/components/copy-button";
 import { LimitTerm } from "@/components/limit-term";
 import { ModelBenchmarks } from "@/components/model-benchmarks";
 import { ModelSectionNav } from "@/components/model-detail-navigation";
 import { ModelFaq } from "@/components/model-faq";
 import { ModelEssentials, ModelOverview } from "@/components/model-overview";
+import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
 import { ProviderBadge } from "@/components/provider-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { entityHref, publisherSlug } from "@/lib/catalogue-entities";
+import { entityHref } from "@/lib/catalogue-entities";
 import type { BenchmarkComparison } from "@/lib/model-benchmarks";
 import { flattenConnectionEntries, formatConnectionKey, formatContext } from "@/lib/model-format";
 import type { ModelHighlight } from "@/lib/model-highlights";
 import { modelHref } from "@/lib/model-path";
 import type { ModelConnection, ModelSummary } from "@/lib/model-types";
+import { modelBreadcrumbs } from "@/lib/page-content";
 import { getProviderName } from "@/lib/provider-logos";
 
 function SectionHeading({
@@ -55,7 +56,6 @@ export function ModelDetail({
   highlights: ModelHighlight[];
   benchmarkComparisons: BenchmarkComparison[];
 }) {
-  const publisher = publisherSlug(model);
   const providerConnections = model.connections.length
     ? model.connections
     : model.providers.map((provider) => ({ provider, modelId: model.id, limits: [] as string[] }));
@@ -71,32 +71,7 @@ export function ModelDetail({
 
   return (
     <div className="container py-8 sm:py-10 lg:max-w-[1280px]">
-      <nav
-        className="mb-6 flex flex-wrap items-center gap-2 text-sm font-medium text-muted-foreground"
-        aria-label="Breadcrumb"
-      >
-        <Link
-          className="rounded-lg underline-offset-4 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-ring"
-          href="/#models"
-        >
-          Models
-        </Link>
-        <span aria-hidden="true">/</span>
-        {publisher && (
-          <>
-            <Link
-              className="underline-offset-4 hover:underline"
-              href={entityHref("publishers", publisher)}
-            >
-              {model.author}
-            </Link>
-            <span aria-hidden="true">/</span>
-          </>
-        )}
-        <span aria-current="page" className="break-words">
-          {model.name}
-        </span>
-      </nav>
+      <PageBreadcrumbs items={modelBreadcrumbs(model)} className="mb-6 font-medium" />
 
       <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-6">
         <ModelOverview model={model} highlights={highlights} />

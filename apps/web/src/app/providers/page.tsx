@@ -1,11 +1,12 @@
 import { CatalogueDirectoryPage } from "@/components/catalogue-entity-page";
+import { directoryContent } from "@/lib/catalogue-entities";
 import { getModels } from "@/lib/model-data";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-static";
 export const metadata = pageMetadata(
-  "Free AI Model Providers",
-  "Browse API providers offering free AI models. Compare available models and find API documentation.",
+  directoryContent.providers.title,
+  directoryContent.providers.description,
   "/providers",
 );
 

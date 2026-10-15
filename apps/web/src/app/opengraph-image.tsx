@@ -1,7 +1,9 @@
 import { ImageResponse } from "next/og";
 
+import { siteConfig, socialImageAlt } from "@/lib/config";
+
 export const dynamic = "force-static";
-export const alt = "Free Models — Make more. Spend less. 0$.";
+export const alt = socialImageAlt;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -55,9 +57,11 @@ export default function OpenGraphImage() {
               letterSpacing: -7,
             }}
           >
-            <div>Make more.</div>
+            <div>
+              {`${siteConfig.headline.first} ${siteConfig.headline.second}${siteConfig.headline.punctuation}`}
+            </div>
             <div style={{ color: colors.body, fontSize: 100, letterSpacing: -5, marginTop: 24 }}>
-              Spend less.
+              {siteConfig.tagline}
             </div>
           </div>
         </div>
@@ -77,7 +81,7 @@ export default function OpenGraphImage() {
         >
           <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
             <span style={{ fontSize: 180, fontWeight: 900, lineHeight: 1, letterSpacing: -10 }}>
-              0$
+              {siteConfig.socialPrice}
             </span>
           </div>
         </div>
