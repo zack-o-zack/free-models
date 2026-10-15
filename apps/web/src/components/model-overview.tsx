@@ -1,21 +1,12 @@
-import {
-  ArrowDown,
-  ArrowUpRight,
-  CalendarDays,
-  CircleCheck,
-  EyeOff,
-  Gauge,
-  Zap,
-} from "lucide-react";
+import { ArrowDown, CalendarDays, CircleCheck, EyeOff, Gauge } from "lucide-react";
 import { BrandImage } from "@/components/brand-image";
 import { ExpandableModelDescription } from "@/components/expandable-model-description";
 import { ModelModalities } from "@/components/model-modalities";
+import { ModelOfferCard } from "@/components/model-offer-card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatContext } from "@/lib/model-format";
-import { getBestFreeLimit } from "@/lib/model-free-limit";
-import { getProviderFundingLabel } from "@/lib/model-funding";
 import type { ModelHighlight } from "@/lib/model-highlights";
 import type { ModelSummary } from "@/lib/model-types";
 import { getProviderName, providerFaviconUrl, publisherFaviconUrl } from "@/lib/provider-logos";
@@ -28,11 +19,6 @@ export function ModelOverview({
   highlights: ModelHighlight[];
 }) {
   const logoUrl = publisherFaviconUrl(model.id.split("/")[0], 128);
-  const freeLimit = getBestFreeLimit(model.connections);
-  const fundingLabel =
-    model.providers.length === 1
-      ? getProviderFundingLabel(model.connections, model.providers[0])
-      : undefined;
 
   return (
     <section
@@ -62,53 +48,9 @@ export function ModelOverview({
             {model.name}
           </h1>
         </div>
-        <section className="mt-7" aria-label="Free usage">
-          {freeLimit ? (
-            <a
-              href={`#provider-${encodeURIComponent(freeLimit.provider)}`}
-              className="block rounded-[20px] bg-primary p-4 text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-            >
-              <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1.5 text-xs font-semibold">
-                  <Zap className="size-3.5" aria-hidden="true" /> Free allowance
-                </span>
-              </div>
-              <p className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className="text-xs font-medium">Up to</span>
-                <span className="font-heading text-4xl leading-none font-black tracking-[-0.06em] tabular-nums sm:text-[42px]">
-                  {freeLimit.amount}
-                </span>
-                <span className="text-sm font-semibold">{freeLimit.allowance}</span>
-              </p>
-              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-                <p className="text-xs font-medium">
-                  via {getProviderName(freeLimit.provider, model.providerNames)}
-                  {freeLimit.qualifier && ` · ${freeLimit.qualifier}`}
-                </p>
-                {freeLimit.otherLimits.length > 0 && (
-                  <ul aria-label="Additional limits" className="flex flex-wrap gap-1.5">
-                    {freeLimit.otherLimits.map((limit) => (
-                      <li
-                        key={limit}
-                        className="rounded-lg bg-primary-foreground/7 px-2 py-1 text-[11px] leading-4"
-                      >
-                        {limit}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </a>
-          ) : (
-            <a
-              href="#providers"
-              className="inline-flex min-h-11 items-center gap-2 text-sm text-background/75 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-current"
-            >
-              {fundingLabel ?? "Free access"} · check provider limits{" "}
-              <ArrowUpRight className="size-3.5" aria-hidden="true" />
-            </a>
-          )}
-        </section>
+        <div className="mt-7">
+          <ModelOfferCard model={model} />
+        </div>
         <ExpandableModelDescription
           className="text-background/75"
           description={model.description}
