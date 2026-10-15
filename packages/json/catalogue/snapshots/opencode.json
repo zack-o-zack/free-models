@@ -49,6 +49,26 @@
       }
     },
     {
+      "model_id": "deepseek-v4.1-flash-free",
+      "name": "DeepSeek V4.1 Flash Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/openai-compatible",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/v1",
+        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
       "model_id": "jev-1.13-free",
       "name": "Jev 1.13 Free",
       "connection": {
@@ -60,26 +80,6 @@
         "base_url": "https://opencode.ai/inference/v1",
         "endpoint": "https://opencode.ai/inference/v1/systemone",
         "protocol": "systemone"
-      },
-      "limits": {
-        "terms": [
-          "200 req / day"
-        ]
-      }
-    },
-    {
-      "model_id": "ling-3.1-flash-free",
-      "name": "Ling 3.1 Flash Free",
-      "connection": {
-        "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "auth": {
-          "env": [
-            "OPENCODE_API_KEY"
-          ]
-        },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
-        "protocol": "openai"
       },
       "limits": {
         "terms": [

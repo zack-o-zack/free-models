@@ -485,7 +485,7 @@
     },
     {
       "model_id": "mistral-ocr-2512",
-      "name": "mistral-ocr-2512",
+      "name": "Mistral OCR 3.0",
       "connection": {
         "auth": {
           "env": [
@@ -504,7 +504,7 @@
     },
     {
       "model_id": "mistral-ocr-3",
-      "name": "mistral-ocr-2512",
+      "name": "Mistral OCR 3.0",
       "connection": {
         "auth": {
           "env": [
@@ -523,7 +523,7 @@
     },
     {
       "model_id": "mistral-ocr-3-0",
-      "name": "mistral-ocr-2512",
+      "name": "Mistral OCR 3.0",
       "connection": {
         "auth": {
           "env": [
@@ -542,26 +542,7 @@
     },
     {
       "model_id": "mistral-ocr-4",
-      "name": "mistral-ocr-latest",
-      "connection": {
-        "auth": {
-          "env": [
-            "MISTRAL_API_KEY"
-          ]
-        },
-        "base_url": "https://api.mistral.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "50 req / min",
-          "50k tok / min"
-        ]
-      }
-    },
-    {
-      "model_id": "mistral-ocr-4-0",
-      "name": "mistral-ocr-4-0",
+      "name": "Mistral OCR 4.1",
       "connection": {
         "auth": {
           "env": [
@@ -580,7 +561,7 @@
     },
     {
       "model_id": "mistral-ocr-4-1",
-      "name": "mistral-ocr-latest",
+      "name": "Mistral OCR 4.1",
       "connection": {
         "auth": {
           "env": [
@@ -599,7 +580,7 @@
     },
     {
       "model_id": "mistral-ocr-latest",
-      "name": "mistral-ocr-latest",
+      "name": "Mistral OCR 4.1",
       "connection": {
         "auth": {
           "env": [
@@ -713,7 +694,7 @@
     },
     {
       "model_id": "voxtral-mini-2602",
-      "name": "voxtral-mini-2602",
+      "name": "Voxtral Mini Transcribe",
       "connection": {
         "auth": {
           "env": [
@@ -732,7 +713,7 @@
     },
     {
       "model_id": "voxtral-mini-latest",
-      "name": "voxtral-mini-2602",
+      "name": "Voxtral Mini Transcribe",
       "connection": {
         "auth": {
           "env": [
@@ -751,7 +732,7 @@
     },
     {
       "model_id": "voxtral-mini-realtime-2602",
-      "name": "voxtral-mini-transcribe-realtime-2602",
+      "name": "Voxtral Mini Transcribe Realtime",
       "connection": {
         "auth": {
           "env": [
@@ -770,7 +751,7 @@
     },
     {
       "model_id": "voxtral-mini-realtime-latest",
-      "name": "voxtral-mini-transcribe-realtime-2602",
+      "name": "Voxtral Mini Transcribe Realtime",
       "connection": {
         "auth": {
           "env": [
@@ -789,7 +770,7 @@
     },
     {
       "model_id": "voxtral-mini-transcribe-realtime-2602",
-      "name": "voxtral-mini-transcribe-realtime-2602",
+      "name": "Voxtral Mini Transcribe Realtime",
       "connection": {
         "auth": {
           "env": [
@@ -846,7 +827,7 @@
     },
     {
       "model_id": "voxtral-small-2507",
-      "name": "voxtral-small-2507",
+      "name": "Voxtral Small Transcribe",
       "connection": {
         "auth": {
           "env": [
@@ -865,7 +846,7 @@
     },
     {
       "model_id": "voxtral-small-latest",
-      "name": "voxtral-small-2507",
+      "name": "Voxtral Small Transcribe",
       "connection": {
         "auth": {
           "env": [

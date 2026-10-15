@@ -1,3 +1,10 @@
 {
-  "providers": {}
+  "providers": {
+    "opencode": [
+      "deepseek-v4.1-flash-free"
+    ],
+    "vercel": [
+      "perplexity/pplx-decider-v1.1-27b"
+    ]
+  }
 }
