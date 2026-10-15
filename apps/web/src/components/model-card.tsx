@@ -155,11 +155,6 @@ export function ModelCard({ model }: { model: ModelSummary }) {
               fundingLabel={getProviderFundingLabel(model.connections, provider)}
             />
           ))}
-          {model.providers[0] && getProviderFundingLabel(model.connections, model.providers[0]) && (
-            <span className="text-xs text-muted-foreground">
-              {getProviderFundingLabel(model.connections, model.providers[0])}
-            </span>
-          )}
         </div>
       </CardContent>
     </Card>

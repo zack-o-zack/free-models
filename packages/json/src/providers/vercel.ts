@@ -76,17 +76,7 @@ export class VercelProvider implements ModelProvider {
           },
           limits: {
             funding: noCredits ? ("no_credits" as const) : ("monthly_credits" as const),
-            terms: noCredits
-              ? [
-                  "Free — no credits used",
-                  "Rate limits vary by model and account; check the Vercel AI Gateway dashboard",
-                ]
-              : [
-                  "Free with $5 monthly credits",
-                  "$5 / month shared across all eligible models in the Vercel team",
-                  "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
-                  "Free-tier rate limits vary by model; BYOK is not included",
-                ],
+            terms: noCredits ? ["Free — no credits used"] : ["Free with $5 monthly credits"],
           },
         };
       });
