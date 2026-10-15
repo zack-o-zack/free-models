@@ -60,15 +60,12 @@ test("discovers credit-eligible offers across modalities and distinguishes zero-
   expect(offers.find((o) => o.model_id === "maker/excluded")).toBeUndefined();
   expect(offers.find((o) => o.model_id === "maker/free")?.limits).toMatchObject({
     funding: "no_credits",
-    terms: expect.arrayContaining(["Free — no credits used"]),
+    terms: ["Free — no credits used"],
   });
   const paid = offers.find((o) => o.model_id === "maker/paid");
   expect(paid?.limits).toMatchObject({
     funding: "monthly_credits",
-    terms: expect.arrayContaining([
-      "Free with $5 monthly credits",
-      "$5 / month shared across all eligible models in the Vercel team",
-    ]),
+    terms: ["Free with $5 monthly credits"],
   });
   expect(paid?.connection.protocol).toBe("openai");
   expect(offers.find((o) => o.model_id === "maker/image")?.connection).toMatchObject({
