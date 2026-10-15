@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { entityHref, publisherSlug } from "@/lib/catalogue-entities";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
+import { getProviderFundingLabel } from "@/lib/model-funding";
 import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
 import { publisherFaviconUrl } from "@/lib/provider-logos";
@@ -151,8 +152,14 @@ export function ModelCard({ model }: { model: ModelSummary }) {
               names={model.providerNames}
               docs={model.providerDocs[provider]}
               provider={provider}
+              fundingLabel={getProviderFundingLabel(model.connections, provider)}
             />
           ))}
+          {model.providers[0] && getProviderFundingLabel(model.connections, model.providers[0]) && (
+            <span className="text-xs text-muted-foreground">
+              {getProviderFundingLabel(model.connections, model.providers[0])}
+            </span>
+          )}
         </div>
       </CardContent>
     </Card>

@@ -51,6 +51,7 @@ interface RawOffer {
   connection?: Record<string, unknown>;
   limits?: {
     terms?: string[];
+    funding?: "no_credits" | "monthly_credits";
   };
 }
 
@@ -113,6 +114,7 @@ function toModelSummary(model: RawModel): ModelSummary {
               modelId: offer.model_id,
               connection: offer.connection ?? {},
               limits: offer.limits?.terms ?? [],
+              ...(offer.limits?.funding ? { funding: offer.limits.funding } : {}),
             },
           ]
         : [],

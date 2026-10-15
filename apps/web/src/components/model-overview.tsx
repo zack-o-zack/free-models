@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatContext } from "@/lib/model-format";
 import { getBestFreeLimit } from "@/lib/model-free-limit";
+import { getProviderFundingLabel } from "@/lib/model-funding";
 import type { ModelHighlight } from "@/lib/model-highlights";
 import type { ModelSummary } from "@/lib/model-types";
 import { getProviderName, providerFaviconUrl, publisherFaviconUrl } from "@/lib/provider-logos";
@@ -28,6 +29,10 @@ export function ModelOverview({
 }) {
   const logoUrl = publisherFaviconUrl(model.id.split("/")[0], 128);
   const freeLimit = getBestFreeLimit(model.connections);
+  const fundingLabel =
+    model.providers.length === 1
+      ? getProviderFundingLabel(model.connections, model.providers[0])
+      : undefined;
 
   return (
     <section
@@ -99,7 +104,7 @@ export function ModelOverview({
               href="#providers"
               className="inline-flex min-h-11 items-center gap-2 text-sm text-background/75 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-current"
             >
-              Free access · check provider limits{" "}
+              {fundingLabel ?? "Free access"} · check provider limits{" "}
               <ArrowUpRight className="size-3.5" aria-hidden="true" />
             </a>
           )}

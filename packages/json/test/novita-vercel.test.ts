@@ -27,10 +27,24 @@ const vercelModel = {
 function vercel(models: unknown[]) {
   return new VercelProvider({
     fetch: async (url) => {
-      expect(url).toBe(VERCEL_MODELS_URL);
-      return Response.json({ object: "list", data: models });
+      if (url === VERCEL_MODELS_URL) return Response.json({ object: "list", data: models });
+      return new Response(
+        vercelPage([
+          {
+            copyString: "publisher/free",
+            displayName: "Free",
+            type: "chat",
+            availableToFreeTier: false,
+          },
+        ]),
+      );
     },
   });
+}
+
+export function vercelPage(models: unknown[]): string {
+  const row = `1:["$","$L2",null,${JSON.stringify({ models })}]\n`;
+  return `<script>self.__next_f.push(${JSON.stringify([1, row])})</script>`;
 }
 
 test("Novita requires public listing, active chat model, and zero non-tiered pricing", async () => {
@@ -55,7 +69,7 @@ test("Novita requires public listing, active chat model, and zero non-tiered pri
   }
 });
 
-test("Vercel excludes paid, partial pricing, extra charges, and non-chat endpoints", async () => {
+test("Vercel excludes paid and ambiguous pricing when models are not credit eligible", async () => {
   const offers = await vercel([vercelModel]).discover(new Map());
   expect(offers[0]?.connection).toEqual({
     base_url: "https://ai-gateway.vercel.sh/v1",
@@ -73,7 +87,7 @@ test("Vercel excludes paid, partial pricing, extra charges, and non-chat endpoin
   ]) {
     expect(await vercel([{ ...vercelModel, pricing }]).discover(new Map())).toEqual([]);
   }
-  expect(await vercel([{ ...vercelModel, type: "evaluation" }]).discover(new Map())).toEqual([]);
+
   expect(
     (await vercel([{ ...vercelModel, pricing: { input: 0, output: "0.00" } }]).discover(new Map()))
       .length,

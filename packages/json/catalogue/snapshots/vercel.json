@@ -9,6 +9,2688 @@
   },
   "offers": [
     {
+      "model_id": "alibaba/qwen-3-14b",
+      "name": "Qwen3-14B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen-3-235b",
+      "name": "Qwen3 235B A22B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen-3-30b",
+      "name": "Qwen3-30B-A3B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen-3-32b",
+      "name": "Qwen 3 32B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-coder",
+      "name": "Qwen3 Coder 480B A35B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-coder-30b-a3b",
+      "name": "Qwen 3 Coder 30B A3B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-coder-next",
+      "name": "Qwen3 Coder Next",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-embedding-0.6b",
+      "name": "Qwen3 Embedding 0.6B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-embedding-4b",
+      "name": "Qwen3 Embedding 4B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-embedding-8b",
+      "name": "Qwen3 Embedding 8B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-max-thinking",
+      "name": "Qwen 3 Max Thinking",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-next-80b-a3b-instruct",
+      "name": "Qwen3 Next 80B A3B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-next-80b-a3b-thinking",
+      "name": "Qwen3 Next 80B A3B Thinking",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-vl-235b-a22b-instruct",
+      "name": "Qwen 3 VL 235B A22B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3-vl-instruct",
+      "name": "Qwen3 VL 235B A22B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3.5-flash",
+      "name": "Qwen 3.5 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3.5-plus",
+      "name": "Qwen 3.5 Plus",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3.6-27b",
+      "name": "Qwen 3.6 27B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3.6-plus",
+      "name": "Qwen 3.6 Plus",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3.7-flash",
+      "name": "Qwen 3.7 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "alibaba/qwen3.8-omni-flash",
+      "name": "Qwen 3.8 Omni Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "amazon/nova-2-lite",
+      "name": "Nova 2 Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "amazon/nova-lite",
+      "name": "Nova Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "amazon/nova-micro",
+      "name": "Nova Micro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "amazon/nova-pro",
+      "name": "Nova Pro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "amazon/titan-embed-text-v2",
+      "name": "Titan Text Embeddings V2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "arcee-ai/trinity-large-thinking",
+      "name": "Trinity Large Thinking",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-2-flex",
+      "name": "FLUX.2 [flex]",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-2-klein-4b",
+      "name": "FLUX.2 [klein] 4B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-2-klein-9b",
+      "name": "FLUX.2 [klein] 9B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-2-max",
+      "name": "FLUX.2 [max]",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-2-pro",
+      "name": "FLUX.2 [pro]",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-kontext-max",
+      "name": "FLUX.1 Kontext Max",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-kontext-pro",
+      "name": "FLUX.1 Kontext Pro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-pro-1.0-fill",
+      "name": "FLUX.1 Fill [pro]",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-pro-1.1",
+      "name": "FLUX1.1 [pro]",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bfl/flux-pro-1.1-ultra",
+      "name": "FLUX1.1 [pro] Ultra",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "browserbase/fetch",
+      "name": "Browserbase Fetch",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "tool"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "browserbase/search",
+      "name": "Browserbase Search",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "tool"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bytedance/seed-1.6",
+      "name": "Seed 1.6",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bytedance/seed-1.8",
+      "name": "Bytedance Seed 1.8",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bytedance/seed-2.1-turbo",
+      "name": "Seed 2.1 Turbo",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bytedance/seedream-4.0",
+      "name": "Seedream 4.0",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bytedance/seedream-4.5",
+      "name": "Seedream 4.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bytedance/seedream-5.0-lite",
+      "name": "Seedream 5.0 Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "bytedance/seedream-5.0-pro",
+      "name": "Seedream 5.0 Pro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "callstack/apex",
+      "name": "Apex",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "cohere/command-a",
+      "name": "Command A",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "cohere/embed-v4.0",
+      "name": "Embed v4.0",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "cohere/embed-v5.0-fast",
+      "name": "Embed 5 Fast",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "cohere/embed-v5.0-pro",
+      "name": "Embed 5 Pro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "cohere/rerank-v3.5",
+      "name": "Cohere Rerank 3.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "reranking"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "cohere/rerank-v4-fast",
+      "name": "Cohere Rerank 4 Fast",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "reranking"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "cohere/rerank-v4-pro",
+      "name": "Cohere Rerank 4 Pro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "reranking"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "convaiinnovations/laya",
+      "name": "Laya",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "decision"
+      },
+      "limits": {
+        "funding": "no_credits",
+        "terms": [
+          "Free — no credits used",
+          "Rate limits vary by model and account; check the Vercel AI Gateway dashboard"
+        ]
+      }
+    },
+    {
+      "model_id": "convaiinnovations/laya-free",
+      "name": "Laya (Free)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "decision"
+      },
+      "limits": {
+        "funding": "no_credits",
+        "terms": [
+          "Free — no credits used",
+          "Rate limits vary by model and account; check the Vercel AI Gateway dashboard"
+        ]
+      }
+    },
+    {
+      "model_id": "deepseek/deepseek-r1",
+      "name": "DeepSeek R1 0528",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "deepseek/deepseek-v3.1",
+      "name": "DeepSeek V3.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "deepseek/deepseek-v3.2-thinking",
+      "name": "DeepSeek V3.2 Thinking",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "exa/search",
+      "name": "Exa Web Search",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "tool"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/gemini-2.5-flash-lite",
+      "name": "Gemini 2.5 Flash Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/gemini-3.5-transcribe",
+      "name": "Gemini 3.5 Transcribe",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/gemini-3.5-transcribe-live",
+      "name": "Gemini 3.5 Transcribe Live",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/gemini-3.8-live",
+      "name": "Gemini 3.8 Live",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "realtime"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/gemini-3.8-live-extended-thinking",
+      "name": "Gemini 3.8 Live Extended Thinking",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "realtime"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/gemini-embedding-001",
+      "name": "Gemini Embedding 001",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/gemma-4-26b-a4b-it",
+      "name": "Gemma 4 26B A4B IT",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/text-embedding-005",
+      "name": "Text Embedding 005",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "google/text-multilingual-embedding-002",
+      "name": "Text Multilingual Embedding 002",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inception/mercury-2",
+      "name": "Mercury 2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inception/mercury-2.5",
+      "name": "Mercury 2.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inception/mercury-coder-small",
+      "name": "Mercury Coder Small Beta",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inclusionai/ling-3.0-flash",
+      "name": "Ling 3.0 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inclusionai/ling-3.0-flash-fin",
+      "name": "Ling 3.0 Flash Fin",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inclusionai/ling-3.0-flash-sante",
+      "name": "Ling 3.0 Flash Sante",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inclusionai/ling-3.0-flash-vl",
+      "name": "Ling 3.0 Flash VL",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inclusionai/ling-3.1-flash",
+      "name": "Ling 3.1 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inference-net/schematron-v2-small",
+      "name": "Schematron V2 Small",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "inference-net/schematron-v2-turbo",
+      "name": "Schematron V2 Turbo",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "interfaze/interfaze-beta",
+      "name": "Interfaze Beta",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "liquid/lfm2.5-24b-a2b",
+      "name": "LFM2.5-24B-A2B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "meta/llama-3.1-70b",
+      "name": "Llama 3.1 70B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "meta/llama-3.1-8b",
+      "name": "Llama 3.1 8B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "meta/llama-3.3-70b",
+      "name": "Llama 3.3 70B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "meta/llama-4-maverick",
+      "name": "Llama 4 Maverick 17B Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "meta/llama-4-scout",
+      "name": "Llama 4 Scout 17B 16E Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "microsoft/mai-image-2.6",
+      "name": "MAI-Image-2.6",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "microsoft/mai-image-2.6-flash",
+      "name": "MAI-Image-2.6-Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "microsoft/mai-transcribe-2",
+      "name": "MAI-Transcribe 2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "microsoft/mai-transcribe-2-streaming",
+      "name": "MAI-Transcribe-2-Streaming",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "microsoft/mai-voice-2",
+      "name": "MAI-Voice-2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "speech"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "microsoft/mai-voice-2-flash",
+      "name": "MAI-Voice-2-Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "speech"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "microsoft/mai-voice-2.1",
+      "name": "MAI-Voice-2.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "speech"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "microsoft/mai-voice-2.1-flash",
+      "name": "MAI-Voice-2.1-Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "speech"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax/minimax-m2",
+      "name": "MiniMax M2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax/minimax-m2.1",
+      "name": "MiniMax M2.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax/minimax-m2.1-lightning",
+      "name": "MiniMax M2.1 Lightning",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax/minimax-m2.5",
+      "name": "MiniMax M2.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax/minimax-m2.5-highspeed",
+      "name": "MiniMax M2.5 High Speed",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax/minimax-m2.7",
+      "name": "MiniMax M2.7",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax/minimax-m2.7-highspeed",
+      "name": "MiniMax M2.7 High Speed",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/codestral",
+      "name": "Mistral Codestral",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/codestral-embed",
+      "name": "Codestral Embed",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/ministral-14b",
+      "name": "Ministral 14B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/ministral-3b",
+      "name": "Ministral 3B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/ministral-8b",
+      "name": "Ministral 8B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/mistral-embed",
+      "name": "Mistral Embed",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/mistral-large-3",
+      "name": "Mistral Large 3",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/mistral-medium-3.5",
+      "name": "Mistral Medium Latest",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/mistral-nemo",
+      "name": "Mistral Nemo 12B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mistral/mistral-small",
+      "name": "Mistral Small",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "mixedbread/toast-1",
+      "name": "Toast 1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "moonshotai/kimi-k2",
+      "name": "Kimi K2 Instruct",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "moonshotai/kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "morph/morph-v3-fast",
+      "name": "Morph V3 Fast",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "morph/morph-v3-large",
+      "name": "Morph V3 Large",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3-nano-30b-a3b",
+      "name": "Nemotron 3 Nano 30B A3B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3-super-120b-a12b",
+      "name": "NVIDIA Nemotron 3 Super 120B A12B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "name": "Nemotron 3 Ultra",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
       "model_id": "nvidia/nemotron-3.5-lightning-free",
       "name": "Nemotron 3.5 Lightning Free",
       "connection": {
@@ -21,8 +2703,1234 @@
         }
       },
       "limits": {
+        "funding": "no_credits",
         "terms": [
+          "Free — no credits used",
           "Rate limits vary by model and account; check the Vercel AI Gateway dashboard"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-nano-12b-v2-vl",
+      "name": "Nvidia Nemotron Nano 12B V2 VL",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-nano-9b-v2",
+      "name": "Nvidia Nemotron Nano 9B V2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-3.5-turbo",
+      "name": "GPT-3.5 Turbo",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4-turbo",
+      "name": "GPT-4 Turbo",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4.1",
+      "name": "GPT-4.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4.1-fast",
+      "name": "GPT-4.1 (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4.1-mini",
+      "name": "GPT-4.1 mini",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4.1-mini-fast",
+      "name": "GPT-4.1 mini (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4.1-nano",
+      "name": "GPT-4.1 nano",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4.1-nano-fast",
+      "name": "GPT-4.1 nano (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4o",
+      "name": "GPT-4o",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4o-fast",
+      "name": "GPT-4o (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4o-mini",
+      "name": "GPT-4o mini",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4o-mini-fast",
+      "name": "GPT-4o mini (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4o-mini-transcribe",
+      "name": "GPT-4o mini Transcribe",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-4o-transcribe",
+      "name": "GPT-4o Transcribe",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5",
+      "name": "GPT-5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5-codex",
+      "name": "GPT-5-Codex",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5-fast",
+      "name": "GPT-5 (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5-mini",
+      "name": "GPT-5 mini",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5-mini-fast",
+      "name": "GPT-5 mini (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5-nano",
+      "name": "GPT-5 nano",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5.1-codex",
+      "name": "GPT-5.1-Codex",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5.1-codex-max",
+      "name": "GPT 5.1 Codex Max",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5.1-codex-mini",
+      "name": "GPT 5.1 Codex Mini",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5.1-thinking",
+      "name": "GPT 5.1 Thinking",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5.1-thinking-fast",
+      "name": "GPT 5.1 Thinking (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5.2",
+      "name": "GPT 5.2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5.2-fast",
+      "name": "GPT-5.2 (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-5.4-nano",
+      "name": "GPT 5.4 Nano",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-image-1-mini",
+      "name": "GPT Image 1 Mini",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-live-1",
+      "name": "GPT-Live 1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "realtime"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-oss-20b",
+      "name": "GPT OSS 20B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-oss-safeguard-120b",
+      "name": "GPT OSS Safeguard 120B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-oss-safeguard-20b",
+      "name": "GPT OSS Safeguard 20B",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-realtime-1.5",
+      "name": "GPT-Realtime-1.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "realtime"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-realtime-2",
+      "name": "gpt-realtime-2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "realtime"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-realtime-2.1",
+      "name": "gpt-realtime-2.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "realtime"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-realtime-mini",
+      "name": "GPT-Realtime mini",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "realtime"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/gpt-realtime-whisper",
+      "name": "gpt-realtime-whisper",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/o1",
+      "name": "o1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/o3",
+      "name": "o3",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/o3-fast",
+      "name": "o3 (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/o3-mini",
+      "name": "o3-mini",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/o3-pro",
+      "name": "o3 Pro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/o4-mini",
+      "name": "o4-mini",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/o4-mini-fast",
+      "name": "o4-mini (Fast)",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/tts-1",
+      "name": "TTS-1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "speech"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/tts-1-hd",
+      "name": "TTS-1 HD",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "speech"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "openai/whisper-1",
+      "name": "Whisper",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "parallel/search",
+      "name": "Parallel Web Search",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "tool"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "perplexity/search",
+      "name": "Perplexity Web Search",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "tool"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "perplexity/sonar",
+      "name": "Sonar",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "poolside/laguna-s-2.1",
+      "name": "Laguna S 2.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
         ]
       }
     },
@@ -39,8 +3947,419 @@
         }
       },
       "limits": {
+        "funding": "no_credits",
         "terms": [
+          "Free — no credits used",
           "Rate limits vary by model and account; check the Vercel AI Gateway dashboard"
+        ]
+      }
+    },
+    {
+      "model_id": "prodia/flux-fast-schnell",
+      "name": "Flux Schnell",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "quiverai/arrow-1.1",
+      "name": "Arrow 1.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "quiverai/arrow-2",
+      "name": "Arrow 2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "quiverai/arrow-2-telos",
+      "name": "Arrow 2 Telos",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "recraft/recraft-v2",
+      "name": "Recraft V2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "recraft/recraft-v3",
+      "name": "Recraft V3",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "recraft/recraft-v4",
+      "name": "Recraft V4",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "recraft/recraft-v4.1",
+      "name": "Recraft V4.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "recraft/recraft-v4.1-flash",
+      "name": "Recraft V4.1 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "recraft/recraft-v4.1-utility",
+      "name": "Recraft V4.1 Utility",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "scaledown/scaledown-classify-1",
+      "name": "Classify-1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "decision"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "spacexai/grok-4.1-fast-non-reasoning",
+      "name": "Grok 4.1 Fast Non-Reasoning",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "spacexai/grok-4.1-fast-reasoning",
+      "name": "Grok 4.1 Fast Reasoning",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "spacexai/grok-build-0.1",
+      "name": "Grok Build 0.1",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "spacexai/grok-imagine-image",
+      "name": "Grok Imagine Image",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "image"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "spacexai/grok-stt",
+      "name": "Grok STT",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "transcription"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "spacexai/grok-tts",
+      "name": "Grok TTS",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "speech"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "spacexai/grok-voice-think-fast-2.0",
+      "name": "Grok Voice Think Fast 2.0",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "realtime"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
         ]
       }
     },
@@ -57,8 +4376,729 @@
         }
       },
       "limits": {
+        "funding": "no_credits",
         "terms": [
+          "Free — no credits used",
           "Rate limits vary by model and account; check the Vercel AI Gateway dashboard"
+        ]
+      }
+    },
+    {
+      "model_id": "stepfun/step-3.7-flash",
+      "name": "Step 3.7 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "tako/search",
+      "name": "Tako Search",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "tool"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "tencent/hy-mt2-lite",
+      "name": "Tencent Hy-MT2-Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "tencent/hy-mt2-plus",
+      "name": "Tencent Hy-MT2-Plus",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "tencent/hy-mt2-pro",
+      "name": "Tencent Hy-MT2-Pro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "tencent/hy3",
+      "name": "Hy3",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "thinkingmachines/inkling",
+      "name": "Inkling",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/rerank-2.5",
+      "name": "Voyage Rerank 2.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "reranking"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/rerank-2.5-lite",
+      "name": "Voyage Rerank 2.5 Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "reranking"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/rerank-3",
+      "name": "Voyage Rerank 3",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "reranking"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/rerank-3-lite",
+      "name": "Voyage Rerank 3 Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "reranking"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-3-large",
+      "name": "voyage-3-large",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-3.5",
+      "name": "Voyage 3.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-3.5-lite",
+      "name": "Voyage 3.5 Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-4",
+      "name": "Voyage 4",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-4-large",
+      "name": "Voyage 4 Large",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-4-lite",
+      "name": "Voyage 4 Lite",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-code-2",
+      "name": "Voyage Code 2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-code-3",
+      "name": "Voyage Code 3",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-finance-2",
+      "name": "Voyage Finance 2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "voyage/voyage-law-2",
+      "name": "Voyage Law 2",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh",
+        "protocol": "vercel-ai-gateway",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "model_type": "embedding"
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "xiaomi/mimo-v2.5",
+      "name": "MiMo M2.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "xiaomi/mimo-v2.5-pro",
+      "name": "MiMo V2.5 Pro",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "xiaomi/mimo-v2.6-flash",
+      "name": "MiMo V2.6 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "zai/glm-4.5",
+      "name": "GLM 4.5",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "zai/glm-4.5-air",
+      "name": "GLM 4.5 Air",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "zai/glm-4.5v",
+      "name": "GLM 4.5V",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "zai/glm-4.6",
+      "name": "GLM 4.6",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "zai/glm-4.7",
+      "name": "GLM 4.7",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "zai/glm-4.7-flash",
+      "name": "GLM 4.7 Flash",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "zai/glm-4.7-flashx",
+      "name": "GLM 4.7 FlashX",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
+        ]
+      }
+    },
+    {
+      "model_id": "zai/glm-5v-turbo",
+      "name": "GLM 5V Turbo",
+      "connection": {
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai",
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        }
+      },
+      "limits": {
+        "funding": "monthly_credits",
+        "terms": [
+          "Free with $5 monthly credits",
+          "$5 / month shared across all eligible models in the Vercel team",
+          "Usage consumes credits at model rates; paid credits required after the allowance is exhausted",
+          "Free-tier rate limits vary by model; BYOK is not included"
         ]
       }
     }

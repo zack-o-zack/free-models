@@ -1,6 +1,134 @@
 {
   "metadata": [
     {
+      "id": "amazon/nova-2-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1764633600,
+        "description": "Nova 2 Lite is a fast, cost-effective reasoning model for everyday workloads that can process text, images, and videos to generate text.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "amazon/nova-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 300000,
+        "created": 1733184000,
+        "description": "A very low cost multimodal model that is lightning fast for processing image, video, and text inputs.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "amazon/nova-micro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1733184000,
+        "description": "A text-only model that delivers the lowest latency responses at very low cost.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "amazon/nova-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 300000,
+        "created": 1733184000,
+        "description": "A highly capable multimodal model with the best combination of accuracy, speed, and cost for a wide range of tasks.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "amazon/titan-embed-text-v2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1714435200,
+        "description": "Amazon Titan Text Embeddings V2 is a light weight, efficient multilingual embedding model supporting 1024, 512, and 256 dimensions.",
+        "model_type": "embedding"
+      }
+    },
+    {
       "id": "apodex/apodex-1.1-mini",
       "metadata": {
         "architecture": {
@@ -56,6 +184,34 @@
           "is_moderated": false,
           "max_completion_tokens": 235929
         }
+      }
+    },
+    {
+      "id": "arcee-ai/trinity-large-thinking",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262100,
+        "created": 1775001600,
+        "description": "Trinity-Large-Thinking is a reasoning-optimized variant of Arcee AI's Trinity-Large family — a 398B-parameter sparse Mixture-of-Experts (MoE) model with approximately 13B active parameters per token. Built on Trinity-Large-Base and post-trained with extended chain-of-thought reasoning and agentic RL, Trinity-Large-Thinking delivers state-of-the-art performance on agentic benchmarks while maintaining strong general capabilities.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     },
     {
@@ -188,6 +344,40 @@
       }
     },
     {
+      "id": "black-forest-labs/flux-2-max",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "context_length": 67300,
+        "created": 1765843200,
+        "description": "FLUX.2 [max] offers image generation and image editing with the highest quality available. It delivers state-of-the-art image generation and advanced image editing with exceptional realism, precision, and consistency. Built for professional use, FLUX.2 [max] produces production-ready outputs for marketing teams, creatives, filmmakers, and creators around the world.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "black-forest-labs/flux-2-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "context_length": 67300,
+        "created": 1764028800,
+        "description": "FLUX.2 is a completely new base model trained for visual intelligence, not just pixel generation, setting a new standard for both image generation and image editing. With FLUX.2 models you can expect the highest quality, higher resolutions (up to 4MP), and new capabilities like multi-ref images. FLUX.2 [pro] supports generation, editing, and multiple reference images (up to 9 MP total input).\nThis provider gives the option to change the moderation level for inputs and outputs. The control is under safety tolerance and is by default 2 on a range from 0 (more strict) through 6 (more permissive).",
+        "model_type": "image"
+      }
+    },
+    {
       "id": "black-forest-labs/flux-3-video",
       "metadata": {
         "architecture": {
@@ -226,6 +416,88 @@
           "is_moderated": false,
           "max_completion_tokens": 0
         }
+      }
+    },
+    {
+      "id": "black-forest-labs/flux-kontext-max",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "context_length": 512,
+        "created": 1748476800,
+        "description": "FLUX.1 Kontext creates images from text prompts with unique capabilities for character consistency and advanced editing. It also edits images using simple text prompts. No complex workflows or fine-tuning needed.\nThis provider gives the option to change the moderation level for inputs and outputs. The control is under safety tolerance and is by default 2 on a range from 0 (more strict) through 6 (more permissive).",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "black-forest-labs/flux-kontext-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "context_length": 512,
+        "created": 1748476800,
+        "description": "FLUX.1 Kontext creates images from text prompts with unique capabilities for character consistency and advanced editing. It also edits images using simple text prompts. No complex workflows or fine-tuning needed.\nThis provider gives the option to change the moderation level for inputs and outputs. The control is under safety tolerance and is by default 2 on a range from 0 (more strict) through 6 (more permissive).",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "black-forest-labs/flux-pro-1.0-fill",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1727740800,
+        "description": "A state-of-the-art inpainting model, enabling editing and expansion of real and generated images given a text description and a binary mask.\nThis provider gives the option to change the moderation level for inputs and outputs. The control is under safety tolerance and is by default 2 on a range from 0 (more strict) through 6 (more permissive).",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "black-forest-labs/flux-pro-1.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1727827200,
+        "description": "FLUX1.1 [pro] is the standard for text-to-image generation with fast, reliable and consistently stunning results.\nThis provider gives the option to change the moderation level for inputs and outputs. The control is under safety tolerance and is by default 2 on a range from 0 (more strict) through 6 (more permissive).",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "black-forest-labs/flux-pro-1.1-ultra",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1730419200,
+        "description": "FLUX1.1 [pro] Ultra delivers ultra-fast, ultra high-resolution image creation - with more pixels in every picture. Generate varying aspect ratios from text, at 4MP resolution fast.\nThis provider gives the option to change the moderation level for inputs and outputs. The control is under safety tolerance and is by default 2 on a range from 0 (more strict) through 6 (more permissive).",
+        "model_type": "image"
       }
     },
     {
@@ -378,6 +650,209 @@
           "is_moderated": false,
           "max_completion_tokens": 36864
         }
+      }
+    },
+    {
+      "id": "black-forest-labs/flux.2-klein-9b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1768435200,
+        "description": "FLUX.2 [klein] is Black Forest Labs' fastest image model yet - it unifies image generation and editing in a single, compact model. Delivering state-of-the-art quality with end-to-end inference in less than a second. Enabling interactive workflows, real-time previews, and latency-critical applications.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "browserbase/fetch",
+      "metadata": {
+        "description": "Fetch the contents of a URL with Browserbase, optionally through proxies, returning the upstream response body unchanged or content extracted as Markdown or JSON. Use it as a built-in tool through the AI Gateway to let any model read a page it already has a URL for.",
+        "model_type": "tool"
+      }
+    },
+    {
+      "id": "browserbase/search",
+      "metadata": {
+        "description": "Search the web with Browserbase's Search API for fast, structured web discovery, returning result titles, URLs, and metadata without opening a browser session. Use it as a built-in tool through the AI Gateway to give any model access to real-time web information.",
+        "model_type": "tool"
+      }
+    },
+    {
+      "id": "bytedance/seed-1.6",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1756684800,
+        "description": "ByteDance's new multimodal deep-thinking model, supporting both text and visual inputs with enhanced reasoning capabilities.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "bytedance/seed-1.8",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1756684800,
+        "description": "Bytedance Seed 1.8 features stronger multimodal understanding and agent capabilities. The model delivers superior performance across a wide range of complex real-world tasks, helping enterprises create greater value.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "bytedance/seed-2.1-turbo",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1782172800,
+        "description": "Seed 2.1 Turbo is ByteDance’s multimodal language model supporting text, image, and video inputs with text output. It offers a 262,144-token context window, reasoning, function calling, and structured JSON output.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "bytedance/seedream-4.0",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1757376000,
+        "description": "Seedream 4.0 is a SOTA multimodal image creation model built on leading architecture. It breaks through the boundaries of traditional text-to-image models by natively supporting text, single-image, and multi-image inputs. Users can freely combine text and images to achieve diverse creative modes within a single model—such as multi-image blending, image editing, and sequentially batch image generation, featuring subject consistency, making image creation more free and controllable.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "bytedance/seedream-4.5",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1764720000,
+        "description": "Seedream 4.5 is the latest in-house image generation model developed by ByteDance. Compared with Seedream 4.0, it delivers comprehensive improvements—especially in editing consistency, including better preservation of subject details, lighting, and color tone. It also enhances portrait refinement and small-text rendering. The model’s multi-image composition capabilities have been significantly strengthened, and both reasoning performance and visual aesthetics continue to advance, enabling more accurate and artistically expressive image generation.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "bytedance/seedream-5.0-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1770940800,
+        "description": "ByteDance-Seedream-5.0-lite is the latest image generation model released by BytePlus. For the first time, it introduces web-connected retrieval, enabling the model to fuse real-time online information to significantly improve the timeliness and relevance of generated images. The model’s reasoning and comprehension capabilities are further upgraded, allowing it to accurately interpret complex prompts and visual inputs. In addition, ByteDance-Seedream-5.0-lite delivers notable improvements in global knowledge coverage, reference consistency, and professional-grade scene generation, making it well suited for enterprise-level visual creation workflows.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "bytedance/seedream-5.0-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1783728000,
+        "description": "Seedream-5.0-Pro, ByteDance's newest image generation model, delivers comprehensive upgrades for complex, lifelike image creation and editing, ushering in a new phase of controllable visual production. It stands out with precise editing control, robust commercial applicability and natural rendering results.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "callstack/apex",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1791417600,
+        "description": "Apex is Callstack’s agentic coding model for mobile and web development, optimized for React Native, React, and Next.js. With a 256K context window, it supports feature development, debugging, code reviews, testing, and large refactors.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
       }
     },
     {
@@ -550,6 +1025,32 @@
       }
     },
     {
+      "id": "cohere/command-a-03-2025",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1741824000,
+        "description": "Command A is Cohere's most performant model to date, excelling at tool use, agents, retrieval augmented generation (RAG), and multilingual use cases. Command A has a context length of 256K, only requires two GPUs to run, and has 150% higher throughput compared to Command R+ 08-2024.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "cohere/command-r-08-2024",
       "metadata": {
         "architecture": {
@@ -704,6 +1205,57 @@
       }
     },
     {
+      "id": "cohere/embed-v4.0",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1744675200,
+        "description": "A model that allows for text, images, or mixed content to be classified or turned into embeddings.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "cohere/embed-v5.0-fast",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1790726400,
+        "description": "Cohere's lightweight embedding model optimized for low latency and high throughput in interactive search, agent loops, and high-volume retrieval. Embed 5 Fast supports text, images, and mixed content, over 100 languages, and a 128,000-token context window, with output dimensions from 256 to 2,048. It shares an embedding space with Embed 5 Pro.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "cohere/embed-v5.0-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1790726400,
+        "description": "Cohere's most capable embedding model for quality-critical enterprise retrieval across text, images, and mixed content such as PDFs. Embed 5 Pro supports over 100 languages and a 128,000-token context window, with output dimensions from 256 to 2,048. It shares an embedding space with Embed 5 Fast, enabling Pro indexing with Fast querying.",
+        "model_type": "embedding"
+      }
+    },
+    {
       "id": "cohere/north-mini-code",
       "metadata": {
         "architecture": {
@@ -817,6 +1369,57 @@
           "is_moderated": true,
           "max_completion_tokens": 3686
         }
+      }
+    },
+    {
+      "id": "cohere/rerank-v4.0-fast",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1765411200,
+        "description": "A light version of Rerank 4 Pro, this is a multilingual model that allows for re-ranking English and non-english documents and semi-structured data (JSON). This model is better suited for low latency and high throughput use-cases than its pro variant.",
+        "model_type": "reranking"
+      }
+    },
+    {
+      "id": "cohere/rerank-v4.0-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1765411200,
+        "description": "A multilingual model that allows for re-ranking English and non-english documents and semi-structured data (JSON). This model is better suited for state-of-the-art quality and complex use-cases than its fast variant.",
+        "model_type": "reranking"
+      }
+    },
+    {
+      "id": "convaiinnovations/laya",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 8192,
+        "created": 1790812800,
+        "description": "Laya is Convai Innovations’ System One evaluation model for fast, structured decisions. It evaluates shared state against choice, score, and yes/no questions and returns typed answers with probabilities in a single forward pass. It supports classification, routing, guardrail checks, and rubric-based assessment without generating free-form text.",
+        "model_type": "decision"
       }
     },
     {
@@ -1079,6 +1682,32 @@
       }
     },
     {
+      "id": "deepseek/deepseek-r1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 160000,
+        "created": 1737331200,
+        "description": "The DeepSeek R1 model has undergone a minor version upgrade, with the current version being DeepSeek-R1-0528.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
       "id": "deepseek/deepseek-r1-distill-llama-70b",
       "metadata": {
         "architecture": {
@@ -1130,6 +1759,60 @@
           "is_moderated": false,
           "max_completion_tokens": 7372
         }
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v3.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 163840,
+        "created": 1755734400,
+        "description": "DeepSeek-V3.1 is post-trained on the top of DeepSeek-V3.1-Base, which is built upon the original V3 base checkpoint through a two-phase long context extension approach, following the methodology outlined in the original DeepSeek-V3 report. We have expanded our dataset by collecting additional long documents and substantially extending both training phases. The 32K extension phase has been increased 10-fold to 630B tokens, while the 128K extension phase has been extended by 3.3x to 209B tokens. Additionally, DeepSeek-V3.1 is trained using the UE8M0 FP8 scale data format to ensure compatibility with microscaling data formats.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "deepseek/deepseek-v3.2-thinking",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 163842,
+        "created": 1764547200,
+        "description": "",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
       }
     },
     {
@@ -1621,6 +2304,13 @@
       }
     },
     {
+      "id": "exa/search",
+      "metadata": {
+        "description": "Search the web with Exa's neural search API, returning LLM-optimized, ranked results with content excerpts. Use it as a built-in tool through the AI Gateway to give any model access to real-time web information.",
+        "model_type": "tool"
+      }
+    },
+    {
       "id": "fish-audio/s2.1-pro-free",
       "metadata": {
         "architecture": {
@@ -1832,6 +2522,36 @@
           "is_moderated": false,
           "max_completion_tokens": 65535
         }
+      }
+    },
+    {
+      "id": "google/gemini-2.5-flash-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1048576,
+        "created": 1750118400,
+        "description": "Gemini 2.5 Flash-Lite is a balanced, low-latency model with configurable thinking budgets and tool connectivity (e.g., Google Search grounding and code execution). It supports multimodal input and offers a 1M-token context window.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     },
     {
@@ -2802,6 +3522,22 @@
       }
     },
     {
+      "id": "google/gemini-3.5-transcribe-live",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1787702400,
+        "description": "Live transcription by Google",
+        "model_type": "transcription"
+      }
+    },
+    {
       "id": "google/gemini-3.6-flash",
       "metadata": {
         "architecture": {
@@ -3494,6 +4230,56 @@
       }
     },
     {
+      "id": "google/gemini-3.8-live",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "audio"
+          ],
+          "output_modalities": [
+            "text",
+            "audio"
+          ]
+        },
+        "created": 1789430400,
+        "description": "Gemini 3.8 Live is Google's model for real-time audio conversations. It supports spoken interactions for developers building voice assistants, conversational experiences, and applications that respond to users through audio.",
+        "model_type": "realtime",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "google/gemini-3.8-live-extended-thinking",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "audio"
+          ],
+          "output_modalities": [
+            "text",
+            "audio"
+          ]
+        },
+        "created": 1789430400,
+        "description": "Gemini 3.8 Live Extended Thinking is Google's real-time audio model with extended thinking capabilities. It combines spoken interaction with additional reasoning for voice assistants and other conversational applications.",
+        "model_type": "realtime",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
       "id": "google/gemini-embedding-001",
       "metadata": {
         "architecture": {
@@ -3830,6 +4616,38 @@
       }
     },
     {
+      "id": "google/text-embedding-005",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1722470400,
+        "description": "English-focused text embedding model optimized for code and English language tasks.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "google/text-multilingual-embedding-002",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1709251200,
+        "description": "Multilingual text embedding model optimized for cross-lingual tasks across many languages.",
+        "model_type": "embedding"
+      }
+    },
+    {
       "id": "hexgrad/kokoro-82m",
       "metadata": {
         "architecture": {
@@ -4003,6 +4821,88 @@
       }
     },
     {
+      "id": "inception/mercury-2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1771891200,
+        "description": "A diffusion-based reasoning LLM that generates text via parallel refinement (not token-by-token), delivering real-time latency with ~1k tokens/sec plus 128K context and built-in tool/JSON support.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "inception/mercury-2.5",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 260000,
+        "created": 1788825600,
+        "description": "Mercury 2.5 is Inception’s diffusion-based reasoning model for chat, agents, and structured workflows, with tool calling, structured outputs, and a 260K context window.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "inception/mercury-coder-small",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1740528000,
+        "description": "Mercury Coder Small is ideal for code generation, debugging, and refactoring tasks with minimal latency.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "inception/mercury-decide",
       "metadata": {
         "architecture": {
@@ -4041,6 +4941,32 @@
           "is_moderated": false,
           "max_completion_tokens": 58982
         }
+      }
+    },
+    {
+      "id": "inclusionai/ling-3.0-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1785974400,
+        "description": "Ling 3.0 Flash is designed with token efficiency and production-scale agentic inference as key priorities, enabling developers to complete more useful work within constrained token, latency, and serving-cost budgets.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
       }
     },
     {
@@ -4304,6 +5230,84 @@
       }
     },
     {
+      "id": "inference-net/schematron-v2-small",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1776297600,
+        "description": "Schematron V2 Small is a specialized model from Inference.net for extracting structured data from HTML. It uses a supplied JSON Schema to produce conforming JSON and is designed for complex schemas and long pages.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "inference-net/schematron-v2-turbo",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1776297600,
+        "description": "Schematron V2 Turbo is a specialized model from Inference.net for extracting structured data from HTML. It uses a supplied JSON Schema to produce conforming JSON and is optimized for high-throughput extraction.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "interfaze/interfaze-beta",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1759795200,
+        "description": "Interfaze is an AI model built on a new architecture that merges specialized DNN/CNN models with LLMs for developer tasks that require deterministic output and high consistency like OCR, scraping, classification, STT and more.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "liquid/lfm-2.5-2.6b",
       "metadata": {
         "architecture": {
@@ -4413,6 +5417,34 @@
           "is_moderated": false,
           "max_completion_tokens": 460
         }
+      }
+    },
+    {
+      "id": "liquid/lfm2.5-24b-a2b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1791849600,
+        "description": "LFM2.5-24B-A2B is a text-generation model from Liquid AI with a 128,000-token context window.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     },
     {
@@ -4729,6 +5761,33 @@
           "is_moderated": false,
           "max_completion_tokens": 32768
         }
+      }
+    },
+    {
+      "id": "meta-llama/llama-4-maverick",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1743811200,
+        "description": "As a general purpose LLM, Llama 4 Maverick contains 17 billion active parameters, 128 experts, and 400 billion total parameters, offering high quality at a lower price compared to Llama 3.3 70B.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
       }
     },
     {
@@ -5104,6 +6163,274 @@
       }
     },
     {
+      "id": "microsoft/mai-image-2.6",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1791849600,
+        "description": "MAI-Image-2.6 is a diffusion-based generative model designed for both high-quality text-to-image synthesis and precise, controllable image-to-image editing. It progressively transforms random noise into a coherent image aligned with a given text prompt, leveraging a flow-matching loss to learn a continuous transformation between the noise distribution and the data distribution. MAI-Image-2.6 excels at precise, surgical edits with consistency - enabling users and developers to make targeted object edits, adapt layouts, update text, clean up artifacts like motion blur, and preserve visual consistency across iterations.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "microsoft/mai-image-2.6-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1791849600,
+        "description": "MAI-Image-2.6 is a diffusion-based generative model designed for both high-quality text-to-image synthesis and precise, controllable image-to-image editing. It progressively transforms random noise into a coherent image aligned with a given text prompt, leveraging a flow-matching loss to learn a continuous transformation between the noise distribution and the data distribution. MAI-Image-2.6 excels at precise, surgical edits with consistency - enabling users and developers to make targeted object edits, adapt layouts, update text, clean up artifacts like motion blur, and preserve visual consistency across iterations.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "microsoft/mai-transcribe-2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1788393600,
+        "description": "MAI-Transcribe 2 is a multilingual speech-to-text model from Microsoft AI, ranked #1 on the FLEURS multilingual benchmark. It supports 60 languages with automatic language identification, code switching for mixed-language speech, speaker diarization, word-level timestamps, keyword biasing for domain-specific terminology, and configurable verbatim or clean transcription styles. It is suited for captions, call transcription, subtitling, accessibility, and other voice-enabled applications, and is faster than MAI-Transcribe-1.5 on long-form audio.",
+        "model_type": "transcription"
+      }
+    },
+    {
+      "id": "microsoft/mai-transcribe-2-streaming",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1790812800,
+        "description": "MAI-Transcribe-2-Streaming is a low-latency, \"speech in, text out\" realtime transcription API. Audio can be sent to the model as a continuous stream over a WebSocket connection and transcripts are returned incrementally as the speaker talks, with no need to wait for the utterance to finish. Intermediate results (aka Partials) update the current transcription; final results confirm a segment.",
+        "model_type": "transcription"
+      }
+    },
+    {
+      "id": "microsoft/mai-voice-2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "audio"
+          ]
+        },
+        "created": 1780358400,
+        "description": "Microsoft AI's highest-fidelity text-to-speech model, with expressive multilingual voices and consistent speakers across long-form narration. Served through Azure Speech (preview).",
+        "model_type": "speech"
+      }
+    },
+    {
+      "id": "microsoft/mai-voice-2-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "audio"
+          ]
+        },
+        "created": 1784764800,
+        "description": "Microsoft AI's low-latency text-to-speech model for voice agents and assistants, with the expressive multilingual voices of MAI-Voice-2 at twice the speed.",
+        "model_type": "speech"
+      }
+    },
+    {
+      "id": "microsoft/mai-voice-2.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "audio"
+          ]
+        },
+        "created": 1790812800,
+        "description": "MAI-Voice-2.1 is our highest-fidelity, most expressive text-to-speech model, delivering rich, natural speech across 23 languages. It extends the MAI-Voice family with broad multilingual coverage, gated instant voice cloning, and strong long-form generation capabilities. With its detailed prosody, nuanced expressiveness, and studio-grade audio quality, MAI-Voice-2.1 is ideal for experiences where maximum voice quality and fidelity are required - long-form narration, brand-defining audio etc.",
+        "model_type": "speech"
+      }
+    },
+    {
+      "id": "microsoft/mai-voice-2.1-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "audio"
+          ]
+        },
+        "created": 1790812800,
+        "description": "MAI-Voice-2.1-Flash is a text-to-speech model built for fast, low-latency generation. It produces high- fidelity, natural, and expressive speech across 23 languages and supports gated instant voice cloning, all while being optimized for real-time responsiveness. Its human-like intonation, rhythm, and emotional nuance make it ideal for voice agents, assistants, and other interactive scenarios where latency and cost are critical.",
+        "model_type": "speech"
+      }
+    },
+    {
+      "id": "minimax/minimax-m2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 205000,
+        "created": 1761523200,
+        "description": "MiniMax-M2 redefines efficiency for agents. It is a compact, fast, and cost-effective MoE model (230 billion total parameters with 10 billion active parameters) built for elite performance in coding and agentic tasks, all while maintaining powerful general intelligence.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 204800,
+        "created": 1766448000,
+        "description": "MiniMax 2.1 is MiniMax's latest model, optimized specifically for robustness in coding, tool use, instruction following, and long-horizon planning.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.1-lightning",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 204800,
+        "created": 1766448000,
+        "description": "MiniMax-M2.1-lightning is a faster version of MiniMax-M2.1, offering the same performance but with significantly higher throughput (output speed ~100 TPS, MiniMax-M2 output speed ~60 TPS).",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.5",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1770854400,
+        "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. It is capable of handling the entire development process of various complex systems. It covers full-stack projects across multiple platforms including Web, Android, iOS, Windows, and Mac, encompassing server-side APIs, functional logic, and databases.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.5-highspeed",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 204800,
+        "created": 1770854400,
+        "description": "M2.5 highspeed: Same performance, faster and more agile (output speed approximately 100 tps)",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "minimax/minimax-m2.7",
       "metadata": {
         "architecture": {
@@ -5233,6 +6560,34 @@
           "is_moderated": false,
           "max_completion_tokens": 131072
         }
+      }
+    },
+    {
+      "id": "minimax/minimax-m2.7-highspeed",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 204800,
+        "created": 1773792000,
+        "description": "M2.7 Highspeed: Same performance, faster and more agile (output speed approximately 100 tps)",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     },
     {
@@ -5524,6 +6879,22 @@
       }
     },
     {
+      "id": "mistralai/codestral-embed",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1748390400,
+        "description": "Code embedding model that can embed code databases and repositories to power coding assistants.",
+        "model_type": "embedding"
+      }
+    },
+    {
       "id": "mistralai/codestral-embed-2505",
       "metadata": {
         "architecture": {
@@ -5632,6 +7003,34 @@
       }
     },
     {
+      "id": "mistralai/ministral-14b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1764633600,
+        "description": "Ministral 3 14B is the largest model in the Ministral 3 family, offering state-of-the-art capabilities and performance comparable to its larger Mistral Small 3.2 24B counterpart. Optimized for local deployment, it delivers high performance across diverse hardware, including local setups.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "mistralai/ministral-14b-2512",
       "metadata": {
         "architecture": {
@@ -5723,6 +7122,31 @@
           "is_moderated": false,
           "max_completion_tokens": 209715
         }
+      }
+    },
+    {
+      "id": "mistralai/ministral-3b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 131072,
+        "created": 1729036800,
+        "description": "A compact, efficient model for on-device tasks like smart assistants and local analytics, offering low-latency performance.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice"
+        ]
       }
     },
     {
@@ -5820,6 +7244,33 @@
       }
     },
     {
+      "id": "mistralai/ministral-8b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1729036800,
+        "description": "A more powerful model with faster, memory-efficient inference, ideal for complex workflows and demanding edge applications.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "mistralai/ministral-8b-2512",
       "metadata": {
         "architecture": {
@@ -5911,6 +7362,22 @@
           "is_moderated": false,
           "max_completion_tokens": 209715
         }
+      }
+    },
+    {
+      "id": "mistralai/mistral-embed",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1702252800,
+        "description": "General-purpose text embedding model for semantic search, similarity, clustering, and RAG workflows.",
+        "model_type": "embedding"
       }
     },
     {
@@ -6685,6 +8152,56 @@
       }
     },
     {
+      "id": "mixedbread/toast-1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 131000,
+        "created": 1786579200,
+        "description": "Built for knowledge-intensive questions, multi-step retrieval, and evidence synthesis. Toast 1 can work with any backend exposed through function calling.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "moonshotai/kimi-k2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 131072,
+        "created": 1752192000,
+        "description": "Kimi K2 is a state-of-the-art mixture-of-experts (MoE) language model with 32 billion activated parameters and 1 trillion total parameters. Trained with the Muon optimizer, Kimi K2 achieves exceptional performance across frontier knowledge, reasoning, and coding tasks while being meticulously optimized for agentic capabilities.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice"
+        ]
+      }
+    },
+    {
       "id": "moonshotai/kimi-k2.5",
       "metadata": {
         "architecture": {
@@ -7086,6 +8603,37 @@
       }
     },
     {
+      "id": "moonshotai/kimi-k2.7-code",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf",
+            "video"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1781222400,
+        "description": "Kimi-K2.7-Code is a coding model from Moonshot AI. It has  improved coding & agent performance over K2.6, more reasoning efficiency with less overthinking, and improved instruction following for long-horizon coding.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "moonshotai/kimi-k3",
       "metadata": {
         "architecture": {
@@ -7277,6 +8825,52 @@
           "is_moderated": false,
           "max_completion_tokens": 943718
         }
+      }
+    },
+    {
+      "id": "morph/morph-v3-fast",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 81920,
+        "created": 1751846400,
+        "description": "Morph offers a specialized AI model that applies code changes suggested by frontier models (like Claude or GPT-4o) to your existing code files FAST - 4500+ tokens/second. It acts as the final step in the AI coding workflow. Supports 16k input tokens and 16k output tokens.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "morph/morph-v3-large",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 81920,
+        "created": 1751846400,
+        "description": "Morph offers a specialized AI model that applies code changes suggested by frontier models (like Claude or GPT-4o) to your existing code files FAST - 2500+ tokens/second. It acts as the final step in the AI coding workflow. Supports 16k input tokens and 16k output tokens.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     },
     {
@@ -8108,6 +9702,576 @@
       }
     },
     {
+      "id": "nvidia/nemotron-nano-12b-v2-vl",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 131072,
+        "created": 1761609600,
+        "description": "The model is an auto-regressive vision language model that uses an optimized transformer architecture. The model enables multi-image reasoning and video understanding, along with strong document intelligence, visual Q&A and summarization capabilities.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "nvidia/nemotron-nano-9b-v2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 131072,
+        "created": 1755475200,
+        "description": "NVIDIA-Nemotron-Nano-9B-v2 is a large language model (LLM) trained from scratch by NVIDIA, and designed as a unified model for both reasoning and non-reasoning tasks. It responds to user queries and tasks by first generating a reasoning trace and then concluding with a final response. The model's reasoning capabilities can be controlled via a system prompt. If the user prefers the model to provide its final answer without intermediate reasoning traces, it can be configured to do so.\\",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-3.5-turbo",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 16385,
+        "created": 1677628800,
+        "description": "OpenAI's most capable and cost effective model in the GPT-3.5 family optimized for chat purposes, but also works well for traditional completions tasks.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-4-turbo",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1712620800,
+        "description": "gpt-4-turbo from OpenAI has broad general knowledge and domain expertise allowing it to follow complex instructions in natural language and solve difficult problems accurately. It has a knowledge cutoff of April 2023 and a 128,000 token context window.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-4.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1047576,
+        "created": 1744588800,
+        "description": "GPT 4.1 is OpenAI's flagship model for complex tasks. It is well suited for problem solving across domains.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-4.1-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1047576,
+        "created": 1747180800,
+        "description": "GPT 4.1 mini provides a balance between intelligence, speed, and cost that makes it an attractive model for many use cases.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-4.1-nano",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1047576,
+        "created": 1744588800,
+        "description": "GPT-4.1 nano is the fastest, most cost-effective GPT 4.1 model.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-4o",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1715558400,
+        "description": "GPT-4o from OpenAI has broad general knowledge and domain expertise allowing it to follow complex instructions in natural language and solve difficult problems accurately. It matches GPT-4 Turbo performance with a faster and cheaper API.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-4o-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1721260800,
+        "description": "GPT-4o mini from OpenAI is their most advanced and cost-efficient small model. It is multi-modal (accepting text or image inputs and outputting text) and has higher intelligence than gpt-3.5-turbo but is just as fast.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-4o-mini-transcribe",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1710288000,
+        "description": "GPT-4o mini Transcribe is a speech-to-text model that uses GPT-4o mini to transcribe audio. It offers improvements to word error rate and better language recognition and accuracy compared to original Whisper models. Use it for more accurate transcripts.",
+        "model_type": "transcription"
+      }
+    },
+    {
+      "id": "openai/gpt-4o-transcribe",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1710288000,
+        "description": "GPT-4o Transcribe is a speech-to-text model that uses GPT-4o to transcribe audio. It offers improvements to word error rate and better language recognition and accuracy compared to original Whisper models. Use it for more accurate transcripts.",
+        "model_type": "transcription"
+      }
+    },
+    {
+      "id": "openai/gpt-5",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1754524800,
+        "description": "GPT-5 is OpenAI's flagship language model that excels at complex reasoning, broad real-world knowledge, code-intensive, and multi-step agentic tasks.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5-codex",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1757894400,
+        "description": "GPT-5-Codex is a version of GPT-5 optimized for agentic coding tasks in Codex or similar environments.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1754524800,
+        "description": "GPT-5 mini is a cost optimized model that excels at reasoning/chat tasks. It offers an optimal balance between speed, cost, and capability.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5-nano",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1754524800,
+        "description": "GPT-5 nano is a high throughput model that excels at simple instruction or classification tasks.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5.1-codex",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1762905600,
+        "description": "GPT-5.1-Codex is a version of GPT-5.1 optimized for agentic coding tasks in Codex or similar environments.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5.1-codex-max",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1763510400,
+        "description": "GPT‑5.1-Codex-Max is purpose-built for agentic coding.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5.1-codex-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1762905600,
+        "description": "GPT-5.1 Codex mini is a smaller, faster, and cheaper version of GPT-5.1 Codex.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5.1-thinking",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1762905600,
+        "description": "An upgraded version of GPT-5 that adapts thinking time more precisely to the question to spend more time on complex questions and respond more quickly to simpler tasks.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5.2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1765411200,
+        "description": "GPT-5.2 is OpenAI's best general-purpose model, part of the GPT-5 flagship model family. It's their most intelligent model yet for both general and agentic tasks.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-5.4-nano",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 400000,
+        "created": 1773705600,
+        "description": "GPT-5.4 Nano is designed for tasks where speed and cost matter most like classification, data extraction, ranking, and sub-agents.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "openai/gpt-audio-mini",
       "metadata": {
         "architecture": {
@@ -8167,6 +10331,45 @@
           "is_moderated": true,
           "max_completion_tokens": 16384
         }
+      }
+    },
+    {
+      "id": "openai/gpt-image-1-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1759708800,
+        "description": "A cost-efficient version of GPT Image 1. It is a natively multimodal language model that accepts both text and image inputs, and produces image outputs.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "openai/gpt-live-1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "audio"
+          ],
+          "output_modalities": [
+            "text",
+            "audio"
+          ]
+        },
+        "created": 1788998400,
+        "description": "Our premier model for natural, expressive voice conversations with smooth interruption handling.",
+        "model_type": "realtime",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop"
+        ]
       }
     },
     {
@@ -8392,6 +10595,34 @@
       }
     },
     {
+      "id": "openai/gpt-oss-safeguard-120b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1764633600,
+        "description": "GPT OSS Safeguard 120B is OpenAI’s open-weight safety model for content moderation and guardrail enforcement. It helps teams evaluate content against custom safety policies and build scalable, adaptable protections for production AI applications.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "openai/gpt-oss-safeguard-20b",
       "metadata": {
         "architecture": {
@@ -8444,6 +10675,295 @@
           "is_moderated": false,
           "max_completion_tokens": 65536
         }
+      }
+    },
+    {
+      "id": "openai/gpt-realtime-1.5",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "audio"
+          ],
+          "output_modalities": [
+            "text",
+            "audio"
+          ]
+        },
+        "created": 1771804800,
+        "description": "GPT-Realtime-1.5 is our flagship audio model for voice agents and customer support.",
+        "model_type": "realtime",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-realtime-2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "audio"
+          ],
+          "output_modalities": [
+            "text",
+            "audio"
+          ]
+        },
+        "created": 1778112000,
+        "description": "GPT Realtime 2 is our most capable realtime voice model. It supports speech-to-speech interactions with configurable reasoning effort, stronger instruction following, and more reliable tool use for complex voice-agent workflows.",
+        "model_type": "realtime",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-realtime-2.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "audio"
+          ],
+          "output_modalities": [
+            "text",
+            "audio"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1783555200,
+        "description": "GPT-Realtime-2.1 updates GPT-Realtime-2 with improved alphanumeric recognition, silence and noise handling, and interruption behavior. It supports speech-to-speech interactions with configurable reasoning effort, instruction following, and tool use for complex voice-agent workflows.",
+        "model_type": "realtime",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-realtime-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "audio"
+          ],
+          "output_modalities": [
+            "text",
+            "audio"
+          ]
+        },
+        "created": 1760054400,
+        "description": "GPT-Realtime mini is capable of responding to audio and text inputs in realtime over WebRTC, WebSocket, or SIP connections.",
+        "model_type": "realtime",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop"
+        ]
+      }
+    },
+    {
+      "id": "openai/gpt-realtime-whisper",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1778112000,
+        "description": "GPT Realtime Whisper is a streaming speech-to-text model for applications that need low-latency transcript deltas from live audio. It is designed for realtime use cases where developers need to tune latency and accuracy. GPT Realtime Whisper is priced by audio duration rather than text tokens.",
+        "model_type": "transcription"
+      }
+    },
+    {
+      "id": "openai/o1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 200000,
+        "created": 1733356800,
+        "description": "o1 is OpenAI's flagship reasoning model, designed for complex problems that require deep thinking. It provides strong reasoning capabilities with improved accuracy for complex multi-step tasks.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/o3",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 200000,
+        "created": 1744761600,
+        "description": "OpenAI's o3 is their most powerful reasoning model, setting new state-of-the-art benchmarks in coding, math, science, and visual perception. It excels at complex queries requiring multi-faceted analysis, with particular strength in analyzing images, charts, and graphics.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/o3-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 200000,
+        "created": 1738281600,
+        "description": "o3-mini is OpenAI's most recent small reasoning model, providing high intelligence at the same cost and latency targets of o1-mini.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/o3-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 200000,
+        "created": 1749513600,
+        "description": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently better answers.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/o4-mini",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 200000,
+        "created": 1744761600,
+        "description": "OpenAI's o4-mini delivers fast, cost-efficient reasoning with exceptional performance for its size, particularly excelling in math (best-performing on AIME benchmarks), coding, and visual tasks.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "openai/tts-1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "audio"
+          ]
+        },
+        "created": 1699228800,
+        "description": "TTS is a model that converts text to natural sounding spoken text.",
+        "model_type": "speech"
+      }
+    },
+    {
+      "id": "openai/tts-1-hd",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "audio"
+          ]
+        },
+        "created": 1699228800,
+        "description": "TTS is a model that converts text to natural sounding spoken text. The tts-1-hd model is optimized for high quality text-to-speech use cases.",
+        "model_type": "speech"
       }
     },
     {
@@ -8571,6 +11091,47 @@
       }
     },
     {
+      "id": "parallel/search",
+      "metadata": {
+        "description": "Search the web using Parallel AI's Search API for LLM-optimized excerpts. Takes a natural language objective and returns relevant excerpts, replacing multiple keyword searches with a single call for broad or complex queries.",
+        "model_type": "tool"
+      }
+    },
+    {
+      "id": "perplexity/search",
+      "metadata": {
+        "description": "Search the web using Perplexity's Search API for real-time information, news, research papers, and articles. Provides ranked search results with advanced filtering options including domain, language, date range, and recency filters.",
+        "model_type": "tool"
+      }
+    },
+    {
+      "id": "perplexity/sonar",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 127000,
+        "created": 1739923200,
+        "description": "Perplexity's lightweight offering with search grounding, quicker and cheaper than Sonar Pro.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "poolside/laguna-s-2.1",
       "metadata": {
         "architecture": {
@@ -8673,6 +11234,96 @@
       }
     },
     {
+      "id": "prodia/flux-fast-schnell",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "context_length": 512,
+        "created": 1722556800,
+        "description": "Lightning-fast image generation",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "quiverai/arrow-1.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "context_length": 131072,
+        "created": 1776297600,
+        "description": "Best default for speed and quality, with stronger prompt following and more precise SVG structure.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "quiverai/arrow-2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text",
+            "image"
+          ]
+        },
+        "context_length": 131072,
+        "created": 1789516800,
+        "description": "SVG generation model with agentic refinement and tool calling.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "quiverai/arrow-2-telos",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text",
+            "image"
+          ]
+        },
+        "context_length": 131072,
+        "created": 1789516800,
+        "description": "Higher-refinement Arrow 2 variant combining Arrow's speed with frontier-model reasoning.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
       "id": "qwen/qwen-2.5-coder-32b-instruct",
       "metadata": {
         "architecture": {
@@ -8730,6 +11381,60 @@
           "is_moderated": false,
           "max_completion_tokens": 29491
         }
+      }
+    },
+    {
+      "id": "qwen/qwen3-14b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 40960,
+        "created": 1745798400,
+        "description": "Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models. Built upon extensive training, Qwen3 delivers groundbreaking advancements in reasoning, instruction-following, agent capabilities, and multilingual support",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "qwen/qwen3-235b-a22b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1745798400,
+        "description": "Qwen3-235B-A22B-Instruct-2507 is the updated version of the Qwen3-235B-A22B non-thinking mode, featuring Significant improvements in general capabilities, including instruction following, logical reasoning, text comprehension, mathematics, science, coding and tool usage.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     },
     {
@@ -8910,6 +11615,101 @@
       }
     },
     {
+      "id": "qwen/qwen3-coder",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1753142400,
+        "description": "Mixture-of-experts LLM with advanced coding and reasoning capabilities",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "qwen/qwen3-coder-30b-a3b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1753920000,
+        "description": "Efficient coding specialist balancing performance with cost-effectiveness for daily development tasks while maintaining strong tool integration capabilities.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "qwen/qwen3-coder-next",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1753142400,
+        "description": "Qwen3-Coder-Next is an open-weight language model built specifically for coding, with strong performance on large-scale software engineering and agentic coding benchmarks. It uses a hybrid Mixture-of-Experts architecture to offer high capability at relatively modest active parameter counts, improving efficiency for real-world deployments. The model is trained on diverse code and natural language data so it can handle tasks like code generation, refactoring, debugging, repository-level reasoning, and technical explanation across multiple programming languages. It is also optimized for tool use and function calling, making it suitable as the core of coding agents that interact with shells, editors, issue trackers, and other developer tools.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "qwen/qwen3-embedding-0.6b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32768,
+        "created": 1763078400,
+        "description": "The Qwen3 Embedding model series is the latest proprietary model of the Qwen family, specifically designed for text embedding and ranking tasks. Building upon the dense foundational models of the Qwen3 series, it provides a comprehensive range of text embeddings and reranking models in various sizes (0.6B, 4B, and 8B).",
+        "model_type": "embedding"
+      }
+    },
+    {
       "id": "qwen/qwen3-embedding-4b",
       "metadata": {
         "architecture": {
@@ -8965,6 +11765,105 @@
       }
     },
     {
+      "id": "qwen/qwen3-embedding-8b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 41000,
+        "created": 1749081600,
+        "description": "The Qwen3 Embedding model series is the latest proprietary model of the Qwen family, specifically designed for text embedding and ranking tasks. Building upon the dense foundational models of the Qwen3 series, it provides a comprehensive range of text embeddings and reranking models in various sizes (0.6B, 4B, and 8B).",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "qwen/qwen3-max-thinking",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1769126400,
+        "description": "Compared with the snapshot as of September 23, 2025, the Qwen-3 series Max model in this release achieves an effective integration of thinking and non-thinking modes, resulting in a comprehensive and substantial improvement in the model’s overall performance. In thinking mode, the model simultaneously supports web search, web information extraction, and a code interpreter tool, enabling it to tackle more complex and challenging problems with greater accuracy by leveraging external tools while engaging in slow, deliberative reasoning. This version is based on a snapshot taken on January 23, 2026.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "qwen/qwen3-next-80b-a3b-instruct",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1757548800,
+        "description": "A new generation of open-source, non-thinking mode model powered by Qwen3. This version demonstrates superior Chinese text understanding, augmented logical reasoning, and enhanced capabilities in text generation tasks over the previous iteration (Qwen3-235B-A22B-Instruct-2507).",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "qwen/qwen3-next-80b-a3b-thinking",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1757548800,
+        "description": "Qwen3-Next uses a highly sparse MoE design: 80B total parameters, but only ~3B activated per inference step. Experiments show that, with global load balancing, increasing total expert parameters while keeping activated experts fixed steadily reduces training loss.Compared to Qwen3’s MoE (128 total experts, 8 routed), Qwen3-Next expands to 512 total experts, combining 10 routed experts + 1 shared expert — maximizing resource usage without hurting performance. The Qwen3-Next-80B-A3B-Thinking excels at complex reasoning tasks — outperforming higher-cost models like Qwen3-30B-A3B-Thinking-2507 and Qwen3-32B-Thinking, outpeforming the closed-source Gemini-2.5-Flash-Thinking on multiple benchmarks, and approaching the performance of our top-tier model Qwen3-235B-A22B-Thinking-2507.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "qwen/qwen3-reranker-8b",
       "metadata": {
         "architecture": {
@@ -9015,6 +11914,87 @@
           "is_moderated": false,
           "max_completion_tokens": 36864
         }
+      }
+    },
+    {
+      "id": "qwen/qwen3-vl-235b-a22b-instruct",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "created": 1758585600,
+        "description": "The Qwen3 series VL models has been comprehensively upgraded in areas such as visual coding and spatial perception. Its visual perception and recognition capabilities have significantly improved, supporting the understanding of ultra-long videos, and its OCR functionality has undergone a major enhancement.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice"
+        ]
+      }
+    },
+    {
+      "id": "qwen/qwen3.5-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1771891200,
+        "description": "The Qwen3.5 native vision-language Flash models are built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. Compared to the 3 series, these models deliver a leap forward in performance for both pure text and multimodal tasks, offering fast response times while balancing inference speed and overall performance.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
+      "id": "qwen/qwen3.5-plus",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1771200000,
+        "description": "The Qwen3.5 native vision-language series Plus models are built on a hybrid architecture that integrates linear attention mechanisms with sparse mixture-of-experts models, achieving higher inference efficiency. In a variety of task evaluations, the 3.5 series consistently demonstrates performance on par with state-of-the-art leading models. Compared to the 3 series, these models show a leap forward in both pure-text and multimodal capabilities.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
       }
     },
     {
@@ -9096,6 +12076,34 @@
           "is_moderated": false,
           "max_completion_tokens": 65536
         }
+      }
+    },
+    {
+      "id": "qwen/qwen3.6-plus",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1775088000,
+        "description": "The Qwen3.6 native vision-language Plus series models demonstrate exceptional performance on par with the current state-of-the-art models, with a significant improvement in overall results compared to the 3.5 series. The models have been markedly enhanced in code-related capabilities such as agentic coding, front-end programming, and Vibe coding, as well as in multi-modal general object recognition, OCR, and object localization.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
       }
     },
     {
@@ -9269,6 +12277,131 @@
       }
     },
     {
+      "id": "qwen/qwen3.8-omni-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1789603200,
+        "description": "Qwen3.8-Omni-Flash is Alibaba’s native multimodal model for understanding text, images, audio, and video and generating text. Built on Qwen3.8-Flash-Next, it supports a 1M-token context window, reasoning, and tool calling for coding, knowledge work, and multimedia analysis.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "recraft/recraft-v2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1710288000,
+        "description": "Recraft V2 is an image generation model released in March 2024 and the first model trained from scratch by Recraft. With 20 billion parameters, it was a breakthrough in human anatomical accuracy and the first to support brand consistency and brand color inputs. It also introduced vector image generation (SVG output), as well as minimalistic icon and illustration styles.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "recraft/recraft-v3",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1730246400,
+        "description": "V3 introduced major advances in photorealism and text rendering. It was the first Recraft model to generate mid-size text accurately and, as of 2025, is the only model capable of placing text at specific positions in an image.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "recraft/recraft-v4",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1771286400,
+        "description": "The model delivers strong photorealism, including realistic skin rendering and natural textures, while avoiding common synthetic artifacts. It produces more distinctive lighting, composition, diverse subjects, contemporary styling, and carefully considered scene elements. For illustration, it generates original characters and forms with sophisticated and unexpected color combinations.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "recraft/recraft-v4.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1778716800,
+        "description": "V4.1 is built on the same visual aesthetic and the same eye for what looks right, just pushed further across every dimension. The photorealism is more natural. The gradients are dreamier. Illustration styles are now possible that simply weren't before. And this is a model that reads a short prompts easier and creates something worth stopping for.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "recraft/recraft-v4.1-flash",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1790121600,
+        "description": "Recraft V4.1 Flash is a fast, low-cost model with quality close to Recraft V4.1, built for high-volume generation and rapid iteration. Strong use cases include photography, portraits, atmosphere, complex scenes, mixed media, and logo concepts.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "recraft/recraft-v4.1-utility",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1778716800,
+        "description": "V4.1 is built on the same visual aesthetic and the same eye for what looks right, just pushed further across every dimension. The photorealism is more natural. The gradients are dreamier. Illustration styles are now possible that simply weren't before. And this is a model that reads a short prompts easier and creates something worth stopping for. V4.1 Utility is designed for when restraint is the aesthetic choice, with flat lighting, front-facing composition, and simple, controlled scenes.",
+        "model_type": "image"
+      }
+    },
+    {
       "id": "rekaai/reka-edge",
       "metadata": {
         "architecture": {
@@ -9370,6 +12503,48 @@
           "is_moderated": false,
           "max_completion_tokens": 0
         }
+      }
+    },
+    {
+      "id": "scaledown/scaledown-classify-1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1791849600,
+        "description": "ScaleDown Classify-1 is a task-specific small language model for text classification. It assigns text to custom labels and returns probability scores, supporting intent detection, content categorization, and routing workflows. Its deterministic, encoder-only approach produces consistent classification results without sampling variability.",
+        "model_type": "decision"
+      }
+    },
+    {
+      "id": "stealth:glyph-cluster",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1791331200,
+        "description": "Glyph Cluster is an anonymous reasoning model in early access. Prompts and outputs may be retained by the provider.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
       }
     },
     {
@@ -9589,6 +12764,13 @@
       }
     },
     {
+      "id": "tako/search",
+      "metadata": {
+        "description": "Search Tako's curated knowledge graph and the live web for source-grounded data cards, citations, and visualizations. Use it as a built-in tool through the AI Gateway to give any model access to structured data and current web information.",
+        "model_type": "tool"
+      }
+    },
+    {
       "id": "tencent/hy-mt2-1.8b",
       "metadata": {
         "architecture": {
@@ -9676,6 +12858,76 @@
           "is_moderated": false,
           "max_completion_tokens": 4096
         }
+      }
+    },
+    {
+      "id": "tencent/hy-mt2-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 8000,
+        "created": 1781222400,
+        "description": "Hy-MT2-Lite is Tencent Cloud Hunyuan’s lightweight 1.8B translation model, combining efficient performance with an 8K-token context window and broad multilingual coverage. It supports translation across 33 languages and five ethnic Chinese and dialect variants, delivering strong results on benchmarks including FLORES-200 and WMT25. Designed for professional and real-world business use, it reliably follows instructions for structured, delimiter-preserving, context-aware, glossary-guided, and style-specific translation.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop"
+        ]
+      }
+    },
+    {
+      "id": "tencent/hy-mt2-plus",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 8000,
+        "created": 1781222400,
+        "description": "Hy-MT2-Plus is Tencent Cloud Hunyuan’s 7B translation model, offering an 8K-token context window and broad multilingual coverage. Optimized for translation across 33 languages and five ethnic Chinese and dialect variants, it delivers industry-leading performance on benchmarks including FLORES-200 and WMT25. It excels in professional domains and real-world business scenarios, with strong instruction-following for structured, delimiter-preserving, context-aware, glossary-guided, and style-specific translation.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "tencent/hy-mt2-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 8000,
+        "created": 1779321600,
+        "description": "Hy-MT2-Pro is Tencent Cloud Hunyuan’s flagship translation model, featuring 30B-A3B parameters and an 8K-token context window. It delivers bidirectional translation across 33 core language pairs, plus five minority-language and dialect pairs. With industry-leading performance on FLORES-200 and WMT25, it excels in specialized domains and real-world business scenarios while supporting structured, contextual, terminology-aware, style-specific, and delimiter-preserving translation.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     },
     {
@@ -10095,6 +13347,399 @@
       }
     },
     {
+      "id": "voyage/rerank-2.5",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1754870400,
+        "description": "A generalist reranker optimized for quality with instruction-following and multilingual support.",
+        "model_type": "reranking"
+      }
+    },
+    {
+      "id": "voyage/rerank-2.5-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1754870400,
+        "description": "A generalist reranker optimized for both latency and quality with instruction-following and multilingual support.",
+        "model_type": "reranking"
+      }
+    },
+    {
+      "id": "voyage/rerank-3",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1790726400,
+        "description": "A general-purpose reranker optimized for retrieval accuracy.",
+        "model_type": "reranking"
+      }
+    },
+    {
+      "id": "voyage/rerank-3-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1790726400,
+        "description": "A fast, cost-effective reranker optimized for latency-sensitive retrieval.",
+        "model_type": "reranking"
+      }
+    },
+    {
+      "id": "voyage/voyage-3-large",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1736208000,
+        "description": "Voyage AI's embedding model with the best general-purpose and multilingual retrieval quality.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-3.5",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1747699200,
+        "description": "Voyage AI's embedding model optimized for general-purpose and multilingual retrieval quality.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-3.5-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1747699200,
+        "description": "Voyage AI's embedding model optimized for latency and cost.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-4",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1768435200,
+        "description": "Optimized for general-purpose and multilingual retrieval quality. All embeddings created with the 4 series are compatible with each other.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-4-large",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1768435200,
+        "description": "The best general-purpose and multilingual retrieval quality. All embeddings created with the 4 series are compatible with each other.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-4-lite",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 32000,
+        "created": 1768435200,
+        "description": "Optimized for latency and cost. All embeddings created with the 4 series are compatible with each other.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-code-2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1704067200,
+        "description": "Voyage AI's embedding model optimized for code retrieval (17% better than alternatives). This is the previous generation of code embeddings models.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-code-3",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1733270400,
+        "description": "Voyage AI's embedding model optimized for code retrieval.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-finance-2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1717372800,
+        "description": "Voyage AI's embedding model optimized for finance retrieval and RAG.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "voyage/voyage-law-2",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1713139200,
+        "description": "Voyage AI's embedding model optimized for legal retrieval and RAG.",
+        "model_type": "embedding"
+      }
+    },
+    {
+      "id": "x-ai/grok-4.1-fast-non-reasoning",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1763510400,
+        "description": "",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "x-ai/grok-4.1-fast-reasoning",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1000000,
+        "created": 1763510400,
+        "description": "",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "x-ai/grok-build-0.1",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 256000,
+        "created": 1779235200,
+        "description": "xAI's fast coding model trained specifically for agentic coding.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "x-ai/grok-imagine-image",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "image"
+          ]
+        },
+        "created": 1769558400,
+        "description": "Generate high-quality images from text prompts with xAI's imagine API.",
+        "model_type": "image"
+      }
+    },
+    {
+      "id": "x-ai/grok-stt",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "created": 1773619200,
+        "description": "Transcribe audio to text in 25 languages with batch and streaming modes.",
+        "model_type": "transcription"
+      }
+    },
+    {
+      "id": "x-ai/grok-tts",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "audio"
+          ]
+        },
+        "created": 1773619200,
+        "description": "Generate speech with 5 expressive voices, speech tags, and telephony codecs.",
+        "model_type": "speech"
+      }
+    },
+    {
+      "id": "x-ai/grok-voice-think-fast-2.0",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "audio"
+          ],
+          "output_modalities": [
+            "text",
+            "audio"
+          ]
+        },
+        "created": 1785283200,
+        "description": "Grok Voice Think Fast 2.0, our next-generation voice model with improved intelligence, transcription accuracy, and conversational capabilities.",
+        "model_type": "realtime",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "reasoning",
+          "include_reasoning"
+        ]
+      }
+    },
+    {
       "id": "xiaomi/mimo-v2.5",
       "metadata": {
         "architecture": {
@@ -10231,6 +13876,34 @@
       }
     },
     {
+      "id": "xiaomi/mimo-v2.5-pro",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 1050000,
+        "created": 1776816000,
+        "description": "MiMo V2.5 Pro delivers significant improvements over its predecessor, MiMo-V2-Pro, in general agentic capabilities, complex software engineering, and long-horizon tasks. MiMo-V2.5-Pro is a 1.02T-parameter Mixture-of-Experts model with 42B active parameters, built on a hybrid-attention architecture with a 1M-token context window.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
       "id": "xiaomi/mimo-v2.6-flash",
       "metadata": {
         "architecture": {
@@ -10306,6 +13979,147 @@
           "is_moderated": false,
           "max_completion_tokens": 131072
         }
+      }
+    },
+    {
+      "id": "z-ai/glm-4.5",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1753660800,
+        "description": "GLM-4.5 and GLM-4.5-Air are our latest flagship models, purpose-built as foundational models for agent-oriented applications. Both leverage a Mixture-of-Experts (MoE) architecture. GLM-4.5 has a total parameter count of 355B with 32B active parameters per forward pass, while GLM-4.5-Air adopts a more streamlined design with 106B total parameters and 12B active parameters.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "z-ai/glm-4.5-air",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 128000,
+        "created": 1753660800,
+        "description": "GLM-4.5 and GLM-4.5-Air are our latest flagship models, purpose-built as foundational models for agent-oriented applications. Both leverage a Mixture-of-Experts (MoE) architecture. GLM-4.5 has a total parameter count of 355B with 32B active parameters per forward pass, while GLM-4.5-Air adopts a more streamlined design with 106B total parameters and 12B active parameters.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "z-ai/glm-4.5v",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 66000,
+        "created": 1754870400,
+        "description": "Built on the GLM-4.5-Air base model, GLM-4.5V inherits proven techniques from GLM-4.1V-Thinking while achieving effective scaling through a powerful 106B-parameter MoE architecture.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "z-ai/glm-4.6",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 204800,
+        "created": 1759190400,
+        "description": "As the latest iteration in the GLM series, GLM-4.6 achieves comprehensive enhancements across multiple domains, including real-world coding, long-context processing, reasoning, searching, writing, and agentic applications.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
+      }
+    },
+    {
+      "id": "z-ai/glm-4.7",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 204800,
+        "created": 1766361600,
+        "description": "GLM-4.7 is Z.ai’s latest flagship model, with major upgrades focused on two key areas: stronger coding capabilities and more stable multi-step reasoning and execution.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     },
     {
@@ -10431,6 +14245,32 @@
           "is_moderated": false,
           "max_completion_tokens": 117964
         }
+      }
+    },
+    {
+      "id": "z-ai/glm-4.7-flashx",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 200000,
+        "created": 1768780800,
+        "description": " GLM-4.7-Flash balances high performance with efficiency, making it the perfect lightweight deployment option. ",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning"
+        ]
       }
     },
     {
@@ -10933,6 +14773,36 @@
           "is_moderated": false,
           "max_completion_tokens": 943718
         }
+      }
+    },
+    {
+      "id": "z-ai/glm-5v-turbo",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 200000,
+        "created": 1775001600,
+        "description": "GLM-5V-Turbo is Z.AI’s first multimodal coding foundation model, built for vision-based coding tasks. It can natively process multimodal inputs such as images, video, and text, while also excelling at long-horizon planning, complex coding, and action execution. Deeply optimized for agent workflows, it works seamlessly with agents such as Claude Code and OpenClaw to complete the full loop of “understand the environment → plan actions → execute tasks”.",
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ]
       }
     }
   ]
