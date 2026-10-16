@@ -26,7 +26,7 @@ const maxIllustratedCostCents = 900;
 const requestClients = [
   { name: "OpenCode", icon: "/brands/opencode.png" },
   { name: "Claude Code", icon: "/brands/claude-code.svg" },
-  { name: "Codex", icon: "/brands/codex.png" },
+  { name: "Codex", icon: "/brands/codex.svg" },
   { name: "Python", icon: "/brands/python.svg" },
   { name: "Pi", icon: "/brands/pi.svg" },
 ];

@@ -385,10 +385,6 @@
   background: var(--primary);
 }
 
-.clientCycle img[src="/brands/codex.png"] {
-  filter: brightness(0);
-}
-
-[class~="dark"] .clientCycle img[src="/brands/codex.png"] {
-  filter: none;
+[class~="dark"] .clientCycle img[src*="codex"] {
+  filter: invert(1);
 }
