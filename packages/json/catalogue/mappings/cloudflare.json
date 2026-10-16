@@ -15,6 +15,7 @@
     "@cf/cloudflare/clef": "cloudflare/clef",
     "@cf/cloudflare/clef-flash": "cloudflare/clef-flash",
     "@cf/cloudflare/clef-omni": "cloudflare/clef-omni",
+    "@cf/daily-co/phonellm-mini-alpha-2": "daily-co/phonellm-mini-alpha-2",
     "@cf/deepgram/aura-1": "deepgram/aura-1",
     "@cf/deepgram/aura-2-en": "deepgram/aura-2",
     "@cf/deepgram/aura-2-es": "deepgram/aura-2",
