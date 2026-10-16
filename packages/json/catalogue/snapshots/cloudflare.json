@@ -275,6 +275,25 @@
       }
     },
     {
+      "model_id": "@cf/daily-co/phonellm-mini-alpha-2",
+      "name": "Daily co: Phonellm mini alpha 2",
+      "connection": {
+        "auth": {
+          "env": [
+            "CLOUDFLARE_ACCOUNT_ID",
+            "CLOUDFLARE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
+        "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
+      }
+    },
+    {
       "model_id": "@cf/deepgram/aura-1",
       "name": "Deepgram: Aura 1",
       "connection": {

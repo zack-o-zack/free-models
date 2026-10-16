@@ -26,6 +26,7 @@
     "nvidia/nemotron-3-ultra-550b-a55b:free": "nvidia/nemotron-3-ultra-550b-a55b",
     "nvidia/nemotron-3.5-content-safety:free": "nvidia/nemotron-3.5-content-safety",
     "nvidia/nemotron-3.5-lightning:free": "nvidia/nemotron-3.5-lightning",
+    "nvidia/nemotron-3.5-super-vl:free": "nvidia/nemotron-3.5-super-vl-120b-a12b",
     "poolside/laguna-s-2.1:free": "poolside/laguna-s-2.1",
     "poolside/laguna-xs-2.1:free": "poolside/laguna-xs-2.1",
     "respan/span-01-lite:free": "respan/span-01-lite",

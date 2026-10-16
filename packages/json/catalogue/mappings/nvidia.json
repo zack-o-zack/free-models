@@ -34,6 +34,7 @@
     "nvidia/nemotron-3-ultra-550b-a55b": "nvidia/nemotron-3-ultra-550b-a55b",
     "nvidia/nemotron-3.5-content-safety": "nvidia/nemotron-3.5-content-safety",
     "nvidia/nemotron-3.5-lightning-30b-a3b": "nvidia/nemotron-3.5-lightning",
+    "nvidia/nemotron-3.5-super-vl-120b-a12b": "nvidia/nemotron-3.5-super-vl-120b-a12b",
     "nvidia/nemotron-voicechat": "nvidia/nemotron-voicechat",
     "nvidia/riva-translate-4b-instruct-v1_1": "nvidia/riva-translate-4b-instruct-v1.1",
     "nvidia/riva-translate-4b-instruct-v2": "nvidia/riva-translate-4b-instruct-v2",
@@ -43,6 +44,7 @@
     "nvidia/synthetic-video-detector": "nvidia/synthetic-video-detector",
     "openai/gpt-oss-20b": "openai/gpt-oss-20b",
     "poolside/laguna-xs-2.1": "poolside/laguna-xs-2.1",
+    "stepfun-ai/step-5-preview": "stepfun/step-5-preview",
     "z-ai/glm-5-3": "z-ai/glm-5.3",
     "z-ai/glm-5-3-flash": "z-ai/glm-5.3-flash"
   }

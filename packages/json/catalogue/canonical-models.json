@@ -309,6 +309,10 @@
       "name": "Laya"
     },
     {
+      "id": "daily-co/phonellm-mini-alpha-2",
+      "name": "Daily: PhoneLLM Mini Alpha 2"
+    },
+    {
       "id": "deepgram/aura-1",
       "name": "Deepgram: Aura-1"
     },
@@ -585,6 +589,10 @@
       "name": "Leonardo: Phoenix 1.0"
     },
     {
+      "id": "liquid/d1-ultra",
+      "name": "Liquid: D1 Ultra"
+    },
+    {
       "id": "liquid/lfm-2.5-2.6b",
       "name": "LiquidAI: LFM2.5-2.6B"
     },
@@ -675,6 +683,10 @@
     {
       "id": "meta/muse-spark-1.3-contributor",
       "name": "Muse Spark 1.3 Contributor"
+    },
+    {
+      "id": "meta/muse-spark-open",
+      "name": "Muse Spark Open"
     },
     {
       "id": "microsoft/mai-image-2.6",
@@ -1013,6 +1025,10 @@
       "name": "NVIDIA: Nemotron 3.5 Lightning"
     },
     {
+      "id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "name": "NVIDIA: Nemotron 3.5 Super VL"
+    },
+    {
       "id": "nvidia/nemotron-nano-12b-v2-vl",
       "name": "Nvidia Nemotron Nano 12B V2 VL"
     },
@@ -1215,6 +1231,10 @@
     {
       "id": "parallel/search",
       "name": "Parallel Web Search"
+    },
+    {
+      "id": "perplexity/pplx-decider-v1.1-27b",
+      "name": "Perplexity: Decider V1.1 27B"
     },
     {
       "id": "perplexity/search",
@@ -1431,6 +1451,10 @@
     {
       "id": "stealth:glyph-cluster",
       "name": "Stealth: Glyph Cluster"
+    },
+    {
+      "id": "stealth:ll-alpha",
+      "name": "LL Alpha"
     },
     {
       "id": "stealth:space-bunny",

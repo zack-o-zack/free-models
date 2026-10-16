@@ -2,8 +2,8 @@
   "provider": "anyapi",
   "name": "AnyAPI",
   "doc": {
-    "overview": "https://docs.anyapi.ai",
     "models": "https://anyapi.ai/ai-models",
+    "overview": "https://docs.anyapi.ai",
     "pricing": "https://anyapi.ai/pricing",
     "rate_limit": "https://docs.anyapi.ai/get-started/faq"
   },
@@ -12,13 +12,13 @@
       "model_id": "google/gemma-4-26b-a4b-it:free",
       "name": "Google: Gemma 4 26b a4b it",
       "connection": {
-        "base_url": "https://api.anyapi.ai/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ANYAPI_KEY"
           ]
-        }
+        },
+        "base_url": "https://api.anyapi.ai/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -31,13 +31,13 @@
       "model_id": "inclusionai/ling-3.0-flash-fin:free",
       "name": "Inclusionai: Ling 3.0 flash fin",
       "connection": {
-        "base_url": "https://api.anyapi.ai/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ANYAPI_KEY"
           ]
-        }
+        },
+        "base_url": "https://api.anyapi.ai/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -50,13 +50,13 @@
       "model_id": "inclusionai/ling-3.0-flash-sante:free",
       "name": "Inclusionai: Ling 3.0 flash sante",
       "connection": {
-        "base_url": "https://api.anyapi.ai/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ANYAPI_KEY"
           ]
-        }
+        },
+        "base_url": "https://api.anyapi.ai/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -69,13 +69,13 @@
       "model_id": "qwen/qwen-2.5-coder-32b-instruct",
       "name": "Qwen: Qwen 2.5 coder 32b instruct",
       "connection": {
-        "base_url": "https://api.anyapi.ai/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ANYAPI_KEY"
           ]
-        }
+        },
+        "base_url": "https://api.anyapi.ai/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -88,13 +88,13 @@
       "model_id": "qwen/qwen3.8-27b:free",
       "name": "Qwen: Qwen3.8 27b",
       "connection": {
-        "base_url": "https://api.anyapi.ai/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ANYAPI_KEY"
           ]
-        }
+        },
+        "base_url": "https://api.anyapi.ai/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
