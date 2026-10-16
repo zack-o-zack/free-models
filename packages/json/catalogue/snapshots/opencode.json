@@ -18,8 +18,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -38,8 +38,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -58,8 +58,28 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "glm-5.3-flash-free",
+      "name": "GLM-5.3-Flash Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/openai-compatible",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -77,9 +97,29 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/systemone",
+        "base_url": "https://opencode.ai/inference/systemone/v1",
+        "endpoint": "https://opencode.ai/inference/systemone/v1/systemone",
         "protocol": "systemone"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "ll-alpha-free",
+      "name": "LL Alpha Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/openai-compatible",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -97,8 +137,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -117,8 +157,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -137,8 +177,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/responses",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/responses",
         "protocol": "openai"
       },
       "limits": {
@@ -157,8 +197,28 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "nemotron-3.5-super-vl-free",
+      "name": "Nemotron 3.5 Super VL Free",
+      "connection": {
+        "ai_sdk_package": "@ai-sdk/openai-compatible",
+        "auth": {
+          "env": [
+            "OPENCODE_API_KEY"
+          ]
+        },
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {
@@ -177,28 +237,8 @@
             "OPENCODE_API_KEY"
           ]
         },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / day"
-        ]
-      }
-    },
-    {
-      "model_id": "step-5-preview-free",
-      "name": "Step 5 Preview Free",
-      "connection": {
-        "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "auth": {
-          "env": [
-            "OPENCODE_API_KEY"
-          ]
-        },
-        "base_url": "https://opencode.ai/inference/v1",
-        "endpoint": "https://opencode.ai/inference/v1/chat/completions",
+        "base_url": "https://opencode.ai/inference/openai/v1",
+        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
         "protocol": "openai"
       },
       "limits": {

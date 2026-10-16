@@ -1584,6 +1584,26 @@
       }
     },
     {
+      "model_id": "liquid/d1-ultra",
+      "name": "Liquid d1 Ultra",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "liquid/lfm2.5-24b-a2b",
       "name": "LFM2.5-24B-A2B",
       "connection": {
@@ -1681,6 +1701,25 @@
     {
       "model_id": "meta/llama-4-scout",
       "name": "Llama 4 Scout 17B 16E Instruct",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "meta/muse-spark-open",
+      "name": "Muse Spark Open",
       "connection": {
         "auth": {
           "env": [
@@ -2351,6 +2390,25 @@
           "Free — no credits used"
         ],
         "funding": "no_credits"
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3.5-super-vl",
+      "name": "NVIDIA Nemotron 3.5 Super VL",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
       }
     },
     {
@@ -3804,6 +3862,25 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "stealth/cat-jam",
+      "name": "Cat Jam",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free — no credits used"
+        ],
+        "funding": "no_credits"
       }
     },
     {

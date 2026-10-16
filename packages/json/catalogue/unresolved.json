@@ -1,10 +1,30 @@
 {
   "providers": {
+    "cloudflare": [
+      "@cf/daily-co/phonellm-mini-alpha-2"
+    ],
+    "kilo": [
+      "nvidia/nemotron-3.5-super-vl:free"
+    ],
+    "nvidia": [
+      "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "stepfun-ai/step-5-preview"
+    ],
     "opencode": [
-      "deepseek-v4.1-flash-free"
+      "deepseek-v4.1-flash-free",
+      "glm-5.3-flash-free",
+      "ll-alpha-free",
+      "nemotron-3.5-super-vl-free"
+    ],
+    "openrouter": [
+      "nvidia/nemotron-3.5-super-vl:free"
     ],
     "vercel": [
-      "perplexity/pplx-decider-v1.1-27b"
+      "liquid/d1-ultra",
+      "meta/muse-spark-open",
+      "nvidia/nemotron-3.5-super-vl",
+      "perplexity/pplx-decider-v1.1-27b",
+      "stealth/cat-jam"
     ]
   }
 }

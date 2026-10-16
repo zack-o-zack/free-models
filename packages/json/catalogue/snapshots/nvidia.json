@@ -161,25 +161,6 @@
       }
     },
     {
-      "model_id": "moonshotai/kimi-k3",
-      "name": "kimi-k3",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      }
-    },
-    {
       "model_id": "nvidia/active-speaker-detection",
       "name": "Active Speaker Detection",
       "connection": {
@@ -541,6 +522,25 @@
       }
     },
     {
+      "model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "name": "nemotron-3.5-super-vl-120b-a12b",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
       "model_id": "nvidia/nemotron-voicechat",
       "name": "nemotron-voicechat",
       "connection": {
@@ -676,6 +676,25 @@
     {
       "model_id": "poolside/laguna-xs-2.1",
       "name": "laguna-xs-2.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "stepfun-ai/step-5-preview",
+      "name": "Step 5 Preview",
       "connection": {
         "auth": {
           "env": [
