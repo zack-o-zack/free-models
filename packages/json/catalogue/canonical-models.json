@@ -369,6 +369,10 @@
       "name": "Dots Studio: Dots3-Note Preview"
     },
     {
+      "id": "elorian/glimpse",
+      "name": "Elorian: Glimpse"
+    },
+    {
       "id": "exa/search",
       "name": "Exa Web Search"
     },
@@ -1233,8 +1237,16 @@
       "name": "Parallel Web Search"
     },
     {
+      "id": "perplexity/pplx-decider-flash-v1.2",
+      "name": "Perplexity: Decider Flash V1.2 4B"
+    },
+    {
       "id": "perplexity/pplx-decider-v1.1-27b",
       "name": "Perplexity: Decider V1.1 27B"
+    },
+    {
+      "id": "perplexity/pplx-decider-v1.2",
+      "name": "Perplexity: Decider V1.2 27B"
     },
     {
       "id": "perplexity/search",
@@ -1403,6 +1415,10 @@
     {
       "id": "recraft/recraft-v4.1-utility",
       "name": "Recraft V4.1 Utility"
+    },
+    {
+      "id": "reflection/beam",
+      "name": "Reflection: Beam 1.0"
     },
     {
       "id": "rekaai/reka-edge",
@@ -1607,6 +1623,10 @@
     {
       "id": "xiaomi/mimo-v2.6-flash",
       "name": "Xiaomi: MiMo-V2.6-Flash"
+    },
+    {
+      "id": "xingchen-agi/xing4.0-29b-a4b",
+      "name": "XingChen: Xing4.0 29B A4B"
     },
     {
       "id": "z-ai/glm-4.5",
