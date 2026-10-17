@@ -111,7 +111,7 @@ Both providers have account- or model-dependent limits; offers direct users to t
 ## Catalogue autopilot
 
 The daily discovery workflow now repairs and reviews catalogue proposals before merging them.
-It runs entirely in GitHub Actions and uses the existing `OPENCODE_API_KEY` and `MISTRAL_FREE_API_KEY`. It needs repository
+It runs entirely in GitHub Actions and uses the existing `OPENCODE_API_KEY` , `MISTRAL_FREE_API_KEY`, and the existing Cohere trial key. It needs repository
 Actions settings to permit creating pull requests and a token with contents, pull-request and
 Actions write permissions. No paid inference route or external agent service is configured.
 
@@ -134,6 +134,9 @@ OpenCode is preferred; up to two Mistral chat models provide a fallback using th
 as required by existing catalogue discovery; the API does not expose a billing-mode attestation.
 Never substitute a paid Mistral organization key. Only catalogued, live `mistral-small-latest` and
 `mistral-large-latest` are eligible, through the fixed `api.mistral.ai` chat endpoint.
+Cohere `command-a-03-2025` is the final fallback if it is both catalogued and live. The workflow
+passes the existing `COHERE_API_KEY` as `COHERE_TRIAL_API_KEY`; it must remain a free trial key,
+not a paid production key. Its endpoint is fixed to Cohere's documented compatibility API.
 OpenCode discovery verifies that input, output and cache pricing are free and the model is still live.
 The OpenCode adapter uses only supported chat-completion endpoints on `opencode.ai`, rejects inference redirects and permits only bounded same-origin public-document redirects,
 and never falls back to a paid model. SystemOne and other protocols remain in the catalogue but
@@ -142,9 +145,9 @@ models have equal review quality. Free pricing is checked immediately before inf
 pricing changes during a request remain outside repository control.
 
 Model responses cannot execute commands, select arbitrary URLs, change credentials, or authorize
-merges. Identity review and final review each try at most five different free models (three OpenCode, two Mistral), with a
+merges. Identity review and final review each try at most six different free models (three OpenCode, two Mistral, one Cohere), with a
 60-second timeout per inference call. A valid rejection stops the phase rather than shopping
-for approval. Each phase has a six-request hard ceiling for future retry extensions.
+for approval. Each phase has a six-request hard ceiling; quota failures defer work to the next daily run.
 
 The workflow stops automatic merge on any unresolved identity, more than 40 proposed identities,
 changes to existing connections, loss of a nonempty provider, removal of more than 20% of one

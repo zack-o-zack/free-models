@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { DiscoveredOffer, ProviderSnapshot } from "../catalogue/schema.ts";
+import { CohereProvider } from "../providers/cohere.ts";
 import { MistralProvider } from "../providers/mistral.ts";
 import { OpenCodeProvider } from "../providers/opencode.ts";
 
@@ -100,6 +101,34 @@ export async function freeReviewer(catalogued: ReadonlyMap<string, ProviderSnaps
       );
     } catch {
       failures.push("mistral: free-account discovery failed");
+    }
+  }
+  const cohereKey = process.env.COHERE_TRIAL_API_KEY;
+  if (cohereKey) {
+    try {
+      const live = await new CohereProvider({
+        apiKey: cohereKey,
+        fetch: (url, init) =>
+          fetch(url, { ...init, signal: AbortSignal.timeout(30_000), redirect: "error" }),
+      }).discover(new Map());
+      const known = catalogued
+        .get("cohere")
+        ?.offers.some((offer) => offer.model_id === "command-a-03-2025");
+      const active = live.some(
+        (offer) =>
+          offer.model_id === "command-a-03-2025" &&
+          offer.connection.protocol === "openai" &&
+          offer.connection.base_url === "https://api.cohere.ai/compatibility/v1",
+      );
+      if (known && active)
+        candidates.push({
+          model: "command-a-03-2025",
+          provider: "cohere",
+          endpoint: "https://api.cohere.ai/compatibility/v1/chat/completions",
+          key: cohereKey,
+        });
+    } catch {
+      failures.push("cohere: trial-account discovery failed");
     }
   }
   if (!candidates.length)
