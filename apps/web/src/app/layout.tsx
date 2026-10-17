@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   robots: isIndexable
     ? { index: true, follow: true, googleBot: { "max-image-preview": "large" } }
     : { index: false, follow: false },
+  verification: {
+    google: siteConfig.googleSiteVerification,
+  },
 };
 
 export default function RootLayout({
