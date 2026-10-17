@@ -25,13 +25,31 @@ export function inferenceCandidates(
     .slice(0, 3);
 }
 
+export async function fetchPublicEvidence(
+  url: string,
+  init?: RequestInit,
+  request: (url: string, init: RequestInit) => Promise<Response> = fetch,
+): Promise<Response> {
+  let target = new URL(url);
+  const signal = AbortSignal.timeout(30_000);
+  for (let hop = 0; hop < 4; hop++) {
+    if (target.origin !== "https://opencode.ai")
+      throw new Error("Evidence redirected outside OpenCode");
+    const response = await request(target.href, { ...init, signal, redirect: "manual" });
+    if (![301, 302, 303, 307, 308].includes(response.status)) return response;
+    const location = response.headers.get("location");
+    if (!location) throw new Error("Evidence redirect has no location");
+    target = new URL(location, target);
+  }
+  throw new Error("Too many evidence redirects");
+}
+
 export async function freeReviewer(catalogued: readonly DiscoveredOffer[]) {
   const key = process.env.OPENCODE_API_KEY;
   if (!key) throw new Error("OPENCODE_API_KEY is required for agent review");
   // Recheck published input/output/cache pricing and live availability before inference.
   const live = await new OpenCodeProvider({
-    fetch: (url, init) =>
-      fetch(url, { ...init, signal: AbortSignal.timeout(30_000), redirect: "error" }),
+    fetch: fetchPublicEvidence,
   }).discover(new Map());
   const candidates = inferenceCandidates(catalogued, live);
   if (!candidates.length)

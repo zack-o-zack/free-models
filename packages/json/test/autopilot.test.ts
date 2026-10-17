@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { inferenceCandidates } from "../src/automation/inference.ts";
+import { fetchPublicEvidence, inferenceCandidates } from "../src/automation/inference.ts";
 import { assertMergeCandidate } from "../src/automation/merge.ts";
 import {
   allowedCataloguePath,
@@ -144,4 +144,36 @@ test("merge binds repository, branch, bot, head, base, file scope and review sta
   expect(() =>
     assertMergeCandidate(pr, expected, files, [{ state: "CHANGES_REQUESTED" }]),
   ).toThrow();
+});
+
+test("public evidence permits same-origin redirects but blocks external origins and loops", async () => {
+  const seen: string[] = [];
+  const result = await fetchPublicEvidence(
+    "https://opencode.ai/docs/zen/",
+    undefined,
+    async (url) => {
+      seen.push(url);
+      return seen.length === 1
+        ? new Response(null, { status: 301, headers: { location: "/docs/en/zen/" } })
+        : new Response("pricing");
+    },
+  );
+  expect(await result.text()).toBe("pricing");
+  expect(seen).toEqual(["https://opencode.ai/docs/zen/", "https://opencode.ai/docs/en/zen/"]);
+  await expect(
+    fetchPublicEvidence(
+      "https://opencode.ai/docs/zen/",
+      undefined,
+      async () =>
+        new Response(null, { status: 302, headers: { location: "https://evil.example/" } }),
+    ),
+  ).rejects.toThrow("outside OpenCode");
+  let calls = 0;
+  await expect(
+    fetchPublicEvidence("https://opencode.ai/docs/zen/", undefined, async () => {
+      calls++;
+      return new Response(null, { status: 302, headers: { location: "/loop" } });
+    }),
+  ).rejects.toThrow("Too many");
+  expect(calls).toBe(4);
 });

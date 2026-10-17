@@ -129,7 +129,7 @@ Actions write permissions. No paid inference provider or external agent service 
 
 Each inference pool is the intersection of the baseline catalogue and a fresh OpenCode discovery.
 Discovery verifies that input, output and cache pricing are free and the model is still live.
-The agent uses only supported chat-completion endpoints on `opencode.ai`, rejects redirects,
+The agent uses only supported chat-completion endpoints on `opencode.ai`, rejects inference redirects and permits only bounded same-origin public-document redirects,
 and never falls back to a paid model. SystemOne and other protocols remain in the catalogue but
 are excluded from inference until they have a tested adapter. There is no claim that all free
 models have equal review quality. Free pricing is checked immediately before inference; provider
