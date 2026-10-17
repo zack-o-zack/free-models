@@ -6,13 +6,14 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: Validate discovery on the selected ref without pushing catalogue changes
+        description: Validate discovery and agent review without pushing or merging
         type: boolean
         default: false
 
 permissions:
   contents: write
   pull-requests: write
+  actions: write
 
 concurrency:
   group: free-model-catalogue-discovery
@@ -24,33 +25,46 @@ env:
 
 jobs:
   discover:
-    name: Discover and propose catalogue changes
+    name: Discover, repair, review and merge catalogue
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
+    timeout-minutes: 30
     steps:
-      - name: Check out the default branch
+      - name: Check out trusted source
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: ${{ inputs.dry_run && github.sha || github.event.repository.default_branch }}
 
-      - name: Restore the automation branch
-        if: ${{ !inputs.dry_run }}
-        shell: bash
+      - name: Prepare fresh candidate and preserve baseline
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin "+refs/heads/$DEFAULT_BRANCH:refs/remotes/origin/$DEFAULT_BRANCH"
-
-          if git ls-remote --exit-code --heads origin "$AUTOMATION_BRANCH" >/dev/null; then
-            git fetch origin "+refs/heads/$AUTOMATION_BRANCH:refs/remotes/origin/$AUTOMATION_BRANCH"
-            git switch --create "$AUTOMATION_BRANCH" --track "origin/$AUTOMATION_BRANCH"
-            git merge --no-commit --no-ff "origin/$DEFAULT_BRANCH"
-          else
-            git switch --create "$AUTOMATION_BRANCH" "origin/$DEFAULT_BRANCH"
+          CATALOGUE_BASELINE="$RUNNER_TEMP/catalogue-baseline"
+          echo "CATALOGUE_BASELINE=$CATALOGUE_BASELINE" >> "$GITHUB_ENV"
+          mkdir -p "$CATALOGUE_BASELINE"
+          cp -R packages/json/catalogue "$CATALOGUE_BASELINE/catalogue"
+          echo "BASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          old_sha=$(git ls-remote origin "refs/heads/$AUTOMATION_BRANCH" | cut -f1)
+          echo "OLD_SHA=$old_sha" >> "$GITHUB_ENV"
+          pending=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$AUTOMATION_BRANCH" --state open --json number --jq '.[0].number')
+          if [[ -n "$old_sha" && -n "$pending" ]]; then
+            git fetch origin "$AUTOMATION_BRANCH"
+            # Never overwrite human repairs or executable changes in a pending proposal.
+            git log "HEAD..$old_sha" --format=%ae > "$RUNNER_TEMP/authors"
+            if grep -vFx '41898282+github-actions[bot]@users.noreply.github.com' "$RUNNER_TEMP/authors"; then
+              echo 'Automation branch has human commits; resolve it before retrying.' >&2
+              exit 1
+            fi
+            git diff --name-only "HEAD...$old_sha" > "$RUNNER_TEMP/paths"
+            if grep -vE '^packages/json/catalogue/(canonical-models.json|canonical-metadata.json|unresolved.json|(mappings|snapshots)/[a-z0-9-]+\.json)$' "$RUNNER_TEMP/paths"; then
+              echo 'Automation branch contains changes outside the catalogue.' >&2
+              exit 1
+            fi
           fi
+          git switch -c catalogue-candidate
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
@@ -65,88 +79,95 @@ jobs:
           TOKENROUTER_API_KEY: ${{ secrets.TOKENROUTER_API_KEY }}
         run: bun run catalogue:discover
 
-      - name: Refresh and render resolved catalogue
-        shell: bash
+      - name: Resolve identities using free catalogue models
+        id: repair
+        continue-on-error: true
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        run: bun packages/json/src/automation/run.ts repair
+
+      - name: Refresh resolved metadata
+        if: steps.repair.outcome == 'success'
+        id: refresh
+        continue-on-error: true
+        run: bun run catalogue:refresh
+
+      - name: Review catalogue using free catalogue models
+        if: steps.refresh.outcome == 'success'
+        id: review
+        continue-on-error: true
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        run: bun packages/json/src/automation/run.ts review
+
+      - name: Validate exact candidate
+        if: steps.review.outcome == 'success'
+        id: validate
+        continue-on-error: true
         run: |
           set -euo pipefail
-          if bun -e 'const value = await Bun.file("packages/json/catalogue/unresolved.json").json(); process.exit(Object.values(value.providers).some((ids) => ids.length > 0) ? 1 : 0)'; then
-            bun run catalogue:refresh
-          else
-            echo "Unresolved offers remain; skipping metadata refresh and retaining the last reviewed public catalogue."
-          fi
+          bun run check
 
-      - name: Save discovery results
+      - name: Save catalogue and agent evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: discovered-catalogue
-          path: packages/json/catalogue/
-          if-no-files-found: error
-          retention-days: 7
+          path: |
+            packages/json/catalogue/
+            .scratch/catalogue-agent-report.json
+          include-hidden-files: true
+          retention-days: 14
 
-      - name: Detect semantic changes
-        if: ${{ !inputs.dry_run }}
-        id: changes
-        shell: bash
-        run: |
-          set -euo pipefail
-          changed=$(git status --porcelain -- packages/json/catalogue/canonical-metadata.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json)
-          if [[ -z "$changed" ]]; then
-            if git rev-parse --verify --quiet MERGE_HEAD >/dev/null; then
-              git merge --abort
-            fi
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-
-      - name: Commit and push the update
-        if: steps.changes.outputs.changed == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          git add -- packages/json/catalogue/canonical-metadata.json packages/json/catalogue/snapshots packages/json/catalogue/unresolved.json
-          git commit -m "chore: update free model catalogue"
-          git push origin "$AUTOMATION_BRANCH"
-
-      - name: Build pull request description
-        if: steps.changes.outputs.changed == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          body_path="$RUNNER_TEMP/catalogue-pull-request.md"
-          bun -e '
-            const report = await Bun.file("packages/json/catalogue/unresolved.json").json();
-            const entries = Object.entries(report.providers);
-            const lines = [
-              "## Generated catalogue update",
-              "",
-              "This pull request was produced from the current registered provider catalogues.",
-              "",
-              "## Unresolved model IDs",
-              "",
-            ];
-            if (entries.length === 0) {
-              lines.push("None. The public catalogue will be regenerated and published after merge.");
-            } else {
-              for (const [provider, ids] of entries) {
-                lines.push(`### ${provider}`, "", ...ids.map((id) => `- \`${id}\``), "");
-              }
-              lines.push("Add reviewed canonical identities and provider mappings, then rerun discovery or regenerate the catalogue locally.");
-            }
-            lines.push("", "Provider availability is not guaranteed. Review all upstream metadata changes before merging.", "");
-            process.stdout.write(lines.join("\n"));
-          ' > "$body_path"
-
-      - name: Create or update the pull request
-        if: steps.changes.outputs.changed == 'true'
+      - name: Commit proposal and open or update one pull request
+        if: ${{ !inputs.dry_run && !cancelled() && steps.repair.outcome != '' }}
+        id: proposal
         env:
           GH_TOKEN: ${{ github.token }}
-        shell: bash
+          VALIDATED: ${{ steps.validate.outcome == 'success' }}
         run: |
           set -euo pipefail
-          pull_request=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$AUTOMATION_BRANCH" --state open --json number --jq '.[0].number')
-          if [[ -n "$pull_request" ]]; then
-            gh pr edit "$pull_request" --repo "$GITHUB_REPOSITORY" --title "chore: update free model catalogue" --body-file "$RUNNER_TEMP/catalogue-pull-request.md"
-          else
-            gh pr create --repo "$GITHUB_REPOSITORY" --base "$DEFAULT_BRANCH" --head "$AUTOMATION_BRANCH" --title "chore: update free model catalogue" --body-file "$RUNNER_TEMP/catalogue-pull-request.md"
+          if git diff --quiet -- packages/json/catalogue; then
+            exit 0
           fi
+          git add -- packages/json/catalogue
+          git commit -m 'chore: update free model catalogue'
+          git push --force-with-lease="refs/heads/$AUTOMATION_BRANCH:$OLD_SHA" origin "HEAD:refs/heads/$AUTOMATION_BRANCH"
+          echo "HEAD_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          body="$RUNNER_TEMP/catalogue-pull-request.md"
+          {
+            echo 'Daily catalogue discovery, bounded identity repair, free-model review and deterministic validation.'
+            echo
+            echo "All gates passed: $VALIDATED"
+            echo "Evidence: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo 'Failures remain open and are retried on the next schedule. Human commits stop automatic branch replacement.'
+            echo 'The model has no shell, repository credentials, or merge authority.'
+          } > "$body"
+          pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$AUTOMATION_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number')
+          if [[ -n "$pr" ]]; then
+            gh pr edit "$pr" --repo "$GITHUB_REPOSITORY" --title 'chore: update free model catalogue' --body-file "$body"
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base "$DEFAULT_BRANCH" --head "$AUTOMATION_BRANCH" --title 'chore: update free model catalogue' --body-file "$body"
+            pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$AUTOMATION_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number')
+          fi
+          echo "number=$pr" >> "$GITHUB_OUTPUT"
+
+      - name: Merge only the validated commit
+        if: steps.validate.outcome == 'success' && steps.proposal.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.proposal.outputs.number }}
+        run: bun packages/json/src/automation/merge.ts
+
+      - name: Dispatch verified catalogue publication
+        if: steps.validate.outcome == 'success' && !inputs.dry_run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run merged-catalogue.yml --repo "$GITHUB_REPOSITORY" --ref "$DEFAULT_BRANCH"
+
+      - name: Report blocked automation
+        if: ${{ !cancelled() && steps.repair.outcome != '' && steps.validate.outcome != 'success' }}
+        run: |
+          echo 'Catalogue autopilot stopped. See the evidence artifact and pending PR.' >&2
+          exit 1
