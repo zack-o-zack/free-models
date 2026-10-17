@@ -45,17 +45,61 @@ function RequestFlow({ models }: HeroProps) {
   }
 
   const featured = useMemo(() => {
-    const ranked = [...models]
-      .filter((model) => model.intelligenceScore !== null && model.intelligenceScore > 0)
+    const multiProvider = [...models]
+      .filter(
+        (model) =>
+          model.intelligenceScore !== null &&
+          model.intelligenceScore > 0 &&
+          model.providers.length > 1,
+      )
       .sort(
         (a, b) =>
           (b.intelligenceScore ?? 0) - (a.intelligenceScore ?? 0) || a.id.localeCompare(b.id),
       );
-    const chosen = ranked.slice(0, destinationSlots.length);
+
+    const chosen: ModelSummary[] = [];
+    const seenPublishers = new Set<string>();
+
+    for (const model of multiProvider) {
+      const publisher = model.id.split("/")[0];
+      if (!seenPublishers.has(publisher)) {
+        seenPublishers.add(publisher);
+        chosen.push(model);
+        if (chosen.length === destinationSlots.length) break;
+      }
+    }
+
+    if (chosen.length < destinationSlots.length) {
+      for (const model of multiProvider) {
+        if (!chosen.some((c) => c.id === model.id)) {
+          chosen.push(model);
+          if (chosen.length === destinationSlots.length) break;
+        }
+      }
+    }
+
+    if (chosen.length < destinationSlots.length) {
+      const anyRanked = [...models]
+        .filter((model) => model.intelligenceScore !== null && model.intelligenceScore > 0)
+        .sort(
+          (a, b) =>
+            (b.intelligenceScore ?? 0) - (a.intelligenceScore ?? 0) || a.id.localeCompare(b.id),
+        );
+      for (const model of anyRanked) {
+        const publisher = model.id.split("/")[0];
+        if (!seenPublishers.has(publisher) && !chosen.some((c) => c.id === model.id)) {
+          seenPublishers.add(publisher);
+          chosen.push(model);
+          if (chosen.length === destinationSlots.length) break;
+        }
+      }
+    }
+
     if (chosen.length < destinationSlots.length) {
       const remaining = models.filter((m) => !chosen.some((c) => c.id === m.id));
       chosen.push(...remaining.slice(0, destinationSlots.length - chosen.length));
     }
+
     return chosen.map((model, index) => {
       const slot = destinationSlots[index];
       const publisher = model.id.split("/")[0];
