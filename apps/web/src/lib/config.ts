@@ -4,6 +4,7 @@ export const siteConfig = {
   tagline: "Spend less.",
   description: "Free AI models for whatever you’re building.",
   socialPrice: "0$",
+  googleSiteVerification: "C1iHXHIalDzkGaPUat_pdY5RDNQrPiAiNjYTYUQp8to",
   links: {
     github: "https://github.com/zack-o-zack/free-models-backend",
   },
