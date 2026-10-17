@@ -16,7 +16,7 @@ function offer(id: string): DiscoveredOffer {
     connection: {
       protocol: "openai",
       base_url: "https://opencode.ai/inference/v1",
-      endpoint: "https://opencode.ai/inference/v1/chat/completions",
+      endpoint: "https://opencode.ai/inference/openai/v1/chat/completions",
     },
     limits: { terms: ["200 req / day"] },
   };

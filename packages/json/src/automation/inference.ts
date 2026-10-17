@@ -18,6 +18,7 @@ export function inferenceCandidates(
         offer.connection.protocol === "openai" &&
         [
           "https://opencode.ai/inference/v1/chat/completions",
+          "https://opencode.ai/inference/openai/v1/chat/completions",
           "https://opencode.ai/zen/v1/chat/completions",
         ].includes(offer.connection.endpoint ?? ""),
     )
