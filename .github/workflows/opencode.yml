@@ -11,7 +11,7 @@ on:
 jobs:
   opencode:
     if: |
-      github.event_name == 'pull_request' ||
+      (github.event_name == 'pull_request' && github.head_ref != 'automation/free-model-catalogue') ||
       contains(github.event.comment.body, ' /oc') ||
       startsWith(github.event.comment.body, '/oc') ||
       contains(github.event.comment.body, ' /opencode') ||

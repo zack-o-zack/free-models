@@ -1,6 +1,7 @@
 name: Verify merged catalogue
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
