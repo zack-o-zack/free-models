@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown } from "lucide-react";
-import { type CSSProperties, useState } from "react";
+import { type CSSProperties, useMemo, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config";
@@ -14,11 +14,11 @@ export interface HeroProps {
   models: ModelSummary[];
 }
 
-const destinations = [
-  { publisher: "google", costCents: 2, y: 72, path: "M 446 300 C 338 300 350 72 153 72" },
-  { publisher: "openai", costCents: 4, y: 224, path: "M 446 300 C 334 300 282 224 153 224" },
-  { publisher: "deepseek", costCents: 1, y: 376, path: "M 446 300 C 334 300 282 376 153 376" },
-  { publisher: "moonshotai", costCents: 3, y: 528, path: "M 446 300 C 338 300 350 528 153 528" },
+const destinationSlots = [
+  { costCents: 2, y: 72, path: "M 446 300 C 338 300 350 72 153 72" },
+  { costCents: 4, y: 224, path: "M 446 300 C 334 300 282 224 153 224" },
+  { costCents: 1, y: 376, path: "M 446 300 C 334 300 282 376 153 376" },
+  { costCents: 3, y: 528, path: "M 446 300 C 338 300 350 528 153 528" },
 ];
 
 const maxIllustratedCostCents = 900;
@@ -36,23 +36,36 @@ function RequestFlow({ models }: HeroProps) {
   const [clientIndex, setClientIndex] = useState(0);
   const client = requestClients[clientIndex];
 
-  function receiveRequest(publisher: string, costCents: number) {
+  function receiveRequest(modelId: string, costCents: number) {
     const maxIllustratedHits = Math.ceil(maxIllustratedCostCents / costCents);
     setHits((current) => ({
       ...current,
-      [publisher]: ((current[publisher] ?? 0) + 1) % (maxIllustratedHits + 1),
+      [modelId]: ((current[modelId] ?? 0) + 1) % (maxIllustratedHits + 1),
     }));
   }
 
-  const featured = destinations.flatMap((destination) => {
-    const model = models
-      .filter((candidate) => candidate.id.startsWith(`${destination.publisher}/`))
+  const featured = useMemo(() => {
+    const ranked = [...models]
+      .filter((model) => model.intelligenceScore !== null && model.intelligenceScore > 0)
       .sort(
         (a, b) =>
-          (b.intelligenceScore ?? -1) - (a.intelligenceScore ?? -1) || a.id.localeCompare(b.id),
-      )[0];
-    return model ? [{ ...destination, model }] : [];
-  });
+          (b.intelligenceScore ?? 0) - (a.intelligenceScore ?? 0) || a.id.localeCompare(b.id),
+      );
+    const chosen = ranked.slice(0, destinationSlots.length);
+    if (chosen.length < destinationSlots.length) {
+      const remaining = models.filter((m) => !chosen.some((c) => c.id === m.id));
+      chosen.push(...remaining.slice(0, destinationSlots.length - chosen.length));
+    }
+    return chosen.map((model, index) => {
+      const slot = destinationSlots[index];
+      const publisher = model.id.split("/")[0];
+      return {
+        ...slot,
+        model,
+        publisher,
+      };
+    });
+  }, [models]);
 
   return (
     <div className={styles.requestFlow}>
@@ -77,14 +90,14 @@ function RequestFlow({ models }: HeroProps) {
               <path d="M 2 1 L 8 5 L 2 9" className={styles.arrowHead} />
             </marker>
           </defs>
-          {featured.map(({ publisher, path, costCents }, index) => (
-            <g key={publisher}>
+          {featured.map(({ model, path, costCents }, index) => (
+            <g key={model.id}>
               <path d={path} className={styles.flowTrack} markerEnd="url(#hero-request-arrow)" />
               <path
                 d={path}
                 pathLength="1"
                 className={styles.flowPacket}
-                onAnimationIteration={() => receiveRequest(publisher, costCents)}
+                onAnimationIteration={() => receiveRequest(model.id, costCents)}
                 style={{ animationDelay: `${-index * 1.2}s` } as CSSProperties}
               />
             </g>
@@ -92,14 +105,14 @@ function RequestFlow({ models }: HeroProps) {
         </svg>
         {featured.map(({ publisher, y, model, costCents }) => (
           <a
-            key={publisher}
+            key={model.id}
             href={modelHref(model.id)}
             className={styles.destination}
             style={{ top: `${y / 6}%` }}
           >
             <span
-              key={hits[publisher] ?? 0}
-              className={`${styles.destinationLogo} ${hits[publisher] ? styles.logoHit : ""}`}
+              key={hits[model.id] ?? 0}
+              className={`${styles.destinationLogo} ${hits[model.id] ? styles.logoHit : ""}`}
             >
               <Avatar className="size-8 rounded-none bg-transparent sm:size-10">
                 <AvatarImage
@@ -115,7 +128,7 @@ function RequestFlow({ models }: HeroProps) {
                 <s aria-hidden="true">
                   $
                   {(
-                    Math.min((hits[publisher] ?? 0) * costCents, maxIllustratedCostCents) / 100
+                    Math.min((hits[model.id] ?? 0) * costCents, maxIllustratedCostCents) / 100
                   ).toFixed(2)}
                 </s>
                 <strong>$0</strong>
