@@ -93,9 +93,17 @@ try {
     const evidence = diff.stdout.toString();
     if (evidence.length > 140_000) throw new Error("Catalogue diff exceeds review context budget");
     if (evidence) {
+      const noLongerListedFree = [...before.snapshots].flatMap(([provider, snapshot]) => {
+        const liveIds = new Set(
+          current.snapshots.get(provider)?.offers.map((offer) => offer.model_id),
+        );
+        return snapshot.offers
+          .filter((offer) => !liveIds.has(offer.model_id))
+          .map((offer) => ({ provider, model_id: offer.model_id }));
+      });
       const review = await freeReviewer(before.snapshots);
       const verdict = await review(
-        `Review this catalogue-only diff. Reject suspicious identity merges, wrong model variants, contradictory metadata, unexplained removals, corrupted limits or changed connection/auth details. Return {"approve":boolean,"reason":string}.\n${evidence}`,
+        `Review this catalogue-only diff. Reject suspicious identity merges, wrong model variants, contradictory metadata, removals inconsistent with live discovery, corrupted limits or changed connection/auth details. Return {"approve":boolean,"reason":string}. The following offers were present in the baseline but are absent from freshly fetched free-provider discovery; this explains their removal and does not imply the underlying model retired: ${JSON.stringify(noLongerListedFree)}.\n${evidence}`,
         z.object({ approve: z.boolean(), reason: z.string().max(2000) }).strict(),
       );
       await Bun.write(reportPath, serializeJson({ phase: mode, ...verdict, files }));

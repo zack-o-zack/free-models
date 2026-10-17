@@ -111,7 +111,8 @@ Both providers have account- or model-dependent limits; offers direct users to t
 ## Catalogue autopilot
 
 The daily discovery workflow now repairs and reviews catalogue proposals before merging them.
-It runs entirely in GitHub Actions and uses the existing `OPENCODE_API_KEY` , `MISTRAL_FREE_API_KEY`, and the existing Cohere trial key. It needs repository
+It runs entirely in GitHub Actions and uses `OPENCODE_API_KEY`, `MISTRAL_FREE_API_KEY`, and
+the existing Cohere trial key. It needs repository
 Actions settings to permit creating pull requests and a token with contents, pull-request and
 Actions write permissions. No paid inference route or external agent service is configured.
 
