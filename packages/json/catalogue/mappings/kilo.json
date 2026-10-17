@@ -18,11 +18,13 @@
     "nvidia/nemotron-3.5-super-vl:free": "nvidia/nemotron-3.5-super-vl-120b-a12b",
     "poolside/laguna-s-2.1:free": "poolside/laguna-s-2.1",
     "poolside/laguna-xs-2.1:free": "poolside/laguna-xs-2.1",
+    "reflection/beam-free": "reflection/beam",
     "stealth/glyph-cluster": "stealth:glyph-cluster",
     "stepfun/step-3.7-flash:free": "stepfun/step-3.7-flash",
     "stepfun/step-5-preview-free": "stepfun/step-5-preview",
     "thinkingmachines/inkling-small:free": "thinkingmachines/inkling-small",
     "thinkingmachines/inkling:free": "thinkingmachines/inkling",
+    "xingchen-agi/xing4.0-29b-a4b:free": "xingchen-agi/xing4.0-29b-a4b",
     "z-ai/glm-5.2:free": "z-ai/glm-5.2"
   }
 }

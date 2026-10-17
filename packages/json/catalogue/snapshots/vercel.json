@@ -1158,6 +1158,25 @@
       }
     },
     {
+      "model_id": "elorian/glimpse",
+      "name": "Glimpse",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "exa/search",
       "name": "Exa Web Search",
       "connection": {
@@ -3413,8 +3432,48 @@
       }
     },
     {
+      "model_id": "perplexity/pplx-decider-flash-v1.2",
+      "name": "Decider Flash V1.2 4B",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "perplexity/pplx-decider-v1.1-27b",
       "name": "Decider V1.1 27B",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "perplexity/pplx-decider-v1.2",
+      "name": "Decider V1.2 27B",
       "connection": {
         "auth": {
           "env": [
@@ -3512,26 +3571,6 @@
     {
       "model_id": "prodia/flux-fast-schnell",
       "name": "Flux Schnell",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh",
-        "model_type": "image",
-        "protocol": "vercel-ai-gateway"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
-      "model_id": "quiverai/arrow-1.1",
-      "name": "Arrow 1.1",
       "connection": {
         "auth": {
           "env": [
@@ -3705,6 +3744,25 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "reflection/beam-free",
+      "name": "Beam 1.0 (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free — no credits used"
+        ],
+        "funding": "no_credits"
       }
     },
     {

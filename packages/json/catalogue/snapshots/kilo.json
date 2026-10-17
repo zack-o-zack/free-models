@@ -207,6 +207,24 @@
       }
     },
     {
+      "model_id": "reflection/beam-free",
+      "name": "Reflection: Beam 1.0 (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "KILO_API_KEY"
+          ]
+        },
+        "base_url": "https://api.kilo.ai/api/gateway",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / hour"
+        ]
+      }
+    },
+    {
       "model_id": "stealth/glyph-cluster",
       "name": "Stealth: Glyph Cluster (free)",
       "connection": {
@@ -227,6 +245,24 @@
     {
       "model_id": "thinkingmachines/inkling-small:free",
       "name": "Thinking Machines: Inkling Small (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "KILO_API_KEY"
+          ]
+        },
+        "base_url": "https://api.kilo.ai/api/gateway",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / hour"
+        ]
+      }
+    },
+    {
+      "model_id": "xingchen-agi/xing4.0-29b-a4b:free",
+      "name": "XingChen: Xing4.0 29B A4B (free)",
       "connection": {
         "auth": {
           "env": [

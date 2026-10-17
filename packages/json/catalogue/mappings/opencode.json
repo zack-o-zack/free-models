@@ -1,6 +1,7 @@
 {
   "provider": "opencode",
   "mappings": {
+    "beam-free": "reflection/beam",
     "big-pickle": "stealth:big-pickle",
     "cat-jam-free": "stealth:cat-jam",
     "deepseek-v4.1-flash-free": "deepseek/deepseek-v4.1-flash",
