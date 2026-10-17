@@ -57,6 +57,7 @@ export async function freeReviewer(catalogued: readonly DiscoveredOffer[]) {
     throw new Error("No catalogued, currently free OpenCode chat model available");
   let calls = 0;
   return async <T>(prompt: string, schema: z.ZodType<T>): Promise<{ model: string; result: T }> => {
+    const failures: string[] = [];
     for (const offer of candidates) {
       if (++calls > 6) throw new Error("Agent inference budget exhausted (6 requests)");
       try {
@@ -78,15 +79,21 @@ export async function freeReviewer(catalogued: readonly DiscoveredOffer[]) {
             ],
           }),
         });
-        if (!response.ok) continue;
+        if (!response.ok) {
+          failures.push(`${offer.model_id}: HTTP ${response.status}`);
+          continue;
+        }
         const envelope = responseSchema.parse(await response.json());
         const content = envelope.choices[0]?.message.content ?? "";
         const result = schema.parse(JSON.parse(content.replace(/^```(?:json)?\s*|\s*```$/g, "")));
         return { model: offer.model_id, result };
-      } catch {
+      } catch (error) {
+        failures.push(
+          `${offer.model_id}: ${error instanceof Error ? error.name : "invalid response"}`,
+        );
         // A failed or malformed response can only fall back to another verified free offer.
       }
     }
-    throw new Error("Free reviewers unavailable or returned invalid JSON; retry on next schedule");
+    throw new Error(`Free reviewers unavailable; retry on next schedule (${failures.join("; ")})`);
   };
 }
