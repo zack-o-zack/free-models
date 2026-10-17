@@ -1,5 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import { fetchPublicEvidence, inferenceCandidates } from "../src/automation/inference.ts";
+import {
+  fetchPublicEvidence,
+  inferenceCandidates,
+  mistralCandidates,
+} from "../src/automation/inference.ts";
 import { assertMergeCandidate } from "../src/automation/merge.ts";
 import {
   allowedCataloguePath,
@@ -176,4 +180,21 @@ test("public evidence permits same-origin redirects but blocks external origins 
     }),
   ).rejects.toThrow("Too many");
   expect(calls).toBe(4);
+});
+
+test("Mistral fallback uses only catalogued live chat models on the fixed endpoint", () => {
+  const model: DiscoveredOffer = {
+    ...offer("mistral-small-latest"),
+    connection: { protocol: "openai", base_url: "https://api.mistral.ai/v1" },
+  };
+  expect(mistralCandidates([model], [model])).toEqual([model]);
+  expect(mistralCandidates([], [model])).toEqual([]);
+  expect(mistralCandidates([model], [])).toEqual([]);
+  const embedding = { ...model, model_id: "codestral-embed" };
+  expect(mistralCandidates([embedding], [embedding])).toEqual([]);
+  const redirected = {
+    ...model,
+    connection: { protocol: "openai", base_url: "https://evil.example" },
+  };
+  expect(mistralCandidates([redirected], [redirected])).toEqual([]);
 });

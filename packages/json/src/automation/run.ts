@@ -34,7 +34,7 @@ try {
     if (tasks.some((task) => task.candidates.length !== 1))
       throw new Error("Uncorroborated or ambiguous identities; refusing to guess");
     if (tasks.length) {
-      const review = await freeReviewer(before.snapshots.get("opencode")?.offers ?? []);
+      const review = await freeReviewer(before.snapshots);
       const verdict = await review(
         `Check each proposed identity against the supplied upstream model IDs. Preserve versions, quantization and variants. Return {"approve":boolean,"reason":string}. Approve only if ALL proposals are sound.\n${JSON.stringify(tasks)}`,
         z.object({ approve: z.boolean(), reason: z.string().max(2000) }).strict(),
@@ -93,7 +93,7 @@ try {
     const evidence = diff.stdout.toString();
     if (evidence.length > 140_000) throw new Error("Catalogue diff exceeds review context budget");
     if (evidence) {
-      const review = await freeReviewer(before.snapshots.get("opencode")?.offers ?? []);
+      const review = await freeReviewer(before.snapshots);
       const verdict = await review(
         `Review this catalogue-only diff. Reject suspicious identity merges, wrong model variants, contradictory metadata, unexplained removals, corrupted limits or changed connection/auth details. Return {"approve":boolean,"reason":string}.\n${evidence}`,
         z.object({ approve: z.boolean(), reason: z.string().max(2000) }).strict(),
