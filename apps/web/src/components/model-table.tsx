@@ -10,7 +10,6 @@ import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "@/compone
 import { TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { entityHref } from "@/lib/catalogue-entities";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
-import { getProviderFundingLabel } from "@/lib/model-funding";
 import { modelHref } from "@/lib/model-path";
 import type { SortDirection, SortOption } from "@/lib/model-sort";
 import type { ModelSummary } from "@/lib/model-types";
@@ -38,7 +37,6 @@ function Providers({ model }: { model: ModelSummary }) {
           plain
           docs={model.providerDocs[model.providers[0]]}
           provider={model.providers[0]}
-          fundingLabel={getProviderFundingLabel(model.connections, model.providers[0])}
           names={model.providerNames}
         />
       </Link>
@@ -64,7 +62,6 @@ function Providers({ model }: { model: ModelSummary }) {
                       size="lg"
                       docs={model.providerDocs[provider]}
                       provider={provider}
-                      fundingLabel={getProviderFundingLabel(model.connections, provider)}
                       names={model.providerNames}
                     />
                   </Link>
@@ -131,13 +128,10 @@ export function ModelTable({
   return (
     <div className="overflow-hidden rounded-[24px] border border-border">
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b bg-muted/50 px-4 py-3 text-xs text-muted-foreground sm:px-5">
-        <p>
-          Click a column heading to sort. <span className="whitespace-nowrap">— = not listed</span>
-        </p>
         <p className="flex items-center gap-1.5 lg:hidden">
           <MoveHorizontal aria-hidden="true" className="size-3.5" /> Scroll to compare
         </p>
-        <p>Scores: Artificial Analysis · Higher is better</p>
+        <p className="ml-auto">Scores: Artificial Analysis</p>
       </div>
       <section
         aria-label="Model comparison"

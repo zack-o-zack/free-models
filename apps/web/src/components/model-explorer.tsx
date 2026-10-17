@@ -154,7 +154,7 @@ export function ModelExplorer({
     selectedProviders.length +
     (isContextFiltered ? 1 : 0);
 
-  const counts = useMemo(() => {
+  const totalCounts = useMemo(() => {
     return Object.fromEntries(
       [{ value: "all" }, ...outputs].map((tab) => [
         tab.value,
@@ -170,59 +170,66 @@ export function ModelExplorer({
       { value: "all", label: "All" },
       ...[...outputs].sort(
         (left, right) =>
-          counts[right.value] - counts[left.value] || left.label.localeCompare(right.label),
+          totalCounts[right.value] - totalCounts[left.value] ||
+          left.label.localeCompare(right.label),
       ),
     ],
-    [outputs, counts],
+    [outputs, totalCounts],
   );
 
-  const visibleModels = useMemo(() => {
+  const filteredModels = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     const minContext = contextSteps[contextRange[0]];
     const maxContext = contextSteps[contextRange[1]];
     const isFiltered = contextRange[0] > 0 || contextRange[1] < contextSteps.length - 1;
 
-    return models
-      .filter((model) => {
-        const searchable = [
-          model.name,
-          model.id,
-          model.author,
-          model.description,
-          ...model.providers,
-        ]
-          .join(" ")
-          .toLowerCase();
+    return models.filter((model) => {
+      const searchable = [model.name, model.id, model.author, model.description, ...model.providers]
+        .join(" ")
+        .toLowerCase();
 
-        const matchesContext =
-          !isFiltered ||
-          (model.contextLength >= minContext &&
-            (contextRange[1] === contextSteps.length - 1 || model.contextLength <= maxContext));
+      const matchesContext =
+        !isFiltered ||
+        (model.contextLength >= minContext &&
+          (contextRange[1] === contextSteps.length - 1 || model.contextLength <= maxContext));
 
-        return (
-          (normalizedQuery.length === 0 || searchable.includes(normalizedQuery)) &&
-          (output === "all" || model.outputModalities.includes(output)) &&
-          selectedInputs.every((modality) => model.inputModalities.includes(modality)) &&
-          (selectedPublishers.length === 0 ||
-            selectedPublishers.includes(model.id.split("/")[0])) &&
-          (selectedProviders.length === 0 ||
-            selectedProviders.some((provider) => model.providers.includes(provider))) &&
-          matchesContext
-        );
-      })
-      .sort((left, right) => compareModels(left, right, sort, direction));
+      return (
+        (normalizedQuery.length === 0 || searchable.includes(normalizedQuery)) &&
+        selectedInputs.every((modality) => model.inputModalities.includes(modality)) &&
+        (selectedPublishers.length === 0 || selectedPublishers.includes(model.id.split("/")[0])) &&
+        (selectedProviders.length === 0 ||
+          selectedProviders.some((provider) => model.providers.includes(provider))) &&
+        matchesContext
+      );
+    });
   }, [
     contextRange,
     contextSteps,
-    direction,
     models,
-    output,
     query,
     selectedInputs,
     selectedProviders,
     selectedPublishers,
-    sort,
   ]);
+
+  const counts = useMemo(() => {
+    return Object.fromEntries(
+      [{ value: "all" }, ...outputs].map((tab) => [
+        tab.value,
+        tab.value === "all"
+          ? filteredModels.length
+          : filteredModels.filter((model) => model.outputModalities.includes(tab.value)).length,
+      ]),
+    ) as Record<string, number>;
+  }, [filteredModels, outputs]);
+
+  const visibleModels = useMemo(() => {
+    return (
+      output === "all"
+        ? filteredModels
+        : filteredModels.filter((model) => model.outputModalities.includes(output))
+    ).sort((left, right) => compareModels(left, right, sort, direction));
+  }, [direction, filteredModels, output, sort]);
 
   function toggleInput(modality: string) {
     setSelectedInputs((current) =>
