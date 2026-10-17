@@ -19,7 +19,7 @@
     "@cf/deepgram/aura-1": "deepgram/aura-1",
     "@cf/deepgram/aura-2-en": "deepgram/aura-2",
     "@cf/deepgram/aura-2-es": "deepgram/aura-2",
-    "@cf/deepgram/flux (WebSocket)": "deepgram/flux-tts",
+    "@cf/deepgram/flux (WebSocket)": "deepgram/flux",
     "@cf/deepgram/nova-3": "deepgram/nova-3",
     "@cf/deepgram/nova-3 (WebSocket)": "deepgram/nova-3",
     "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b": "deepseek/deepseek-r1-distill-qwen-32b",

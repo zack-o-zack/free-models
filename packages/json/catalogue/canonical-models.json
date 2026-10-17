@@ -9,20 +9,20 @@
       "name": "AISingapore: Gemma Sea Lion V4 27B"
     },
     {
-      "id": "amazon/nova-2-lite",
-      "name": "Nova 2 Lite"
+      "id": "amazon/nova-2-lite-v1",
+      "name": "Amazon: Nova 2 Lite"
     },
     {
-      "id": "amazon/nova-lite",
-      "name": "Nova Lite"
+      "id": "amazon/nova-lite-v1",
+      "name": "Amazon: Nova Lite 1.0"
     },
     {
-      "id": "amazon/nova-micro",
-      "name": "Nova Micro"
+      "id": "amazon/nova-micro-v1",
+      "name": "Amazon: Nova Micro 1.0"
     },
     {
-      "id": "amazon/nova-pro",
-      "name": "Nova Pro"
+      "id": "amazon/nova-pro-v1",
+      "name": "Amazon: Nova Pro 1.0"
     },
     {
       "id": "amazon/titan-embed-text-v2",
@@ -55,14 +55,6 @@
     {
       "id": "baai/bge-small-en-v1.5",
       "name": "BAAI: bge-small-en-v1.5"
-    },
-    {
-      "id": "black-forest-labs/flux-2-max",
-      "name": "FLUX.2 [max]"
-    },
-    {
-      "id": "black-forest-labs/flux-2-pro",
-      "name": "FLUX.2 [pro]"
     },
     {
       "id": "black-forest-labs/flux-3-video",
@@ -109,6 +101,14 @@
       "name": "Black Forest Labs: FLUX.2 Klein 9B"
     },
     {
+      "id": "black-forest-labs/flux.2-max",
+      "name": "Black Forest Labs: FLUX.2 Max"
+    },
+    {
+      "id": "black-forest-labs/flux.2-pro",
+      "name": "Black Forest Labs: FLUX.2 Pro"
+    },
+    {
       "id": "browserbase/fetch",
       "name": "Browserbase Fetch"
     },
@@ -117,32 +117,32 @@
       "name": "Browserbase Search"
     },
     {
-      "id": "bytedance/seed-1.6",
-      "name": "Seed 1.6"
+      "id": "bytedance-seed/seed-1.6",
+      "name": "ByteDance Seed: Seed 1.6"
+    },
+    {
+      "id": "bytedance-seed/seed-2-1-turbo",
+      "name": "ByteDance Seed: Seed 2.1 Turbo"
+    },
+    {
+      "id": "bytedance-seed/seedream-4.5",
+      "name": "ByteDance Seed: Seedream 4.5"
+    },
+    {
+      "id": "bytedance-seed/seedream-5-0-lite",
+      "name": "ByteDance Seed: Seedream 5.0 Lite"
+    },
+    {
+      "id": "bytedance-seed/seedream-5-0-pro",
+      "name": "ByteDance Seed: Seedream 5.0 Pro"
     },
     {
       "id": "bytedance/seed-1.8",
       "name": "Bytedance Seed 1.8"
     },
     {
-      "id": "bytedance/seed-2.1-turbo",
-      "name": "Seed 2.1 Turbo"
-    },
-    {
       "id": "bytedance/seedream-4.0",
       "name": "Seedream 4.0"
-    },
-    {
-      "id": "bytedance/seedream-4.5",
-      "name": "Seedream 4.5"
-    },
-    {
-      "id": "bytedance/seedream-5.0-lite",
-      "name": "Seedream 5.0 Lite"
-    },
-    {
-      "id": "bytedance/seedream-5.0-pro",
-      "name": "Seedream 5.0 Pro"
     },
     {
       "id": "callstack/apex",
@@ -177,12 +177,12 @@
       "name": "Cohere: Transcribe 03-2026"
     },
     {
-      "id": "cohere/command-a-03-2025",
-      "name": "Cohere: Command A 03-2025"
+      "id": "cohere/command-a",
+      "name": "Cohere: Command A"
     },
     {
-      "id": "cohere/command-a-plus-05-2026",
-      "name": "Cohere: Command A Plus 05-2026"
+      "id": "cohere/command-a-plus",
+      "name": "Cohere: Command A+"
     },
     {
       "id": "cohere/command-a-reasoning-08-2025",
@@ -269,6 +269,14 @@
       "name": "Cohere: Parse V5.0"
     },
     {
+      "id": "cohere/rerank-4-fast",
+      "name": "Cohere: Rerank 4 Fast"
+    },
+    {
+      "id": "cohere/rerank-4-pro",
+      "name": "Cohere: Rerank 4 Pro"
+    },
+    {
       "id": "cohere/rerank-english-v3.0",
       "name": "Cohere: Rerank English V3.0"
     },
@@ -279,14 +287,6 @@
     {
       "id": "cohere/rerank-v3.5",
       "name": "Cohere: Rerank V3.5"
-    },
-    {
-      "id": "cohere/rerank-v4.0-fast",
-      "name": "Cohere: Rerank V4.0 Fast"
-    },
-    {
-      "id": "cohere/rerank-v4.0-pro",
-      "name": "Cohere: Rerank V4.0 Pro"
     },
     {
       "id": "cohere/tiny-aya-earth",
@@ -319,6 +319,10 @@
     {
       "id": "deepgram/aura-2",
       "name": "Deepgram: Aura-2"
+    },
+    {
+      "id": "deepgram/flux",
+      "name": "Deepgram: Flux (Speech Recognition)"
     },
     {
       "id": "deepgram/flux-tts",
@@ -601,12 +605,12 @@
       "name": "LiquidAI: LFM2.5-2.6B"
     },
     {
-      "id": "liquid/lfm-2.5-embedding-350m",
-      "name": "LiquidAI: LFM2.5-Embedding-350M"
+      "id": "liquid/lfm-2.5-24b-a2b",
+      "name": "LiquidAI: LFM2.5-24B-A2B"
     },
     {
-      "id": "liquid/lfm2.5-24b-a2b",
-      "name": "LFM2.5-24B-A2B"
+      "id": "liquid/lfm-2.5-embedding-350m",
+      "name": "LiquidAI: LFM2.5-Embedding-350M"
     },
     {
       "id": "meituan/longcat-2.5-preview",
@@ -765,10 +769,6 @@
       "name": "Mistral: Codestral 2508"
     },
     {
-      "id": "mistralai/codestral-embed",
-      "name": "Codestral Embed"
-    },
-    {
       "id": "mistralai/codestral-embed-2505",
       "name": "Mistral: Codestral Embed 2505"
     },
@@ -787,10 +787,6 @@
     {
       "id": "mistralai/magistral-small",
       "name": "Mistral: Magistral Small"
-    },
-    {
-      "id": "mistralai/ministral-14b",
-      "name": "Ministral 14B"
     },
     {
       "id": "mistralai/ministral-14b-2512",
@@ -815,10 +811,6 @@
     {
       "id": "mistralai/mistral-7b-instruct-v0.1",
       "name": "Mistral: Mistral 7B Instruct V0.1"
-    },
-    {
-      "id": "mistralai/mistral-embed",
-      "name": "Mistral Embed"
     },
     {
       "id": "mistralai/mistral-embed-2312",
@@ -1029,7 +1021,7 @@
       "name": "NVIDIA: Nemotron 3.5 Lightning"
     },
     {
-      "id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "id": "nvidia/nemotron-3.5-super-vl",
       "name": "NVIDIA: Nemotron 3.5 Super VL"
     },
     {
@@ -1321,8 +1313,8 @@
       "name": "Qwen3 Coder 480B A35B Instruct"
     },
     {
-      "id": "qwen/qwen3-coder-30b-a3b",
-      "name": "Qwen 3 Coder 30B A3B Instruct"
+      "id": "qwen/qwen3-coder-30b-a3b-instruct",
+      "name": "Qwen: Qwen3 Coder 30B A3B Instruct"
     },
     {
       "id": "qwen/qwen3-coder-next",
@@ -1417,8 +1409,8 @@
       "name": "Recraft V4.1 Utility"
     },
     {
-      "id": "reflection/beam",
-      "name": "Reflection: Beam 1.0"
+      "id": "reflection/beam-1.0-501b-a23b",
+      "name": "Reflection: Beam 1.0 501B A23B"
     },
     {
       "id": "rekaai/reka-edge",
@@ -1453,8 +1445,8 @@
       "name": "Gemma 4 26b A4b It Musica"
     },
     {
-      "id": "scaledown/scaledown-classify-1",
-      "name": "Classify-1"
+      "id": "scaledown/classify-1",
+      "name": "ScaleDown: Classify-1"
     },
     {
       "id": "stealth:big-pickle",
@@ -1529,22 +1521,6 @@
       "name": "Jev 1.13"
     },
     {
-      "id": "voyage/rerank-2.5",
-      "name": "Voyage Rerank 2.5"
-    },
-    {
-      "id": "voyage/rerank-2.5-lite",
-      "name": "Voyage Rerank 2.5 Lite"
-    },
-    {
-      "id": "voyage/rerank-3",
-      "name": "Voyage Rerank 3"
-    },
-    {
-      "id": "voyage/rerank-3-lite",
-      "name": "Voyage Rerank 3 Lite"
-    },
-    {
       "id": "voyage/voyage-3-large",
       "name": "voyage-3-large"
     },
@@ -1555,18 +1531,6 @@
     {
       "id": "voyage/voyage-3.5-lite",
       "name": "Voyage 3.5 Lite"
-    },
-    {
-      "id": "voyage/voyage-4",
-      "name": "Voyage 4"
-    },
-    {
-      "id": "voyage/voyage-4-large",
-      "name": "Voyage 4 Large"
-    },
-    {
-      "id": "voyage/voyage-4-lite",
-      "name": "Voyage 4 Lite"
     },
     {
       "id": "voyage/voyage-code-2",
@@ -1585,6 +1549,34 @@
       "name": "Voyage Law 2"
     },
     {
+      "id": "voyageai/rerank-2.5",
+      "name": "VoyageAI by MongoDB: rerank-2.5"
+    },
+    {
+      "id": "voyageai/rerank-2.5-lite",
+      "name": "VoyageAI by MongoDB: rerank-2.5-lite"
+    },
+    {
+      "id": "voyageai/rerank-3",
+      "name": "VoyageAI by MongoDB: rerank-3"
+    },
+    {
+      "id": "voyageai/rerank-3-lite",
+      "name": "VoyageAI by MongoDB: rerank-3-lite"
+    },
+    {
+      "id": "voyageai/voyage-4",
+      "name": "VoyageAI by MongoDB: voyage-4"
+    },
+    {
+      "id": "voyageai/voyage-4-large",
+      "name": "VoyageAI by MongoDB: voyage-4-large"
+    },
+    {
+      "id": "voyageai/voyage-4-lite",
+      "name": "VoyageAI by MongoDB: voyage-4-lite"
+    },
+    {
       "id": "x-ai/grok-4.1-fast-non-reasoning",
       "name": "Grok 4.1 Fast Non-Reasoning"
     },
@@ -1601,8 +1593,8 @@
       "name": "Grok Imagine Image"
     },
     {
-      "id": "x-ai/grok-stt",
-      "name": "Grok STT"
+      "id": "x-ai/grok-stt-1.0",
+      "name": "SpaceXAI: Grok STT 1.0"
     },
     {
       "id": "x-ai/grok-tts",
