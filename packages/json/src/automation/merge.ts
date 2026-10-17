@@ -58,18 +58,20 @@ if (import.meta.main) {
     files.flat().map((file) => file.filename),
     reviews.flat(),
   );
+  // A non-forced fast-forward installs exactly the validated tree. If main advances,
+  // GitHub rejects it atomically instead of merging new, unvalidated base content.
   const result = JSON.parse(
     gh([
       "api",
       "--method",
-      "PUT",
-      `${route}/merge`,
+      "PATCH",
+      `repos/${repository}/git/refs/heads/${encodeURIComponent(branch)}`,
       "-f",
       `sha=${head}`,
-      "-f",
-      "merge_method=squash",
+      "-F",
+      "force=false",
     ]),
   );
-  if (result.merged !== true)
+  if (result.object?.sha !== head)
     throw new Error("GitHub declined merge; retained proposal for next run");
 }
