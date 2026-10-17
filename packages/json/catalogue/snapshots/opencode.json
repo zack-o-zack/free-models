@@ -9,8 +9,8 @@
   },
   "offers": [
     {
-      "model_id": "big-pickle",
-      "name": "Big Pickle",
+      "model_id": "beam-free",
+      "name": "Beam Free",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "auth": {
@@ -29,8 +29,8 @@
       }
     },
     {
-      "model_id": "cat-jam-free",
-      "name": "Cat Jam Free",
+      "model_id": "big-pickle",
+      "name": "Big Pickle",
       "connection": {
         "ai_sdk_package": "@ai-sdk/openai-compatible",
         "auth": {
@@ -108,26 +108,6 @@
       }
     },
     {
-      "model_id": "ll-alpha-free",
-      "name": "LL Alpha Free",
-      "connection": {
-        "ai_sdk_package": "@ai-sdk/openai-compatible",
-        "auth": {
-          "env": [
-            "OPENCODE_API_KEY"
-          ]
-        },
-        "base_url": "https://opencode.ai/inference/openai/v1",
-        "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / day"
-        ]
-      }
-    },
-    {
       "model_id": "longcat-2.5-preview-free",
       "name": "LongCat 2.5 Preview Free",
       "connection": {
@@ -159,26 +139,6 @@
         },
         "base_url": "https://opencode.ai/inference/openai/v1",
         "endpoint": "https://opencode.ai/inference/openai/v1/chat/completions",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / day"
-        ]
-      }
-    },
-    {
-      "model_id": "muse-spark-1.3-contributor-free",
-      "name": "Muse Spark 1.3 Contributor Free",
-      "connection": {
-        "ai_sdk_package": "@ai-sdk/openai",
-        "auth": {
-          "env": [
-            "OPENCODE_API_KEY"
-          ]
-        },
-        "base_url": "https://opencode.ai/inference/openai/v1",
-        "endpoint": "https://opencode.ai/inference/openai/v1/responses",
         "protocol": "openai"
       },
       "limits": {

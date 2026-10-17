@@ -1,3 +1,20 @@
 {
-  "providers": {}
+  "providers": {
+    "kilo": [
+      "reflection/beam-free",
+      "xingchen-agi/xing4.0-29b-a4b:free"
+    ],
+    "opencode": [
+      "beam-free"
+    ],
+    "openrouter": [
+      "xingchen-agi/xing4.0-29b-a4b:free"
+    ],
+    "vercel": [
+      "elorian/glimpse",
+      "perplexity/pplx-decider-flash-v1.2",
+      "perplexity/pplx-decider-v1.2",
+      "reflection/beam-free"
+    ]
+  }
 }
