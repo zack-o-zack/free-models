@@ -1,28 +1,49 @@
 import { describe, expect, test } from "bun:test";
+import { fileURLToPath } from "node:url";
+import brandLogos from "../src/lib/brand-logos.json";
 import { providerFaviconUrl, publisherFaviconUrl } from "../src/lib/provider-logos";
 
-describe("publisher logo resolution", () => {
-  test("new publishers get a logo URL without a website-map entry", () => {
-    expect(publisherFaviconUrl("apodex")).toBe("https://openrouter.ai/images/icons/Apodex.svg");
-    expect(publisherFaviconUrl("inception")).toBe(
-      "https://openrouter.ai/images/icons/Inception.svg",
-    );
+const localLogo = /^\/brand-logos\/[a-f0-9]{16}\.(png|jpg|webp|ico|svg)$/;
+
+describe("local brand logo resolution", () => {
+  test("known and newly discovered publishers use checked-in snapshots", () => {
+    for (const publisher of ["apodex", "inception", "liquid"]) {
+      expect(publisherFaviconUrl(publisher)).toMatch(localLogo);
+    }
   });
 
-  test("existing publisher websites still use the favicon service", () => {
-    const url = new URL(publisherFaviconUrl("liquid", 128) ?? "");
-    expect(url.searchParams.get("url")).toBe("https://www.liquid.ai/");
-    expect(url.searchParams.get("size")).toBe("128");
-  });
-
-  test("invalid or undisclosed publishers have no guessed asset URL", () => {
-    for (const publisher of ["", "stealth:test", "../apodex", "https://example.com"]) {
+  test("invalid and unavailable publishers use initials instead of guessed requests", () => {
+    for (const publisher of [
+      "",
+      "stealth:test",
+      "../apodex",
+      "https://example.com",
+      "unknown-brand",
+    ]) {
       expect(publisherFaviconUrl(publisher)).toBeNull();
     }
   });
 
-  test("provider URLs are taken from catalogue documentation", () => {
-    const url = new URL(providerFaviconUrl({ overview: "https://example.com/docs" }) ?? "");
-    expect(url.searchParams.get("url")).toBe("https://example.com/docs");
+  test("provider documentation resolves locally and rejects unsafe URLs", () => {
+    expect(
+      providerFaviconUrl({ overview: "https://developers.cloudflare.com/workers-ai/" }),
+    ).toMatch(localLogo);
+    expect(providerFaviconUrl({ overview: "javascript:alert(1)" })).toBeNull();
+    expect(providerFaviconUrl({ overview: "https://unknown-brand.example/docs" })).toBeNull();
+    expect(
+      providerFaviconUrl({
+        overview: "invalid",
+        models: "https://developers.cloudflare.com/workers-ai/",
+      }),
+    ).toMatch(localLogo);
+  });
+
+  test("every manifest entry has a real local image", async () => {
+    for (const path of Object.values(brandLogos)) {
+      expect(path).toMatch(localLogo);
+      expect(
+        await Bun.file(fileURLToPath(new URL(`../public${path}`, import.meta.url))).exists(),
+      ).toBe(true);
+    }
   });
 });

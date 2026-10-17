@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-
 import { entityHref, getCatalogueEntities } from "@/lib/catalogue-entities";
+import { cataloguePageCount, cataloguePageHref } from "@/lib/catalogue-pagination";
 import { getModels } from "@/lib/model-data";
 import { modelHref } from "@/lib/model-path";
 import { absoluteUrl } from "@/lib/seo";
@@ -11,6 +11,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { models } = await getModels();
   return [
     { url: absoluteUrl("/") },
+    ...Array.from({ length: cataloguePageCount(models.length) - 1 }, (_, index) => ({
+      url: absoluteUrl(cataloguePageHref(index + 2)),
+    })),
     ...["providers", "publishers"].flatMap((kind) => {
       const entityKind = kind as "providers" | "publishers";
       return [

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-
 import {
   type CatalogueEntity,
   type EntityKind,
@@ -8,6 +7,12 @@ import {
   entityHref,
   entityTitle,
 } from "@/lib/catalogue-entities";
+import {
+  CATALOGUE_PAGE_SIZE,
+  cataloguePageDescription,
+  cataloguePageHref,
+  cataloguePageTitle,
+} from "@/lib/catalogue-pagination";
 import { homeTitle, siteConfig, socialImageAlt } from "@/lib/config";
 import { modelHref } from "@/lib/model-path";
 import { sortCatalogue } from "@/lib/model-sort";
@@ -95,21 +100,41 @@ export function websiteJsonLd() {
   };
 }
 
-export function catalogueJsonLd(models: ModelSummary[]) {
+export function catalogueJsonLd(
+  models: ModelSummary[],
+  { page = 1, total = models.length }: { page?: number; total?: number } = {},
+) {
+  const path = cataloguePageHref(page);
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": absoluteUrl("/#catalogue"),
-    name: homeTitle,
-    description: siteConfig.description,
-    url: absoluteUrl("/"),
+    "@id": absoluteUrl(`${path}#catalogue`),
+    name: page === 1 ? homeTitle : cataloguePageTitle(page),
+    description: page === 1 ? siteConfig.description : cataloguePageDescription(page, total),
+    url: absoluteUrl(path),
     isPartOf: { "@id": absoluteUrl("/#website") },
+    ...(page > 1
+      ? {
+          breadcrumb: {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: cataloguePageTitle(page),
+                item: absoluteUrl(path),
+              },
+            ],
+          },
+        }
+      : {}),
     mainEntity: {
       "@type": "ItemList",
-      numberOfItems: models.length,
+      numberOfItems: total,
       itemListElement: sortCatalogue(models).map((model, index) => ({
         "@type": "ListItem",
-        position: index + 1,
+        position: (page - 1) * CATALOGUE_PAGE_SIZE + index + 1,
         name: model.name,
         url: absoluteUrl(modelHref(model.id)),
       })),
@@ -166,12 +191,14 @@ export function entityJsonLd(entity: CatalogueEntity, kind: EntityKind) {
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: entity.models.length,
-      itemListElement: sortCatalogue(entity.models).map((model, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: model.name,
-        url: absoluteUrl(modelHref(model.id)),
-      })),
+      itemListElement: sortCatalogue(entity.models)
+        .slice(0, CATALOGUE_PAGE_SIZE)
+        .map((model, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: model.name,
+          url: absoluteUrl(modelHref(model.id)),
+        })),
     },
   };
 }

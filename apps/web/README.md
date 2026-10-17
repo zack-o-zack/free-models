@@ -48,3 +48,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Brand logos
+
+Logos are checked-in images in `public/brand-logos`, with content hashes in their filenames and a one-year immutable cache policy. Pages use these local assets; an unknown brand uses its initials.
+
+To refresh the snapshots explicitly, run `bun run catalogue:render` and then `bun run logos:sync` from `apps/web`. Pass a local catalogue path after the command to use a different `free-models.json`. This maintenance command downloads favicon images; regular builds do not refresh them.

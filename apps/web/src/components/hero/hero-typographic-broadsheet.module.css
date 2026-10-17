@@ -299,11 +299,9 @@
 @keyframes logo-impact {
   0% {
     transform: translateX(0);
-    background: var(--primary);
   }
   18% {
     transform: translateX(-2px) rotate(-2deg);
-    background: var(--primary);
   }
   38% {
     transform: translateX(2px) rotate(2deg);
@@ -313,7 +311,6 @@
   }
   100% {
     transform: translateX(0);
-    background: var(--card);
   }
 }
 
@@ -387,4 +384,21 @@
 
 [class~="dark"] .clientCycle img[src*="codex"] {
   filter: invert(1);
+}
+
+.requestFlow[data-paused="true"] .flowPacket,
+.requestFlow[data-paused="true"] .logoHit,
+.requestFlow[data-paused="true"] .clientCycle {
+  animation-play-state: paused;
+}
+
+@media (max-width: 767px) {
+  .flowPacket,
+  .logoHit,
+  .clientCycle {
+    animation: none;
+  }
+  .flowPacket {
+    stroke-dashoffset: 0.5;
+  }
 }

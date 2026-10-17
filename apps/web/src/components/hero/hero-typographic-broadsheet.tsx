@@ -1,14 +1,8 @@
-"use client";
-
 import { ArrowDown } from "lucide-react";
-import { type CSSProperties, useMemo, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/config";
-import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
-import { publisherFaviconUrl } from "@/lib/provider-logos";
 import styles from "./hero-typographic-broadsheet.module.css";
+import { RequestFlow } from "./request-flow";
 
 export interface HeroProps {
   models: ModelSummary[];
@@ -21,189 +15,71 @@ const destinationSlots = [
   { costCents: 3, y: 528, path: "M 446 300 C 338 300 350 528 153 528" },
 ];
 
-const maxIllustratedCostCents = 900;
+function getFeaturedModels(models: ModelSummary[]) {
+  const multiProvider = [...models]
+    .filter(
+      (model) =>
+        model.intelligenceScore !== null &&
+        model.intelligenceScore > 0 &&
+        model.providers.length > 1,
+    )
+    .sort(
+      (a, b) => (b.intelligenceScore ?? 0) - (a.intelligenceScore ?? 0) || a.id.localeCompare(b.id),
+    );
 
-const requestClients = [
-  { name: "OpenCode", icon: "/brands/opencode.png" },
-  { name: "Claude Code", icon: "/brands/claude-code.svg" },
-  { name: "Codex", icon: "/brands/codex.svg" },
-  { name: "Python", icon: "/brands/python.svg" },
-  { name: "Pi", icon: "/brands/pi.svg" },
-];
+  const chosen: ModelSummary[] = [];
+  const seenPublishers = new Set<string>();
 
-function RequestFlow({ models }: HeroProps) {
-  const [hits, setHits] = useState<Record<string, number>>({});
-  const [clientIndex, setClientIndex] = useState(0);
-  const client = requestClients[clientIndex];
-
-  function receiveRequest(modelId: string, costCents: number) {
-    const maxIllustratedHits = Math.ceil(maxIllustratedCostCents / costCents);
-    setHits((current) => ({
-      ...current,
-      [modelId]: ((current[modelId] ?? 0) + 1) % (maxIllustratedHits + 1),
-    }));
+  for (const model of multiProvider) {
+    const publisher = model.id.split("/")[0];
+    if (!seenPublishers.has(publisher)) {
+      seenPublishers.add(publisher);
+      chosen.push(model);
+      if (chosen.length === destinationSlots.length) break;
+    }
   }
 
-  const featured = useMemo(() => {
-    const multiProvider = [...models]
-      .filter(
-        (model) =>
-          model.intelligenceScore !== null &&
-          model.intelligenceScore > 0 &&
-          model.providers.length > 1,
-      )
+  if (chosen.length < destinationSlots.length) {
+    for (const model of multiProvider) {
+      if (!chosen.some((c) => c.id === model.id)) {
+        chosen.push(model);
+        if (chosen.length === destinationSlots.length) break;
+      }
+    }
+  }
+
+  if (chosen.length < destinationSlots.length) {
+    const anyRanked = [...models]
+      .filter((model) => model.intelligenceScore !== null && model.intelligenceScore > 0)
       .sort(
         (a, b) =>
           (b.intelligenceScore ?? 0) - (a.intelligenceScore ?? 0) || a.id.localeCompare(b.id),
       );
-
-    const chosen: ModelSummary[] = [];
-    const seenPublishers = new Set<string>();
-
-    for (const model of multiProvider) {
+    for (const model of anyRanked) {
       const publisher = model.id.split("/")[0];
-      if (!seenPublishers.has(publisher)) {
+      if (!seenPublishers.has(publisher) && !chosen.some((c) => c.id === model.id)) {
         seenPublishers.add(publisher);
         chosen.push(model);
         if (chosen.length === destinationSlots.length) break;
       }
     }
+  }
 
-    if (chosen.length < destinationSlots.length) {
-      for (const model of multiProvider) {
-        if (!chosen.some((c) => c.id === model.id)) {
-          chosen.push(model);
-          if (chosen.length === destinationSlots.length) break;
-        }
-      }
-    }
+  if (chosen.length < destinationSlots.length) {
+    const remaining = models.filter((m) => !chosen.some((c) => c.id === m.id));
+    chosen.push(...remaining.slice(0, destinationSlots.length - chosen.length));
+  }
 
-    if (chosen.length < destinationSlots.length) {
-      const anyRanked = [...models]
-        .filter((model) => model.intelligenceScore !== null && model.intelligenceScore > 0)
-        .sort(
-          (a, b) =>
-            (b.intelligenceScore ?? 0) - (a.intelligenceScore ?? 0) || a.id.localeCompare(b.id),
-        );
-      for (const model of anyRanked) {
-        const publisher = model.id.split("/")[0];
-        if (!seenPublishers.has(publisher) && !chosen.some((c) => c.id === model.id)) {
-          seenPublishers.add(publisher);
-          chosen.push(model);
-          if (chosen.length === destinationSlots.length) break;
-        }
-      }
-    }
-
-    if (chosen.length < destinationSlots.length) {
-      const remaining = models.filter((m) => !chosen.some((c) => c.id === m.id));
-      chosen.push(...remaining.slice(0, destinationSlots.length - chosen.length));
-    }
-
-    return chosen.map((model, index) => {
-      const slot = destinationSlots[index];
-      const publisher = model.id.split("/")[0];
-      return {
-        ...slot,
-        model,
-        publisher,
-      };
-    });
-  }, [models]);
-
-  return (
-    <div className={styles.requestFlow}>
-      <div className={styles.flowCanvas}>
-        <svg
-          viewBox="0 0 600 600"
-          preserveAspectRatio="none"
-          fill="none"
-          className={styles.flowLines}
-          aria-hidden="true"
-        >
-          <defs>
-            <marker
-              id="hero-request-arrow"
-              viewBox="0 0 10 10"
-              refX="8"
-              refY="5"
-              markerWidth="6"
-              markerHeight="6"
-              orient="auto-start-reverse"
-            >
-              <path d="M 2 1 L 8 5 L 2 9" className={styles.arrowHead} />
-            </marker>
-          </defs>
-          {featured.map(({ model, path, costCents }, index) => (
-            <g key={model.id}>
-              <path d={path} className={styles.flowTrack} markerEnd="url(#hero-request-arrow)" />
-              <path
-                d={path}
-                pathLength="1"
-                className={styles.flowPacket}
-                onAnimationIteration={() => receiveRequest(model.id, costCents)}
-                style={{ animationDelay: `${-index * 1.2}s` } as CSSProperties}
-              />
-            </g>
-          ))}
-        </svg>
-        {featured.map(({ publisher, y, model, costCents }) => (
-          <a
-            key={model.id}
-            href={modelHref(model.id)}
-            className={styles.destination}
-            style={{ top: `${y / 6}%` }}
-          >
-            <span
-              key={hits[model.id] ?? 0}
-              className={`${styles.destinationLogo} ${hits[model.id] ? styles.logoHit : ""}`}
-            >
-              <Avatar className="size-8 rounded-none bg-transparent sm:size-10">
-                <AvatarImage
-                  src={publisherFaviconUrl(publisher, 128) ?? undefined}
-                  alt=""
-                  className="object-contain"
-                />
-                <AvatarFallback className="bg-transparent text-lg font-bold">
-                  {model.author.slice(0, 1)}
-                </AvatarFallback>
-              </Avatar>
-              <span className={styles.freeTag}>
-                <s aria-hidden="true">
-                  $
-                  {(
-                    Math.min((hits[model.id] ?? 0) * costCents, maxIllustratedCostCents) / 100
-                  ).toFixed(2)}
-                </s>
-                <strong>$0</strong>
-              </span>
-            </span>
-            <span className={styles.destinationName}>{model.name.replace(/^[^:]+:\s*/, "")}</span>
-          </a>
-        ))}
-        <div
-          className={styles.requestOrigin}
-          role="img"
-          aria-label="Request from OpenCode, Claude Code, Codex, Python, or Pi"
-        >
-          <div
-            className={styles.clientCycle}
-            onAnimationIteration={() =>
-              setClientIndex((current) => (current + 1) % requestClients.length)
-            }
-            aria-hidden="true"
-          >
-            <Avatar key={client.name} className="size-12 rounded-none bg-transparent sm:size-14">
-              <AvatarImage src={client.icon} alt="" className="rounded-none object-contain" />
-            </Avatar>
-          </div>
-        </div>
-      </div>
-      <p className={styles.flowCaption}>Your tools, zero cost</p>
-    </div>
-  );
+  return chosen.map((model, index) => {
+    const slot = destinationSlots[index];
+    const publisher = model.id.split("/")[0];
+    return {
+      ...slot,
+      model: { id: model.id, name: model.name, author: model.author },
+      publisher,
+    };
+  });
 }
-
 export function HeroTypographicBroadsheet({ models }: HeroProps) {
   return (
     <section aria-labelledby="hero-title" className={styles.hero}>
@@ -224,17 +100,15 @@ export function HeroTypographicBroadsheet({ models }: HeroProps) {
               {siteConfig.description}
             </p>
             <div className={styles.actions}>
-              <Button
-                render={<a href="#models" />}
-                nativeButton={false}
-                size="lg"
-                className={styles.browse}
+              <a
+                href="#models"
+                className={`${styles.browse} inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-base font-semibold text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring`}
               >
                 Find your model <ArrowDown size={18} aria-hidden="true" />
-              </Button>
+              </a>
             </div>
           </div>
-          <RequestFlow models={models} />
+          <RequestFlow featured={getFeaturedModels(models)} />
         </div>
       </div>
     </section>
