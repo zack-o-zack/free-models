@@ -46,13 +46,13 @@ export function ProviderBadge({
     return (
       <Tooltip>
         <TooltipTrigger
-          aria-label={fundingLabel ? `${label}: ${fundingLabel}` : label}
+          aria-label={`${label} ${publisher ? "publisher" : "provider"}`}
           className="inline-flex size-6 shrink-0 rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           render={href ? <Link href={href} /> : <button type="button" />}
         >
           <Avatar aria-hidden="true" className="size-6">
             {logoUrl && <BrandImage alt="" className="object-contain" src={logoUrl} />}
-            <AvatarFallback className="text-[8px]">{initials(label)}</AvatarFallback>
+            <AvatarFallback className="text-[8px]">{label.slice(0, 1)}</AvatarFallback>
           </Avatar>
         </TooltipTrigger>
         <TooltipContent>

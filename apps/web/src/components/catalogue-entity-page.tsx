@@ -18,6 +18,7 @@ import {
   getCatalogueEntities,
   getEntityDocs,
 } from "@/lib/catalogue-entities";
+import { toCatalogueModel } from "@/lib/catalogue-model";
 import { getEntityHighlight } from "@/lib/entity-highlight";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import type { ModelSummary } from "@/lib/model-types";
@@ -173,7 +174,10 @@ export function CatalogueEntityPage({
             </div>
           )}
         </section>
-        <ModelExplorer models={explorerModels} collection={{ name: entity.name, kind }} />
+        <ModelExplorer
+          models={explorerModels.map(toCatalogueModel)}
+          collection={{ name: entity.name, kind }}
+        />
         {related.length > 0 && (
           <section className="container py-12 sm:py-16" aria-labelledby="related-heading">
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4">

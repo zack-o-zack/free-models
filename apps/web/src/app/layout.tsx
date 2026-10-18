@@ -69,8 +69,8 @@ export default function RootLayout({
         >
           <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
+        {process.env.VERCEL && <Analytics />}
+        {process.env.VERCEL && <SpeedInsights />}
       </body>
     </html>
   );

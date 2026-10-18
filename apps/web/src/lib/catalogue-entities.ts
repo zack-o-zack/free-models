@@ -9,7 +9,7 @@ export interface CatalogueEntity {
   models: ModelSummary[];
 }
 
-export function publisherSlug(model: ModelSummary): string | null {
+export function publisherSlug(model: Pick<ModelSummary, "id" | "isStealth">): string | null {
   if (model.isStealth || model.id.startsWith("stealth:")) return null;
   const separator = model.id.indexOf("/");
   return separator > 0 ? model.id.slice(0, separator) : null;
