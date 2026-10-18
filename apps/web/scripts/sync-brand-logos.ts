@@ -63,7 +63,7 @@ await Promise.all(
         const response = await fetch(source, {
           signal: AbortSignal.timeout(15000),
         });
-        const bytes = new Uint8Array(await response.arrayBuffer());
+        let bytes = new Uint8Array(await response.arrayBuffer());
         const type = response.headers.get("content-type")?.split(";")[0];
         const extension = (
           {
@@ -77,6 +77,17 @@ await Promise.all(
         )[type ?? ""];
         if (!response.ok || !extension || !bytes.length)
           throw new Error(`HTTP ${response.status}, ${type}`);
+        if (extension === "svg") {
+          const svg = new TextDecoder().decode(bytes);
+          if (!/<title[\s>]/i.test(svg)) {
+            bytes = new TextEncoder().encode(
+              svg.replace(
+                /(<svg\b[^>]*>)/i,
+                `$1<title>${Bun.escapeHTML(host.replace("publisher:", ""))} logo</title>`,
+              ),
+            );
+          }
+        }
         const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 16);
         const filename = `${hash}.${extension}`;
         await Bun.write(new URL(filename, assets), bytes);
