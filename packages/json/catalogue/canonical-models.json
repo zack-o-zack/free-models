@@ -369,6 +369,14 @@
       "name": "DeepSeek: DeepSeek V4.1 Flash"
     },
     {
+      "id": "deepseek/deepseek-v4.1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017"
+    },
+    {
+      "id": "deepseek/deepseek-v4.1-flash-1017-fast",
+      "name": "DeepSeek V4.1 Flash 1017 Fast"
+    },
+    {
       "id": "dots-studio/dots-3-note-preview",
       "name": "Dots Studio: Dots3-Note Preview"
     },

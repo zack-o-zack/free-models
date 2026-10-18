@@ -1158,6 +1158,44 @@
       }
     },
     {
+      "model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "name": "DeepSeek V4.1 Flash 1017",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "deepseek/deepseek-v4.1-flash-1017-fast",
+      "name": "DeepSeek V4.1 Flash 1017 Fast",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "elorian/glimpse",
       "name": "Glimpse",
       "connection": {
@@ -3434,26 +3472,6 @@
     {
       "model_id": "perplexity/pplx-decider-flash-v1.2",
       "name": "Decider Flash V1.2 4B",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh",
-        "model_type": "decision",
-        "protocol": "vercel-ai-gateway"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
-      "model_id": "perplexity/pplx-decider-v1.1-27b",
-      "name": "Decider V1.1 27B",
       "connection": {
         "auth": {
           "env": [

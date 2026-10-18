@@ -60,6 +60,8 @@
     "deepseek/deepseek-r1": "deepseek/deepseek-r1",
     "deepseek/deepseek-v3.1": "deepseek/deepseek-v3.1",
     "deepseek/deepseek-v3.2-thinking": "deepseek/deepseek-v3.2-thinking",
+    "deepseek/deepseek-v4.1-flash-1017": "deepseek/deepseek-v4.1-flash-1017",
+    "deepseek/deepseek-v4.1-flash-1017-fast": "deepseek/deepseek-v4.1-flash-1017-fast",
     "elorian/glimpse": "elorian/glimpse",
     "exa/search": "exa/search",
     "google/gemini-2.5-flash": "google/gemini-2.5-flash",
