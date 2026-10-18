@@ -41,7 +41,7 @@ export function ProgressiveModelList({ models }: { models: ModelSummary[] }) {
         setVisibleCount((count) => count + CATALOGUE_PAGE_SIZE);
         setLoading(false);
       });
-    }, 1000);
+    }, 500);
     return () => window.clearTimeout(timer);
   }, [loading]);
 
