@@ -28,8 +28,16 @@ function Avatar({
 function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
   return (
     <AvatarPrimitive.Image
+      keepMounted
+      loading="lazy"
+      decoding="async"
+      width={64}
+      height={64}
       data-slot="avatar-image"
-      className={cn("aspect-square size-full rounded-full object-cover", className)}
+      className={cn(
+        "absolute inset-0 aspect-square size-full rounded-full object-cover aria-hidden:opacity-0",
+        className,
+      )}
       {...props}
     />
   );

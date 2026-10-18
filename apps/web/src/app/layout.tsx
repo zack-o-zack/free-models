@@ -24,6 +24,7 @@ const displayFont = Manrope({
 
 const codeFont = JetBrains_Mono({
   variable: "--font-code",
+  preload: false,
   subsets: ["latin"],
   display: "swap",
 });

@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "logos:sync": "bun scripts/sync-brand-logos.ts",
     "seo:check": "bun scripts/audit-seo.ts"
   },
   "dependencies": {

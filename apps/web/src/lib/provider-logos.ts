@@ -1,6 +1,7 @@
+import brandLogos from "@/lib/brand-logos.json";
 import type { ProviderDoc } from "@/lib/model-types";
 
-const publisherWebsites: Record<string, string> = {
+export const publisherWebsites: Record<string, string> = {
   ai4bharat: "https://ai4bharat.iitm.ac.in/",
   aisingapore: "https://aisingapore.org/",
   baai: "https://bge.baai.ac.cn/",
@@ -103,42 +104,28 @@ export function getProviderName(providerSlug: string, liveNames?: Record<string,
   );
 }
 
-export function publisherFaviconUrl(publisherSlug: string, size: 64 | 128 = 64): string | null {
+export function publisherFaviconUrl(publisherSlug: string): string | null {
   const slug = publisherSlug.toLowerCase();
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null;
   const website = publisherWebsites[slug];
-  if (website) return faviconUrl(website, size);
-
-  const assetName = slug.replace(
-    /(^|-)([a-z])/g,
-    (_, separator, letter) => `${separator}${letter.toUpperCase()}`,
-  );
-  return `https://openrouter.ai/images/icons/${assetName}.svg`;
+  return faviconUrl(website) ?? (brandLogos as Record<string, string>)[`publisher:${slug}`] ?? null;
 }
 
-export function providerFaviconUrl(docs?: ProviderDoc, size: 64 | 128 = 64): string | null {
+export function providerFaviconUrl(docs?: ProviderDoc): string | null {
   for (const url of [docs?.overview, docs?.models, docs?.pricing, docs?.rateLimit]) {
-    const favicon = faviconUrl(url, size);
+    const favicon = faviconUrl(url);
     if (favicon) return favicon;
   }
   return null;
 }
 
-function faviconUrl(website: string | undefined, size: 64 | 128): string | null {
+function faviconUrl(website: string | undefined): string | null {
   if (!website) return null;
   try {
-    if (!["https:", "http:"].includes(new URL(website).protocol)) return null;
+    const url = new URL(website);
+    if (!["https:", "http:"].includes(url.protocol)) return null;
+    return (brandLogos as Record<string, string>)[url.hostname] ?? null;
   } catch {
     return null;
   }
-
-  const params = new URLSearchParams({
-    client: "SOCIAL",
-    type: "FAVICON",
-    fallback_opts: "TYPE,SIZE,URL",
-    url: website,
-    size: String(size),
-  });
-
-  return `https://t0.gstatic.com/faviconV2?${params.toString()}`;
 }

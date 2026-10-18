@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { CATALOGUE_PAGE_SIZE } from "../src/lib/catalogue-pagination";
 import { assertContentParity, readPage } from "./seo-parity";
 
 const output = resolve(import.meta.dir, "../.next/server/app");
 const files = (await readdir(output, { recursive: true })).filter(
-  (file) => file === "index.html" || /^(models|providers|publishers)(\/.*)?\.html$/.test(file),
+  (file) =>
+    file === "index.html" || /^(models|providers|publishers|catalogue)(\/.*)?\.html$/.test(file),
 );
 assert(files.length > 1, "Build the web app before running the SEO audit.");
 const sitemap = await readFile(resolve(output, "sitemap.xml.body"), "utf8");
@@ -14,7 +16,8 @@ assert.equal(new Set(urls).size, urls.length, "Sitemap contains duplicate URLs")
 assert.equal(urls.length, files.length, "Sitemap must cover every public page");
 const titles = new Map<string, string[]>();
 const pages = new Map<string, Awaited<ReturnType<typeof readPage>>>();
-let modelLinks = new Set<string>();
+const modelLinks = new Set<string>();
+const cataloguePages = new Map<number, Awaited<ReturnType<typeof readPage>>>();
 let origin = "";
 
 for (const file of files) {
@@ -46,7 +49,15 @@ for (const file of files) {
     `${file}: missing large social card`,
   );
   assert(!page.meta.get("robots")?.includes("noindex"), `${file}: production page blocks indexing`);
-  if (file === "index.html") modelLinks = new Set(page.models.map((item) => item.href));
+  const catalogueMatch = file.match(/^catalogue\/(\d+)\.html$/);
+  if (file === "index.html" || catalogueMatch) {
+    cataloguePages.set(catalogueMatch ? Number(catalogueMatch[1]) : 1, page);
+    for (const item of page.models) modelLinks.add(item.href);
+    assert(
+      page.models.length > 0 && page.models.length <= CATALOGUE_PAGE_SIZE,
+      `${file}: initial catalogue must contain at most ${CATALOGUE_PAGE_SIZE} models`,
+    );
+  }
   if (file.startsWith("models/")) {
     assert(
       page.faq.includes("API requests go directly to the provider"),
@@ -74,7 +85,23 @@ for (const [canonical, page] of pages) {
 assert.equal(
   modelLinks.size,
   files.filter((file) => file.startsWith("models/")).length,
-  "Homepage must link to every model without JavaScript",
+  "Linked catalogue pages must cover every model without JavaScript",
+);
+for (let page = 1; page <= cataloguePages.size; page++) {
+  const current = cataloguePages.get(page);
+  assert(current, `Missing catalogue page ${page}`);
+  if (page < cataloguePages.size)
+    assert(current.links.includes(`/catalogue/${page + 1}`), `Page ${page}: missing next link`);
+  if (page > 1)
+    assert(
+      current.links.includes(page === 2 ? "/" : `/catalogue/${page - 1}`),
+      `Page ${page}: missing previous link`,
+    );
+}
+assert.equal(
+  [...cataloguePages.values()].reduce((count, page) => count + page.models.length, 0),
+  modelLinks.size,
+  "Catalogue pages duplicate models",
 );
 const robots = await readFile(resolve(output, "robots.txt.body"), "utf8");
 assert(robots.includes("Allow: /"), "Production robots must allow crawling");

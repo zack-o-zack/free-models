@@ -52,6 +52,8 @@ export async function readPage(html: string) {
     description: "",
     language: "",
     faq: "",
+    catalogueTotal: null as number | null,
+    catalogueOffset: 0,
     h1Count: 0,
     descriptionCount: 0,
     meta: new Map<string, string>(),
@@ -64,6 +66,12 @@ export async function readPage(html: string) {
   };
   let json = "";
   const reader = new HTMLRewriter()
+    .on("[data-catalogue-total]", {
+      element(e) {
+        page.catalogueTotal = Number(e.getAttribute("data-catalogue-total"));
+        page.catalogueOffset = Number(e.getAttribute("data-catalogue-offset") ?? 0);
+      },
+    })
     .on("html", {
       element(e) {
         page.language = e.getAttribute("lang") ?? "";
@@ -258,14 +266,14 @@ export function assertContentParity(page: Awaited<ReturnType<typeof readPage>>, 
     check(page.models.length > 0, "missing visible catalogue");
     equal(
       schema?.mainEntity?.numberOfItems,
-      page.models.length,
+      page.catalogueTotal ?? page.models.length,
       "schema count differs from visible list",
     );
     equal(
       schema?.mainEntity?.itemListElement,
       page.models.map((item, index) => ({
         "@type": "ListItem",
-        position: index + 1,
+        position: page.catalogueOffset + index + 1,
         name: item.name,
         url: new URL(item.href, canonical).href,
       })),

@@ -147,8 +147,8 @@ export function HeroOrbit({ models, focused }: { models: ModelSummary[]; focused
                   <AvatarImage
                     src={
                       (brand in providerDocs
-                        ? providerFaviconUrl(providerDocs[brand], 128)
-                        : publisherFaviconUrl(brand, 128)) ?? undefined
+                        ? providerFaviconUrl(providerDocs[brand])
+                        : publisherFaviconUrl(brand)) ?? undefined
                     }
                     alt=""
                     className="object-contain p-3 sm:p-4"
@@ -191,7 +191,7 @@ export function HeroOrbit({ models, focused }: { models: ModelSummary[]; focused
                     className="hero-model-logo size-5 shrink-0 bg-transparent"
                   >
                     <AvatarImage
-                      src={publisherFaviconUrl(model.id.split("/")[0], 128) ?? undefined}
+                      src={publisherFaviconUrl(model.id.split("/")[0]) ?? undefined}
                       alt=""
                       className="object-contain"
                     />

@@ -18,7 +18,7 @@ export function ModelOverview({
   model: ModelSummary;
   highlights: ModelHighlight[];
 }) {
-  const logoUrl = publisherFaviconUrl(model.id.split("/")[0], 128);
+  const logoUrl = publisherFaviconUrl(model.id.split("/")[0]);
 
   return (
     <section

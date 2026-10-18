@@ -3,7 +3,7 @@
 import { Bot, BrainCircuit, Code2, EyeOff, Gauge, Server } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import type { MouseEvent } from "react";
+import { type MouseEvent, memo } from "react";
 
 import { BenchmarkMetric, ModalityMetric } from "@/components/benchmark-metric";
 import { BrandImage } from "@/components/brand-image";
@@ -28,7 +28,7 @@ function initials(value: string): string {
     .toUpperCase();
 }
 
-export function ModelCard({ model }: { model: ModelSummary }) {
+export const ModelCard = memo(function ModelCard({ model }: { model: ModelSummary }) {
   const router = useRouter();
   const publisher = publisherSlug(model);
   const href = modelHref(model.id);
@@ -159,4 +159,4 @@ export function ModelCard({ model }: { model: ModelSummary }) {
       </CardContent>
     </Card>
   );
-}
+});
