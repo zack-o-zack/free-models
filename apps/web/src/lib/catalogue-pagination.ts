@@ -1,7 +1,7 @@
 import { sortCatalogue } from "@/lib/model-sort";
 import type { ModelSummary } from "@/lib/model-types";
 
-export const CATALOGUE_PAGE_SIZE = 20;
+export const CATALOGUE_PAGE_SIZE = 40;
 
 export function cataloguePageHref(page: number): string {
   return page === 1 ? "/" : `/catalogue/${page}`;

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { CATALOGUE_PAGE_SIZE } from "../src/lib/catalogue-pagination";
 import { assertContentParity, readPage } from "./seo-parity";
 
 const output = resolve(import.meta.dir, "../.next/server/app");
@@ -53,8 +54,8 @@ for (const file of files) {
     cataloguePages.set(catalogueMatch ? Number(catalogueMatch[1]) : 1, page);
     for (const item of page.models) modelLinks.add(item.href);
     assert(
-      page.models.length > 0 && page.models.length <= 20,
-      `${file}: initial catalogue must contain at most 20 models`,
+      page.models.length > 0 && page.models.length <= CATALOGUE_PAGE_SIZE,
+      `${file}: initial catalogue must contain at most ${CATALOGUE_PAGE_SIZE} models`,
     );
   }
   if (file.startsWith("models/")) {

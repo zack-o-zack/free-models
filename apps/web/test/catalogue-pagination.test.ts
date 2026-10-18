@@ -8,18 +8,18 @@ import {
 import type { ModelSummary } from "../src/lib/model-types";
 import { catalogueJsonLd } from "../src/lib/seo";
 
-const models = Array.from({ length: 43 }, (_, index) => ({
+const models = Array.from({ length: 83 }, (_, index) => ({
   id: `maker/${index}`,
   name: `Model ${index}`,
   created: index,
 })) as ModelSummary[];
 
 describe("Crawlable catalogue pagination", () => {
-  test("covers the catalogue exactly once in newest-first pages of 20", () => {
+  test("covers the catalogue exactly once in newest-first pages of 40", () => {
     const pages = Array.from({ length: cataloguePageCount(models.length) }, (_, index) =>
       cataloguePageModels(models, index + 1),
     );
-    expect(pages.map((page) => page.length)).toEqual([20, 20, 3]);
+    expect(pages.map((page) => page.length)).toEqual([40, 40, 3]);
     expect(pages.flat().map((model) => model.id)).toEqual(
       [...models].reverse().map((model) => model.id),
     );
@@ -42,8 +42,8 @@ describe("Crawlable catalogue pagination", () => {
       total: models.length,
     });
     expect(schema.url).toEndWith("/catalogue/3");
-    expect(schema.mainEntity.numberOfItems).toBe(43);
-    expect(schema.mainEntity.itemListElement.map((item) => item.position)).toEqual([41, 42, 43]);
+    expect(schema.mainEntity.numberOfItems).toBe(83);
+    expect(schema.mainEntity.itemListElement.map((item) => item.position)).toEqual([81, 82, 83]);
     expect(cataloguePageCount(0)).toBe(1);
     expect(cataloguePageModels([], 1)).toEqual([]);
   });

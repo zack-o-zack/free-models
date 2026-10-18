@@ -7,6 +7,7 @@ import { ModelCard } from "@/components/model-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import {
+  CATALOGUE_PAGE_SIZE,
   cataloguePageCount,
   cataloguePageDescription,
   cataloguePageHref,
@@ -58,7 +59,7 @@ export default async function CataloguePage({ params }: CataloguePageProps) {
         <section
           id="models"
           data-catalogue-total={models.length}
-          data-catalogue-offset={(page - 1) * 20}
+          data-catalogue-offset={(page - 1) * CATALOGUE_PAGE_SIZE}
           className="container py-12"
           aria-labelledby="catalogue-title"
         >
