@@ -5,9 +5,9 @@ import { useEffect, useRef, useState, useTransition } from "react";
 import { ModelCard } from "@/components/model-card";
 import { Button } from "@/components/ui/button";
 import { CATALOGUE_PAGE_SIZE } from "@/lib/catalogue-pagination";
-import type { ModelSummary } from "@/lib/model-types";
+import type { CatalogueModel } from "@/lib/model-types";
 
-export function ProgressiveModelList({ models }: { models: ModelSummary[] }) {
+export function ProgressiveModelList({ models }: { models: CatalogueModel[] }) {
   const [visibleCount, setVisibleCount] = useState(CATALOGUE_PAGE_SIZE);
   const [loading, setLoading] = useState(false);
   const [pending, startTransition] = useTransition();

@@ -17,16 +17,21 @@ export function defaultSortDirection(sort: SortOption): SortDirection {
   return sort === "name" || sort === "oldest" ? "ascending" : "descending";
 }
 
+type SortableModel = Pick<
+  ModelSummary,
+  "name" | "contextLength" | "intelligenceScore" | "codingScore" | "agenticScore" | "created"
+>;
+
 export function compareModels(
-  left: ModelSummary,
-  right: ModelSummary,
+  left: SortableModel,
+  right: SortableModel,
   sort: SortOption,
   direction: SortDirection,
 ): number {
   const sign = direction === "ascending" ? 1 : -1;
   if (sort === "name") return sign * left.name.localeCompare(right.name);
 
-  const value = (model: ModelSummary): number | null => {
+  const value = (model: SortableModel): number | null => {
     switch (sort) {
       case "context":
         return model.contextLength > 0 ? model.contextLength : null;
@@ -48,7 +53,7 @@ export function compareModels(
   return sign * (a - b);
 }
 
-export function sortCatalogue(models: ModelSummary[]): ModelSummary[] {
+export function sortCatalogue<T extends SortableModel>(models: T[]): T[] {
   return [...models].sort((left, right) =>
     compareModels(left, right, defaultModelSort, defaultModelDirection),
   );

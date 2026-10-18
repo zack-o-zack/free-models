@@ -16,12 +16,8 @@ import {
   Video,
 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useMemo, useState } from "react";
-import {
-  ModelFilters,
-  type ProviderFilterOption,
-  type PublisherFilterOption,
-} from "@/components/model-filters";
+import { useMemo, useState, useSyncExternalStore } from "react";
+import type { ProviderFilterOption, PublisherFilterOption } from "@/components/model-filters";
 import { ProgressiveModelList } from "@/components/progressive-model-list";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -48,8 +44,20 @@ import {
   type SortDirection,
   type SortOption,
 } from "@/lib/model-sort";
-import type { ModelSummary } from "@/lib/model-types";
+import type { CatalogueModel } from "@/lib/model-types";
 import { getProviderName } from "@/lib/provider-logos";
+
+const ModelFilters = dynamic(() =>
+  import("@/components/model-filters").then((module) => module.ModelFilters),
+);
+const desktopQuery = "(min-width: 1024px)";
+function subscribeDesktop(callback: () => void) {
+  const query = window.matchMedia(desktopQuery);
+  query.addEventListener("change", callback);
+  return () => query.removeEventListener("change", callback);
+}
+const desktopSnapshot = () => window.matchMedia(desktopQuery).matches;
+const serverDesktopSnapshot = () => false;
 
 const ModelTable = dynamic(() =>
   import("@/components/model-table").then((module) => module.ModelTable),
@@ -83,10 +91,12 @@ export function ModelExplorer({
   models,
   collection,
 }: {
-  models: ModelSummary[];
+  models: CatalogueModel[];
   collection?: { name: string; kind: EntityKind };
 }) {
   const [query, setQuery] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const desktop = useSyncExternalStore(subscribeDesktop, desktopSnapshot, serverDesktopSnapshot);
   const [sort, setSort] = useState<SortOption>(defaultModelSort);
   const [direction, setDirection] = useState<SortDirection>(defaultModelDirection);
   const [view, setView] = useState<ViewMode>("list");
@@ -311,7 +321,7 @@ export function ModelExplorer({
         >
           {view === "list" && (
             <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto rounded-[24px] bg-background p-5 lg:block">
-              <ModelFilters {...filterProps} idPrefix="desktop" />
+              {desktop && <ModelFilters {...filterProps} idPrefix="desktop" />}
             </aside>
           )}
 
@@ -325,7 +335,7 @@ export function ModelExplorer({
                   {visibleModels.length} {visibleModels.length === 1 ? "result" : "results"}
                 </p>
               </div>
-              <Sheet>
+              <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
                 <SheetTrigger
                   render={
                     <Button className={view === "list" ? "lg:hidden" : ""} variant="outline">
@@ -346,7 +356,7 @@ export function ModelExplorer({
                     </SheetDescription>
                   </SheetHeader>
                   <ScrollArea className="min-h-0 flex-1 px-4 pb-4">
-                    <ModelFilters {...filterProps} idPrefix="mobile" />
+                    {filtersOpen && <ModelFilters {...filterProps} idPrefix="mobile" />}
                   </ScrollArea>
                 </SheetContent>
               </Sheet>
@@ -434,13 +444,13 @@ export function ModelExplorer({
                     const Icon = value === "all" ? LayoutGrid : outputIcons[value];
                     return (
                       <TabsTrigger
-                        className="h-10 flex-none rounded-[20px] px-4 shadow-none! hover:bg-card hover:text-foreground data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-primary-hover data-active:hover:text-primary-foreground dark:hover:bg-card dark:hover:text-foreground dark:data-active:bg-primary dark:data-active:text-primary-foreground dark:data-active:hover:bg-primary-hover dark:data-active:hover:text-primary-foreground"
+                        className="h-10 flex-none rounded-[20px] px-4 text-muted-foreground shadow-none! hover:bg-card hover:text-foreground data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-primary-hover data-active:hover:text-primary-foreground dark:hover:bg-card dark:hover:text-foreground dark:data-active:bg-primary dark:data-active:text-primary-foreground dark:data-active:hover:bg-primary-hover dark:data-active:hover:text-primary-foreground"
                         key={value}
                         value={value}
                       >
                         {Icon && <Icon />}
                         {label}
-                        <span className="text-xs text-current opacity-80">{counts[value]}</span>
+                        <span className="text-xs text-current">{counts[value]}</span>
                       </TabsTrigger>
                     );
                   })}

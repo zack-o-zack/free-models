@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ModelExplorer } from "@/components/model-explorer";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { toCatalogueModel } from "@/lib/catalogue-model";
 import { cataloguePageModels } from "@/lib/catalogue-pagination";
 import { siteConfig } from "@/lib/config";
 import { getModels } from "@/lib/model-data";
@@ -23,7 +24,7 @@ export default async function Home() {
 
       <main id="top" tabIndex={-1}>
         <HeroTypographicBroadsheet models={models} />
-        <ModelExplorer models={models} />
+        <ModelExplorer models={models.map(toCatalogueModel)} />
         <CataloguePagination page={1} total={models.length} />
       </main>
       <SiteFooter />

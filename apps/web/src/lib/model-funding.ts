@@ -17,7 +17,7 @@ export function getBestMonthlyCreditOffer(connections: ModelConnection[]) {
 }
 
 export function getProviderFundingLabel(
-  connections: ModelConnection[],
+  connections: Pick<ModelConnection, "provider" | "funding">[],
   provider: string,
 ): string | undefined {
   const offers = connections.filter((connection) => connection.provider === provider);

@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/json-ld";
 import { ModelCard } from "@/components/model-card";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { toCatalogueModel } from "@/lib/catalogue-model";
 import {
   CATALOGUE_PAGE_SIZE,
   cataloguePageCount,
@@ -76,7 +77,7 @@ export default async function CataloguePage({ params }: CataloguePageProps) {
           </p>
           <div className="mt-8 grid gap-4">
             {pageModels.map((model) => (
-              <ModelCard key={model.id} model={model} />
+              <ModelCard key={model.id} model={toCatalogueModel(model)} />
             ))}
           </div>
         </section>

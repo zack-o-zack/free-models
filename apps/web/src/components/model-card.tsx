@@ -16,7 +16,7 @@ import { entityHref, publisherSlug } from "@/lib/catalogue-entities";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import { getProviderFundingLabel } from "@/lib/model-funding";
 import { modelHref } from "@/lib/model-path";
-import type { ModelSummary } from "@/lib/model-types";
+import type { CatalogueModel } from "@/lib/model-types";
 import { publisherFaviconUrl } from "@/lib/provider-logos";
 
 function initials(value: string): string {
@@ -28,7 +28,7 @@ function initials(value: string): string {
     .toUpperCase();
 }
 
-export const ModelCard = memo(function ModelCard({ model }: { model: ModelSummary }) {
+export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueModel }) {
   const router = useRouter();
   const publisher = publisherSlug(model);
   const href = modelHref(model.id);
@@ -92,6 +92,7 @@ export const ModelCard = memo(function ModelCard({ model }: { model: ModelSummar
                 <>
                   <Link
                     href={entityHref("publishers", publisher)}
+                    aria-label={`${model.author} publisher`}
                     className="font-medium underline-offset-4 hover:underline"
                   >
                     {model.author}

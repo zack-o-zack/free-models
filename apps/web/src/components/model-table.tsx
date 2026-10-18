@@ -12,7 +12,7 @@ import { entityHref } from "@/lib/catalogue-entities";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import { modelHref } from "@/lib/model-path";
 import type { SortDirection, SortOption } from "@/lib/model-sort";
-import type { ModelSummary } from "@/lib/model-types";
+import type { CatalogueModel } from "@/lib/model-types";
 import { publisherFaviconUrl } from "@/lib/provider-logos";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +25,7 @@ function NotListed() {
   );
 }
 
-function Providers({ model }: { model: ModelSummary }) {
+function Providers({ model }: { model: CatalogueModel }) {
   if (model.providers.length === 0) return <NotListed />;
   return (
     <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
@@ -120,7 +120,7 @@ export function ModelTable({
   direction,
   onSort,
 }: {
-  models: ModelSummary[];
+  models: CatalogueModel[];
   sort: SortOption;
   direction: SortDirection;
   onSort: (sort: SortOption) => void;

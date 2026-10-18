@@ -43,3 +43,7 @@ export interface ModelSummary {
   agenticScore: number | null;
   designArena: DesignArenaBenchmark[];
 }
+
+export type CatalogueModel = Omit<ModelSummary, "connections" | "supportedParameters"> & {
+  connections: Pick<ModelConnection, "provider" | "funding">[];
+};
