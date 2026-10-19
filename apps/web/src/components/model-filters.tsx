@@ -1,7 +1,16 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { AudioLines, CircleHelp, FileText, ImageIcon, Type, Video } from "lucide-react";
+import {
+  AudioLines,
+  BookText,
+  CircleHelp,
+  File,
+  FileText,
+  ImageIcon,
+  Type,
+  Video,
+} from "lucide-react";
 import { ProviderBadge } from "@/components/provider-badge";
 import {
   Accordion,
@@ -53,7 +62,9 @@ interface ModelFiltersProps {
 const inputIcons: Record<string, LucideIcon> = {
   text: Type,
   image: ImageIcon,
-  file: FileText,
+  file: File,
+  document: BookText,
+  pdf: FileText,
   audio: AudioLines,
   video: Video,
 };
