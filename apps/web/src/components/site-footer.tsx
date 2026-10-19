@@ -19,8 +19,8 @@ export function SiteFooter() {
               <SiteLogo />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
-              Free AI models, providers, and benchmarks in one place. Find the right fit for your
-              next idea.
+              Find and compare free AI models for coding, text, images, audio, and video. Explore
+              API providers, usage limits, context windows, and benchmarks.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ export function SiteFooter() {
               href="/#models"
               className="group flex min-h-14 items-center justify-between gap-4 rounded-2xl bg-primary px-5 py-3 text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
-              <span className="text-sm font-semibold">Explore the catalogue</span>
+              <span className="text-sm font-semibold">Browse models</span>
               <ArrowRight
                 aria-hidden="true"
                 className="size-5 shrink-0 transition-transform group-hover:translate-x-1 motion-reduce:transform-none"
@@ -51,11 +51,27 @@ export function SiteFooter() {
               />
               <span className="sr-only">(opens in a new tab)</span>
             </Link>
+            <div className="mt-1 flex flex-wrap items-center gap-x-5 px-5">
+              <Link
+                href="/providers"
+                className="inline-flex min-h-11 items-center rounded-lg text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              >
+                Providers
+              </Link>
+              <Link
+                href="/publishers"
+                className="inline-flex min-h-11 items-center rounded-lg text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              >
+                Publishers
+              </Link>
+            </div>
           </nav>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-border py-4 text-xs">
-          <p className="leading-5 text-muted-foreground">Free access. Limits vary by provider.</p>
+          <p className="leading-5 text-muted-foreground">
+            Free access. Usage limits vary by provider.
+          </p>
           <a
             href="#site-top"
             className="inline-flex min-h-11 items-center gap-2 rounded-lg font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
