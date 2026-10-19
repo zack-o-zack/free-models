@@ -183,7 +183,17 @@ function applyMetadataResults(
   for (const { model } of activeModels) {
     const fresh = results.get(model.id);
     if (fresh) {
-      byId.set(model.id, sortJsonObject(stripReservedMetadataFields(fresh)));
+      const existing = byId.get(model.id);
+      const mergedFresh = { ...fresh };
+      if (
+        typeof fresh.description === "string" &&
+        fresh.description.endsWith("...") &&
+        typeof existing?.description === "string" &&
+        !existing.description.endsWith("...")
+      ) {
+        mergedFresh.description = existing.description;
+      }
+      byId.set(model.id, sortJsonObject(stripReservedMetadataFields(mergedFresh)));
     }
   }
 
