@@ -57,6 +57,7 @@ const modalityIcons: Record<string, LucideIcon> = {
   decisions: GitBranch,
   audio: AudioLines,
   document: BookText,
+  embedding: Database,
   embeddings: Database,
   file: File,
   image: ImageIcon,

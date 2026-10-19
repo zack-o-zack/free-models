@@ -74,6 +74,7 @@ const outputIcons: Record<string, LucideIcon> = {
   video: Video,
   transcript: Mic,
   transcription: Mic,
+  embedding: Database,
   embeddings: Database,
   rerank: SlidersHorizontal,
   scores: ChartColumn,
