@@ -640,7 +640,7 @@
             "text"
           ],
           "output_modalities": [
-            "embedding"
+            "embeddings"
           ]
         },
         "description": "BAAI general embedding (Small) model that transforms any given text into a 384-dimensional vector",
@@ -2124,7 +2124,7 @@
             "image"
           ],
           "output_modalities": [
-            "embedding"
+            "embeddings"
           ]
         },
         "context_length": 512,
@@ -2148,7 +2148,7 @@
             "image"
           ],
           "output_modalities": [
-            "embedding"
+            "embeddings"
           ]
         },
         "context_length": 512,
@@ -2172,7 +2172,7 @@
             "image"
           ],
           "output_modalities": [
-            "embedding"
+            "embeddings"
           ]
         },
         "context_length": 512,
@@ -2196,7 +2196,7 @@
             "image"
           ],
           "output_modalities": [
-            "embedding"
+            "embeddings"
           ]
         },
         "context_length": 512,
@@ -17194,7 +17194,7 @@
             "text"
           ],
           "output_modalities": [
-            "embedding"
+            "embeddings"
           ]
         },
         "description": "PLaMo-Embedding-1B is a Japanese text embedding model developed by Preferred Networks, Inc.\n\nIt can convert Japanese text input into numerical vectors and can be used for a wide range of applications, including information retrieval, text classification, and clustering.",

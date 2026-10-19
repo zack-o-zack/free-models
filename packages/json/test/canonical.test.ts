@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import {
   canonicalModelWithGeneratedFields,
+  normalizeCanonicalMetadata,
   normalizeCanonicalModelName,
 } from "../src/catalogue/canonical.ts";
 
@@ -30,6 +31,41 @@ describe("canonical model names", () => {
       id: "acme/alpha",
       name: "Alpha",
       description: "Generated metadata",
+    });
+  });
+
+  test("normalizes embedding output modalities to embeddings", () => {
+    expect(
+      normalizeCanonicalMetadata({
+        architecture: {
+          input_modalities: ["text"],
+          output_modalities: ["embedding"],
+        },
+      }),
+    ).toEqual({
+      architecture: {
+        input_modalities: ["text"],
+        output_modalities: ["embeddings"],
+      },
+    });
+
+    expect(
+      canonicalModelWithGeneratedFields(
+        { id: "baai/bge-small-en-v1.5", name: "BGE Small" },
+        {
+          architecture: {
+            input_modalities: ["text"],
+            output_modalities: ["embedding"],
+          },
+        },
+      ),
+    ).toEqual({
+      id: "baai/bge-small-en-v1.5",
+      name: "BGE Small",
+      architecture: {
+        input_modalities: ["text"],
+        output_modalities: ["embeddings"],
+      },
     });
   });
 });
