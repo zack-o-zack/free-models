@@ -6,7 +6,7 @@ import type {
 } from "../metadata/provider.ts";
 import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "../providers/models-dev.ts";
 import type { ModelProvider } from "../providers/provider.ts";
-import { RESERVED_CANONICAL_FIELDS } from "./canonical.ts";
+import { normalizeCanonicalMetadata, RESERVED_CANONICAL_FIELDS } from "./canonical.ts";
 import type { CataloguePaths } from "./files.ts";
 import {
   compareStrings,
@@ -193,7 +193,10 @@ function applyMetadataResults(
       ) {
         mergedFresh.description = existing.description;
       }
-      byId.set(model.id, sortJsonObject(stripReservedMetadataFields(mergedFresh)));
+      byId.set(
+        model.id,
+        sortJsonObject(stripReservedMetadataFields(normalizeCanonicalMetadata(mergedFresh))),
+      );
     }
   }
 

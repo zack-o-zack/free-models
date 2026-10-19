@@ -14,12 +14,33 @@ export function normalizeCanonicalModelName(name: string): string {
   return normalized || name.trim();
 }
 
+export function normalizeCanonicalMetadata(
+  metadata: Readonly<Record<string, JsonValue>>,
+): Record<string, JsonValue> {
+  const result: Record<string, JsonValue> = { ...metadata };
+  if (
+    result.architecture &&
+    typeof result.architecture === "object" &&
+    !Array.isArray(result.architecture)
+  ) {
+    const arch = { ...(result.architecture as Record<string, JsonValue>) };
+    if (Array.isArray(arch.output_modalities)) {
+      arch.output_modalities = arch.output_modalities.map((modality) =>
+        modality === "embedding" ? "embeddings" : modality,
+      );
+    }
+    result.architecture = arch;
+  }
+  return result;
+}
+
 export function canonicalModelWithGeneratedFields(
   identity: Pick<CanonicalModel, "id" | "name">,
   generatedFields: Readonly<Record<string, JsonValue>>,
 ): CanonicalModel & Record<string, JsonValue> {
+  const normalized = normalizeCanonicalMetadata(generatedFields);
   const generated = Object.fromEntries(
-    Object.entries(generatedFields).filter(([key]) => !RESERVED_CANONICAL_FIELDS.has(key)),
+    Object.entries(normalized).filter(([key]) => !RESERVED_CANONICAL_FIELDS.has(key)),
   );
 
   return {
