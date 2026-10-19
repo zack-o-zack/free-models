@@ -3,6 +3,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   AudioLines,
+  ChartColumn,
   Database,
   GitBranch,
   Image as ImageIcon,
@@ -73,8 +74,10 @@ const outputIcons: Record<string, LucideIcon> = {
   video: Video,
   transcript: Mic,
   transcription: Mic,
+  embedding: Database,
   embeddings: Database,
   rerank: SlidersHorizontal,
+  scores: ChartColumn,
 };
 
 const sortLabels: Record<SortOption, string> = {
