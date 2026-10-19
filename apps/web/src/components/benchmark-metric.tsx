@@ -4,8 +4,10 @@ import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   AudioLines,
+  BookText,
   CircleHelp,
   Database,
+  File,
   FileText,
   GitBranch,
   Image as ImageIcon,
@@ -53,9 +55,11 @@ export function BenchmarkMetric({
 const modalityIcons: Record<string, LucideIcon> = {
   decisions: GitBranch,
   audio: AudioLines,
+  document: BookText,
   embeddings: Database,
-  file: FileText,
+  file: File,
   image: ImageIcon,
+  pdf: FileText,
   rerank: ListFilter,
   speech: AudioLines,
   text: Type,

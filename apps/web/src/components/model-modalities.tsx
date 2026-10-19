@@ -2,8 +2,10 @@ import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   AudioLines,
+  BookText,
   CircleHelp,
   Database,
+  File,
   FileText,
   GitBranch,
   Image,
@@ -16,9 +18,11 @@ import {
 const icons: Record<string, LucideIcon> = {
   decisions: GitBranch,
   audio: AudioLines,
+  document: BookText,
   embeddings: Database,
-  file: FileText,
+  file: File,
   image: Image,
+  pdf: FileText,
   rerank: ListFilter,
   speech: AudioLines,
   text: Type,
