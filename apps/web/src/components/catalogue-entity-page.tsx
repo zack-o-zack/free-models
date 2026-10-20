@@ -1,9 +1,10 @@
 import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Layers, Server } from "lucide-react";
 import Link from "next/link";
+import { CatalogueDirectoryList } from "@/components/catalogue-directory-list";
+import { EntityCards } from "@/components/entity-cards";
 import { JsonLd } from "@/components/json-ld";
 import { ModelExplorer } from "@/components/model-explorer";
 import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
-import { ProviderBadge } from "@/components/provider-badge";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,6 @@ import {
   type EntityKind,
   entityBreadcrumbs,
   entityDescription,
-  entityHref,
   entityLabel,
   getCatalogueEntities,
   getEntityDocs,
@@ -24,42 +24,7 @@ import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import type { ModelSummary } from "@/lib/model-types";
 import { entityJsonLd } from "@/lib/seo";
 
-export function EntityCards({ entities, kind }: { entities: CatalogueEntity[]; kind: EntityKind }) {
-  return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {entities.map((entity) => (
-        <Link
-          key={entity.slug}
-          href={entityHref(kind, entity.slug)}
-          className="group flex min-w-0 flex-col gap-6 rounded-[24px] bg-card p-6 transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-        >
-          <div className="flex min-w-0 items-start justify-between gap-4">
-            <ProviderBadge
-              plain
-              size="xl"
-              provider={entity.slug}
-              publisher={kind === "publishers"}
-              docs={
-                entity.models.find((model) => model.providerDocs[entity.slug])?.providerDocs[
-                  entity.slug
-                ]
-              }
-              names={{ [entity.slug]: entity.name }}
-            />
-            <ArrowUpRight
-              aria-hidden="true"
-              className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none"
-            />
-          </div>
-          <p className="text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">{entity.models.length}</span> free{" "}
-            {entity.models.length === 1 ? "model" : "models"}
-          </p>
-        </Link>
-      ))}
-    </div>
-  );
-}
+export { EntityCards };
 
 export function CatalogueEntityPage({
   entity,
@@ -239,7 +204,7 @@ export function CatalogueDirectoryPage({
         >
           {directoryContent[kind].description}
         </p>
-        <EntityCards entities={entities} kind={kind} />
+        <CatalogueDirectoryList entities={entities} kind={kind} />
       </main>
       <SiteFooter />
     </div>
