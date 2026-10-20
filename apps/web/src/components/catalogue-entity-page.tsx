@@ -202,7 +202,7 @@ export function CatalogueEntityPage({
             </aside>
           </div>
           {docs.length > 0 && (
-            <div className="mt-8 rounded-[24px] bg-card p-6">
+            <div className="mt-8 w-full max-w-3xl rounded-[24px] bg-card p-6">
               <h2 className="text-sm font-semibold">{entity.name} resources</h2>
               <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
                 {docs.map((doc) => (
