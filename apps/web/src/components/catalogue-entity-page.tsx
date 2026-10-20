@@ -146,9 +146,31 @@ export function CatalogueEntityPage({
                 Based on models in this catalogue. Availability and free limits vary by model.
               </p>
             </div>
+            {docs.length > 0 && (
+              <section
+                aria-label={`${entity.name} resources`}
+                className="min-w-0 rounded-[24px] bg-card px-4 py-5 shadow-xs sm:px-5 lg:col-start-1 lg:row-start-2 lg:max-w-[36rem]"
+              >
+                <h2 className="text-sm font-semibold">{entity.name} resources</h2>
+                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                  {docs.map((doc) => (
+                    <a
+                      key={doc.url}
+                      href={doc.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                    >
+                      {compactResourceLabels[doc.label] ?? doc.label}{" "}
+                      <ArrowUpRight aria-hidden="true" className="size-4" />
+                    </a>
+                  ))}
+                </div>
+              </section>
+            )}
             <aside
               aria-label={`${entity.name} overview`}
-              className="overflow-hidden rounded-[24px] bg-card shadow-xs lg:col-start-1 lg:row-start-2 lg:max-w-[36rem]"
+              className="overflow-hidden rounded-[24px] bg-card shadow-xs lg:col-start-2 lg:row-start-1"
             >
               <div className="border-b border-border/70 bg-muted/30 p-6 sm:p-7">
                 <div className="flex items-center gap-5">
@@ -190,25 +212,6 @@ export function CatalogueEntityPage({
                   </div>
                 </div>
               </div>
-              {docs.length > 0 && (
-                <div className="border-b border-border/70 px-4 py-5 sm:px-5">
-                  <h3 className="text-sm font-semibold">{entity.name} resources</h3>
-                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                    {docs.map((doc) => (
-                      <a
-                        key={doc.url}
-                        href={doc.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                      >
-                        {compactResourceLabels[doc.label] ?? doc.label}{" "}
-                        <ArrowUpRight aria-hidden="true" className="size-4" />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
               <div className="p-6 sm:p-8">
                 <p className="text-sm font-semibold">At a glance</p>
                 <dl className="mt-6 grid grid-cols-2 gap-x-5 gap-y-8">
