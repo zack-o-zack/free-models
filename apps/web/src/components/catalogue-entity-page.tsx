@@ -111,26 +111,28 @@ export function CatalogueEntityPage({
               >
                 {entityDescription(entity, kind)}
               </p>
-              <Button
-                className="mt-8 h-12 gap-4 px-6"
-                render={<a href="#models" />}
-                nativeButton={false}
-              >
-                Explore {entity.models.length} {entity.models.length === 1 ? "model" : "models"}{" "}
-                <ArrowDown aria-hidden="true" />
-              </Button>
-              {highlight && (
-                <div className="mt-8 flex max-w-xl flex-wrap items-baseline justify-between gap-2 rounded-2xl bg-card p-4">
-                  <span className="text-sm text-muted-foreground">{highlight.label}</span>
-                  <span className="text-lg font-semibold">
-                    {highlight.unit === "tokens"
-                      ? `${formatContext(highlight.value)} tokens`
-                      : highlight.unit === "models"
-                        ? `${highlight.value} ${highlight.value === 1 ? "model" : "models"}`
-                        : formatBenchmarkScore(highlight.value)}
-                  </span>
-                </div>
-              )}
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Button
+                  className="h-12 shrink-0 gap-4 px-6"
+                  render={<a href="#models" />}
+                  nativeButton={false}
+                >
+                  Explore {entity.models.length} {entity.models.length === 1 ? "model" : "models"}{" "}
+                  <ArrowDown aria-hidden="true" />
+                </Button>
+                {highlight && (
+                  <div className="flex w-fit min-w-[17rem] max-w-sm flex-wrap items-baseline gap-x-4 gap-y-2 rounded-2xl bg-card px-6 py-4">
+                    <span className="text-sm text-muted-foreground">{highlight.label}</span>
+                    <span className="text-lg font-semibold">
+                      {highlight.unit === "tokens"
+                        ? `${formatContext(highlight.value)} tokens`
+                        : highlight.unit === "models"
+                          ? `${highlight.value} ${highlight.value === 1 ? "model" : "models"}`
+                          : formatBenchmarkScore(highlight.value)}
+                    </span>
+                  </div>
+                )}
+              </div>
               <p
                 className={`${highlight ? "mt-4" : "mt-8"} max-w-xl text-xs leading-5 text-muted-foreground`}
               >
@@ -181,6 +183,24 @@ export function CatalogueEntityPage({
                   </div>
                 </div>
               </div>
+              {docs.length > 0 && (
+                <div className="border-b border-border/70 px-4 py-5 sm:px-5">
+                  <h3 className="text-sm font-semibold">{entity.name} resources</h3>
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                    {docs.map((doc) => (
+                      <a
+                        key={doc.url}
+                        href={doc.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                      >
+                        {doc.label} <ArrowUpRight aria-hidden="true" className="size-4" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="p-6 sm:p-8">
                 <p className="text-sm font-semibold">At a glance</p>
                 <dl className="mt-6 grid grid-cols-2 gap-x-5 gap-y-8">
@@ -201,24 +221,6 @@ export function CatalogueEntityPage({
               </div>
             </aside>
           </div>
-          {docs.length > 0 && (
-            <div className="mt-8 w-full max-w-3xl rounded-[24px] bg-card p-6">
-              <h2 className="text-sm font-semibold">{entity.name} resources</h2>
-              <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-                {docs.map((doc) => (
-                  <a
-                    key={doc.url}
-                    href={doc.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                  >
-                    {doc.label} <ArrowUpRight aria-hidden="true" className="size-4" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
         </section>
         <ModelExplorer
           models={explorerModels.map(toCatalogueModel)}
