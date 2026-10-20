@@ -186,21 +186,18 @@ export function CatalogueEntityPage({
                     </AvatarFallback>
                   </Avatar>
                   <div className="min-w-0 flex-1">
-                    <h2 className="truncate font-heading text-xl font-bold leading-tight tracking-tight text-foreground sm:text-2xl">
-                      {entity.name}
-                    </h2>
                     {websiteUrl && websiteHostname ? (
                       <a
                         href={websiteUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-1 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
                       >
                         <span className="truncate">{websiteHostname}</span>
                         <ArrowUpRight aria-hidden="true" className="size-3.5 shrink-0" />
                       </a>
                     ) : (
-                      <p className="mt-1 text-xs text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         Catalogue {label.toLowerCase()}
                       </p>
                     )}
