@@ -3,6 +3,19 @@ import { getProviderName } from "@/lib/provider-logos";
 
 export type EntityKind = "providers" | "publishers";
 
+export type DirectorySortOption = "models-desc" | "name-asc" | "name-desc" | "models-asc";
+
+export type EntitySortOption = DirectorySortOption | "models" | "alphabetical" | "name";
+
+export const defaultDirectorySort: DirectorySortOption = "models-desc";
+
+export const directorySortLabels: Record<DirectorySortOption, string> = {
+  "models-desc": "Most models",
+  "name-asc": "Alphabetical (A–Z)",
+  "name-desc": "Alphabetical (Z–A)",
+  "models-asc": "Fewest models",
+};
+
 export interface CatalogueEntity {
   slug: string;
   name: string;
@@ -19,7 +32,37 @@ export function entityHref(kind: EntityKind, slug: string): string {
   return `/${kind}/${encodeURIComponent(slug)}`;
 }
 
-export function getCatalogueEntities(models: ModelSummary[], kind: EntityKind): CatalogueEntity[] {
+export function compareCatalogueEntities(
+  left: CatalogueEntity,
+  right: CatalogueEntity,
+  sort: EntitySortOption = "models-desc",
+): number {
+  switch (sort) {
+    case "alphabetical":
+    case "name":
+    case "name-asc":
+      return left.name.localeCompare(right.name) || right.models.length - left.models.length;
+    case "name-desc":
+      return right.name.localeCompare(left.name) || right.models.length - left.models.length;
+    case "models-asc":
+      return left.models.length - right.models.length || left.name.localeCompare(right.name);
+    default:
+      return right.models.length - left.models.length || left.name.localeCompare(right.name);
+  }
+}
+
+export function sortCatalogueEntities(
+  entities: CatalogueEntity[],
+  sort: EntitySortOption = "models-desc",
+): CatalogueEntity[] {
+  return [...entities].sort((left, right) => compareCatalogueEntities(left, right, sort));
+}
+
+export function getCatalogueEntities(
+  models: ModelSummary[],
+  kind: EntityKind,
+  sort: EntitySortOption = "models-desc",
+): CatalogueEntity[] {
   const entities = new Map<string, CatalogueEntity>();
   const names = Object.assign({}, ...models.map((model) => model.providerNames));
 
@@ -40,7 +83,7 @@ export function getCatalogueEntities(models: ModelSummary[], kind: EntityKind): 
     }
   }
 
-  return [...entities.values()].sort((a, b) => a.name.localeCompare(b.name));
+  return sortCatalogueEntities([...entities.values()], sort);
 }
 
 export function entityDescription(entity: CatalogueEntity, kind: EntityKind): string {

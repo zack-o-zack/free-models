@@ -1,5 +1,10 @@
 import { describe, expect, test } from "bun:test";
-import { entityHref, getCatalogueEntities, getEntityDocs } from "../src/lib/catalogue-entities";
+import {
+  entityHref,
+  getCatalogueEntities,
+  getEntityDocs,
+  sortCatalogueEntities,
+} from "../src/lib/catalogue-entities";
 import type { ModelSummary } from "../src/lib/model-types";
 
 function model(id: string, providers: string[], extra: Partial<ModelSummary> = {}): ModelSummary {
@@ -66,6 +71,69 @@ describe("Catalogue entity membership", () => {
     };
     expect(getEntityDocs(entity)).toEqual([
       { label: "Documentation", url: "https://host.test/docs" },
+    ]);
+  });
+});
+
+describe("Catalogue entity sorting", () => {
+  test("sorts publishers and providers by model count descending by default", () => {
+    const publishers = getCatalogueEntities(models, "publishers");
+    expect(publishers.map((e) => e.slug)).toEqual(["maker", "another"]);
+
+    const providers = getCatalogueEntities(models, "providers");
+    expect(providers.map((e) => e.slug)).toEqual(["other", "host"]);
+  });
+
+  test("breaks ties in model count alphabetically by name", () => {
+    const tiedModels = [
+      model("beta/one", ["p1"], { author: "Beta" }),
+      model("alpha/one", ["p1"], { author: "Alpha" }),
+    ];
+    const publishers = getCatalogueEntities(tiedModels, "publishers");
+    expect(publishers.map((e) => e.name)).toEqual(["Alpha", "Beta"]);
+  });
+
+  test("supports sorting alphabetically", () => {
+    const distinctModels = [
+      model("beta/one", ["p1"], { author: "Beta" }),
+      model("alpha/one", ["p1"], { author: "Alpha" }),
+    ];
+    const publishers = getCatalogueEntities(distinctModels, "publishers", "alphabetical");
+    expect(publishers.map((e) => e.name)).toEqual(["Alpha", "Beta"]);
+
+    const providers = getCatalogueEntities(models, "providers", "alphabetical");
+    expect(providers.map((e) => e.slug)).toEqual(["host", "other"]);
+  });
+
+  test("sortCatalogueEntities helper supports all sort options", () => {
+    const entities = [
+      { slug: "c", name: "Charlie", models: [model("c/1", [])] },
+      { slug: "a", name: "Alice", models: [model("a/1", []), model("a/2", [])] },
+      { slug: "b", name: "Bob", models: [model("b/1", [])] },
+    ];
+
+    expect(sortCatalogueEntities(entities, "models-desc").map((e) => e.name)).toEqual([
+      "Alice",
+      "Bob",
+      "Charlie",
+    ]);
+
+    expect(sortCatalogueEntities(entities, "name-asc").map((e) => e.name)).toEqual([
+      "Alice",
+      "Bob",
+      "Charlie",
+    ]);
+
+    expect(sortCatalogueEntities(entities, "name-desc").map((e) => e.name)).toEqual([
+      "Charlie",
+      "Bob",
+      "Alice",
+    ]);
+
+    expect(sortCatalogueEntities(entities, "models-asc").map((e) => e.name)).toEqual([
+      "Bob",
+      "Charlie",
+      "Alice",
     ]);
   });
 });
