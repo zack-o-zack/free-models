@@ -152,26 +152,23 @@ export function CatalogueEntityPage({
                 )}
               </div>
               {docs.length > 0 && (
-                <section
+                <nav
                   aria-label={`${entity.name} resources`}
-                  className="mt-8 min-w-0 w-full max-w-[36rem] rounded-[24px] bg-card px-4 py-5 shadow-xs sm:px-5"
+                  className="mt-8 flex min-w-0 w-full max-w-[36rem] flex-wrap gap-x-5 gap-y-1"
                 >
-                  <h2 className="text-sm font-semibold">{entity.name} resources</h2>
-                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                    {docs.map((doc) => (
-                      <a
-                        key={doc.url}
-                        href={doc.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                      >
-                        {compactResourceLabels[doc.label] ?? doc.label}{" "}
-                        <ArrowUpRight aria-hidden="true" className="size-4" />
-                      </a>
-                    ))}
-                  </div>
-                </section>
+                  {docs.map((doc) => (
+                    <a
+                      key={doc.url}
+                      href={doc.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                    >
+                      {compactResourceLabels[doc.label] ?? doc.label}{" "}
+                      <ArrowUpRight aria-hidden="true" className="size-4" />
+                    </a>
+                  ))}
+                </nav>
               )}
             </div>
             <aside
