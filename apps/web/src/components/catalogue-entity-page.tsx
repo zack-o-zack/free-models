@@ -49,6 +49,13 @@ function formatHostname(url: string | null | undefined): string | null {
   }
 }
 
+const compactResourceLabels: Record<string, string> = {
+  Documentation: "Docs",
+  "Model catalogue": "Models",
+  "Pricing & free access": "Pricing",
+  "Rate limits": "Limits",
+};
+
 export function CatalogueEntityPage({
   entity,
   kind,
@@ -141,7 +148,7 @@ export function CatalogueEntityPage({
             </div>
             <aside
               aria-label={`${entity.name} overview`}
-              className="overflow-hidden rounded-[24px] bg-card shadow-xs"
+              className="overflow-hidden rounded-[24px] bg-card shadow-xs lg:col-start-1 lg:row-start-2 lg:max-w-[36rem]"
             >
               <div className="border-b border-border/70 bg-muted/30 p-6 sm:p-7">
                 <div className="flex items-center gap-5">
@@ -195,7 +202,8 @@ export function CatalogueEntityPage({
                         rel="noreferrer"
                         className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                       >
-                        {doc.label} <ArrowUpRight aria-hidden="true" className="size-4" />
+                        {compactResourceLabels[doc.label] ?? doc.label}{" "}
+                        <ArrowUpRight aria-hidden="true" className="size-4" />
                       </a>
                     ))}
                   </div>
