@@ -102,10 +102,10 @@ export function CatalogueEntityPage({
           <PageBreadcrumbs items={entityBreadcrumbs(entity, kind)} className="mb-10" />
           <div className="grid items-start gap-10 pb-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16">
             <div className="min-w-0">
-              <div className="flex min-w-0 items-start gap-4 sm:items-center sm:gap-5">
+              <div className="flex min-w-0 items-center gap-4 sm:gap-5">
                 <Avatar
                   aria-hidden="true"
-                  className="mt-1 size-14 shrink-0 rounded-2xl bg-logo-surface ring-1 ring-border/80 shadow-xs sm:mt-0 sm:size-16 xl:size-20"
+                  className="size-14 shrink-0 rounded-2xl bg-logo-surface ring-1 ring-border/80 shadow-xs sm:size-16 xl:size-20"
                 >
                   {logoUrl && (
                     <BrandImage
@@ -125,7 +125,7 @@ export function CatalogueEntityPage({
               </div>
               <p
                 data-page-description
-                className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground"
+                className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground sm:mt-6"
               >
                 {entityDescription(entity, kind)}
               </p>
