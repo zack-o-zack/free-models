@@ -102,16 +102,47 @@ export function CatalogueEntityPage({
           <PageBreadcrumbs items={entityBreadcrumbs(entity, kind)} className="mb-10" />
           <div className="grid items-start gap-10 pb-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16">
             <div className="min-w-0">
-              <p
-                data-page-title-context
-                className="mb-5 flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase"
-              >
-                {isProvider ? <Server className="size-4" /> : <BookOpen className="size-4" />}{" "}
-                {label}
-              </p>
-              <h1 className="font-heading text-5xl leading-[0.98] font-black tracking-[-0.055em] [overflow-wrap:anywhere] sm:text-7xl xl:text-8xl">
-                {entity.name}
-              </h1>
+              <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <p
+                  data-page-title-context
+                  className="flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase"
+                >
+                  {isProvider ? <Server className="size-4" /> : <BookOpen className="size-4" />}{" "}
+                  {label}
+                </p>
+                {websiteUrl && websiteHostname && (
+                  <a
+                    href={websiteUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                  >
+                    <span>{websiteHostname}</span>
+                    <ArrowUpRight aria-hidden="true" className="size-3.5 shrink-0" />
+                  </a>
+                )}
+              </div>
+              <div className="flex min-w-0 items-start gap-4 sm:items-center sm:gap-5">
+                <Avatar
+                  aria-hidden="true"
+                  className="mt-1 size-14 shrink-0 rounded-2xl bg-logo-surface ring-1 ring-border/80 shadow-xs sm:mt-0 sm:size-16 xl:size-20"
+                >
+                  {logoUrl && (
+                    <BrandImage
+                      src={logoUrl}
+                      alt=""
+                      loading="eager"
+                      className="rounded-[inherit] object-contain p-2.5 sm:p-3"
+                    />
+                  )}
+                  <AvatarFallback className="rounded-[inherit] bg-transparent font-heading text-xl font-black tracking-tight text-foreground sm:text-2xl">
+                    {entityInitials(entity.name)}
+                  </AvatarFallback>
+                </Avatar>
+                <h1 className="min-w-0 font-heading text-4xl leading-[1.02] font-black tracking-[-0.055em] [overflow-wrap:anywhere] sm:text-5xl lg:text-6xl xl:text-7xl">
+                  {entity.name}
+                </h1>
+              </div>
               <p
                 data-page-description
                 className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground"
@@ -167,45 +198,8 @@ export function CatalogueEntityPage({
               aria-label={`${entity.name} overview`}
               className="overflow-hidden rounded-[24px] bg-card shadow-xs lg:col-start-2 lg:row-start-1"
             >
-              <div className="border-b border-border/70 bg-muted/30 p-6 sm:p-7">
-                <div className="flex items-center gap-5">
-                  <Avatar
-                    aria-hidden="true"
-                    className="size-20 shrink-0 rounded-2xl bg-logo-surface ring-1 ring-border/80 shadow-xs sm:size-24"
-                  >
-                    {logoUrl && (
-                      <BrandImage
-                        src={logoUrl}
-                        alt=""
-                        loading="eager"
-                        className="rounded-[inherit] object-contain p-3 sm:p-3.5"
-                      />
-                    )}
-                    <AvatarFallback className="rounded-[inherit] bg-transparent font-heading text-2xl font-black tracking-tight text-foreground sm:text-3xl">
-                      {entityInitials(entity.name)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="min-w-0 flex-1">
-                    {websiteUrl && websiteHostname ? (
-                      <a
-                        href={websiteUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
-                      >
-                        <span className="truncate">{websiteHostname}</span>
-                        <ArrowUpRight aria-hidden="true" className="size-3.5 shrink-0" />
-                      </a>
-                    ) : (
-                      <p className="text-xs text-muted-foreground">
-                        Catalogue {label.toLowerCase()}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
               <div className="p-6 sm:p-8">
-                <p className="text-sm font-semibold">At a glance</p>
+                <p className="border-b border-border/70 pb-4 text-sm font-semibold">At a glance</p>
                 <dl className="mt-6 grid grid-cols-2 gap-x-5 gap-y-8">
                   {[
                     { label: "Free models", value: entity.models.length },
