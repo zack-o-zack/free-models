@@ -102,26 +102,6 @@ export function CatalogueEntityPage({
           <PageBreadcrumbs items={entityBreadcrumbs(entity, kind)} className="mb-10" />
           <div className="grid items-start gap-10 pb-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16">
             <div className="min-w-0">
-              <div className="mb-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-                <p
-                  data-page-title-context
-                  className="flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase"
-                >
-                  {isProvider ? <Server className="size-4" /> : <BookOpen className="size-4" />}{" "}
-                  {label}
-                </p>
-                {websiteUrl && websiteHostname && (
-                  <a
-                    href={websiteUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
-                  >
-                    <span>{websiteHostname}</span>
-                    <ArrowUpRight aria-hidden="true" className="size-3.5 shrink-0" />
-                  </a>
-                )}
-              </div>
               <div className="flex min-w-0 items-start gap-4 sm:items-center sm:gap-5">
                 <Avatar
                   aria-hidden="true"
@@ -199,7 +179,26 @@ export function CatalogueEntityPage({
               className="overflow-hidden rounded-[24px] bg-card shadow-xs lg:col-start-2 lg:row-start-1"
             >
               <div className="p-6 sm:p-8">
-                <p className="border-b border-border/70 pb-4 text-sm font-semibold">At a glance</p>
+                <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border/70 pb-4">
+                  <p
+                    data-page-title-context
+                    className="flex items-center gap-2 text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase"
+                  >
+                    {isProvider ? <Server className="size-4" /> : <BookOpen className="size-4" />}
+                    <span>{label}</span>
+                  </p>
+                  {websiteUrl && websiteHostname && (
+                    <a
+                      href={websiteUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                    >
+                      <span>{websiteHostname}</span>
+                      <ArrowUpRight aria-hidden="true" className="size-3.5 shrink-0" />
+                    </a>
+                  )}
+                </div>
                 <dl className="mt-6 grid grid-cols-2 gap-x-5 gap-y-8">
                   {[
                     { label: "Free models", value: entity.models.length },
