@@ -113,7 +113,7 @@ export function CatalogueEntityPage({
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button
-                  className="h-12 shrink-0 gap-4 px-6"
+                  className="h-15 shrink-0 gap-4 px-6"
                   render={<a href="#models" />}
                   nativeButton={false}
                 >
