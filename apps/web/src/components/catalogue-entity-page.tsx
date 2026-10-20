@@ -145,29 +145,29 @@ export function CatalogueEntityPage({
               >
                 Based on models in this catalogue. Availability and free limits vary by model.
               </p>
+              {docs.length > 0 && (
+                <section
+                  aria-label={`${entity.name} resources`}
+                  className="mt-8 min-w-0 w-full max-w-[36rem] rounded-[24px] bg-card px-4 py-5 shadow-xs sm:px-5"
+                >
+                  <h2 className="text-sm font-semibold">{entity.name} resources</h2>
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                    {docs.map((doc) => (
+                      <a
+                        key={doc.url}
+                        href={doc.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                      >
+                        {compactResourceLabels[doc.label] ?? doc.label}{" "}
+                        <ArrowUpRight aria-hidden="true" className="size-4" />
+                      </a>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
-            {docs.length > 0 && (
-              <section
-                aria-label={`${entity.name} resources`}
-                className="min-w-0 rounded-[24px] bg-card px-4 py-5 shadow-xs sm:px-5 lg:col-start-1 lg:row-start-2 lg:max-w-[36rem]"
-              >
-                <h2 className="text-sm font-semibold">{entity.name} resources</h2>
-                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                  {docs.map((doc) => (
-                    <a
-                      key={doc.url}
-                      href={doc.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                    >
-                      {compactResourceLabels[doc.label] ?? doc.label}{" "}
-                      <ArrowUpRight aria-hidden="true" className="size-4" />
-                    </a>
-                  ))}
-                </div>
-              </section>
-            )}
             <aside
               aria-label={`${entity.name} overview`}
               className="overflow-hidden rounded-[24px] bg-card shadow-xs lg:col-start-2 lg:row-start-1"
