@@ -140,11 +140,6 @@ export function CatalogueEntityPage({
                   </div>
                 )}
               </div>
-              <p
-                className={`${highlight ? "mt-4" : "mt-8"} max-w-xl text-xs leading-5 text-muted-foreground`}
-              >
-                Based on models in this catalogue. Availability and free limits vary by model.
-              </p>
               {docs.length > 0 && (
                 <section
                   aria-label={`${entity.name} resources`}
