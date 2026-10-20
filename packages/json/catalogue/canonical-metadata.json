@@ -7722,6 +7722,76 @@
       }
     },
     {
+      "id": "meituan/longcat-2.0",
+      "metadata": {
+        "canonical_slug": "meituan/longcat-2.0-20260720",
+        "hugging_face_id": "meituan-longcat/LongCat-2.0",
+        "name": "Meituan: LongCat 2.0",
+        "created": 1784554658,
+        "description": "LongCat 2.0 is a sparse mixture-of-experts language model from Meituan, with 48B active parameters out of 1.6T total. It is suited for coding, repository-level changes, long-horizon problem solving, and agentic...",
+        "context_length": 1048756,
+        "architecture": {
+          "modality": "text->text",
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Other",
+          "instruct_type": null
+        },
+        "pricing": {
+          "prompt": "0.0000003",
+          "completion": "0.0000012",
+          "input_cache_read": "0.000000006"
+        },
+        "top_provider": {
+          "context_length": 1048756,
+          "max_completion_tokens": 262144,
+          "is_moderated": false
+        },
+        "per_request_limits": null,
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "logit_bias",
+          "max_tokens",
+          "min_p",
+          "presence_penalty",
+          "reasoning",
+          "repetition_penalty",
+          "seed",
+          "stop",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_k",
+          "top_p"
+        ],
+        "default_parameters": {},
+        "supported_voices": null,
+        "knowledge_cutoff": null,
+        "expiration_date": null,
+        "links": {
+          "details": "/api/v1/models/meituan/longcat-2.0-20260720/endpoints"
+        },
+        "benchmarks": {
+          "design_arena": [],
+          "artificial_analysis": {
+            "intelligence_index": 19.1,
+            "coding_index": 45.3,
+            "agentic_index": 14
+          }
+        },
+        "reasoning": {
+          "mandatory": false,
+          "default_enabled": true,
+          "supports_max_tokens": true
+        }
+      }
+    },
+    {
       "id": "meituan/longcat-2.5-preview",
       "metadata": {
         "architecture": {
@@ -20611,6 +20681,105 @@
           "context_length": 262144,
           "is_moderated": false,
           "max_completion_tokens": 235929
+        }
+      }
+    },
+    {
+      "id": "upstage/solar-mini4",
+      "metadata": {
+        "canonical_slug": "upstage/solar-mini4-20260922",
+        "hugging_face_id": null,
+        "name": "Upstage: Solar Mini 4",
+        "created": 1790160358,
+        "description": "Solar Mini 4 is Upstage's compact, cost-efficient language model, a 35B-parameter mixture-of-experts with 3B active parameters and a 524K context window. It is built for agentic use cases where response...",
+        "context_length": 524288,
+        "architecture": {
+          "modality": "text->text",
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Other",
+          "instruct_type": null
+        },
+        "pricing": {
+          "prompt": "0.00000005",
+          "completion": "0.0000002",
+          "input_cache_read": "0.000000005"
+        },
+        "top_provider": {
+          "context_length": 524288,
+          "max_completion_tokens": 131072,
+          "is_moderated": false
+        },
+        "per_request_limits": null,
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "max_tokens",
+          "parallel_tool_calls",
+          "presence_penalty",
+          "reasoning",
+          "reasoning_effort",
+          "response_format",
+          "structured_outputs",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_p"
+        ],
+        "default_parameters": {},
+        "supported_voices": null,
+        "knowledge_cutoff": null,
+        "expiration_date": null,
+        "links": {
+          "details": "/api/v1/models/upstage/solar-mini4-20260922/endpoints"
+        },
+        "benchmarks": {
+          "design_arena": [
+            {
+              "arena": "models",
+              "category": "codecategories",
+              "elo": 1155,
+              "win_rate": 32.5,
+              "rank": 81
+            },
+            {
+              "arena": "models",
+              "category": "gamedev",
+              "elo": 1124,
+              "win_rate": 29.9,
+              "rank": 89
+            },
+            {
+              "arena": "models",
+              "category": "website",
+              "elo": 1161,
+              "win_rate": 33.4,
+              "rank": 86
+            }
+          ],
+          "artificial_analysis": {
+            "intelligence_index": 24.1,
+            "coding_index": null,
+            "agentic_index": null
+          }
+        },
+        "reasoning": {
+          "mandatory": false,
+          "default_enabled": false,
+          "supported_efforts": [
+            "max",
+            "xhigh",
+            "high",
+            "medium",
+            "low",
+            "minimal",
+            "none"
+          ],
+          "default_effort": "medium"
         }
       }
     },

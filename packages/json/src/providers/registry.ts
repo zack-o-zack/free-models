@@ -7,6 +7,7 @@ import { GroqProvider } from "./groq.ts";
 import { KiloProvider } from "./kilo.ts";
 import { LLM7Provider } from "./llm7.ts";
 import { MistralProvider } from "./mistral.ts";
+import { NousProvider } from "./nous.ts";
 import { NovitaProvider } from "./novita.ts";
 import { NvidiaProvider } from "./nvidia.ts";
 import { OpenCodeProvider } from "./opencode.ts";
@@ -39,6 +40,7 @@ export const providerRegistry = defineProviderRegistry(
   new AnyApiProvider(),
   new NovitaProvider(),
   new VercelProvider(),
+  new NousProvider(),
 );
 
 export const metadataProvider = openRouterProvider;

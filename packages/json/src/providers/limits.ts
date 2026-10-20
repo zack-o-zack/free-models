@@ -72,6 +72,10 @@ export function llm7PublishedLimits(): OfferLimits {
   );
 }
 
+export function nousPublishedLimits(): OfferLimits {
+  return termsLimits(formatLimitTerm(50, "req", "min"), formatLimitTerm(500_000, "tok", "min"));
+}
+
 export function termsLimits(...terms: string[]): OfferLimits {
   return { terms };
 }
