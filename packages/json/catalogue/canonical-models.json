@@ -621,6 +621,10 @@
       "name": "LiquidAI: LFM2.5-Embedding-350M"
     },
     {
+      "id": "meituan/longcat-2.0",
+      "name": "Meituan: LongCat 2.0"
+    },
+    {
       "id": "meituan/longcat-2.5-preview",
       "name": "LongCat 2.5 Preview"
     },
@@ -1527,6 +1531,10 @@
     {
       "id": "typesafe/jev-1.13",
       "name": "Jev 1.13"
+    },
+    {
+      "id": "upstage/solar-mini4",
+      "name": "Upstage: Solar Mini 4"
     },
     {
       "id": "voyage/voyage-3-large",

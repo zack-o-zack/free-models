@@ -1,0 +1,145 @@
+{
+  "provider": "nous",
+  "name": "Nous Portal",
+  "doc": {
+    "models": "https://portal.nousresearch.com/models",
+    "overview": "https://portal.nousresearch.com/",
+    "pricing": "https://portal.nousresearch.com/manage-subscription",
+    "rate_limit": "https://portal.nousresearch.com/api-docs"
+  },
+  "offers": [
+    {
+      "model_id": "meituan/longcat-2.0:free",
+      "name": "Meituan: LongCat 2.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      }
+    },
+    {
+      "model_id": "meituan/longcat-2.5-preview:free",
+      "name": "Meituan: LongCat 2.5 Preview",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      }
+    },
+    {
+      "model_id": "poolside/laguna-s-2.1:free",
+      "name": "Poolside: Laguna S 2.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      }
+    },
+    {
+      "model_id": "poolside/laguna-xs-2.1:free",
+      "name": "Poolside: Laguna XS 2.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      }
+    },
+    {
+      "model_id": "reflection/beam-1.0-501b-a23b:free",
+      "name": "Reflection: Beam 1.0 501B A23B",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      }
+    },
+    {
+      "model_id": "stepfun/step-3.7-flash:free",
+      "name": "StepFun: Step 3.7 Flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      }
+    },
+    {
+      "model_id": "upstage/solar-mini4:free",
+      "name": "Upstage: Solar Mini 4",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      }
+    }
+  ]
+}
