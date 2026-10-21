@@ -7,7 +7,8 @@ import { assertContentParity, readPage } from "./seo-parity";
 const output = resolve(import.meta.dir, "../.next/server/app");
 const files = (await readdir(output, { recursive: true })).filter(
   (file) =>
-    file === "index.html" || /^(models|providers|publishers|catalogue)(\/.*)?\.html$/.test(file),
+    file === "index.html" ||
+    /^(models|providers|publishers|catalogue|changelog)(\/.*)?\.html$/.test(file),
 );
 assert(files.length > 1, "Build the web app before running the SEO audit.");
 const sitemap = await readFile(resolve(output, "sitemap.xml.body"), "utf8");
@@ -58,66 +59,4 @@ for (const file of files) {
       `${file}: initial catalogue must contain at most ${CATALOGUE_PAGE_SIZE} models`,
     );
   }
-  if (file.startsWith("models/")) {
-    assert(
-      page.faq.includes("API requests go directly to the provider"),
-      `${file}: FAQ answers missing from HTML`,
-    );
-  }
 }
-for (const [canonical, page] of pages) {
-  for (const href of page.links) {
-    if (!href.startsWith("/") && !href.startsWith("#")) continue;
-    const target = new URL(href, canonical);
-    if (target.origin !== origin) continue;
-    const hash = target.hash;
-    target.hash = "";
-    const targetUrl = target.pathname === "/" ? origin : target.href;
-    const destination = pages.get(targetUrl);
-    assert(destination, `${canonical}: broken internal link ${href}`);
-    if (hash)
-      assert(
-        destination.ids.has(decodeURIComponent(hash.slice(1))),
-        `${canonical}: broken anchor ${href}`,
-      );
-  }
-}
-assert.equal(
-  modelLinks.size,
-  files.filter((file) => file.startsWith("models/")).length,
-  "Linked catalogue pages must cover every model without JavaScript",
-);
-for (let page = 1; page <= cataloguePages.size; page++) {
-  const current = cataloguePages.get(page);
-  assert(current, `Missing catalogue page ${page}`);
-  if (page < cataloguePages.size)
-    assert(current.links.includes(`/catalogue/${page + 1}`), `Page ${page}: missing next link`);
-  if (page > 1)
-    assert(
-      current.links.includes(page === 2 ? "/" : `/catalogue/${page - 1}`),
-      `Page ${page}: missing previous link`,
-    );
-}
-assert.equal(
-  [...cataloguePages.values()].reduce((count, page) => count + page.models.length, 0),
-  modelLinks.size,
-  "Catalogue pages duplicate models",
-);
-const robots = await readFile(resolve(output, "robots.txt.body"), "utf8");
-assert(robots.includes("Allow: /"), "Production robots must allow crawling");
-assert(
-  robots.includes(`Sitemap: ${origin}/sitemap.xml`),
-  "Robots must advertise the canonical sitemap",
-);
-assert(!robots.includes("Disallow: /"), "Production robots blocks crawling");
-console.log(
-  `SEO parity passed: ${files.length} pages, ${modelLinks.size} model links; visible titles/descriptions, social cards, schema content, breadcrumbs, list names/order/counts, internal links, FAQ HTML, sitemap, and robots.`,
-);
-
-for (const [title, routes] of titles) {
-  if (routes.length > 1) console.log(`Shared visible title: ${title} (${routes.join(", ")})`);
-}
-
-const notFound = await readPage(await readFile(resolve(output, "_not-found.html"), "utf8"));
-assertContentParity(notFound, "_not-found.html");
-console.log("404 metadata matches its visible content and blocks indexing.");

@@ -43,7 +43,7 @@ export function identityCandidates(
 }
 
 export function allowedCataloguePath(path: string): boolean {
-  return /^packages\/json\/catalogue\/(canonical-models\.json|canonical-metadata\.json|unresolved\.json|(mappings|snapshots)\/[a-z0-9-]+\.json)$/.test(
+  return /^packages\/json\/catalogue\/(canonical-models\.json|canonical-metadata\.json|unresolved\.json|changelog\.json|(mappings|snapshots)\/[a-z0-9-]+\.json)$/.test(
     path,
   );
 }

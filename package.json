@@ -14,6 +14,8 @@
     "catalogue:refresh": "bun run --filter json catalogue:refresh",
     "catalogue:render": "bun run --filter json catalogue:render",
     "catalogue:check": "bun run --filter json catalogue:check",
+    "catalogue:changelog": "bun run --filter json catalogue:changelog",
+    "changelog": "bun run --filter json catalogue:changelog",
     "format": "biome format --write .",
     "format:check": "biome format .",
     "lint": "biome lint .",

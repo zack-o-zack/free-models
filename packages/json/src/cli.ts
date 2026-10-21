@@ -1,5 +1,6 @@
 import { join, resolve } from "node:path";
 import { parseArgs } from "node:util";
+import { generateChangelog } from "./catalogue/changelog.ts";
 import { cataloguePaths } from "./catalogue/files.ts";
 import { type CatalogueRenderer, JsonCatalogueRenderer } from "./catalogue/render.ts";
 import {
@@ -14,7 +15,7 @@ import type { ModelsDevRegistry } from "./providers/models-dev.ts";
 import type { ModelProvider } from "./providers/provider.ts";
 import { metadataProvider, providerRegistry } from "./providers/registry.ts";
 
-type Command = "check" | "discover" | "reconcile" | "refresh" | "render";
+type Command = "check" | "discover" | "reconcile" | "refresh" | "render" | "changelog";
 
 export interface CliDependencies {
   readonly providers: readonly ModelProvider[];
@@ -37,6 +38,7 @@ function usage(): string {
     "  bun run catalogue refresh [--workspace <path>]",
     "  bun run catalogue render [--workspace <path>] [--output <path>]",
     "  bun run catalogue check [--workspace <path>] [--input <path>]",
+    "  bun run catalogue changelog [--workspace <path>] [--output <path>]",
   ].join("\n");
 }
 
@@ -88,6 +90,15 @@ export async function runCli(
     return;
   }
 
+  if (command === "changelog") {
+    const outputPath = resolve(options.output ?? paths.changelog);
+    const doc = await generateChangelog(paths, dependencies.providers, { outputPath });
+    console.log(
+      `Generated changelog (${doc.entries.length} entries, +${doc.totalAdded}/-${doc.totalRemoved}) at ${outputPath}`,
+    );
+    return;
+  }
+
   const inputPath = resolve(
     options.input ?? join(paths.workspace, dependencies.renderer.defaultFileName),
   );
@@ -101,7 +112,8 @@ function isCommand(command: string | undefined): command is Command {
     command === "discover" ||
     command === "reconcile" ||
     command === "refresh" ||
-    command === "render"
+    command === "render" ||
+    command === "changelog"
   );
 }
 
@@ -115,7 +127,7 @@ function parseCommandOptions(
   if (command === "check") {
     options.input = { type: "string" };
   }
-  if (command === "render") {
+  if (command === "render" || command === "changelog") {
     options.output = { type: "string" };
   }
 
