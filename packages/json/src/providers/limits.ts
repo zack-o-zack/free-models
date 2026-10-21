@@ -76,6 +76,10 @@ export function nousPublishedLimits(): OfferLimits {
   return termsLimits(formatLimitTerm(50, "req", "min"), formatLimitTerm(500_000, "tok", "min"));
 }
 
+export function onomeoPublishedLimits(): OfferLimits {
+  return termsLimits(formatLimitTerm(12, "req", "min"), formatLimitTerm(30, "req", "5 hr"));
+}
+
 export function termsLimits(...terms: string[]): OfferLimits {
   return { terms };
 }

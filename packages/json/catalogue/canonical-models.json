@@ -1365,6 +1365,10 @@
       "name": "Qwen3 VL 235B A22B Instruct"
     },
     {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "name": "Qwen: Qwen3.5 397B A17B"
+    },
+    {
       "id": "qwen/qwen3.5-flash",
       "name": "Qwen 3.5 Flash"
     },
@@ -1387,6 +1391,10 @@
     {
       "id": "qwen/qwen3.8-27b",
       "name": "Qwen: Qwen3.8 27B"
+    },
+    {
+      "id": "qwen/qwen3.8-flash-next",
+      "name": "Qwen: Qwen3.8 Flash Next"
     },
     {
       "id": "qwen/qwen3.8-omni-flash",
@@ -1519,6 +1527,10 @@
     {
       "id": "tencent/hy3",
       "name": "Hy3"
+    },
+    {
+      "id": "tencent/hy4-preview",
+      "name": "Tencent: Hy4 preview"
     },
     {
       "id": "thinkingmachines/inkling",
