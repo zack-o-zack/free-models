@@ -1538,7 +1538,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -2724,7 +2724,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -2881,7 +2881,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -4011,7 +4011,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -4919,7 +4919,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Gemini"
         },
@@ -5950,7 +5950,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Gemini"
         },
@@ -6020,7 +6020,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Gemini"
         },
@@ -6602,7 +6602,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -9241,7 +9241,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -9303,7 +9303,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -9365,7 +9365,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -9502,7 +9502,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Other"
         },
@@ -11898,7 +11898,7 @@
           "instruct_type": null,
           "modality": "text->speech",
           "output_modalities": [
-            "speech"
+            "audio"
           ],
           "tokenizer": "Mistral"
         },

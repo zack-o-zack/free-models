@@ -68,4 +68,53 @@ describe("canonical model names", () => {
       },
     });
   });
+
+  test("normalizes speech output and input modalities to audio", () => {
+    expect(
+      normalizeCanonicalMetadata({
+        architecture: {
+          input_modalities: ["text", "speech"],
+          output_modalities: ["speech"],
+        },
+      }),
+    ).toEqual({
+      architecture: {
+        input_modalities: ["text", "audio"],
+        output_modalities: ["audio"],
+      },
+    });
+
+    expect(
+      normalizeCanonicalMetadata({
+        architecture: {
+          input_modalities: ["text"],
+          output_modalities: ["audio", "speech"],
+        },
+      }),
+    ).toEqual({
+      architecture: {
+        input_modalities: ["text"],
+        output_modalities: ["audio"],
+      },
+    });
+
+    expect(
+      canonicalModelWithGeneratedFields(
+        { id: "hexgrad/kokoro-82m", name: "Kokoro 82M" },
+        {
+          architecture: {
+            input_modalities: ["text"],
+            output_modalities: ["speech"],
+          },
+        },
+      ),
+    ).toEqual({
+      id: "hexgrad/kokoro-82m",
+      name: "Kokoro 82M",
+      architecture: {
+        input_modalities: ["text"],
+        output_modalities: ["audio"],
+      },
+    });
+  });
 });
