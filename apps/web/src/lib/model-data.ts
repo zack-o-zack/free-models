@@ -102,6 +102,12 @@ function humanizeAuthor(id: string, name?: string): string {
   return publisher.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
+function normalizeModality(modality: string): string {
+  if (modality === "embedding") return "embeddings";
+  if (modality === "speech") return "audio";
+  return modality;
+}
+
 function toModelSummary(model: RawModel): ModelSummary {
   const supportedParameters = model.supported_parameters ?? [];
   const providerEntries = Object.entries(model.providers);
@@ -130,8 +136,12 @@ function toModelSummary(model: RawModel): ModelSummary {
       "No description available yet.",
     contextLength: model.context_length ?? 0,
     created: model.created ?? null,
-    inputModalities: model.architecture?.input_modalities ?? [],
-    outputModalities: model.architecture?.output_modalities ?? [],
+    inputModalities: [
+      ...new Set((model.architecture?.input_modalities ?? []).map(normalizeModality)),
+    ],
+    outputModalities: [
+      ...new Set((model.architecture?.output_modalities ?? []).map(normalizeModality)),
+    ],
     providers: providerEntries.map(([provider]) => provider),
     providerNames: Object.fromEntries(
       providerEntries

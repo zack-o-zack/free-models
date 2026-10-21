@@ -24,10 +24,23 @@ export function normalizeCanonicalMetadata(
     !Array.isArray(result.architecture)
   ) {
     const arch = { ...(result.architecture as Record<string, JsonValue>) };
+    if (Array.isArray(arch.input_modalities)) {
+      arch.input_modalities = [
+        ...new Set(
+          arch.input_modalities.map((modality) => (modality === "speech" ? "audio" : modality)),
+        ),
+      ];
+    }
     if (Array.isArray(arch.output_modalities)) {
-      arch.output_modalities = arch.output_modalities.map((modality) =>
-        modality === "embedding" ? "embeddings" : modality,
-      );
+      arch.output_modalities = [
+        ...new Set(
+          arch.output_modalities.map((modality) => {
+            if (modality === "embedding") return "embeddings";
+            if (modality === "speech") return "audio";
+            return modality;
+          }),
+        ),
+      ];
     }
     result.architecture = arch;
   }
