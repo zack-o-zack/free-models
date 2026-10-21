@@ -598,6 +598,44 @@
       }
     },
     {
+      "model_id": "rerank-v5.0-fast",
+      "name": "Rerank v5.0 fast",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
+      "model_id": "rerank-v5.0-pro",
+      "name": "Rerank v5.0 pro",
+      "connection": {
+        "auth": {
+          "env": [
+            "COHERE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cohere.com/v1",
+        "protocol": "cohere"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min",
+          "1k req / month"
+        ]
+      }
+    },
+    {
       "model_id": "tiny-aya-earth",
       "name": "Tiny aya earth",
       "connection": {

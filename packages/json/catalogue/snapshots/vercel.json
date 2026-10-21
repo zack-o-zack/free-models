@@ -1470,6 +1470,25 @@
       }
     },
     {
+      "model_id": "inception/mercury-3",
+      "name": "Mercury 3",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "inception/mercury-coder-small",
       "name": "Mercury Coder Small Beta",
       "connection": {
@@ -2087,6 +2106,25 @@
       }
     },
     {
+      "model_id": "minimax/minimax-m3.1-flash",
+      "name": "MiniMax-M3.1-Flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free — no credits used"
+        ],
+        "funding": "no_credits"
+      }
+    },
+    {
       "model_id": "mistral/codestral",
       "name": "Mistral Codestral",
       "connection": {
@@ -2270,6 +2308,66 @@
         },
         "base_url": "https://ai-gateway.vercel.sh/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "mistral/voxtral-mini-transcribe-3",
+      "name": "Voxtral Mini Transcribe 3",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "transcription",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "mistral/voxtral-mini-tts-3",
+      "name": "Voxtral TTS 3",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "mistral/voxtral-small-transcribe-3",
+      "name": "Voxtral Small Transcribe 3",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "transcription",
+        "protocol": "vercel-ai-gateway"
       },
       "limits": {
         "terms": [
@@ -3804,6 +3902,44 @@
       }
     },
     {
+      "model_id": "scaledown/scaledown-extract-1",
+      "name": "Extract-1",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "scaledown/scaledown-summarize-1",
+      "name": "Summarize-1",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "spacexai/grok-4.1-fast-non-reasoning",
       "name": "Grok 4.1 Fast Non-Reasoning",
       "connection": {
@@ -3938,25 +4074,6 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
-      }
-    },
-    {
-      "model_id": "stealth/cat-jam",
-      "name": "Cat Jam",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free — no credits used"
-        ],
-        "funding": "no_credits"
       }
     },
     {

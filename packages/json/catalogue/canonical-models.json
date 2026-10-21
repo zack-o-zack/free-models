@@ -153,6 +153,10 @@
       "name": "Canopy Labs: Orpheus 3B"
     },
     {
+      "id": "cloudflare/clairic",
+      "name": "Cloudflare: Clairic"
+    },
+    {
       "id": "cloudflare/clef",
       "name": "Cloudflare: Clef"
     },
@@ -287,6 +291,14 @@
     {
       "id": "cohere/rerank-v3.5",
       "name": "Cohere: Rerank V3.5"
+    },
+    {
+      "id": "cohere/rerank-v5.0-fast",
+      "name": "Cohere Rerank v5.0 Fast"
+    },
+    {
+      "id": "cohere/rerank-v5.0-pro",
+      "name": "Cohere Rerank v5.0 Pro"
     },
     {
       "id": "cohere/tiny-aya-earth",
@@ -553,6 +565,10 @@
       "name": "Mercury 2.5"
     },
     {
+      "id": "inception/mercury-3",
+      "name": "Mercury 3"
+    },
+    {
       "id": "inception/mercury-coder-small",
       "name": "Mercury Coder Small Beta"
     },
@@ -595,6 +611,10 @@
     {
       "id": "interfaze/interfaze-beta",
       "name": "Interfaze Beta"
+    },
+    {
+      "id": "ipd/rfd4-proteina",
+      "name": "rfd4-proteina"
     },
     {
       "id": "leonardo/lucid-origin",
@@ -777,6 +797,10 @@
       "name": "MiniMax: MiniMax M3"
     },
     {
+      "id": "minimax/minimax-m3.1-flash",
+      "name": "MiniMax: MiniMax M3.1 Flash"
+    },
+    {
       "id": "mistralai/codestral-2508",
       "name": "Mistral: Codestral 2508"
     },
@@ -881,12 +905,28 @@
       "name": "Mistral: Voxtral Mini Transcribe"
     },
     {
+      "id": "mistralai/voxtral-mini-transcribe-3",
+      "name": "Mistral: Voxtral Mini Transcribe 3"
+    },
+    {
+      "id": "mistralai/voxtral-mini-transcribe-realtime-3",
+      "name": "Mistral: Voxtral Mini Transcribe Realtime 3"
+    },
+    {
       "id": "mistralai/voxtral-mini-tts-2603",
       "name": "Mistral: Voxtral Mini TTS"
     },
     {
+      "id": "mistralai/voxtral-mini-tts-3",
+      "name": "Mistral: Voxtral Mini TTS 3"
+    },
+    {
       "id": "mistralai/voxtral-small-24b-2507",
       "name": "Mistral: Voxtral Small 24B 2507"
+    },
+    {
+      "id": "mistralai/voxtral-small-transcribe-3",
+      "name": "Mistral: Voxtral Small Transcribe 3"
     },
     {
       "id": "mixedbread/toast-1",
@@ -999,6 +1039,18 @@
     {
       "id": "nvidia/magpie-tts-zeroshot",
       "name": "NVIDIA: Magpie TTS Zeroshot"
+    },
+    {
+      "id": "nvidia/nemotron-3_5-embed-1b",
+      "name": "nemotron-3.5-embed-1b"
+    },
+    {
+      "id": "nvidia/nemotron-3_5-embed-8b",
+      "name": "nemotron-3.5-embed-8b"
+    },
+    {
+      "id": "nvidia/nemotron-3_5-rerank-8b",
+      "name": "nemotron-3.5-rerank-8b"
     },
     {
       "id": "nvidia/nemotron-3-embed-1b",
@@ -1237,6 +1289,10 @@
       "name": "OpenAI: Whisper Large V3 Turbo"
     },
     {
+      "id": "ornith/ornith-1.5-122b",
+      "name": "Ornith: Ornith 1.5 122B"
+    },
+    {
       "id": "parallel/search",
       "name": "Parallel Web Search"
     },
@@ -1467,6 +1523,14 @@
     {
       "id": "scaledown/classify-1",
       "name": "ScaleDown: Classify-1"
+    },
+    {
+      "id": "scaledown/extract-1",
+      "name": "ScaleDown: Extract-1"
+    },
+    {
+      "id": "scaledown/summarize-1",
+      "name": "ScaleDown: Summarize-1"
     },
     {
       "id": "stealth:big-pickle",

@@ -34,6 +34,26 @@ ${header}
   expect(offers[0]?.limits.terms.length).toBeGreaterThan(0);
 });
 
+test("discovers free models inside blockquoted tables", () => {
+  const markdown = `> ## Documentation Index
+>
+> **Other Pricing**
+>
+> ### Text Models
+>
+> | Model | Input | Cached Input | Cached Input Storage | Output |
+> | :- | :- | :- | :- | :- |
+> | GLM-4.7-Flash | Free | Free | Free | Free |
+> | GLM-4.5-Flash | Free | Free | Free | Free |
+>
+> ### Vision Models
+>
+> | Model | Input | Cached Input | Cached Input Storage | Output |
+> | :- | :- | :- | :- | :- |
+> | GLM-4.6V-Flash | Free | Free | Free | Free |`;
+  expect(parseZaiPricing(markdown)).toEqual(["GLM-4.5-Flash", "GLM-4.6V-Flash", "GLM-4.7-Flash"]);
+});
+
 test("returns no offers when all documented models become paid", () => {
   expect(parseZaiPricing(`${header}\n| GLM-4.7-Flash | $1 | $1 | Free | $1 |`)).toEqual([]);
 });

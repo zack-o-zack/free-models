@@ -42,10 +42,18 @@
     "voxtral-mini-latest": "mistralai/voxtral-mini-2602",
     "voxtral-mini-realtime-2602": "mistralai/voxtral-mini-transcribe",
     "voxtral-mini-realtime-latest": "mistralai/voxtral-mini-transcribe",
+    "voxtral-mini-transcribe-3": "mistralai/voxtral-mini-transcribe-3",
+    "voxtral-mini-transcribe-3-0": "mistralai/voxtral-mini-transcribe-3",
     "voxtral-mini-transcribe-realtime-2602": "mistralai/voxtral-mini-transcribe",
+    "voxtral-mini-transcribe-realtime-3": "mistralai/voxtral-mini-transcribe-realtime-3",
+    "voxtral-mini-transcribe-realtime-3-0": "mistralai/voxtral-mini-transcribe-realtime-3",
     "voxtral-mini-tts-2603": "mistralai/voxtral-mini-tts-2603",
+    "voxtral-mini-tts-3": "mistralai/voxtral-mini-tts-3",
+    "voxtral-mini-tts-3-0": "mistralai/voxtral-mini-tts-3",
     "voxtral-mini-tts-latest": "mistralai/voxtral-mini-tts-2603",
     "voxtral-small-2507": "mistralai/voxtral-small-24b-2507",
-    "voxtral-small-latest": "mistralai/voxtral-small-24b-2507"
+    "voxtral-small-latest": "mistralai/voxtral-small-24b-2507",
+    "voxtral-small-transcribe-3": "mistralai/voxtral-small-transcribe-3",
+    "voxtral-small-transcribe-3-0": "mistralai/voxtral-small-transcribe-3"
   }
 }
