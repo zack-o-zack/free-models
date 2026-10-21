@@ -11,6 +11,7 @@ export interface CataloguePaths {
   readonly snapshotsDirectory: string;
   readonly unresolved: string;
   readonly publicCatalogue: string;
+  readonly changelog: string;
   mapping(providerId: string): string;
   snapshot(providerId: string): string;
 }
@@ -29,6 +30,7 @@ export function cataloguePaths(workspace: string): CataloguePaths {
     snapshotsDirectory,
     unresolved: join(dataDirectory, "unresolved.json"),
     publicCatalogue: join(absoluteWorkspace, "free-models.json"),
+    changelog: join(dataDirectory, "changelog.json"),
     mapping: (providerId) => join(mappingsDirectory, `${providerId}.json`),
     snapshot: (providerId) => join(snapshotsDirectory, `${providerId}.json`),
   };

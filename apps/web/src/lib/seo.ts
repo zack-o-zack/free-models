@@ -202,3 +202,23 @@ export function entityJsonLd(entity: CatalogueEntity, kind: EntityKind) {
     },
   };
 }
+
+export function changelogJsonLd() {
+  const url = absoluteUrl("/changelog");
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Catalogue Changes",
+    description:
+      "Track free model additions and removals across all supported providers over the past 30 days.",
+    url,
+    isPartOf: { "@id": absoluteUrl("/#website") },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+        { "@type": "ListItem", position: 2, name: "Changelog", item: url },
+      ],
+    },
+  };
+}

@@ -14,6 +14,7 @@ import {
 const links = [
   { href: "/providers", label: "Providers" },
   { href: "/publishers", label: "Publishers" },
+  { href: "/changelog", label: "Changelog" },
 ];
 
 export function CatalogueNavigation() {

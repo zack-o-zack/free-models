@@ -190,7 +190,8 @@ export function assertContentParity(page: Awaited<ReturnType<typeof readPage>>, 
   const equal = (actual: unknown, expected: unknown, message: string) =>
     assert.deepEqual(actual, expected, `${file}: ${message}`);
   const isModel = file.startsWith("models/");
-  const isDirectory = file === "providers.html" || file === "publishers.html";
+  const isDirectory =
+    file === "providers.html" || file === "publishers.html" || file === "changelog.html";
   const canonical = page.canonicals[0];
   equal(page.h1Count, 1, "expected one visible main heading");
   equal(page.descriptionCount, 1, "expected one visible page description");

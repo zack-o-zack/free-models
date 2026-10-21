@@ -10,6 +10,7 @@
     "catalogue:refresh": "bun run src/cli.ts refresh",
     "catalogue:render": "bun run src/cli.ts render",
     "catalogue:check": "bun run src/cli.ts check",
+    "catalogue:changelog": "bun run src/cli.ts changelog",
     "typecheck": "tsc --noEmit",
     "test": "bun test"
   },
