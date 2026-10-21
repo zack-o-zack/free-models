@@ -10,6 +10,7 @@ import { MistralProvider } from "./mistral.ts";
 import { NousProvider } from "./nous.ts";
 import { NovitaProvider } from "./novita.ts";
 import { NvidiaProvider } from "./nvidia.ts";
+import { OnomeoProvider } from "./onomeo.ts";
 import { OpenCodeProvider } from "./opencode.ts";
 import { OpenRouterProvider } from "./openrouter.ts";
 import { defineProviderRegistry } from "./provider.ts";
@@ -41,6 +42,7 @@ export const providerRegistry = defineProviderRegistry(
   new NovitaProvider(),
   new VercelProvider(),
   new NousProvider(),
+  new OnomeoProvider(),
 );
 
 export const metadataProvider = openRouterProvider;

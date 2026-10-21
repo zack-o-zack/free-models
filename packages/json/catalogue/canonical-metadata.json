@@ -18547,6 +18547,135 @@
       }
     },
     {
+      "id": "qwen/qwen3.5-397b-a17b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "video"
+          ],
+          "instruct_type": null,
+          "modality": "text+image+video->text",
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Qwen3"
+        },
+        "benchmarks": {
+          "artificial_analysis": {
+            "agentic_index": null,
+            "coding_index": null,
+            "intelligence_index": 21.4
+          },
+          "design_arena": [
+            {
+              "arena": "models",
+              "category": "3d",
+              "elo": 1161,
+              "rank": 65,
+              "win_rate": 56.7
+            },
+            {
+              "arena": "models",
+              "category": "codecategories",
+              "elo": 1181,
+              "rank": 66,
+              "win_rate": 52.6
+            },
+            {
+              "arena": "models",
+              "category": "dataviz",
+              "elo": 1175,
+              "rank": 68,
+              "win_rate": 53.2
+            },
+            {
+              "arena": "models",
+              "category": "gamedev",
+              "elo": 1141,
+              "rank": 78,
+              "win_rate": 50.2
+            },
+            {
+              "arena": "models",
+              "category": "svg",
+              "elo": 1139,
+              "rank": 50,
+              "win_rate": 56.1
+            },
+            {
+              "arena": "models",
+              "category": "uicomponent",
+              "elo": 1163,
+              "rank": 75,
+              "win_rate": 51.4
+            },
+            {
+              "arena": "models",
+              "category": "website",
+              "elo": 1192,
+              "rank": 69,
+              "win_rate": 52.5
+            }
+          ]
+        },
+        "canonical_slug": "qwen/qwen3.5-397b-a17b-20260216",
+        "context_length": 262144,
+        "created": 1771223018,
+        "default_parameters": {
+          "frequency_penalty": null,
+          "presence_penalty": null,
+          "repetition_penalty": null,
+          "temperature": 0.6,
+          "top_k": 20,
+          "top_p": 0.95
+        },
+        "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
+        "expiration_date": null,
+        "hugging_face_id": "Qwen/Qwen3.5-397B-A17B",
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/qwen/qwen3.5-397b-a17b-20260216/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.00000234",
+          "prompt": "0.00000039"
+        },
+        "reasoning": {
+          "mandatory": false
+        },
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "logit_bias",
+          "logprobs",
+          "max_tokens",
+          "min_p",
+          "presence_penalty",
+          "reasoning",
+          "repetition_penalty",
+          "response_format",
+          "seed",
+          "stop",
+          "structured_outputs",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_k",
+          "top_logprobs",
+          "top_p"
+        ],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 262144,
+          "is_moderated": false,
+          "max_completion_tokens": 65536
+        }
+      }
+    },
+    {
       "id": "qwen/qwen3.5-flash",
       "metadata": {
         "architecture": {
@@ -20403,6 +20532,92 @@
           "context_length": 262144,
           "is_moderated": false,
           "max_completion_tokens": 128000
+        }
+      }
+    },
+    {
+      "id": "tencent/hy4-preview",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->text",
+          "output_modalities": [
+            "text"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "tencent/hy4-preview-20260827",
+        "context_length": 1048576,
+        "created": 1787897375,
+        "default_parameters": {},
+        "description": "Tencent: Hy4 preview is a mixture-of-experts model from Tencent, with 49B active parameters out of 770B total. It is designed for coding agents, complex tool-use workflows, and productivity tasks that...",
+        "expiration_date": null,
+        "hugging_face_id": "tencent/Hy4-preview",
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/tencent/hy4-preview-20260827/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0.000002501",
+          "input_cache_read": "0.000000042",
+          "overrides": [
+            {
+              "completion": "0.000002501",
+              "input_cache_read": "0.000000042",
+              "prompt": "0.000000834",
+              "utc_end": 1600,
+              "utc_start": 0
+            },
+            {
+              "completion": "0.0000022509",
+              "input_cache_read": "0.0000000378",
+              "prompt": "0.0000007506",
+              "utc_end": 0,
+              "utc_start": 1600
+            }
+          ],
+          "prompt": "0.000000834"
+        },
+        "reasoning": {
+          "default_effort": "high",
+          "default_enabled": true,
+          "mandatory": false,
+          "supported_efforts": [
+            "high",
+            "low",
+            "none"
+          ]
+        },
+        "supported_parameters": [
+          "frequency_penalty",
+          "include_reasoning",
+          "logit_bias",
+          "max_completion_tokens",
+          "max_tokens",
+          "min_p",
+          "presence_penalty",
+          "reasoning",
+          "reasoning_effort",
+          "repetition_penalty",
+          "response_format",
+          "seed",
+          "stop",
+          "structured_outputs",
+          "temperature",
+          "tool_choice",
+          "tools",
+          "top_k",
+          "top_p"
+        ],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 1048576,
+          "is_moderated": false,
+          "max_completion_tokens": 64000
         }
       }
     },
