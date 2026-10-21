@@ -390,14 +390,3 @@
 .requestFlow[data-paused="true"] .clientCycle {
   animation-play-state: paused;
 }
-
-@media (max-width: 767px) {
-  .flowPacket,
-  .logoHit,
-  .clientCycle {
-    animation: none;
-  }
-  .flowPacket {
-    stroke-dashoffset: 0.5;
-  }
-}
