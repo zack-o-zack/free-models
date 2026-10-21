@@ -41,7 +41,7 @@ export function parseZaiPricing(markdown: string): string[] {
   const seen = new Set<string>();
   const freeModels: string[] = [];
   for (const line of markdown.split(/\r?\n/)) {
-    const trimmed = line.trim();
+    const trimmed = line.trim().replace(/^(?:>\s*)+/, "");
     if (!trimmed.startsWith("|")) {
       inPricingTable = false;
       continue;

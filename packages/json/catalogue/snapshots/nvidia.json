@@ -85,6 +85,25 @@
       }
     },
     {
+      "model_id": "ipd/rfd4-proteina",
+      "name": "rfd4-proteina",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
       "model_id": "meta/llama-3.2-11b-vision-instruct",
       "name": "llama-3.2-11b-vision-instruct",
       "connection": {
@@ -446,25 +465,6 @@
       }
     },
     {
-      "model_id": "nvidia/nemotron-3-super-120b-a12b",
-      "name": "nemotron-3-super-120b-a12b",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      }
-    },
-    {
       "model_id": "nvidia/nemotron-3-ultra-550b-a55b",
       "name": "nemotron-3-ultra-550b-a55b",
       "connection": {
@@ -524,6 +524,63 @@
     {
       "model_id": "nvidia/nemotron-3.5-super-vl-120b-a12b",
       "name": "nemotron-3.5-super-vl-120b-a12b",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3_5-embed-1b",
+      "name": "nemotron-3.5-embed-1b",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3_5-embed-8b",
+      "name": "nemotron-3.5-embed-8b",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3_5-rerank-8b",
+      "name": "nemotron-3.5-rerank-8b",
       "connection": {
         "auth": {
           "env": [

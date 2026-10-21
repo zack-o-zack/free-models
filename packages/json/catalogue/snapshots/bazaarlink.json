@@ -26,7 +26,30 @@
           "60 weighted units / day (no credit)",
           "20 req / min (with credit)",
           "120 weighted units / day (with credit)",
-          "15 req / min (site-wide)",
+          "20 req / min (site-wide)",
+          "2 concurrent req / account"
+        ]
+      }
+    },
+    {
+      "model_id": "nvidia/nemotron-3.5-lightning-free:free",
+      "name": "Nemotron 3.5 Lightning Free (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "BAZAARLINK_API_KEY"
+          ]
+        },
+        "base_url": "https://api.bazaarlink.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min (no credit)",
+          "60 weighted units / day (no credit)",
+          "20 req / min (with credit)",
+          "120 weighted units / day (with credit)",
+          "20 req / min (site-wide)",
           "2 concurrent req / account"
         ]
       }
@@ -49,7 +72,76 @@
           "60 weighted units / day (no credit)",
           "20 req / min (with credit)",
           "120 weighted units / day (with credit)",
-          "15 req / min (site-wide)",
+          "20 req / min (site-wide)",
+          "2 concurrent req / account"
+        ]
+      }
+    },
+    {
+      "model_id": "reflection/beam-free:free",
+      "name": "Beam Free (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "BAZAARLINK_API_KEY"
+          ]
+        },
+        "base_url": "https://api.bazaarlink.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min (no credit)",
+          "60 weighted units / day (no credit)",
+          "20 req / min (with credit)",
+          "120 weighted units / day (with credit)",
+          "20 req / min (site-wide)",
+          "2 concurrent req / account"
+        ]
+      }
+    },
+    {
+      "model_id": "reflection/beam:free",
+      "name": "Beam (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "BAZAARLINK_API_KEY"
+          ]
+        },
+        "base_url": "https://api.bazaarlink.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min (no credit)",
+          "60 weighted units / day (no credit)",
+          "20 req / min (with credit)",
+          "120 weighted units / day (with credit)",
+          "20 req / min (site-wide)",
+          "2 concurrent req / account"
+        ]
+      }
+    },
+    {
+      "model_id": "stealth/glyph-cluster:free",
+      "name": "Glyph Cluster (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "BAZAARLINK_API_KEY"
+          ]
+        },
+        "base_url": "https://api.bazaarlink.ai/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "10 req / min (no credit)",
+          "60 weighted units / day (no credit)",
+          "20 req / min (with credit)",
+          "120 weighted units / day (with credit)",
+          "20 req / min (site-wide)",
           "2 concurrent req / account"
         ]
       }

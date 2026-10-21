@@ -3,6 +3,7 @@
   "mappings": {
     "meituan/longcat-2.0:free": "meituan/longcat-2.0",
     "meituan/longcat-2.5-preview:free": "meituan/longcat-2.5-preview",
+    "ornith/ornith-1.5-122b:free": "ornith/ornith-1.5-122b",
     "poolside/laguna-s-2.1:free": "poolside/laguna-s-2.1",
     "poolside/laguna-xs-2.1:free": "poolside/laguna-xs-2.1",
     "reflection/beam-1.0-501b-a23b:free": "reflection/beam-1.0-501b-a23b",

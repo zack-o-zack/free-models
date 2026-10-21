@@ -12,6 +12,7 @@
     "@cf/black-forest-labs/flux-2-dev": "black-forest-labs/flux.2-dev",
     "@cf/black-forest-labs/flux-2-klein-4b": "black-forest-labs/flux.2-klein-4b",
     "@cf/black-forest-labs/flux-2-klein-9b": "black-forest-labs/flux.2-klein-9b",
+    "@cf/cloudflare/clairic": "cloudflare/clairic",
     "@cf/cloudflare/clef": "cloudflare/clef",
     "@cf/cloudflare/clef-flash": "cloudflare/clef-flash",
     "@cf/cloudflare/clef-omni": "cloudflare/clef-omni",
