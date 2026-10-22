@@ -5,6 +5,7 @@
     "big-pickle": "stealth:big-pickle",
     "cat-jam-free": "stealth:cat-jam",
     "deepseek-v4.1-flash-free": "deepseek/deepseek-v4.1-flash",
+    "flint-40b-free": "recursive/flint-v1.0",
     "glm-5.3-flash-free": "z-ai/glm-5.3-flash",
     "jev-1.13-free": "typesafe/jev-1.13",
     "ling-3.0-flash-fin-free": "inclusionai/ling-3.0-flash-fin",

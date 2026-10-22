@@ -19,6 +19,7 @@
     "nvidia/nemotron-3.5-super-vl:free": "nvidia/nemotron-3.5-super-vl",
     "poolside/laguna-s-2.1:free": "poolside/laguna-s-2.1",
     "poolside/laguna-xs-2.1:free": "poolside/laguna-xs-2.1",
+    "recursive/flint-v1.0:free": "recursive/flint-v1.0",
     "reflection/beam-free": "reflection/beam-1.0-501b-a23b",
     "stealth/glyph-cluster": "stealth:glyph-cluster",
     "stepfun/step-3.7-flash:free": "stepfun/step-3.7-flash",

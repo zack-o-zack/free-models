@@ -225,6 +225,24 @@
       }
     },
     {
+      "model_id": "recursive/flint-v1.0:free",
+      "name": "Recursive: Flint (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "KILO_API_KEY"
+          ]
+        },
+        "base_url": "https://api.kilo.ai/api/gateway",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / hour"
+        ]
+      }
+    },
+    {
       "model_id": "reflection/beam-free",
       "name": "Reflection: Beam 1.0 (free)",
       "connection": {
