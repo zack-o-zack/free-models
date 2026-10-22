@@ -9,48 +9,6 @@
   },
   "offers": [
     {
-      "model_id": "DeepSeek-V4-Flash-0731",
-      "name": "Deepseek v4 flash 0731",
-      "connection": {
-        "auth": {
-          "env": [
-            "LLM7_API_KEY"
-          ]
-        },
-        "base_url": "https://api.llm7.io/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "1 req / sec",
-          "60 req / min",
-          "250 req / hour",
-          "100k tok / day"
-        ]
-      }
-    },
-    {
-      "model_id": "GLM-5.3-Flash",
-      "name": "Glm 5.3 flash",
-      "connection": {
-        "auth": {
-          "env": [
-            "LLM7_API_KEY"
-          ]
-        },
-        "base_url": "https://api.llm7.io/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "1 req / sec",
-          "60 req / min",
-          "250 req / hour",
-          "100k tok / day"
-        ]
-      }
-    },
-    {
       "model_id": "codestral-latest",
       "name": "Codestral latest",
       "connection": {

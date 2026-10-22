@@ -2,8 +2,8 @@
   "provider": "onomeo",
   "name": "Onomeo",
   "doc": {
-    "overview": "https://onomeo.com",
     "models": "https://onomeo.com/models",
+    "overview": "https://onomeo.com",
     "pricing": "https://onomeo.com/models#pricing",
     "rate_limit": "https://onomeo.com/integrations#billing"
   },
@@ -12,13 +12,13 @@
       "model_id": "codestral-latest",
       "name": "Codestral latest",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -31,32 +31,13 @@
       "model_id": "deepseek-v4-flash",
       "name": "Deepseek v4 flash",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      }
-    },
-    {
-      "model_id": "deepseek-v4-pro",
-      "name": "Deepseek v4 pro",
-      "connection": {
+        },
         "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        }
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -69,13 +50,13 @@
       "model_id": "gemini-3.1-flash-lite",
       "name": "Gemini 3.1 flash lite",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -88,13 +69,13 @@
       "model_id": "gemini-3.5-flash",
       "name": "Gemini 3.5 flash",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -107,13 +88,13 @@
       "model_id": "gemini-3.5-flash-lite",
       "name": "Gemini 3.5 flash lite",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -126,13 +107,51 @@
       "model_id": "gemini-3.6-flash",
       "name": "Gemini 3.6 flash",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      }
+    },
+    {
+      "model_id": "gemini-3.7-flash",
+      "name": "Gemini 3.7 flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      }
+    },
+    {
+      "model_id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -145,13 +164,13 @@
       "model_id": "glm-4.5-flash",
       "name": "Glm 4.5 flash",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -164,13 +183,13 @@
       "model_id": "glm-4.6v-flash",
       "name": "Glm 4.6v flash",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -183,13 +202,13 @@
       "model_id": "glm-4.7-flash",
       "name": "Glm 4.7 flash",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -202,13 +221,13 @@
       "model_id": "glm-5.2",
       "name": "Glm 5.2",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -221,13 +240,13 @@
       "model_id": "glm-5.3-flash",
       "name": "Glm 5.3 flash",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -240,13 +259,13 @@
       "model_id": "gpt-oss-20b",
       "name": "Gpt oss 20b",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -259,13 +278,32 @@
       "model_id": "hy4-preview",
       "name": "Hy4 preview",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      }
+    },
+    {
+      "model_id": "minimax-m2.7",
+      "name": "Minimax m2.7",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -278,13 +316,13 @@
       "model_id": "ministral-14b-latest",
       "name": "Ministral 14b latest",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -297,32 +335,13 @@
       "model_id": "muse-glimmer-30b",
       "name": "Muse glimmer 30b",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      }
-    },
-    {
-      "model_id": "qwen3.5-397b-a17b",
-      "name": "Qwen3.5 397b a17b",
-      "connection": {
+        },
         "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        }
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -335,13 +354,13 @@
       "model_id": "qwen3.8-27b",
       "name": "Qwen3.8 27b",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -354,13 +373,13 @@
       "model_id": "qwen3.8-flash-next",
       "name": "Qwen3.8 flash next",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
@@ -373,13 +392,13 @@
       "model_id": "stealth/glyph-cluster",
       "name": "Stealth: Glyph cluster",
       "connection": {
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai",
         "auth": {
           "env": [
             "ONOMEO_API_KEY"
           ]
-        }
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
       },
       "limits": {
         "terms": [
