@@ -2,8 +2,7 @@ export const siteConfig = {
   name: "Free Models",
   headline: { first: "Free AI", second: "models", punctuation: "." },
   tagline: "Zero-cost LLM APIs.",
-  description:
-    "Compare 400+ free AI models and zero-cost LLM APIs across 19 providers. Filter by context window, tool calling, reasoning, modalities, and live benchmarks.",
+  description: "Compare 400+ free AI models and zero-cost LLM APIs across 19 providers.",
   socialPrice: "$0",
   googleSiteVerification: "C1iHXHIalDzkGaPUat_pdY5RDNQrPiAiNjYTYUQp8to",
   links: {

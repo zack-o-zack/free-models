@@ -315,8 +315,7 @@ export function ModelExplorer({
           </h2>
           <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg">
             Search zero-cost AI models by name or filter by context window, input modality (text,
-            image, audio, PDF, video, embeddings), reasoning, or tool calling. Open any model to
-            compare free API providers, rate limits, and benchmark scores.
+            image, audio, PDF, video, embeddings), reasoning, or tool calling.
           </p>
         </div>
 
