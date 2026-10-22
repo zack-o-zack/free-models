@@ -104,7 +104,7 @@ export function HeroTypographicBroadsheet({ models }: HeroProps) {
                 href="#models"
                 className={`${styles.browse} inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-base font-semibold text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring`}
               >
-                Find your model <ArrowDown size={18} aria-hidden="true" />
+                Browse free AI models <ArrowDown size={18} aria-hidden="true" />
               </a>
             </div>
           </div>

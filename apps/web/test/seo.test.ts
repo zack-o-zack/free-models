@@ -21,15 +21,25 @@ describe("SEO catalogue boundaries", () => {
     expect(JSON.parse(serialized)).toEqual(data);
   });
 
-  test("snippets use only the displayed model name and description", () => {
+  test("snippets mention free API specs and stay within the search description limit", () => {
     const description = modelDescription({
       name: "Example",
       description: "No description available yet.",
     });
-    expect(description).toBe("Example. No description available yet.");
-    expect(description).not.toContain("benchmarks");
-    expect(description).not.toContain("context window");
-    expect(description).not.toContain("usage limits");
+    expect(description).toBe("Example — free AI model & API specs. No description available yet.");
+    expect(description).toContain("free AI model & API specs");
+    expect(description.length).toBeLessThanOrEqual(160);
+  });
+
+  test("includes the number of free API providers when available", () => {
+    const description = modelDescription({
+      name: "Example",
+      description: "A compact language model.",
+      providers: ["one", "two"],
+    });
+    expect(description).toBe(
+      "Example — free API access across 2 providers. A compact language model.",
+    );
   });
 
   test("long names and descriptions remain bounded and preserve displayed wording", () => {

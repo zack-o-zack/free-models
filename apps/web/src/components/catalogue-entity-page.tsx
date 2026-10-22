@@ -230,12 +230,14 @@ export function CatalogueEntityPage({
                   id="related-heading"
                   className="font-heading text-3xl font-extrabold tracking-tight sm:text-4xl"
                 >
-                  {isProvider ? "Meet the publishers." : "Find a provider."}
+                  {isProvider
+                    ? `AI Model Publishers on ${entity.name}.`
+                    : `Free API Providers Hosting ${entity.name} Models.`}
                 </h2>
                 <p className="mt-3 max-w-2xl leading-7 text-muted-foreground">
                   {isProvider
-                    ? `The publishers behind models available through ${entity.name}.`
-                    : `These providers offer free access to ${entity.name} models.`}
+                    ? `Explore the AI labs and model publishers with zero-cost endpoints available through ${entity.name}.`
+                    : `Compare the API providers offering free-tier access, rate limits, and endpoints for ${entity.name} models.`}
                 </p>
               </div>
               <Link

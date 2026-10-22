@@ -306,16 +306,17 @@ export function ModelExplorer({
       <div className="container py-14 sm:py-20">
         <div className="mb-10 max-w-2xl">
           <p className="text-sm font-bold tracking-[0.14em] text-positive uppercase">
-            Browse models
+            Free AI Model Catalogue
           </p>
           <h2 className="mt-3 font-heading text-4xl font-extrabold tracking-[-0.05em] [overflow-wrap:anywhere] sm:text-6xl">
             {collection
-              ? `Models ${collection.kind === "providers" ? "on" : "by"} ${collection.name}.`
-              : "Choose a model."}
+              ? `Free AI Models ${collection.kind === "providers" ? "on" : "by"} ${collection.name}.`
+              : "Compare Free LLMs, Vision, Audio & Embedding APIs."}
           </h2>
           <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg">
-            Search by name or filter by what you need. Open a model to see its providers,
-            benchmarks, and API details.
+            Search zero-cost AI models by name or filter by context window, input modality (text,
+            image, audio, PDF, video, embeddings), reasoning, or tool calling. Open any model to
+            compare free API providers, rate limits, and benchmark scores.
           </p>
         </div>
 

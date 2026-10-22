@@ -24,6 +24,7 @@ export function ModelOverview({
     <section
       id="model-hero"
       aria-labelledby="model-title"
+      data-page-provider-count={model.providers.length}
       className="min-w-0 rounded-[24px] bg-foreground p-6 text-background sm:p-8 xl:p-10"
     >
       <div className="min-w-0">
