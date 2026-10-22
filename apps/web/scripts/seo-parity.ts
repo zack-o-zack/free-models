@@ -54,6 +54,7 @@ export async function readPage(html: string) {
     faq: "",
     catalogueTotal: null as number | null,
     catalogueOffset: 0,
+    modelProviderCount: null as number | null,
     h1Count: 0,
     descriptionCount: 0,
     meta: new Map<string, string>(),
@@ -70,6 +71,11 @@ export async function readPage(html: string) {
       element(e) {
         page.catalogueTotal = Number(e.getAttribute("data-catalogue-total"));
         page.catalogueOffset = Number(e.getAttribute("data-catalogue-offset") ?? 0);
+      },
+    })
+    .on("[data-page-provider-count]", {
+      element(e) {
+        page.modelProviderCount = Number(e.getAttribute("data-page-provider-count"));
       },
     })
     .on("html", {
@@ -198,10 +204,21 @@ export function assertContentParity(page: Awaited<ReturnType<typeof readPage>>, 
   check(page.heading && page.description, "missing visible title or description");
   const heading =
     [page.heading, page.subtitle].filter(Boolean).join(" ") +
-    (page.titleContext ? ` — ${page.titleContext}` : "");
-  equal(page.title, `${heading} | ${siteConfig.name}`, "title differs from visible heading");
+    (page.titleContext
+      ? `${/^(providers|publishers)\/[^/]+\.html$/.test(file) ? " – " : " — "}${page.titleContext}`
+      : "");
+  const metadataHeading = isModel ? `${heading} Free API & Benchmarks` : heading;
+  equal(
+    page.title,
+    `${metadataHeading} | ${siteConfig.name}`,
+    "title differs from visible heading",
+  );
   const description = isModel
-    ? modelDescription({ name: page.heading, description: page.description })
+    ? modelDescription({
+        name: page.heading,
+        description: page.description,
+        providers: Array.from({ length: page.modelProviderCount ?? 0 }, (_, index) => `${index}`),
+      })
     : contentSnippet(page.description);
   equal(page.meta.get("description"), description, "description differs from visible content");
   for (const prefix of ["og", "twitter"]) {

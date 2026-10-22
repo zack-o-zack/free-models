@@ -208,9 +208,9 @@ export function changelogJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Catalogue Changes",
+    name: "Free AI Models Changelog",
     description:
-      "Track free model additions and removals across all supported providers over the past 30 days.",
+      "Track daily additions and removals of free AI models and zero-cost LLM APIs across all supported providers over the past 30 days.",
     url,
     isPartOf: { "@id": absoluteUrl("/#website") },
     breadcrumb: {

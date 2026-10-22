@@ -10,8 +10,8 @@ import { changelogJsonLd, pageMetadata } from "@/lib/seo";
 export const dynamic = "force-static";
 
 export const metadata = pageMetadata(
-  "Catalogue Changes",
-  "Track free model additions and removals across all supported providers over the past 30 days.",
+  "Free AI Models Changelog",
+  "Track daily additions and removals of free AI models and zero-cost LLM APIs across all supported providers over the past 30 days.",
   "/changelog",
 );
 
@@ -36,11 +36,11 @@ export default async function ChangelogPage() {
 
             <div>
               <h1 className="font-heading text-3xl font-black tracking-tight sm:text-4xl text-foreground">
-                Catalogue Changes
+                Free AI Models Changelog
               </h1>
               <p data-page-description className="mt-2 text-sm text-muted-foreground sm:text-base">
-                Track free model additions and removals across all supported providers over the past
-                30 days.
+                Track daily additions and removals of free AI models and zero-cost LLM APIs across
+                all supported providers over the past 30 days.
               </p>
             </div>
           </div>

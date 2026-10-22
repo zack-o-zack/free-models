@@ -55,7 +55,10 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-border py-4 text-xs">
-          <p className="leading-5 text-muted-foreground">Free access. Limits vary by provider.</p>
+          <p className="leading-5 text-muted-foreground">
+            © {new Date().getFullYear()} {siteConfig.name}. Directory of free AI models, zero-cost
+            LLM API providers, and live model benchmarks.
+          </p>
           <a
             href="#site-top"
             className="inline-flex min-h-11 items-center gap-2 rounded-lg font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"

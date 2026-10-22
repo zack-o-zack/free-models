@@ -24,9 +24,16 @@ export function contentSnippet(text: string, limit = 160): string {
   return `${shortened.slice(0, lastSpace > limit / 2 ? lastSpace : undefined).trimEnd()}…`;
 }
 
-export function modelDescription(model: Pick<ModelSummary, "name" | "description">): string {
-  const name = contentSnippet(model.name, 65);
-  return `${name}. ${contentSnippet(model.description, 160 - name.length - 2)}`;
+export function modelDescription(
+  model: Pick<ModelSummary, "name" | "description"> & Partial<Pick<ModelSummary, "providers">>,
+): string {
+  const name = contentSnippet(model.name, 55);
+  const providerCount = model.providers?.length ?? 0;
+  const prefix =
+    providerCount > 0
+      ? `${name} — free API access across ${providerCount} ${providerCount === 1 ? "provider" : "providers"}. `
+      : `${name} — free AI model & API specs. `;
+  return `${prefix}${contentSnippet(model.description, Math.max(40, 160 - prefix.length))}`;
 }
 
 export const notFoundContent = {

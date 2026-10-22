@@ -88,7 +88,10 @@ export function getCatalogueEntities(
 
 export function entityDescription(entity: CatalogueEntity, kind: EntityKind): string {
   const count = entity.models.length;
-  return `Explore ${count} free AI ${count === 1 ? "model" : "models"} ${kind === "providers" ? "available through" : "published by"} ${entity.name}.`;
+  const noun = count === 1 ? "model" : "models";
+  return kind === "providers"
+    ? `Explore ${count} free AI ${noun} and zero-cost LLM APIs on ${entity.name}. Compare context windows, reasoning, tool calling, and benchmarks.`
+    : `Explore ${count} free AI ${noun} from ${entity.name} across verified API providers. Compare context windows, reasoning, tool calling, and benchmarks.`;
 }
 
 export function getEntityDocs(entity: CatalogueEntity): Array<{ label: string; url: string }> {
@@ -119,14 +122,14 @@ export function getEntityDocs(entity: CatalogueEntity): Array<{ label: string; u
 
 export const directoryContent = {
   providers: {
-    title: "Find your API provider.",
+    title: "Free AI & LLM API Providers",
     description:
-      "Browse the services offering free model access. Explore their models, capabilities, and API documentation.",
+      "Compare API providers offering free AI model access. Explore their zero-cost LLMs, capabilities, rate limits, and official API documentation.",
   },
   publishers: {
-    title: "Meet the model makers.",
+    title: "AI Model Publishers with Free APIs",
     description:
-      "Explore the organisations behind the models. Find their free models and the providers that make them available.",
+      "Explore the AI labs and organisations behind the models. Find their free-tier AI models, benchmarks, and the API providers hosting them at $0.",
   },
 };
 
@@ -139,9 +142,9 @@ export function entityBreadcrumbs(entity: CatalogueEntity, kind: EntityKind) {
 }
 
 export function entityLabel(kind: EntityKind): string {
-  return kind === "providers" ? "Provider" : "Publisher";
+  return kind === "providers" ? "Free AI Models & API Provider" : "Free AI Models & API Providers";
 }
 
 export function entityTitle(entity: CatalogueEntity, kind: EntityKind): string {
-  return `${entity.name} — ${entityLabel(kind)}`;
+  return `${entity.name} – ${entityLabel(kind)}`;
 }

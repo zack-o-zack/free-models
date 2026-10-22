@@ -22,8 +22,8 @@ export function parseCataloguePage(value: string, total: number): number | null 
 }
 
 export function cataloguePageTitle(page: number): string {
-  return `Free AI Models — Page ${page}`;
+  return `Free AI Models & LLM APIs – Page ${page}`;
 }
 export function cataloguePageDescription(page: number, total: number): string {
-  return `Browse page ${page} of ${cataloguePageCount(total)} in the free AI model catalogue. Compare providers, context windows, and benchmarks.`;
+  return `Browse page ${page} of ${cataloguePageCount(total)} in the free AI model and LLM API directory. Compare $0 providers, context windows, and benchmarks.`;
 }

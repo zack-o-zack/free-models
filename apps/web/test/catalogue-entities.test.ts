@@ -1,6 +1,10 @@
 import { describe, expect, test } from "bun:test";
 import {
+  directoryContent,
+  entityDescription,
   entityHref,
+  entityLabel,
+  entityTitle,
   getCatalogueEntities,
   getEntityDocs,
   sortCatalogueEntities,
@@ -29,6 +33,28 @@ const models = [
 ];
 
 describe("Catalogue entity membership", () => {
+  test("uses AI and API language in directory and entity copy", () => {
+    expect(directoryContent.providers.title).toBe("Free AI & LLM API Providers");
+    expect(directoryContent.publishers.title).toBe("AI Model Publishers with Free APIs");
+    expect(directoryContent.providers.description.length).toBeLessThanOrEqual(160);
+    expect(directoryContent.publishers.description.length).toBeLessThanOrEqual(160);
+
+    const provider = { slug: "cloudflare", name: "Cloudflare", models: [model("a", [])] };
+    const publisher = { slug: "openai", name: "OpenAI", models: [model("a", []), model("b", [])] };
+    expect(entityLabel("providers")).toBe("Free AI Models & API Provider");
+    expect(entityLabel("publishers")).toBe("Free AI Models & API Providers");
+    expect(entityTitle(provider, "providers")).toBe("Cloudflare – Free AI Models & API Provider");
+    expect(entityTitle(publisher, "publishers")).toBe("OpenAI – Free AI Models & API Providers");
+    expect(entityDescription(provider, "providers")).toBe(
+      "Explore 1 free AI model and zero-cost LLM APIs on Cloudflare. Compare context windows, reasoning, tool calling, and benchmarks.",
+    );
+    expect(entityDescription(publisher, "publishers")).toBe(
+      "Explore 2 free AI models from OpenAI across verified API providers. Compare context windows, reasoning, tool calling, and benchmarks.",
+    );
+    expect(entityDescription(provider, "providers").length).toBeLessThanOrEqual(160);
+    expect(entityDescription(publisher, "publishers").length).toBeLessThanOrEqual(160);
+  });
+
   test("counts a model once per provider and uses catalogue display names", () => {
     const host = getCatalogueEntities(models, "providers").find((entity) => entity.slug === "host");
     expect(host?.name).toBe("Live Host");
