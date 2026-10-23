@@ -6,7 +6,6 @@ import {
   Check,
   Copy,
   Database,
-  ExternalLink,
   FileText,
   Image as ImageIcon,
   type LucideIcon,
@@ -23,6 +22,12 @@ import { useMemo, useState } from "react";
 
 import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
 import { ProviderBadge } from "@/components/provider-badge";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -42,6 +47,39 @@ import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
 import { getProviderName } from "@/lib/provider-logos";
 import { cn } from "@/lib/utils";
+
+const faqs = [
+  {
+    id: "what-can-i-compare",
+    question: "What can I compare?",
+    answer:
+      "You can compare available model capabilities, context windows, modalities, reasoning support, tool calling, providers, listed limits, and benchmark scores.",
+  },
+  {
+    id: "are-these-models-free",
+    question: "Are these models completely free?",
+    answer:
+      "The catalogue lists models available through free providers. Availability and usage limits can vary by provider. Check the provider details before relying on a model for ongoing use.",
+  },
+  {
+    id: "what-does-context-window-mean",
+    question: "What does context window mean?",
+    answer:
+      "The context window is the maximum amount of input and conversation history listed for a model. A larger context window does not automatically mean better output quality.",
+  },
+  {
+    id: "what-does-best-mean",
+    question: "What does “best” mean in the comparison?",
+    answer:
+      "The Highlight best option only identifies the highest or lowest numeric value for supported rows. It does not determine which model is best for every task.",
+  },
+  {
+    id: "can-i-share-a-comparison",
+    question: "Can I share a comparison?",
+    answer:
+      "Yes. Selected models are stored in the URL, so you can copy and share the comparison link.",
+  },
+];
 
 function useCompareState(models: ModelSummary[]) {
   const router = useRouter();
@@ -179,7 +217,7 @@ function CompareModelHeader({
   onRemove: (id: string) => void;
 }) {
   return (
-    <div className="min-w-[230px] rounded-[20px] bg-card p-4 sm:min-w-0 sm:p-5">
+    <div className="w-full rounded-[20px] bg-card p-4 sm:p-5">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
@@ -212,28 +250,21 @@ function CompareModelHeader({
         </Button>
       </div>
 
-      <div className="mt-3">
-        {model.providers[0] ? (
-          <ProviderBadge
-            plain
-            size="lg"
-            provider={model.providers[0]}
-            names={model.providerNames}
-            docs={model.providerDocs[model.providers[0]]}
-          />
+      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+        {model.providers.length > 0 ? (
+          model.providers.map((provider) => (
+            <ProviderBadge
+              key={provider}
+              plain
+              provider={provider}
+              names={model.providerNames}
+              docs={model.providerDocs[provider]}
+            />
+          ))
         ) : (
           <span className="text-xs text-muted-foreground">Provider not listed</span>
         )}
       </div>
-
-      <Link
-        href={modelHref(model.id)}
-        prefetch={false}
-        className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-      >
-        View model details
-        <ExternalLink aria-hidden="true" className="size-3.5" />
-      </Link>
     </div>
   );
 }
@@ -390,7 +421,7 @@ function CompareValue({
 
     case "providers":
       return model.providers.length > 0 ? (
-        <div className="space-y-2">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           {model.providers.map((provider) => (
             <ProviderBadge
               key={provider}
@@ -478,12 +509,14 @@ function CompareTable({
     ["access", "Free access"],
   ] as const;
 
+  const modelWidthPercent = `${(100 - 24) / models.length}%`;
+
   return (
     <div className="overflow-hidden rounded-[24px] border border-border">
       <div className="flex items-center gap-1.5 border-b bg-muted/50 px-4 py-3 text-xs text-muted-foreground sm:px-5">
         <MoveHorizontal aria-hidden="true" className="size-3.5 lg:hidden" />
         <span className="lg:hidden">Scroll to compare</span>
-        <span className="hidden ml-auto text-xs text-muted-foreground sm:inline-block">
+        <span className="ml-auto hidden text-xs text-muted-foreground sm:inline-block">
           Scores: Artificial Analysis
         </span>
       </div>
@@ -500,7 +533,11 @@ function CompareTable({
           <colgroup>
             <col className="w-[180px] sm:w-[24%]" />
             {models.map((model) => (
-              <col key={model.id} className="w-[240px] sm:w-auto" />
+              <col
+                key={model.id}
+                style={{ width: modelWidthPercent }}
+                className="w-[240px] sm:w-auto"
+              />
             ))}
           </colgroup>
 
@@ -625,7 +662,7 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
             />
             <label
               htmlFor="compare-highlight-best"
-              className="cursor-pointer text-sm font-medium select-none"
+              className="cursor-pointer select-none text-sm font-medium"
             >
               Highlight best
             </label>
@@ -681,42 +718,6 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
         )}
       </div>
 
-      {/* How to use this comparison */}
-      <section aria-labelledby="compare-how-it-works-heading" className="mt-16 max-w-3xl">
-        <h2
-          id="compare-how-it-works-heading"
-          className="font-heading text-2xl font-extrabold tracking-[-0.035em]"
-        >
-          How to use this comparison
-        </h2>
-
-        <ol className="mt-5 grid gap-4 sm:grid-cols-3">
-          <li className="rounded-[20px] border border-border bg-card p-5">
-            <span className="text-sm font-semibold text-muted-foreground">1</span>
-            <h3 className="mt-3 font-semibold">Choose models</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Add up to four models from the catalogue.
-            </p>
-          </li>
-
-          <li className="rounded-[20px] border border-border bg-card p-5">
-            <span className="text-sm font-semibold text-muted-foreground">2</span>
-            <h3 className="mt-3 font-semibold">Review the differences</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Compare capabilities, context, providers, limits, and available scores.
-            </p>
-          </li>
-
-          <li className="rounded-[20px] border border-border bg-card p-5">
-            <span className="text-sm font-semibold text-muted-foreground">3</span>
-            <h3 className="mt-3 font-semibold">Share your shortlist</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Copy the URL to share the same comparison with someone else.
-            </p>
-          </li>
-        </ol>
-      </section>
-
       {/* Frequently Asked Questions */}
       <section aria-labelledby="compare-faq-heading" className="mt-16 max-w-3xl">
         <h2
@@ -726,63 +727,21 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
           Frequently asked questions
         </h2>
 
-        <div className="mt-6 space-y-6">
-          <div>
-            <h3 className="text-base font-semibold">What can I compare?</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              You can compare available model capabilities, context windows, modalities, reasoning
-              support, tool calling, providers, listed limits, and benchmark scores.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-base font-semibold">Are these models completely free?</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              The catalogue lists models available through free providers. Availability and usage
-              limits can vary by provider. Check the provider details before relying on a model for
-              ongoing use.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-base font-semibold">What does context window mean?</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              The context window is the maximum amount of input and conversation history listed for
-              a model. A larger context window does not automatically mean better output quality.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-base font-semibold">What does “best” mean in the comparison?</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              The Highlight best option only identifies the highest or lowest numeric value for
-              supported rows. It does not determine which model is best for every task.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-base font-semibold">Can I share a comparison?</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Yes. Selected models are stored in the URL, so you can copy and share the comparison
-              link.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Browse all models CTA */}
-      <section className="mt-16 max-w-3xl rounded-[24px] border border-border bg-card p-8 sm:p-10">
-        <h2 className="font-heading text-2xl font-extrabold tracking-[-0.035em]">
-          Browse all models
-        </h2>
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">
-          Explore hundreds of free AI models across top providers in our complete catalogue.
-        </p>
-        <div className="mt-6">
-          <Button render={<Link href="/#models" />} nativeButton={false} className="gap-2">
-            Browse all models
-          </Button>
-        </div>
+        <Accordion
+          keepMounted
+          className="mt-6 rounded-[24px] border border-border bg-card px-5 sm:px-8"
+        >
+          {faqs.map(({ id, question, answer }) => (
+            <AccordionItem key={id} value={id}>
+              <AccordionTrigger className="py-5 font-heading text-base font-bold leading-snug hover:no-underline sm:text-lg">
+                {question}
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-[15px] leading-7 text-muted-foreground sm:text-base">
+                {answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </section>
     </div>
   );
