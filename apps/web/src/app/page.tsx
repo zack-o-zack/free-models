@@ -23,7 +23,7 @@ export default async function Home() {
       <SiteHeader modelCount={models.length} githubStars={githubStars} />
 
       <main id="top" tabIndex={-1}>
-        <HeroTypographicBroadsheet models={models} />
+        <HeroTypographicBroadsheet models={models} githubStars={githubStars} />
         <ModelExplorer models={models.map(toCatalogueModel)} />
         <CataloguePagination page={1} total={models.length} />
       </main>
