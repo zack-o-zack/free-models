@@ -18,12 +18,12 @@ export const metadata = pageMetadata(
 export default async function ChangelogPage() {
   const [{ models, githubStars }, changelog] = await Promise.all([getModels(), getChangelog()]);
 
-  const activeProviderSlugs = Array.from(new Set(models.flatMap((m) => m.providers)));
-
   const breadcrumbs = [
     { name: "Home", href: "/" },
     { name: "Changelog", href: "/changelog" },
   ];
+
+  const activeProviderSlugs = Array.from(new Set(models.flatMap((m) => m.providers)));
 
   return (
     <div className="min-h-screen bg-background">

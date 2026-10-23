@@ -10,7 +10,7 @@ export interface ChangelogEntry {
   readonly type: "added" | "removed";
   readonly category?: "model" | "provider";
   readonly modelId?: string;
-  readonly modelName?: string;
+  readonly modelName: string;
   readonly canonicalId?: string | null;
   readonly commitHash?: string;
   readonly commitMessage?: string;
@@ -23,8 +23,6 @@ export interface ChangelogDocument {
   readonly since: string;
   readonly totalAdded: number;
   readonly totalRemoved: number;
-  readonly totalProvidersAdded?: number;
-  readonly totalProvidersRemoved?: number;
   readonly entries: readonly ChangelogEntry[];
 }
 
@@ -54,8 +52,6 @@ export async function getChangelog(): Promise<ChangelogDocument> {
     since: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
     totalAdded: 0,
     totalRemoved: 0,
-    totalProvidersAdded: 0,
-    totalProvidersRemoved: 0,
     entries: [],
   };
 }

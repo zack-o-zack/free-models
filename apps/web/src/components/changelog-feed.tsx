@@ -58,7 +58,8 @@ function formatTime(timestamp: string): string {
   }
 }
 
-function initials(name: string): string {
+function initials(name?: string): string {
+  if (!name) return "";
   return name
     .split(/\s+/)
     .map((part) => part[0])
@@ -89,7 +90,7 @@ export function ChangelogFeed({
     return (
       <div className="py-12 text-center">
         <p className="text-sm text-muted-foreground">
-          No model or provider additions or removals recorded in the past 30 days.
+          No model additions or removals recorded in the past 30 days.
         </p>
       </div>
     );
@@ -104,7 +105,7 @@ export function ChangelogFeed({
         return (
           <section key={date} aria-labelledby={`date-heading-${date}`} className="space-y-1.5">
             {/* Date Group Header */}
-            <div className="flex items-center justify-between pb-1 text-xs text-muted-foreground">
+            <div className="flex items-center justify-between pb-1 text-xs text-muted-foreground px-1">
               <div className="flex items-center gap-2 font-medium">
                 <GitCommit className="size-3.5 text-muted-foreground" aria-hidden="true" />
                 <h2 id={`date-heading-${date}`} className="font-semibold text-foreground">
@@ -124,7 +125,7 @@ export function ChangelogFeed({
               </div>
             </div>
 
-            {/* Git Log Row List - Clean, no background card */}
+            {/* Git Log Row List */}
             <div className="divide-y divide-border/40 border-y border-border/40">
               {dayEntries.map((entry) => {
                 const isAdded = entry.type === "added";
@@ -146,20 +147,26 @@ export function ChangelogFeed({
                     ? "+PROVIDER"
                     : "-PROVIDER"
                   : isAdded
-                    ? "NEW"
-                    : "DEL";
+                    ? "+NEW"
+                    : "-DEL";
+
+                const rowBg = isProvider
+                  ? isAdded
+                    ? "bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12] hover:bg-emerald-500/[0.12] dark:hover:bg-emerald-500/[0.16]"
+                    : "bg-red-500/[0.08] dark:bg-red-500/[0.12] hover:bg-red-500/[0.12] dark:hover:bg-red-500/[0.16]"
+                  : "hover:bg-muted/30";
 
                 return (
                   <div
                     key={entry.id}
                     title={hoverText}
-                    className="flex items-center justify-between gap-3 py-2 px-1 hover:bg-muted/30 transition-colors"
+                    className={`flex items-center justify-between gap-3 py-2 px-2 transition-colors ${rowBg}`}
                   >
                     {/* Left: Indicator, Provider, Model info */}
                     <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                      {/* Subtle text label: +PROVIDER / -PROVIDER or NEW / DEL */}
+                      {/* Text label: +PROVIDER / -PROVIDER or +NEW / -DEL */}
                       <span
-                        className={`font-mono text-[10px] font-bold tracking-wider shrink-0 min-w-7 ${
+                        className={`font-mono text-[10px] font-bold tracking-wider shrink-0 ${
                           isAdded
                             ? "text-[#216e32] dark:text-[#9fe870]"
                             : "text-[#d03238] dark:text-red-400"
@@ -174,7 +181,7 @@ export function ChangelogFeed({
                           href={`/providers/${entry.provider}`}
                           className="inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-ring"
                         >
-                          <Avatar className="size-4 rounded-sm border border-border/50">
+                          <Avatar className="size-4 rounded-[4px] border border-border/50">
                             {logoUrl && (
                               <BrandImage alt="" className="object-contain" src={logoUrl} />
                             )}
@@ -188,7 +195,7 @@ export function ChangelogFeed({
                         </Link>
                       ) : (
                         <div className="inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-foreground">
-                          <Avatar className="size-4 rounded-sm border border-border/50">
+                          <Avatar className="size-4 rounded-[4px] border border-border/50">
                             {logoUrl && (
                               <BrandImage alt="" className="object-contain" src={logoUrl} />
                             )}

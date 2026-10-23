@@ -19,19 +19,7 @@ test("getChangelog reads the local changelog document", async () => {
     expect(entry.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(["added", "removed"]).toContain(entry.type);
     expect(typeof entry.provider).toBe("string");
-    if (entry.category === "provider") {
-      expect(entry.category).toBe("provider");
-    } else {
-      expect(typeof entry.modelId).toBe("string");
-    }
-  }
-
-  const providerEntry = changelog.entries.find((e) => e.category === "provider");
-  if (providerEntry) {
-    expect(providerEntry.id).toBeDefined();
-    expect(providerEntry.provider).toBeDefined();
-    expect(["added", "removed"]).toContain(providerEntry.type);
-    expect(providerEntry.category).toBe("provider");
+    expect(typeof (entry.modelId ?? entry.modelName)).toBe("string");
   }
 });
 
