@@ -11,7 +11,6 @@ import {
   FileText,
   Image as ImageIcon,
   type LucideIcon,
-  MoveHorizontal,
   Plus,
   Search,
   Type,
@@ -265,7 +264,7 @@ function CompareModelHeader({
   const cleanName = getCleanModelName(model);
 
   return (
-    <div className="w-full rounded-2xl border border-border/80 bg-card p-3 sm:p-3.5 shadow-2xs">
+    <div className="w-full rounded-xl border border-border/80 bg-card p-3 shadow-2xs">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
@@ -315,10 +314,6 @@ function CompareModelHeader({
               />
             </Popover>
           </div>
-
-          <p className="mt-1 pl-8 text-xs text-muted-foreground truncate" title={model.author}>
-            {model.author}
-          </p>
         </div>
 
         <div className="flex shrink-0 items-center gap-0.5">
@@ -347,37 +342,32 @@ function CompareModelHeader({
         </div>
       </div>
 
-      <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-border/50 pt-2.5">
-        <span className="text-[11px] font-medium text-muted-foreground">Providers</span>
-        {model.providers.length > 0 ? (
-          <div className="flex items-center -space-x-1.5">
-            {model.providers.map((provider) => {
-              const label = getProviderName(provider, model.providerNames);
-              const iconUrl = providerFaviconUrl(model.providerDocs[provider]);
-              return (
-                <Tooltip key={provider}>
-                  <TooltipTrigger
-                    aria-label={label}
-                    className="inline-flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                  >
-                    <Avatar className="size-5.5 bg-card ring-2 ring-card shadow-2xs">
-                      {iconUrl ? (
-                        <BrandImage src={iconUrl} alt="" className="object-contain p-0.5" />
-                      ) : null}
-                      <AvatarFallback className="text-[7px] font-bold">
-                        {label.slice(0, 2).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                  </TooltipTrigger>
-                  <TooltipContent>{label}</TooltipContent>
-                </Tooltip>
-              );
-            })}
-          </div>
-        ) : (
-          <span className="text-xs text-muted-foreground">None</span>
-        )}
-      </div>
+      {model.providers.length > 0 && (
+        <div className="mt-2.5 flex items-center -space-x-1.5">
+          {model.providers.map((provider) => {
+            const label = getProviderName(provider, model.providerNames);
+            const iconUrl = providerFaviconUrl(model.providerDocs[provider]);
+            return (
+              <Tooltip key={provider}>
+                <TooltipTrigger
+                  aria-label={label}
+                  className="inline-flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                >
+                  <Avatar className="size-5.5 bg-card ring-2 ring-card shadow-2xs">
+                    {iconUrl ? (
+                      <BrandImage src={iconUrl} alt="" className="object-contain p-0.5" />
+                    ) : null}
+                    <AvatarFallback className="text-[7px] font-bold">
+                      {label.slice(0, 2).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                </TooltipTrigger>
+                <TooltipContent>{label}</TooltipContent>
+              </Tooltip>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
@@ -989,12 +979,8 @@ function CompareTable({
 
   return (
     <div className="overflow-hidden rounded-[24px] border border-border">
-      <div className="flex items-center gap-1.5 border-b bg-muted/50 px-4 py-3 text-xs text-muted-foreground sm:px-5">
-        <MoveHorizontal aria-hidden="true" className="size-3.5" />
-        <span>Scroll horizontally to compare all models</span>
-        <span className="ml-auto hidden text-xs text-muted-foreground sm:inline-block">
-          Scores: Artificial Analysis & Design Arena
-        </span>
+      <div className="flex items-center justify-end border-b bg-muted/50 px-4 py-2.5 text-xs text-muted-foreground sm:px-5">
+        <span>Scores: Artificial Analysis & Design Arena</span>
       </div>
 
       <section

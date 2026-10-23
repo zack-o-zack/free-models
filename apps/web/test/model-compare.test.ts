@@ -159,4 +159,25 @@ describe("getBestIndexes", () => {
     const best = getBestIndexes(models, providersRow);
     expect(best).toEqual(new Set([1]));
   });
+
+  it("highlights models with feature support for boolean rows", () => {
+    const multimodalRow = getRow("feature-multimodal");
+    const models = [
+      model({ id: "a", inputModalities: ["text", "image"] }),
+      model({ id: "b", inputModalities: ["text"] }),
+      model({ id: "c", inputModalities: ["text", "audio"] }),
+    ];
+    const best = getBestIndexes(models, multimodalRow);
+    expect(best).toEqual(new Set([0, 2]));
+  });
+
+  it("does not highlight when no models have the feature", () => {
+    const toolUseRow = getRow("feature-tool-use");
+    const models = [
+      model({ id: "a", supportsTools: false }),
+      model({ id: "b", supportsTools: false }),
+    ];
+    const best = getBestIndexes(models, toolUseRow);
+    expect(best).toEqual(new Set());
+  });
 });

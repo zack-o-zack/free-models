@@ -101,6 +101,10 @@ export function getBestIndexes(models: ModelSummary[], row: CompareRow): Set<num
 
   const target = row.better === "higher" ? Math.max(...validValues) : Math.min(...validValues);
 
+  if (row.kind === "boolean" && target === 0) {
+    return new Set();
+  }
+
   return new Set(values.flatMap((value, index) => (value === target ? [index] : [])));
 }
 
@@ -121,20 +125,6 @@ export const compareRows: CompareRow[] = [
     getValue: (model) => model.contextLength,
     comparableValue: (model) => (model.contextLength > 0 ? model.contextLength : null),
     better: "higher",
-  },
-  {
-    id: "reasoning",
-    section: "overview",
-    label: "Reasoning",
-    kind: "boolean",
-    getValue: (model) => model.supportsReasoning,
-  },
-  {
-    id: "tools",
-    section: "overview",
-    label: "Tool calling",
-    kind: "boolean",
-    getValue: (model) => model.supportsTools,
   },
   {
     id: "input-modalities",
@@ -166,6 +156,8 @@ export const compareRows: CompareRow[] = [
     description: "Ability to call external tools or functions.",
     kind: "boolean",
     getValue: (model) => model.supportsTools,
+    comparableValue: (model) => (model.supportsTools ? 1 : 0),
+    better: "higher",
   },
   {
     id: "feature-reasoning",
@@ -174,6 +166,8 @@ export const compareRows: CompareRow[] = [
     description: "Chain-of-thought or reasoning capability.",
     kind: "boolean",
     getValue: (model) => model.supportsReasoning,
+    comparableValue: (model) => (model.supportsReasoning ? 1 : 0),
+    better: "higher",
   },
   {
     id: "feature-multimodal",
@@ -184,6 +178,12 @@ export const compareRows: CompareRow[] = [
     getValue: (model) =>
       model.inputModalities.some((m) => m.toLowerCase() !== "text") ||
       model.outputModalities.some((m) => m.toLowerCase() !== "text"),
+    comparableValue: (model) =>
+      model.inputModalities.some((m) => m.toLowerCase() !== "text") ||
+      model.outputModalities.some((m) => m.toLowerCase() !== "text")
+        ? 1
+        : 0,
+    better: "higher",
   },
   {
     id: "intelligence",
