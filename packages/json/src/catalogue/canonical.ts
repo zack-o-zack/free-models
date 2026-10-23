@@ -14,6 +14,14 @@ export function normalizeCanonicalModelName(name: string): string {
   return normalized || name.trim();
 }
 
+function normalizeModality(modality: JsonValue): JsonValue {
+  if (typeof modality !== "string") return modality;
+  if (modality === "embedding") return "embeddings";
+  if (modality === "speech") return "audio";
+  if (modality === "document" || modality === "pdf") return "file";
+  return modality;
+}
+
 export function normalizeCanonicalMetadata(
   metadata: Readonly<Record<string, JsonValue>>,
 ): Record<string, JsonValue> {
@@ -25,22 +33,10 @@ export function normalizeCanonicalMetadata(
   ) {
     const arch = { ...(result.architecture as Record<string, JsonValue>) };
     if (Array.isArray(arch.input_modalities)) {
-      arch.input_modalities = [
-        ...new Set(
-          arch.input_modalities.map((modality) => (modality === "speech" ? "audio" : modality)),
-        ),
-      ];
+      arch.input_modalities = [...new Set(arch.input_modalities.map(normalizeModality))];
     }
     if (Array.isArray(arch.output_modalities)) {
-      arch.output_modalities = [
-        ...new Set(
-          arch.output_modalities.map((modality) => {
-            if (modality === "embedding") return "embeddings";
-            if (modality === "speech") return "audio";
-            return modality;
-          }),
-        ),
-      ];
+      arch.output_modalities = [...new Set(arch.output_modalities.map(normalizeModality))];
     }
     result.architecture = arch;
   }

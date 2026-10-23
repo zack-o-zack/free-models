@@ -2,6 +2,7 @@ import { AnyApiProvider } from "./anyapi.ts";
 import { BazaarLinkProvider } from "./bazaarlink.ts";
 import { CloudflareProvider } from "./cloudflare.ts";
 import { CohereProvider } from "./cohere.ts";
+import { CommandCodeProvider } from "./commandcode.ts";
 import { GeminiProvider } from "./gemini.ts";
 import { GroqProvider } from "./groq.ts";
 import { KiloProvider } from "./kilo.ts";
@@ -43,6 +44,7 @@ export const providerRegistry = defineProviderRegistry(
   new VercelProvider(),
   new NousProvider(),
   new OnomeoProvider(),
+  new CommandCodeProvider(),
 );
 
 export const metadataProvider = openRouterProvider;

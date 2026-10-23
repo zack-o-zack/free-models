@@ -66,15 +66,37 @@
   margin-top: 28px;
 }
 
-.browse {
+.starCta {
   height: 56px;
+  gap: 12px;
   padding-inline: 25px;
   border-radius: 999px;
-  gap: 28px;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease;
 }
 
-.browse:hover {
+.starCta:hover {
   background: var(--primary-hover);
+}
+
+.starCta:active {
+  transform: translateY(1px);
+}
+
+.starIcon {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.starCount {
+  border-left: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+  padding-left: 12px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
 }
 
 .requestFlow {
@@ -136,7 +158,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translate(-50%, -38px);
+  transform: translate(-50%, -34px);
   text-align: center;
   border-radius: 12px;
 }
@@ -145,9 +167,9 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
   background: var(--card);
   border: 1px solid var(--border);
 }
@@ -225,6 +247,7 @@
   .destinationLogo {
     width: 52px;
     height: 52px;
+    border-radius: 14px;
   }
   .destinationName {
     font-size: 10px;
@@ -268,9 +291,9 @@
     gap: 10px 18px;
     margin-top: 22px;
   }
-  .browse {
+  .starCta {
     height: 52px;
-    gap: 17px;
+    gap: 10px;
     padding-inline: 22px;
   }
   .requestFlow {

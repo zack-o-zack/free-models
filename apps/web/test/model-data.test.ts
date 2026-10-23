@@ -72,6 +72,15 @@ test("normalizes speech modalities to audio and embedding to embeddings", async 
             },
             providers: {},
           },
+          {
+            id: "maker/files",
+            name: "File Model",
+            architecture: {
+              input_modalities: ["pdf", "document", "file"],
+              output_modalities: ["document", "pdf"],
+            },
+            providers: {},
+          },
         ],
       }),
     );
@@ -95,6 +104,7 @@ test("normalizes speech modalities to audio and embedding to embeddings", async 
     expect(JSON.parse(output)).toEqual([
       { id: "maker/voice", in: ["audio"], out: ["audio"] },
       { id: "maker/embed", in: ["text"], out: ["embeddings"] },
+      { id: "maker/files", in: ["file"], out: ["file"] },
     ]);
   } finally {
     await rm(workspace, { recursive: true, force: true });

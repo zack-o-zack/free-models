@@ -51,6 +51,7 @@ export const providerNames: Record<string, string> = {
   canopylabs: "Canopy Labs",
   cloudflare: "Cloudflare",
   cohere: "Cohere",
+  commandcode: "CommandCode",
   deepgram: "Deepgram",
   deepseek: "DeepSeek",
   "dots-studio": "Dots Studio",

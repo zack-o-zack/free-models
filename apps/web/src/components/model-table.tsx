@@ -216,12 +216,15 @@ export function ModelTable({
                     prefetch={false}
                     className="flex min-h-11 items-center gap-3 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                   >
-                    <Avatar aria-hidden="true" className="hidden size-8 shrink-0 sm:flex">
+                    <Avatar
+                      aria-hidden="true"
+                      className="hidden size-8 shrink-0 rounded-[8px] sm:flex"
+                    >
                       {!model.isStealth && (
                         <BrandImage
                           alt=""
                           src={publisherFaviconUrl(model.id.split("/")[0]) ?? undefined}
-                          className="object-contain p-1"
+                          className="object-contain p-0.5"
                         />
                       )}
                       <AvatarFallback className="bg-background text-[10px]">

@@ -105,6 +105,7 @@ function humanizeAuthor(id: string, name?: string): string {
 function normalizeModality(modality: string): string {
   if (modality === "embedding") return "embeddings";
   if (modality === "speech") return "audio";
+  if (modality === "document" || modality === "pdf") return "file";
   return modality;
 }
 
