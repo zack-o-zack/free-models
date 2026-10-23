@@ -25,6 +25,17 @@ export interface CompareRow {
   better?: "higher" | "lower";
 }
 
+export const DESIGN_ARENA_CATEGORIES = [
+  { key: "3d", label: "3D" },
+  { key: "asciiart", label: "Asciiart" },
+  { key: "codecategories", label: "Code Categories" },
+  { key: "dataviz", label: "Data Visualization" },
+  { key: "gamedev", label: "Game Development" },
+  { key: "svg", label: "SVG" },
+  { key: "uicomponent", label: "UI Component" },
+  { key: "website", label: "Website" },
+] as const;
+
 export function parseCompareModelIds(search: string): string[] {
   const query = search.startsWith("?") ? search.slice(1) : search;
   const params = new URLSearchParams(query);
@@ -200,13 +211,6 @@ export const compareRows: CompareRow[] = [
     getValue: (model) => model.agenticScore,
     comparableValue: (model) => model.agenticScore,
     better: "higher",
-  },
-  {
-    id: "design-arena",
-    section: "benchmarks",
-    label: "Design Arena",
-    kind: "boolean",
-    getValue: (model) => model.designArena.length > 0,
   },
   {
     id: "providers",

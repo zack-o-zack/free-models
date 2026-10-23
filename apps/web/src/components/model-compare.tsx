@@ -21,6 +21,14 @@ import {
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
+import {
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+  ResponsiveContainer,
+} from "recharts";
 
 import { BrandImage } from "@/components/brand-image";
 import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
@@ -47,6 +55,7 @@ import {
   type CompareRow,
   compareRows,
   createCompareSearch,
+  DESIGN_ARENA_CATEGORIES,
   getBestIndexes,
   MAX_COMPARE_MODELS,
   parseCompareModelIds,
@@ -57,6 +66,13 @@ import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
 import { getProviderName, publisherFaviconUrl } from "@/lib/provider-logos";
 import { cn } from "@/lib/utils";
+
+const MODEL_COLORS = [
+  "#3b82f6", // Blue
+  "#f59e0b", // Amber / Orange
+  "#10b981", // Emerald
+  "#8b5cf6", // Purple
+];
 
 const faqs = [
   {
@@ -663,6 +679,273 @@ function CompareTableRow({
   );
 }
 
+function DesignArenaSectionRows({
+  models,
+  hasEmptySlot,
+  highlightBest,
+  arenaView,
+  onToggleView,
+}: {
+  models: ModelSummary[];
+  hasEmptySlot: boolean;
+  highlightBest: boolean;
+  arenaView: "table" | "graph";
+  onToggleView: (view: "table" | "graph") => void;
+}) {
+  const modelsWithBenchmarks = useMemo(
+    () => models.filter((m) => m.designArena && m.designArena.length > 0),
+    [models],
+  );
+
+  const maxElos = useMemo(() => {
+    const map: Record<string, number | null> = {};
+    for (const cat of DESIGN_ARENA_CATEGORIES) {
+      const elos = models.map((m) => {
+        const entry = m.designArena?.find(
+          (b) =>
+            b.category.toLowerCase().replace(/[-_ ]/g, "") ===
+            cat.key.toLowerCase().replace(/[-_ ]/g, ""),
+        );
+        return entry && entry.elo !== null && Number.isFinite(entry.elo) ? entry.elo : null;
+      });
+      const valid = elos.filter((v): v is number => v !== null);
+      map[cat.key] = valid.length > 0 ? Math.max(...valid) : null;
+    }
+    return map;
+  }, [models]);
+
+  const radarData = useMemo(() => {
+    return DESIGN_ARENA_CATEGORIES.map(({ key, label }) => {
+      const row: Record<string, string | number> = { category: label };
+      modelsWithBenchmarks.forEach((model) => {
+        const entry = model.designArena?.find(
+          (b) =>
+            b.category.toLowerCase().replace(/[-_ ]/g, "") ===
+            key.toLowerCase().replace(/[-_ ]/g, ""),
+        );
+        if (entry && entry.winRate !== null && Number.isFinite(entry.winRate)) {
+          const normalized = entry.winRate > 1 ? entry.winRate / 100 : entry.winRate;
+          row[model.id] = Number(normalized.toFixed(2));
+        } else {
+          row[model.id] = 0;
+        }
+      });
+      return row;
+    });
+  }, [modelsWithBenchmarks]);
+
+  return (
+    <>
+      <tr>
+        <th
+          scope="colgroup"
+          colSpan={models.length + (hasEmptySlot ? 2 : 1)}
+          className="border-b bg-card px-4 py-3 text-left sm:px-5"
+        >
+          <div className="flex items-center gap-3">
+            <span className="font-heading text-base font-extrabold tracking-[-0.025em] text-foreground sm:text-lg">
+              Design Arena
+            </span>
+            <div className="inline-flex items-center gap-0.5 rounded-lg border border-border bg-muted p-0.5 text-xs">
+              <button
+                type="button"
+                aria-pressed={arenaView === "table"}
+                onClick={() => onToggleView("table")}
+                className={cn(
+                  "cursor-pointer rounded-md px-2.5 py-1 font-medium transition-colors",
+                  arenaView === "table"
+                    ? "bg-background text-foreground shadow-xs font-semibold"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                Table
+              </button>
+              <button
+                type="button"
+                aria-pressed={arenaView === "graph"}
+                onClick={() => onToggleView("graph")}
+                className={cn(
+                  "cursor-pointer rounded-md px-2.5 py-1 font-medium transition-colors",
+                  arenaView === "graph"
+                    ? "bg-background text-foreground shadow-xs font-semibold"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                Graph
+              </button>
+            </div>
+          </div>
+        </th>
+      </tr>
+
+      {arenaView === "table" &&
+        DESIGN_ARENA_CATEGORIES.map((cat, catIndex) => (
+          <tr key={cat.key} className="group bg-card transition-colors hover:bg-muted/60">
+            <th
+              scope="row"
+              className="sticky left-0 z-10 border-b border-border/60 bg-card px-4 py-3.5 text-left align-middle font-medium transition-colors group-hover:bg-muted/60 sm:px-5"
+            >
+              <span className="text-sm text-foreground">{cat.label}</span>
+            </th>
+
+            {models.map((model) => {
+              const hasBenchmarks = model.designArena && model.designArena.length > 0;
+
+              if (!hasBenchmarks) {
+                if (catIndex === 0) {
+                  return (
+                    <td
+                      key={model.id}
+                      rowSpan={DESIGN_ARENA_CATEGORIES.length}
+                      className="border-b border-border/60 bg-card/20 p-4 align-middle text-center sm:px-5"
+                    >
+                      <div className="flex h-full min-h-[300px] flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border/80 bg-foreground/[0.02] p-6 text-center">
+                        <div
+                          className="mb-1 flex items-end justify-center gap-1 text-muted-foreground/40"
+                          aria-hidden="true"
+                        >
+                          <span className="h-4 w-1.5 rounded-xs bg-muted-foreground/30" />
+                          <span className="h-7 w-1.5 rounded-xs bg-muted-foreground/30" />
+                          <span className="h-5 w-1.5 rounded-xs bg-muted-foreground/30" />
+                        </div>
+                        <p className="text-sm font-medium text-foreground">
+                          No benchmarks available
+                        </p>
+                      </div>
+                    </td>
+                  );
+                }
+                return null;
+              }
+
+              const entry = model.designArena.find(
+                (b) =>
+                  b.category.toLowerCase().replace(/[-_ ]/g, "") ===
+                  cat.key.toLowerCase().replace(/[-_ ]/g, ""),
+              );
+
+              const isBest =
+                highlightBest &&
+                entry &&
+                entry.elo !== null &&
+                maxElos[cat.key] !== null &&
+                entry.elo === maxElos[cat.key];
+
+              return (
+                <td
+                  key={model.id}
+                  className={cn(
+                    "border-b border-border/60 px-4 py-3.5 align-middle transition-colors sm:px-5",
+                    isBest && "bg-positive/10 font-medium text-foreground",
+                  )}
+                >
+                  {isBest && <span className="sr-only">Best listed value. </span>}
+                  {entry ? (
+                    <div className="flex items-baseline justify-between gap-2">
+                      <span className="text-sm font-medium tabular-nums text-foreground">
+                        {entry.elo !== null ? Math.round(entry.elo) : "—"}
+                      </span>
+                      {entry.winRate !== null && (
+                        <span className="text-xs font-semibold tabular-nums text-positive">
+                          {Math.round(entry.winRate)}%
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <span className="font-normal text-muted-foreground">—</span>
+                  )}
+                </td>
+              );
+            })}
+
+            {hasEmptySlot && catIndex === 0 && (
+              <td
+                rowSpan={DESIGN_ARENA_CATEGORIES.length}
+                aria-hidden="true"
+                className="border-b border-border/60 bg-card/20 px-4 py-4 align-middle text-center text-muted-foreground/40 sm:px-5"
+              >
+                <span className="text-xs italic">—</span>
+              </td>
+            )}
+          </tr>
+        ))}
+
+      {arenaView === "graph" && (
+        <tr>
+          <td
+            colSpan={models.length + (hasEmptySlot ? 2 : 1)}
+            className="border-b border-border/60 bg-card/30 p-4 sm:p-8"
+          >
+            {modelsWithBenchmarks.length === 0 ? (
+              <div className="flex h-72 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-foreground/[0.02] p-8 text-center text-muted-foreground">
+                <div
+                  className="mb-1 flex items-end justify-center gap-1 text-muted-foreground/40"
+                  aria-hidden="true"
+                >
+                  <span className="h-4 w-1.5 rounded-xs bg-muted-foreground/30" />
+                  <span className="h-7 w-1.5 rounded-xs bg-muted-foreground/30" />
+                  <span className="h-5 w-1.5 rounded-xs bg-muted-foreground/30" />
+                </div>
+                <p className="text-sm font-medium text-foreground">No benchmarks available</p>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center">
+                <div className="h-[380px] w-full max-w-[680px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart data={radarData} outerRadius="68%">
+                      <PolarGrid stroke="var(--border)" strokeOpacity={0.7} />
+                      <PolarAngleAxis
+                        dataKey="category"
+                        tick={{ fill: "var(--foreground)", fontSize: 12, fontWeight: 500 }}
+                      />
+                      <PolarRadiusAxis
+                        domain={[0, 1]}
+                        ticks={[0.0, 0.3, 0.5, 0.8, 1.0]}
+                        axisLine={false}
+                        tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
+                      />
+                      {modelsWithBenchmarks.map((model, idx) => {
+                        const color = MODEL_COLORS[idx % MODEL_COLORS.length];
+                        return (
+                          <Radar
+                            key={model.id}
+                            name={model.name}
+                            dataKey={model.id}
+                            stroke={color}
+                            strokeWidth={2}
+                            fill={color}
+                            fillOpacity={0.15}
+                          />
+                        );
+                      })}
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-6 text-xs font-medium">
+                  {modelsWithBenchmarks.map((model, idx) => {
+                    const color = MODEL_COLORS[idx % MODEL_COLORS.length];
+                    return (
+                      <div key={model.id} className="flex items-center gap-2">
+                        <span
+                          className="size-3 rounded-full"
+                          style={{ backgroundColor: color }}
+                          aria-hidden="true"
+                        />
+                        <span className="text-foreground">{model.name}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </td>
+        </tr>
+      )}
+    </>
+  );
+}
+
 function CompareTable({
   models,
   allModels,
@@ -691,6 +974,7 @@ function CompareTable({
     ["benchmarks", "Benchmarks"],
   ] as const;
 
+  const [arenaView, setArenaView] = useState<"table" | "graph">("table");
   const hasEmptySlot = models.length < MAX_COMPARE_MODELS;
   const totalCols = models.length + (hasEmptySlot ? 1 : 0);
   const modelWidthPercent = `${(100 - 24) / totalCols}%`;
@@ -701,7 +985,7 @@ function CompareTable({
         <MoveHorizontal aria-hidden="true" className="size-3.5 lg:hidden" />
         <span className="lg:hidden">Scroll to compare</span>
         <span className="ml-auto hidden text-xs text-muted-foreground sm:inline-block">
-          Scores: Artificial Analysis
+          Scores: Artificial Analysis & Design Arena
         </span>
       </div>
 
@@ -788,6 +1072,16 @@ function CompareTable({
                     selectedProviders={selectedProviders}
                   />
                 ))}
+
+                {section === "benchmarks" && (
+                  <DesignArenaSectionRows
+                    models={models}
+                    hasEmptySlot={hasEmptySlot}
+                    highlightBest={highlightBest}
+                    arenaView={arenaView}
+                    onToggleView={setArenaView}
+                  />
+                )}
               </tbody>
             );
           })}
