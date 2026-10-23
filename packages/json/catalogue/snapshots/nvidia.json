@@ -180,6 +180,25 @@
       }
     },
     {
+      "model_id": "minimaxai/minimax-m3.1-flash",
+      "name": "minimax-m3.1-flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      }
+    },
+    {
       "model_id": "nvidia/active-speaker-detection",
       "name": "Active Speaker Detection",
       "connection": {

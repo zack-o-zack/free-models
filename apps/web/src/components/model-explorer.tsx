@@ -297,8 +297,6 @@ export function ModelExplorer({
     onClear: clearFilters,
   };
 
-  const Heading = collection ? "h3" : "h2";
-
   return (
     <section
       className="rounded-t-[40px] bg-card text-card-foreground"
@@ -306,21 +304,6 @@ export function ModelExplorer({
       data-catalogue-total={models.length}
     >
       <div className="container py-14 sm:py-20">
-        {collection && (
-          <div className="mb-10 max-w-2xl">
-            <p className="text-sm font-bold tracking-[0.14em] text-positive uppercase">
-              Free AI Model Catalogue
-            </p>
-            <h2 className="mt-3 font-heading text-4xl font-extrabold tracking-[-0.05em] [overflow-wrap:anywhere] sm:text-6xl">
-              Free AI Models {collection.kind === "providers" ? "on" : "by"} {collection.name}.
-            </h2>
-            <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg">
-              Search zero-cost AI models by name or filter by context window, input modality (text,
-              image, audio, PDF, video, embeddings), reasoning, or tool calling.
-            </p>
-          </div>
-        )}
-
         <div
           className={`grid items-start gap-8 ${view === "list" ? "lg:grid-cols-[268px_minmax(0,1fr)]" : ""}`}
         >
@@ -333,9 +316,9 @@ export function ModelExplorer({
           <section className="min-w-0">
             <div className="mb-5 flex items-end justify-between gap-3">
               <div>
-                <Heading className="font-heading text-2xl font-extrabold tracking-[-0.03em]">
-                  All models
-                </Heading>
+                <h2 className="font-heading text-2xl font-extrabold tracking-[-0.03em]">
+                  {collection ? `${collection.name} models` : "All models"}
+                </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {visibleModels.length} {visibleModels.length === 1 ? "result" : "results"}
                 </p>

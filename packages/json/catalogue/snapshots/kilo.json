@@ -63,24 +63,6 @@
       }
     },
     {
-      "model_id": "minimax/minimax-m3.1-flash:free",
-      "name": "MiniMax: MiniMax M3.1 Flash (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "KILO_API_KEY"
-          ]
-        },
-        "base_url": "https://api.kilo.ai/api/gateway",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / hour"
-        ]
-      }
-    },
-    {
       "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       "name": "NVIDIA: Nemotron 3 Nano Omni (free)",
       "connection": {

@@ -1,0 +1,66 @@
+{
+  "provider": "commandcode",
+  "name": "CommandCode",
+  "doc": {
+    "models": "https://commandcode.ai/models",
+    "overview": "https://commandcode.ai/docs/provider",
+    "pricing": "https://commandcode.ai/docs/resources/pricing-limits",
+    "rate_limit": "https://commandcode.ai/docs/resources/usage-limits"
+  },
+  "offers": [
+    {
+      "model_id": "poolside/laguna-s-2.1-free",
+      "name": "Laguna S 2.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "CMD_API_KEY"
+          ]
+        },
+        "base_url": "https://api.commandcode.ai/provider/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "No daily request limit (while capacity lasts)"
+        ]
+      }
+    },
+    {
+      "model_id": "reflection/beam:free",
+      "name": "Beam 1.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "CMD_API_KEY"
+          ]
+        },
+        "base_url": "https://api.commandcode.ai/provider/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "No daily request limit (while capacity lasts)"
+        ]
+      }
+    },
+    {
+      "model_id": "stealth/glyph-cluster:free",
+      "name": "Glyph Cluster",
+      "connection": {
+        "auth": {
+          "env": [
+            "CMD_API_KEY"
+          ]
+        },
+        "base_url": "https://api.commandcode.ai/provider/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "100 req / day"
+        ]
+      }
+    }
+  ]
+}

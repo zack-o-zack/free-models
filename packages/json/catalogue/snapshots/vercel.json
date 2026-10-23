@@ -1238,44 +1238,6 @@
       }
     },
     {
-      "model_id": "deepseek/deepseek-v4.1-flash-1017",
-      "name": "DeepSeek V4.1 Flash 1017",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
-      "model_id": "deepseek/deepseek-v4.1-flash-1017-fast",
-      "name": "DeepSeek V4.1 Flash 1017 Fast",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
       "model_id": "elorian/glimpse",
       "name": "Glimpse",
       "connection": {
@@ -2199,9 +2161,9 @@
       },
       "limits": {
         "terms": [
-          "Free — no credits used"
+          "Free with $5 monthly credits"
         ],
-        "funding": "no_credits"
+        "funding": "monthly_credits"
       }
     },
     {
@@ -2685,44 +2647,6 @@
       }
     },
     {
-      "model_id": "openai/gpt-3.5-turbo",
-      "name": "GPT-3.5 Turbo",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
-      "model_id": "openai/gpt-4-turbo",
-      "name": "GPT-4 Turbo",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
       "model_id": "openai/gpt-4.1",
       "name": "GPT-4.1",
       "connection": {
@@ -2801,25 +2725,6 @@
     {
       "model_id": "openai/gpt-4.1-nano",
       "name": "GPT-4.1 nano",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
-      "model_id": "openai/gpt-4.1-nano-fast",
-      "name": "GPT-4.1 nano (Fast)",
       "connection": {
         "auth": {
           "env": [
@@ -3549,25 +3454,6 @@
       }
     },
     {
-      "model_id": "openai/o4-mini-fast",
-      "name": "o4-mini (Fast)",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
       "model_id": "openai/tts-1",
       "name": "TTS-1",
       "connection": {
@@ -4003,44 +3889,6 @@
     {
       "model_id": "scaledown/scaledown-summarize-1",
       "name": "Summarize-1",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
-      "model_id": "spacexai/grok-4.1-fast-non-reasoning",
-      "name": "Grok 4.1 Fast Non-Reasoning",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
-      "model_id": "spacexai/grok-4.1-fast-reasoning",
-      "name": "Grok 4.1 Fast Reasoning",
       "connection": {
         "auth": {
           "env": [
