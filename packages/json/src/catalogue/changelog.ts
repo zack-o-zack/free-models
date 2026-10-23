@@ -196,7 +196,7 @@ export async function generateChangelog(
               providerName,
               type: "added",
               category: "provider",
-              modelName: `${providerName} provider`,
+              modelName: "Provider added",
               commitHash: shortHash,
               commitMessage,
               details:
@@ -215,7 +215,7 @@ export async function generateChangelog(
               providerName,
               type: "removed",
               category: "provider",
-              modelName: `${providerName} provider`,
+              modelName: "Provider removed",
               commitHash: shortHash,
               commitMessage,
               details:
@@ -336,7 +336,7 @@ export async function generateChangelog(
             providerName,
             type: "added",
             category: "provider",
-            modelName: `${providerName} provider`,
+            modelName: "Provider added",
             commitMessage: "Working directory changes",
             details:
               currOffers.size > 0
@@ -354,7 +354,7 @@ export async function generateChangelog(
             providerName,
             type: "removed",
             category: "provider",
-            modelName: `${providerName} provider`,
+            modelName: "Provider removed",
             commitMessage: "Working directory changes",
             details:
               headOffers.size > 0
@@ -411,7 +411,9 @@ export async function generateChangelog(
         "Existing changelog",
       );
       for (const entry of existingDoc.entries) {
-        entries.push(entry);
+        if (!entry.id.startsWith("working-")) {
+          entries.push(entry);
+        }
       }
     } catch {
       // Ignore existing changelog read issues

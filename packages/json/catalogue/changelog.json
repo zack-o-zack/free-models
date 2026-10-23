@@ -1,67 +1,16 @@
 {
-  "generatedAt": "2026-10-23T07:47:57.270Z",
+  "generatedAt": "2026-10-23T10:25:03.528Z",
   "windowDays": 30,
-  "since": "2026-09-23T07:47:57.270Z",
-  "totalAdded": 405,
+  "since": "2026-09-23T10:25:03.528Z",
+  "totalAdded": 402,
   "totalRemoved": 65,
   "totalProvidersAdded": 8,
   "totalProvidersRemoved": 0,
   "entries": [
     {
-      "id": "working-commandcode-add-provider",
+      "id": "6c227b4-kilo-remove-minimax/minimax-m3.1-flash:free",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
-      "provider": "commandcode",
-      "providerName": "CommandCode",
-      "type": "added",
-      "category": "provider",
-      "modelName": "CommandCode provider",
-      "commitMessage": "Working directory changes",
-      "details": "3 free models"
-    },
-    {
-      "id": "working-commandcode-add-poolside/laguna-s-2.1-free",
-      "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
-      "provider": "commandcode",
-      "providerName": "CommandCode",
-      "type": "added",
-      "category": "model",
-      "modelId": "poolside/laguna-s-2.1-free",
-      "modelName": "Laguna S 2.1",
-      "canonicalId": "poolside/laguna-s-2.1",
-      "commitMessage": "Working directory changes"
-    },
-    {
-      "id": "working-commandcode-add-reflection/beam:free",
-      "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
-      "provider": "commandcode",
-      "providerName": "CommandCode",
-      "type": "added",
-      "category": "model",
-      "modelId": "reflection/beam:free",
-      "modelName": "Beam 1.0",
-      "canonicalId": "reflection/beam-1.0-501b-a23b",
-      "commitMessage": "Working directory changes"
-    },
-    {
-      "id": "working-commandcode-add-stealth/glyph-cluster:free",
-      "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
-      "provider": "commandcode",
-      "providerName": "CommandCode",
-      "type": "added",
-      "category": "model",
-      "modelId": "stealth/glyph-cluster:free",
-      "modelName": "Glyph Cluster",
-      "canonicalId": "stealth:glyph-cluster",
-      "commitMessage": "Working directory changes"
-    },
-    {
-      "id": "working-kilo-remove-minimax/minimax-m3.1-flash:free",
-      "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "kilo",
       "providerName": "Kilo",
       "type": "removed",
@@ -69,12 +18,13 @@
       "modelId": "minimax/minimax-m3.1-flash:free",
       "modelName": "MiniMax: MiniMax M3.1 Flash (free)",
       "canonicalId": "minimax/minimax-m3.1-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-nvidia-add-minimaxai/minimax-m3.1-flash",
+      "id": "6c227b4-nvidia-add-minimaxai/minimax-m3.1-flash",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "nvidia",
       "providerName": "NVIDIA",
       "type": "added",
@@ -82,12 +32,13 @@
       "modelId": "minimaxai/minimax-m3.1-flash",
       "modelName": "minimax-m3.1-flash",
       "canonicalId": "minimaxai/minimax-m3.1-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-remove-deepseek-v4-flash",
+      "id": "6c227b4-onomeo-remove-deepseek-v4-flash",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "removed",
@@ -95,12 +46,13 @@
       "modelId": "deepseek-v4-flash",
       "modelName": "Deepseek v4 flash",
       "canonicalId": "deepseek/deepseek-v4-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-add-deepseek-v4-pro",
+      "id": "6c227b4-onomeo-add-deepseek-v4-pro",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "added",
@@ -108,12 +60,13 @@
       "modelId": "deepseek-v4-pro",
       "modelName": "Deepseek v4 pro",
       "canonicalId": "deepseek/deepseek-v4-pro-0813",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-remove-gemini-3.7-flash",
+      "id": "6c227b4-onomeo-remove-gemini-3.7-flash",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "removed",
@@ -121,12 +74,13 @@
       "modelId": "gemini-3.7-flash",
       "modelName": "Gemini 3.7 flash",
       "canonicalId": "google/gemini-3.7-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-remove-gemini-3.8-flash",
+      "id": "6c227b4-onomeo-remove-gemini-3.8-flash",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "removed",
@@ -134,12 +88,13 @@
       "modelId": "gemini-3.8-flash",
       "modelName": "Gemini 3.8 flash",
       "canonicalId": "google/gemini-3.8-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-remove-glm-5.3-flash",
+      "id": "6c227b4-onomeo-remove-glm-5.3-flash",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "removed",
@@ -147,12 +102,13 @@
       "modelId": "glm-5.3-flash",
       "modelName": "Glm 5.3 flash",
       "canonicalId": "z-ai/glm-5.3-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-add-qwen3.5-397b-a17b",
+      "id": "6c227b4-onomeo-add-qwen3.5-397b-a17b",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "added",
@@ -160,12 +116,13 @@
       "modelId": "qwen3.5-397b-a17b",
       "modelName": "Qwen3.5 397b a17b",
       "canonicalId": "qwen/qwen3.5-397b-a17b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-opencode-remove-minimax-m3.1-flash-free",
+      "id": "6c227b4-opencode-remove-minimax-m3.1-flash-free",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "opencode",
       "providerName": "OpenCode",
       "type": "removed",
@@ -173,12 +130,13 @@
       "modelId": "minimax-m3.1-flash-free",
       "modelName": "MiniMax M3.1 Flash Free",
       "canonicalId": "minimax/minimax-m3.1-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-openrouter-remove-minimax/minimax-m3.1-flash:free",
+      "id": "6c227b4-openrouter-remove-minimax/minimax-m3.1-flash:free",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "openrouter",
       "providerName": "OpenRouter",
       "type": "removed",
@@ -186,12 +144,13 @@
       "modelId": "minimax/minimax-m3.1-flash:free",
       "modelName": "MiniMax: MiniMax M3.1 Flash (free)",
       "canonicalId": "minimax/minimax-m3.1-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-deepseek/deepseek-v4.1-flash-1017",
+      "id": "6c227b4-vercel-remove-deepseek/deepseek-v4.1-flash-1017",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -199,12 +158,13 @@
       "modelId": "deepseek/deepseek-v4.1-flash-1017",
       "modelName": "DeepSeek V4.1 Flash 1017",
       "canonicalId": "deepseek/deepseek-v4.1-flash-1017",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-deepseek/deepseek-v4.1-flash-1017-fast",
+      "id": "6c227b4-vercel-remove-deepseek/deepseek-v4.1-flash-1017-fast",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -212,12 +172,13 @@
       "modelId": "deepseek/deepseek-v4.1-flash-1017-fast",
       "modelName": "DeepSeek V4.1 Flash 1017 Fast",
       "canonicalId": "deepseek/deepseek-v4.1-flash-1017-fast",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-openai/gpt-3.5-turbo",
+      "id": "6c227b4-vercel-remove-openai/gpt-3.5-turbo",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -225,12 +186,13 @@
       "modelId": "openai/gpt-3.5-turbo",
       "modelName": "GPT-3.5 Turbo",
       "canonicalId": "openai/gpt-3.5-turbo",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-openai/gpt-4-turbo",
+      "id": "6c227b4-vercel-remove-openai/gpt-4-turbo",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -238,12 +200,13 @@
       "modelId": "openai/gpt-4-turbo",
       "modelName": "GPT-4 Turbo",
       "canonicalId": "openai/gpt-4-turbo",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-openai/gpt-4.1-nano-fast",
+      "id": "6c227b4-vercel-remove-openai/gpt-4.1-nano-fast",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -251,12 +214,13 @@
       "modelId": "openai/gpt-4.1-nano-fast",
       "modelName": "GPT-4.1 nano (Fast)",
       "canonicalId": "openai/gpt-4.1-nano",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-openai/o4-mini-fast",
+      "id": "6c227b4-vercel-remove-openai/o4-mini-fast",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -264,12 +228,13 @@
       "modelId": "openai/o4-mini-fast",
       "modelName": "o4-mini (Fast)",
       "canonicalId": "openai/o4-mini",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-spacexai/grok-4.1-fast-non-reasoning",
+      "id": "6c227b4-vercel-remove-spacexai/grok-4.1-fast-non-reasoning",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -277,12 +242,13 @@
       "modelId": "spacexai/grok-4.1-fast-non-reasoning",
       "modelName": "Grok 4.1 Fast Non-Reasoning",
       "canonicalId": "x-ai/grok-4.1-fast-non-reasoning",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-spacexai/grok-4.1-fast-reasoning",
+      "id": "6c227b4-vercel-remove-spacexai/grok-4.1-fast-reasoning",
       "date": "2026-10-23",
-      "timestamp": "2026-10-23T07:47:57.270Z",
+      "timestamp": "2026-10-23T07:40:03Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -290,7 +256,21 @@
       "modelId": "spacexai/grok-4.1-fast-reasoning",
       "modelName": "Grok 4.1 Fast Reasoning",
       "canonicalId": "x-ai/grok-4.1-fast-reasoning",
-      "commitMessage": "Working directory changes"
+      "commitHash": "6c227b4",
+      "commitMessage": "chore: update free model catalogue"
+    },
+    {
+      "id": "28d784e-commandcode-add-provider",
+      "date": "2026-10-23",
+      "timestamp": "2026-10-23T10:20:48+05:30",
+      "provider": "commandcode",
+      "providerName": "CommandCode",
+      "type": "added",
+      "category": "provider",
+      "modelName": "Provider added",
+      "commitHash": "28d784e",
+      "commitMessage": "feat: add CommandCode provider (#100)",
+      "details": "3 free models"
     },
     {
       "id": "28d784e-commandcode-add-poolside/laguna-s-2.1-free",
@@ -1406,7 +1386,7 @@
       "providerName": "Onomeo",
       "type": "added",
       "category": "provider",
-      "modelName": "Onomeo provider",
+      "modelName": "Provider added",
       "commitHash": "de90405",
       "commitMessage": "feat: add Onomeo provider (#91)",
       "details": "20 free models"
@@ -1699,7 +1679,7 @@
       "providerName": "Nous Portal",
       "type": "added",
       "category": "provider",
-      "modelName": "Nous Portal provider",
+      "modelName": "Provider added",
       "commitHash": "1a412f4",
       "commitMessage": "feat: add Nous Portal provider",
       "details": "7 free models"
@@ -5436,7 +5416,7 @@
       "providerName": "Novita AI",
       "type": "added",
       "category": "provider",
-      "modelName": "Novita AI provider",
+      "modelName": "Provider added",
       "commitHash": "4506633",
       "commitMessage": "feat(catalogue): add Novita and Vercel AI Gateway providers (#61)",
       "details": "1 free model"
@@ -5449,7 +5429,7 @@
       "providerName": "Vercel AI Gateway",
       "type": "added",
       "category": "provider",
-      "modelName": "Vercel AI Gateway provider",
+      "modelName": "Provider added",
       "commitHash": "4506633",
       "commitMessage": "feat(catalogue): add Novita and Vercel AI Gateway providers (#61)",
       "details": "3 free models"
@@ -5518,7 +5498,7 @@
       "providerName": "AnyAPI",
       "type": "added",
       "category": "provider",
-      "modelName": "AnyAPI provider",
+      "modelName": "Provider added",
       "commitHash": "6d30d3c",
       "commitMessage": "Add AnyAPI free model provider",
       "details": "5 free models"
@@ -5601,7 +5581,7 @@
       "providerName": "Z.ai",
       "type": "added",
       "category": "provider",
-      "modelName": "Z.ai provider",
+      "modelName": "Provider added",
       "commitHash": "9ad6ec6",
       "commitMessage": "Add Z.ai free model provider",
       "details": "3 free models"
@@ -5656,7 +5636,7 @@
       "providerName": "LLM7",
       "type": "added",
       "category": "provider",
-      "modelName": "LLM7 provider",
+      "modelName": "Provider added",
       "commitHash": "735a15c",
       "commitMessage": "feat(catalogue): add LLM7 provider (#58)",
       "details": "7 free models"
