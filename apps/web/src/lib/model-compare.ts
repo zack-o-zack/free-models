@@ -2,7 +2,7 @@ import type { ModelSummary } from "@/lib/model-types";
 
 export const MAX_COMPARE_MODELS = 4;
 
-export type CompareSection = "overview" | "benchmarks" | "access";
+export type CompareSection = "overview" | "features" | "benchmarks" | "access";
 
 export type CompareValueKind =
   | "text"
@@ -147,6 +147,32 @@ export const compareRows: CompareRow[] = [
     getValue: (model) => model.providers.length,
     comparableValue: (model) => (model.providers.length > 0 ? model.providers.length : null),
     better: "higher",
+  },
+  {
+    id: "feature-tool-use",
+    section: "features",
+    label: "Tool use",
+    description: "Ability to call external tools or functions.",
+    kind: "boolean",
+    getValue: (model) => model.supportsTools,
+  },
+  {
+    id: "feature-reasoning",
+    section: "features",
+    label: "Reasoning",
+    description: "Chain-of-thought or reasoning capability.",
+    kind: "boolean",
+    getValue: (model) => model.supportsReasoning,
+  },
+  {
+    id: "feature-multimodal",
+    section: "features",
+    label: "Multimodal",
+    description: "Accepts or generates vision, audio, or other non-text media.",
+    kind: "boolean",
+    getValue: (model) =>
+      model.inputModalities.some((m) => m.toLowerCase() !== "text") ||
+      model.outputModalities.some((m) => m.toLowerCase() !== "text"),
   },
   {
     id: "intelligence",

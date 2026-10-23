@@ -54,6 +54,20 @@ describe("createCompareSearch", () => {
   });
 });
 
+describe("compareRows and sections", () => {
+  it("includes all key comparison sections matching OpenRouter features", () => {
+    const sections = new Set(compareRows.map((r) => r.section));
+    expect(sections).toEqual(new Set(["overview", "features", "benchmarks", "access"]));
+  });
+
+  it("includes feature capability rows", () => {
+    const featureRowIds = compareRows.filter((r) => r.section === "features").map((r) => r.id);
+    expect(featureRowIds).toContain("feature-tool-use");
+    expect(featureRowIds).toContain("feature-reasoning");
+    expect(featureRowIds).toContain("feature-multimodal");
+  });
+});
+
 describe("getBestIndexes", () => {
   const model = (overrides: Partial<ModelSummary>): ModelSummary => ({
     id: "test/model",
