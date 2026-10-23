@@ -911,21 +911,24 @@ function DesignArenaSectionRows({
                       />
                       <RechartsTooltip
                         content={({ active, payload, label }) => {
-                          if (!active || !payload || payload.length === 0) return null;
+                          const validEntries = (payload ?? []).filter(
+                            (entry) => typeof entry.value === "number" && entry.value > 0,
+                          );
+                          if (!active || validEntries.length === 0) return null;
                           return (
-                            <div className="min-w-[190px] rounded-xl border border-border bg-card p-3 shadow-lg">
-                              <p className="mb-2 font-heading text-sm font-bold text-foreground">
+                            <div className="min-w-[180px] rounded-lg border border-border bg-card p-2.5 shadow-md">
+                              <p className="mb-1.5 font-heading text-xs font-bold text-foreground">
                                 {label}
                               </p>
-                              <div className="space-y-1.5 text-xs">
-                                {payload.map((entry) => (
+                              <div className="space-y-1 text-xs">
+                                {validEntries.map((entry) => (
                                   <div
                                     key={String(entry.dataKey)}
                                     className="flex items-center justify-between gap-4"
                                   >
                                     <div className="flex min-w-0 items-center gap-2">
                                       <span
-                                        className="size-2.5 shrink-0 rounded-full"
+                                        className="size-2 shrink-0 rounded-full"
                                         style={{ backgroundColor: entry.color }}
                                         aria-hidden="true"
                                       />
