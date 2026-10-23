@@ -8,11 +8,13 @@ export interface ChangelogEntry {
   readonly provider: string;
   readonly providerName: string;
   readonly type: "added" | "removed";
-  readonly modelId: string;
+  readonly category?: "model" | "provider";
+  readonly modelId?: string;
   readonly modelName: string;
   readonly canonicalId?: string | null;
   readonly commitHash?: string;
   readonly commitMessage?: string;
+  readonly details?: string;
 }
 
 export interface ChangelogDocument {

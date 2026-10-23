@@ -9,6 +9,7 @@ import { publisherFaviconUrl } from "@/lib/provider-logos";
 interface ChangelogFeedProps {
   readonly entries: readonly ChangelogEntry[];
   readonly activeModelIds: readonly string[];
+  readonly activeProviderSlugs?: readonly string[];
 }
 
 function formatDateHeading(dateString: string): string {
@@ -57,7 +58,8 @@ function formatTime(timestamp: string): string {
   }
 }
 
-function initials(name: string): string {
+function initials(name?: string): string {
+  if (!name) return "";
   return name
     .split(/\s+/)
     .map((part) => part[0])
@@ -66,8 +68,13 @@ function initials(name: string): string {
     .toUpperCase();
 }
 
-export function ChangelogFeed({ entries, activeModelIds }: ChangelogFeedProps) {
+export function ChangelogFeed({
+  entries,
+  activeModelIds,
+  activeProviderSlugs,
+}: ChangelogFeedProps) {
   const activeSet = new Set(activeModelIds);
+  const activeProviderSet = new Set(activeProviderSlugs ?? []);
 
   const groupedByDate = new Map<string, ChangelogEntry[]>();
   for (const entry of entries) {
@@ -98,7 +105,7 @@ export function ChangelogFeed({ entries, activeModelIds }: ChangelogFeedProps) {
         return (
           <section key={date} aria-labelledby={`date-heading-${date}`} className="space-y-1.5">
             {/* Date Group Header */}
-            <div className="flex items-center justify-between pb-1 text-xs text-muted-foreground">
+            <div className="flex items-center justify-between pb-1 text-xs text-muted-foreground px-1">
               <div className="flex items-center gap-2 font-medium">
                 <GitCommit className="size-3.5 text-muted-foreground" aria-hidden="true" />
                 <h2 id={`date-heading-${date}`} className="font-semibold text-foreground">
@@ -118,68 +125,123 @@ export function ChangelogFeed({ entries, activeModelIds }: ChangelogFeedProps) {
               </div>
             </div>
 
-            {/* Git Log Row List - Clean, no background card */}
+            {/* Git Log Row List */}
             <div className="divide-y divide-border/40 border-y border-border/40">
               {dayEntries.map((entry) => {
                 const isAdded = entry.type === "added";
+                const isProvider = entry.category === "provider";
                 const logoUrl = publisherFaviconUrl(entry.provider);
                 const isLiveInCatalogue = entry.canonicalId && activeSet.has(entry.canonicalId);
-                const actionLabel = isAdded ? "Added on" : "Removed on";
+                const isLiveProvider =
+                  activeProviderSet.size === 0 || activeProviderSet.has(entry.provider);
+                const actionLabel = isProvider
+                  ? isAdded
+                    ? "Provider added on"
+                    : "Provider removed on"
+                  : isAdded
+                    ? "Added on"
+                    : "Removed on";
                 const hoverText = `${actionLabel} ${formatTooltipDate(entry.timestamp)} UTC`;
+                const prefix = isProvider
+                  ? isAdded
+                    ? "+PROVIDER"
+                    : "-PROVIDER"
+                  : isAdded
+                    ? "+NEW"
+                    : "-DEL";
+
+                const rowBg = isProvider
+                  ? isAdded
+                    ? "bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12] hover:bg-emerald-500/[0.12] dark:hover:bg-emerald-500/[0.16]"
+                    : "bg-red-500/[0.08] dark:bg-red-500/[0.12] hover:bg-red-500/[0.12] dark:hover:bg-red-500/[0.16]"
+                  : "hover:bg-muted/30";
 
                 return (
                   <div
                     key={entry.id}
                     title={hoverText}
-                    className="flex items-center justify-between gap-3 py-2 px-1 hover:bg-muted/30 transition-colors"
+                    className={`flex items-center justify-between gap-3 py-2 px-2 transition-colors ${rowBg}`}
                   >
                     {/* Left: Indicator, Provider, Model info */}
                     <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                      {/* Subtle text label: small uppercase NEW / DEL */}
+                      {/* Text label: +PROVIDER / -PROVIDER or +NEW / -DEL */}
                       <span
-                        className={`font-mono text-[10px] font-bold tracking-wider w-7 shrink-0 ${
+                        className={`font-mono text-[10px] font-bold tracking-wider shrink-0 ${
                           isAdded
                             ? "text-[#216e32] dark:text-[#9fe870]"
                             : "text-[#d03238] dark:text-red-400"
                         }`}
                       >
-                        {isAdded ? "NEW" : "DEL"}
+                        {prefix}
                       </span>
 
                       {/* Provider Logo & Name */}
-                      <Link
-                        href={`/providers/${entry.provider}`}
-                        className="inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-ring"
-                      >
-                        <Avatar className="size-4 rounded-[4px] border border-border/50">
-                          {logoUrl && (
-                            <BrandImage alt="" className="object-contain" src={logoUrl} />
-                          )}
-                          <AvatarFallback className="text-[8px] font-bold">
-                            {initials(entry.providerName)}
-                          </AvatarFallback>
-                        </Avatar>
-                        <span className="truncate max-w-[120px] sm:max-w-[160px]">
-                          {entry.providerName}
-                        </span>
-                      </Link>
+                      {isLiveProvider ? (
+                        <Link
+                          href={`/providers/${entry.provider}`}
+                          className="inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-ring"
+                        >
+                          <Avatar className="size-4 rounded-[4px] border border-border/50">
+                            {logoUrl && (
+                              <BrandImage alt="" className="object-contain" src={logoUrl} />
+                            )}
+                            <AvatarFallback className="text-[8px] font-bold">
+                              {initials(entry.providerName)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <span className="truncate max-w-[120px] sm:max-w-[160px]">
+                            {entry.providerName}
+                          </span>
+                        </Link>
+                      ) : (
+                        <div className="inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-foreground">
+                          <Avatar className="size-4 rounded-[4px] border border-border/50">
+                            {logoUrl && (
+                              <BrandImage alt="" className="object-contain" src={logoUrl} />
+                            )}
+                            <AvatarFallback className="text-[8px] font-bold">
+                              {initials(entry.providerName)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <span className="truncate max-w-[120px] sm:max-w-[160px]">
+                            {entry.providerName}
+                          </span>
+                        </div>
+                      )}
 
-                      {/* Model Display Name */}
+                      {/* Model / Provider Display Name */}
                       <div className="flex items-center gap-1.5 min-w-0 flex-1 truncate">
                         <span className="font-medium text-xs text-foreground truncate">
                           {entry.modelName}
                         </span>
 
-                        {/* Top-right arrow icon linking to catalogue */}
-                        {isLiveInCatalogue && entry.canonicalId && (
-                          <Link
-                            href={modelHref(entry.canonicalId)}
-                            className="inline-flex items-center text-muted-foreground hover:text-foreground shrink-0 focus-visible:outline-2 focus-visible:outline-ring"
-                            aria-label={`View ${entry.modelName} details in catalogue`}
-                          >
-                            <ArrowUpRight className="size-3.5" />
-                          </Link>
+                        {isProvider && entry.details && (
+                          <span className="text-[11px] text-muted-foreground shrink-0 font-mono">
+                            ({entry.details})
+                          </span>
                         )}
+
+                        {/* Top-right arrow icon linking to catalogue */}
+                        {isProvider
+                          ? isLiveProvider && (
+                              <Link
+                                href={`/providers/${entry.provider}`}
+                                className="inline-flex items-center text-muted-foreground hover:text-foreground shrink-0 focus-visible:outline-2 focus-visible:outline-ring"
+                                aria-label={`View ${entry.providerName} details in catalogue`}
+                              >
+                                <ArrowUpRight className="size-3.5" />
+                              </Link>
+                            )
+                          : isLiveInCatalogue &&
+                            entry.canonicalId && (
+                              <Link
+                                href={modelHref(entry.canonicalId)}
+                                className="inline-flex items-center text-muted-foreground hover:text-foreground shrink-0 focus-visible:outline-2 focus-visible:outline-ring"
+                                aria-label={`View ${entry.modelName} details in catalogue`}
+                              >
+                                <ArrowUpRight className="size-3.5" />
+                              </Link>
+                            )}
                       </div>
                     </div>
 

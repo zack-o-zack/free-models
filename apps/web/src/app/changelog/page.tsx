@@ -23,6 +23,8 @@ export default async function ChangelogPage() {
     { name: "Changelog", href: "/changelog" },
   ];
 
+  const activeProviderSlugs = Array.from(new Set(models.flatMap((m) => m.providers)));
+
   return (
     <div className="min-h-screen bg-background">
       <JsonLd data={changelogJsonLd()} />
@@ -49,7 +51,11 @@ export default async function ChangelogPage() {
         {/* Feed Section */}
         <section className="py-6 sm:py-8">
           <div className="container max-w-4xl">
-            <ChangelogFeed entries={changelog.entries} activeModelIds={models.map((m) => m.id)} />
+            <ChangelogFeed
+              entries={changelog.entries}
+              activeModelIds={models.map((m) => m.id)}
+              activeProviderSlugs={activeProviderSlugs}
+            />
           </div>
         </section>
       </main>

@@ -93,8 +93,12 @@ export async function runCli(
   if (command === "changelog") {
     const outputPath = resolve(options.output ?? paths.changelog);
     const doc = await generateChangelog(paths, dependencies.providers, { outputPath });
+    const providerSummary =
+      (doc.totalProvidersAdded ?? 0) > 0 || (doc.totalProvidersRemoved ?? 0) > 0
+        ? `, providers: +${doc.totalProvidersAdded ?? 0}/-${doc.totalProvidersRemoved ?? 0}`
+        : "";
     console.log(
-      `Generated changelog (${doc.entries.length} entries, +${doc.totalAdded}/-${doc.totalRemoved}) at ${outputPath}`,
+      `Generated changelog (${doc.entries.length} entries, +${doc.totalAdded}/-${doc.totalRemoved}${providerSummary}) at ${outputPath}`,
     );
     return;
   }
