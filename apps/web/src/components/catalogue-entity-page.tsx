@@ -105,14 +105,14 @@ export function CatalogueEntityPage({
               <div className="flex min-w-0 items-center gap-4 sm:gap-5">
                 <Avatar
                   aria-hidden="true"
-                  className="size-14 shrink-0 rounded-2xl bg-logo-surface ring-1 ring-border/80 shadow-xs sm:size-16 xl:size-20"
+                  className="size-14 shrink-0 rounded-[14px] bg-logo-surface ring-1 ring-border/80 shadow-xs sm:size-16 sm:rounded-[16px] xl:size-20 xl:rounded-[20px]"
                 >
                   {logoUrl && (
                     <BrandImage
                       src={logoUrl}
                       alt=""
                       loading="eager"
-                      className="rounded-[inherit] object-contain p-2.5 sm:p-3"
+                      className="rounded-[inherit] object-contain p-1.5 sm:p-2"
                     />
                   )}
                   <AvatarFallback className="rounded-[inherit] bg-transparent font-heading text-xl font-black tracking-tight text-foreground sm:text-2xl">

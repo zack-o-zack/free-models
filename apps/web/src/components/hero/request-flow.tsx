@@ -96,11 +96,11 @@ export function RequestFlow({ featured }: { featured: RequestFlowItem[] }) {
               key={hits[model.id] ?? 0}
               className={`${styles.destinationLogo} ${hits[model.id] ? styles.logoHit : ""}`}
             >
-              <Avatar className="size-8 rounded-none bg-transparent sm:size-10">
+              <Avatar className="size-11 rounded-[12px] bg-transparent sm:size-12 sm:rounded-[14px]">
                 <AvatarImage
                   src={publisherFaviconUrl(publisher) ?? undefined}
                   alt=""
-                  className="object-contain"
+                  className="rounded-[inherit] object-contain"
                 />
                 <AvatarFallback className="bg-transparent text-lg font-bold">
                   {model.author.slice(0, 1)}
@@ -131,8 +131,11 @@ export function RequestFlow({ featured }: { featured: RequestFlowItem[] }) {
             }
             aria-hidden="true"
           >
-            <Avatar key={client.name} className="size-12 rounded-none bg-transparent sm:size-14">
-              <AvatarImage src={client.icon} alt="" className="rounded-none object-contain" />
+            <Avatar
+              key={client.name}
+              className="size-12 rounded-[14px] bg-transparent sm:size-14 sm:rounded-[16px]"
+            >
+              <AvatarImage src={client.icon} alt="" className="rounded-[inherit] object-contain" />
             </Avatar>
           </div>
         </div>

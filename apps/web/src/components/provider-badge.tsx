@@ -47,10 +47,10 @@ export function ProviderBadge({
       <Tooltip>
         <TooltipTrigger
           aria-label={`${label} ${publisher ? "publisher" : "provider"}`}
-          className="inline-flex size-6 shrink-0 rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          className="inline-flex size-6 shrink-0 rounded-[6px] border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           render={href ? <Link href={href} /> : <button type="button" />}
         >
-          <Avatar aria-hidden="true" className="size-6">
+          <Avatar aria-hidden="true" className="size-6 rounded-[6px]">
             {logoUrl && <BrandImage alt="" className="object-contain" src={logoUrl} />}
             <AvatarFallback className="text-[8px]">{label.slice(0, 1)}</AvatarFallback>
           </Avatar>
@@ -75,7 +75,15 @@ export function ProviderBadge({
               : "gap-1.5 text-xs",
         )}
       >
-        <Avatar className={size === "xl" ? "size-8" : size === "lg" ? "size-5" : "size-4"}>
+        <Avatar
+          className={
+            size === "xl"
+              ? "size-8 rounded-[8px]"
+              : size === "lg"
+                ? "size-5 rounded-[5px]"
+                : "size-4 rounded-[4px]"
+          }
+        >
           {logoUrl && <BrandImage alt="" className="object-contain" src={logoUrl} />}
           <AvatarFallback
             className={
@@ -107,7 +115,15 @@ export function ProviderBadge({
       variant="secondary"
     >
       {logoUrl && (
-        <Avatar className={size === "xl" ? "size-7" : size === "lg" ? "size-5" : "size-3.5"}>
+        <Avatar
+          className={
+            size === "xl"
+              ? "size-7 rounded-[7px]"
+              : size === "lg"
+                ? "size-5 rounded-[5px]"
+                : "size-3.5 rounded-[3.5px]"
+          }
+        >
           <BrandImage alt="" className="object-contain" src={logoUrl} />
           <AvatarFallback
             className={size === "xl" ? "text-xs" : size === "lg" ? "text-[9px]" : "text-[7px]"}

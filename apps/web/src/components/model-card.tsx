@@ -56,11 +56,11 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
       <CardHeader>
         <div className="flex min-w-0 items-start gap-4">
           {!model.isStealth && (
-            <Avatar className="bg-card ring-1 ring-foreground/10" size="lg">
+            <Avatar className="rounded-[10px] bg-card ring-1 ring-foreground/10" size="lg">
               {providerLogoUrl && (
                 <BrandImage
                   alt={`${model.author} logo`}
-                  className="object-contain p-1"
+                  className="object-contain p-0.5 sm:p-1"
                   src={providerLogoUrl}
                 />
               )}
