@@ -151,7 +151,7 @@ export function ChangelogFeed({ entries, activeModelIds }: ChangelogFeedProps) {
                         href={`/providers/${entry.provider}`}
                         className="inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-ring"
                       >
-                        <Avatar className="size-4 rounded-sm border border-border/50">
+                        <Avatar className="size-4 rounded-[4px] border border-border/50">
                           {logoUrl && (
                             <BrandImage alt="" className="object-contain" src={logoUrl} />
                           )}

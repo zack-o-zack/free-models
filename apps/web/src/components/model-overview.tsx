@@ -30,8 +30,10 @@ export function ModelOverview({
       <div className="min-w-0">
         <div className="flex items-start gap-3 sm:gap-5">
           {!model.isStealth && (
-            <Avatar className="mt-1 size-10 shrink-0 rounded-2xl bg-card text-card-foreground sm:size-14">
-              {logoUrl && <BrandImage src={logoUrl} alt="" className="object-contain p-2" />}
+            <Avatar className="mt-1 size-10 shrink-0 rounded-[10px] bg-logo-surface ring-1 ring-border/80 text-card-foreground sm:size-14 sm:rounded-[14px]">
+              {logoUrl && (
+                <BrandImage src={logoUrl} alt="" className="object-contain p-1 sm:p-1.5" />
+              )}
               <AvatarFallback className="bg-card font-semibold">
                 {model.author.slice(0, 2)}
               </AvatarFallback>
@@ -136,11 +138,11 @@ export function ModelEssentials({ model }: { model: ModelSummary }) {
         <span>Providers</span>
         <span aria-hidden="true" className="ml-auto flex shrink-0 items-center -space-x-2">
           {model.providers.slice(0, 3).map((provider) => (
-            <Avatar key={provider} className="size-7 bg-card ring-2 ring-primary">
+            <Avatar key={provider} className="size-7 rounded-[7px] bg-card ring-2 ring-primary">
               <BrandImage
                 src={providerFaviconUrl(model.providerDocs[provider]) ?? undefined}
                 alt=""
-                className="object-contain p-1"
+                className="object-contain p-0.5"
               />
               <AvatarFallback className="bg-card text-[9px] font-semibold text-card-foreground">
                 {getProviderName(provider, model.providerNames).slice(0, 2)}
@@ -148,7 +150,7 @@ export function ModelEssentials({ model }: { model: ModelSummary }) {
             </Avatar>
           ))}
           {model.providers.length > 3 && (
-            <span className="relative flex h-7 min-w-7 items-center justify-center rounded-full bg-primary-foreground px-1.5 text-[10px] font-semibold text-primary ring-2 ring-primary tabular-nums">
+            <span className="relative flex h-7 min-w-7 items-center justify-center rounded-[7px] bg-primary-foreground px-1.5 text-[10px] font-semibold text-primary ring-2 ring-primary tabular-nums">
               +{model.providers.length - 3}
             </span>
           )}
