@@ -43,14 +43,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   type CompareRow,
   compareRows,
@@ -64,7 +58,7 @@ import {
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
 import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
-import { getProviderName, publisherFaviconUrl } from "@/lib/provider-logos";
+import { getProviderName, providerFaviconUrl, publisherFaviconUrl } from "@/lib/provider-logos";
 import { cn } from "@/lib/utils";
 
 const MODEL_COLORS = [
@@ -135,6 +129,9 @@ function useCompareState(models: ModelSummary[]) {
     requestedIds,
     selectedModels,
     highlightBest,
+    setModels(ids: string[]) {
+      replaceState(ids.slice(0, MAX_COMPARE_MODELS));
+    },
     addModel(id: string) {
       if (requestedIds.includes(id) || requestedIds.length >= MAX_COMPARE_MODELS) {
         return;
@@ -247,16 +244,12 @@ function CompareModelHeader({
   model,
   allModels,
   selectedIds,
-  selectedProvider,
-  onSelectProvider,
   onRemove,
   onReplace,
 }: {
   model: ModelSummary;
   allModels: ModelSummary[];
   selectedIds: string[];
-  selectedProvider?: string;
-  onSelectProvider: (modelId: string, provider: string) => void;
   onRemove: (id: string) => void;
   onReplace: (oldId: string, newId: string) => void;
 }) {
@@ -341,105 +334,147 @@ function CompareModelHeader({
         </div>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+      <div className="mt-3 flex items-center">
         {model.providers.length > 0 ? (
-          model.providers.map((provider) => (
-            <ProviderBadge
-              key={provider}
-              plain
-              provider={provider}
-              names={model.providerNames}
-              docs={model.providerDocs[provider]}
-            />
-          ))
+          <div className="flex items-center -space-x-1.5">
+            {model.providers.map((provider) => {
+              const label = getProviderName(provider, model.providerNames);
+              const iconUrl = providerFaviconUrl(model.providerDocs[provider]);
+              return (
+                <Tooltip key={provider}>
+                  <TooltipTrigger
+                    aria-label={label}
+                    className="inline-flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                  >
+                    <Avatar className="size-6 bg-card ring-2 ring-card shadow-xs">
+                      {iconUrl ? (
+                        <BrandImage src={iconUrl} alt="" className="object-contain p-0.5" />
+                      ) : null}
+                      <AvatarFallback className="text-[8px] font-semibold">
+                        {label.slice(0, 2).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                  </TooltipTrigger>
+                  <TooltipContent>{label}</TooltipContent>
+                </Tooltip>
+              );
+            })}
+          </div>
         ) : (
           <span className="text-xs text-muted-foreground">Provider not listed</span>
         )}
       </div>
-
-      {model.providers.length > 1 && (
-        <div className="mt-3">
-          <Select
-            value={selectedProvider || "all"}
-            onValueChange={(val) => onSelectProvider(model.id, val ?? "all")}
-          >
-            <SelectTrigger size="sm" className="h-8 w-full text-xs">
-              <SelectValue placeholder="All providers" />
-            </SelectTrigger>
-            <SelectContent align="start">
-              <SelectItem value="all">
-                <span className="font-medium">All providers ({model.providers.length})</span>
-              </SelectItem>
-              {model.providers.map((provider) => (
-                <SelectItem key={provider} value={provider}>
-                  <span className="truncate">{getProviderName(provider, model.providerNames)}</span>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      )}
     </div>
   );
 }
 
-function CompareEmptySlot({
+function EmptyModelSlot({
   allModels,
   selectedIds,
-  onAdd,
+  onSelect,
 }: {
   allModels: ModelSummary[];
   selectedIds: string[];
-  onAdd: (id: string) => void;
+  onSelect: (id: string) => void;
 }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex h-full min-h-[140px] w-full flex-col items-center justify-center rounded-[20px] border border-dashed border-border bg-card/40 p-4 text-center">
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger
-          render={
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="gap-2 rounded-xl text-xs font-semibold"
-            />
-          }
-        >
-          <Plus aria-hidden="true" className="size-3.5" />
-          <span>Add model</span>
-        </PopoverTrigger>
-        <ModelPicker
-          models={allModels}
-          selectedIds={selectedIds}
-          onSelect={(id) => {
-            onAdd(id);
-            setOpen(false);
-          }}
-          title="Add model to comparison"
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger
+        render={
+          <button
+            type="button"
+            className="group flex h-28 w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border border-dashed border-border/80 bg-card/40 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-card hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+          />
+        }
+      >
+        <Plus
+          aria-hidden="true"
+          className="size-4 shrink-0 transition-transform group-hover:scale-110"
         />
-      </Popover>
-      <span className="mt-2 text-xs text-muted-foreground">Compare up to 4 models</span>
-    </div>
+        <span>Select a model</span>
+      </PopoverTrigger>
+      <ModelPicker
+        models={allModels}
+        selectedIds={selectedIds}
+        onSelect={(id) => {
+          onSelect(id);
+          setOpen(false);
+        }}
+        title="Select a model"
+      />
+    </Popover>
   );
 }
 
-function CompareEmptyState({ onAddModel }: { onAddModel: () => void }) {
+function CompareEmptyState({
+  allModels,
+  onSelectModel,
+  onCompareModels,
+}: {
+  allModels: ModelSummary[];
+  onSelectModel: (id: string) => void;
+  onCompareModels: (ids: string[]) => void;
+}) {
+  const topCodingModels = useMemo(() => {
+    return [...allModels]
+      .filter((m) => typeof m.codingScore === "number" && m.codingScore > 0)
+      .sort((a, b) => (b.codingScore ?? 0) - (a.codingScore ?? 0))
+      .slice(0, 4);
+  }, [allModels]);
+
   return (
-    <section className="rounded-[24px] border border-border bg-card p-8 text-center sm:p-12">
-      <h2 className="font-heading text-2xl font-extrabold tracking-[-0.035em]">
-        Compare models side by side
-      </h2>
-      <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base">
-        Select at least two free models to compare context windows, capabilities, providers, limits,
-        and benchmark scores.
-      </p>
-      <Button type="button" className="mt-6 gap-2" onClick={onAddModel}>
-        <Plus aria-hidden="true" className="size-4" />
-        Add model
-      </Button>
-    </section>
+    <div className="space-y-6">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <EmptyModelSlot allModels={allModels} selectedIds={[]} onSelect={onSelectModel} />
+        <EmptyModelSlot allModels={allModels} selectedIds={[]} onSelect={onSelectModel} />
+      </div>
+
+      {topCodingModels.length > 0 && (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <button
+            type="button"
+            onClick={() => onCompareModels(topCodingModels.map((m) => m.id))}
+            className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-5 text-left transition-all hover:border-foreground/30 hover:bg-muted/30 hover:shadow-xs focus-visible:outline-2 focus-visible:outline-ring cursor-pointer"
+          >
+            <div>
+              <div className="flex items-center -space-x-1.5">
+                {topCodingModels.map((model) => {
+                  const publisherLogo = publisherFaviconUrl(model.id.split("/")[0]);
+                  return (
+                    <Avatar
+                      key={model.id}
+                      className="size-6 bg-card ring-2 ring-card shadow-xs"
+                      aria-hidden="true"
+                    >
+                      {publisherLogo ? (
+                        <BrandImage src={publisherLogo} alt="" className="object-contain p-0.5" />
+                      ) : (
+                        <AvatarFallback className="text-[8px] font-bold">
+                          {model.author.slice(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                  );
+                })}
+              </div>
+
+              <h2 className="mt-3 font-heading text-sm font-bold text-foreground sm:text-base">
+                Best for code
+              </h2>
+              <p className="mt-1 text-xs leading-normal text-muted-foreground">
+                Top scores on the Artificial Analysis Coding Index.
+              </p>
+            </div>
+
+            <p className="mt-4 truncate text-xs text-muted-foreground/80">
+              {topCodingModels.map((m) => m.name).join(" · ")}
+            </p>
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -497,7 +532,7 @@ function formatModalityList(values: string[]): React.ReactNode {
   );
 }
 
-function formatLimitList(model: ModelSummary, selectedProvider?: string): React.ReactNode {
+function formatLimitList(model: ModelSummary): React.ReactNode {
   const allLimits = model.connections.flatMap((connection) =>
     connection.limits.map((term) => ({
       provider: connection.provider,
@@ -505,23 +540,20 @@ function formatLimitList(model: ModelSummary, selectedProvider?: string): React.
     })),
   );
 
-  const limits =
-    selectedProvider && selectedProvider !== "all"
-      ? allLimits.filter((item) => item.provider === selectedProvider)
-      : allLimits;
-
-  if (limits.length === 0) return <NotListed />;
+  if (allLimits.length === 0) return <NotListed />;
 
   return (
     <ul className="space-y-2">
-      {limits.slice(0, 5).map(({ provider, term }) => (
+      {allLimits.slice(0, 5).map(({ provider, term }) => (
         <li key={`${provider}-${term}`} className="text-xs leading-5">
           <span className="font-semibold">{getProviderName(provider, model.providerNames)}:</span>{" "}
           {term}
         </li>
       ))}
-      {limits.length > 5 && (
-        <li className="text-xs text-muted-foreground">+{limits.length - 5} more listed limits</li>
+      {allLimits.length > 5 && (
+        <li className="text-xs text-muted-foreground">
+          +{allLimits.length - 5} more listed limits
+        </li>
       )}
     </ul>
   );
@@ -531,12 +563,10 @@ function CompareValue({
   model,
   row,
   value,
-  selectedProvider,
 }: {
   model: ModelSummary;
   row: CompareRow;
   value: unknown;
-  selectedProvider?: string;
 }) {
   switch (row.kind) {
     case "number": {
@@ -604,7 +634,7 @@ function CompareValue({
       );
 
     case "free-limit":
-      return formatLimitList(model, selectedProvider);
+      return formatLimitList(model);
 
     case "text":
       return typeof value === "string" && value.length > 0 ? value : <NotListed />;
@@ -617,15 +647,11 @@ function CompareValue({
 function CompareTableRow({
   row,
   models,
-  hasEmptySlot,
   highlightBest,
-  selectedProviders,
 }: {
   row: CompareRow;
   models: ModelSummary[];
-  hasEmptySlot: boolean;
   highlightBest: boolean;
-  selectedProviders: Record<string, string>;
 }) {
   const bestIndexes = highlightBest ? getBestIndexes(models, row) : new Set<number>();
 
@@ -657,37 +683,21 @@ function CompareTableRow({
           >
             {isBest && <span className="sr-only">Best listed value. </span>}
 
-            <CompareValue
-              model={model}
-              row={row}
-              value={value}
-              selectedProvider={selectedProviders[model.id]}
-            />
+            <CompareValue model={model} row={row} value={value} />
           </td>
         );
       })}
-
-      {hasEmptySlot && (
-        <td
-          aria-hidden="true"
-          className="border-b border-border/60 bg-card/20 px-4 py-4 align-middle text-muted-foreground/40 sm:px-5"
-        >
-          <span className="text-xs italic">—</span>
-        </td>
-      )}
     </tr>
   );
 }
 
 function DesignArenaSectionRows({
   models,
-  hasEmptySlot,
   highlightBest,
   arenaView,
   onToggleView,
 }: {
   models: ModelSummary[];
-  hasEmptySlot: boolean;
   highlightBest: boolean;
   arenaView: "table" | "graph";
   onToggleView: (view: "table" | "graph") => void;
@@ -739,7 +749,7 @@ function DesignArenaSectionRows({
       <tr>
         <th
           scope="colgroup"
-          colSpan={models.length + (hasEmptySlot ? 2 : 1)}
+          colSpan={models.length + 1}
           className="border-b bg-card px-4 py-3 text-left sm:px-5"
         >
           <div className="flex items-center gap-3">
@@ -857,23 +867,13 @@ function DesignArenaSectionRows({
                 </td>
               );
             })}
-
-            {hasEmptySlot && catIndex === 0 && (
-              <td
-                rowSpan={DESIGN_ARENA_CATEGORIES.length}
-                aria-hidden="true"
-                className="border-b border-border/60 bg-card/20 px-4 py-4 align-middle text-center text-muted-foreground/40 sm:px-5"
-              >
-                <span className="text-xs italic">—</span>
-              </td>
-            )}
           </tr>
         ))}
 
       {arenaView === "graph" && (
         <tr>
           <td
-            colSpan={models.length + (hasEmptySlot ? 2 : 1)}
+            colSpan={models.length + 1}
             className="border-b border-border/60 bg-card/30 p-4 sm:p-8"
           >
             {modelsWithBenchmarks.length === 0 ? (
@@ -951,21 +951,15 @@ function CompareTable({
   allModels,
   selectedIds,
   highlightBest,
-  selectedProviders,
-  onSelectProvider,
   onRemove,
   onReplace,
-  onAdd,
 }: {
   models: ModelSummary[];
   allModels: ModelSummary[];
   selectedIds: string[];
   highlightBest: boolean;
-  selectedProviders: Record<string, string>;
-  onSelectProvider: (modelId: string, provider: string) => void;
   onRemove: (id: string) => void;
   onReplace: (oldId: string, newId: string) => void;
-  onAdd: (id: string) => void;
 }) {
   const sections = [
     ["overview", "Overview"],
@@ -975,9 +969,7 @@ function CompareTable({
   ] as const;
 
   const [arenaView, setArenaView] = useState<"table" | "graph">("table");
-  const hasEmptySlot = models.length < MAX_COMPARE_MODELS;
-  const totalCols = models.length + (hasEmptySlot ? 1 : 0);
-  const modelWidthPercent = `${(100 - 24) / totalCols}%`;
+  const modelWidthPercent = `${(100 - 24) / models.length}%`;
 
   return (
     <div className="overflow-hidden rounded-[24px] border border-border">
@@ -1007,9 +999,6 @@ function CompareTable({
                 className="w-[240px] sm:w-auto"
               />
             ))}
-            {hasEmptySlot && (
-              <col style={{ width: modelWidthPercent }} className="w-[240px] sm:w-auto" />
-            )}
           </colgroup>
 
           <thead className="sticky top-0 z-20 bg-muted">
@@ -1031,19 +1020,11 @@ function CompareTable({
                     model={model}
                     allModels={allModels}
                     selectedIds={selectedIds}
-                    selectedProvider={selectedProviders[model.id]}
-                    onSelectProvider={onSelectProvider}
                     onRemove={onRemove}
                     onReplace={onReplace}
                   />
                 </th>
               ))}
-
-              {hasEmptySlot && (
-                <th scope="col" className="border-b px-3 py-3 text-left align-top sm:px-4">
-                  <CompareEmptySlot allModels={allModels} selectedIds={selectedIds} onAdd={onAdd} />
-                </th>
-              )}
             </tr>
           </thead>
 
@@ -1055,7 +1036,7 @@ function CompareTable({
                 <tr>
                   <th
                     scope="colgroup"
-                    colSpan={models.length + (hasEmptySlot ? 2 : 1)}
+                    colSpan={models.length + 1}
                     className="border-b bg-background px-4 py-4 text-left font-heading text-lg font-extrabold tracking-[-0.025em] sm:px-5"
                   >
                     {title}
@@ -1067,16 +1048,13 @@ function CompareTable({
                     key={row.id}
                     row={row}
                     models={models}
-                    hasEmptySlot={hasEmptySlot}
                     highlightBest={highlightBest}
-                    selectedProviders={selectedProviders}
                   />
                 ))}
 
                 {section === "benchmarks" && (
                   <DesignArenaSectionRows
                     models={models}
-                    hasEmptySlot={hasEmptySlot}
                     highlightBest={highlightBest}
                     arenaView={arenaView}
                     onToggleView={setArenaView}
@@ -1091,127 +1069,12 @@ function CompareTable({
   );
 }
 
-function CompareSideBySideSummary({ models }: { models: ModelSummary[] }) {
-  if (models.length < 2) return null;
-
-  const names = models.map((m) => m.name).join(" vs ");
-
-  return (
-    <section aria-labelledby="side-by-side-summary-heading" className="mt-16 max-w-4xl">
-      <h2
-        id="side-by-side-summary-heading"
-        className="font-heading text-2xl font-extrabold tracking-[-0.035em] sm:text-3xl"
-      >
-        {names}: side-by-side summary
-      </h2>
-
-      <div className="mt-6 space-y-4 text-base leading-7 text-muted-foreground">
-        <p>
-          {models.map((m) => m.name).join(", ")} are available through free providers in the
-          catalogue, allowing developers to compare context sizes, capabilities, and usage limits
-          without paid commitments.
-        </p>
-
-        {models.map((m) => (
-          <p key={m.id}>
-            <strong className="font-semibold text-foreground">{m.name}</strong>, from {m.author},
-            features a{" "}
-            <span className="font-semibold text-foreground tabular-nums">
-              {formatContext(m.contextLength)} token
-            </span>{" "}
-            context window and is offered through{" "}
-            {m.providers.length === 1
-              ? `1 free provider (${getProviderName(m.providers[0], m.providerNames)})`
-              : `${m.providers.length} free providers (${m.providers
-                  .map((p) => getProviderName(p, m.providerNames))
-                  .join(", ")})`}
-            .
-          </p>
-        ))}
-      </div>
-
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div className="rounded-[20px] border border-border bg-card p-5">
-          <h3 className="font-heading text-xs font-bold tracking-wider text-muted-foreground uppercase">
-            Context Windows
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm">
-            {models.map((m) => (
-              <li key={m.id} className="flex items-center justify-between gap-2">
-                <span className="truncate text-muted-foreground">{m.name}</span>
-                <span className="font-semibold tabular-nums text-foreground">
-                  {formatContext(m.contextLength)}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="rounded-[20px] border border-border bg-card p-5">
-          <h3 className="font-heading text-xs font-bold tracking-wider text-muted-foreground uppercase">
-            Capabilities
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm">
-            {models.map((m) => {
-              const caps = [
-                m.supportsReasoning && "Reasoning",
-                m.supportsTools && "Tool use",
-                (m.inputModalities.some((x) => x.toLowerCase() !== "text") ||
-                  m.outputModalities.some((x) => x.toLowerCase() !== "text")) &&
-                  "Multimodal",
-              ].filter(Boolean);
-
-              return (
-                <li key={m.id} className="flex items-center justify-between gap-2">
-                  <span className="truncate text-muted-foreground">{m.name}</span>
-                  <span className="font-medium text-foreground">
-                    {caps.length > 0 ? caps.join(", ") : "Standard text"}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-
-        <div className="rounded-[20px] border border-border bg-card p-5">
-          <h3 className="font-heading text-xs font-bold tracking-wider text-muted-foreground uppercase">
-            Free Providers
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm">
-            {models.map((m) => (
-              <li key={m.id} className="flex items-center justify-between gap-2">
-                <span className="truncate text-muted-foreground">{m.name}</span>
-                <span className="font-medium text-foreground">
-                  {m.providers.length} {m.providers.length === 1 ? "provider" : "providers"}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="mt-6 flex flex-wrap gap-3">
-        {models.map((m) => (
-          <Link
-            key={m.id}
-            href={modelHref(m.id)}
-            prefetch={false}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-medium transition-colors hover:border-foreground/30 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-ring"
-          >
-            <span>{m.name} details & providers</span>
-            <span aria-hidden="true">→</span>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export function ModelCompare({ models }: { models: ModelSummary[] }) {
   const {
     requestedIds,
     selectedModels,
     highlightBest,
+    setModels,
     addModel,
     removeModel,
     replaceModel,
@@ -1220,14 +1083,6 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
 
   const [pickerOpen, setPickerOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [selectedProviders, setSelectedProviders] = useState<Record<string, string>>({});
-
-  function handleSelectProvider(modelId: string, provider: string) {
-    setSelectedProviders((prev) => ({
-      ...prev,
-      [modelId]: provider,
-    }));
-  }
 
   const unknownIds = requestedIds.filter((id) => !models.some((model) => model.id === id));
 
@@ -1281,60 +1136,66 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
       )}
 
       {/* Toolbar Controls */}
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <Switch
-            id="compare-highlight-best"
-            checked={highlightBest}
-            onCheckedChange={setHighlightBest}
-          />
-          <label
-            htmlFor="compare-highlight-best"
-            className="cursor-pointer select-none text-sm font-medium"
-          >
-            Highlight best
-          </label>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <Button type="button" variant="outline" onClick={copyLink} className="gap-2">
-            {copied ? (
-              <Check aria-hidden="true" className="size-4" />
-            ) : (
-              <Copy aria-hidden="true" className="size-4" />
-            )}
-            <span>{copied ? "Copied" : "Share comparison"}</span>
-          </Button>
-
-          <Popover open={pickerOpen} onOpenChange={setPickerOpen}>
-            <PopoverTrigger
-              render={
-                <Button
-                  type="button"
-                  className="gap-2"
-                  disabled={selectedModels.length >= MAX_COMPARE_MODELS}
-                />
-              }
-            >
-              <Plus aria-hidden="true" className="size-4" />
-              <span>Add model</span>
-            </PopoverTrigger>
-            <ModelPicker
-              models={models}
-              selectedIds={requestedIds}
-              onSelect={(id) => {
-                addModel(id);
-                setPickerOpen(false);
-              }}
-              title="Add model to comparison"
+      {selectedModels.length > 0 && (
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <Switch
+              id="compare-highlight-best"
+              checked={highlightBest}
+              onCheckedChange={setHighlightBest}
             />
-          </Popover>
-        </div>
-      </div>
+            <label
+              htmlFor="compare-highlight-best"
+              className="cursor-pointer select-none text-sm font-medium"
+            >
+              Highlight best
+            </label>
+          </div>
 
-      <div className="mt-6">
+          <div className="flex flex-wrap items-center gap-2">
+            <Button type="button" variant="outline" onClick={copyLink} className="gap-2">
+              {copied ? (
+                <Check aria-hidden="true" className="size-4" />
+              ) : (
+                <Copy aria-hidden="true" className="size-4" />
+              )}
+              <span>{copied ? "Copied" : "Share comparison"}</span>
+            </Button>
+
+            <Popover open={pickerOpen} onOpenChange={setPickerOpen}>
+              <PopoverTrigger
+                render={
+                  <Button
+                    type="button"
+                    className="gap-2"
+                    disabled={selectedModels.length >= MAX_COMPARE_MODELS}
+                  />
+                }
+              >
+                <Plus aria-hidden="true" className="size-4" />
+                <span>Add model</span>
+              </PopoverTrigger>
+              <ModelPicker
+                models={models}
+                selectedIds={requestedIds}
+                onSelect={(id) => {
+                  addModel(id);
+                  setPickerOpen(false);
+                }}
+                title="Add model to comparison"
+              />
+            </Popover>
+          </div>
+        </div>
+      )}
+
+      <div className={cn(selectedModels.length > 0 ? "mt-6" : "mt-8")}>
         {selectedModels.length === 0 ? (
-          <CompareEmptyState onAddModel={() => setPickerOpen(true)} />
+          <CompareEmptyState
+            allModels={models}
+            onSelectModel={addModel}
+            onCompareModels={setModels}
+          />
         ) : selectedModels.length === 1 ? (
           <div className="space-y-6">
             <OneModelNotice onAddModel={() => setPickerOpen(true)} />
@@ -1343,11 +1204,8 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
               allModels={models}
               selectedIds={requestedIds}
               highlightBest={highlightBest}
-              selectedProviders={selectedProviders}
-              onSelectProvider={handleSelectProvider}
               onRemove={removeModel}
               onReplace={replaceModel}
-              onAdd={addModel}
             />
           </div>
         ) : (
@@ -1356,17 +1214,11 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
             allModels={models}
             selectedIds={requestedIds}
             highlightBest={highlightBest}
-            selectedProviders={selectedProviders}
-            onSelectProvider={handleSelectProvider}
             onRemove={removeModel}
             onReplace={replaceModel}
-            onAdd={addModel}
           />
         )}
       </div>
-
-      {/* Side-by-side Summary */}
-      <CompareSideBySideSummary models={selectedModels} />
 
       {/* Frequently Asked Questions */}
       <section aria-labelledby="compare-faq-heading" className="mt-16 max-w-3xl">
