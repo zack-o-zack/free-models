@@ -26,6 +26,7 @@ import {
   PolarRadiusAxis,
   Radar,
   RadarChart,
+  Tooltip as RechartsTooltip,
   ResponsiveContainer,
 } from "recharts";
 
@@ -908,17 +909,55 @@ function DesignArenaSectionRows({
                         axisLine={false}
                         tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
                       />
+                      <RechartsTooltip
+                        content={({ active, payload, label }) => {
+                          if (!active || !payload || payload.length === 0) return null;
+                          return (
+                            <div className="min-w-[190px] rounded-xl border border-border bg-card p-3 shadow-lg">
+                              <p className="mb-2 font-heading text-sm font-bold text-foreground">
+                                {label}
+                              </p>
+                              <div className="space-y-1.5 text-xs">
+                                {payload.map((entry) => (
+                                  <div
+                                    key={String(entry.dataKey)}
+                                    className="flex items-center justify-between gap-4"
+                                  >
+                                    <div className="flex min-w-0 items-center gap-2">
+                                      <span
+                                        className="size-2.5 shrink-0 rounded-full"
+                                        style={{ backgroundColor: entry.color }}
+                                        aria-hidden="true"
+                                      />
+                                      <span className="truncate font-medium text-foreground">
+                                        {entry.name}
+                                      </span>
+                                    </div>
+                                    <span className="shrink-0 font-semibold tabular-nums text-foreground">
+                                      {typeof entry.value === "number"
+                                        ? entry.value.toFixed(2)
+                                        : entry.value}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        }}
+                      />
                       {modelsWithBenchmarks.map((model, idx) => {
                         const color = MODEL_COLORS[idx % MODEL_COLORS.length];
                         return (
                           <Radar
                             key={model.id}
-                            name={model.name}
+                            name={getCleanModelName(model)}
                             dataKey={model.id}
                             stroke={color}
                             strokeWidth={2}
                             fill={color}
                             fillOpacity={0.15}
+                            dot={{ r: 3, fill: color, strokeWidth: 0 }}
+                            activeDot={{ r: 5, fill: color, stroke: "var(--card)", strokeWidth: 2 }}
                           />
                         );
                       })}
@@ -936,7 +975,7 @@ function DesignArenaSectionRows({
                           style={{ backgroundColor: color }}
                           aria-hidden="true"
                         />
-                        <span className="text-foreground">{model.name}</span>
+                        <span className="text-foreground">{getCleanModelName(model)}</span>
                       </div>
                     );
                   })}
