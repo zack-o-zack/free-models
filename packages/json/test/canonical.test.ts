@@ -117,4 +117,39 @@ describe("canonical model names", () => {
       },
     });
   });
+
+  test("normalizes document and pdf output and input modalities to file", () => {
+    expect(
+      normalizeCanonicalMetadata({
+        architecture: {
+          input_modalities: ["text", "pdf", "document", "file"],
+          output_modalities: ["document", "pdf"],
+        },
+      }),
+    ).toEqual({
+      architecture: {
+        input_modalities: ["text", "file"],
+        output_modalities: ["file"],
+      },
+    });
+
+    expect(
+      canonicalModelWithGeneratedFields(
+        { id: "mistralai/mistral-ocr-2512", name: "Mistral OCR" },
+        {
+          architecture: {
+            input_modalities: ["image", "document"],
+            output_modalities: ["text", "pdf"],
+          },
+        },
+      ),
+    ).toEqual({
+      id: "mistralai/mistral-ocr-2512",
+      name: "Mistral OCR",
+      architecture: {
+        input_modalities: ["image", "file"],
+        output_modalities: ["text", "file"],
+      },
+    });
+  });
 });

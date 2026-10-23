@@ -7798,7 +7798,7 @@
           "input_modalities": [
             "text",
             "image",
-            "pdf"
+            "file"
           ],
           "output_modalities": [
             "text"
@@ -11842,7 +11842,7 @@
         "architecture": {
           "input_modalities": [
             "image",
-            "document"
+            "file"
           ],
           "output_modalities": [
             "text",
@@ -11864,7 +11864,7 @@
         "architecture": {
           "input_modalities": [
             "image",
-            "document"
+            "file"
           ],
           "output_modalities": [
             "text",
@@ -15539,7 +15539,7 @@
           "input_modalities": [
             "text",
             "image",
-            "pdf"
+            "file"
           ],
           "output_modalities": [
             "text"
@@ -16175,7 +16175,7 @@
           "input_modalities": [
             "text",
             "image",
-            "pdf"
+            "file"
           ],
           "output_modalities": [
             "text"
@@ -19267,7 +19267,7 @@
           "input_modalities": [
             "text",
             "image",
-            "pdf"
+            "file"
           ],
           "output_modalities": [
             "text"
@@ -19303,7 +19303,7 @@
           "input_modalities": [
             "text",
             "image",
-            "pdf"
+            "file"
           ],
           "output_modalities": [
             "text"
@@ -22090,7 +22090,7 @@
           "input_modalities": [
             "text",
             "image",
-            "pdf"
+            "file"
           ],
           "output_modalities": [
             "text"
@@ -22127,7 +22127,7 @@
           "input_modalities": [
             "text",
             "image",
-            "pdf"
+            "file"
           ],
           "output_modalities": [
             "text"
