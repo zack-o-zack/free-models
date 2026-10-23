@@ -11,6 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { models } = await getModels();
   return [
     { url: absoluteUrl("/") },
+    { url: absoluteUrl("/compare") },
     { url: absoluteUrl("/changelog") },
     ...Array.from({ length: cataloguePageCount(models.length) - 1 }, (_, index) => ({
       url: absoluteUrl(cataloguePageHref(index + 2)),

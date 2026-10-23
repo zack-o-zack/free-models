@@ -1,4 +1,5 @@
 import { ArrowDown, CalendarDays, CircleCheck, EyeOff, Gauge } from "lucide-react";
+import Link from "next/link";
 import { BrandImage } from "@/components/brand-image";
 import { ExpandableModelDescription } from "@/components/expandable-model-description";
 import { ModelModalities } from "@/components/model-modalities";
@@ -154,6 +155,15 @@ export function ModelEssentials({ model }: { model: ModelSummary }) {
           )}
         </span>
         <ArrowDown className="ml-1 size-4 shrink-0" aria-hidden="true" />
+      </Button>
+      <Button
+        render={<Link href={`/compare?models=${encodeURIComponent(model.id)}`} />}
+        nativeButton={false}
+        variant="outline"
+        size="lg"
+        className="mt-2.5 h-12 w-full justify-center gap-2 rounded-[24px] text-sm"
+      >
+        Compare this model
       </Button>
     </div>
   );
