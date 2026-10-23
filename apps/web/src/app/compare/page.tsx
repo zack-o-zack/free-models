@@ -46,7 +46,7 @@ export default async function ComparePage() {
       <JsonLd data={compareJsonLd(models)} />
       <SiteHeader modelCount={models.length} githubStars={githubStars} />
       <main id="top" tabIndex={-1}>
-        <Suspense fallback={<div className="container py-8 sm:py-10 lg:max-w-[1280px]" />}>
+        <Suspense fallback={<div className="container py-8 sm:py-10 max-w-[1400px]" />}>
           <ModelCompare models={models} />
         </Suspense>
       </main>

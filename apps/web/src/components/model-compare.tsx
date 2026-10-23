@@ -240,6 +240,13 @@ function ModelPicker({
   );
 }
 
+function getCleanModelName(model: ModelSummary): string {
+  if (model.author && model.name.toLowerCase().startsWith(`${model.author.toLowerCase()}: `)) {
+    return model.name.slice(model.author.length + 2).trim();
+  }
+  return model.name.replace(/^[^:]+:\s*/, "").trim();
+}
+
 function CompareModelHeader({
   model,
   allModels,
@@ -255,13 +262,17 @@ function CompareModelHeader({
 }) {
   const [changeOpen, setChangeOpen] = useState(false);
   const publisherLogo = publisherFaviconUrl(model.id.split("/")[0]);
+  const cleanName = getCleanModelName(model);
 
   return (
-    <div className="w-full rounded-[20px] bg-card p-4 sm:p-5">
+    <div className="w-full rounded-2xl border border-border/80 bg-card p-3 sm:p-3.5 shadow-2xs">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <Avatar aria-hidden="true" className="size-7 shrink-0 bg-card ring-1 ring-border">
+            <Avatar
+              aria-hidden="true"
+              className="size-6 shrink-0 rounded-md bg-card ring-1 ring-border"
+            >
               {publisherLogo ? (
                 <BrandImage
                   alt={`${model.author} logo`}
@@ -269,7 +280,7 @@ function CompareModelHeader({
                   src={publisherLogo}
                 />
               ) : (
-                <AvatarFallback className="text-[10px] font-bold">
+                <AvatarFallback className="text-[9px] font-bold">
                   {model.author.slice(0, 2).toUpperCase()}
                 </AvatarFallback>
               )}
@@ -280,13 +291,13 @@ function CompareModelHeader({
                 render={
                   <button
                     type="button"
-                    aria-label={`Change model ${model.name}`}
-                    className="group inline-flex min-w-0 items-center gap-1.5 rounded-sm text-left font-heading text-sm font-extrabold leading-tight tracking-[-0.025em] transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring sm:text-base"
+                    aria-label={`Change model ${cleanName}`}
+                    className="group inline-flex min-w-0 max-w-full items-center gap-1 rounded-sm text-left font-heading text-sm font-bold leading-tight tracking-[-0.02em] transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
                   />
                 }
               >
                 <span className="truncate" title={model.name}>
-                  {model.name}
+                  {cleanName}
                 </span>
                 <ChevronDown
                   aria-hidden="true"
@@ -305,7 +316,9 @@ function CompareModelHeader({
             </Popover>
           </div>
 
-          <p className="mt-1 text-xs text-muted-foreground">{model.author}</p>
+          <p className="mt-1 pl-8 text-xs text-muted-foreground truncate" title={model.author}>
+            {model.author}
+          </p>
         </div>
 
         <div className="flex shrink-0 items-center gap-0.5">
@@ -316,7 +329,7 @@ function CompareModelHeader({
             rel="noreferrer"
             aria-label={`View ${model.name} details (opens in new tab)`}
             title="View model details (opens in new tab)"
-            className="flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+            className="flex size-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
           >
             <ExternalLink aria-hidden="true" className="size-3.5" />
           </Link>
@@ -327,14 +340,15 @@ function CompareModelHeader({
             variant="ghost"
             aria-label={`Remove ${model.name} from comparison`}
             onClick={() => onRemove(model.id)}
-            className="size-7 text-muted-foreground hover:text-foreground"
+            className="size-6 text-muted-foreground hover:text-foreground"
           >
-            <X aria-hidden="true" className="size-4" />
+            <X aria-hidden="true" className="size-3.5" />
           </Button>
         </div>
       </div>
 
-      <div className="mt-3 flex items-center">
+      <div className="mt-2.5 flex items-center justify-between gap-2 border-t border-border/50 pt-2.5">
+        <span className="text-[11px] font-medium text-muted-foreground">Providers</span>
         {model.providers.length > 0 ? (
           <div className="flex items-center -space-x-1.5">
             {model.providers.map((provider) => {
@@ -346,11 +360,11 @@ function CompareModelHeader({
                     aria-label={label}
                     className="inline-flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                   >
-                    <Avatar className="size-6 bg-card ring-2 ring-card shadow-xs">
+                    <Avatar className="size-5.5 bg-card ring-2 ring-card shadow-2xs">
                       {iconUrl ? (
                         <BrandImage src={iconUrl} alt="" className="object-contain p-0.5" />
                       ) : null}
-                      <AvatarFallback className="text-[8px] font-semibold">
+                      <AvatarFallback className="text-[7px] font-bold">
                         {label.slice(0, 2).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
@@ -361,7 +375,7 @@ function CompareModelHeader({
             })}
           </div>
         ) : (
-          <span className="text-xs text-muted-foreground">Provider not listed</span>
+          <span className="text-xs text-muted-foreground">None</span>
         )}
       </div>
     </div>
@@ -969,13 +983,15 @@ function CompareTable({
   ] as const;
 
   const [arenaView, setArenaView] = useState<"table" | "graph">("table");
-  const modelWidthPercent = `${(100 - 24) / models.length}%`;
+  const colMinWidth = 280;
+  const metricColWidth = 180;
+  const minTableWidth = Math.max(760, metricColWidth + models.length * colMinWidth);
 
   return (
     <div className="overflow-hidden rounded-[24px] border border-border">
       <div className="flex items-center gap-1.5 border-b bg-muted/50 px-4 py-3 text-xs text-muted-foreground sm:px-5">
-        <MoveHorizontal aria-hidden="true" className="size-3.5 lg:hidden" />
-        <span className="lg:hidden">Scroll to compare</span>
+        <MoveHorizontal aria-hidden="true" className="size-3.5" />
+        <span>Scroll horizontally to compare all models</span>
         <span className="ml-auto hidden text-xs text-muted-foreground sm:inline-block">
           Scores: Artificial Analysis & Design Arena
         </span>
@@ -985,19 +1001,18 @@ function CompareTable({
         aria-label="Selected model comparison"
         // biome-ignore lint/a11y/noNoninteractiveTabindex: The scroll region needs keyboard access to off-screen columns.
         tabIndex={0}
-        className="relative isolate overflow-auto focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+        className="relative isolate overflow-x-auto focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
       >
-        <table className="w-full min-w-[760px] table-fixed border-separate border-spacing-0 text-sm">
+        <table
+          style={{ minWidth: `${minTableWidth}px` }}
+          className="w-full table-fixed border-separate border-spacing-0 text-sm"
+        >
           <caption className="sr-only">Side-by-side comparison of selected free AI models.</caption>
 
           <colgroup>
-            <col className="w-[180px] sm:w-[24%]" />
+            <col style={{ width: `${metricColWidth}px` }} className="w-[180px]" />
             {models.map((model) => (
-              <col
-                key={model.id}
-                style={{ width: modelWidthPercent }}
-                className="w-[240px] sm:w-auto"
-              />
+              <col key={model.id} style={{ minWidth: `${colMinWidth}px` }} />
             ))}
           </colgroup>
 
@@ -1014,7 +1029,7 @@ function CompareTable({
                 <th
                   scope="col"
                   key={model.id}
-                  className="border-b px-3 py-3 text-left align-top sm:px-4"
+                  className="border-b px-2 py-2.5 text-left align-top sm:px-3"
                 >
                   <CompareModelHeader
                     model={model}
@@ -1117,7 +1132,7 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
   ];
 
   return (
-    <div className="container py-8 sm:py-10 lg:max-w-[1280px]">
+    <div className="container py-8 sm:py-10 max-w-[1400px]">
       <PageBreadcrumbs items={breadcrumbItems} className="mb-6" />
 
       <header className="max-w-3xl">
