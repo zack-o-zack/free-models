@@ -123,6 +123,25 @@
       }
     },
     {
+      "model_id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      }
+    },
+    {
       "model_id": "glm-4.5-flash",
       "name": "Glm 4.5 flash",
       "connection": {
