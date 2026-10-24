@@ -193,9 +193,13 @@ function applyMetadataResults(
       ) {
         mergedFresh.description = existing.description;
       }
+      const refreshed = stripReservedMetadataFields(normalizeCanonicalMetadata(mergedFresh));
+      const provenance = existing?.identity_provenance;
       byId.set(
         model.id,
-        sortJsonObject(stripReservedMetadataFields(normalizeCanonicalMetadata(mergedFresh))),
+        sortJsonObject(
+          provenance === undefined ? refreshed : { ...refreshed, identity_provenance: provenance },
+        ),
       );
     }
   }

@@ -86,7 +86,19 @@ jobs:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
           COHERE_TRIAL_API_KEY: ${{ secrets.COHERE_API_KEY }}
           MISTRAL_FREE_API_KEY: ${{ secrets.MISTRAL_FREE_API_KEY }}
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+          JEV_MODEL: ${{ secrets.JEV_MODEL }}
         run: bun packages/json/src/automation/run.ts repair
+
+      - name: Summarise identity outcomes
+        if: ${{ !cancelled() && steps.repair.outcome != '' }}
+        run: |
+          report=.scratch/catalogue-agent-report.json
+          if [[ ! -f "$report" ]]; then
+            echo 'identity outcomes: no report written'
+            exit 0
+          fi
+          jq -r '"identity outcomes: " + ([.resolutions[].outcome] | group_by(.) | map("\(.[0])=\(length)") | join(" ") | if . == "" then "none" else . end) + (if .error then " error=" + (.error | split("\n")[0]) else "" end)' "$report"
 
       - name: Refresh resolved metadata
         if: steps.repair.outcome == 'success'
@@ -151,6 +163,14 @@ jobs:
             echo
             echo 'Failures remain open and are retried on the next schedule. Human commits stop automatic branch replacement.'
             echo 'The model has no shell, repository credentials, or merge authority.'
+            if [[ -f .scratch/catalogue-agent-report.json ]]; then
+              minted=$(jq -r '.resolutions[]? | select(.outcome == "minted") | "- `\(.canonicalId)` from \(.provider)/\(.id)"' .scratch/catalogue-agent-report.json)
+              if [[ -n "$minted" ]]; then
+                echo
+                echo 'Newly minted canonical identities (review, merge or dedupe before publication):'
+                echo "$minted"
+              fi
+            fi
           } > "$body"
           pr=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$AUTOMATION_BRANCH" --base "$DEFAULT_BRANCH" --state open --json number --jq '.[0].number')
           if [[ -n "$pr" ]]; then
