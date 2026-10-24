@@ -272,7 +272,7 @@ function CompareModelHeader({
   const cleanName = getCleanModelName(model);
 
   return (
-    <div className="w-full rounded-xl border border-border/80 bg-card p-3 shadow-2xs">
+    <div className="w-full rounded-lg border border-border/80 bg-card p-3 shadow-2xs">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
@@ -397,7 +397,7 @@ function EmptyModelSlot({
         render={
           <button
             type="button"
-            className="group flex h-28 w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border border-dashed border-border/80 bg-card/40 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-card hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+            className="group flex h-28 w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-border/80 bg-card/40 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-card hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
           />
         }
       >
