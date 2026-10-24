@@ -70,34 +70,40 @@ const MODEL_COLORS = [
 
 const faqs = [
   {
-    id: "what-can-i-compare",
-    question: "What can I compare?",
+    id: "same-model-different-providers",
+    question: "Why does the same model have different limits or behavior across providers?",
     answer:
-      "You can compare available model capabilities, context windows, modalities, reasoning support, tool calling, providers, listed limits, and benchmark scores.",
+      "Providers serving the same model weights can apply different RPM, TPM, daily quotas, queueing, regions, model versions, and API settings. Compare the endpoint you plan to use—not only the underlying model name—and validate latency and reliability with your own workload.",
   },
   {
-    id: "are-these-models-free",
-    question: "Are these models completely free?",
+    id: "free-tier-sustainability",
+    question: "Is a listed free tier suitable for production use?",
     answer:
-      "The catalogue lists models available through free providers. Availability and usage limits can vary by provider. Check the provider details before relying on a model for ongoing use.",
+      "A free endpoint may be a sustained developer tier, a limited daily allowance, or promotional credit that can change or expire. Treat listed limits as a useful starting point, then check the provider’s current terms and plan a fallback before depending on it in production.",
   },
   {
-    id: "what-does-context-window-mean",
-    question: "What does context window mean?",
+    id: "benchmark-scores",
+    question: "How should I interpret Artificial Analysis and Design Arena scores?",
     answer:
-      "The context window is the maximum amount of input and conversation history listed for a model. A larger context window does not automatically mean better output quality.",
+      "Artificial Analysis scores summarize controlled capability evaluations such as general intelligence, coding, and agentic tasks. Design Arena ratings reflect crowdsourced blind preferences, so use both as directional evidence rather than a guarantee for your prompts, tools, or domain.",
   },
   {
-    id: "what-does-best-mean",
-    question: "What does “best” mean in the comparison?",
+    id: "context-window-in-practice",
+    question: "Does a larger context window mean the model handles long inputs better?",
     answer:
-      "The Highlight best option only identifies the highest or lowest numeric value for supported rows. It does not determine which model is best for every task.",
+      "Not necessarily. The context window is the maximum supported token budget; effective retrieval from a long prompt can vary with input position, task type, and provider implementation, while larger inputs usually increase latency and cost.",
   },
   {
-    id: "can-i-share-a-comparison",
-    question: "Can I share a comparison?",
+    id: "tool-calling-json-reliability",
+    question: "Do tool calling and JSON support work the same on every endpoint?",
     answer:
-      "Yes. Selected models are stored in the URL, so you can copy and share the comparison link.",
+      "No. An endpoint may expose tool calling or JSON-schema mode while differing in schema coverage, strictness, streaming behavior, retries, and malformed-output rates. Test your exact provider, SDK, and schema—especially nested objects, enums, and parallel tool calls—before relying on it in an agent workflow.",
+  },
+  {
+    id: "highlight-best",
+    question: "What does “Highlight best” actually optimize for?",
+    answer:
+      "It marks the strongest numeric value in supported comparison rows, such as the largest context window or highest benchmark score. It does not combine metrics or account for endpoint limits, latency, reliability, or the requirements of your application.",
   },
 ];
 
