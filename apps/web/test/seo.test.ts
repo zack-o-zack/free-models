@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
 import { modelHref, modelIdFromRouteSegments, modelRouteSegments } from "../src/lib/model-path";
-import { modelDescription, serializeJsonLd } from "../src/lib/seo";
+import { homeDescription, modelDescription, serializeJsonLd } from "../src/lib/seo";
 
 describe("SEO catalogue boundaries", () => {
   test.each(["google/gemini-2.5-pro", "stealth:alpha", "publisher/model with spaces:free"])(
@@ -39,6 +39,25 @@ describe("SEO catalogue boundaries", () => {
     });
     expect(description).toBe(
       "Example — free API access across 2 providers. A compact language model.",
+    );
+  });
+
+  test("dynamically formats home description from catalogue models and providers", () => {
+    const models = [
+      { providers: ["provider-a", "provider-b"] },
+      { providers: ["provider-b", "provider-c"] },
+      { providers: ["provider-a"] },
+    ];
+    const description = homeDescription(models);
+    expect(description).toBe("Compare 3 free AI models and zero-cost LLM APIs across 3 providers.");
+
+    const single = [{ providers: ["provider-a"] }];
+    expect(homeDescription(single)).toBe(
+      "Compare 1 free AI models and zero-cost LLM APIs across 1 provider.",
+    );
+
+    expect(homeDescription([])).toBe(
+      "Compare free AI models and zero-cost LLM APIs across verified providers.",
     );
   });
 
