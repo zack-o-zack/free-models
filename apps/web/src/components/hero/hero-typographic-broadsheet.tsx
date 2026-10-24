@@ -4,12 +4,14 @@ import { Icons } from "@/components/icons";
 import { siteConfig } from "@/lib/config";
 import { formatCount } from "@/lib/format-count";
 import type { ModelSummary } from "@/lib/model-types";
+import { homeDescription } from "@/lib/page-content";
 import styles from "./hero-typographic-broadsheet.module.css";
 import { RequestFlow } from "./request-flow";
 
 export interface HeroProps {
   models: ModelSummary[];
   githubStars: number;
+  description?: string;
 }
 
 const destinationSlots = [
@@ -84,7 +86,10 @@ function getFeaturedModels(models: ModelSummary[]) {
     };
   });
 }
-export function HeroTypographicBroadsheet({ models, githubStars }: HeroProps) {
+
+export function HeroTypographicBroadsheet({ models, githubStars, description }: HeroProps) {
+  const displayDescription = description ?? homeDescription(models);
+
   return (
     <section aria-labelledby="hero-title" className={styles.hero}>
       <div className="container">
@@ -101,7 +106,7 @@ export function HeroTypographicBroadsheet({ models, githubStars }: HeroProps) {
               </span>
             </div>
             <p data-page-description className={styles.description}>
-              {siteConfig.description}
+              {displayDescription}
             </p>
             <div className={styles.actions}>
               <Link

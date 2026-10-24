@@ -20,6 +20,7 @@ import type { ModelSummary } from "@/lib/model-types";
 import {
   type BreadcrumbItem,
   contentSnippet,
+  homeDescription,
   modelBreadcrumbs,
   modelDescription,
 } from "@/lib/page-content";
@@ -40,7 +41,7 @@ if (
 
 export const siteUrl = origin.origin;
 export const isIndexable = Boolean(configuredUrl) && process.env.VERCEL_ENV !== "preview";
-export { homeTitle, modelDescription };
+export { homeDescription, homeTitle, modelDescription };
 
 export function absoluteUrl(path: string): string {
   if (path === "/") return siteUrl;
@@ -88,21 +89,26 @@ export function pageMetadata(title: string, description: string, path?: string):
   };
 }
 
-export function websiteJsonLd() {
+export function websiteJsonLd(description = siteConfig.description) {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": absoluteUrl("/#website"),
     name: siteConfig.name,
+    alternateName: ["free-models", "free-models.zackozack.com", "FreeModels"],
     url: absoluteUrl("/"),
-    description: siteConfig.description,
+    description,
     inLanguage: "en",
   };
 }
 
 export function catalogueJsonLd(
   models: ModelSummary[],
-  { page = 1, total = models.length }: { page?: number; total?: number } = {},
+  {
+    page = 1,
+    total = models.length,
+    description,
+  }: { page?: number; total?: number; description?: string } = {},
 ) {
   const path = cataloguePageHref(page);
   return {
@@ -110,7 +116,8 @@ export function catalogueJsonLd(
     "@type": "CollectionPage",
     "@id": absoluteUrl(`${path}#catalogue`),
     name: page === 1 ? homeTitle : cataloguePageTitle(page),
-    description: page === 1 ? siteConfig.description : cataloguePageDescription(page, total),
+    description:
+      page === 1 ? (description ?? siteConfig.description) : cataloguePageDescription(page, total),
     url: absoluteUrl(path),
     isPartOf: { "@id": absoluteUrl("/#website") },
     ...(page > 1

@@ -34,6 +34,9 @@ export const metadata: Metadata = {
   title: { default: homeTitle, template: "%s | Free Models" },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  openGraph: {
+    siteName: siteConfig.name,
+  },
   robots: isIndexable
     ? { index: true, follow: true, googleBot: { "max-image-preview": "large" } }
     : { index: false, follow: false },
