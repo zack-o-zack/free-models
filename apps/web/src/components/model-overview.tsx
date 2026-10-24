@@ -1,4 +1,5 @@
-import { ArrowDown, CalendarDays, CircleCheck, EyeOff, Gauge } from "lucide-react";
+import { ArrowDown, ArrowLeftRight, CalendarDays, CircleCheck, EyeOff, Gauge } from "lucide-react";
+import Link from "next/link";
 import { BrandImage } from "@/components/brand-image";
 import { ExpandableModelDescription } from "@/components/expandable-model-description";
 import { ModelModalities } from "@/components/model-modalities";
@@ -8,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatContext } from "@/lib/model-format";
 import type { ModelHighlight } from "@/lib/model-highlights";
+import { compareHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
 import { getProviderName, providerFaviconUrl, publisherFaviconUrl } from "@/lib/provider-logos";
 
@@ -156,6 +158,16 @@ export function ModelEssentials({ model }: { model: ModelSummary }) {
           )}
         </span>
         <ArrowDown className="ml-1 size-4 shrink-0" aria-hidden="true" />
+      </Button>
+      <Button
+        render={<Link href={compareHref([model.id])} />}
+        nativeButton={false}
+        variant="outline"
+        size="lg"
+        className="mt-2.5 h-12 w-full justify-center gap-2 rounded-[24px] text-sm"
+      >
+        <ArrowLeftRight className="size-4 shrink-0" aria-hidden="true" />
+        Compare this model
       </Button>
     </div>
   );

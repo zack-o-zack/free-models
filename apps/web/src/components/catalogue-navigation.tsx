@@ -14,6 +14,7 @@ import {
 const links = [
   { href: "/providers", label: "Providers" },
   { href: "/publishers", label: "Publishers" },
+  { href: "/compare", label: "Compare" },
   { href: "/changelog", label: "Changelog" },
 ];
 

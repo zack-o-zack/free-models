@@ -222,3 +222,62 @@ export function changelogJsonLd() {
     },
   };
 }
+
+export function compareJsonLd(models: ModelSummary[]) {
+  const url = absoluteUrl("/compare");
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": url,
+        url,
+        name: "Compare free AI models",
+        description:
+          "Compare free AI models by context window, capabilities, reasoning, tool calling, providers, usage limits, and benchmark scores.",
+        inLanguage: "en",
+        isPartOf: { "@id": absoluteUrl("/#website") },
+        mainEntity: {
+          "@type": "ItemList",
+          name: "Free AI models",
+          numberOfItems: models.length,
+          itemListElement: models.slice(0, 50).map((model, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: model.name,
+            url: absoluteUrl(modelHref(model.id)),
+          })),
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What can I compare?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "You can compare available model capabilities, context windows, modalities, reasoning support, tool calling, providers, listed limits, and benchmark scores.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Are these models completely free?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "The catalogue lists models available through free providers. Availability and usage limits can vary by provider.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Can I share a comparison?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. Selected models are stored in the URL, so you can copy and share the comparison link.",
+            },
+          },
+        ],
+      },
+    ],
+  };
+}
