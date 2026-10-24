@@ -47,12 +47,13 @@ import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   type CompareRow,
+  compareHref,
   compareRows,
-  createCompareSearch,
   DESIGN_ARENA_CATEGORIES,
   getBestIndexes,
   MAX_COMPARE_MODELS,
   parseCompareModelIds,
+  parseComparePathname,
   parseHighlightBest,
 } from "@/lib/model-compare";
 import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
@@ -101,14 +102,20 @@ const faqs = [
   },
 ];
 
-function useCompareState(models: ModelSummary[]) {
+function useCompareState(models: ModelSummary[], initialModelIds?: string[]) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const search = searchParams.toString();
 
-  const requestedIds = useMemo(() => parseCompareModelIds(search), [search]);
+  const requestedIds = useMemo(() => {
+    const pathIds = parseComparePathname(pathname);
+    if (pathIds.length > 0) return pathIds;
+    const queryIds = parseCompareModelIds(search);
+    if (queryIds.length > 0) return queryIds;
+    return initialModelIds ?? [];
+  }, [pathname, search, initialModelIds]);
 
   const selectedModels = useMemo(() => {
     const byId = new Map(models.map((model) => [model.id, model]));
@@ -121,8 +128,8 @@ function useCompareState(models: ModelSummary[]) {
   const highlightBest = useMemo(() => parseHighlightBest(search), [search]);
 
   function replaceState(ids: string[], highlight = highlightBest) {
-    const nextSearch = createCompareSearch(search, ids, highlight);
-    router.replace(`${pathname}${nextSearch}`, { scroll: false });
+    const nextHref = compareHref(ids, highlight);
+    router.replace(nextHref, { scroll: false });
   }
 
   return {
@@ -1112,7 +1119,13 @@ function CompareTable({
   );
 }
 
-export function ModelCompare({ models }: { models: ModelSummary[] }) {
+export function ModelCompare({
+  models,
+  initialModelIds,
+}: {
+  models: ModelSummary[];
+  initialModelIds?: string[];
+}) {
   const {
     requestedIds,
     selectedModels,
@@ -1122,7 +1135,7 @@ export function ModelCompare({ models }: { models: ModelSummary[] }) {
     removeModel,
     replaceModel,
     setHighlightBest,
-  } = useCompareState(models);
+  } = useCompareState(models, initialModelIds);
 
   const [pickerOpen, setPickerOpen] = useState(false);
   const [copied, setCopied] = useState(false);

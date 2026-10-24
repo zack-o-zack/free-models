@@ -1,6 +1,11 @@
 import type { ModelSummary } from "@/lib/model-types";
 
 export const MAX_COMPARE_MODELS = 4;
+export {
+  compareHref,
+  parseComparePathname,
+  parseCompareRouteSegments,
+} from "./model-path";
 
 export type CompareSection = "overview" | "features" | "benchmarks" | "access";
 

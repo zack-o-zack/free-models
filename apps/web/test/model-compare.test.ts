@@ -1,9 +1,12 @@
 import { describe, expect, it } from "bun:test";
 import {
+  compareHref,
   compareRows,
   createCompareSearch,
   getBestIndexes,
   parseCompareModelIds,
+  parseComparePathname,
+  parseCompareRouteSegments,
   parseHighlightBest,
 } from "../src/lib/model-compare";
 import type { ModelSummary } from "../src/lib/model-types";
@@ -179,5 +182,109 @@ describe("getBestIndexes", () => {
     ];
     const best = getBestIndexes(models, toolUseRow);
     expect(best).toEqual(new Set());
+  });
+});
+
+describe("compareHref", () => {
+  it("formats single model using slugged path", () => {
+    expect(compareHref(["google/gemini-3.6-flash"])).toBe("/compare/google/gemini-3.6-flash");
+  });
+
+  it("formats multiple models using concatenated slugged paths", () => {
+    expect(
+      compareHref([
+        "google/gemini-3.8-flash",
+        "z-ai/glm-5.3",
+        "google/gemini-3.7-flash",
+        "z-ai/glm-5.3-flash",
+      ]),
+    ).toBe(
+      "/compare/google/gemini-3.8-flash/z-ai/glm-5.3/google/gemini-3.7-flash/z-ai/glm-5.3-flash",
+    );
+  });
+
+  it("handles stealth models", () => {
+    expect(compareHref(["stealth:big-pickle", "google/gemini-3.6-flash"])).toBe(
+      "/compare/stealth/big-pickle/google/gemini-3.6-flash",
+    );
+  });
+
+  it("appends highlight query parameter when true", () => {
+    expect(compareHref(["google/gemini-3.6-flash"], true)).toBe(
+      "/compare/google/gemini-3.6-flash?highlight=true",
+    );
+  });
+
+  it("returns base /compare when empty", () => {
+    expect(compareHref([])).toBe("/compare");
+  });
+
+  it("deduplicates models and limits to 4", () => {
+    expect(
+      compareHref([
+        "google/gemini-3.8-flash",
+        "google/gemini-3.8-flash",
+        "z-ai/glm-5.3",
+        "google/gemini-3.7-flash",
+        "z-ai/glm-5.3-flash",
+        "openai/gpt-4o",
+      ]),
+    ).toBe(
+      "/compare/google/gemini-3.8-flash/z-ai/glm-5.3/google/gemini-3.7-flash/z-ai/glm-5.3-flash",
+    );
+  });
+});
+
+describe("parseCompareRouteSegments", () => {
+  it("parses pairs into model ids", () => {
+    expect(
+      parseCompareRouteSegments([
+        "google",
+        "gemini-3.8-flash",
+        "z-ai",
+        "glm-5.3",
+        "google",
+        "gemini-3.7-flash",
+        "z-ai",
+        "glm-5.3-flash",
+      ]),
+    ).toEqual([
+      "google/gemini-3.8-flash",
+      "z-ai/glm-5.3",
+      "google/gemini-3.7-flash",
+      "z-ai/glm-5.3-flash",
+    ]);
+  });
+
+  it("handles stealth model segments", () => {
+    expect(
+      parseCompareRouteSegments(["stealth", "big-pickle", "google", "gemini-3.6-flash"]),
+    ).toEqual(["stealth:big-pickle", "google/gemini-3.6-flash"]);
+  });
+
+  it("ignores odd leftover segments", () => {
+    expect(parseCompareRouteSegments(["google", "gemini-3.8-flash", "orphan"])).toEqual([
+      "google/gemini-3.8-flash",
+    ]);
+  });
+
+  it("limits to 4 models", () => {
+    expect(
+      parseCompareRouteSegments(["m1", "a", "m2", "b", "m3", "c", "m4", "d", "m5", "e"]),
+    ).toEqual(["m1/a", "m2/b", "m3/c", "m4/d"]);
+  });
+});
+
+describe("parseComparePathname", () => {
+  it("parses model ids from pathname", () => {
+    expect(parseComparePathname("/compare/google/gemini-3.8-flash/z-ai/glm-5.3")).toEqual([
+      "google/gemini-3.8-flash",
+      "z-ai/glm-5.3",
+    ]);
+  });
+
+  it("returns empty for /compare", () => {
+    expect(parseComparePathname("/compare")).toEqual([]);
+    expect(parseComparePathname("/compare/")).toEqual([]);
   });
 });

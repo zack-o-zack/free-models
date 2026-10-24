@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatContext } from "@/lib/model-format";
 import type { ModelHighlight } from "@/lib/model-highlights";
+import { compareHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
 import { getProviderName, providerFaviconUrl, publisherFaviconUrl } from "@/lib/provider-logos";
 
@@ -159,7 +160,7 @@ export function ModelEssentials({ model }: { model: ModelSummary }) {
         <ArrowDown className="ml-1 size-4 shrink-0" aria-hidden="true" />
       </Button>
       <Button
-        render={<Link href={`/compare?models=${encodeURIComponent(model.id)}`} />}
+        render={<Link href={compareHref([model.id])} />}
         nativeButton={false}
         variant="outline"
         size="lg"
