@@ -5,7 +5,6 @@ import {
   BookText,
   Check,
   ChevronDown,
-  Copy,
   Database,
   ExternalLink,
   FileText,
@@ -1138,19 +1137,8 @@ export function ModelCompare({
   } = useCompareState(models, initialModelIds);
 
   const [pickerOpen, setPickerOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const unknownIds = requestedIds.filter((id) => !models.some((model) => model.id === id));
-
-  async function copyLink() {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      setCopied(false);
-    }
-  }
 
   const comparisonTitle =
     selectedModels.length >= 2
@@ -1193,7 +1181,7 @@ export function ModelCompare({
 
       {/* Toolbar Controls */}
       {selectedModels.length > 0 && (
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+        <div className="mt-8 flex flex-wrap items-center justify-end gap-5">
           <div className="flex items-center gap-3">
             <Switch
               id="compare-highlight-best"
@@ -1208,40 +1196,29 @@ export function ModelCompare({
             </label>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <Button type="button" variant="outline" onClick={copyLink} className="gap-2">
-              {copied ? (
-                <Check aria-hidden="true" className="size-4" />
-              ) : (
-                <Copy aria-hidden="true" className="size-4" />
-              )}
-              <span>{copied ? "Copied" : "Share comparison"}</span>
-            </Button>
-
-            <Popover open={pickerOpen} onOpenChange={setPickerOpen}>
-              <PopoverTrigger
-                render={
-                  <Button
-                    type="button"
-                    className="gap-2"
-                    disabled={selectedModels.length >= MAX_COMPARE_MODELS}
-                  />
-                }
-              >
-                <Plus aria-hidden="true" className="size-4" />
-                <span>Add model</span>
-              </PopoverTrigger>
-              <ModelPicker
-                models={models}
-                selectedIds={requestedIds}
-                onSelect={(id) => {
-                  addModel(id);
-                  setPickerOpen(false);
-                }}
-                title="Add model to comparison"
-              />
-            </Popover>
-          </div>
+          <Popover open={pickerOpen} onOpenChange={setPickerOpen}>
+            <PopoverTrigger
+              render={
+                <Button
+                  type="button"
+                  className="gap-2"
+                  disabled={selectedModels.length >= MAX_COMPARE_MODELS}
+                />
+              }
+            >
+              <Plus aria-hidden="true" className="size-4" />
+              <span>Add model</span>
+            </PopoverTrigger>
+            <ModelPicker
+              models={models}
+              selectedIds={requestedIds}
+              onSelect={(id) => {
+                addModel(id);
+                setPickerOpen(false);
+              }}
+              title="Add model to comparison"
+            />
+          </Popover>
         </div>
       )}
 
