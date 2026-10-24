@@ -220,7 +220,7 @@ function ModelPicker({
                 <button
                   type="button"
                   onClick={() => onSelect(model.id)}
-                  className="flex min-h-12 w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-ring"
+                  className="flex min-h-12 w-full items-center gap-3 rounded-[12px] px-3 py-2 text-left transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-ring"
                 >
                   <Avatar aria-hidden="true" className="size-8 shrink-0">
                     <AvatarFallback className="text-[10px] font-bold">
@@ -272,13 +272,13 @@ function CompareModelHeader({
   const cleanName = getCleanModelName(model);
 
   return (
-    <div className="w-full rounded-lg border border-border/80 bg-card p-3 shadow-2xs">
+    <div className="w-full rounded-[12px] border border-border/80 bg-card p-3 shadow-2xs">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
             <Avatar
               aria-hidden="true"
-              className="size-6 shrink-0 rounded-md bg-card ring-1 ring-border"
+              className="size-6 shrink-0 rounded-[6px] bg-card ring-1 ring-border"
             >
               {publisherLogo ? (
                 <BrandImage
@@ -299,7 +299,7 @@ function CompareModelHeader({
                   <button
                     type="button"
                     aria-label={`Change model ${cleanName}`}
-                    className="group inline-flex min-w-0 max-w-full items-center gap-1 rounded-sm text-left font-heading text-sm font-bold leading-tight tracking-[-0.02em] transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
+                    className="group inline-flex min-w-0 max-w-full items-center gap-1 rounded-[6px] text-left font-heading text-sm font-bold leading-tight tracking-[-0.02em] transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring"
                   />
                 }
               >
@@ -332,7 +332,7 @@ function CompareModelHeader({
             rel="noreferrer"
             aria-label={`View ${model.name} details (opens in new tab)`}
             title="View model details (opens in new tab)"
-            className="flex size-6 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+            className="flex size-6 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
           >
             <ExternalLink aria-hidden="true" className="size-3.5" />
           </Link>
@@ -397,7 +397,7 @@ function EmptyModelSlot({
         render={
           <button
             type="button"
-            className="group flex h-28 w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-border/80 bg-card/40 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-card hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+            className="group flex h-28 w-full cursor-pointer items-center justify-center gap-2 rounded-[12px] border border-dashed border-border/80 bg-card/40 text-sm font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:bg-card hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
           />
         }
       >
@@ -448,7 +448,7 @@ function CompareEmptyState({
           <button
             type="button"
             onClick={() => onCompareModels(topCodingModels.map((m) => m.id))}
-            className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-5 text-left transition-all hover:border-foreground/30 hover:bg-muted/30 hover:shadow-xs focus-visible:outline-2 focus-visible:outline-ring cursor-pointer"
+            className="group flex flex-col justify-between rounded-[16px] border border-border bg-card p-5 text-left transition-all hover:border-foreground/30 hover:bg-muted/30 hover:shadow-xs focus-visible:outline-2 focus-visible:outline-ring cursor-pointer"
           >
             <div>
               <div className="flex items-center -space-x-1.5">
@@ -492,7 +492,7 @@ function CompareEmptyState({
 
 function OneModelNotice({ onAddModel }: { onAddModel: () => void }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-secondary bg-secondary px-4 py-3 text-sm font-medium text-secondary-foreground">
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-[12px] border border-secondary bg-secondary px-4 py-3 text-sm font-medium text-secondary-foreground">
       <span>Add one more model to start comparing side by side.</span>
       <Button type="button" size="sm" onClick={onAddModel} className="gap-1.5">
         <Plus aria-hidden="true" className="size-3.5" />
@@ -533,7 +533,7 @@ function formatModalityList(values: string[]): React.ReactNode {
         return (
           <span
             key={value}
-            className="inline-flex items-center gap-1 rounded-md bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground"
+            className="inline-flex items-center gap-1 rounded-[8px] bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground"
           >
             {Icon && <Icon className="size-3.5" aria-hidden="true" />}
             <span className="capitalize">{value.replaceAll("_", " ")}</span>
@@ -768,13 +768,13 @@ function DesignArenaSectionRows({
             <span className="font-heading text-base font-extrabold tracking-[-0.025em] text-foreground sm:text-lg">
               Design Arena
             </span>
-            <div className="inline-flex items-center gap-0.5 rounded-lg border border-border bg-muted p-0.5 text-xs">
+            <div className="inline-flex items-center gap-0.5 rounded-[8px] border border-border bg-muted p-0.5 text-xs">
               <button
                 type="button"
                 aria-pressed={arenaView === "table"}
                 onClick={() => onToggleView("table")}
                 className={cn(
-                  "cursor-pointer rounded-md px-2.5 py-1 font-medium transition-colors",
+                  "cursor-pointer rounded-[6px] px-2.5 py-1 font-medium transition-colors",
                   arenaView === "table"
                     ? "bg-background text-foreground shadow-xs font-semibold"
                     : "text-muted-foreground hover:text-foreground",
@@ -787,7 +787,7 @@ function DesignArenaSectionRows({
                 aria-pressed={arenaView === "graph"}
                 onClick={() => onToggleView("graph")}
                 className={cn(
-                  "cursor-pointer rounded-md px-2.5 py-1 font-medium transition-colors",
+                  "cursor-pointer rounded-[6px] px-2.5 py-1 font-medium transition-colors",
                   arenaView === "graph"
                     ? "bg-background text-foreground shadow-xs font-semibold"
                     : "text-muted-foreground hover:text-foreground",
@@ -821,7 +821,7 @@ function DesignArenaSectionRows({
                       rowSpan={DESIGN_ARENA_CATEGORIES.length}
                       className="border-b border-border/60 bg-card/20 p-4 align-middle text-center sm:px-5"
                     >
-                      <div className="flex h-full min-h-[300px] flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border/80 bg-foreground/[0.02] p-6 text-center">
+                      <div className="flex h-full min-h-[300px] flex-col items-center justify-center gap-3 rounded-[16px] border border-dashed border-border/80 bg-foreground/[0.02] p-6 text-center">
                         <div
                           className="mb-1 flex items-end justify-center gap-1 text-muted-foreground/40"
                           aria-hidden="true"
@@ -889,7 +889,7 @@ function DesignArenaSectionRows({
             className="border-b border-border/60 bg-card/30 p-4 sm:p-8"
           >
             {modelsWithBenchmarks.length === 0 ? (
-              <div className="flex h-72 flex-col items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-foreground/[0.02] p-8 text-center text-muted-foreground">
+              <div className="flex h-72 flex-col items-center justify-center gap-3 rounded-[16px] border border-dashed border-border bg-foreground/[0.02] p-8 text-center text-muted-foreground">
                 <div
                   className="mb-1 flex items-end justify-center gap-1 text-muted-foreground/40"
                   aria-hidden="true"
@@ -923,7 +923,7 @@ function DesignArenaSectionRows({
                           );
                           if (!active || validEntries.length === 0) return null;
                           return (
-                            <div className="min-w-[180px] rounded-lg border border-border bg-card p-2.5 shadow-md">
+                            <div className="min-w-[180px] rounded-[8px] border border-border bg-card p-2.5 shadow-md">
                               <p className="mb-1.5 font-heading text-xs font-bold text-foreground">
                                 {label}
                               </p>
@@ -1186,7 +1186,7 @@ export function ModelCompare({
       </header>
 
       {unknownIds.length > 0 && (
-        <p className="mt-6 rounded-xl border border-secondary bg-secondary px-4 py-3 text-sm font-medium text-secondary-foreground">
+        <p className="mt-6 rounded-[12px] border border-secondary bg-secondary px-4 py-3 text-sm font-medium text-secondary-foreground">
           Some requested models could not be found: {unknownIds.join(", ")}
         </p>
       )}
