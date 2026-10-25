@@ -28,8 +28,8 @@
       }
     },
     {
-      "model_id": "deepseek-v4-pro",
-      "name": "Deepseek v4 pro",
+      "model_id": "deepseek-v4-flash",
+      "name": "Deepseek v4 flash",
       "connection": {
         "auth": {
           "env": [
@@ -123,8 +123,8 @@
       }
     },
     {
-      "model_id": "gemini-3.8-flash",
-      "name": "Gemini 3.8 flash",
+      "model_id": "gemini-3.7-flash",
+      "name": "Gemini 3.7 flash",
       "connection": {
         "auth": {
           "env": [
@@ -296,25 +296,6 @@
     {
       "model_id": "muse-glimmer-30b",
       "name": "Muse glimmer 30b",
-      "connection": {
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        },
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      }
-    },
-    {
-      "model_id": "qwen3.5-397b-a17b",
-      "name": "Qwen3.5 397b a17b",
       "connection": {
         "auth": {
           "env": [

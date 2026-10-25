@@ -1,16 +1,81 @@
 {
-  "generatedAt": "2026-10-24T07:23:29.060Z",
+  "generatedAt": "2026-10-25T07:39:37.231Z",
   "windowDays": 30,
-  "since": "2026-09-24T07:23:29.060Z",
-  "totalAdded": 405,
-  "totalRemoved": 65,
+  "since": "2026-09-25T07:39:37.231Z",
+  "totalAdded": 407,
+  "totalRemoved": 68,
   "totalProvidersAdded": 8,
   "totalProvidersRemoved": 0,
   "entries": [
     {
-      "id": "working-nvidia-add-nvidia/nemotron-3.5-bolt-e4b",
+      "id": "working-onomeo-add-deepseek-v4-flash",
+      "date": "2026-10-25",
+      "timestamp": "2026-10-25T07:39:37.231Z",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "added",
+      "category": "model",
+      "modelId": "deepseek-v4-flash",
+      "modelName": "Deepseek v4 flash",
+      "canonicalId": "deepseek/deepseek-v4-flash",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-onomeo-remove-deepseek-v4-pro",
+      "date": "2026-10-25",
+      "timestamp": "2026-10-25T07:39:37.231Z",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "deepseek-v4-pro",
+      "modelName": "Deepseek v4 pro",
+      "canonicalId": "deepseek/deepseek-v4-pro-0813",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-onomeo-add-gemini-3.7-flash",
+      "date": "2026-10-25",
+      "timestamp": "2026-10-25T07:39:37.231Z",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "added",
+      "category": "model",
+      "modelId": "gemini-3.7-flash",
+      "modelName": "Gemini 3.7 flash",
+      "canonicalId": "google/gemini-3.7-flash",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-onomeo-remove-gemini-3.8-flash",
+      "date": "2026-10-25",
+      "timestamp": "2026-10-25T07:39:37.231Z",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "gemini-3.8-flash",
+      "modelName": "Gemini 3.8 flash",
+      "canonicalId": "google/gemini-3.8-flash",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-onomeo-remove-qwen3.5-397b-a17b",
+      "date": "2026-10-25",
+      "timestamp": "2026-10-25T07:39:37.231Z",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "qwen3.5-397b-a17b",
+      "modelName": "Qwen3.5 397b a17b",
+      "canonicalId": "qwen/qwen3.5-397b-a17b",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "50a9ec9-nvidia-add-nvidia/nemotron-3.5-bolt-e4b",
       "date": "2026-10-24",
-      "timestamp": "2026-10-24T07:23:29.060Z",
+      "timestamp": "2026-10-24T07:23:49Z",
       "provider": "nvidia",
       "providerName": "NVIDIA",
       "type": "added",
@@ -18,12 +83,13 @@
       "modelId": "nvidia/nemotron-3.5-bolt-e4b",
       "modelName": "Nemotron 3.5 Bolt E4B",
       "canonicalId": "nvidia/nemotron-3.5-bolt-e4b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "50a9ec9",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-nvidia-add-nvidia/nemotron-3.5-parse",
+      "id": "50a9ec9-nvidia-add-nvidia/nemotron-3.5-parse",
       "date": "2026-10-24",
-      "timestamp": "2026-10-24T07:23:29.060Z",
+      "timestamp": "2026-10-24T07:23:49Z",
       "provider": "nvidia",
       "providerName": "NVIDIA",
       "type": "added",
@@ -31,12 +97,13 @@
       "modelId": "nvidia/nemotron-3.5-parse",
       "modelName": "nemotron-3.5-parse",
       "canonicalId": "nvidia/nemotron-3.5-parse",
-      "commitMessage": "Working directory changes"
+      "commitHash": "50a9ec9",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-add-gemini-3.8-flash",
+      "id": "50a9ec9-onomeo-add-gemini-3.8-flash",
       "date": "2026-10-24",
-      "timestamp": "2026-10-24T07:23:29.060Z",
+      "timestamp": "2026-10-24T07:23:49Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "added",
@@ -44,7 +111,8 @@
       "modelId": "gemini-3.8-flash",
       "modelName": "Gemini 3.8 flash",
       "canonicalId": "google/gemini-3.8-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "50a9ec9",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
       "id": "6c227b4-kilo-remove-minimax/minimax-m3.1-flash:free",
