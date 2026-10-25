@@ -73,7 +73,7 @@ const faqs = [
     id: "same-model-different-providers",
     question: "Why does the same model have different limits or behavior across providers?",
     answer:
-      "Providers serving the same model weights can apply different RPM, TPM, daily quotas, queueing, regions, model versions, and API settings. Compare the endpoint you plan to use—not only the underlying model name—and validate latency and reliability with your own workload.",
+      "Providers serving the same model weights can apply different RPM, TPM, daily quotas, queueing, regions, model versions, and API settings. Compare the endpoint you plan to use, not only the underlying model name, and validate latency and reliability with your own workload.",
   },
   {
     id: "free-tier-sustainability",
@@ -97,7 +97,7 @@ const faqs = [
     id: "tool-calling-json-reliability",
     question: "Do tool calling and JSON support work the same on every endpoint?",
     answer:
-      "No. An endpoint may expose tool calling or JSON-schema mode while differing in schema coverage, strictness, streaming behavior, retries, and malformed-output rates. Test your exact provider, SDK, and schema—especially nested objects, enums, and parallel tool calls—before relying on it in an agent workflow.",
+      "No. An endpoint may expose tool calling or JSON-schema mode while differing in schema coverage, strictness, streaming behavior, retries, and malformed-output rates. Test your exact provider, SDK, and schema, especially nested objects, enums, and parallel tool calls, before relying on it in an agent workflow.",
   },
   {
     id: "highlight-best",
