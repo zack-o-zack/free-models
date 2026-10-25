@@ -1,10 +1,18 @@
-import { ArrowUpRight, GitCommit } from "lucide-react";
+import { ArrowUpRight, EyeOff, GitCommit } from "lucide-react";
 import Link from "next/link";
 import { BrandImage } from "@/components/brand-image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import type { ChangelogEntry } from "@/lib/changelog-data";
 import { modelHref } from "@/lib/model-path";
-import { publisherFaviconUrl } from "@/lib/provider-logos";
+import { providerLogoUrl, publisherFaviconUrl } from "@/lib/provider-logos";
 
 interface ChangelogFeedProps {
   readonly entries: readonly ChangelogEntry[];
@@ -68,6 +76,12 @@ function initials(name?: string): string {
     .toUpperCase();
 }
 
+function getModelPublisher(canonicalId?: string | null): string | null {
+  if (!canonicalId || canonicalId.startsWith("stealth:")) return null;
+  const separator = canonicalId.indexOf("/");
+  return separator > 0 ? canonicalId.slice(0, separator) : null;
+}
+
 export function ChangelogFeed({
   entries,
   activeModelIds,
@@ -125,135 +139,175 @@ export function ChangelogFeed({
               </div>
             </div>
 
-            {/* Git Log Row List */}
-            <div className="divide-y divide-border/40 border-y border-border/40">
-              {dayEntries.map((entry) => {
-                const isAdded = entry.type === "added";
-                const isProvider = entry.category === "provider";
-                const logoUrl = publisherFaviconUrl(entry.provider);
-                const isLiveInCatalogue = entry.canonicalId && activeSet.has(entry.canonicalId);
-                const isLiveProvider =
-                  activeProviderSet.size === 0 || activeProviderSet.has(entry.provider);
-                const actionLabel = isProvider
-                  ? isAdded
-                    ? "Provider added on"
-                    : "Provider removed on"
-                  : isAdded
-                    ? "Added on"
-                    : "Removed on";
-                const hoverText = `${actionLabel} ${formatTooltipDate(entry.timestamp)} UTC`;
-                const prefix = isProvider
-                  ? isAdded
-                    ? "+PROVIDER"
-                    : "-PROVIDER"
-                  : isAdded
-                    ? "+NEW"
-                    : "-DEL";
+            {/* Git Log Row Table */}
+            <div className="border-y border-border/40 overflow-hidden">
+              <Table className="table-fixed w-full">
+                <colgroup>
+                  <col className="w-[88px]" />
+                  <col className="w-[160px] sm:w-[200px]" />
+                  <col />
+                  <col className="w-[85px]" />
+                </colgroup>
+                <TableHeader className="sr-only">
+                  <TableRow>
+                    <TableHead>Change type</TableHead>
+                    <TableHead>Provider</TableHead>
+                    <TableHead>Model</TableHead>
+                    <TableHead>Timestamp</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {dayEntries.map((entry) => {
+                    const isAdded = entry.type === "added";
+                    const isProvider = entry.category === "provider";
+                    const logoUrl = providerLogoUrl(entry.provider);
+                    const modelPublisher = !isProvider
+                      ? getModelPublisher(entry.canonicalId)
+                      : null;
+                    const modelLogoUrl = modelPublisher
+                      ? publisherFaviconUrl(modelPublisher)
+                      : null;
+                    const isStealth = entry.canonicalId?.startsWith("stealth:") ?? false;
+                    const isLiveInCatalogue = entry.canonicalId && activeSet.has(entry.canonicalId);
+                    const isLiveProvider =
+                      activeProviderSet.size === 0 || activeProviderSet.has(entry.provider);
+                    const actionLabel = isProvider
+                      ? isAdded
+                        ? "Provider added on"
+                        : "Provider removed on"
+                      : isAdded
+                        ? "Added on"
+                        : "Removed on";
+                    const hoverText = `${actionLabel} ${formatTooltipDate(entry.timestamp)} UTC`;
+                    const prefix = isProvider
+                      ? isAdded
+                        ? "+PROVIDER"
+                        : "-PROVIDER"
+                      : isAdded
+                        ? "+NEW"
+                        : "-DEL";
 
-                const rowBg = isProvider
-                  ? isAdded
-                    ? "bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12] hover:bg-emerald-500/[0.12] dark:hover:bg-emerald-500/[0.16]"
-                    : "bg-red-500/[0.08] dark:bg-red-500/[0.12] hover:bg-red-500/[0.12] dark:hover:bg-red-500/[0.16]"
-                  : "hover:bg-muted/30";
+                    const rowBg = isProvider
+                      ? isAdded
+                        ? "bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12] hover:bg-emerald-500/[0.12] dark:hover:bg-emerald-500/[0.16]"
+                        : "bg-red-500/[0.08] dark:bg-red-500/[0.12] hover:bg-red-500/[0.12] dark:hover:bg-red-500/[0.16]"
+                      : "hover:bg-muted/30";
 
-                return (
-                  <div
-                    key={entry.id}
-                    title={hoverText}
-                    className={`flex items-center justify-between gap-3 py-2 px-2 transition-colors ${rowBg}`}
-                  >
-                    {/* Left: Indicator, Provider, Model info */}
-                    <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                      {/* Text label: +PROVIDER / -PROVIDER or +NEW / -DEL */}
-                      <span
-                        className={`font-mono text-[10px] font-bold tracking-wider shrink-0 ${
-                          isAdded
-                            ? "text-[#216e32] dark:text-[#9fe870]"
-                            : "text-[#d03238] dark:text-red-400"
-                        }`}
+                    return (
+                      <TableRow
+                        key={entry.id}
+                        title={hoverText}
+                        className={`border-b border-border/40 transition-colors ${rowBg}`}
                       >
-                        {prefix}
-                      </span>
-
-                      {/* Provider Logo & Name */}
-                      {isLiveProvider ? (
-                        <Link
-                          href={`/providers/${entry.provider}`}
-                          className="inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-ring"
-                        >
-                          <Avatar className="size-4 rounded-[4px] border border-border/50">
-                            {logoUrl && (
-                              <BrandImage alt="" className="object-contain" src={logoUrl} />
-                            )}
-                            <AvatarFallback className="text-[8px] font-bold">
-                              {initials(entry.providerName)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <span className="truncate max-w-[120px] sm:max-w-[160px]">
-                            {entry.providerName}
+                        {/* Status Label */}
+                        <TableCell className="py-2 pl-2 pr-1 font-mono text-[10px] font-bold tracking-wider align-middle">
+                          <span
+                            className={
+                              isAdded
+                                ? "text-[#216e32] dark:text-[#9fe870]"
+                                : "text-[#d03238] dark:text-red-400"
+                            }
+                          >
+                            {prefix}
                           </span>
-                        </Link>
-                      ) : (
-                        <div className="inline-flex items-center gap-1.5 shrink-0 text-xs font-semibold text-foreground">
-                          <Avatar className="size-4 rounded-[4px] border border-border/50">
-                            {logoUrl && (
-                              <BrandImage alt="" className="object-contain" src={logoUrl} />
+                        </TableCell>
+
+                        {/* Provider Logo & Name */}
+                        <TableCell className="py-2 px-2 align-middle">
+                          {isLiveProvider ? (
+                            <Link
+                              href={`/providers/${entry.provider}`}
+                              className="inline-flex items-center gap-1.5 max-w-full text-xs font-semibold text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-ring"
+                            >
+                              <Avatar className="size-4 shrink-0 rounded-[4px] border border-border/50">
+                                {logoUrl && (
+                                  <BrandImage alt="" className="object-contain" src={logoUrl} />
+                                )}
+                                <AvatarFallback className="text-[8px] font-bold">
+                                  {initials(entry.providerName)}
+                                </AvatarFallback>
+                              </Avatar>
+                              <span className="truncate">{entry.providerName}</span>
+                            </Link>
+                          ) : (
+                            <div className="inline-flex items-center gap-1.5 max-w-full text-xs font-semibold text-foreground">
+                              <Avatar className="size-4 shrink-0 rounded-[4px] border border-border/50">
+                                {logoUrl && (
+                                  <BrandImage alt="" className="object-contain" src={logoUrl} />
+                                )}
+                                <AvatarFallback className="text-[8px] font-bold">
+                                  {initials(entry.providerName)}
+                                </AvatarFallback>
+                              </Avatar>
+                              <span className="truncate">{entry.providerName}</span>
+                            </div>
+                          )}
+                        </TableCell>
+
+                        {/* Model / Provider Display Name */}
+                        <TableCell className="py-2 px-2 align-middle min-w-0">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            {!isProvider && (
+                              <Avatar className="size-4 shrink-0 rounded-[4px] border border-border/50">
+                                {modelLogoUrl && (
+                                  <BrandImage
+                                    alt=""
+                                    className="object-contain"
+                                    src={modelLogoUrl}
+                                  />
+                                )}
+                                <AvatarFallback className="text-[8px] font-bold">
+                                  {isStealth ? (
+                                    <EyeOff className="size-2.5" />
+                                  ) : (
+                                    initials(entry.modelName)
+                                  )}
+                                </AvatarFallback>
+                              </Avatar>
                             )}
-                            <AvatarFallback className="text-[8px] font-bold">
-                              {initials(entry.providerName)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <span className="truncate max-w-[120px] sm:max-w-[160px]">
-                            {entry.providerName}
-                          </span>
-                        </div>
-                      )}
+                            <span className="font-medium text-xs text-foreground truncate">
+                              {entry.modelName}
+                            </span>
 
-                      {/* Model / Provider Display Name */}
-                      <div className="flex items-center gap-1.5 min-w-0 flex-1 truncate">
-                        <span className="font-medium text-xs text-foreground truncate">
-                          {entry.modelName}
-                        </span>
-
-                        {isProvider && entry.details && (
-                          <span className="text-[11px] text-muted-foreground shrink-0 font-mono">
-                            ({entry.details})
-                          </span>
-                        )}
-
-                        {/* Top-right arrow icon linking to catalogue */}
-                        {isProvider
-                          ? isLiveProvider && (
-                              <Link
-                                href={`/providers/${entry.provider}`}
-                                className="inline-flex items-center text-muted-foreground hover:text-foreground shrink-0 focus-visible:outline-2 focus-visible:outline-ring"
-                                aria-label={`View ${entry.providerName} details in catalogue`}
-                              >
-                                <ArrowUpRight className="size-3.5" />
-                              </Link>
-                            )
-                          : isLiveInCatalogue &&
-                            entry.canonicalId && (
-                              <Link
-                                href={modelHref(entry.canonicalId)}
-                                className="inline-flex items-center text-muted-foreground hover:text-foreground shrink-0 focus-visible:outline-2 focus-visible:outline-ring"
-                                aria-label={`View ${entry.modelName} details in catalogue`}
-                              >
-                                <ArrowUpRight className="size-3.5" />
-                              </Link>
+                            {isProvider && entry.details && (
+                              <span className="text-[11px] text-muted-foreground shrink-0 font-mono">
+                                ({entry.details})
+                              </span>
                             )}
-                      </div>
-                    </div>
 
-                    {/* Right: Timestamp */}
-                    <div className="flex items-center shrink-0 text-[11px] text-muted-foreground">
-                      <time dateTime={entry.timestamp} className="font-mono text-[11px]">
-                        {formatTime(entry.timestamp)}
-                      </time>
-                    </div>
-                  </div>
-                );
-              })}
+                            {/* Top-right arrow icon linking to catalogue */}
+                            {isProvider
+                              ? isLiveProvider && (
+                                  <Link
+                                    href={`/providers/${entry.provider}`}
+                                    className="inline-flex items-center text-muted-foreground hover:text-foreground shrink-0 focus-visible:outline-2 focus-visible:outline-ring"
+                                    aria-label={`View ${entry.providerName} details in catalogue`}
+                                  >
+                                    <ArrowUpRight className="size-3.5" />
+                                  </Link>
+                                )
+                              : isLiveInCatalogue &&
+                                entry.canonicalId && (
+                                  <Link
+                                    href={modelHref(entry.canonicalId)}
+                                    className="inline-flex items-center text-muted-foreground hover:text-foreground shrink-0 focus-visible:outline-2 focus-visible:outline-ring"
+                                    aria-label={`View ${entry.modelName} details in catalogue`}
+                                  >
+                                    <ArrowUpRight className="size-3.5" />
+                                  </Link>
+                                )}
+                          </div>
+                        </TableCell>
+
+                        {/* Timestamp */}
+                        <TableCell className="py-2 pl-1 pr-2 text-right align-middle font-mono text-[11px] text-muted-foreground">
+                          <time dateTime={entry.timestamp}>{formatTime(entry.timestamp)}</time>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
             </div>
           </section>
         );
