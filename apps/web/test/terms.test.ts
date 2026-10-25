@@ -49,7 +49,7 @@ describe("Terms & Conditions content verification", () => {
   });
 
   test("termsData says the site does not host or operate models", () => {
-    expect(contentContain("about-the-service", "informational only")).toBe(true);
+    expect(contentContain("about-the-service", "supplies information only")).toBe(true);
     expect(contentContain("about-the-service", "host, or operate")).toBe(true);
   });
 
