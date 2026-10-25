@@ -62,3 +62,7 @@ bun run lint          # Run Biome linter
 bun run quality       # Run complete quality gate
 bun run --filter web seo:check # Verify SEO and UI content parity
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
