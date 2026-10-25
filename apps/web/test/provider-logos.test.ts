@@ -7,8 +7,24 @@ const localLogo = /^\/brand-logos\/[a-f0-9]{16}\.(png|jpg|webp|ico|svg)$/;
 
 describe("local brand logo resolution", () => {
   test("known and newly discovered publishers use checked-in snapshots", () => {
-    for (const publisher of ["apodex", "inception", "liquid"]) {
+    for (const publisher of [
+      "amazon",
+      "apodex",
+      "baseten",
+      "bytedance",
+      "inception",
+      "liquid",
+      "routeway",
+      "voyage",
+      "x-ai",
+    ]) {
       expect(publisherFaviconUrl(publisher)).toMatch(localLogo);
+    }
+  });
+
+  test("publisher aliases resolve to their canonical brand logo", () => {
+    for (const alias of ["bytedance-seed", "voyageai", "minimaxai", "preferred-networks", "xai"]) {
+      expect(publisherFaviconUrl(alias)).toMatch(localLogo);
     }
   });
 
@@ -19,6 +35,7 @@ describe("local brand logo resolution", () => {
       "../apodex",
       "https://example.com",
       "unknown-brand",
+      "recursive",
     ]) {
       expect(publisherFaviconUrl(publisher)).toBeNull();
     }
