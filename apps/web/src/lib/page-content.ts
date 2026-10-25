@@ -24,6 +24,17 @@ export function contentSnippet(text: string, limit = 160): string {
   return `${shortened.slice(0, lastSpace > limit / 2 ? lastSpace : undefined).trimEnd()}…`;
 }
 
+export function homeDescription(models: readonly Pick<ModelSummary, "providers">[]): string {
+  const modelCount = models.length;
+  const providerCount = new Set(models.flatMap((model) => model.providers)).size;
+  if (modelCount === 0) {
+    return "Compare free AI models and zero-cost LLM APIs across verified providers.";
+  }
+  return `Compare ${modelCount} free AI models and zero-cost LLM APIs across ${providerCount} ${
+    providerCount === 1 ? "provider" : "providers"
+  }.`;
+}
+
 export function modelDescription(
   model: Pick<ModelSummary, "name" | "description"> & Partial<Pick<ModelSummary, "providers">>,
 ): string {

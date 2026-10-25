@@ -19,7 +19,7 @@ test("getChangelog reads the local changelog document", async () => {
     expect(entry.date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(["added", "removed"]).toContain(entry.type);
     expect(typeof entry.provider).toBe("string");
-    expect(typeof entry.modelId).toBe("string");
+    expect(typeof (entry.modelId ?? entry.modelName)).toBe("string");
   }
 });
 

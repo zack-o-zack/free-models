@@ -14,11 +14,13 @@ export const changelogEntrySchema = z.object({
   provider: providerIdSchema,
   providerName: z.string().min(1),
   type: z.enum(["added", "removed"]),
-  modelId: z.string().min(1),
-  modelName: z.string().min(1),
+  category: z.enum(["model", "provider"]).default("model"),
+  modelId: z.string().optional(),
+  modelName: z.string().optional(),
   canonicalId: z.string().nullable().optional(),
   commitHash: z.string().optional(),
   commitMessage: z.string().optional(),
+  details: z.string().optional(),
 });
 
 export type ChangelogEntry = z.infer<typeof changelogEntrySchema>;
@@ -29,6 +31,8 @@ export const changelogDocumentSchema = z.object({
   since: z.string().min(1),
   totalAdded: z.number().int().nonnegative(),
   totalRemoved: z.number().int().nonnegative(),
+  totalProvidersAdded: z.number().int().nonnegative().optional(),
+  totalProvidersRemoved: z.number().int().nonnegative().optional(),
   entries: z.array(changelogEntrySchema),
 });
 
@@ -139,15 +143,26 @@ export async function generateChangelog(
         if (!hash || !commitDate) continue;
 
         const filesOut = runGit(
-          ["diff-tree", "--no-commit-id", "--name-only", "-r", hash, "--", relSnapshots],
+          ["diff-tree", "--no-commit-id", "--name-status", "-r", hash, "--", relSnapshots],
           gitRoot,
         );
         if (!filesOut) continue;
 
-        const changedFiles = filesOut.trim().split("\n").filter(Boolean);
-        for (const relFile of changedFiles) {
-          const currRaw = runGit(["show", `${hash}:${relFile}`], gitRoot);
-          const prevRaw = runGit(["show", `${hash}~1:${relFile}`], gitRoot);
+        const changedLines = filesOut.trim().split("\n").filter(Boolean);
+        for (const changedLine of changedLines) {
+          const [status, ...fileParts] = changedLine.split("\t");
+          const relFile = fileParts[fileParts.length - 1];
+          if (!relFile?.endsWith(".json")) continue;
+
+          const isProviderAdded = status?.startsWith("A") ?? false;
+          const isProviderRemoved = status?.startsWith("D") ?? false;
+
+          const currRaw = isProviderRemoved
+            ? null
+            : runGit(["show", `${hash}:${relFile}`], gitRoot);
+          const prevRaw = isProviderAdded
+            ? null
+            : runGit(["show", `${hash}~1:${relFile}`], gitRoot);
 
           const currSnapshot = parseSnapshotJson(currRaw);
           const prevSnapshot = parseSnapshotJson(prevRaw);
@@ -172,6 +187,44 @@ export async function generateChangelog(
           const shortHash = hash.slice(0, 7);
           const dateStr = commitDate.slice(0, 10);
 
+          if (isProviderAdded) {
+            entries.push({
+              id: `${shortHash}-${provider}-add-provider`,
+              date: dateStr,
+              timestamp: commitDate,
+              provider,
+              providerName,
+              type: "added",
+              category: "provider",
+              modelName: "Provider added",
+              commitHash: shortHash,
+              commitMessage,
+              details:
+                currOffers.size > 0
+                  ? `${currOffers.size} free ${currOffers.size === 1 ? "model" : "models"}`
+                  : undefined,
+            });
+          }
+
+          if (isProviderRemoved) {
+            entries.push({
+              id: `${shortHash}-${provider}-remove-provider`,
+              date: dateStr,
+              timestamp: commitDate,
+              provider,
+              providerName,
+              type: "removed",
+              category: "provider",
+              modelName: "Provider removed",
+              commitHash: shortHash,
+              commitMessage,
+              details:
+                prevOffers.size > 0
+                  ? `${prevOffers.size} free ${prevOffers.size === 1 ? "model" : "models"} removed`
+                  : undefined,
+            });
+          }
+
           for (const [modelId, modelName] of currOffers.entries()) {
             if (!prevOffers.has(modelId)) {
               entries.push({
@@ -181,6 +234,7 @@ export async function generateChangelog(
                 provider,
                 providerName,
                 type: "added",
+                category: "model",
                 modelId,
                 modelName,
                 canonicalId: providerMappings?.get(modelId) ?? null,
@@ -199,6 +253,7 @@ export async function generateChangelog(
                 provider,
                 providerName,
                 type: "removed",
+                category: "model",
                 modelId,
                 modelName,
                 canonicalId: providerMappings?.get(modelId) ?? null,
@@ -212,30 +267,45 @@ export async function generateChangelog(
     }
 
     // Check for uncommitted working tree changes
-    const workingDiff = runGit(["diff", "--name-only", "HEAD", "--", relSnapshots], gitRoot);
+    const workingDiff = runGit(["diff", "--name-status", "HEAD", "--", relSnapshots], gitRoot);
     const untracked = runGit(
       ["ls-files", "--others", "--exclude-standard", "--", relSnapshots],
       gitRoot,
     );
-    const pendingFiles = new Set(
-      [...(workingDiff?.split("\n") ?? []), ...(untracked?.split("\n") ?? [])].filter(Boolean),
-    );
 
-    if (pendingFiles.size > 0) {
+    const pendingStatuses = new Map<string, string>();
+    if (workingDiff) {
+      for (const line of workingDiff.trim().split("\n").filter(Boolean)) {
+        const [status, ...parts] = line.split("\t");
+        const file = parts[parts.length - 1];
+        if (file && status) pendingStatuses.set(file, status);
+      }
+    }
+    if (untracked) {
+      for (const file of untracked.trim().split("\n").filter(Boolean)) {
+        pendingStatuses.set(file, "A");
+      }
+    }
+
+    if (pendingStatuses.size > 0) {
       const nowIso = new Date(now).toISOString();
       const nowDate = nowIso.slice(0, 10);
 
-      for (const relFile of pendingFiles) {
+      for (const [relFile, status] of pendingStatuses.entries()) {
+        if (!relFile?.endsWith(".json")) continue;
+        const isProviderAdded = status.startsWith("A");
+        const isProviderRemoved = status.startsWith("D");
+
         const fullPath = join(gitRoot, relFile);
         let currRaw: string | null = null;
-        if (existsSync(fullPath)) {
+        if (!isProviderRemoved && existsSync(fullPath)) {
           try {
             currRaw = readFileSync(fullPath, "utf8");
           } catch {
             currRaw = null;
           }
         }
-        const headRaw = runGit(["show", `HEAD:${relFile}`], gitRoot);
+        const headRaw = isProviderAdded ? null : runGit(["show", `HEAD:${relFile}`], gitRoot);
 
         const currSnapshot = parseSnapshotJson(currRaw);
         const headSnapshot = parseSnapshotJson(headRaw);
@@ -257,6 +327,42 @@ export async function generateChangelog(
           if (offer.model_id) headOffers.set(offer.model_id, offer.name ?? offer.model_id);
         }
 
+        if (isProviderAdded) {
+          entries.push({
+            id: `working-${provider}-add-provider`,
+            date: nowDate,
+            timestamp: nowIso,
+            provider,
+            providerName,
+            type: "added",
+            category: "provider",
+            modelName: "Provider added",
+            commitMessage: "Working directory changes",
+            details:
+              currOffers.size > 0
+                ? `${currOffers.size} free ${currOffers.size === 1 ? "model" : "models"}`
+                : undefined,
+          });
+        }
+
+        if (isProviderRemoved) {
+          entries.push({
+            id: `working-${provider}-remove-provider`,
+            date: nowDate,
+            timestamp: nowIso,
+            provider,
+            providerName,
+            type: "removed",
+            category: "provider",
+            modelName: "Provider removed",
+            commitMessage: "Working directory changes",
+            details:
+              headOffers.size > 0
+                ? `${headOffers.size} free ${headOffers.size === 1 ? "model" : "models"} removed`
+                : undefined,
+          });
+        }
+
         for (const [modelId, modelName] of currOffers.entries()) {
           if (!headOffers.has(modelId)) {
             entries.push({
@@ -266,6 +372,7 @@ export async function generateChangelog(
               provider,
               providerName,
               type: "added",
+              category: "model",
               modelId,
               modelName,
               canonicalId: providerMappings?.get(modelId) ?? null,
@@ -283,6 +390,7 @@ export async function generateChangelog(
               provider,
               providerName,
               type: "removed",
+              category: "model",
               modelId,
               modelName,
               canonicalId: providerMappings?.get(modelId) ?? null,
@@ -303,7 +411,9 @@ export async function generateChangelog(
         "Existing changelog",
       );
       for (const entry of existingDoc.entries) {
-        entries.push(entry);
+        if (!entry.id.startsWith("working-")) {
+          entries.push(entry);
+        }
       }
     } catch {
       // Ignore existing changelog read issues
@@ -315,7 +425,7 @@ export async function generateChangelog(
   const uniqueEntries: ChangelogEntry[] = [];
 
   for (const entry of entries) {
-    const key = `${entry.commitHash ?? "local"}:${entry.provider}:${entry.modelId}:${entry.type}:${entry.date}`;
+    const key = `${entry.commitHash ?? "local"}:${entry.provider}:${entry.category ?? "model"}:${entry.modelId ?? "provider"}:${entry.type}:${entry.date}`;
     if (!seen.has(key)) {
       seen.add(key);
       uniqueEntries.push(entry);
@@ -328,20 +438,29 @@ export async function generateChangelog(
     return !Number.isNaN(time) && time >= cutoffTime;
   });
 
-  // Sort newest first: timestamp desc, then provider, then modelId
+  // Sort newest first: timestamp desc, then category (provider first), then provider, then modelId
   filteredEntries.sort((a, b) => {
     const timeA = Date.parse(a.timestamp);
     const timeB = Date.parse(b.timestamp);
     if (timeB !== timeA) return timeB - timeA;
+    if (a.category !== b.category) {
+      return a.category === "provider" ? -1 : 1;
+    }
     const pComp = compareStrings(a.provider, b.provider);
     if (pComp !== 0) return pComp;
-    const mComp = compareStrings(a.modelId, b.modelId);
+    const mComp = compareStrings(a.modelId ?? "", b.modelId ?? "");
     if (mComp !== 0) return mComp;
     return compareStrings(a.type, b.type);
   });
 
   const totalAdded = filteredEntries.filter((e) => e.type === "added").length;
   const totalRemoved = filteredEntries.filter((e) => e.type === "removed").length;
+  const totalProvidersAdded = filteredEntries.filter(
+    (e) => e.category === "provider" && e.type === "added",
+  ).length;
+  const totalProvidersRemoved = filteredEntries.filter(
+    (e) => e.category === "provider" && e.type === "removed",
+  ).length;
 
   const document: ChangelogDocument = {
     generatedAt: new Date(now).toISOString(),
@@ -349,6 +468,8 @@ export async function generateChangelog(
     since: cutoffIso,
     totalAdded,
     totalRemoved,
+    totalProvidersAdded,
+    totalProvidersRemoved,
     entries: filteredEntries,
   };
 
