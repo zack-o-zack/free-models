@@ -2,10 +2,12 @@
 
 import type { LucideIcon } from "lucide-react";
 import {
+  ArrowLeftRight,
   AudioLines,
   ChartColumn,
   Database,
   GitBranch,
+  History,
   Image as ImageIcon,
   LayoutGrid,
   LayoutList,
@@ -17,6 +19,7 @@ import {
   Video,
 } from "lucide-react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import type { ProviderFilterOption, PublisherFilterOption } from "@/components/model-filters";
 import { ProgressiveModelList } from "@/components/progressive-model-list";
@@ -35,6 +38,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { EntityKind } from "@/lib/catalogue-entities";
 import { getModelFilterOptions } from "@/lib/model-filter-options";
 import {
@@ -314,7 +318,7 @@ export function ModelExplorer({
           )}
 
           <section className="min-w-0">
-            <div className="mb-5 flex items-end justify-between gap-3">
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
               <div>
                 <h2 className="font-heading text-2xl font-extrabold tracking-[-0.03em]">
                   {collection ? `${collection.name} models` : "All models"}
@@ -323,31 +327,58 @@ export function ModelExplorer({
                   {visibleModels.length} {visibleModels.length === 1 ? "result" : "results"}
                 </p>
               </div>
-              <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
-                <SheetTrigger
-                  render={
-                    <Button className={view === "list" ? "lg:hidden" : ""} variant="outline">
-                      <SlidersHorizontal /> Filters
-                      {activeFilterCount > 0 && (
-                        <Badge className="ml-1" variant="secondary">
-                          {activeFilterCount}
-                        </Badge>
-                      )}
-                    </Button>
-                  }
-                />
-                <SheetContent side="left" className="w-[min(88vw,360px)]">
-                  <SheetHeader>
-                    <SheetTitle>Filter models</SheetTitle>
-                    <SheetDescription>
-                      Filter by input type, provider, and context size.
-                    </SheetDescription>
-                  </SheetHeader>
-                  <ScrollArea className="min-h-0 flex-1 px-4 pb-4">
-                    {filtersOpen && <ModelFilters {...filterProps} idPrefix="mobile" />}
-                  </ScrollArea>
-                </SheetContent>
-              </Sheet>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                <Button
+                  render={<Link href="/compare" />}
+                  nativeButton={false}
+                  variant="outline"
+                  className="gap-2"
+                >
+                  <ArrowLeftRight aria-hidden="true" className="size-4" />
+                  <span>Compare</span>
+                </Button>
+                <Tooltip>
+                  <TooltipTrigger
+                    render={
+                      <Button
+                        render={<Link href="/changelog" />}
+                        nativeButton={false}
+                        variant="outline"
+                        size="icon"
+                        aria-label="Changelog"
+                      />
+                    }
+                  >
+                    <History aria-hidden="true" className="size-4" />
+                  </TooltipTrigger>
+                  <TooltipContent>Changelog</TooltipContent>
+                </Tooltip>
+                <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
+                  <SheetTrigger
+                    render={
+                      <Button className={view === "list" ? "lg:hidden" : ""} variant="outline">
+                        <SlidersHorizontal /> Filters
+                        {activeFilterCount > 0 && (
+                          <Badge className="ml-1" variant="secondary">
+                            {activeFilterCount}
+                          </Badge>
+                        )}
+                      </Button>
+                    }
+                  />
+                  <SheetContent side="left" className="w-[min(88vw,360px)]">
+                    <SheetHeader>
+                      <SheetTitle>Filter models</SheetTitle>
+                      <SheetDescription>
+                        Filter by input type, provider, and context size.
+                      </SheetDescription>
+                    </SheetHeader>
+                    <ScrollArea className="min-h-0 flex-1 px-4 pb-4">
+                      {filtersOpen && <ModelFilters {...filterProps} idPrefix="mobile" />}
+                    </ScrollArea>
+                  </SheetContent>
+                </Sheet>
+              </div>
             </div>
 
             <div className="mb-5 grid grid-cols-[minmax(0,1fr)_auto] gap-3 md:grid-cols-[minmax(220px,1fr)_190px_auto]">
