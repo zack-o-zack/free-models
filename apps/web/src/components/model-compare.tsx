@@ -438,7 +438,7 @@ function CompareEmptyState({
     return [...allModels]
       .filter((m) => typeof m.codingScore === "number" && m.codingScore > 0)
       .sort((a, b) => (b.codingScore ?? 0) - (a.codingScore ?? 0))
-      .slice(0, 4);
+      .slice(0, 3);
   }, [allModels]);
 
   return (
