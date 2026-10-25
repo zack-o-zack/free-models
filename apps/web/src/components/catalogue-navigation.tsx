@@ -1,10 +1,10 @@
 "use client";
 
-import { ArrowLeftRight, ArrowRight, ChevronDown, Menu } from "lucide-react";
+import { ArrowLeftRight, ArrowRight, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandImage } from "@/components/brand-image";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarGroup } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,6 +12,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
 const providerIcons = [
@@ -26,21 +34,18 @@ const publisherIcons = [
   { name: "Claude", src: "/brands/claude-code.svg", fallback: "C" },
 ];
 
-function StackedIcons({ icons }: { icons: typeof providerIcons }) {
+function StackedBrandIcons({ icons }: { icons: typeof providerIcons }) {
   return (
-    <div className="flex items-center -space-x-1.5" aria-hidden="true">
+    <AvatarGroup className="-space-x-1.5 *:data-[slot=avatar]:ring-popover">
       {icons.map((icon) => (
-        <Avatar
-          key={icon.name}
-          className="size-5.5 rounded-full bg-card ring-2 ring-popover shadow-2xs"
-        >
+        <Avatar key={icon.name} className="size-5.5 rounded-full bg-card shadow-2xs">
           <BrandImage src={icon.src} alt={icon.name} className="object-contain p-0.5" />
           <AvatarFallback className="rounded-full text-[7px] font-bold">
             {icon.fallback}
           </AvatarFallback>
         </Avatar>
       ))}
-    </div>
+    </AvatarGroup>
   );
 }
 
@@ -54,67 +59,74 @@ export function CatalogueNavigation() {
 
   return (
     <>
-      <div className="hidden items-center gap-3 text-sm font-semibold md:flex">
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={
-              <button
-                type="button"
+      <div className="hidden md:flex">
+        <NavigationMenu>
+          <NavigationMenuList className="gap-2">
+            <NavigationMenuItem>
+              <NavigationMenuTrigger
                 className={cn(
-                  "group/nav inline-flex min-h-12 items-center gap-1.5 rounded-lg px-2.5 text-sm font-semibold underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-ring cursor-pointer",
+                  "min-h-12 bg-transparent px-3 text-sm font-semibold underline-offset-4 hover:bg-transparent hover:underline focus:bg-transparent focus-visible:outline-2 focus-visible:outline-ring data-open:bg-transparent data-open:hover:bg-transparent data-popup-open:bg-transparent data-popup-open:hover:bg-transparent",
                   isModelsActive && "underline",
                 )}
-              />
-            }
-          >
-            <span>Models</span>
-            <ChevronDown
-              aria-hidden="true"
-              className="size-3.5 text-muted-foreground transition-transform duration-200 group-data-popup-open/nav:rotate-180"
-            />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="start"
-            className="w-60 rounded-2xl p-1.5 border border-border/80 shadow-xl"
-          >
-            <DropdownMenuItem
-              render={<Link href="/#models" />}
-              className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium cursor-pointer"
-            >
-              <span>All Models</span>
-              <ArrowRight aria-hidden="true" className="size-3.5 text-muted-foreground" />
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              render={<Link href="/providers" />}
-              className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium cursor-pointer"
-            >
-              <span>Providers</span>
-              <StackedIcons icons={providerIcons} />
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              render={<Link href="/publishers" />}
-              className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium cursor-pointer"
-            >
-              <span>Publishers</span>
-              <StackedIcons icons={publisherIcons} />
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              render={<Link href="/compare" />}
-              className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium cursor-pointer"
-            >
-              <span>Compare Models</span>
-              <ArrowLeftRight aria-hidden="true" className="size-3.5 text-muted-foreground" />
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              >
+                Models
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="w-64 rounded-2xl p-1.5 border border-border/80 shadow-xl">
+                <ul className="grid gap-1">
+                  <li>
+                    <NavigationMenuLink
+                      render={<Link href="/#models" />}
+                      className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    >
+                      <span>All Models</span>
+                      <ArrowRight aria-hidden="true" className="size-3.5 text-muted-foreground" />
+                    </NavigationMenuLink>
+                  </li>
+                  <li>
+                    <NavigationMenuLink
+                      render={<Link href="/providers" />}
+                      className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    >
+                      <span>Providers</span>
+                      <StackedBrandIcons icons={providerIcons} />
+                    </NavigationMenuLink>
+                  </li>
+                  <li>
+                    <NavigationMenuLink
+                      render={<Link href="/publishers" />}
+                      className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    >
+                      <span>Publishers</span>
+                      <StackedBrandIcons icons={publisherIcons} />
+                    </NavigationMenuLink>
+                  </li>
+                  <li>
+                    <NavigationMenuLink
+                      render={<Link href="/compare" />}
+                      className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    >
+                      <span>Compare Models</span>
+                      <ArrowLeftRight
+                        aria-hidden="true"
+                        className="size-3.5 text-muted-foreground"
+                      />
+                    </NavigationMenuLink>
+                  </li>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
 
-        <Link
-          href="/changelog"
-          aria-current={pathname.startsWith("/changelog") ? "page" : undefined}
-          className="inline-flex min-h-12 items-center rounded-lg px-2.5 underline-offset-4 hover:underline aria-[current=page]:underline focus-visible:outline-2 focus-visible:outline-ring"
-        >
-          Changelog
-        </Link>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                render={<Link href="/changelog" />}
+                aria-current={pathname.startsWith("/changelog") ? "page" : undefined}
+                className="inline-flex min-h-12 items-center rounded-lg px-3 text-sm font-semibold underline-offset-4 hover:bg-transparent hover:underline aria-[current=page]:underline focus:bg-transparent focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                Changelog
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
 
       <div className="md:hidden">
@@ -140,14 +152,14 @@ export function CatalogueNavigation() {
               className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium cursor-pointer"
             >
               <span>Providers</span>
-              <StackedIcons icons={providerIcons} />
+              <StackedBrandIcons icons={providerIcons} />
             </DropdownMenuItem>
             <DropdownMenuItem
               render={<Link href="/publishers" />}
               className="flex items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium cursor-pointer"
             >
               <span>Publishers</span>
-              <StackedIcons icons={publisherIcons} />
+              <StackedBrandIcons icons={publisherIcons} />
             </DropdownMenuItem>
             <DropdownMenuItem
               render={<Link href="/compare" />}
