@@ -38,6 +38,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { EntityKind } from "@/lib/catalogue-entities";
 import { getModelFilterOptions } from "@/lib/model-filter-options";
 import {
@@ -328,15 +329,6 @@ export function ModelExplorer({
               </div>
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <Button
-                  render={<Link href="/changelog" />}
-                  nativeButton={false}
-                  variant="outline"
-                  className="gap-2"
-                >
-                  <History aria-hidden="true" className="size-4" />
-                  <span>Changelog</span>
-                </Button>
-                <Button
                   render={<Link href="/compare" />}
                   nativeButton={false}
                   variant="outline"
@@ -345,6 +337,22 @@ export function ModelExplorer({
                   <ArrowLeftRight aria-hidden="true" className="size-4" />
                   <span>Compare</span>
                 </Button>
+                <Tooltip>
+                  <TooltipTrigger
+                    render={
+                      <Button
+                        render={<Link href="/changelog" />}
+                        nativeButton={false}
+                        variant="outline"
+                        size="icon"
+                        aria-label="Changelog"
+                      />
+                    }
+                  >
+                    <History aria-hidden="true" className="size-4" />
+                  </TooltipTrigger>
+                  <TooltipContent>Changelog</TooltipContent>
+                </Tooltip>
                 <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
                   <SheetTrigger
                     render={
