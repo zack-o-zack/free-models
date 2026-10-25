@@ -50,12 +50,10 @@ describe("Terms & Conditions content and disclaimer verification", () => {
     expect(liabilityHighlight).toBeDefined();
     expect(liabilityHighlight?.description.toLowerCase()).toContain("zero liability");
 
-    const liabilitySection = termsData.sections.find(
-      (s) => s.id === "no-liability-provider-falsehoods",
-    );
-    expect(liabilitySection).toBeDefined();
+    const claimsSection = termsData.sections.find((s) => s.id === "accuracy-and-claims");
+    expect(claimsSection).toBeDefined();
     expect(
-      liabilitySection?.content.some((p) =>
+      claimsSection?.content.some((p) =>
         p.toLowerCase().includes("cannot and will not be blamed or held liable"),
       ),
     ).toBe(true);
