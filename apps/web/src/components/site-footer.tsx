@@ -59,9 +59,9 @@ export function SiteFooter() {
           <p className="leading-relaxed">
             <strong className="font-semibold text-foreground">Disclaimer:</strong> Model, provider,
             and publisher names, logos, and trademarks belong to their respective owners. Free
-            Models does not host or operate AI models. Specifications and rate limits shown here are
-            provider-dependent. They can be outdated and can change at any time. Verify with the
-            provider before you rely on them.
+            Models does not host or operate AI models. Specifications and rate limits here are
+            provider-dependent. They can be outdated and can change at any time. Before you rely on
+            them, verify with the provider.
           </p>
         </div>
 

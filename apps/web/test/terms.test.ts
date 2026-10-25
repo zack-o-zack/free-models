@@ -27,7 +27,7 @@ describe("Terms & Conditions content verification", () => {
     expect(
       contentContain("no-ownership", "belong to their respective providers and publishers"),
     ).toBe(true);
-    expect(contentContain("no-ownership", "free models claims no ownership")).toBe(true);
+    expect(contentContain("no-ownership", "Free Models does not own them")).toBe(true);
   });
 
   test("termsData states trademarks and logos belong to publishers and providers", () => {
@@ -37,7 +37,7 @@ describe("Terms & Conditions content verification", () => {
   });
 
   test("termsData clarifies that claims and limits are provider-dependent and may be outdated", () => {
-    expect(contentContain("accuracy", "determined solely by the respective providers")).toBe(true);
+    expect(contentContain("accuracy", "Providers set the rate limits")).toBe(true);
     expect(contentContain("accuracy", "outdated")).toBe(true);
     expect(contentContain("accuracy", "without notice")).toBe(true);
   });
@@ -50,7 +50,7 @@ describe("Terms & Conditions content verification", () => {
 
   test("termsData says the site does not host or operate models", () => {
     expect(contentContain("about-the-service", "informational only")).toBe(true);
-    expect(contentContain("about-the-service", "host, serve, or operate")).toBe(true);
+    expect(contentContain("about-the-service", "host, or operate")).toBe(true);
   });
 
   test("terms page metadata conforms to SEO requirements", () => {
