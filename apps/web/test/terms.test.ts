@@ -16,70 +16,46 @@ mock.module("../src/lib/model-data", () => ({
   }),
 }));
 
-describe("Terms & Conditions content and disclaimer verification", () => {
-  test("termsData includes explicit disclaimer of third-party ownership", () => {
-    expect(termsData.summaryNotice).toContain("do not own");
-    const noOwnershipHighlight = termsData.highlights.find((h) => h.id === "no-ownership");
-    expect(noOwnershipHighlight).toBeDefined();
-    expect(noOwnershipHighlight?.description.toLowerCase()).toContain("do not own");
+function contentContain(id: string, needle: string) {
+  const section = termsData.sections.find((s) => s.id === id);
+  expect(section, `section ${id} should exist`).toBeDefined();
+  return section?.content.some((p) => p.toLowerCase().includes(needle.toLowerCase())) ?? false;
+}
 
-    const ownershipSection = termsData.sections.find((s) => s.id === "third-party-ownership");
-    expect(ownershipSection).toBeDefined();
-    expect(ownershipSection?.content.some((p) => p.includes("zero ownership"))).toBe(true);
+describe("Terms & Conditions content verification", () => {
+  test("termsData includes explicit disclaimer of third-party ownership", () => {
+    expect(
+      contentContain("no-ownership", "belong to their respective providers and publishers"),
+    ).toBe(true);
+    expect(contentContain("no-ownership", "free models claims no ownership")).toBe(true);
+  });
+
+  test("termsData states trademarks and logos belong to publishers and providers", () => {
+    expect(contentContain("no-ownership", "trademarks")).toBe(true);
+    expect(contentContain("no-ownership", "logos")).toBe(true);
+    expect(contentContain("no-ownership", "publishers")).toBe(true);
   });
 
   test("termsData clarifies that claims and limits are provider-dependent and may be outdated", () => {
-    expect(termsData.providerClaimsDisclaimer.toLowerCase()).toContain("provider-dependent");
-    expect(termsData.providerClaimsDisclaimer.toLowerCase()).toContain("outdated");
-
-    const providerHighlight = termsData.highlights.find((h) => h.id === "provider-dependent");
-    expect(providerHighlight).toBeDefined();
-    expect(providerHighlight?.description.toLowerCase()).toContain("provider");
-
-    const accuracySection = termsData.sections.find((s) => s.id === "accuracy-and-claims");
-    expect(accuracySection).toBeDefined();
-    expect(accuracySection?.content.some((p) => p.includes("outdated"))).toBe(true);
+    expect(contentContain("accuracy", "determined solely by the respective providers")).toBe(true);
+    expect(contentContain("accuracy", "outdated")).toBe(true);
+    expect(contentContain("accuracy", "without notice")).toBe(true);
   });
 
-  test("termsData explicitly protects against provider falsehoods / lies and disclaims liability", () => {
-    expect(termsData.providerClaimsDisclaimer.toLowerCase()).toContain(
-      "cannot be blamed or held liable",
-    );
-
-    const liabilityHighlight = termsData.highlights.find((h) => h.id === "no-blame");
-    expect(liabilityHighlight).toBeDefined();
-    expect(liabilityHighlight?.description.toLowerCase()).toContain("zero liability");
-
-    const claimsSection = termsData.sections.find((s) => s.id === "accuracy-and-claims");
-    expect(claimsSection).toBeDefined();
-    expect(
-      claimsSection?.content.some((p) =>
-        p.toLowerCase().includes("cannot and will not be blamed or held liable"),
-      ),
-    ).toBe(true);
+  test("termsData disclaims liability for third-party provider conduct and misrepresentation", () => {
+    expect(contentContain("third-party", "misrepresented capabilities")).toBe(true);
+    expect(contentContain("third-party", "not responsible for")).toBe(true);
+    expect(contentContain("third-party", "at your own risk")).toBe(true);
   });
 
-  test("termsData states that logos and trademarks belong to publishers and providers", () => {
-    expect(termsData.trademarkDisclaimer.toLowerCase()).toContain(
-      "belong exclusively to their respective owners",
-    );
-    expect(termsData.trademarkDisclaimer.toLowerCase()).toContain("publishers");
-    expect(termsData.trademarkDisclaimer.toLowerCase()).toContain("providers");
-
-    const tmHighlight = termsData.highlights.find((h) => h.id === "trademarks");
-    expect(tmHighlight).toBeDefined();
-    expect(tmHighlight?.description.toLowerCase()).toContain(
-      "intellectual property of their respective creators, publishers, and providers",
-    );
-
-    const tmSection = termsData.sections.find((s) => s.id === "third-party-ownership");
-    expect(tmSection).toBeDefined();
-    expect(tmSection?.content.some((p) => p.includes("exclusive property"))).toBe(true);
+  test("termsData says the site does not host or operate models", () => {
+    expect(contentContain("about-the-service", "informational only")).toBe(true);
+    expect(contentContain("about-the-service", "host, serve, or operate")).toBe(true);
   });
 
   test("terms page metadata conforms to SEO requirements", () => {
     const desc =
-      "Terms and conditions, trademark ownership notices, provider-dependent claims disclaimer, and limitation of liability for Free Models.";
+      "The terms and conditions that apply to using Free Models, including trademark ownership and third-party liability notices.";
     const meta = pageMetadata("Terms & Conditions", desc, "/terms");
     expect(meta.title).toEqual({ absolute: "Terms & Conditions | Free Models" });
     expect(typeof meta.description).toBe("string");

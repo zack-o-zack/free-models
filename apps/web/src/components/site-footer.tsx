@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { Icons } from "@/components/icons";
 import { SiteLogo } from "@/components/site-logo";
-import { TermsDialog } from "@/components/terms-dialog";
 import { siteConfig } from "@/lib/config";
 
 export function SiteFooter() {
@@ -58,13 +57,11 @@ export function SiteFooter() {
         {/* Disclaimer & Trademark Notice */}
         <div className="border-t border-border/60 py-6 text-xs text-muted-foreground">
           <p className="leading-relaxed">
-            <strong className="font-semibold text-foreground">Disclaimer &amp; Trademarks:</strong>{" "}
-            All trademarks, logos, brand names, and model designations are the property of their
-            respective providers and publishers; Free Models claims zero ownership over third-party
-            assets or models. We do not host or operate any inference services. Model
-            specifications, rate limits, and claims are provider-dependent, subject to change
-            without notice, and may be outdated. Free Models is an independent directory and
-            disclaims all liability for third-party provider claims or representations.
+            <strong className="font-semibold text-foreground">Disclaimer:</strong> Model, provider,
+            and publisher names, logos, and trademarks are the property of their respective owners.
+            Free Models does not host or operate any AI models. Specifications and rate limits shown
+            here are provider-dependent, may be outdated, and can change at any time — verify
+            directly with the provider before relying on them.
           </p>
         </div>
 
@@ -74,12 +71,11 @@ export function SiteFooter() {
             LLM API providers, and live model benchmarks.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <TermsDialog triggerVariant="link" triggerLabel="Terms & Conditions" />
             <Link
               href="/terms"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
-              Full Terms
+              Terms &amp; Conditions
             </Link>
             <a
               href="#site-top"
