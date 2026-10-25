@@ -7,6 +7,7 @@ import {
   ChevronDown,
   Database,
   ExternalLink,
+  EyeOff,
   FileText,
   Image as ImageIcon,
   type LucideIcon,
@@ -44,6 +45,7 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { publisherSlug } from "@/lib/catalogue-entities";
 import {
   type CompareRow,
   compareHref,
@@ -220,31 +222,43 @@ function ModelPicker({
           <p className="p-4 text-center text-sm text-muted-foreground">No models found.</p>
         ) : (
           <ul className="space-y-1">
-            {filteredModels.map((model) => (
-              <li key={model.id}>
-                <button
-                  type="button"
-                  onClick={() => onSelect(model.id)}
-                  className="flex min-h-12 w-full items-center gap-3 rounded-[12px] px-3 py-2 text-left transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-ring"
-                >
-                  <Avatar aria-hidden="true" className="size-8 shrink-0">
-                    <AvatarFallback className="text-[10px] font-bold">
-                      {model.author.slice(0, 2).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+            {filteredModels.map((model) => {
+              const publisher = publisherSlug(model);
+              const publisherLogo = publisher ? publisherFaviconUrl(publisher) : null;
 
-                  <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-semibold">{model.name}</span>
-                    <span className="block truncate text-xs text-muted-foreground">
-                      {model.author} · {model.providers.length}{" "}
-                      {model.providers.length === 1 ? "provider" : "providers"}
+              return (
+                <li key={model.id}>
+                  <button
+                    type="button"
+                    onClick={() => onSelect(model.id)}
+                    className="flex min-h-12 w-full items-center gap-3 rounded-[12px] px-3 py-2 text-left transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-ring"
+                  >
+                    <Avatar aria-hidden="true" className="size-8 shrink-0 rounded-[8px]">
+                      {publisherLogo && (
+                        <BrandImage alt="" className="object-contain p-0.5" src={publisherLogo} />
+                      )}
+                      <AvatarFallback className="text-[10px] font-bold">
+                        {model.isStealth ? (
+                          <EyeOff className="size-4" />
+                        ) : (
+                          model.author.slice(0, 2).toUpperCase()
+                        )}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-semibold">{model.name}</span>
+                      <span className="block truncate text-xs text-muted-foreground">
+                        {model.author} · {model.providers.length}{" "}
+                        {model.providers.length === 1 ? "provider" : "providers"}
+                      </span>
                     </span>
-                  </span>
 
-                  <Plus aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
-                </button>
-              </li>
-            ))}
+                    <Plus aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
@@ -273,7 +287,8 @@ function CompareModelHeader({
   onReplace: (oldId: string, newId: string) => void;
 }) {
   const [changeOpen, setChangeOpen] = useState(false);
-  const publisherLogo = publisherFaviconUrl(model.id.split("/")[0]);
+  const publisher = publisherSlug(model);
+  const publisherLogo = publisher ? publisherFaviconUrl(publisher) : null;
   const cleanName = getCleanModelName(model);
 
   return (
@@ -293,7 +308,11 @@ function CompareModelHeader({
                 />
               ) : (
                 <AvatarFallback className="text-[9px] font-bold">
-                  {model.author.slice(0, 2).toUpperCase()}
+                  {model.isStealth ? (
+                    <EyeOff className="size-3" />
+                  ) : (
+                    model.author.slice(0, 2).toUpperCase()
+                  )}
                 </AvatarFallback>
               )}
             </Avatar>
@@ -458,7 +477,8 @@ function CompareEmptyState({
             <div>
               <div className="flex items-center -space-x-1.5">
                 {topCodingModels.map((model) => {
-                  const publisherLogo = publisherFaviconUrl(model.id.split("/")[0]);
+                  const publisher = publisherSlug(model);
+                  const publisherLogo = publisher ? publisherFaviconUrl(publisher) : null;
                   return (
                     <Avatar
                       key={model.id}

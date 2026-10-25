@@ -42,6 +42,28 @@ export const publisherWebsites: Record<string, string> = {
   "z-ai": "https://z.ai/",
 };
 
+export const providerWebsites: Record<string, string> = {
+  anyapi: "https://docs.anyapi.ai/",
+  bazaarlink: "https://bazaarlink.ai/",
+  cloudflare: "https://developers.cloudflare.com/",
+  cohere: "https://docs.cohere.com/",
+  commandcode: "https://commandcode.ai/",
+  groq: "https://console.groq.com/",
+  kilo: "https://kilo.ai/",
+  llm7: "https://docs.llm7.io/",
+  mistral: "https://docs.mistral.ai/",
+  novita: "https://novita.ai/",
+  nous: "https://portal.nousresearch.com/",
+  nvidia: "https://docs.api.nvidia.com/",
+  onomeo: "https://onomeo.com/",
+  opencode: "https://opencode.ai/",
+  openrouter: "https://openrouter.ai/",
+  requesty: "https://docs.requesty.ai/",
+  routeway: "https://docs.routeway.ai/",
+  vercel: "https://vercel.com/",
+  "z-ai": "https://docs.z.ai/",
+};
+
 export const providerNames: Record<string, string> = {
   ai4bharat: "AI4Bharat",
   aisingapore: "AI Singapore",
@@ -118,6 +140,21 @@ export function providerFaviconUrl(docs?: ProviderDoc): string | null {
     if (favicon) return favicon;
   }
   return null;
+}
+
+export function providerLogoUrl(providerSlug: string, docs?: ProviderDoc): string | null {
+  if (docs) {
+    const docFavicon = providerFaviconUrl(docs);
+    if (docFavicon) return docFavicon;
+  }
+  const slug = providerSlug.toLowerCase();
+  const website = providerWebsites[slug];
+  return (
+    faviconUrl(website) ??
+    (brandLogos as Record<string, string>)[`provider:${slug}`] ??
+    publisherFaviconUrl(providerSlug) ??
+    null
+  );
 }
 
 function faviconUrl(website: string | undefined): string | null {
