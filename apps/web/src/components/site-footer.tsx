@@ -58,10 +58,10 @@ export function SiteFooter() {
         <div className="border-t border-border/60 py-6 text-xs text-muted-foreground">
           <p className="leading-relaxed">
             <strong className="font-semibold text-foreground">Disclaimer:</strong> Model, provider,
-            and publisher names, logos, and trademarks are the property of their respective owners.
-            Free Models does not host or operate any AI models. Specifications and rate limits shown
-            here are provider-dependent, may be outdated, and can change at any time — verify
-            directly with the provider before relying on them.
+            and publisher names, logos, and trademarks belong to their respective owners. Free
+            Models does not host or operate AI models. Specifications and rate limits shown here are
+            provider-dependent. They can be outdated and can change at any time. Verify with the
+            provider before you rely on them.
           </p>
         </div>
 
