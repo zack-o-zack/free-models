@@ -56,8 +56,7 @@ export function SiteFooter() {
 
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-border py-4 text-xs">
           <p className="leading-5 text-muted-foreground">
-            © {new Date().getFullYear()} {siteConfig.name}. Directory of free AI models, zero-cost
-            LLM API providers, and live model benchmarks.
+            © {new Date().getFullYear()} {siteConfig.name}.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <Link
