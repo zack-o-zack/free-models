@@ -54,17 +54,6 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        {/* Disclaimer & Trademark Notice */}
-        <div className="border-t border-border/60 py-6 text-xs text-muted-foreground">
-          <p className="leading-relaxed">
-            <strong className="font-semibold text-foreground">Disclaimer:</strong> Model, provider,
-            and publisher names, logos, and trademarks belong to their respective owners. Free
-            Models does not host or operate AI models. Specifications and rate limits here are
-            provider-dependent. They can be outdated and can change at any time. Before you rely on
-            them, verify with the provider.
-          </p>
-        </div>
-
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-border py-4 text-xs">
           <p className="leading-5 text-muted-foreground">
             © {new Date().getFullYear()} {siteConfig.name}. Directory of free AI models, zero-cost
