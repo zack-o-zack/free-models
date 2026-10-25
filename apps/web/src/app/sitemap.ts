@@ -13,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/") },
     { url: absoluteUrl("/compare") },
     { url: absoluteUrl("/changelog") },
+    { url: absoluteUrl("/terms") },
     ...Array.from({ length: cataloguePageCount(models.length) - 1 }, (_, index) => ({
       url: absoluteUrl(cataloguePageHref(index + 2)),
     })),
