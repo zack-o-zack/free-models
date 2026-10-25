@@ -6,6 +6,7 @@ import { EntityCards } from "@/components/entity-cards";
 import { JsonLd } from "@/components/json-ld";
 import { ModelExplorer } from "@/components/model-explorer";
 import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
+import { ProviderComplianceBadges } from "@/components/provider-compliance-badges";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -119,9 +120,14 @@ export function CatalogueEntityPage({
                     {entityInitials(entity.name)}
                   </AvatarFallback>
                 </Avatar>
-                <h1 className="min-w-0 font-heading text-4xl leading-[1.02] font-black tracking-[-0.055em] [overflow-wrap:anywhere] sm:text-5xl lg:text-6xl xl:text-7xl">
-                  {entity.name}
-                </h1>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h1 className="min-w-0 font-heading text-4xl leading-[1.02] font-black tracking-[-0.055em] [overflow-wrap:anywhere] sm:text-5xl lg:text-6xl xl:text-7xl">
+                      {entity.name}
+                    </h1>
+                    {isProvider && <ProviderComplianceBadges provider={entity.slug} size="lg" />}
+                  </div>
+                </div>
               </div>
               <p
                 data-page-description
@@ -276,13 +282,16 @@ export function CatalogueDirectoryPage({
         <h1 className="mt-4 max-w-4xl font-heading text-5xl leading-none font-black tracking-[-0.055em] sm:text-7xl">
           {directoryContent[kind].title}
         </h1>
-        <p
-          data-page-description
-          className="mt-6 mb-10 max-w-2xl text-lg leading-8 text-muted-foreground"
-        >
+        <p data-page-description className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
           {directoryContent[kind].description}
         </p>
-        <CatalogueDirectoryList entities={entities} kind={kind} />
+        <div className="mt-12">
+          {kind === "providers" ? (
+            <EntityCards entities={entities} kind={kind} />
+          ) : (
+            <CatalogueDirectoryList entities={entities} kind={kind} />
+          )}
+        </div>
       </main>
       <SiteFooter />
     </div>

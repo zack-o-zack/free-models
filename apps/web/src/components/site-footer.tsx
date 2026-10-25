@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUp, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUp, ArrowUpRight, FileJson } from "lucide-react";
 import Link from "next/link";
 
 import { Icons } from "@/components/icons";
@@ -44,6 +44,22 @@ export function SiteFooter() {
               <span className="flex items-center gap-2.5 text-sm font-semibold">
                 <Icons.gitHub className="size-4 shrink-0" />
                 View on GitHub
+              </span>
+              <ArrowUpRight
+                aria-hidden="true"
+                className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
+              />
+              <span className="sr-only">(opens in a new tab)</span>
+            </Link>
+            <Link
+              href={siteConfig.links.json}
+              rel="noreferrer"
+              target="_blank"
+              className="group flex min-h-14 items-center justify-between gap-4 rounded-2xl px-5 py-3 transition-colors hover:bg-card focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            >
+              <span className="flex items-center gap-2.5 text-sm font-semibold">
+                <FileJson aria-hidden="true" className="size-4 shrink-0" />
+                Raw JSON data
               </span>
               <ArrowUpRight
                 aria-hidden="true"

@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { BrandImage } from "@/components/brand-image";
+import { ProviderComplianceBadges } from "@/components/provider-compliance-badges";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { ProviderDoc } from "@/lib/model-types";
+import { countryCodeToFlag, getProviderCompliance } from "@/lib/provider-compliance";
 import { getProviderName, providerFaviconUrl, publisherFaviconUrl } from "@/lib/provider-logos";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +30,7 @@ export function ProviderBadge({
   names,
   href,
   fundingLabel,
+  showCompliance = true,
 }: {
   provider: string;
   docs?: ProviderDoc;
@@ -38,9 +41,11 @@ export function ProviderBadge({
   names?: Record<string, string>;
   href?: string;
   fundingLabel?: string;
+  showCompliance?: boolean;
 }) {
   const label = getProviderName(provider, names);
   const logoUrl = publisher ? publisherFaviconUrl(provider) : providerFaviconUrl(docs);
+  const compliance = !publisher ? getProviderCompliance(provider) : undefined;
 
   if (iconOnly) {
     return (
@@ -56,8 +61,22 @@ export function ProviderBadge({
           </Avatar>
         </TooltipTrigger>
         <TooltipContent>
-          {label}
-          {fundingLabel && ` · ${fundingLabel}`}
+          <span className="flex items-center gap-1.5 text-xs">
+            <span>{label}</span>
+            {compliance && (
+              <>
+                <span className="text-muted-foreground">·</span>
+                <span>{compliance.countries.map((c) => countryCodeToFlag(c)).join(" ")}</span>
+                <span className="text-muted-foreground">·</span>
+                {compliance.zdr ? (
+                  <span className="font-medium text-emerald-400">ZDR</span>
+                ) : compliance.dataRetention ? (
+                  <span className="font-medium text-red-400">Data Retained</span>
+                ) : null}
+              </>
+            )}
+            {fundingLabel && ` · ${fundingLabel}`}
+          </span>
         </TooltipContent>
       </Tooltip>
     );
@@ -93,8 +112,11 @@ export function ProviderBadge({
             {initials(label)}
           </AvatarFallback>
         </Avatar>
-        <span className="min-w-0 break-words">
-          {label}
+        <span className="min-w-0 break-words flex flex-wrap items-center gap-2">
+          <span>{label}</span>
+          {!publisher && showCompliance && (
+            <ProviderComplianceBadges provider={provider} size={size === "xl" ? "default" : "sm"} />
+          )}
           {fundingLabel && (
             <span className="block text-xs font-normal text-muted-foreground">{fundingLabel}</span>
           )}
@@ -132,7 +154,10 @@ export function ProviderBadge({
           </AvatarFallback>
         </Avatar>
       )}
-      {label}
+      <span>{label}</span>
+      {!publisher && showCompliance && (
+        <ProviderComplianceBadges provider={provider} size={size === "xl" ? "default" : "sm"} />
+      )}
     </Badge>
   );
 }

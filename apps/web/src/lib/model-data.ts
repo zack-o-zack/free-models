@@ -1,8 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { siteConfig } from "@/lib/config";
 import type { ModelSummary } from "@/lib/model-types";
 
-export const MODEL_CATALOGUE_URL = "https://static.zackozack.com/free-models.json";
+export const MODEL_CATALOGUE_URL = siteConfig.links.json;
 
 interface RawModel {
   id: string;

@@ -7,6 +7,7 @@ export const siteConfig = {
   googleSiteVerification: "C1iHXHIalDzkGaPUat_pdY5RDNQrPiAiNjYTYUQp8to",
   links: {
     github: "https://github.com/zack-o-zack/free-models-backend",
+    json: "https://static.zackozack.com/free-models.json",
   },
 };
 
