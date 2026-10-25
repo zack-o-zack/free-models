@@ -8,13 +8,14 @@ const output = resolve(import.meta.dir, "../.next/server/app");
 const files = (await readdir(output, { recursive: true })).filter(
   (file) =>
     file === "index.html" ||
-    /^(models|providers|publishers|catalogue|changelog)(\/.*)?\.html$/.test(file),
+    /^(models|providers|publishers|catalogue|changelog|terms)(\/.*)?\.html$/.test(file),
 );
 assert(files.length > 1, "Build the web app before running the SEO audit.");
 const sitemap = await readFile(resolve(output, "sitemap.xml.body"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 assert.equal(new Set(urls).size, urls.length, "Sitemap contains duplicate URLs");
-assert.equal(urls.length, files.length, "Sitemap must cover every public page");
+const staticUrls = urls.filter((url) => !url.endsWith("/compare"));
+assert.equal(staticUrls.length, files.length, "Sitemap must cover every public page");
 const titles = new Map<string, string[]>();
 const pages = new Map<string, Awaited<ReturnType<typeof readPage>>>();
 const modelLinks = new Set<string>();

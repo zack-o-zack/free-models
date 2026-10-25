@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Icons } from "@/components/icons";
 import { SiteLogo } from "@/components/site-logo";
+import { TermsDialog } from "@/components/terms-dialog";
 import { siteConfig } from "@/lib/config";
 
 export function SiteFooter() {
@@ -54,17 +55,39 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-border py-4 text-xs">
+        {/* Disclaimer & Trademark Notice */}
+        <div className="border-t border-border/60 py-6 text-xs text-muted-foreground">
+          <p className="leading-relaxed">
+            <strong className="font-semibold text-foreground">Disclaimer &amp; Trademarks:</strong>{" "}
+            All trademarks, logos, brand names, and model designations are the property of their
+            respective providers and publishers; Free Models claims zero ownership over third-party
+            assets or models. We do not host or operate any inference services. Model
+            specifications, rate limits, and claims are provider-dependent, subject to change
+            without notice, and may be outdated. Free Models is an independent directory and
+            disclaims all liability for third-party provider claims or representations.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-border py-4 text-xs">
           <p className="leading-5 text-muted-foreground">
             © {new Date().getFullYear()} {siteConfig.name}. Directory of free AI models, zero-cost
             LLM API providers, and live model benchmarks.
           </p>
-          <a
-            href="#site-top"
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-          >
-            Back to top <ArrowUp aria-hidden="true" className="size-3.5" />
-          </a>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <TermsDialog triggerVariant="link" triggerLabel="Terms & Conditions" />
+            <Link
+              href="/terms"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Full Terms
+            </Link>
+            <a
+              href="#site-top"
+              className="inline-flex min-h-11 items-center gap-2 rounded-lg font-semibold text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            >
+              Back to top <ArrowUp aria-hidden="true" className="size-3.5" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
