@@ -1260,17 +1260,26 @@ export function ModelCompare({
       </div>
 
       {/* Frequently Asked Questions */}
-      <section aria-labelledby="compare-faq-heading" className="mt-16 max-w-3xl">
-        <h2
-          id="compare-faq-heading"
-          className="font-heading text-2xl font-extrabold tracking-[-0.035em]"
-        >
-          Frequently asked questions
-        </h2>
+      <section
+        aria-labelledby="compare-faq-heading"
+        className="mt-16 border-t border-border/70 pt-12 lg:grid lg:grid-cols-[340px_1fr] lg:gap-16 lg:pt-16"
+      >
+        <div>
+          <h2
+            id="compare-faq-heading"
+            className="font-heading text-2xl font-extrabold tracking-[-0.035em] sm:text-3xl"
+          >
+            Frequently asked questions
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
+            Decisions, trade-offs, and benchmarks to keep in mind when evaluating and comparing free
+            model endpoints.
+          </p>
+        </div>
 
         <Accordion
           keepMounted
-          className="mt-6 rounded-[24px] border border-border bg-card px-5 sm:px-8"
+          className="mt-6 rounded-[24px] border border-border bg-card px-5 sm:px-8 lg:mt-0"
         >
           {faqs.map(({ id, question, answer }) => (
             <AccordionItem key={id} value={id}>
