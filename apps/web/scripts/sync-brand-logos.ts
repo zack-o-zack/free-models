@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { publisherWebsites } from "../src/lib/provider-logos";
+import { publisherAliases, publisherWebsites } from "../src/lib/provider-logos";
 
 // Refresh explicitly; builds and visitors use the checked-in assets without upstream requests.
 const cataloguePath =
@@ -45,8 +45,14 @@ const sources = new Map(
   }),
 );
 for (const model of catalogue.models) {
-  const slug = model.id.split("/")[0].toLowerCase();
-  if (publisherWebsites[slug] || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) continue;
+  const rawSlug = model.id.split("/")[0].toLowerCase();
+  const slug = publisherAliases[rawSlug] ?? rawSlug;
+  if (
+    publisherWebsites[slug] ||
+    publisherWebsites[rawSlug] ||
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)
+  )
+    continue;
   const name = slug.replace(
     /(^|-)([a-z])/g,
     (_: string, separator: string, letter: string) => `${separator}${letter.toUpperCase()}`,
