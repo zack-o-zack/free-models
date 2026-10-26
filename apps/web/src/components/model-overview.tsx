@@ -21,6 +21,7 @@ export function ModelOverview({
   highlights: ModelHighlight[];
 }) {
   const logoUrl = publisherFaviconUrl(model.id.split("/")[0]);
+  const displayName = model.isStealth ? model.name.replace(/^Stealth:\s*/i, "") : model.name;
 
   return (
     <section
@@ -31,27 +32,37 @@ export function ModelOverview({
     >
       <div className="min-w-0">
         <div className="flex items-start gap-3 sm:gap-5">
-          {!model.isStealth && (
-            <Avatar className="mt-1 size-10 shrink-0 rounded-[10px] bg-logo-surface ring-1 ring-border/80 text-card-foreground sm:size-14 sm:rounded-[14px]">
-              {logoUrl && (
-                <BrandImage src={logoUrl} alt="" className="object-contain p-1 sm:p-1.5" />
-              )}
-              <AvatarFallback className="bg-card font-semibold">
-                {model.author.slice(0, 2)}
+          <Avatar className="mt-1 size-10 shrink-0 rounded-[10px] bg-logo-surface ring-1 ring-border/80 text-card-foreground sm:size-14 sm:rounded-[14px]">
+            {model.isStealth ? (
+              <AvatarFallback className="bg-card text-muted-foreground">
+                <EyeOff className="size-5 sm:size-7" />
               </AvatarFallback>
-            </Avatar>
-          )}
-          {model.isStealth && (
-            <Badge variant="secondary">
-              <EyeOff /> Stealth
-            </Badge>
-          )}
-          <h1
-            id="model-title"
-            className={`min-w-0 font-heading leading-[1.08] font-black tracking-[-0.055em] text-primary wrap-anywhere dark:text-primary-foreground ${model.name.length > 44 ? "text-3xl sm:text-5xl lg:text-[44px]" : "text-3xl sm:text-5xl xl:text-[56px]"}`}
-          >
-            {model.name}
-          </h1>
+            ) : (
+              <>
+                {logoUrl && (
+                  <BrandImage src={logoUrl} alt="" className="object-contain p-1 sm:p-1.5" />
+                )}
+                <AvatarFallback className="bg-card font-semibold">
+                  {model.author.slice(0, 2)}
+                </AvatarFallback>
+              </>
+            )}
+          </Avatar>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <h1
+                id="model-title"
+                className={`min-w-0 font-heading leading-[1.08] font-black tracking-[-0.055em] text-primary wrap-anywhere dark:text-primary-foreground ${displayName.length > 44 ? "text-3xl sm:text-5xl lg:text-[44px]" : "text-3xl sm:text-5xl xl:text-[56px]"}`}
+              >
+                {displayName}
+              </h1>
+              {model.isStealth && (
+                <Badge variant="secondary" className="shrink-0">
+                  <EyeOff /> Stealth
+                </Badge>
+              )}
+            </div>
+          </div>
         </div>
         <div className="mt-7">
           <ModelOfferCard model={model} />
