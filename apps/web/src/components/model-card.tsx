@@ -33,6 +33,7 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
   const publisher = publisherSlug(model);
   const href = modelHref(model.id);
   const providerLogoUrl = publisherFaviconUrl(model.id.split("/")[0]);
+  const displayName = model.isStealth ? model.name.replace(/^Stealth:\s*/i, "") : model.name;
 
   function handleCardClick(event: MouseEvent<HTMLDivElement>) {
     if (
@@ -45,9 +46,9 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
     router.push(href);
   }
   const modelNameSize =
-    model.name.length > 42
+    displayName.length > 42
       ? "text-sm sm:text-base"
-      : model.name.length > 30
+      : displayName.length > 30
         ? "text-base"
         : "text-lg";
 
@@ -55,20 +56,26 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
     <Card className="model-catalogue-card cursor-pointer bg-background" onClick={handleCardClick}>
       <CardHeader>
         <div className="flex min-w-0 items-start gap-4">
-          {!model.isStealth && (
-            <Avatar className="rounded-[10px] bg-card ring-1 ring-foreground/10" size="lg">
-              {providerLogoUrl && (
-                <BrandImage
-                  alt={`${model.author} logo`}
-                  className="object-contain p-0.5 sm:p-1"
-                  src={providerLogoUrl}
-                />
-              )}
-              <AvatarFallback className="bg-card font-heading font-bold text-foreground">
-                {initials(model.author)}
+          <Avatar className="rounded-[10px] bg-card ring-1 ring-foreground/10" size="lg">
+            {model.isStealth ? (
+              <AvatarFallback className="bg-muted/40 font-heading text-muted-foreground">
+                <EyeOff className="size-5" aria-hidden="true" />
               </AvatarFallback>
-            </Avatar>
-          )}
+            ) : (
+              <>
+                {providerLogoUrl && (
+                  <BrandImage
+                    alt={`${model.author} logo`}
+                    className="object-contain p-0.5 sm:p-1"
+                    src={providerLogoUrl}
+                  />
+                )}
+                <AvatarFallback className="bg-card font-heading font-bold text-foreground">
+                  {initials(model.author)}
+                </AvatarFallback>
+              </>
+            )}
+          </Avatar>
           <div className="min-w-0 flex-1">
             <CardTitle
               className={`flex flex-wrap items-center gap-2 font-extrabold tracking-[-0.025em] ${modelNameSize}`}
@@ -78,7 +85,7 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
                 href={href}
                 prefetch={false}
               >
-                {model.name}
+                {displayName}
               </Link>
               {model.isStealth && (
                 <Badge className="shrink-0" variant="secondary">
@@ -88,7 +95,7 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
               <ModalityMetric input={model.inputModalities} output={model.outputModalities} />
             </CardTitle>
             <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted-foreground">
-              {publisher && (
+              {publisher ? (
                 <>
                   <Link
                     href={entityHref("publishers", publisher)}
@@ -99,7 +106,12 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
                   </Link>
                   <span aria-hidden="true" className="h-3 w-px shrink-0 bg-border" />
                 </>
-              )}
+              ) : model.isStealth ? (
+                <>
+                  <span className="font-medium text-muted-foreground">Anonymous</span>
+                  <span aria-hidden="true" className="h-3 w-px shrink-0 bg-border" />
+                </>
+              ) : null}
               <span className="flex flex-wrap items-center gap-x-4 gap-y-2 font-medium">
                 <BenchmarkMetric
                   icon={Server}
