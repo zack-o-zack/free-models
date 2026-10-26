@@ -123,65 +123,8 @@
       }
     },
     {
-      "model_id": "gemini-3.7-flash",
-      "name": "Gemini 3.7 flash",
-      "connection": {
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        },
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      }
-    },
-    {
       "model_id": "glm-4.5-flash",
       "name": "Glm 4.5 flash",
-      "connection": {
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        },
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      }
-    },
-    {
-      "model_id": "glm-4.6v-flash",
-      "name": "Glm 4.6v flash",
-      "connection": {
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        },
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      }
-    },
-    {
-      "model_id": "glm-4.7-flash",
-      "name": "Glm 4.7 flash",
       "connection": {
         "auth": {
           "env": [
@@ -296,44 +239,6 @@
     {
       "model_id": "muse-glimmer-30b",
       "name": "Muse glimmer 30b",
-      "connection": {
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        },
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      }
-    },
-    {
-      "model_id": "qwen3.8-27b",
-      "name": "Qwen3.8 27b",
-      "connection": {
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        },
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      }
-    },
-    {
-      "model_id": "qwen3.8-flash-next",
-      "name": "Qwen3.8 flash next",
       "connection": {
         "auth": {
           "env": [

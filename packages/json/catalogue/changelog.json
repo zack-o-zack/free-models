@@ -1,16 +1,86 @@
 {
-  "generatedAt": "2026-10-25T07:39:37.231Z",
+  "generatedAt": "2026-10-26T15:13:55.251Z",
   "windowDays": 30,
-  "since": "2026-09-25T07:39:37.231Z",
+  "since": "2026-09-26T15:13:55.251Z",
   "totalAdded": 407,
-  "totalRemoved": 68,
+  "totalRemoved": 73,
   "totalProvidersAdded": 8,
   "totalProvidersRemoved": 0,
   "entries": [
     {
-      "id": "working-onomeo-add-deepseek-v4-flash",
+      "id": "a5ada38-onomeo-remove-gemini-3.7-flash",
+      "date": "2026-10-26",
+      "timestamp": "2026-10-26T20:43:48+05:30",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "gemini-3.7-flash",
+      "modelName": "Gemini 3.7 flash",
+      "canonicalId": "google/gemini-3.7-flash",
+      "commitHash": "a5ada38",
+      "commitMessage": "chore: update free model catalogue"
+    },
+    {
+      "id": "a5ada38-onomeo-remove-glm-4.6v-flash",
+      "date": "2026-10-26",
+      "timestamp": "2026-10-26T20:43:48+05:30",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "glm-4.6v-flash",
+      "modelName": "Glm 4.6v flash",
+      "canonicalId": "z-ai/glm-4.6v-flash",
+      "commitHash": "a5ada38",
+      "commitMessage": "chore: update free model catalogue"
+    },
+    {
+      "id": "a5ada38-onomeo-remove-glm-4.7-flash",
+      "date": "2026-10-26",
+      "timestamp": "2026-10-26T20:43:48+05:30",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "glm-4.7-flash",
+      "modelName": "Glm 4.7 flash",
+      "canonicalId": "z-ai/glm-4.7-flash",
+      "commitHash": "a5ada38",
+      "commitMessage": "chore: update free model catalogue"
+    },
+    {
+      "id": "a5ada38-onomeo-remove-qwen3.8-27b",
+      "date": "2026-10-26",
+      "timestamp": "2026-10-26T20:43:48+05:30",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "qwen3.8-27b",
+      "modelName": "Qwen3.8 27b",
+      "canonicalId": "qwen/qwen3.8-27b",
+      "commitHash": "a5ada38",
+      "commitMessage": "chore: update free model catalogue"
+    },
+    {
+      "id": "a5ada38-onomeo-remove-qwen3.8-flash-next",
+      "date": "2026-10-26",
+      "timestamp": "2026-10-26T20:43:48+05:30",
+      "provider": "onomeo",
+      "providerName": "Onomeo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "qwen3.8-flash-next",
+      "modelName": "Qwen3.8 flash next",
+      "canonicalId": "qwen/qwen3.8-flash-next",
+      "commitHash": "a5ada38",
+      "commitMessage": "chore: update free model catalogue"
+    },
+    {
+      "id": "5c5c9cd-onomeo-add-deepseek-v4-flash",
       "date": "2026-10-25",
-      "timestamp": "2026-10-25T07:39:37.231Z",
+      "timestamp": "2026-10-25T07:40:01Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "added",
@@ -18,12 +88,13 @@
       "modelId": "deepseek-v4-flash",
       "modelName": "Deepseek v4 flash",
       "canonicalId": "deepseek/deepseek-v4-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "5c5c9cd",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-remove-deepseek-v4-pro",
+      "id": "5c5c9cd-onomeo-remove-deepseek-v4-pro",
       "date": "2026-10-25",
-      "timestamp": "2026-10-25T07:39:37.231Z",
+      "timestamp": "2026-10-25T07:40:01Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "removed",
@@ -31,12 +102,13 @@
       "modelId": "deepseek-v4-pro",
       "modelName": "Deepseek v4 pro",
       "canonicalId": "deepseek/deepseek-v4-pro-0813",
-      "commitMessage": "Working directory changes"
+      "commitHash": "5c5c9cd",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-add-gemini-3.7-flash",
+      "id": "5c5c9cd-onomeo-add-gemini-3.7-flash",
       "date": "2026-10-25",
-      "timestamp": "2026-10-25T07:39:37.231Z",
+      "timestamp": "2026-10-25T07:40:01Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "added",
@@ -44,12 +116,13 @@
       "modelId": "gemini-3.7-flash",
       "modelName": "Gemini 3.7 flash",
       "canonicalId": "google/gemini-3.7-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "5c5c9cd",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-remove-gemini-3.8-flash",
+      "id": "5c5c9cd-onomeo-remove-gemini-3.8-flash",
       "date": "2026-10-25",
-      "timestamp": "2026-10-25T07:39:37.231Z",
+      "timestamp": "2026-10-25T07:40:01Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "removed",
@@ -57,12 +130,13 @@
       "modelId": "gemini-3.8-flash",
       "modelName": "Gemini 3.8 flash",
       "canonicalId": "google/gemini-3.8-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "5c5c9cd",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-remove-qwen3.5-397b-a17b",
+      "id": "5c5c9cd-onomeo-remove-qwen3.5-397b-a17b",
       "date": "2026-10-25",
-      "timestamp": "2026-10-25T07:39:37.231Z",
+      "timestamp": "2026-10-25T07:40:01Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "removed",
@@ -70,7 +144,8 @@
       "modelId": "qwen3.5-397b-a17b",
       "modelName": "Qwen3.5 397b a17b",
       "canonicalId": "qwen/qwen3.5-397b-a17b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "5c5c9cd",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
       "id": "50a9ec9-nvidia-add-nvidia/nemotron-3.5-bolt-e4b",
