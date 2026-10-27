@@ -1,3 +1,10 @@
 {
-  "providers": {}
+  "providers": {
+    "onomeo": [
+      "qwen-flash-character"
+    ],
+    "openrouter": [
+      "heygen/heygen-voice-1-turbo:free"
+    ]
+  }
 }
