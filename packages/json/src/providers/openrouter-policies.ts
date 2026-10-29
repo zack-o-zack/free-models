@@ -25,6 +25,7 @@ export const OPENROUTER_AUDITED_HOSTS: Readonly<Record<string, AuditedHostInfo>>
   google: { countries: ["US"], subprocessors: ["google"] },
   "google-ai-studio": { countries: ["US"], subprocessors: ["google"] },
   "google-vertex": { countries: ["US"], subprocessors: ["google"] },
+  heygen: { countries: ["US"], subprocessors: ["heygen"] },
   inception: { countries: ["US"], subprocessors: ["inception"] },
   liquid: { countries: ["US"], subprocessors: ["liquid"] },
   nvidia: { countries: ["US"], subprocessors: ["nvidia"] },

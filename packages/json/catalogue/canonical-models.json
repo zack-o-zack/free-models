@@ -557,6 +557,10 @@
       "name": "hexgrad: Kokoro 82M"
     },
     {
+      "id": "heygen/heygen-voice-1-turbo",
+      "name": "HeyGen: HeyGen Voice Turbo"
+    },
+    {
       "id": "huggingface/distilbert-sst-2-int8",
       "name": "Hugging Face: DistilBERT SST-2 Int8"
     },
@@ -1379,6 +1383,10 @@
     {
       "id": "qwen/qwen-2.5-coder-32b-instruct",
       "name": "Qwen2.5 Coder 32B Instruct"
+    },
+    {
+      "id": "qwen/qwen-flash-character",
+      "name": "Qwen: Qwen Flash Character"
     },
     {
       "id": "qwen/qwen3-14b",

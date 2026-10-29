@@ -233,6 +233,38 @@
       }
     },
     {
+      "model_id": "heygen/heygen-voice-1-turbo:free",
+      "name": "HeyGen: HeyGen Voice Turbo (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "heygen"
+        ],
+        "description": "Free endpoints may log prompts and completions"
+      }
+    },
+    {
       "model_id": "inception/mercury-decide:free",
       "name": "Inception: Mercury Decide (free)",
       "connection": {
