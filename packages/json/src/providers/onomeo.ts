@@ -4,6 +4,7 @@ import { compareStrings } from "../catalogue/files.ts";
 import type { DiscoveredOffer, ProviderDoc } from "../catalogue/schema.ts";
 import { onomeoPublishedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
+import { resolveOnomeoCompliance } from "./onomeo-policies.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -72,6 +73,7 @@ export class OnomeoProvider implements ModelProvider {
           name: desluggifyModelId(modelId),
           connection,
           limits: onomeoPublishedLimits(),
+          compliance: resolveOnomeoCompliance(modelId),
         });
       }
     }

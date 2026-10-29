@@ -10,12 +10,14 @@ import {
   parseBazaarLinkLimits,
   parseBazaarLinkModels,
 } from "../src/providers/bazaarlink.ts";
+import { resolveBazaarLinkCompliance } from "../src/providers/bazaarlink-policies.ts";
 import {
   CLOUDFLARE_WORKERS_AI_BASE_URL,
   CLOUDFLARE_WORKERS_AI_PRICING_URL,
   CloudflareProvider,
   cloudflareOfferLimits,
 } from "../src/providers/cloudflare.ts";
+import { resolveCloudflareCompliance } from "../src/providers/cloudflare-policies.ts";
 import {
   COHERE_API_BASE_URL,
   COHERE_MODELS_URL,
@@ -24,12 +26,15 @@ import {
   cohereModelsUrl,
   parseCohereModelsPage,
 } from "../src/providers/cohere.ts";
+import { resolveCohereCompliance } from "../src/providers/cohere-policies.ts";
 import {
   GEMINI_API_BASE_URL,
   GEMINI_PRICING_URL,
   GeminiProvider,
 } from "../src/providers/gemini.ts";
+import { resolveGeminiCompliance } from "../src/providers/gemini-policies.ts";
 import { GROQ_API_BASE_URL, GroqProvider, groqOfferLimits } from "../src/providers/groq.ts";
+import { resolveGroqCompliance } from "../src/providers/groq-policies.ts";
 import {
   isFreeKiloModel,
   KILO_API_BASE_URL,
@@ -37,6 +42,7 @@ import {
   KiloProvider,
   parseKiloModels,
 } from "../src/providers/kilo.ts";
+import { KILO_COMPLIANCE } from "../src/providers/kilo-policies.ts";
 import {
   cohereOfferLimits,
   geminiUnconfirmedLimits,
@@ -54,11 +60,13 @@ import {
   LLM7Provider,
   parseLLM7Models,
 } from "../src/providers/llm7.ts";
+import { resolveLlm7Compliance } from "../src/providers/llm7-policies.ts";
 import {
   MISTRAL_API_BASE_URL,
   MISTRAL_MODELS_URL,
   MistralProvider,
 } from "../src/providers/mistral.ts";
+import { resolveMistralCompliance } from "../src/providers/mistral-policies.ts";
 import {
   NVIDIA_API_BASE_URL,
   NVIDIA_LIMITS_URL,
@@ -66,6 +74,7 @@ import {
   nvidiaModelsUrl,
   parseNvidiaLimits,
 } from "../src/providers/nvidia.ts";
+import { resolveNvidiaCompliance } from "../src/providers/nvidia-policies.ts";
 import { providerRegistry } from "../src/providers/registry.ts";
 import {
   isFreeRequestyModel,
@@ -76,6 +85,7 @@ import {
   REQUESTY_MODELS_URL,
   RequestyProvider,
 } from "../src/providers/requesty.ts";
+import { resolveRequestyCompliance } from "../src/providers/requesty-policies.ts";
 import {
   isFreeRoutewayModel,
   parseRoutewayModels,
@@ -83,6 +93,7 @@ import {
   ROUTEWAY_MODELS_URL,
   RoutewayProvider,
 } from "../src/providers/routeway.ts";
+import { ROUTEWAY_COMPLIANCE } from "../src/providers/routeway-policies.ts";
 import {
   parseTokenRouterModels,
   parseTokenRouterPricing,
@@ -354,6 +365,7 @@ describe("Requesty discovery", () => {
           protocol: "openai",
         },
         limits: expectedLimits,
+        compliance: resolveRequestyCompliance(modelId),
       })),
     );
   });
@@ -481,6 +493,7 @@ describe("Routeway discovery", () => {
           protocol: "openai",
         },
         limits: expectedLimits,
+        compliance: ROUTEWAY_COMPLIANCE,
       },
       {
         model_id: "kimi-k2.6:free",
@@ -491,6 +504,7 @@ describe("Routeway discovery", () => {
           protocol: "openai",
         },
         limits: expectedLimits,
+        compliance: ROUTEWAY_COMPLIANCE,
       },
       {
         model_id: "unnamed:free",
@@ -501,6 +515,7 @@ describe("Routeway discovery", () => {
           protocol: "openai",
         },
         limits: expectedLimits,
+        compliance: ROUTEWAY_COMPLIANCE,
       },
     ]);
   });
@@ -526,6 +541,7 @@ describe("Routeway discovery", () => {
           protocol: "openai",
         },
         limits: routewayPublishedLimits(),
+        compliance: ROUTEWAY_COMPLIANCE,
       },
     ]);
   });
@@ -645,6 +661,7 @@ describe("BazaarLink discovery", () => {
           protocol: "openai",
         },
         limits: expectedLimits,
+        compliance: resolveBazaarLinkCompliance("qwen/qwen3.7-flash:free"),
       },
     ]);
   });
@@ -797,6 +814,7 @@ describe("Kilo discovery", () => {
           protocol: "openai",
         },
         limits: expectedLimits,
+        compliance: KILO_COMPLIANCE,
       })),
     );
   });
@@ -819,6 +837,7 @@ describe("Kilo discovery", () => {
           protocol: "openai",
         },
         limits: kiloPublishedLimits(),
+        compliance: KILO_COMPLIANCE,
       },
     ]);
   });
@@ -912,6 +931,7 @@ describe("LLM7 discovery", () => {
           protocol: "openai",
         },
         limits: expectedLimits,
+        compliance: resolveLlm7Compliance("DeepSeek-V4-Flash-0731"),
       },
       {
         model_id: "GLM-5.3-Flash",
@@ -922,6 +942,7 @@ describe("LLM7 discovery", () => {
           protocol: "openai",
         },
         limits: expectedLimits,
+        compliance: resolveLlm7Compliance("GLM-5.3-Flash"),
       },
     ]);
   });
@@ -945,6 +966,7 @@ describe("LLM7 discovery", () => {
           protocol: "openai",
         },
         limits: llm7PublishedLimits(),
+        compliance: resolveLlm7Compliance("vendor/model"),
       },
     ]);
   });
@@ -1048,6 +1070,7 @@ describe("Groq discovery", () => {
           protocol: "openai",
         },
         limits: groqOfferLimits({ rpm: "30", rpd: "1,000", tpm: "6,000", tpd: "500,000" }),
+        compliance: resolveGroqCompliance("alpha/model"),
       },
       {
         model_id: "beta/model",
@@ -1065,6 +1088,7 @@ describe("Groq discovery", () => {
           ash: "5",
           asd: "20",
         }),
+        compliance: resolveGroqCompliance("beta/model"),
       },
     ]);
   });
@@ -1107,6 +1131,7 @@ describe("Mistral discovery", () => {
           protocol: "openai",
         },
         limits: mistralUnconfirmedLimits(),
+        compliance: resolveMistralCompliance("mistral-small"),
       },
     ]);
   });
@@ -1193,6 +1218,7 @@ describe("Cohere discovery", () => {
         name: desluggifyModelId(modelId),
         connection: cohereConnection(endpoints, ["COHERE_API_KEY"]),
         limits: cohereOfferLimits(endpoints),
+        compliance: resolveCohereCompliance(modelId),
       })),
     );
   });
@@ -1246,6 +1272,7 @@ describe("Gemini API discovery", () => {
           protocol: "google",
         },
         limits: geminiUnconfirmedLimits("gemini-free"),
+        compliance: resolveGeminiCompliance("gemini-free"),
       },
     ]);
   });
@@ -1298,6 +1325,7 @@ describe("NVIDIA Build discovery", () => {
         limits: parseNvidiaLimits(
           '"rateLimits":{"requestsPerMinute":"Up to 40 rpm","requestsPerDay":"10,000 requests per day"}',
         ),
+        compliance: resolveNvidiaCompliance("nvidia/free"),
       },
     ]);
   });
@@ -1344,6 +1372,7 @@ Some models require a paid billing method. This applies to \`@cf/paid/model\`.
           protocol: "cloudflare",
         },
         limits: cloudflareOfferLimits("12,345 Neurons per day"),
+        compliance: resolveCloudflareCompliance("@cf/free/model"),
       },
     ]);
   });

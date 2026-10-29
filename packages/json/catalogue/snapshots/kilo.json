@@ -24,6 +24,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     },
     {
@@ -42,6 +54,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     },
     {
@@ -60,6 +84,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     },
     {
@@ -78,6 +114,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter",
+          "nvidia"
+        ],
+        "description": "NVIDIA trial endpoint logs prompts and outputs"
       }
     },
     {
@@ -96,6 +144,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter",
+          "nvidia"
+        ],
+        "description": "NVIDIA trial endpoint logs prompts and outputs"
       }
     },
     {
@@ -114,6 +174,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter",
+          "nvidia"
+        ],
+        "description": "NVIDIA trial endpoint logs prompts and outputs"
       }
     },
     {
@@ -132,6 +204,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter",
+          "nvidia"
+        ],
+        "description": "NVIDIA trial endpoint logs prompts and outputs"
       }
     },
     {
@@ -150,6 +234,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter",
+          "nvidia"
+        ],
+        "description": "NVIDIA trial endpoint logs prompts and outputs"
       }
     },
     {
@@ -168,6 +264,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter",
+          "nvidia"
+        ],
+        "description": "NVIDIA trial endpoint logs prompts and outputs"
       }
     },
     {
@@ -186,6 +294,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     },
     {
@@ -204,6 +324,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     },
     {
@@ -222,6 +354,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     },
     {
@@ -240,6 +384,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     },
     {
@@ -258,6 +414,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     },
     {
@@ -276,6 +444,18 @@
         "terms": [
           "200 req / hour"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
       }
     }
   ]

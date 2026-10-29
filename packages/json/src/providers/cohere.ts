@@ -5,6 +5,7 @@ import {
   jsonObjectSchema,
   type ProviderDoc,
 } from "../catalogue/schema.ts";
+import { resolveCohereCompliance } from "./cohere-policies.ts";
 import { cohereOfferLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
@@ -82,6 +83,7 @@ export class CohereProvider implements ModelProvider {
         name: desluggifyModelId(model.modelId),
         connection: cohereConnection(model.endpoints, env),
         limits: cohereOfferLimits(model.endpoints),
+        compliance: resolveCohereCompliance(model.modelId),
       };
     });
   }

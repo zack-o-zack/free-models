@@ -28,6 +28,18 @@
           "250k tok / min",
           "20 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -50,6 +62,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -72,6 +96,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -94,6 +130,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -116,6 +164,18 @@
           "250k tok / min",
           "20 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -138,6 +198,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -160,6 +232,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -182,6 +266,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -204,6 +300,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -226,6 +334,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -248,6 +368,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -270,6 +402,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -292,6 +436,18 @@
           "250k tok / min",
           "20 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -314,6 +470,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -336,6 +504,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -358,6 +538,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -380,6 +572,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -402,6 +606,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -424,6 +640,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     },
     {
@@ -446,6 +674,18 @@
           "250k tok / min",
           "500 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
       }
     }
   ]

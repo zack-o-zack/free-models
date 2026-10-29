@@ -25,6 +25,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -44,6 +57,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -63,6 +89,19 @@
           "5 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -82,6 +121,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -101,6 +153,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -120,6 +185,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -139,6 +217,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -158,6 +249,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -177,6 +281,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -196,6 +313,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -215,6 +345,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -234,6 +377,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -253,6 +409,19 @@
           "2k inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -272,6 +441,19 @@
           "5 inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -291,6 +473,19 @@
           "2k inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -310,6 +505,19 @@
           "5 inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -329,6 +537,19 @@
           "2k inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -348,6 +569,19 @@
           "5 inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -367,6 +601,19 @@
           "2k inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -386,6 +633,19 @@
           "5 inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -405,6 +665,19 @@
           "2k inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -424,6 +697,19 @@
           "2k inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -443,6 +729,19 @@
           "2k inputs / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -462,6 +761,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -481,6 +793,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -500,6 +825,19 @@
           "500 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -519,6 +857,19 @@
           "10 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -538,6 +889,19 @@
           "10 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -557,6 +921,19 @@
           "10 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -576,6 +953,19 @@
           "10 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -595,6 +985,19 @@
           "10 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -614,6 +1017,19 @@
           "10 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -633,6 +1049,19 @@
           "10 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -652,6 +1081,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -671,6 +1113,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -690,6 +1145,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     },
     {
@@ -709,6 +1177,19 @@
           "20 req / min",
           "1k req / month"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere",
+          "google"
+        ],
+        "description": "Trial prompts are logged for 30 days and may be used to train models"
       }
     }
   ]

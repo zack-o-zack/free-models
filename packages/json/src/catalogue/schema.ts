@@ -1,27 +1,25 @@
 import { z } from "zod";
 
-export const CATALOGUE_SCHEMA_VERSION = 4 as const;
+export const CATALOGUE_SCHEMA_VERSION = 4;
 
-export type JsonValue =
-  | boolean
-  | null
-  | number
-  | string
-  | JsonValue[]
-  | { [key: string]: JsonValue };
+export const jsonPrimitiveSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
+export type JsonPrimitive = z.infer<typeof jsonPrimitiveSchema>;
+
+export type JsonValue = JsonPrimitive | JsonObject | JsonArray;
+export interface JsonObject {
+  [key: string]: JsonValue;
+}
+export type JsonArray = JsonValue[];
 
 export const jsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
-  z.union([
-    z.boolean(),
-    z.null(),
-    z.number().finite(),
-    z.string(),
-    z.array(jsonValueSchema),
-    z.record(z.string(), jsonValueSchema),
-  ]),
+  z.union([jsonPrimitiveSchema, z.record(z.string(), jsonValueSchema), z.array(jsonValueSchema)]),
 );
 
-export const jsonObjectSchema = z.record(z.string(), jsonValueSchema);
+export const jsonObjectSchema: z.ZodType<Record<string, JsonValue>> = z.record(
+  z.string(),
+  jsonValueSchema,
+);
+
 export const providerIdSchema = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const canonicalModelIdSchema = z
   .string()
@@ -54,12 +52,26 @@ export const connectionSchema = z
   })
   .catchall(jsonValueSchema);
 
+export const complianceSchema = z
+  .object({
+    zdr: z.boolean(),
+    no_training: z.boolean(),
+    data_retention: z.boolean(),
+    countries: z.array(z.string().min(1)),
+    subprocessors: z.array(z.string().min(1)).optional(),
+    description: z.string().min(1).optional(),
+    edge: z.boolean().optional(),
+    conditional: z.boolean().optional(),
+  })
+  .strict();
+
 export const offerSchema = z
   .object({
     model_id: z.string().min(1),
     name: z.string().min(1),
     connection: connectionSchema,
     limits: limitsSchema,
+    compliance: complianceSchema.optional(),
   })
   .strict();
 
@@ -149,6 +161,7 @@ export type CanonicalModel = z.infer<typeof canonicalModelSchema>;
 export type CanonicalModels = z.infer<typeof canonicalModelsSchema>;
 export type CanonicalMetadataEntry = z.infer<typeof canonicalMetadataEntrySchema>;
 export type CanonicalMetadataFile = z.infer<typeof canonicalMetadataSchema>;
+export type Compliance = z.infer<typeof complianceSchema>;
 export type Connection = z.infer<typeof connectionSchema>;
 export type ConnectionAuth = z.infer<typeof connectionAuthSchema>;
 export type ConnectionProtocol = z.infer<typeof connectionProtocolSchema>;

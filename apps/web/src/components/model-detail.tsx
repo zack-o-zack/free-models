@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import { BrainCircuit, ExternalLink, FileText, Gauge, Layers, Server } from "lucide-react";
 import Link from "next/link";
+import { ConnectionCompliancePills } from "@/components/connection-compliance-pills";
 import { CopyButton } from "@/components/copy-button";
 import { LimitTerm } from "@/components/limit-term";
 import { ModelBenchmarks } from "@/components/model-benchmarks";
@@ -17,6 +18,7 @@ import type { ModelHighlight } from "@/lib/model-highlights";
 import { modelHref } from "@/lib/model-path";
 import type { ModelConnection, ModelSummary } from "@/lib/model-types";
 import { modelBreadcrumbs } from "@/lib/page-content";
+import { getModelProviderCompliance } from "@/lib/provider-compliance";
 import { getProviderName } from "@/lib/provider-logos";
 
 function SectionHeading({
@@ -235,6 +237,23 @@ export function ModelDetail({
                                     </div>
                                   </div>
                                 )}
+
+                                {(() => {
+                                  const compliance = getModelProviderCompliance(
+                                    connection.modelId,
+                                    provider,
+                                    connection.compliance,
+                                  );
+                                  if (!compliance) return null;
+                                  return (
+                                    <div className="space-y-3">
+                                      <p className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80">
+                                        Data & Privacy
+                                      </p>
+                                      <ConnectionCompliancePills compliance={compliance} />
+                                    </div>
+                                  );
+                                })()}
                               </div>
                             ))}
                           </div>

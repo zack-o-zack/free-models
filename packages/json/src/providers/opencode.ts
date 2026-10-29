@@ -7,6 +7,7 @@ import {
 } from "../catalogue/schema.ts";
 import { openCodePublishedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
+import { resolveOpenCodeCompliance } from "./opencode-policies.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENCODE_ZEN_DOCUMENTATION_URL = "https://opencode.ai/docs/zen/";
@@ -109,6 +110,10 @@ export class OpenCodeProvider implements ModelProvider {
           );
         }
 
+        const compliance = resolveOpenCodeCompliance(
+          documentedOffer.modelId,
+          documentedOffer.modelName,
+        );
         return {
           model_id: documentedOffer.modelId,
           name: documentedOffer.modelName || desluggifyModelId(documentedOffer.modelId),
@@ -120,6 +125,7 @@ export class OpenCodeProvider implements ModelProvider {
             protocol,
           },
           limits: openCodePublishedLimits(),
+          ...(compliance ? { compliance } : {}),
         };
       });
   }

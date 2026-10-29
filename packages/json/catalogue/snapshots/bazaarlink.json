@@ -29,6 +29,15 @@
           "20 req / min (site-wide)",
           "2 concurrent req / account"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -52,6 +61,15 @@
           "20 req / min (site-wide)",
           "2 concurrent req / account"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -75,6 +93,15 @@
           "20 req / min (site-wide)",
           "2 concurrent req / account"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -98,6 +125,15 @@
           "20 req / min (site-wide)",
           "2 concurrent req / account"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -121,6 +157,15 @@
           "20 req / min (site-wide)",
           "2 concurrent req / account"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -144,6 +189,15 @@
           "20 req / min (site-wide)",
           "2 concurrent req / account"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     }
   ]

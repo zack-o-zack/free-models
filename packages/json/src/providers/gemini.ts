@@ -1,5 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
 import type { DiscoveredOffer, JsonValue, ProviderDoc } from "../catalogue/schema.ts";
+import { resolveGeminiCompliance } from "./gemini-policies.ts";
 import { geminiUnconfirmedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
@@ -64,6 +65,7 @@ export class GeminiProvider implements ModelProvider {
       name: name || desluggifyModelId(modelId),
       connection,
       limits: geminiUnconfirmedLimits(modelId),
+      compliance: resolveGeminiCompliance(modelId),
     }));
   }
 }

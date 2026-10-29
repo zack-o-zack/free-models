@@ -9,6 +9,7 @@ import {
 import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
+import { resolveRequestyCompliance } from "./requesty-policies.ts";
 import {
   createHtmlRewriter,
   type FetchSource,
@@ -85,6 +86,7 @@ export class RequestyProvider implements ModelProvider {
         name: modelName,
         connection,
         limits,
+        compliance: resolveRequestyCompliance(modelId),
       };
     });
   }

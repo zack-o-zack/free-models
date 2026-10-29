@@ -27,6 +27,19 @@
           "1.2k tok / min",
           "3.6k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -48,6 +61,19 @@
           "1.2k tok / min",
           "3.6k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -69,6 +95,19 @@
           "15k tok / min",
           "500k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -90,6 +129,19 @@
           "15k tok / min",
           "500k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -111,6 +163,19 @@
           "8k tok / min",
           "200k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -132,6 +197,19 @@
           "8k tok / min",
           "200k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -153,6 +231,19 @@
           "2k tok / min",
           "200k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -174,6 +265,19 @@
           "8k tok / min",
           "200k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -195,6 +299,19 @@
           "7.2k audio sec / hour",
           "28.8k audio sec / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -216,6 +333,19 @@
           "7.2k audio sec / hour",
           "28.8k audio sec / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "groq",
+          "google"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     }
   ]

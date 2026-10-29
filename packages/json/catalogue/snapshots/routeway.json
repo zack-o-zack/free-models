@@ -25,6 +25,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -44,6 +57,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -63,6 +89,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -82,6 +121,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -101,6 +153,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -120,6 +185,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -139,6 +217,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -158,6 +249,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     },
     {
@@ -177,6 +281,19 @@
           "20 req / min",
           "200 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "routeway",
+          "aws",
+          "google"
+        ],
+        "description": "Upstream providers may retain or use prompts",
+        "conditional": true
       }
     }
   ]

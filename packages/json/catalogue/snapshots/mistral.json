@@ -25,6 +25,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -44,6 +57,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -63,6 +89,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -82,6 +121,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -101,6 +153,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Labs models may use prompts and outputs for training"
       }
     },
     {
@@ -120,6 +185,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Labs models may use prompts and outputs for training"
       }
     },
     {
@@ -139,6 +217,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -158,6 +249,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -177,6 +281,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -196,6 +313,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -215,6 +345,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -234,6 +377,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -253,6 +409,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -272,6 +441,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -291,6 +473,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -310,6 +505,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -329,6 +537,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -348,6 +569,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -367,6 +601,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -386,6 +633,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -405,6 +665,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -424,6 +697,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -443,6 +729,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -462,6 +761,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -481,6 +793,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -500,6 +825,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -519,6 +857,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -538,6 +889,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -557,6 +921,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -576,6 +953,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -595,6 +985,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -614,6 +1017,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -633,6 +1049,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -652,6 +1081,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -671,6 +1113,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -690,6 +1145,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -709,6 +1177,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -728,6 +1209,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -747,6 +1241,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -766,6 +1273,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -785,6 +1305,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -804,6 +1337,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -823,6 +1369,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -842,6 +1401,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -861,6 +1433,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -880,6 +1465,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -899,6 +1497,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -918,6 +1529,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -937,6 +1561,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -956,6 +1593,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -975,6 +1625,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -994,6 +1657,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     },
     {
@@ -1013,6 +1689,19 @@
           "50 req / min",
           "50k tok / min"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": true,
+        "data_retention": true,
+        "countries": [
+          "FR",
+          "EU"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Logs kept up to 30 days unless zero retention is enabled"
       }
     }
   ]

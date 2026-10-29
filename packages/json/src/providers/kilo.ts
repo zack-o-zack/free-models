@@ -5,6 +5,7 @@ import {
   jsonObjectSchema,
   type ProviderDoc,
 } from "../catalogue/schema.ts";
+import { resolveKiloCompliance } from "./kilo-policies.ts";
 import { kiloPublishedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
@@ -65,6 +66,7 @@ export class KiloProvider implements ModelProvider {
         name: modelName,
         connection,
         limits: kiloPublishedLimits(),
+        compliance: resolveKiloCompliance(modelId),
       };
     });
   }

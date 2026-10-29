@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { DiscoveredOffer, ProviderDoc } from "../catalogue/schema.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
+import { resolveNovitaCompliance } from "./novita-policies.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchJson, fetchText } from "./source.ts";
 
@@ -77,6 +78,7 @@ export class NovitaProvider implements ModelProvider {
           auth: { env: ["NOVITA_API_KEY"] },
         },
         limits: { terms: ["Rate limits vary by model and account; check the Novita console"] },
+        compliance: resolveNovitaCompliance(model.id),
       }));
   }
 }

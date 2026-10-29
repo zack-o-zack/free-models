@@ -5,6 +5,7 @@ import {
   parseAnyApiCatalogue,
   parseAnyApiModelId,
 } from "../src/providers/anyapi.ts";
+import { ANYAPI_COMPLIANCE } from "../src/providers/anyapi-policies.ts";
 
 function card(tier: string, name: string, href = "/ai-models/free"): string {
   return `<div class="ailist_card"><div fs-list-field="tier">${tier}</div><a fs-list-field="name" href="${href}">${name}</a></div>`;
@@ -38,6 +39,7 @@ test("follows catalogue pagination and reads exact model IDs from Free cards", a
         auth: { env: ["ANYAPI_KEY"] },
       },
       limits: { terms: ["100k ANY Tokens / day", "Limited API calls (Free plan)"] },
+      compliance: ANYAPI_COMPLIANCE,
     },
   ]);
 });

@@ -40,6 +40,7 @@ function buildCatalogue(state: CatalogueState): Catalogue {
       name: offer.name,
       connection: sortJsonObject(offer.connection),
       limits: offer.limits,
+      ...(offer.compliance ? { compliance: offer.compliance } : {}),
     });
     providerOffers.set(provider, offers);
     groupedOffers.set(canonicalId, providerOffers);

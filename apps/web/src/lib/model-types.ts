@@ -1,3 +1,5 @@
+import type { ProviderCompliance } from "./provider-compliance";
+
 export interface DesignArenaBenchmark {
   arena: string;
   category: string;
@@ -19,6 +21,7 @@ export interface ModelConnection {
   connection?: Record<string, unknown>;
   limits: string[];
   funding?: "no_credits" | "monthly_credits";
+  compliance?: ProviderCompliance;
 }
 
 export interface ModelSummary {
@@ -45,5 +48,5 @@ export interface ModelSummary {
 }
 
 export type CatalogueModel = Omit<ModelSummary, "connections" | "supportedParameters"> & {
-  connections: Pick<ModelConnection, "provider" | "funding">[];
+  connections: Pick<ModelConnection, "provider" | "funding" | "compliance">[];
 };

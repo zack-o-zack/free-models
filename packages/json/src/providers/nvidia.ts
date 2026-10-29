@@ -8,6 +8,7 @@ import {
 } from "../catalogue/schema.ts";
 import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
+import { resolveNvidiaCompliance } from "./nvidia-policies.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson, fetchText } from "./source.ts";
 
@@ -91,6 +92,7 @@ export class NvidiaProvider implements ModelProvider {
         name: model.title || desluggifyModelId(model.modelId),
         connection,
         limits,
+        compliance: resolveNvidiaCompliance(model.modelId),
       };
     });
   }

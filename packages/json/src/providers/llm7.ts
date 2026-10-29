@@ -6,6 +6,7 @@ import {
   type ProviderDoc,
 } from "../catalogue/schema.ts";
 import { llm7PublishedLimits } from "./limits.ts";
+import { resolveLlm7Compliance } from "./llm7-policies.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
@@ -65,6 +66,7 @@ export class LLM7Provider implements ModelProvider {
         name: modelName,
         connection,
         limits: llm7PublishedLimits(),
+        compliance: resolveLlm7Compliance(modelId),
       };
     });
   }

@@ -4,6 +4,7 @@ import { compareStrings } from "../catalogue/files.ts";
 import type { DiscoveredOffer, ProviderDoc } from "../catalogue/schema.ts";
 import { nousPublishedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
+import { resolveNousCompliance } from "./nous-policies.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
@@ -82,6 +83,7 @@ export class NousProvider implements ModelProvider {
         name: modelName,
         connection,
         limits: nousPublishedLimits(),
+        compliance: resolveNousCompliance(model.id),
       });
     }
 

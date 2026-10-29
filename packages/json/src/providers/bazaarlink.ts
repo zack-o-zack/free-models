@@ -6,6 +6,7 @@ import {
   type OfferLimits,
   type ProviderDoc,
 } from "../catalogue/schema.ts";
+import { resolveBazaarLinkCompliance } from "./bazaarlink-policies.ts";
 import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
@@ -91,6 +92,7 @@ export class BazaarLinkProvider implements ModelProvider {
         name: modelName,
         connection,
         limits,
+        compliance: resolveBazaarLinkCompliance(modelId),
       };
     });
   }

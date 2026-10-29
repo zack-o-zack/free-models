@@ -27,6 +27,18 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "google"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -48,6 +60,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "mistral"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -69,6 +95,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "novita"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -90,6 +130,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "novita"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -111,6 +165,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "nvidia"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -132,6 +200,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "nvidia"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -153,6 +235,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "nvidia"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -174,6 +270,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "nvidia"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -195,6 +305,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "nvidia"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -216,6 +340,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "nvidia"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -237,6 +375,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "nvidia"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -258,6 +410,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "poolside"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     },
     {
@@ -279,6 +445,20 @@
           "60 req / min (paying orgs)",
           "1k req / day (paying orgs)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "requesty",
+          "aws",
+          "poolside"
+        ],
+        "description": "Free plan logs up to 30 days and may train on prompts"
       }
     }
   ]

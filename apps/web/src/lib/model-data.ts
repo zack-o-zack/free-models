@@ -53,6 +53,16 @@ interface RawOffer {
     terms?: string[];
     funding?: "no_credits" | "monthly_credits";
   };
+  compliance?: {
+    zdr?: boolean;
+    no_training?: boolean;
+    data_retention?: boolean;
+    countries?: string[];
+    subprocessors?: string[];
+    description?: string;
+    edge?: boolean;
+    conditional?: boolean;
+  };
 }
 
 interface RawCatalogue {
@@ -122,6 +132,20 @@ function toModelSummary(model: RawModel): ModelSummary {
               connection: offer.connection ?? {},
               limits: offer.limits?.terms ?? [],
               ...(offer.limits?.funding ? { funding: offer.limits.funding } : {}),
+              ...(offer.compliance
+                ? {
+                    compliance: {
+                      zdr: Boolean(offer.compliance.zdr),
+                      noTraining: Boolean(offer.compliance.no_training),
+                      dataRetention: Boolean(offer.compliance.data_retention),
+                      countries: offer.compliance.countries ?? [],
+                      subprocessors: offer.compliance.subprocessors,
+                      description: offer.compliance.description,
+                      edge: offer.compliance.edge,
+                      conditional: offer.compliance.conditional,
+                    },
+                  }
+                : {}),
             },
           ]
         : [],
