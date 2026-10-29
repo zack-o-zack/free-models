@@ -6917,6 +6917,56 @@
       }
     },
     {
+      "id": "heygen/heygen-voice-1-turbo",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "instruct_type": null,
+          "modality": "text->speech",
+          "output_modalities": [
+            "audio"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "heygen/heygen-voice-1-turbo-20261009",
+        "context_length": 0,
+        "created": 1793030422,
+        "default_parameters": {},
+        "description": "HeyGen Voice Turbo is a lower-latency version of HeyGen Voice, HeyGen's text-to-speech model. It has the same 10 default voices, or bring your own HeyGen key to use voice clones...",
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/heygen/heygen-voice-1-turbo-20261009/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0.000004"
+        },
+        "supported_parameters": [],
+        "supported_voices": [
+          "nadine",
+          "tabitha",
+          "bram",
+          "gareth",
+          "noelle",
+          "meredith",
+          "sabrina",
+          "lucian",
+          "weston",
+          "vincent"
+        ],
+        "top_provider": {
+          "context_length": 0,
+          "is_moderated": false,
+          "max_completion_tokens": 0
+        }
+      }
+    },
+    {
       "id": "huggingface/distilbert-sst-2-int8",
       "metadata": {
         "architecture": {
