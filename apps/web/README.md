@@ -61,7 +61,7 @@ Configure these settings in the Cloudflare dashboard under Workers & Pages > fre
 | Branch control                        | Enable preview builds               |
 | Build variable `NEXT_PUBLIC_SITE_URL` | Public HTTPS origin, without a path |
 
-Do not set `SITE_ENVIRONMENT` in the dashboard. Workers Builds sets `WORKERS_CI_BRANCH`, and any branch other than `main` is treated as a preview: it emits `noindex, nofollow` and `Disallow: /`. Without `NEXT_PUBLIC_SITE_URL`, production output is non-indexable and the SEO check fails.
+Do not set `SITE_ENVIRONMENT` in the dashboard. Workers Builds sets `WORKERS_CI_BRANCH`, and any branch other than `main` is treated as a preview: it emits `noindex, nofollow` and `Disallow: /`. Without `NEXT_PUBLIC_SITE_URL`, production output is non-indexable. `bun run seo:check` is a manual check of production output; no deploy step runs it.
 
 To serve the built output locally with the same header and redirect rules as Cloudflare, run `bun run build` and then `bun run start`.
 
