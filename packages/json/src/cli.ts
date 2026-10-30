@@ -1,7 +1,7 @@
 import { join, resolve } from "node:path";
 import { parseArgs } from "node:util";
 import { generateChangelog } from "./catalogue/changelog.ts";
-import { cataloguePaths } from "./catalogue/files.ts";
+import { cataloguePaths, serializeJson } from "./catalogue/files.ts";
 import { type CatalogueRenderer, JsonCatalogueRenderer } from "./catalogue/render.ts";
 import {
   check as checkCatalogue,
@@ -33,7 +33,7 @@ const defaultDependencies: CliDependencies = {
 function usage(): string {
   return [
     "Usage:",
-    "  bun run catalogue discover [--workspace <path>]",
+    "  bun run catalogue discover [--workspace <path>] [--failures <path>]",
     "  bun run catalogue reconcile [--workspace <path>]",
     "  bun run catalogue refresh [--workspace <path>]",
     "  bun run catalogue render [--workspace <path>] [--output <path>]",
@@ -55,11 +55,15 @@ export async function runCli(
   const paths = cataloguePaths(options.workspace ?? process.cwd());
 
   if (command === "discover") {
-    const unresolvedCount = await discover(
+    const { unresolvedCount, failures } = await discover(
       paths,
       dependencies.providers,
       dependencies.modelsDevRegistry,
+      { keepFailedProviders: options.failures !== undefined },
     );
+    if (options.failures) await Bun.write(resolve(options.failures), serializeJson({ failures }));
+    for (const failure of failures)
+      console.warn(`Kept committed snapshot for ${failure.provider}: ${failure.error}`);
     console.log(
       `Discovered ${dependencies.providers.length} provider(s); ${unresolvedCount} unresolved model(s)`,
     );
@@ -124,10 +128,13 @@ function isCommand(command: string | undefined): command is Command {
 function parseCommandOptions(
   command: Command,
   args: string[],
-): { input?: string; output?: string; workspace?: string } {
+): { failures?: string; input?: string; output?: string; workspace?: string } {
   const options: Record<string, { type: "string" }> = {
     workspace: { type: "string" },
   };
+  if (command === "discover") {
+    options.failures = { type: "string" };
+  }
   if (command === "check") {
     options.input = { type: "string" };
   }

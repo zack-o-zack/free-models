@@ -13,7 +13,7 @@ describe("catalogue automation", () => {
       "run.ts repair",
       "bun run catalogue:refresh",
       "run.ts review",
-      "bun run check",
+      "bun run check:catalogue",
       "git push --force-with-lease",
       "automation/merge.ts",
       "gh workflow run merged-catalogue.yml",
@@ -27,6 +27,15 @@ describe("catalogue automation", () => {
     expect(source).toContain("steps.validate.outcome == 'success'");
     expect(source).toContain("!inputs.dry_run");
     expect(source).toContain("include-hidden-files: true");
+    expect(source).toContain("--failures");
+    expect(source).toContain("DISCOVERY_FAILURES");
+    for (const key of [
+      "OPENCODE_API_KEY",
+      "NVIDIA_API_KEY",
+      "GEMINI_API_KEY",
+      "COHERE_TRIAL_API_KEY",
+    ])
+      expect(source).toContain(`${key}: \${{ secrets.`);
     expect(source).not.toContain("pull_request_target");
     const reviewer = await Bun.file(
       resolve(import.meta.dir, "../src/automation/inference.ts"),

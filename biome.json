@@ -13,6 +13,7 @@
       "!!packages/json/catalogue/canonical-metadata.json",
       "!!packages/json/catalogue/snapshots",
       "!!packages/json/catalogue/unresolved.json",
+      "!!packages/json/catalogue/held-providers.json",
       "!!packages/json/catalogue/changelog.json",
       "!!packages/json/free-models.json"
     ]

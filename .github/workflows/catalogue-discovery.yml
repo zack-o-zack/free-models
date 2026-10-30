@@ -59,7 +59,7 @@ jobs:
               exit 1
             fi
             git diff --name-only "HEAD...$old_sha" > "$RUNNER_TEMP/paths"
-            if grep -vE '^packages/json/catalogue/(canonical-models.json|canonical-metadata.json|unresolved.json|changelog\.json|(mappings|snapshots)/[a-z0-9-]+\.json)$' "$RUNNER_TEMP/paths"; then
+            if grep -vE '^packages/json/catalogue/(canonical-models.json|canonical-metadata.json|unresolved.json|changelog\.json|held-providers\.json|(mappings|snapshots)/[a-z0-9-]+\.json)$' "$RUNNER_TEMP/paths"; then
               echo 'Automation branch contains changes outside the catalogue.' >&2
               exit 1
             fi
@@ -77,15 +77,19 @@ jobs:
           COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
           MISTRAL_FREE_API_KEY: ${{ secrets.MISTRAL_FREE_API_KEY }}
           TOKENROUTER_API_KEY: ${{ secrets.TOKENROUTER_API_KEY }}
-        run: bun run catalogue:discover
+        # A failing provider keeps its committed snapshot; repair holds it back instead of failing the run.
+        run: bun run catalogue:discover -- --failures "$GITHUB_WORKSPACE/.scratch/discovery-failures.json"
 
       - name: Resolve identities using free catalogue models
         id: repair
         continue-on-error: true
         env:
+          DISCOVERY_FAILURES: .scratch/discovery-failures.json
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          COHERE_TRIAL_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           MISTRAL_FREE_API_KEY: ${{ secrets.MISTRAL_FREE_API_KEY }}
+          COHERE_TRIAL_API_KEY: ${{ secrets.COHERE_API_KEY }}
         run: bun packages/json/src/automation/run.ts repair
 
       - name: Refresh resolved metadata
@@ -99,9 +103,12 @@ jobs:
         id: review
         continue-on-error: true
         env:
+          DISCOVERY_FAILURES: .scratch/discovery-failures.json
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-          COHERE_TRIAL_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           MISTRAL_FREE_API_KEY: ${{ secrets.MISTRAL_FREE_API_KEY }}
+          COHERE_TRIAL_API_KEY: ${{ secrets.COHERE_API_KEY }}
         run: bun packages/json/src/automation/run.ts review
 
       - name: Update catalogue changelog
@@ -112,9 +119,10 @@ jobs:
         if: steps.review.outcome == 'success'
         id: validate
         continue-on-error: true
+        # Dependency advisories are not caused by a catalogue-only diff, so they do not block it.
         run: |
           set -euo pipefail
-          bun run check
+          bun run check:catalogue
 
       - name: Save catalogue and agent evidence
         if: always()
@@ -149,6 +157,10 @@ jobs:
             echo "All gates passed: $VALIDATED"
             echo "Evidence: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             echo
+            if [[ -s .scratch/catalogue-summary.md ]]; then
+              cat .scratch/catalogue-summary.md
+              echo
+            fi
             echo 'Failures remain open and are retried on the next schedule. Human commits stop automatic branch replacement.'
             echo 'The model has no shell, repository credentials, or merge authority.'
           } > "$body"
