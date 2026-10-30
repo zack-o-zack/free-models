@@ -1,3 +1,7 @@
+export function modelDisplayName(model: { name: string; isStealth: boolean }): string {
+  return model.isStealth ? model.name.replace(/^Stealth:\s*/i, "") : model.name;
+}
+
 export function formatContext(value: number): string {
   if (value <= 0) return "Not listed";
   if (value >= 1_000_000) {

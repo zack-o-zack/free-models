@@ -1,4 +1,5 @@
 import { entityHref, publisherSlug } from "@/lib/catalogue-entities";
+import { modelDisplayName } from "@/lib/model-format";
 import { modelHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
 
@@ -36,9 +37,13 @@ export function homeDescription(models: readonly Pick<ModelSummary, "providers">
 }
 
 export function modelDescription(
-  model: Pick<ModelSummary, "name" | "description"> & Partial<Pick<ModelSummary, "providers">>,
+  model: Pick<ModelSummary, "name" | "description"> &
+    Partial<Pick<ModelSummary, "isStealth" | "providers">>,
 ): string {
-  const name = contentSnippet(model.name, 55);
+  const name = contentSnippet(
+    modelDisplayName({ name: model.name, isStealth: model.isStealth ?? false }),
+    55,
+  );
   const providerCount = model.providers?.length ?? 0;
   const prefix =
     providerCount > 0

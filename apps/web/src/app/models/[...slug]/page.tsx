@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getBenchmarkComparisons } from "@/lib/model-benchmarks";
 import { getModels } from "@/lib/model-data";
+import { modelDisplayName } from "@/lib/model-format";
 import { getModelHighlights } from "@/lib/model-highlights";
 import { modelHref, modelIdFromRouteSegments, modelRouteSegments } from "@/lib/model-path";
 import { modelDescription, modelJsonLd, pageMetadata } from "@/lib/seo";
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: ModelPageProps): Promise<Meta
   if (!model) notFound();
 
   return pageMetadata(
-    `${model.name} Free API & Benchmarks`,
+    `${modelDisplayName(model)} Free API & Benchmarks`,
     modelDescription(model),
     modelHref(model.id),
   );

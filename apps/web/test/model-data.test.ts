@@ -117,6 +117,6 @@ test("catalogue changes affect the web deployment's workspace dependency graph",
     new URL("../../../packages/json/package.json", import.meta.url),
   ).json();
 
-  // Vercel's affected-project detection cannot infer the CLI's relative file reads.
+  // The build renders the catalogue through the workspace package, so it must stay a workspace dependency.
   expect(web.dependencies[catalogue.name]).toBe("workspace:*");
 });

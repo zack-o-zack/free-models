@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { entityHref, publisherSlug } from "@/lib/catalogue-entities";
-import { formatBenchmarkScore, formatContext } from "@/lib/model-format";
+import { formatBenchmarkScore, formatContext, modelDisplayName } from "@/lib/model-format";
 import { getProviderFundingLabel } from "@/lib/model-funding";
 import { modelHref } from "@/lib/model-path";
 import type { CatalogueModel } from "@/lib/model-types";
@@ -33,7 +33,7 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
   const publisher = publisherSlug(model);
   const href = modelHref(model.id);
   const providerLogoUrl = publisherFaviconUrl(model.id.split("/")[0]);
-  const displayName = model.isStealth ? model.name.replace(/^Stealth:\s*/i, "") : model.name;
+  const displayName = modelDisplayName(model);
 
   function handleCardClick(event: MouseEvent<HTMLDivElement>) {
     if (

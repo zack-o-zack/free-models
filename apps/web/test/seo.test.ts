@@ -42,6 +42,16 @@ describe("SEO catalogue boundaries", () => {
     );
   });
 
+  test("stealth descriptions use the visible model name", () => {
+    const description = modelDescription({
+      name: "Stealth: Glyph Cluster",
+      description: "An anonymous reasoning model.",
+      isStealth: true,
+    });
+    expect(description).toStartWith("Glyph Cluster —");
+    expect(description).not.toContain("Stealth:");
+  });
+
   test("dynamically formats home description from catalogue models and providers", () => {
     const models = [
       { providers: ["provider-a", "provider-b"] },

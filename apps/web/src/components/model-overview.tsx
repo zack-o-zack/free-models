@@ -7,7 +7,7 @@ import { ModelOfferCard } from "@/components/model-offer-card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatContext } from "@/lib/model-format";
+import { formatContext, modelDisplayName } from "@/lib/model-format";
 import type { ModelHighlight } from "@/lib/model-highlights";
 import { compareHref } from "@/lib/model-path";
 import type { ModelSummary } from "@/lib/model-types";
@@ -21,7 +21,7 @@ export function ModelOverview({
   highlights: ModelHighlight[];
 }) {
   const logoUrl = publisherFaviconUrl(model.id.split("/")[0]);
-  const displayName = model.isStealth ? model.name.replace(/^Stealth:\s*/i, "") : model.name;
+  const displayName = modelDisplayName(model);
 
   return (
     <section

@@ -198,6 +198,7 @@ export function assertContentParity(page: Awaited<ReturnType<typeof readPage>>, 
   const isModel = file.startsWith("models/");
   const isDirectory =
     file === "providers.html" || file === "publishers.html" || file === "changelog.html";
+  const hasCatalogue = !isModel && !isDirectory && file !== "terms.html";
   const canonical = page.canonicals[0];
   equal(page.h1Count, 1, "expected one visible main heading");
   equal(page.descriptionCount, 1, "expected one visible page description");
@@ -217,6 +218,7 @@ export function assertContentParity(page: Awaited<ReturnType<typeof readPage>>, 
     ? modelDescription({
         name: page.heading,
         description: page.description,
+        isStealth: file.startsWith("models/stealth/"),
         providers: Array.from({ length: page.modelProviderCount ?? 0 }, (_, index) => `${index}`),
       })
     : contentSnippet(page.description);
@@ -245,7 +247,7 @@ export function assertContentParity(page: Awaited<ReturnType<typeof readPage>>, 
     return;
   }
   const schema = page.schemas.find(
-    (item) => item["@type"] === (isModel ? "WebPage" : "CollectionPage"),
+    (item) => item["@type"] === (isModel || file === "terms.html" ? "WebPage" : "CollectionPage"),
   );
   if (!isDirectory) {
     check(schema, "missing page schema");
@@ -280,7 +282,7 @@ export function assertContentParity(page: Awaited<ReturnType<typeof readPage>>, 
       "schema breadcrumbs differ from visible trail",
     );
   }
-  if (!isModel && !isDirectory) {
+  if (hasCatalogue) {
     check(page.models.length > 0, "missing visible catalogue");
     equal(
       schema?.mainEntity?.numberOfItems,
