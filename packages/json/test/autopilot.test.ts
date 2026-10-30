@@ -5,8 +5,10 @@ import { assertMergeCandidate } from "../src/automation/merge.ts";
 import {
   allowedCataloguePath,
   decideHolds,
+  diffParts,
   HOLD_DAYS,
   identityCandidates,
+  metadataChanges,
   providerAnomalies,
   restoreCommittedIdentities,
 } from "../src/automation/policy.ts";
@@ -201,11 +203,13 @@ function reviewerPool() {
     "mistral-embed": "mistralai/embed",
     "command-a": "cohere/command-a",
   };
-  const scores: Record<string, number> = {
+  const scores: Record<string, number | undefined> = {
     "vendor/small": 10,
     "vendor/smart": 30,
     "vendor/mid": 20,
+    "vendor/unscored": undefined,
     "mistralai/medium": 14,
+    "mistralai/embed": undefined,
     "cohere/command-a": 13,
   };
   const build = (providers: Record<string, { model_id: string; connection: object }[]>) =>
@@ -216,7 +220,11 @@ function reviewerPool() {
           id,
           metadata: {
             context_length: id === "vendor/smart" ? 8_000 : 256_000,
-            benchmarks: { artificial_analysis: { intelligence_index } },
+            architecture: { output_modalities: id.endsWith("embed") ? ["embeddings"] : ["text"] },
+            supported_parameters: ["max_tokens"],
+            ...(intelligence_index === undefined
+              ? {}
+              : { benchmarks: { artificial_analysis: { intelligence_index } } }),
           },
         })),
       },
@@ -269,7 +277,18 @@ test("reviewer tiers prefer OpenCode, then rank providers and models by catalogu
   Object.assign(moved, {
     connection: { ...moved.connection, endpoint: "https://evil.example/chat/completions" },
   });
-  expect(reviewerTiers({ ...pool, live })[0]?.map((offer) => offer.model)).toEqual(["small-free"]);
+  expect(reviewerTiers({ ...pool, live })[0]?.map((offer) => offer.model)).toEqual([
+    "small-free",
+    "unscored-free",
+  ]);
+});
+
+test("reviewer tiers keep unscored chat models when upstream drops benchmarks", () => {
+  const pool = reviewerPool();
+  for (const entry of pool.baseline.metadata.metadata) delete entry.metadata.benchmarks;
+  const tiers = reviewerTiers(pool).map((tier) => tier.map((offer) => offer.model));
+  // Without scores, longer context ranks first and embedding models are never reviewers.
+  expect(tiers).toEqual([["mid-free", "small-free"], ["mistral-medium-3.5"], ["command-a"]]);
 });
 
 test("reviewer falls back across provider tiers and records every attempt", async () => {
@@ -289,4 +308,85 @@ test("reviewer falls back across provider tiers and records every attempt", asyn
     { model: "mistral/mistral-medium-3.5", outcome: "answered" },
   ]);
   expect(() => freeReviewer({ ...reviewerPool(), env: {} })).toThrow("No catalogued free reviewer");
+});
+
+test("reviewer skips providers with account-wide errors on later requests", async () => {
+  const seen: string[] = [];
+  const review = freeReviewer(reviewerPool(), async (_url, init) => {
+    const { model } = JSON.parse(String(init.body)) as { model: string };
+    seen.push(model);
+    if (model.endsWith("-free")) return new Response("quota", { status: 429 });
+    return Response.json({ choices: [{ message: { content: '{"approve":true}' } }] });
+  });
+  const schema = z.object({ approve: z.boolean() });
+  await review("part one", schema);
+  await review("part two", schema);
+  expect(seen).toEqual(["smart-free", "mistral-medium-3.5", "mistral-medium-3.5"]);
+});
+
+test("summarizes refreshed metadata per field path", () => {
+  const before = {
+    metadata: [
+      { id: "a/one", metadata: { benchmarks: { score: 13 }, description: "old" } },
+      { id: "a/two", metadata: { benchmarks: { score: 7 } } },
+      { id: "a/gone", metadata: {} },
+    ],
+  };
+  const after = {
+    metadata: [
+      { id: "a/one", metadata: { description: "new", endpoints: ["/chat"] } },
+      { id: "a/two", metadata: { benchmarks: { score: 9 } } },
+      { id: "a/new", metadata: {} },
+    ],
+  };
+  expect(metadataChanges(before, after)).toEqual({
+    added: ["a/new"],
+    removed: ["a/gone"],
+    fields: [
+      {
+        path: "benchmarks.score",
+        added: 0,
+        removed: 1,
+        changed: 1,
+        examples: [
+          { id: "a/one", before: "13" },
+          { id: "a/two", before: "7", after: "9" },
+        ],
+      },
+      {
+        path: "description",
+        added: 0,
+        removed: 0,
+        changed: 1,
+        examples: [{ id: "a/one", before: '"old"', after: '"new"' }],
+      },
+      {
+        path: "endpoints",
+        added: 1,
+        removed: 0,
+        changed: 0,
+        examples: [{ id: "a/one", after: '["/chat"]' }],
+      },
+    ],
+  });
+});
+
+test("splits large diffs by file, then by hunk with the file header repeated", () => {
+  const file = (name: string, ...hunks: string[]) =>
+    `diff --git a/${name} b/${name}\n--- a/${name}\n+++ b/${name}\n${hunks.join("")}`;
+  const small = file("small.json", "@@ -1 +1 @@\n-a\n+b\n");
+  const big = file(
+    "big.json",
+    `@@ -1 +1 @@\n${"-x\n".repeat(30)}`,
+    `@@ -9 +9 @@\n${"+y\n".repeat(30)}`,
+  );
+  const parts = diffParts(small + big, 200);
+  expect(parts).toHaveLength(3);
+  expect(parts[0]).toBe(small);
+  expect(parts.slice(1).every((part) => part.startsWith("diff --git a/big.json"))).toBe(true);
+  expect(parts.join("").replaceAll(/diff --git[^@]*/g, "")).toBe(
+    (small + big).replaceAll(/diff --git[^@]*/g, ""),
+  );
+  expect(diffParts("", 200)).toEqual([]);
+  expect(() => diffParts(big, 60)).toThrow("single catalogue diff hunk");
 });

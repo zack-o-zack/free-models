@@ -127,7 +127,10 @@ Actions write permissions. No paid inference route or external agent service is 
    agreeing existing mappings. Ask a free reviewer model to approve each single-candidate mapping
    on its own. Approved mappings are applied through an atomic file transaction. Ambiguous,
    declined or unreviewed offers are left out of the proposal and retried on the next run.
-5. Reconcile, refresh metadata, and ask a free reviewer model to review the complete catalogue diff.
+5. Reconcile, refresh metadata, and ask a free reviewer model to review the catalogue change.
+   Snapshots, identities and mappings are reviewed as a raw diff, split into parts of at most
+   120,000 characters; every part must be approved. Refreshed metadata is copied from upstream
+   registries, so it is summarized per field path with examples instead of reviewed line by line.
 6. Run `bun run check:catalogue`, then create or update `automation/free-model-catalogue`. The PR
    body lists every restore, hold, accepted change, mapping and deferred offer.
 7. Recheck repository, bot ownership, branch, head SHA, base SHA, file scope and requested-change
@@ -142,23 +145,26 @@ remaining tiers are ordered by their most intelligent model: NVIDIA (`NVIDIA_API
 (`COHERE_TRIAL_API_KEY`, the trial key, never a paid production key). A tier without its secret
 is skipped, so NVIDIA and Gemini are optional.
 
-Each tier offers its two most intelligent models, ranked by the reviewed baseline's Artificial
-Analysis intelligence index. A candidate must be in the baseline catalogue with a mapping and a
-score, and this run's discovery must still list it free with the same connection. Providers that
+Each tier offers its two most intelligent chat models, ranked by the reviewed baseline's
+Artificial Analysis intelligence index. Upstream publishes the index for only some models, so
+unscored chat models rank after scored ones, by context length. A candidate must be in the
+baseline catalogue with a mapping and chat metadata, and this run's discovery must still list it
+free with the same connection. Providers that
 failed discovery or are held back supply no reviewers. A model whose catalogued context length is
 too small for the prompt is skipped. An auth, billing or quota error (401, 402, 403 or 429) skips
-the rest of that provider's tier. Only fixed chat-completion endpoints are called, redirects are
+that provider for the rest of the run. Only fixed chat-completion endpoints are called, redirects are
 rejected, and no paid model is used. Provider pricing changes after discovery remain outside
 repository control.
 
 Model responses cannot execute commands, select arbitrary URLs, change credentials, or authorize
 merges. Each inference call has a 60-second timeout. A valid rejection stops the phase rather than
-shopping for approval. Each phase has a six-request hard ceiling; when every tier fails, work is
-deferred to the next daily run. The agent report and PR body record every reviewer attempt and
+shopping for approval. Each review request has a six-call hard ceiling; when every tier fails,
+work is deferred to the next daily run. The agent report and PR body record every reviewer attempt and
 its outcome.
 
 The workflow stops automatic merge only when more than half of the providers fail discovery in one
-run, the diff exceeds 140,000 characters, the final review rejects the diff, or validation fails.
+run, the reviewed diff needs more than four parts, the final review rejects a part, or validation
+fails.
 Changes to metadata still use the existing refresh policy, which may retain stale metadata when
 upstream enrichment fails. These are catalogue repairs; the agent does not rewrite broken provider code.
 

@@ -318,6 +318,18 @@ describe("manual identity workflow", () => {
     });
   });
 
+  test("keeps offer compliance in discovered snapshots", async () => {
+    await withWorkspace(async (workspace) => {
+      const compliance = { zdr: true, no_training: true, data_retention: false, countries: ["US"] };
+      await writeJson(join(workspace, "provider-fixtures/fixture-z.json"), {
+        offers: [{ ...fixtureZOffers[0], compliance }],
+      });
+      expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
+      const fixtureZ = await Bun.file(join(workspace, "catalogue/snapshots/fixture-z.json")).json();
+      expect(fixtureZ.offers[0].compliance).toEqual(compliance);
+    });
+  });
+
   test("handles removals, connection changes, and returning mapped offers deterministically", async () => {
     await withWorkspace(async (workspace) => {
       expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);

@@ -67,13 +67,14 @@ export const REVIEWER_TIERS: readonly ReviewerTier[] = [
 ];
 
 const MODELS_PER_TIER = 2;
+// Model calls allowed for one review request across all tiers.
 const MAX_CALLS = 6;
 
 export interface ReviewerCandidate {
   readonly provider: string;
   readonly model: string;
   readonly canonicalId: string;
-  readonly intelligence: number;
+  readonly intelligence: number | undefined;
   readonly contextLength: number | undefined;
   readonly endpoint: string;
   readonly key: string;
@@ -90,21 +91,42 @@ export interface ReviewerPool {
   readonly tiers?: readonly ReviewerTier[];
 }
 
-// Artificial Analysis intelligence index and context length from reviewed canonical metadata.
+// Chat support, Artificial Analysis intelligence index and context length from reviewed
+// canonical metadata. Upstream publishes the index for only some models, so it is optional.
 function capability(state: CatalogueState, canonicalId: string) {
   const entry = state.metadata.metadata.find((item) => item.id === canonicalId)?.metadata;
-  const benchmarks = entry?.benchmarks as
+  if (!entry) return undefined;
+  const benchmarks = entry.benchmarks as
     | { artificial_analysis?: { intelligence_index?: unknown } }
     | undefined;
   const score = benchmarks?.artificial_analysis?.intelligence_index;
-  const context = entry?.context_length;
+  const outputs = (entry.architecture as { output_modalities?: unknown } | undefined)
+    ?.output_modalities;
+  const parameters = entry.supported_parameters;
+  const chat =
+    entry.model_type === "chat" ||
+    (entry.model_type == null &&
+      Array.isArray(outputs) &&
+      outputs.includes("text") &&
+      Array.isArray(parameters) &&
+      parameters.includes("max_tokens"));
   return {
+    chat,
     intelligence: typeof score === "number" ? score : undefined,
-    contextLength: typeof context === "number" ? context : undefined,
+    contextLength: typeof entry.context_length === "number" ? entry.context_length : undefined,
   };
 }
 
-// Models still listed free by live discovery and already in the reviewed catalogue, most
+// Scored models first, most intelligent first; unscored chat models follow by context length.
+function byCapability(a: ReviewerCandidate, b: ReviewerCandidate): number {
+  return (
+    (b.intelligence ?? -1) - (a.intelligence ?? -1) ||
+    (b.contextLength ?? 0) - (a.contextLength ?? 0) ||
+    a.model.localeCompare(b.model)
+  );
+}
+
+// Chat models still listed free by live discovery and already in the reviewed catalogue, most
 // intelligent first, grouped into provider tiers with OpenCode preferred.
 export function reviewerTiers(pool: ReviewerPool): ReviewerCandidate[][] {
   const env = pool.env ?? process.env;
@@ -121,8 +143,9 @@ export function reviewerTiers(pool: ReviewerPool): ReviewerCandidate[][] {
       const endpoint = tier.endpoint(offer);
       const canonicalId = mappings[offer.model_id];
       if (!endpoint || !canonicalId) continue;
-      const { intelligence, contextLength } = capability(pool.baseline, canonicalId);
-      if (intelligence === undefined) continue;
+      const capabilities = capability(pool.baseline, canonicalId);
+      if (!capabilities?.chat) continue;
+      const { intelligence, contextLength } = capabilities;
       const previous = byCanonical.get(canonicalId);
       if (!previous || offer.model_id < previous.model)
         byCanonical.set(canonicalId, {
@@ -135,9 +158,7 @@ export function reviewerTiers(pool: ReviewerPool): ReviewerCandidate[][] {
           key,
         });
     }
-    const candidates = [...byCanonical.values()]
-      .sort((a, b) => b.intelligence - a.intelligence || a.model.localeCompare(b.model))
-      .slice(0, MODELS_PER_TIER);
+    const candidates = [...byCanonical.values()].sort(byCapability).slice(0, MODELS_PER_TIER);
     return candidates.length ? [candidates] : [];
   });
   const [first, ...rest] = tiers;
@@ -146,7 +167,7 @@ export function reviewerTiers(pool: ReviewerPool): ReviewerCandidate[][] {
 }
 
 function byBestModel(a: readonly ReviewerCandidate[], b: readonly ReviewerCandidate[]): number {
-  return (b[0]?.intelligence ?? 0) - (a[0]?.intelligence ?? 0);
+  return (b[0]?.intelligence ?? -1) - (a[0]?.intelligence ?? -1);
 }
 
 export interface ReviewAttempt {
@@ -166,12 +187,15 @@ export function freeReviewer(
   const tiers = reviewerTiers(pool);
   if (!tiers.length) throw new Error("No catalogued free reviewer available");
   const attempts: ReviewAttempt[] = [];
-  let calls = 0;
+  // Providers that returned an account-wide error are skipped for the rest of the run.
+  const exhausted = new Set<string>();
   const review = async <T>(prompt: string, schema: z.ZodType<T>) => {
     // Rough upper bound: catalogue JSON averages well over three characters per token.
     const promptTokens = Math.ceil(prompt.length / 3) + 4096;
+    let calls = 0;
     for (const tier of tiers) {
       for (const offer of tier) {
+        if (exhausted.has(offer.provider)) break;
         const model = `${offer.provider}/${offer.model}`;
         if (offer.contextLength && offer.contextLength < promptTokens) {
           attempts.push({ model, outcome: "context too small" });
@@ -200,7 +224,10 @@ export function freeReviewer(
           if (!response.ok) {
             attempts.push({ model, outcome: `HTTP ${response.status}` });
             // Auth, billing and quota errors apply to the whole provider account.
-            if ([401, 402, 403, 429].includes(response.status)) break;
+            if ([401, 402, 403, 429].includes(response.status)) {
+              exhausted.add(offer.provider);
+              break;
+            }
             continue;
           }
           const envelope = responseSchema.parse(await response.json());

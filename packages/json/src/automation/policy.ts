@@ -159,3 +159,98 @@ export function decideHolds(
   }
   return { held, accepted };
 }
+
+export interface MetadataFieldChange {
+  readonly path: string;
+  readonly added: number;
+  readonly removed: number;
+  readonly changed: number;
+  readonly examples: { id: string; before?: string; after?: string }[];
+}
+
+export interface MetadataChanges {
+  readonly added: string[];
+  readonly removed: string[];
+  readonly fields: MetadataFieldChange[];
+}
+
+function leaves(value: unknown, prefix: string, into: Map<string, string>) {
+  if (value !== null && typeof value === "object" && !Array.isArray(value)) {
+    for (const [key, child] of Object.entries(value))
+      leaves(child, prefix ? `${prefix}.${key}` : key, into);
+  } else into.set(prefix, JSON.stringify(value));
+  return into;
+}
+
+function excerpt(value: string) {
+  return value.length > 160 ? `${value.slice(0, 157)}...` : value;
+}
+
+// Refreshed metadata is copied from upstream registries, so its raw diff can be far larger than a
+// reviewer's context. Summarize it per field path with a few concrete examples instead.
+export function metadataChanges(
+  before: CatalogueState["metadata"],
+  after: CatalogueState["metadata"],
+): MetadataChanges {
+  const old = new Map(before.metadata.map((entry) => [entry.id, entry.metadata]));
+  const now = new Map(after.metadata.map((entry) => [entry.id, entry.metadata]));
+  const fields = new Map<string, Omit<MetadataFieldChange, "path">>();
+  for (const [id, metadata] of now) {
+    const previous = old.get(id);
+    if (!previous) continue;
+    const from = leaves(previous, "", new Map());
+    const to = leaves(metadata, "", new Map());
+    for (const path of new Set([...from.keys(), ...to.keys()])) {
+      const a = from.get(path);
+      const b = to.get(path);
+      if (a === b) continue;
+      const field = fields.get(path) ?? { added: 0, removed: 0, changed: 0, examples: [] };
+      const kind = a === undefined ? "added" : b === undefined ? "removed" : "changed";
+      const example = {
+        id,
+        ...(a ? { before: excerpt(a) } : {}),
+        ...(b ? { after: excerpt(b) } : {}),
+      };
+      fields.set(path, {
+        ...field,
+        [kind]: field[kind] + 1,
+        examples: field.examples.length < 3 ? [...field.examples, example] : field.examples,
+      });
+    }
+  }
+  return {
+    added: [...now.keys()].filter((id) => !old.has(id)).sort(),
+    removed: [...old.keys()].filter((id) => !now.has(id)).sort(),
+    fields: [...fields]
+      .map(([path, field]) => ({ path, ...field }))
+      .sort((a, b) => a.path.localeCompare(b.path)),
+  };
+}
+
+// Splits a git diff into parts no larger than limit, keeping whole files together where possible
+// and repeating the file header when one file's hunks must be split.
+export function diffParts(diff: string, limit: number): string[] {
+  const parts: string[] = [];
+  let current = "";
+  const push = (piece: string) => {
+    if (current && current.length + piece.length > limit) {
+      parts.push(current);
+      current = "";
+    }
+    current += piece;
+  };
+  for (const file of diff.split(/(?=^diff --git )/m).filter(Boolean)) {
+    if (file.length <= limit) {
+      push(file);
+      continue;
+    }
+    const [header = "", ...hunks] = file.split(/(?=^@@ )/m);
+    for (const hunk of hunks) {
+      if (header.length + hunk.length > limit)
+        throw new Error("A single catalogue diff hunk exceeds the review context budget");
+      push(header + hunk);
+    }
+  }
+  if (current) parts.push(current);
+  return parts;
+}

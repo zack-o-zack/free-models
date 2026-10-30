@@ -334,6 +334,7 @@ function normalizeOffers(providerId: string, offers: DiscoveredOffer[]): Discove
         name: offer.name,
         connection: sortJsonObject(offer.connection),
         limits: offer.limits,
+        ...(offer.compliance ? { compliance: offer.compliance } : {}),
       };
     })
     .sort((left, right) => compareStrings(left.model_id, right.model_id));

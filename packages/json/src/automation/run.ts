@@ -1,11 +1,10 @@
-import { dirname, join, resolve } from "node:path";
+import { dirname, join, relative, resolve } from "node:path";
 import { z } from "zod";
 import { cataloguePaths, serializeJson, writeTextFilesAtomically } from "../catalogue/files.ts";
 import {
   type CanonicalModel,
   canonicalModelsSchema,
   type ProviderMappings,
-  type ProviderSnapshot,
   providerMappingsSchema,
 } from "../catalogue/schema.ts";
 import { computeUnresolved, loadCatalogueState } from "../catalogue/state.ts";
@@ -15,8 +14,10 @@ import { freeReviewer, type ReviewAttempt } from "./inference.ts";
 import {
   allowedCataloguePath,
   decideHolds,
+  diffParts,
   HOLD_DAYS,
   identityCandidates,
+  metadataChanges,
   providerAnomalies,
   restoreCommittedIdentities,
 } from "./policy.ts";
@@ -37,14 +38,26 @@ const failuresSchema = z.object({
 });
 const repairSchema = z.object({ accepted: z.record(z.string(), holdSchema) }).passthrough();
 const MAX_REPAIRS = 40;
+const METADATA_PATH = relative(process.cwd(), paths.canonicalMetadata);
+// Each review part must fit the smallest reviewer context; more parts than this needs a human.
+const REVIEW_PART_CHARS = 120_000;
+const MAX_REVIEW_PARTS = 4;
 
 async function readJson<T>(path: string, schema: z.ZodType<T>, fallback: T): Promise<T> {
   const file = Bun.file(path);
   return (await file.exists()) ? schema.parse(await file.json()) : fallback;
 }
 
-function snapshotFile(snapshot: ProviderSnapshot) {
-  return { path: paths.snapshot(snapshot.provider), contents: serializeJson(snapshot) };
+// Rewrites a snapshot from its file rather than parsed state, so kept offers retain their exact
+// serialization and the diff shows only real changes.
+async function snapshotFile(
+  source: string,
+  provider: string,
+  keep: (modelId: string) => boolean = () => true,
+) {
+  const snapshot = (await Bun.file(source).json()) as { offers: { model_id: string }[] };
+  const offers = snapshot.offers.filter((offer) => keep(offer.model_id));
+  return { path: paths.snapshot(provider), contents: serializeJson({ ...snapshot, offers }) };
 }
 
 function identityFiles(
@@ -130,14 +143,15 @@ try {
     const failed = new Set(failures.map((failure) => failure.provider));
     const snapshotWrites = [];
     for (const provider of held.keys()) {
-      const snapshot = before.snapshots.get(provider);
-      if (snapshot) snapshotWrites.push(snapshotFile(snapshot));
+      if (before.snapshots.has(provider))
+        snapshotWrites.push(
+          await snapshotFile(cataloguePaths(baseline).snapshot(provider), provider),
+        );
     }
     // A provider that stayed undiscoverable for the whole hold window no longer lists free offers.
     for (const provider of accepted.keys()) {
-      const snapshot = current.snapshots.get(provider);
-      if (snapshot && failed.has(provider))
-        snapshotWrites.push(snapshotFile({ ...snapshot, offers: [] }));
+      if (current.snapshots.has(provider) && failed.has(provider))
+        snapshotWrites.push(await snapshotFile(paths.snapshot(provider), provider, () => false));
     }
     const heldFile =
       held.size || (await Bun.file(heldPath).exists())
@@ -234,18 +248,21 @@ try {
       .filter((task) => !approved.has(key(task)))
       .map((task) => ({ provider: task.provider, id: task.id, reason: reasons.get(key(task)) }));
     const deferredIds = new Set(deferred.map(key));
-    const prunedSnapshots = [...current.snapshots.values()]
-      .filter((snapshot) =>
-        snapshot.offers.some((offer) => deferredIds.has(`${snapshot.provider}/${offer.model_id}`)),
-      )
-      .map((snapshot) =>
-        snapshotFile({
-          ...snapshot,
-          offers: snapshot.offers.filter(
-            (offer) => !deferredIds.has(`${snapshot.provider}/${offer.model_id}`),
+    const prunedSnapshots = await Promise.all(
+      [...current.snapshots.values()]
+        .filter((snapshot) =>
+          snapshot.offers.some((offer) =>
+            deferredIds.has(`${snapshot.provider}/${offer.model_id}`),
           ),
-        }),
-      );
+        )
+        .map(({ provider }) =>
+          snapshotFile(
+            paths.snapshot(provider),
+            provider,
+            (modelId) => !deferredIds.has(`${provider}/${modelId}`),
+          ),
+        ),
+    );
     await writeTextFilesAtomically([
       ...prunedSnapshots,
       ...(resolved.length ? identityFiles([...models.values()], mappings) : []),
@@ -294,13 +311,20 @@ try {
     const files = changed.stdout.toString().trim().split("\n").filter(Boolean);
     if (files.some((file) => !allowedCataloguePath(file)))
       throw new Error("Change exceeds catalogue-only scope");
-    const diff = Bun.spawnSync(["git", "diff", "HEAD", "--", "packages/json/catalogue"], {
-      stdout: "pipe",
-    });
+    // Metadata is summarized per field; everything else is reviewed as a raw diff.
+    const diff = Bun.spawnSync(
+      ["git", "diff", "HEAD", "--", "packages/json/catalogue", `:(exclude)${METADATA_PATH}`],
+      { stdout: "pipe" },
+    );
     if (diff.exitCode !== 0) throw new Error("Cannot inspect catalogue diff");
-    const evidence = diff.stdout.toString();
-    if (evidence.length > 140_000) throw new Error("Catalogue diff exceeds review context budget");
-    if (evidence) {
+    const metadata = metadataChanges(before.metadata, current.metadata);
+    const metadataChanged =
+      metadata.added.length || metadata.removed.length || metadata.fields.length;
+    const parts = diffParts(diff.stdout.toString(), REVIEW_PART_CHARS);
+    if (parts.length > MAX_REVIEW_PARTS)
+      throw new Error("Catalogue diff exceeds review context budget");
+    if (metadataChanged && !parts.length) parts.push("");
+    if (parts.length) {
       const noLongerListedFree = [...before.snapshots].flatMap(([provider, snapshot]) => {
         const liveIds = new Set(
           current.snapshots.get(provider)?.offers.map((offer) => offer.model_id),
@@ -312,17 +336,24 @@ try {
       const { accepted } = await readJson(repairPath, repairSchema, { accepted: {} });
       const review = freeReviewer(reviewerPool);
       reviewAttempts = review.attempts;
-      const verdict = await review(
-        `Review this catalogue-only diff. Reject suspicious identity merges, wrong model variants, contradictory metadata, removals inconsistent with live discovery, corrupted limits or changed connection/auth details. Return {"approve":boolean,"reason":string}. The following offers were present in the baseline but are absent from freshly fetched free-provider discovery; this explains their removal and does not imply the underlying model retired: ${JSON.stringify(noLongerListedFree)}. These provider-level changes were held back and observed on every scheduled discovery for at least ${HOLD_DAYS} days before being accepted, so they reflect the live provider: ${JSON.stringify(accepted)}. packages/json/catalogue/held-providers.json records providers whose previous snapshot is intentionally kept while a suspicious change is observed.\n${evidence}`,
-        z.object({ approve: z.boolean(), reason: z.string().max(2000) }).strict(),
-      );
+      const verdicts = [];
+      for (const [index, part] of parts.entries()) {
+        const verdict = await review(
+          `Review part ${index + 1} of ${parts.length} of a catalogue-only change. Reject suspicious identity merges, wrong model variants, contradictory metadata, removals inconsistent with live discovery, corrupted limits or changed connection/auth details. Return {"approve":boolean,"reason":string}. The following offers were present in the baseline but are absent from freshly fetched free-provider discovery; this explains their removal and does not imply the underlying model retired: ${JSON.stringify(noLongerListedFree)}. These provider-level changes were held back and observed on every scheduled discovery for at least ${HOLD_DAYS} days before being accepted, so they reflect the live provider: ${JSON.stringify(accepted)}. packages/json/catalogue/held-providers.json records providers whose previous snapshot is intentionally kept while a suspicious change is observed.${index === 0 && metadataChanged ? ` Canonical metadata was refreshed from upstream registries; upstream may add, drop or rescale fields such as benchmarks. Its changes, summarized per field path with examples: ${JSON.stringify(metadata)}.` : ""}${part ? `\n${part}` : ""}`,
+          z.object({ approve: z.boolean(), reason: z.string().max(2000) }).strict(),
+        );
+        verdicts.push(verdict);
+        if (!verdict.result.approve) break;
+      }
+      const declined = verdicts.find((verdict) => !verdict.result.approve);
       await Bun.write(
         reportPath,
-        serializeJson({ phase: mode, ...verdict, reviewAttempts, files }),
+        serializeJson({ phase: mode, approved: !declined, verdicts, reviewAttempts, files }),
       );
-      await appendSummary(reviewerLine("Final", verdict.model));
-      if (!verdict.result.approve)
-        throw new Error(`Catalogue review declined: ${verdict.result.reason}`);
+      await appendSummary(
+        reviewerLine("Final", [...new Set(verdicts.map((verdict) => verdict.model))].join(", ")),
+      );
+      if (declined) throw new Error(`Catalogue review declined: ${declined.result.reason}`);
     }
   } else throw new Error("Expected repair or review mode");
 } catch (error) {
