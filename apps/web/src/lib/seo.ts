@@ -41,7 +41,13 @@ if (
 }
 
 export const siteUrl = origin.origin;
-export const isIndexable = Boolean(configuredUrl) && process.env.SITE_ENVIRONMENT !== "preview";
+export function isPreviewBuild(env: Record<string, string | undefined> = process.env): boolean {
+  const branch = env.WORKERS_CI_BRANCH;
+  const environment =
+    env.SITE_ENVIRONMENT || (branch && branch !== "main" ? "preview" : "production");
+  return environment === "preview";
+}
+export const isIndexable = Boolean(configuredUrl) && !isPreviewBuild();
 export { homeDescription, homeTitle, modelDescription };
 
 export function absoluteUrl(path: string): string {
