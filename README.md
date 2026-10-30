@@ -63,6 +63,10 @@ bun run quality       # Run complete quality gate
 bun run --filter web seo:check # Verify SEO and UI content parity
 ```
 
+## Releases
+
+`packages/json` and `apps/web` are released automatically and separately. See [RELEASING.md](RELEASING.md).
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
