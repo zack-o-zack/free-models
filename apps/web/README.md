@@ -43,11 +43,26 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The site is a fully prerendered static export (`output: "export"`), written to `out/`. It is hosted on Cloudflare Pages and deployed by GitHub Actions. Nothing runs on a server at request time.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `.github/workflows/web-preview.yml` builds each pull request from this repository and deploys it to `https://pr-<number>.free-models.pages.dev`. The workflow maintains one pull request comment with the stable preview URL and the immutable deployment URL. Preview builds set `SITE_ENVIRONMENT=preview`, so they emit `noindex, nofollow`. Cloudflare also adds `X-Robots-Tag: noindex` to preview responses. Fork pull requests receive build validation but no credential-backed deployment.
+- `.github/workflows/web-production.yml` builds each push to `main`, checks the SEO output, and deploys to the production branch. Explicitly dispatched catalogue publications also dispatch this workflow after a successful publication; this covers automated merges without causing a second deployment for ordinary pushes.
+
+Builds need the repository variable `NEXT_PUBLIC_SITE_URL`, set to the public HTTPS origin without a path. Without it, production output is non-indexable and the SEO check fails. The repository secrets `CLOUDFLARE_API_TOKEN` (with Cloudflare Pages edit permission) and `CLOUDFLARE_ACCOUNT_ID` are required. The token used for catalogue publication needs the Pages permission added if it was previously scoped only to R2.
+
+One-time Cloudflare setup (use a Direct Upload project without a connected Git integration, so Cloudflare and GitHub Actions do not both deploy):
+
+```sh
+bunx wrangler pages project create free-models --production-branch main
+```
+
+Then attach the production domain in the Cloudflare Pages project settings.
+
+To serve the built output locally with the same header and redirect rules as Cloudflare, run `bun run build` and then `bun run start`.
+
+`public/_headers` sets cache policies for fingerprinted assets and the content type for the extensionless OpenGraph image. `public/_redirects` serves the compare shell for `/compare/<model>/...` URLs, which are read in the browser, while preserving Next.js route manifests.
 
 ## Brand logos
 

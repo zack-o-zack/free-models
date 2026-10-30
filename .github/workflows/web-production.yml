@@ -1,0 +1,70 @@
+name: Deploy web production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: web-production
+  cancel-in-progress: false
+
+jobs:
+  production:
+    name: Build and deploy production
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+      SITE_ENVIRONMENT: production
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun ci
+
+      - name: Build static export
+        run: bun run --filter web build
+
+      - name: Verify static production artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f apps/web/out/index.html
+          test -f apps/web/out/compare.html
+          test -f apps/web/out/_headers
+          test -f apps/web/out/_redirects
+
+      - name: Check production SEO output
+        run: bun run --filter web seo:check
+
+      - name: Resolve deployment revision
+        id: revision
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          packageManager: bun
+          workingDirectory: apps/web
+          gitHubToken: ${{ github.token }}
+          command: >-
+            pages deploy out
+            --project-name=free-models
+            --branch=main
+            --commit-hash=${{ steps.revision.outputs.sha }}
+            --commit-dirty=true

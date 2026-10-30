@@ -18,8 +18,8 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import {
   PolarAngleAxis,
   PolarGrid,
@@ -109,8 +109,7 @@ const faqs = [
   },
 ];
 
-function useCompareState(models: ModelSummary[], initialModelIds?: string[]) {
-  const router = useRouter();
+function useCompareState(models: ModelSummary[]) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -119,10 +118,13 @@ function useCompareState(models: ModelSummary[], initialModelIds?: string[]) {
   const requestedIds = useMemo(() => {
     const pathIds = parseComparePathname(pathname);
     if (pathIds.length > 0) return pathIds;
-    const queryIds = parseCompareModelIds(search);
-    if (queryIds.length > 0) return queryIds;
-    return initialModelIds ?? [];
-  }, [pathname, search, initialModelIds]);
+    return parseCompareModelIds(search);
+  }, [pathname, search]);
+
+  useEffect(() => {
+    if (pathname !== "/compare" || requestedIds.length === 0) return;
+    window.history.replaceState(null, "", compareHref(requestedIds, parseHighlightBest(search)));
+  }, [pathname, requestedIds, search]);
 
   const selectedModels = useMemo(() => {
     const byId = new Map(models.map((model) => [model.id, model]));
@@ -136,7 +138,7 @@ function useCompareState(models: ModelSummary[], initialModelIds?: string[]) {
 
   function replaceState(ids: string[], highlight = highlightBest) {
     const nextHref = compareHref(ids, highlight);
-    router.replace(nextHref, { scroll: false });
+    window.history.replaceState(null, "", nextHref);
   }
 
   return {
@@ -1144,13 +1146,7 @@ function CompareTable({
   );
 }
 
-export function ModelCompare({
-  models,
-  initialModelIds,
-}: {
-  models: ModelSummary[];
-  initialModelIds?: string[];
-}) {
+export function ModelCompare({ models }: { models: ModelSummary[] }) {
   const {
     requestedIds,
     selectedModels,
@@ -1160,7 +1156,7 @@ export function ModelCompare({
     removeModel,
     replaceModel,
     setHighlightBest,
-  } = useCompareState(models, initialModelIds);
+  } = useCompareState(models);
 
   const [pickerOpen, setPickerOpen] = useState(false);
 

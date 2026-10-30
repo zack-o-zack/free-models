@@ -1,10 +1,11 @@
 import Link from "next/link";
 
+import { JsonLd } from "@/components/json-ld";
 import { PageBreadcrumbs } from "@/components/page-breadcrumbs";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getModels } from "@/lib/model-data";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, termsJsonLd } from "@/lib/seo";
 import { termsData } from "@/lib/terms-data";
 
 export const dynamic = "force-static";
@@ -24,6 +25,7 @@ export default async function TermsPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={termsJsonLd(termsDescription)} />
       <SiteHeader modelCount={models.length} githubStars={githubStars} />
 
       <main id="top" tabIndex={-1}>
@@ -34,6 +36,9 @@ export default async function TermsPage() {
               Terms &amp; Conditions
             </h1>
             <p data-page-description className="mt-3 text-sm text-muted-foreground sm:text-base">
+              {termsDescription}
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground">
               Last updated: {termsData.lastUpdated}
             </p>
           </div>

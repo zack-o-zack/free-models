@@ -6,7 +6,7 @@
     "catalogue:render": "bun ../../packages/json/src/cli.ts render --workspace ../../packages/json --output .generated/free-models.json && bun ../../packages/json/src/cli.ts changelog --workspace ../../packages/json --output .generated/changelog.json",
     "dev": "bun run catalogue:render && next dev",
     "build": "bun run catalogue:render && next build",
-    "start": "next start",
+    "start": "wrangler pages dev out",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "logos:sync": "bun scripts/sync-brand-logos.ts",
@@ -14,8 +14,6 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
-    "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cn": "^0.5.0",
@@ -38,7 +36,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "4.156.0"
   },
   "packageManager": "bun@1.4.0",
   "ignoreScripts": [

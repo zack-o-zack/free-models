@@ -14,6 +14,7 @@ import {
   cataloguePageTitle,
 } from "@/lib/catalogue-pagination";
 import { homeTitle, siteConfig, socialImageAlt } from "@/lib/config";
+import { modelDisplayName } from "@/lib/model-format";
 import { modelHref } from "@/lib/model-path";
 import { sortCatalogue } from "@/lib/model-sort";
 import type { ModelSummary } from "@/lib/model-types";
@@ -40,7 +41,7 @@ if (
 }
 
 export const siteUrl = origin.origin;
-export const isIndexable = Boolean(configuredUrl) && process.env.VERCEL_ENV !== "preview";
+export const isIndexable = Boolean(configuredUrl) && process.env.SITE_ENVIRONMENT !== "preview";
 export { homeDescription, homeTitle, modelDescription };
 
 export function absoluteUrl(path: string): string {
@@ -142,7 +143,7 @@ export function catalogueJsonLd(
       itemListElement: sortCatalogue(models).map((model, index) => ({
         "@type": "ListItem",
         position: (page - 1) * CATALOGUE_PAGE_SIZE + index + 1,
-        name: model.name,
+        name: modelDisplayName(model),
         url: absoluteUrl(modelHref(model.id)),
       })),
     },
@@ -158,14 +159,14 @@ export function modelJsonLd(model: ModelSummary) {
         "@type": "WebPage",
         "@id": url,
         url,
-        name: model.name,
+        name: modelDisplayName(model),
         description: modelDescription(model),
         inLanguage: "en",
         isPartOf: { "@id": absoluteUrl("/#website") },
         breadcrumb: { "@id": `${url}#breadcrumb` },
         about: {
           "@type": "Thing",
-          name: model.name,
+          name: modelDisplayName(model),
           description: model.description,
         },
       },
@@ -203,7 +204,7 @@ export function entityJsonLd(entity: CatalogueEntity, kind: EntityKind) {
         .map((model, index) => ({
           "@type": "ListItem",
           position: index + 1,
-          name: model.name,
+          name: modelDisplayName(model),
           url: absoluteUrl(modelHref(model.id)),
         })),
     },
@@ -227,6 +228,33 @@ export function changelogJsonLd() {
         { "@type": "ListItem", position: 2, name: "Changelog", item: url },
       ],
     },
+  };
+}
+
+export function termsJsonLd(description: string) {
+  const url = absoluteUrl("/terms");
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": url,
+        url,
+        name: "Terms & Conditions",
+        description: contentSnippet(description),
+        inLanguage: "en",
+        isPartOf: { "@id": absoluteUrl("/#website") },
+        breadcrumb: { "@id": `${url}#breadcrumb` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+          { "@type": "ListItem", position: 2, name: "Terms & Conditions", item: url },
+        ],
+      },
+    ],
   };
 }
 
