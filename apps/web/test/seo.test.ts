@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
 import { modelHref, modelIdFromRouteSegments, modelRouteSegments } from "../src/lib/model-path";
-import { homeDescription, modelDescription, serializeJsonLd } from "../src/lib/seo";
+import { homeDescription, isPreviewBuild, modelDescription, serializeJsonLd } from "../src/lib/seo";
 
 describe("SEO catalogue boundaries", () => {
   test.each(["google/gemini-2.5-pro", "stealth:alpha", "publisher/model with spaces:free"])(
@@ -80,5 +80,18 @@ describe("SEO catalogue boundaries", () => {
     expect(description).toStartWith("Publisher:");
     expect(description).toContain("A model for translation.");
     expect(description).not.toContain("  ");
+  });
+});
+
+describe("preview detection", () => {
+  test("explicit SITE_ENVIRONMENT wins", () => {
+    expect(isPreviewBuild({ SITE_ENVIRONMENT: "preview", WORKERS_CI_BRANCH: "main" })).toBe(true);
+    expect(isPreviewBuild({ SITE_ENVIRONMENT: "production", WORKERS_CI_BRANCH: "x" })).toBe(false);
+  });
+
+  test("Workers Builds branch decides when unset", () => {
+    expect(isPreviewBuild({ WORKERS_CI_BRANCH: "main" })).toBe(false);
+    expect(isPreviewBuild({ WORKERS_CI_BRANCH: "feat/x" })).toBe(true);
+    expect(isPreviewBuild({})).toBe(false);
   });
 });

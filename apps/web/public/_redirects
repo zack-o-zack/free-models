@@ -2,4 +2,4 @@
 /compare/__next* /compare/__next:splat 200
 # Compare selections live in the path and are read in the browser. Serve the
 # prerendered compare shell for any /compare/<model>/... URL.
-/compare/* /compare.html 200
+/compare/* /compare 200

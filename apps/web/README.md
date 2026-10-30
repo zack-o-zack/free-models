@@ -45,20 +45,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deployment
 
-The site is a fully prerendered static export (`output: "export"`), written to `out/`. It is hosted on Cloudflare Pages and deployed by GitHub Actions. Nothing runs on a server at request time.
+The site is a fully prerendered static export (`output: "export"`), written to `out/`. It is served as an assets-only Cloudflare Worker named `free-models`, configured in `wrangler.jsonc`. The Worker has no main script, so every request is a static asset request. Nothing runs on a server at request time.
 
-- `.github/workflows/web-preview.yml` builds each pull request from this repository and deploys it to `https://pr-<number>.free-models.pages.dev`. The workflow maintains one pull request comment with the stable preview URL and the immutable deployment URL. Preview builds set `SITE_ENVIRONMENT=preview`, so they emit `noindex, nofollow`. Cloudflare also adds `X-Robots-Tag: noindex` to preview responses. Fork pull requests receive build validation but no credential-backed deployment.
-- `.github/workflows/web-production.yml` builds each push to `main`, checks the SEO output, and deploys to the production branch. Explicitly dispatched catalogue publications also dispatch this workflow after a successful publication; this covers automated merges without causing a second deployment for ordinary pushes.
+Cloudflare Workers Builds, connected to this repository, builds and deploys the site. GitHub Actions do not deploy it.
 
-Builds need the repository variable `NEXT_PUBLIC_SITE_URL`, set to the public HTTPS origin without a path. Without it, production output is non-indexable and the SEO check fails. The repository secrets `CLOUDFLARE_API_TOKEN` (with Cloudflare Pages edit permission) and `CLOUDFLARE_ACCOUNT_ID` are required. The token used for catalogue publication needs the Pages permission added if it was previously scoped only to R2.
+Configure these settings in the Cloudflare dashboard under Workers & Pages > free-models > Settings > Build:
 
-One-time Cloudflare setup (use a Direct Upload project without a connected Git integration, so Cloudflare and GitHub Actions do not both deploy):
+| Setting                               | Value                               |
+| ------------------------------------- | ----------------------------------- |
+| Production branch                     | `main`                              |
+| Root directory                        | `apps/web`                          |
+| Build command                         | `bun run build`                     |
+| Deploy command                        | `npx wrangler deploy`               |
+| Non-production branch deploy command | `npx wrangler versions upload`      |
+| Branch control                        | Enable preview builds               |
+| Build variable `NEXT_PUBLIC_SITE_URL` | Public HTTPS origin, without a path |
 
-```sh
-bunx wrangler pages project create free-models --production-branch main
-```
-
-Then attach the production domain in the Cloudflare Pages project settings.
+Do not set `SITE_ENVIRONMENT` in the dashboard. Workers Builds sets `WORKERS_CI_BRANCH`, and any branch other than `main` is treated as a preview: it emits `noindex, nofollow` and `Disallow: /`. Without `NEXT_PUBLIC_SITE_URL`, production output is non-indexable. `bun run seo:check` is a manual check of production output; no deploy step runs it.
 
 To serve the built output locally with the same header and redirect rules as Cloudflare, run `bun run build` and then `bun run start`.
 
