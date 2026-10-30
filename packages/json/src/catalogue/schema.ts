@@ -1,25 +1,27 @@
 import { z } from "zod";
 
-export const CATALOGUE_SCHEMA_VERSION = 4;
+export const CATALOGUE_SCHEMA_VERSION = 4 as const;
 
-export const jsonPrimitiveSchema = z.union([z.string(), z.number(), z.boolean(), z.null()]);
-export type JsonPrimitive = z.infer<typeof jsonPrimitiveSchema>;
-
-export type JsonValue = JsonPrimitive | JsonObject | JsonArray;
-export interface JsonObject {
-  [key: string]: JsonValue;
-}
-export type JsonArray = JsonValue[];
+export type JsonValue =
+  | boolean
+  | null
+  | number
+  | string
+  | JsonValue[]
+  | { [key: string]: JsonValue };
 
 export const jsonValueSchema: z.ZodType<JsonValue> = z.lazy(() =>
-  z.union([jsonPrimitiveSchema, z.record(z.string(), jsonValueSchema), z.array(jsonValueSchema)]),
+  z.union([
+    z.boolean(),
+    z.null(),
+    z.number().finite(),
+    z.string(),
+    z.array(jsonValueSchema),
+    z.record(z.string(), jsonValueSchema),
+  ]),
 );
 
-export const jsonObjectSchema: z.ZodType<Record<string, JsonValue>> = z.record(
-  z.string(),
-  jsonValueSchema,
-);
-
+export const jsonObjectSchema = z.record(z.string(), jsonValueSchema);
 export const providerIdSchema = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const canonicalModelIdSchema = z
   .string()
