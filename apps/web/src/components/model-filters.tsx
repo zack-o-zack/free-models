@@ -8,6 +8,7 @@ import {
   File,
   FileText,
   ImageIcon,
+  Shield,
   Type,
   Video,
 } from "lucide-react";
@@ -22,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
+import type { RegionFilterOption } from "@/lib/model-filter-options";
 import { formatContext } from "@/lib/model-format";
 import type { ProviderDoc } from "@/lib/model-types";
 
@@ -44,6 +46,10 @@ interface ModelFiltersProps {
   selectedInputs: string[];
   selectedPublishers: string[];
   selectedProviders: string[];
+  selectedRegions: string[];
+  regionOptions: RegionFilterOption[];
+  zdrOnly: boolean;
+  zdrCount?: number;
   contextRange: [number, number];
   contextSteps: number[];
   inputOptions: Array<{ value: string; label: string }>;
@@ -55,6 +61,8 @@ interface ModelFiltersProps {
   onToggleInput: (modality: string) => void;
   onTogglePublisher: (publisher: string) => void;
   onToggleProvider: (provider: string) => void;
+  onToggleRegion: (region: string) => void;
+  onToggleZdr: () => void;
   onContextRangeChange: (range: [number, number]) => void;
   onClear: () => void;
 }
@@ -74,6 +82,10 @@ export function ModelFilters({
   selectedInputs,
   selectedPublishers,
   selectedProviders,
+  selectedRegions,
+  regionOptions,
+  zdrOnly,
+  zdrCount,
   contextRange,
   contextSteps,
   inputOptions,
@@ -85,6 +97,8 @@ export function ModelFilters({
   onToggleInput,
   onTogglePublisher,
   onToggleProvider,
+  onToggleRegion,
+  onToggleZdr,
   onContextRangeChange,
   onClear,
 }: ModelFiltersProps) {
@@ -107,7 +121,7 @@ export function ModelFilters({
 
       <Accordion
         className="min-h-0 flex-1"
-        defaultValue={["context", "inputs", "publishers", "providers"]}
+        defaultValue={["context", "privacy", "regions", "inputs", "providers", "publishers"]}
         multiple
       >
         <AccordionItem value="context">
@@ -141,6 +155,58 @@ export function ModelFilters({
               </span>
               <span>{formatStepLabel(contextSteps[contextSteps.length - 1])}</span>
             </div>
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="privacy">
+          <AccordionTrigger>Data privacy</AccordionTrigger>
+          <AccordionContent className="grid gap-3 px-1 pt-1">
+            <label
+              className="flex cursor-pointer items-center gap-3 text-sm font-medium text-muted-foreground hover:text-foreground"
+              htmlFor={`${idPrefix}-privacy-zdr`}
+            >
+              <Checkbox
+                checked={zdrOnly}
+                id={`${idPrefix}-privacy-zdr`}
+                onCheckedChange={onToggleZdr}
+              />
+              <Shield className="size-4 text-emerald-600 dark:text-emerald-400 stroke-[1.8] shrink-0" />
+              <div className="flex flex-col min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-foreground">Zero Data Retention</span>
+                  {typeof zdrCount === "number" && (
+                    <span className="text-xs font-mono text-muted-foreground">{zdrCount}</span>
+                  )}
+                </div>
+                <span className="text-[11px] font-normal text-muted-foreground">
+                  Prompts and outputs are never stored
+                </span>
+              </div>
+            </label>
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="regions">
+          <AccordionTrigger>Hosting region</AccordionTrigger>
+          <AccordionContent className="grid gap-3 px-1 pt-1">
+            {regionOptions.map(({ value, label, flag, count }) => (
+              <label
+                className="flex cursor-pointer items-center gap-3 text-sm font-medium text-muted-foreground hover:text-foreground"
+                htmlFor={`${idPrefix}-region-${value}`}
+                key={value}
+              >
+                <Checkbox
+                  checked={selectedRegions.includes(value)}
+                  id={`${idPrefix}-region-${value}`}
+                  onCheckedChange={() => onToggleRegion(value)}
+                />
+                <span className="text-base select-none leading-none" role="img" aria-label={label}>
+                  {flag}
+                </span>
+                <span className="min-w-0 flex-1 truncate">{label}</span>
+                <span className="text-xs font-mono text-muted-foreground">{count}</span>
+              </label>
+            ))}
           </AccordionContent>
         </AccordionItem>
 

@@ -27,6 +27,17 @@
           "250 req / hour",
           "100k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "description": "Responses may be cached up to 5 minutes",
+        "conditional": true
       }
     },
     {
@@ -48,6 +59,17 @@
           "250 req / hour",
           "100k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "description": "Responses may be cached up to 5 minutes",
+        "conditional": true
       }
     },
     {
@@ -69,6 +91,17 @@
           "250 req / hour",
           "100k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "description": "Responses may be cached up to 5 minutes",
+        "conditional": true
       }
     },
     {
@@ -90,6 +123,17 @@
           "250 req / hour",
           "100k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "description": "Responses may be cached up to 5 minutes",
+        "conditional": true
       }
     },
     {
@@ -111,6 +155,17 @@
           "250 req / hour",
           "100k tok / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "description": "Responses may be cached up to 5 minutes",
+        "conditional": true
       }
     }
   ]

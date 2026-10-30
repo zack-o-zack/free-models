@@ -7,6 +7,7 @@ import {
   type OfferLimits,
   type ProviderDoc,
 } from "../catalogue/schema.ts";
+import { resolveCommandCodeCompliance } from "./commandcode-policies.ts";
 import { formatLimitTerm, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
@@ -78,6 +79,7 @@ export class CommandCodeProvider implements ModelProvider {
           name: modelName,
           connection,
           limits: matchCommandCodeLimits(modelId, deals),
+          compliance: resolveCommandCodeCompliance(modelId),
         };
       })
       .sort((left, right) => compareStrings(left.model_id, right.model_id));

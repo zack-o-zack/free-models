@@ -1,5 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
 import type { DiscoveredOffer, JsonValue, OfferLimits, ProviderDoc } from "../catalogue/schema.ts";
+import { resolveGroqCompliance } from "./groq-policies.ts";
 import { formatLimitTerm, parseCompactInteger, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
@@ -65,6 +66,7 @@ export class GroqProvider implements ModelProvider {
         name: desluggifyModelId(modelId),
         connection,
         limits: groqOfferLimits(rateLimits),
+        compliance: resolveGroqCompliance(modelId),
       }));
   }
 }

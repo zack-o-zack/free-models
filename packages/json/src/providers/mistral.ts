@@ -6,6 +6,7 @@ import {
   type ProviderDoc,
 } from "../catalogue/schema.ts";
 import { mistralUnconfirmedLimits } from "./limits.ts";
+import { resolveMistralCompliance } from "./mistral-policies.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
@@ -72,6 +73,7 @@ export class MistralProvider implements ModelProvider {
         name: modelName,
         connection,
         limits: mistralUnconfirmedLimits(),
+        compliance: resolveMistralCompliance(modelId),
       };
     });
   }

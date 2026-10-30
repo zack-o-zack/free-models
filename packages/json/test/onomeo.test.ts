@@ -6,6 +6,7 @@ import {
   ONOMEO_INFO_URL,
   OnomeoProvider,
 } from "../src/providers/onomeo.ts";
+import { ONOMEO_COMPLIANCE } from "../src/providers/onomeo-policies.ts";
 
 test("discovers free models and skips routing endpoints", async () => {
   const provider = new OnomeoProvider({
@@ -31,6 +32,7 @@ test("discovers free models and skips routing endpoints", async () => {
     auth: { env: ["ONOMEO_API_KEY"] },
   });
   expect(offers[0]?.limits.terms).toEqual(["12 req / min", "30 req / 5 hr"]);
+  expect(offers[0]?.compliance).toEqual(ONOMEO_COMPLIANCE);
 });
 
 test("returns hardcoded published Onomeo limits", () => {

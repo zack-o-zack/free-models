@@ -5,6 +5,7 @@ import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchJson, fetchText } from "./source.ts";
 
 import { parseVercelCatalogue } from "./vercel-catalogue.ts";
+import { resolveVercelCompliance } from "./vercel-policies.ts";
 
 export const VERCEL_CATALOGUE_URL = "https://vercel.com/ai-gateway/models?freeTier=true";
 export const VERCEL_API_BASE_URL = "https://ai-gateway.vercel.sh/v1";
@@ -65,6 +66,11 @@ export class VercelProvider implements ModelProvider {
       .filter((model) => model.availableToFreeTier || zeroPriceIds.has(model.copyString))
       .map((model) => {
         const noCredits = zeroPriceIds.has(model.copyString);
+        const funding = noCredits ? ("no_credits" as const) : ("monthly_credits" as const);
+        const compliance = resolveVercelCompliance({
+          modelId: model.copyString,
+          funding,
+        });
         return {
           model_id: model.copyString,
           name: model.displayName,
@@ -78,6 +84,7 @@ export class VercelProvider implements ModelProvider {
             funding: noCredits ? ("no_credits" as const) : ("monthly_credits" as const),
             terms: noCredits ? ["Free — no credits used"] : ["Free with $5 monthly credits"],
           },
+          ...(compliance ? { compliance } : {}),
         };
       });
   }

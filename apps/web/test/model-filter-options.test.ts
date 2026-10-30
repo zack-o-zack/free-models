@@ -19,11 +19,62 @@ test("filters expose new catalogue values without configured options or context 
 });
 
 test("empty catalogues and missing context have a safe unfiltered range", () => {
-  expect(getModelFilterOptions([])).toEqual({ inputs: [], outputs: [], contextSteps: [0] });
+  expect(getModelFilterOptions([])).toEqual({
+    inputs: [],
+    outputs: [],
+    contextSteps: [0],
+    regions: [],
+    zdrCount: 0,
+  });
   expect(
     getModelFilterOptions([
       { inputModalities: [], outputModalities: [], contextLength: 0 },
       { inputModalities: [], outputModalities: [], contextLength: Number.NaN },
     ]).contextSteps,
   ).toEqual([0]);
+});
+
+test("computes region and ZDR counts from model connections", () => {
+  const options = getModelFilterOptions([
+    {
+      id: "model-zdr",
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+      contextLength: 4096,
+      connections: [
+        {
+          provider: "cloudflare",
+          compliance: {
+            zdr: true,
+            noTraining: true,
+            dataRetention: false,
+            countries: ["US", "EU"],
+          },
+        },
+      ],
+    },
+    {
+      id: "model-retained",
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+      contextLength: 8192,
+      connections: [
+        {
+          provider: "groq",
+          compliance: {
+            zdr: false,
+            noTraining: true,
+            dataRetention: true,
+            countries: ["US"],
+          },
+        },
+      ],
+    },
+  ]);
+
+  expect(options.zdrCount).toBe(1);
+  expect(options.regions).toEqual([
+    { value: "US", label: "United States", flag: "🇺🇸", count: 2 },
+    { value: "EU", label: "European Union", flag: "🇪🇺", count: 1 },
+  ]);
 });

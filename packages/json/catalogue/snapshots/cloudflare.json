@@ -25,6 +25,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -44,6 +58,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -63,6 +91,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -82,6 +124,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -101,6 +157,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -120,6 +190,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -139,6 +223,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -158,6 +256,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -177,6 +289,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -196,6 +322,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -215,6 +355,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -234,6 +388,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -253,6 +421,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -272,6 +454,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -291,6 +487,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -310,6 +520,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -329,6 +553,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -348,6 +586,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -367,6 +619,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -386,6 +652,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -405,6 +685,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -424,6 +718,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -443,6 +751,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -462,6 +784,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -481,6 +817,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -500,6 +850,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -519,6 +883,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -538,6 +916,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -557,6 +949,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -576,6 +982,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -595,6 +1015,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -614,6 +1048,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -633,6 +1081,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -652,6 +1114,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -671,6 +1147,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -690,6 +1180,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -709,6 +1213,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -728,6 +1246,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -747,6 +1279,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -766,6 +1312,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -785,6 +1345,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -804,6 +1378,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -823,6 +1411,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -842,6 +1444,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -861,6 +1477,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -880,6 +1510,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -899,6 +1543,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -918,6 +1576,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -937,6 +1609,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -956,6 +1642,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -975,6 +1675,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -994,6 +1708,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1013,6 +1741,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1032,6 +1774,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1051,6 +1807,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1070,6 +1840,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1089,6 +1873,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1108,6 +1906,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1127,6 +1939,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1146,6 +1972,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1165,6 +2005,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1184,6 +2038,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     },
     {
@@ -1203,6 +2071,20 @@
         "terms": [
           "10k neurons / day"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "edge": true,
+        "description": "Zero data retention and no model training on edge GPUs"
       }
     }
   ]

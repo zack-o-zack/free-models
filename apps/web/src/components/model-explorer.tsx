@@ -2,33 +2,32 @@
 
 import type { LucideIcon } from "lucide-react";
 import {
-  ArrowLeftRight,
   AudioLines,
   ChartColumn,
   Database,
   GitBranch,
-  History,
-  Image as ImageIcon,
-  LayoutGrid,
+  Grid,
+  ImageIcon,
   LayoutList,
   Mic,
-  Search,
   SlidersHorizontal,
-  TableProperties,
-  TextIcon,
+  Table as TableIcon,
+  Text as TextIcon,
   Video,
 } from "lucide-react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import type { ProviderFilterOption, PublisherFilterOption } from "@/components/model-filters";
 import { ProgressiveModelList } from "@/components/progressive-model-list";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Sheet,
   SheetContent,
@@ -38,18 +37,17 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { EntityKind } from "@/lib/catalogue-entities";
 import { getModelFilterOptions } from "@/lib/model-filter-options";
 import {
   compareModels,
   defaultModelDirection,
   defaultModelSort,
-  defaultSortDirection,
   type SortDirection,
   type SortOption,
 } from "@/lib/model-sort";
 import type { CatalogueModel } from "@/lib/model-types";
+import { getModelCountries, modelHasZdr } from "@/lib/provider-compliance";
 import { getProviderName } from "@/lib/provider-logos";
 
 const ModelFilters = dynamic(() =>
@@ -111,10 +109,14 @@ export function ModelExplorer({
   const [selectedInputs, setSelectedInputs] = useState<string[]>([]);
   const [selectedPublishers, setSelectedPublishers] = useState<string[]>([]);
   const [selectedProviders, setSelectedProviders] = useState<string[]>([]);
+  const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+  const [zdrOnly, setZdrOnly] = useState(false);
   const {
     inputs: inputOptions,
     outputs,
     contextSteps,
+    regions: regionOptions,
+    zdrCount,
   } = useMemo(() => getModelFilterOptions(models), [models]);
   const [selectedContextRange, setContextRange] = useState<[number, number] | null>(null);
   const contextRange = useMemo<[number, number]>(
@@ -172,6 +174,8 @@ export function ModelExplorer({
     selectedInputs.length +
     selectedPublishers.length +
     selectedProviders.length +
+    selectedRegions.length +
+    (zdrOnly ? 1 : 0) +
     (isContextFiltered ? 1 : 0);
 
   const totalCounts = useMemo(() => {
@@ -213,13 +217,23 @@ export function ModelExplorer({
         (model.contextLength >= minContext &&
           (contextRange[1] === contextSteps.length - 1 || model.contextLength <= maxContext));
 
+      const matchesZdr = !zdrOnly || modelHasZdr(model, selectedProviders);
+
+      const matchesRegion =
+        selectedRegions.length === 0 ||
+        getModelCountries(model, selectedProviders).some((country) =>
+          selectedRegions.includes(country),
+        );
+
       return (
         (normalizedQuery.length === 0 || searchable.includes(normalizedQuery)) &&
         selectedInputs.every((modality) => model.inputModalities.includes(modality)) &&
         (selectedPublishers.length === 0 || selectedPublishers.includes(model.id.split("/")[0])) &&
         (selectedProviders.length === 0 ||
           selectedProviders.some((provider) => model.providers.includes(provider))) &&
-        matchesContext
+        matchesContext &&
+        matchesZdr &&
+        matchesRegion
       );
     });
   }, [
@@ -230,6 +244,8 @@ export function ModelExplorer({
     selectedInputs,
     selectedProviders,
     selectedPublishers,
+    selectedRegions,
+    zdrOnly,
   ]);
 
   const counts = useMemo(() => {
@@ -275,10 +291,22 @@ export function ModelExplorer({
     );
   }
 
+  function toggleRegion(region: string) {
+    setSelectedRegions((current) =>
+      current.includes(region) ? current.filter((value) => value !== region) : [...current, region],
+    );
+  }
+
+  function toggleZdr() {
+    setZdrOnly((current) => !current);
+  }
+
   function clearFilters() {
     setSelectedInputs([]);
     setSelectedPublishers([]);
     setSelectedProviders([]);
+    setSelectedRegions([]);
+    setZdrOnly(false);
     setContextRange(null);
   }
 
@@ -286,6 +314,10 @@ export function ModelExplorer({
     selectedInputs,
     selectedPublishers,
     selectedProviders,
+    selectedRegions,
+    regionOptions,
+    zdrOnly,
+    zdrCount,
     contextRange,
     contextSteps,
     inputOptions,
@@ -297,6 +329,8 @@ export function ModelExplorer({
     onToggleInput: toggleInput,
     onTogglePublisher: togglePublisher,
     onToggleProvider: toggleProvider,
+    onToggleRegion: toggleRegion,
+    onToggleZdr: toggleZdr,
     onContextRangeChange: setContextRange,
     onClear: clearFilters,
   };
@@ -328,192 +362,160 @@ export function ModelExplorer({
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                <Button
-                  render={<Link href="/compare" />}
-                  nativeButton={false}
-                  variant="outline"
-                  className="gap-2"
-                >
-                  <ArrowLeftRight aria-hidden="true" className="size-4" />
-                  <span>Compare</span>
-                </Button>
-                <Tooltip>
-                  <TooltipTrigger
-                    render={
-                      <Button
-                        render={<Link href="/changelog" />}
-                        nativeButton={false}
-                        variant="outline"
-                        size="icon"
-                        aria-label="Changelog"
-                      />
-                    }
-                  >
-                    <History aria-hidden="true" className="size-4" />
-                  </TooltipTrigger>
-                  <TooltipContent>Changelog</TooltipContent>
-                </Tooltip>
-                <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
-                  <SheetTrigger
-                    render={
-                      <Button className={view === "list" ? "lg:hidden" : ""} variant="outline">
-                        <SlidersHorizontal /> Filters
-                        {activeFilterCount > 0 && (
-                          <Badge className="ml-1" variant="secondary">
-                            {activeFilterCount}
-                          </Badge>
-                        )}
-                      </Button>
-                    }
+                <div className="w-full sm:w-64">
+                  <Input
+                    className="h-10"
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="Search by name, ID, provider, publisher..."
+                    value={query}
                   />
-                  <SheetContent side="left" className="w-[min(88vw,360px)]">
-                    <SheetHeader>
-                      <SheetTitle>Filter models</SheetTitle>
-                      <SheetDescription>
-                        Filter by input type, provider, and context size.
-                      </SheetDescription>
-                    </SheetHeader>
-                    <ScrollArea className="min-h-0 flex-1 px-4 pb-4">
-                      {filtersOpen && <ModelFilters {...filterProps} idPrefix="mobile" />}
-                    </ScrollArea>
-                  </SheetContent>
-                </Sheet>
-              </div>
-            </div>
-
-            <div className="mb-5 grid grid-cols-[minmax(0,1fr)_auto] gap-3 md:grid-cols-[minmax(220px,1fr)_190px_auto]">
-              <div className="relative col-span-2 md:col-span-1">
-                <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  aria-label="Search models"
-                  className="pl-11"
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Search models..."
-                  value={query}
-                />
-              </div>
-              <Select
-                value={sort}
-                onValueChange={(value) => {
-                  const next = value as SortOption;
-                  setSort(next);
-                  setDirection(defaultSortDirection(next));
-                }}
-              >
-                <SelectTrigger className="w-full" aria-label="Sort models">
-                  <span className="truncate">
-                    {direction === defaultSortDirection(sort)
-                      ? sortLabels[sort]
-                      : sort === "name"
-                        ? "Name: Z–A"
-                        : sort === "context"
-                          ? "Smallest context"
-                          : `${sortLabels[sort]}: low to high`}
-                  </span>
-                </SelectTrigger>
-                <SelectContent align="start">
-                  <SelectItem value="newest">Newest first</SelectItem>
-                  <SelectItem value="oldest">Oldest first</SelectItem>
-                  <SelectItem value="context">Largest context</SelectItem>
-                  <SelectItem value="name">Name</SelectItem>
-                  <SelectItem value="intelligence">Intelligence score</SelectItem>
-                  <SelectItem value="coding">Coding score</SelectItem>
-                  <SelectItem value="agentic">Agentic score</SelectItem>
-                </SelectContent>
-              </Select>
-              <div className="flex items-center gap-1 rounded-full bg-background p-1">
-                <Button
-                  aria-label="List view"
-                  aria-pressed={view === "list"}
-                  className={
-                    view === "list"
-                      ? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground dark:hover:text-primary-foreground"
-                      : ""
-                  }
-                  onClick={() => setView("list")}
-                  size="icon"
-                  variant="ghost"
-                >
-                  <LayoutList />
-                </Button>
-                <Button
-                  aria-label="Table view"
-                  aria-pressed={view === "table"}
-                  className={
-                    view === "table"
-                      ? "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground dark:hover:text-primary-foreground"
-                      : ""
-                  }
-                  onClick={() => setView("table")}
-                  size="icon"
-                  variant="ghost"
-                >
-                  <TableProperties />
-                </Button>
-              </div>
-            </div>
-
-            <Tabs value={output} onValueChange={(value) => setOutput(String(value))}>
-              <div className="mb-6 w-full overflow-x-auto pb-2 whitespace-nowrap">
-                <TabsList
-                  className="h-auto! min-w-max gap-1 rounded-[24px] bg-background p-1"
-                  variant="default"
-                >
-                  {outputTabs.map(({ value, label }) => {
-                    const Icon = value === "all" ? LayoutGrid : outputIcons[value];
-                    return (
-                      <TabsTrigger
-                        className="h-10 flex-none rounded-[20px] px-4 text-muted-foreground shadow-none! hover:bg-card hover:text-foreground data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-primary-hover data-active:hover:text-primary-foreground dark:hover:bg-card dark:hover:text-foreground dark:data-active:bg-primary dark:data-active:text-primary-foreground dark:data-active:hover:bg-primary-hover dark:data-active:hover:text-primary-foreground"
-                        key={value}
-                        value={value}
-                      >
-                        {Icon && <Icon />}
-                        {label}
-                        <span className="text-xs text-current">{counts[value]}</span>
-                      </TabsTrigger>
+                </div>
+                <Select
+                  value={sort}
+                  onValueChange={(val) => {
+                    const nextSort = val as SortOption;
+                    setSort(nextSort);
+                    setDirection(
+                      nextSort === "newest" ||
+                        nextSort === "context" ||
+                        nextSort === "intelligence" ||
+                        nextSort === "coding" ||
+                        nextSort === "agentic"
+                        ? "descending"
+                        : "ascending",
                     );
-                  })}
-                </TabsList>
+                  }}
+                >
+                  <SelectTrigger aria-label="Sort models by" className="h-10 w-full sm:w-44">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(Object.keys(sortLabels) as SortOption[]).map((option) => (
+                      <SelectItem key={option} value={option}>
+                        {sortLabels[option]}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <div className="hidden items-center gap-1 sm:flex">
+                  <Button
+                    aria-label="List view"
+                    className="size-10"
+                    onClick={() => setView("list")}
+                    size="icon"
+                    variant={view === "list" ? "secondary" : "ghost"}
+                  >
+                    <LayoutList className="size-4" />
+                  </Button>
+                  <Button
+                    aria-label="Table view"
+                    className="size-10"
+                    onClick={() => setView("table")}
+                    size="icon"
+                    variant={view === "table" ? "secondary" : "ghost"}
+                  >
+                    <TableIcon className="size-4" />
+                  </Button>
+                </div>
+                {!desktop && (
+                  <Sheet open={filtersOpen} onOpenChange={setFiltersOpen}>
+                    <SheetTrigger
+                      render={
+                        <Button
+                          aria-label="Open filter settings"
+                          className="relative h-10 gap-2 font-medium"
+                          size="sm"
+                          variant="outline"
+                        >
+                          <SlidersHorizontal /> Filters
+                          {activeFilterCount > 0 && (
+                            <span className="flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                              {activeFilterCount}
+                            </span>
+                          )}
+                        </Button>
+                      }
+                    />
+                    <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+                      <SheetHeader className="pb-4">
+                        <SheetTitle>Filter models</SheetTitle>
+                        <SheetDescription>
+                          Filter by input type, data privacy, hosting region, provider, and context
+                          size.
+                        </SheetDescription>
+                      </SheetHeader>
+                      {filtersOpen && <ModelFilters {...filterProps} idPrefix="mobile" />}
+                    </SheetContent>
+                  </Sheet>
+                )}
               </div>
+            </div>
+
+            <Tabs
+              className="mb-8"
+              onValueChange={setOutput}
+              value={output}
+              data-active-output={output}
+            >
+              <TabsList className="scrollbar-none -mx-4 flex h-auto max-w-[calc(100vw-2rem)] justify-start overflow-x-auto rounded-none border-b border-border/70 bg-transparent px-4 pb-0 pt-0 sm:mx-0 sm:max-w-none sm:px-0">
+                {outputTabs.map((tab) => {
+                  const Icon = outputIcons[tab.value] ?? Grid;
+                  return (
+                    <TabsTrigger
+                      className="group relative flex shrink-0 items-center gap-2 rounded-none border-b-2 border-transparent px-3.5 py-3 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground data-active:border-primary data-active:bg-transparent data-active:text-foreground data-active:shadow-none"
+                      key={tab.value}
+                      value={tab.value}
+                    >
+                      {tab.value !== "all" && (
+                        <Icon className="size-4 shrink-0 transition-transform duration-200 group-hover:scale-110" />
+                      )}
+                      <span>{tab.label}</span>
+                      <span className="rounded-full bg-muted/70 px-1.5 py-0.5 font-code text-[11px] font-normal text-muted-foreground group-data-active:bg-primary/10 group-data-active:text-primary">
+                        {counts[tab.value] ?? 0}
+                      </span>
+                    </TabsTrigger>
+                  );
+                })}
+              </TabsList>
             </Tabs>
 
             {visibleModels.length === 0 ? (
-              <Card className="bg-background py-12 text-center">
-                <CardHeader>
-                  <CardTitle>No matching models</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4 text-muted-foreground">
-                  <p>Try a broader search or remove one of the active filters.</p>
-                  <Button
-                    onClick={() => {
-                      clearFilters();
-                      setQuery("");
-                      setOutput("all");
-                    }}
-                    variant="outline"
-                  >
-                    Reset search and filters
-                  </Button>
-                </CardContent>
-              </Card>
-            ) : view === "list" ? (
-              <ProgressiveModelList models={visibleModels} />
-            ) : (
+              <div className="rounded-[24px] border border-dashed border-border p-12 text-center">
+                <SlidersHorizontal className="mx-auto size-10 text-muted-foreground/60" />
+                <h3 className="mt-4 font-heading text-lg font-bold">
+                  No models match your filters
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Try a broader search or remove one of the active filters.
+                </p>
+                <Button
+                  className="mt-6"
+                  onClick={() => {
+                    setQuery("");
+                    setOutput("all");
+                    clearFilters();
+                  }}
+                  variant="outline"
+                >
+                  Reset search and filters
+                </Button>
+              </div>
+            ) : view === "table" ? (
               <ModelTable
-                models={visibleModels}
-                sort={sort}
                 direction={direction}
-                onSort={(next) => {
-                  setDirection(
-                    next === sort
-                      ? direction === "ascending"
-                        ? "descending"
-                        : "ascending"
-                      : defaultSortDirection(next),
-                  );
-                  setSort(next);
+                models={visibleModels}
+                onSort={(column) => {
+                  if (sort === column) {
+                    setDirection((prev) => (prev === "ascending" ? "descending" : "ascending"));
+                  } else {
+                    setSort(column);
+                    setDirection("descending");
+                  }
                 }}
+                sort={sort}
               />
+            ) : (
+              <ProgressiveModelList models={visibleModels} />
             )}
           </section>
         </div>

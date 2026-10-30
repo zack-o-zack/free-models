@@ -25,6 +25,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -44,6 +58,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -63,6 +91,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -82,6 +124,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -101,6 +157,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -120,6 +190,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -139,6 +223,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -159,6 +257,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -179,6 +291,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -199,6 +325,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -218,6 +358,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -237,6 +391,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -256,6 +424,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -275,6 +457,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -294,6 +490,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -313,6 +523,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -332,6 +556,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -351,6 +589,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -370,6 +622,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -389,6 +655,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -408,6 +688,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "alibaba"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -427,6 +721,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "aws"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -446,6 +754,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "aws"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -465,6 +787,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "aws"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -484,6 +820,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "aws"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -504,6 +854,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "aws"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -543,6 +907,18 @@
           "Free — no credits used"
         ],
         "funding": "no_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "baseten"
+        ],
+        "description": "Upstream provider retains prompts and completions for training"
       }
     },
     {
@@ -563,6 +939,18 @@
           "Free — no credits used"
         ],
         "funding": "no_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "baseten"
+        ],
+        "description": "Upstream provider retains prompts and completions for training"
       }
     },
     {
@@ -978,6 +1366,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -998,6 +1400,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1018,6 +1434,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1038,6 +1468,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1058,6 +1502,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1078,6 +1536,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1098,6 +1570,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1118,6 +1604,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1138,6 +1638,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CA"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1197,6 +1711,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "deepseek"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1216,6 +1744,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "deepseek"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1235,6 +1777,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "deepseek"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1293,6 +1849,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1312,6 +1881,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1332,6 +1914,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1352,6 +1947,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1372,6 +1980,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1392,6 +2013,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1412,6 +2046,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1431,6 +2078,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1451,6 +2111,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1471,6 +2144,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1757,6 +2443,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "meta"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1776,6 +2475,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "meta"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1795,6 +2507,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "meta"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1814,6 +2539,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "meta"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1833,6 +2571,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "meta"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1852,6 +2603,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "meta"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1872,6 +2636,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1892,6 +2670,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1912,6 +2704,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1932,6 +2738,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1952,6 +2772,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1972,6 +2806,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1992,6 +2840,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2012,6 +2874,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2031,6 +2907,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "minimax"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2050,6 +2940,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "minimax"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2069,6 +2973,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "minimax"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2088,6 +3006,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "minimax"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2107,6 +3039,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "minimax"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2126,6 +3072,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "minimax"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2145,6 +3105,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "minimax"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2164,6 +3138,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "minimax"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2183,6 +3171,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2203,6 +3205,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2222,6 +3238,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2241,6 +3271,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2260,6 +3304,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2280,6 +3338,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2299,6 +3371,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2318,6 +3404,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2337,6 +3437,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2356,6 +3470,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2376,6 +3504,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2396,6 +3538,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2416,6 +3572,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "EU",
+          "FR"
+        ],
+        "subprocessors": [
+          "mistral"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2663,6 +3833,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2682,6 +3865,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2701,6 +3897,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2720,6 +3929,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2739,6 +3961,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2758,6 +3993,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2777,6 +4025,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2796,6 +4057,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2815,6 +4089,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2835,6 +4122,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2855,6 +4155,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2874,6 +4187,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2893,6 +4219,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2912,6 +4251,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2931,6 +4283,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2950,6 +4315,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2969,6 +4347,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -2988,6 +4379,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3007,6 +4411,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3026,6 +4443,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3045,6 +4475,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3064,6 +4507,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3083,6 +4539,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3102,6 +4571,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3121,6 +4603,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3141,6 +4636,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3161,6 +4669,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3180,6 +4701,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3199,6 +4733,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3218,6 +4765,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3237,6 +4797,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3257,6 +4830,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3277,6 +4863,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3297,6 +4896,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3317,6 +4929,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3337,6 +4962,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3356,6 +4994,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3375,6 +5026,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3394,6 +5058,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3413,6 +5090,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3432,6 +5122,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3451,6 +5154,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3471,6 +5187,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3491,6 +5220,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3511,6 +5253,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3551,6 +5306,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "perplexity"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3571,6 +5339,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "perplexity"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3591,6 +5372,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "perplexity"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3610,6 +5404,19 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "perplexity"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3629,6 +5436,20 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "poolside"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -3648,6 +5469,19 @@
           "Free — no credits used"
         ],
         "funding": "no_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "poolside"
+        ],
+        "description": "Upstream provider retains prompts and completions for training"
       }
     },
     {

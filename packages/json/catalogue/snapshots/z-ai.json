@@ -22,6 +22,18 @@
         "terms": [
           "Rate limits vary by account; check the Z.ai console"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "SG"
+        ],
+        "subprocessors": [
+          "zhipu"
+        ],
+        "description": "Zero data retention and no model training with Singapore hosting"
       }
     },
     {
@@ -40,6 +52,18 @@
         "terms": [
           "Rate limits vary by account; check the Z.ai console"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "SG"
+        ],
+        "subprocessors": [
+          "zhipu"
+        ],
+        "description": "Zero data retention and no model training with Singapore hosting"
       }
     },
     {
@@ -58,6 +82,18 @@
         "terms": [
           "Rate limits vary by account; check the Z.ai console"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "SG"
+        ],
+        "subprocessors": [
+          "zhipu"
+        ],
+        "description": "Zero data retention and no model training with Singapore hosting"
       }
     }
   ]

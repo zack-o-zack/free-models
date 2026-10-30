@@ -13,6 +13,7 @@ import type {
 } from "../metadata/provider.ts";
 import { formatLimitTerm, termsLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
+import { resolveOpenRouterCompliance } from "./openrouter-policies.ts";
 import type { ModelProvider } from "./provider.ts";
 
 export const OPENROUTER_API_BASE_URL = "https://openrouter.ai/api/v1";
@@ -81,11 +82,16 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
           ? model.name.trim()
           : desluggifyModelId(modelId);
 
+      const compliance = resolveOpenRouterCompliance({
+        modelId,
+      });
+
       offers.push({
         model_id: modelId,
         name: modelName,
         connection,
         limits,
+        ...(compliance ? { compliance } : {}),
       });
     }
 

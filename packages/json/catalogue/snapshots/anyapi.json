@@ -25,6 +25,15 @@
           "100k ANY Tokens / day",
           "Limited API calls (Free plan)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Retention policies vary by upstream provider",
+        "conditional": true
       }
     },
     {
@@ -44,6 +53,15 @@
           "100k ANY Tokens / day",
           "Limited API calls (Free plan)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Retention policies vary by upstream provider",
+        "conditional": true
       }
     },
     {
@@ -63,6 +81,15 @@
           "100k ANY Tokens / day",
           "Limited API calls (Free plan)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Retention policies vary by upstream provider",
+        "conditional": true
       }
     },
     {
@@ -82,6 +109,15 @@
           "100k ANY Tokens / day",
           "Limited API calls (Free plan)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Retention policies vary by upstream provider",
+        "conditional": true
       }
     },
     {
@@ -101,6 +137,15 @@
           "100k ANY Tokens / day",
           "Limited API calls (Free plan)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Retention policies vary by upstream provider",
+        "conditional": true
       }
     }
   ]

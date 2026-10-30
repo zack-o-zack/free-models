@@ -26,6 +26,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "baseten"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -46,6 +58,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "baseten"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -66,6 +90,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "cohere"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -86,6 +122,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "dots-studio"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -106,6 +154,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "fish-audio"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -126,6 +186,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -146,6 +218,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -166,6 +250,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "heygen"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -186,6 +282,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "inception"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -206,6 +314,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "liquid"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -226,6 +346,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "liquid"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -246,6 +378,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -266,6 +410,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -286,6 +442,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -306,6 +474,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -326,6 +506,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -346,6 +538,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -366,6 +570,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -386,6 +602,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -406,6 +634,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -426,6 +666,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -446,6 +698,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -466,6 +730,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -486,6 +762,19 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "poolside"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -506,6 +795,19 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "poolside"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -526,6 +828,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "recursive"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -546,6 +860,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "respan"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -566,6 +892,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "thinkingmachines"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -586,6 +924,18 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "thinkingmachines"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     },
     {
@@ -606,6 +956,19 @@
           "50 req / day (< $10 credits)",
           "1k req / day (>= $10 credits)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "CN"
+        ],
+        "subprocessors": [
+          "xingchen-agi"
+        ],
+        "description": "Free endpoints may log prompts and completions"
       }
     }
   ]

@@ -25,6 +25,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -44,6 +56,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -63,6 +87,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -82,6 +118,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -101,6 +149,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -120,6 +180,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -139,6 +211,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -158,6 +242,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -177,6 +273,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -196,6 +304,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -215,6 +335,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -234,6 +366,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -253,6 +397,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -272,6 +428,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -291,6 +459,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -310,6 +490,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -329,6 +521,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -348,6 +552,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -367,6 +583,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -386,6 +614,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -405,6 +645,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -424,6 +676,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -443,6 +707,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -462,6 +738,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -481,6 +769,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -500,6 +800,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -519,6 +831,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -538,6 +862,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -557,6 +893,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -576,6 +924,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -595,6 +955,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -614,6 +986,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -633,6 +1017,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -652,6 +1048,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -671,6 +1079,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -690,6 +1110,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -709,6 +1141,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -728,6 +1172,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -747,6 +1203,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -766,6 +1234,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -785,6 +1265,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -804,6 +1296,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -823,6 +1327,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -842,6 +1358,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     },
     {
@@ -861,6 +1389,18 @@
           "40 req / min",
           "10k req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
       }
     }
   ]

@@ -8,6 +8,7 @@ import {
 import { routewayPublishedLimits } from "./limits.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
+import { ROUTEWAY_COMPLIANCE } from "./routeway-policies.ts";
 import { type FetchSource, fetchJson } from "./source.ts";
 
 export const ROUTEWAY_API_BASE_URL = "https://api.routeway.ai/v1";
@@ -71,6 +72,7 @@ export class RoutewayProvider implements ModelProvider {
         name: modelName,
         connection,
         limits: routewayPublishedLimits(),
+        compliance: ROUTEWAY_COMPLIANCE,
       };
     });
   }

@@ -2,6 +2,7 @@ import type { DiscoveredOffer, ProviderDoc } from "../catalogue/schema.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { type FetchSource, fetchText } from "./source.ts";
+import { resolveZaiCompliance } from "./zai-policies.ts";
 
 export const ZAI_PRICING_URL = "https://docs.z.ai/guides/overview/pricing";
 export const ZAI_API_BASE_URL = "https://api.z.ai/api/paas/v4";
@@ -31,6 +32,7 @@ export class ZaiProvider implements ModelProvider {
         auth: { env: ["ZAI_API_KEY"] },
       },
       limits: { terms: ["Rate limits vary by account; check the Z.ai console"] },
+      compliance: resolveZaiCompliance(name.toLowerCase()),
     }));
   }
 }

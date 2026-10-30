@@ -24,6 +24,14 @@
         "terms": [
           "No daily request limit (while capacity lasts)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Free models retain prompts up to 30 days"
       }
     },
     {
@@ -42,6 +50,14 @@
         "terms": [
           "No daily request limit (while capacity lasts)"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Free models retain prompts up to 30 days"
       }
     },
     {
@@ -60,6 +76,14 @@
         "terms": [
           "100 req / day"
         ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Free models retain prompts up to 30 days"
       }
     }
   ]

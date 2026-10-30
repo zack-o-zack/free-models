@@ -23,6 +23,19 @@
         "terms": [
           "Rate limits vary by model and account; check the Novita console"
         ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "novita",
+          "aws"
+        ],
+        "description": "API content is not retained and not used for model training"
       }
     }
   ]

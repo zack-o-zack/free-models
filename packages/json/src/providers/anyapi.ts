@@ -1,5 +1,6 @@
 import { desluggifyModelId } from "../catalogue/canonical.ts";
 import type { DiscoveredOffer, ProviderDoc } from "../catalogue/schema.ts";
+import { resolveAnyApiCompliance } from "./anyapi-policies.ts";
 import type { ModelsDevRegistry } from "./models-dev.ts";
 import type { ModelProvider } from "./provider.ts";
 import { createHtmlRewriter, type FetchSource, fetchText, normalizeText } from "./source.ts";
@@ -61,6 +62,7 @@ export class AnyApiProvider implements ModelProvider {
         },
         // ANY Tokens are provider credits, not a model-token quota.
         limits: { terms: ["100k ANY Tokens / day", "Limited API calls (Free plan)"] },
+        compliance: resolveAnyApiCompliance(modelId),
       });
     }
     return offers.sort((left, right) => left.model_id.localeCompare(right.model_id));
