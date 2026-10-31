@@ -73,38 +73,6 @@
       }
     },
     {
-      "model_id": "minimax-m2.7",
-      "name": "Minimax m2.7",
-      "connection": {
-        "auth": {
-          "env": [
-            "LLM7_API_KEY"
-          ]
-        },
-        "base_url": "https://api.llm7.io/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "1 req / sec",
-          "60 req / min",
-          "250 req / hour",
-          "100k tok / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "cloudflare"
-        ],
-        "description": "Responses may be cached up to 5 minutes",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "mistral-Nemo-Instruct-2407",
       "name": "Mistral nemo instruct 2407",
       "connection": {

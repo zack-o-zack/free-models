@@ -9,70 +9,6 @@
   },
   "offers": [
     {
-      "model_id": "baseten/elephant-1:free",
-      "name": "Baseten: Elephant 1 (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "baseten"
-        ],
-        "description": "Free endpoints may log prompts and completions"
-      }
-    },
-    {
-      "model_id": "baseten/mammoth-1:free",
-      "name": "Baseten: Mammoth 1 (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "baseten"
-        ],
-        "description": "Free endpoints may log prompts and completions"
-      }
-    },
-    {
       "model_id": "cohere/north-mini-code:free",
       "name": "Cohere: North Mini Code (free)",
       "connection": {
@@ -265,38 +201,6 @@
       }
     },
     {
-      "model_id": "inception/mercury-decide:free",
-      "name": "Inception: Mercury Decide (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "inception"
-        ],
-        "description": "Free endpoints may log prompts and completions"
-      }
-    },
-    {
       "model_id": "liquid/lfm-2.5-2.6b:free",
       "name": "LiquidAI: LFM2.5-2.6B (free)",
       "connection": {
@@ -459,38 +363,6 @@
     {
       "model_id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       "name": "NVIDIA: Nemotron 3 Nano Omni (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "nvidia"
-        ],
-        "description": "Free endpoints may log prompts and completions"
-      }
-    },
-    {
-      "model_id": "nvidia/nemotron-3-super-120b-a12b:free",
-      "name": "NVIDIA: Nemotron 3 Super (free)",
       "connection": {
         "auth": {
           "env": [

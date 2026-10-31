@@ -37,8 +37,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -70,8 +70,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -103,8 +103,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -136,8 +136,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -169,8 +169,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -202,8 +202,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -235,8 +235,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -268,8 +268,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -301,8 +301,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -334,8 +334,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -367,8 +367,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -400,8 +400,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -433,8 +433,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -466,8 +466,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -499,8 +499,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -532,8 +532,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -565,8 +565,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -598,8 +598,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -631,8 +631,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -664,8 +664,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -697,8 +697,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -730,8 +730,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -763,8 +763,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -796,8 +796,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -829,8 +829,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -862,8 +862,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -895,8 +895,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -928,8 +928,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -961,8 +961,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -994,8 +994,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1027,8 +1027,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1060,8 +1060,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1093,8 +1093,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1126,8 +1126,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1159,8 +1159,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1192,8 +1192,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1225,8 +1225,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1258,8 +1258,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1291,8 +1291,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1324,8 +1324,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1357,8 +1357,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1390,8 +1390,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1423,8 +1423,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1456,8 +1456,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1489,8 +1489,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1522,8 +1522,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1555,8 +1555,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1588,8 +1588,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1621,8 +1621,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1654,8 +1654,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1687,8 +1687,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1720,8 +1720,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1753,8 +1753,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1786,8 +1786,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1819,8 +1819,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1852,8 +1852,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1885,8 +1885,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1918,8 +1918,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1951,8 +1951,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -1984,8 +1984,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -2017,8 +2017,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -2050,8 +2050,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     },
     {
@@ -2083,8 +2083,8 @@
         "subprocessors": [
           "cloudflare"
         ],
-        "edge": true,
-        "description": "Zero data retention and no model training on edge GPUs"
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
       }
     }
   ]

@@ -61,6 +61,10 @@
       "name": "Baseten: Elephant 1"
     },
     {
+      "id": "baseten/joey-1",
+      "name": "Joey-1"
+    },
+    {
       "id": "baseten/mammoth-1",
       "name": "Baseten: Mammoth 1"
     },
@@ -401,6 +405,62 @@
       "name": "Dots Studio: Dots3-Note Preview"
     },
     {
+      "id": "elevenlabs/eleven-flash-v2",
+      "name": "Eleven Flash v2"
+    },
+    {
+      "id": "elevenlabs/eleven-flash-v2.5",
+      "name": "Eleven Flash v2.5"
+    },
+    {
+      "id": "elevenlabs/eleven-multilingual-v2",
+      "name": "Eleven Multilingual v2"
+    },
+    {
+      "id": "elevenlabs/eleven-realtime-v1-max",
+      "name": "Eleven Realtime v1 Max"
+    },
+    {
+      "id": "elevenlabs/eleven-realtime-v1-mini",
+      "name": "Eleven Realtime v1 Mini"
+    },
+    {
+      "id": "elevenlabs/eleven-v3",
+      "name": "Eleven v3"
+    },
+    {
+      "id": "elevenlabs/eleven-v3-conversational",
+      "name": "Eleven v3 Conversational"
+    },
+    {
+      "id": "elevenlabs/eleven-v4",
+      "name": "Eleven v4"
+    },
+    {
+      "id": "elevenlabs/eleven-v4-turbo",
+      "name": "Eleven v4 Turbo"
+    },
+    {
+      "id": "elevenlabs/music-v2",
+      "name": "Eleven Music v2"
+    },
+    {
+      "id": "elevenlabs/music-v2.5",
+      "name": "Eleven Music v2.5"
+    },
+    {
+      "id": "elevenlabs/scribe-v2",
+      "name": "Scribe v2"
+    },
+    {
+      "id": "elevenlabs/scribe-v2-realtime",
+      "name": "Scribe v2 Realtime"
+    },
+    {
+      "id": "elevenlabs/sound-effects-v2",
+      "name": "Eleven Sound Effects v2"
+    },
+    {
       "id": "elorian/glimpse",
       "name": "Elorian: Glimpse"
     },
@@ -611,6 +671,10 @@
     {
       "id": "inclusionai/ling-3.1-flash",
       "name": "inclusionAI: Ling 3.1 Flash"
+    },
+    {
+      "id": "inclusionai/ling-3.1-flash-1019",
+      "name": "Ling 3.1 Flash 1019"
     },
     {
       "id": "inference-net/schematron-v2-small",
@@ -871,6 +935,10 @@
     {
       "id": "mistralai/mistral-large-2512",
       "name": "Mistral: Mistral Large 3 2512"
+    },
+    {
+      "id": "mistralai/mistral-large-4-1t-a52b",
+      "name": "Mistral Large 4"
     },
     {
       "id": "mistralai/mistral-medium-3",
@@ -1237,6 +1305,10 @@
       "name": "GPT-Live 1"
     },
     {
+      "id": "openai/gpt-live-transcribe",
+      "name": "GPT Live Transcribe"
+    },
+    {
       "id": "openai/gpt-oss-120b",
       "name": "OpenAI: gpt-oss-120b"
     },
@@ -1271,6 +1343,10 @@
     {
       "id": "openai/gpt-realtime-whisper",
       "name": "gpt-realtime-whisper"
+    },
+    {
+      "id": "openai/gpt-transcribe",
+      "name": "GPT Transcribe"
     },
     {
       "id": "openai/o1",

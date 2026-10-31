@@ -871,25 +871,6 @@
       }
     },
     {
-      "model_id": "arcee-ai/trinity-large-thinking",
-      "name": "Trinity Large Thinking",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
       "model_id": "baseten/elephant-1",
       "name": "Elephant-1",
       "connection": {
@@ -904,9 +885,9 @@
       },
       "limits": {
         "terms": [
-          "Free — no credits used"
+          "Free with $5 monthly credits"
         ],
-        "funding": "no_credits"
+        "funding": "monthly_credits"
       },
       "compliance": {
         "zdr": false,
@@ -918,7 +899,41 @@
         "subprocessors": [
           "baseten"
         ],
-        "description": "Upstream provider retains prompts and completions for training"
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "baseten/joey-1",
+      "name": "Joey-1",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "baseten"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -936,9 +951,9 @@
       },
       "limits": {
         "terms": [
-          "Free — no credits used"
+          "Free with $5 monthly credits"
         ],
-        "funding": "no_credits"
+        "funding": "monthly_credits"
       },
       "compliance": {
         "zdr": false,
@@ -950,7 +965,8 @@
         "subprocessors": [
           "baseten"
         ],
-        "description": "Upstream provider retains prompts and completions for training"
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
       }
     },
     {
@@ -1794,6 +1810,286 @@
       }
     },
     {
+      "model_id": "elevenlabs/eleven-flash-v2",
+      "name": "Eleven Flash v2",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/eleven-flash-v2.5",
+      "name": "Eleven Flash v2.5",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/eleven-multilingual-v2",
+      "name": "Eleven Multilingual v2",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/eleven-realtime-v1-max",
+      "name": "Eleven Realtime v1 Max",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "realtime",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/eleven-realtime-v1-mini",
+      "name": "Eleven Realtime v1 Mini",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "realtime",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/eleven-v3",
+      "name": "Eleven v3",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/eleven-v3-conversational",
+      "name": "Eleven v3 Conversational",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/eleven-v4",
+      "name": "Eleven v4",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/eleven-v4-turbo",
+      "name": "Eleven v4 Turbo",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/music-v2",
+      "name": "Eleven Music v2",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/music-v2.5",
+      "name": "Eleven Music v2.5",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/scribe-v2",
+      "name": "Scribe v2",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "transcription",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/scribe-v2-realtime",
+      "name": "Scribe v2 Realtime",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "transcription",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "elevenlabs/sound-effects-v2",
+      "name": "Eleven Sound Effects v2",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "speech",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "elorian/glimpse",
       "name": "Glimpse",
       "connection": {
@@ -2328,6 +2624,25 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "inclusionai/ling-3.1-flash-1019",
+      "name": "Ling 3.1 Flash 1019",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free — no credits used"
+        ],
+        "funding": "no_credits"
       }
     },
     {
@@ -4685,6 +5000,39 @@
       }
     },
     {
+      "model_id": "openai/gpt-live-transcribe",
+      "name": "GPT Live Transcribe",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "transcription",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
       "model_id": "openai/gpt-oss-120b",
       "name": "GPT OSS 120B",
       "connection": {
@@ -4947,6 +5295,39 @@
     {
       "model_id": "openai/gpt-realtime-whisper",
       "name": "gpt-realtime-whisper",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "transcription",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "openai"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "openai/gpt-transcribe",
+      "name": "GPT Transcribe",
       "connection": {
         "auth": {
           "env": [
@@ -5450,38 +5831,6 @@
         ],
         "description": "Upstream providers may retain data unless training is disabled",
         "conditional": true
-      }
-    },
-    {
-      "model_id": "poolside/laguna-s-2.1-free",
-      "name": "Laguna S 2.1 Free",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free — no credits used"
-        ],
-        "funding": "no_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "EU"
-        ],
-        "subprocessors": [
-          "poolside"
-        ],
-        "description": "Upstream provider retains prompts and completions for training"
       }
     },
     {

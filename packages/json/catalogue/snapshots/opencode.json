@@ -156,35 +156,6 @@
       }
     },
     {
-      "model_id": "jev-1.13-free",
-      "name": "Jev 1.13 Free",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENCODE_API_KEY"
-          ]
-        },
-        "base_url": "https://opencode.ai/inference/systemone/v1",
-        "endpoint": "https://opencode.ai/inference/systemone/v1/systemone",
-        "protocol": "systemone"
-      },
-      "limits": {
-        "terms": [
-          "200 req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": true,
-        "no_training": true,
-        "data_retention": false,
-        "countries": [
-          "US",
-          "EU"
-        ],
-        "description": "Zero data retention on in-memory inference"
-      }
-    },
-    {
       "model_id": "mimo-v2.6-flash-free",
       "name": "MiMo-V2.6-Flash Free",
       "connection": {

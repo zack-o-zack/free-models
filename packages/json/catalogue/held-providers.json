@@ -1,0 +1,12 @@
+{
+  "providers": {
+    "onomeo": {
+      "since": "2026-10-31",
+      "reason": "15 of 15 offers removed"
+    },
+    "routeway": {
+      "since": "2026-10-31",
+      "reason": "2 of 9 offers removed"
+    }
+  }
+}

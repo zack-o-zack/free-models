@@ -621,6 +621,40 @@
       }
     },
     {
+      "model_id": "gemini-embedding-001",
+      "name": "Gemini Embedding",
+      "connection": {
+        "auth": {
+          "env": [
+            "GOOGLE_API_KEY",
+            "GOOGLE_GENERATIVE_AI_API_KEY",
+            "GEMINI_API_KEY"
+          ]
+        },
+        "base_url": "https://generativelanguage.googleapis.com/v1beta",
+        "protocol": "google"
+      },
+      "limits": {
+        "terms": [
+          "15 req / min",
+          "250k tok / min",
+          "500 req / day"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "google"
+        ],
+        "description": "Prompts and outputs are logged, reviewed, and used to train models"
+      }
+    },
+    {
       "model_id": "gemini-robotics-er-2-preview",
       "name": "Gemini Robotics ER 2 Preview",
       "connection": {

@@ -319,6 +319,37 @@
       }
     },
     {
+      "model_id": "mistralai/mistral-large-4-1t-a52b",
+      "name": "Mistral Large 4",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
+      }
+    },
+    {
       "model_id": "nvidia/active-speaker-detection",
       "name": "Active Speaker Detection",
       "connection": {
@@ -1313,37 +1344,6 @@
     {
       "model_id": "stepfun-ai/step-5-preview",
       "name": "Step 5 Preview",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "nvidia"
-        ],
-        "description": "Trial interactions are retained and monitored on US servers"
-      }
-    },
-    {
-      "model_id": "z-ai/glm-5-3",
-      "name": "glm-5-3",
       "connection": {
         "auth": {
           "env": [
