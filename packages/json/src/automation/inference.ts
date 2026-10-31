@@ -218,6 +218,18 @@ function byBestModel(a: readonly ReviewerCandidate[], b: readonly ReviewerCandid
   return (b[0]?.intelligence ?? -1) - (a[0]?.intelligence ?? -1);
 }
 
+// Short machine-readable error code from an error body, such as `api_key_expired`. Free text is
+// dropped so provider messages never reach the PR body.
+async function errorCode(response: Response): Promise<string | undefined> {
+  try {
+    const body = (await response.json()) as { error?: { code?: unknown; type?: unknown } };
+    const code = body.error?.code ?? body.error?.type;
+    return typeof code === "string" && /^[\w.-]{1,64}$/.test(code) ? code : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 export interface ReviewAttempt {
   readonly model: string;
   readonly outcome: string;
@@ -286,7 +298,8 @@ export function catalogueReviewer(
             ),
           });
           if (!response.ok) {
-            attempts.push({ model, outcome: `HTTP ${response.status}` });
+            const code = await errorCode(response);
+            attempts.push({ model, outcome: `HTTP ${response.status}${code ? ` ${code}` : ""}` });
             // Auth, billing and quota errors apply to the whole provider account.
             if ([401, 402, 403, 429].includes(response.status)) {
               exhausted.add(offer.provider);

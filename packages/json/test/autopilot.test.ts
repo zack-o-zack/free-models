@@ -335,7 +335,7 @@ test("reviewer tries the OpenCode Go subscription before free models", async () 
   const review = catalogueReviewer(pool, async (url, init) => {
     requests.push({ url, init });
     if (url.endsWith("/chat/completions") && requests.length === 1)
-      return new Response("bad gateway", { status: 502 });
+      return Response.json({ error: { code: "upstream_error", message: "x" } }, { status: 502 });
     return Response.json({ content: [{ type: "text", text: '{"approve":true}' }] });
   });
   const verdict = await review("diff", z.object({ approve: z.boolean() }));
@@ -344,6 +344,10 @@ test("reviewer tries the OpenCode Go subscription before free models", async () 
     "https://opencode.ai/inference/go/openai/v1/chat/completions",
     "https://opencode.ai/inference/go/anthropic/v1/messages",
   ]);
+  expect(review.attempts[0]).toEqual({
+    model: "opencode-go/deepseek-v4-pro",
+    outcome: "HTTP 502 upstream_error",
+  });
   const [openAi, anthropic] = requests.map(({ init }) => init.headers as Record<string, string>);
   expect(openAi?.["x-opencode-session"]).toBeString();
   expect(anthropic).toMatchObject({
