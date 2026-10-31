@@ -1825,6 +1825,14 @@
     {
       "id": "cohere/cohere-transcribe-03-2026",
       "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "audio"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
         "metadata_source": {
           "url": "https://docs.cohere.com/docs/models",
           "model_id": "cohere-transcribe-03-2026",
