@@ -8,7 +8,6 @@ import {
   File,
   FileText,
   ImageIcon,
-  Shield,
   Type,
   Video,
 } from "lucide-react";
@@ -170,18 +169,10 @@ export function ModelFilters({
                 id={`${idPrefix}-privacy-zdr`}
                 onCheckedChange={onToggleZdr}
               />
-              <Shield className="size-4 text-emerald-600 dark:text-emerald-400 stroke-[1.8] shrink-0" />
-              <div className="flex flex-col min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-foreground">Zero Data Retention</span>
-                  {typeof zdrCount === "number" && (
-                    <span className="text-xs font-mono text-muted-foreground">{zdrCount}</span>
-                  )}
-                </div>
-                <span className="text-[11px] font-normal text-muted-foreground">
-                  Prompts and outputs are never stored
-                </span>
-              </div>
+              <span className="min-w-0 flex-1 truncate">Zero Data Retention</span>
+              {typeof zdrCount === "number" && (
+                <span className="text-xs font-mono text-muted-foreground">{zdrCount}</span>
+              )}
             </label>
           </AccordionContent>
         </AccordionItem>
