@@ -97,6 +97,10 @@ export const SUBSCRIPTION_REVIEWERS: readonly SubscriptionReviewer[] = [
   },
 ];
 
+// Subscription models reason before answering, so a full diff part can take minutes.
+const SUBSCRIPTION_TIMEOUT_MS = 180_000;
+const FREE_TIMEOUT_MS = 60_000;
+
 const MODELS_PER_TIER = 2;
 // Model calls allowed for one review request across all tiers.
 const MAX_CALLS = 8;
@@ -230,6 +234,24 @@ async function errorCode(response: Response): Promise<string | undefined> {
   }
 }
 
+// The outermost JSON object in a reply, ignoring code fences or prose around it.
+function jsonObject(content: string): string {
+  const start = content.indexOf("{");
+  const end = content.lastIndexOf("}");
+  return start >= 0 && end > start ? content.slice(start, end + 1) : content;
+}
+
+// Error class plus, for schema errors, the failing issue codes and paths. Model text is never
+// included, so the outcome is safe to publish in the PR body.
+function failure(error: unknown): string {
+  if (error instanceof z.ZodError)
+    return `ZodError ${error.issues
+      .slice(0, 3)
+      .map((issue) => `${issue.code}@${issue.path.join(".") || "root"}`)
+      .join(", ")}`;
+  return error instanceof Error ? error.name : "invalid response";
+}
+
 export interface ReviewAttempt {
   readonly model: string;
   readonly outcome: string;
@@ -249,6 +271,8 @@ export function catalogueReviewer(
   const attempts: ReviewAttempt[] = [];
   // Providers that returned an account-wide error are skipped for the rest of the run.
   const exhausted = new Set<string>();
+  // Models that timed out once would likely time out on every later part.
+  const slow = new Set<string>();
   const review = async <T>(prompt: string, schema: z.ZodType<T>) => {
     // Rough upper bound: catalogue JSON averages well over three characters per token.
     const promptTokens = Math.ceil(prompt.length / 3) + 4096;
@@ -259,6 +283,7 @@ export function catalogueReviewer(
       for (const offer of tier) {
         if (exhausted.has(offer.provider)) break;
         const model = `${offer.provider}/${offer.model}`;
+        if (slow.has(model)) continue;
         if (offer.contextLength && offer.contextLength < promptTokens) {
           attempts.push({ model, outcome: "context too small" });
           continue;
@@ -271,7 +296,9 @@ export function catalogueReviewer(
           const response = await request(offer.endpoint, {
             method: "POST",
             redirect: "error",
-            signal: AbortSignal.timeout(60_000),
+            signal: AbortSignal.timeout(
+              offer.provider === "opencode-go" ? SUBSCRIPTION_TIMEOUT_MS : FREE_TIMEOUT_MS,
+            ),
             headers: {
               Authorization: `Bearer ${offer.key}`,
               "Content-Type": "application/json",
@@ -314,15 +341,13 @@ export function catalogueReviewer(
                 .content.map((block) => (block.type === "text" ? (block.text ?? "") : ""))
                 .join("")
             : (openAiResponseSchema.parse(body).choices[0]?.message.content ?? "");
-          const result = schema.parse(JSON.parse(content.replace(/^```(?:json)?\s*|\s*```$/g, "")));
+          const result = schema.parse(JSON.parse(jsonObject(content)));
           attempts.push({ model, outcome: "answered" });
           return { model, result };
         } catch (error) {
           // A failed or malformed response can only fall back to the next verified reviewer.
-          attempts.push({
-            model,
-            outcome: error instanceof Error ? error.name : "invalid response",
-          });
+          if (error instanceof Error && error.name === "TimeoutError") slow.add(model);
+          attempts.push({ model, outcome: failure(error) });
         }
       }
     }

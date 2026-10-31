@@ -27,7 +27,7 @@ jobs:
   discover:
     name: Discover, repair, review and merge catalogue
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - name: Check out trusted source
         uses: actions/checkout@v6

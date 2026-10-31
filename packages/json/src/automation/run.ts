@@ -201,7 +201,7 @@ try {
         const review = catalogueReviewer(reviewerPool);
         reviewAttempts = review.attempts;
         const verdict = await review(
-          `Check each proposed identity against its upstream model ID. Preserve versions, quantization and variants. Decide each proposal independently. Return {"decisions":[{"provider":string,"id":string,"approve":boolean,"reason":string}]} with one decision per proposal.\n${JSON.stringify(reviewable)}`,
+          `Check each proposed identity against its upstream model ID. Preserve versions, quantization and variants. Decide each proposal independently. Return {"decisions":[{"provider":string,"id":string,"approve":boolean,"reason":string}]} with one decision per proposal and each reason under 300 characters.\n${JSON.stringify(reviewable)}`,
           z
             .object({
               decisions: z.array(
@@ -339,7 +339,7 @@ try {
       const verdicts = [];
       for (const [index, part] of parts.entries()) {
         const verdict = await review(
-          `Review part ${index + 1} of ${parts.length} of a catalogue-only change. Reject suspicious identity merges, wrong model variants, contradictory metadata, removals inconsistent with live discovery, corrupted limits or changed connection/auth details. Return {"approve":boolean,"reason":string}. The following offers were present in the baseline but are absent from freshly fetched free-provider discovery; this explains their removal and does not imply the underlying model retired: ${JSON.stringify(noLongerListedFree)}. These provider-level changes were held back and observed on every scheduled discovery for at least ${HOLD_DAYS} days before being accepted, so they reflect the live provider: ${JSON.stringify(accepted)}. packages/json/catalogue/held-providers.json records providers whose previous snapshot is intentionally kept while a suspicious change is observed.${index === 0 && metadataChanged ? ` Canonical metadata was refreshed from upstream registries; upstream may add, drop or rescale fields such as benchmarks. Its changes, summarized per field path with examples: ${JSON.stringify(metadata)}.` : ""}${part ? `\n${part}` : ""}`,
+          `Review part ${index + 1} of ${parts.length} of a catalogue-only change. Reject suspicious identity merges, wrong model variants, contradictory metadata, removals inconsistent with live discovery, corrupted limits or changed connection/auth details. Return {"approve":boolean,"reason":string} with a reason under 1000 characters and no other keys. The following offers were present in the baseline but are absent from freshly fetched free-provider discovery; this explains their removal and does not imply the underlying model retired: ${JSON.stringify(noLongerListedFree)}. These provider-level changes were held back and observed on every scheduled discovery for at least ${HOLD_DAYS} days before being accepted, so they reflect the live provider: ${JSON.stringify(accepted)}. packages/json/catalogue/held-providers.json records providers whose previous snapshot is intentionally kept while a suspicious change is observed.${index === 0 && metadataChanged ? ` Canonical metadata was refreshed from upstream registries; upstream may add, drop or rescale fields such as benchmarks. Its changes, summarized per field path with examples: ${JSON.stringify(metadata)}.` : ""}${part ? `\n${part}` : ""}`,
           z.object({ approve: z.boolean(), reason: z.string().max(2000) }).strict(),
         );
         verdicts.push(verdict);

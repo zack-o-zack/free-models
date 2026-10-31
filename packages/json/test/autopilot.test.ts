@@ -361,6 +361,34 @@ test("reviewer tries the OpenCode Go subscription before free models", async () 
   });
 });
 
+test("reviewer reads wrapped JSON, explains schema errors and skips models that timed out", async () => {
+  const seen: string[] = [];
+  const review = catalogueReviewer(reviewerPool(), async (_url, init) => {
+    const { model } = JSON.parse(String(init.body)) as { model: string };
+    seen.push(model);
+    if (model === "smart-free") throw Object.assign(new Error("slow"), { name: "TimeoutError" });
+    const content =
+      model === "mid-free"
+        ? '{"approve":"yes"}'
+        : 'Verdict:\n```json\n{"approve":true}\n```\nDone.';
+    return Response.json({ choices: [{ message: { content } }] });
+  });
+  const schema = z.object({ approve: z.boolean() }).strict();
+  expect((await review("one", schema)).model).toBe("mistral/mistral-medium-3.5");
+  await review("two", schema);
+  expect(seen).toEqual([
+    "smart-free",
+    "mid-free",
+    "mistral-medium-3.5",
+    "mid-free",
+    "mistral-medium-3.5",
+  ]);
+  expect(review.attempts.slice(0, 2)).toEqual([
+    { model: "opencode/smart-free", outcome: "TimeoutError" },
+    { model: "opencode/mid-free", outcome: "ZodError invalid_type@approve" },
+  ]);
+});
+
 test("reviewer skips providers with account-wide errors on later requests", async () => {
   const seen: string[] = [];
   const review = catalogueReviewer(reviewerPool(), async (_url, init) => {

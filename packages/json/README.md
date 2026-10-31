@@ -162,7 +162,7 @@ subscription, no paid model is used. Provider pricing changes after discovery re
 repository control.
 
 Model responses cannot execute commands, select arbitrary URLs, change credentials, or authorize
-merges. Each inference call has a 60-second timeout. A valid rejection stops the phase rather than
+merges. Each inference call has a 60-second timeout, or 180 seconds for OpenCode Go models, which reason before answering. A model that times out is skipped for the rest of the run. Replies may wrap the JSON in prose or code fences; only the outermost object is parsed. A valid rejection stops the phase rather than
 shopping for approval. Each review request has an eight-call hard ceiling; when every tier fails,
 work is deferred to the next daily run. The agent report and PR body record every reviewer attempt and
 its outcome.
