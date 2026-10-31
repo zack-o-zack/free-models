@@ -367,6 +367,16 @@ test("reviewer tries the OpenCode Go subscription before free models", async () 
   expect((await anthropicReview("diff", z.object({ approve: z.boolean() }))).result).toEqual({
     approve: false,
   });
+  const truncatedReview = catalogueReviewer(pool, async (url) =>
+    url.endsWith("/messages")
+      ? Response.json({ content: [{ type: "text", text: '{"appr' }], stop_reason: "max_tokens" })
+      : Response.json({ choices: [{ message: { content: '{"approve":true}' } }] }),
+  );
+  await truncatedReview("diff", z.object({ approve: z.boolean() }));
+  expect(truncatedReview.attempts[0]).toEqual({
+    model: "opencode-go/claude-haiku-5-5",
+    outcome: "output token limit reached",
+  });
 });
 
 test("reviewer reads wrapped JSON, explains schema errors and skips models that timed out", async () => {
