@@ -4,18 +4,21 @@ import type { LucideIcon } from "lucide-react";
 import {
   ArrowLeftRight,
   AudioLines,
-  ChartColumn,
   Database,
   GitBranch,
   History,
   Image as ImageIcon,
   LayoutGrid,
   LayoutList,
+  ListFilter,
+  MessageSquareText,
   Mic,
+  Radio,
   Search,
+  Shapes,
+  ShieldCheck,
   SlidersHorizontal,
   TableProperties,
-  TextIcon,
   Video,
 } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -55,6 +58,7 @@ import {
   type SortDirection,
   type SortOption,
 } from "@/lib/model-sort";
+import { getModelTypeTabs, modelTypeTab, OTHER_MODEL_TYPE } from "@/lib/model-type-tabs";
 import type { CatalogueModel } from "@/lib/model-types";
 import { getModelCountries, modelHasZdr } from "@/lib/provider-compliance";
 import { getProviderName } from "@/lib/provider-logos";
@@ -76,25 +80,25 @@ const ModelTable = dynamic(() =>
 );
 
 type ViewMode = "list" | "table";
-const outputIcons: Record<string, LucideIcon> = {
-  decisions: GitBranch,
-  text: TextIcon,
-  image: ImageIcon,
-  audio: AudioLines,
-  speech: AudioLines,
-  video: Video,
-  transcript: Mic,
-  transcription: Mic,
+const modelTypeIcons: Record<string, LucideIcon> = {
+  chat: MessageSquareText,
+  decision: GitBranch,
   embedding: Database,
-  embeddings: Database,
-  rerank: SlidersHorizontal,
-  scores: ChartColumn,
+  image: ImageIcon,
+  moderation: ShieldCheck,
+  realtime: Radio,
+  reranking: ListFilter,
+  speech: AudioLines,
+  transcription: Mic,
+  video: Video,
+  [OTHER_MODEL_TYPE]: Shapes,
 };
 
 const sortLabels: Record<SortOption, string> = {
   newest: "Newest first",
   oldest: "Oldest first",
   context: "Largest context",
+  price: "Lowest list price",
   name: "Name",
   intelligence: "Intelligence score",
   coding: "Coding score",
@@ -114,7 +118,7 @@ export function ModelExplorer({
   const [sort, setSort] = useState<SortOption>(defaultModelSort);
   const [direction, setDirection] = useState<SortDirection>(defaultModelDirection);
   const [view, setView] = useState<ViewMode>("list");
-  const [output, setOutput] = useState<string>("all");
+  const [modelType, setModelType] = useState<string>("all");
   const [selectedInputs, setSelectedInputs] = useState<string[]>([]);
   const [selectedPublishers, setSelectedPublishers] = useState<string[]>([]);
   const [selectedProviders, setSelectedProviders] = useState<string[]>([]);
@@ -126,7 +130,6 @@ export function ModelExplorer({
   const [zdrOnly, setZdrOnly] = useState(false);
   const {
     inputs: inputOptions,
-    outputs,
     contextSteps,
     regions: regionOptions,
     topics: topicOptions,
@@ -203,28 +206,7 @@ export function ModelExplorer({
     (zdrOnly ? 1 : 0) +
     (isContextFiltered ? 1 : 0);
 
-  const totalCounts = useMemo(() => {
-    return Object.fromEntries(
-      [{ value: "all" }, ...outputs].map((tab) => [
-        tab.value,
-        tab.value === "all"
-          ? models.length
-          : models.filter((model) => model.outputModalities.includes(tab.value)).length,
-      ]),
-    ) as Record<string, number>;
-  }, [models, outputs]);
-
-  const outputTabs = useMemo(
-    () => [
-      { value: "all", label: "All" },
-      ...[...outputs].sort(
-        (left, right) =>
-          totalCounts[right.value] - totalCounts[left.value] ||
-          left.label.localeCompare(right.label),
-      ),
-    ],
-    [outputs, totalCounts],
-  );
+  const typeTabs = useMemo(() => getModelTypeTabs(models), [models]);
 
   const filteredModels = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -279,23 +261,21 @@ export function ModelExplorer({
   ]);
 
   const counts = useMemo(() => {
-    return Object.fromEntries(
-      [{ value: "all" }, ...outputs].map((tab) => [
-        tab.value,
-        tab.value === "all"
-          ? filteredModels.length
-          : filteredModels.filter((model) => model.outputModalities.includes(tab.value)).length,
-      ]),
-    ) as Record<string, number>;
-  }, [filteredModels, outputs]);
+    const result: Record<string, number> = { all: filteredModels.length };
+    for (const model of filteredModels) {
+      const tab = modelTypeTab(model, typeTabs);
+      result[tab] = (result[tab] ?? 0) + 1;
+    }
+    return result;
+  }, [filteredModels, typeTabs]);
 
   const visibleModels = useMemo(() => {
     return (
-      output === "all"
+      modelType === "all"
         ? filteredModels
-        : filteredModels.filter((model) => model.outputModalities.includes(output))
+        : filteredModels.filter((model) => modelTypeTab(model, typeTabs) === modelType)
     ).sort((left, right) => compareModels(left, right, sort, direction));
-  }, [direction, filteredModels, output, sort]);
+  }, [direction, filteredModels, modelType, sort, typeTabs]);
 
   function toggleInput(modality: string) {
     setSelectedInputs((current) =>
@@ -492,13 +472,16 @@ export function ModelExplorer({
                         ? "Name: Z–A"
                         : sort === "context"
                           ? "Smallest context"
-                          : `${sortLabels[sort]}: low to high`}
+                          : sort === "price"
+                            ? "Highest list price"
+                            : `${sortLabels[sort]}: low to high`}
                   </span>
                 </SelectTrigger>
                 <SelectContent align="start">
                   <SelectItem value="newest">Newest first</SelectItem>
                   <SelectItem value="oldest">Oldest first</SelectItem>
                   <SelectItem value="context">Largest context</SelectItem>
+                  <SelectItem value="price">Lowest list price</SelectItem>
                   <SelectItem value="name">Name</SelectItem>
                   <SelectItem value="intelligence">Intelligence score</SelectItem>
                   <SelectItem value="coding">Coding score</SelectItem>
@@ -537,14 +520,14 @@ export function ModelExplorer({
               </div>
             </div>
 
-            <Tabs value={output} onValueChange={(value) => setOutput(String(value))}>
+            <Tabs value={modelType} onValueChange={(value) => setModelType(String(value))}>
               <div className="mb-6 w-full overflow-x-auto pb-2 whitespace-nowrap">
                 <TabsList
                   className="h-auto! min-w-max gap-1 rounded-[24px] bg-background p-1"
                   variant="default"
                 >
-                  {outputTabs.map(({ value, label }) => {
-                    const Icon = value === "all" ? LayoutGrid : outputIcons[value];
+                  {[{ value: "all", label: "All" }, ...typeTabs].map(({ value, label }) => {
+                    const Icon = value === "all" ? LayoutGrid : modelTypeIcons[value];
                     return (
                       <TabsTrigger
                         className="h-10 flex-none rounded-[20px] px-4 text-muted-foreground shadow-none! hover:bg-card hover:text-foreground data-active:bg-primary data-active:text-primary-foreground data-active:hover:bg-primary-hover data-active:hover:text-primary-foreground dark:hover:bg-card dark:hover:text-foreground dark:data-active:bg-primary dark:data-active:text-primary-foreground dark:data-active:hover:bg-primary-hover dark:data-active:hover:text-primary-foreground"
@@ -553,7 +536,7 @@ export function ModelExplorer({
                       >
                         {Icon && <Icon />}
                         {label}
-                        <span className="text-xs text-current">{counts[value]}</span>
+                        <span className="text-xs text-current">{counts[value] ?? 0}</span>
                       </TabsTrigger>
                     );
                   })}
@@ -572,7 +555,7 @@ export function ModelExplorer({
                     onClick={() => {
                       clearFilters();
                       setQuery("");
-                      setOutput("all");
+                      setModelType("all");
                     }}
                     variant="outline"
                   >

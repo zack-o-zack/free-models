@@ -111,6 +111,54 @@ test("normalizes speech modalities to audio and embedding to embeddings", async 
   }
 });
 
+test("maps embedding dimensions and the paid list price", async () => {
+  const workspace = await mkdtemp(join(tmpdir(), "web-catalogue-"));
+  try {
+    await Bun.write(
+      join(workspace, ".generated/free-models.json"),
+      JSON.stringify({
+        models: [
+          {
+            id: "maker/embed",
+            name: "Embed Model",
+            embedding_dimensions: [1024, 256],
+            pricing: { prompt: "0.0000001" },
+            providers: {},
+          },
+          { id: "maker/free", name: "Free Model", pricing: { prompt: "0" }, providers: {} },
+          { id: "maker/router", name: "Router", pricing: { prompt: "-1" }, providers: {} },
+          { id: "maker/bare", name: "Bare", providers: {} },
+        ],
+      }),
+    );
+    const modulePath = new URL("../src/lib/model-data.ts", import.meta.url).pathname;
+    const child = Bun.spawn(
+      [
+        "bun",
+        "--eval",
+        `
+          import { getModels } from ${JSON.stringify(modulePath)};
+          globalThis.fetch = async () => Response.json({ stargazers_count: 0 });
+          const result = await getModels();
+          console.log(JSON.stringify(result.models.map(m => ({ id: m.id, dims: m.embeddingDimensions, price: m.promptPrice }))));
+        `,
+      ],
+      { cwd: workspace, stdout: "pipe", stderr: "pipe" },
+    );
+    const output = await new Response(child.stdout).text();
+    const errors = await new Response(child.stderr).text();
+    expect(await child.exited, errors).toBe(0);
+    expect(JSON.parse(output)).toEqual([
+      { id: "maker/embed", dims: [1024, 256], price: 0.0000001 },
+      { id: "maker/free", dims: [], price: 0 },
+      { id: "maker/router", dims: [], price: null },
+      { id: "maker/bare", dims: [], price: null },
+    ]);
+  } finally {
+    await rm(workspace, { recursive: true, force: true });
+  }
+});
+
 test("catalogue changes affect the web deployment's workspace dependency graph", async () => {
   const web = await Bun.file(new URL("../package.json", import.meta.url)).json();
   const catalogue = await Bun.file(

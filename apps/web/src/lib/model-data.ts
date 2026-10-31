@@ -10,6 +10,10 @@ interface RawModel {
   description?: string;
   model_type?: string;
   topics?: string[];
+  embedding_dimensions?: number[];
+  pricing?: {
+    prompt?: string;
+  };
   context_length?: number;
   created?: number;
   architecture?: {
@@ -121,6 +125,11 @@ function normalizeModality(modality: string): string {
   return modality;
 }
 
+function parsePrice(value: string | undefined): number | null {
+  const price = value === undefined ? Number.NaN : Number(value);
+  return Number.isFinite(price) && price >= 0 ? price : null;
+}
+
 function toModelSummary(model: RawModel): ModelSummary {
   const supportedParameters = model.supported_parameters ?? [];
   const providerEntries = Object.entries(model.providers);
@@ -197,6 +206,8 @@ function toModelSummary(model: RawModel): ModelSummary {
     isStealth: model.id.startsWith("stealth:"),
     modelType: model.model_type ?? null,
     topics: model.topics ?? [],
+    embeddingDimensions: model.embedding_dimensions ?? [],
+    promptPrice: parsePrice(model.pricing?.prompt),
     intelligenceScore: model.benchmarks?.artificial_analysis?.intelligence_index ?? null,
     codingScore: model.benchmarks?.artificial_analysis?.coding_index ?? null,
     agenticScore: model.benchmarks?.artificial_analysis?.agentic_index ?? null,

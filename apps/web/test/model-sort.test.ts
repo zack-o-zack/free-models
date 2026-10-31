@@ -11,6 +11,7 @@ const models = [
   {
     name: "Unknown",
     contextLength: 0,
+    promptPrice: null,
     intelligenceScore: null,
     codingScore: null,
     agenticScore: null,
@@ -19,6 +20,7 @@ const models = [
   {
     name: "Beta",
     contextLength: 32000,
+    promptPrice: 0,
     intelligenceScore: 0,
     codingScore: 0,
     agenticScore: 0,
@@ -27,6 +29,7 @@ const models = [
   {
     name: "Alpha",
     contextLength: 128000,
+    promptPrice: 0.000001,
     intelligenceScore: 90,
     codingScore: 90,
     agenticScore: 90,
@@ -35,17 +38,22 @@ const models = [
 ] as ModelSummary[];
 
 describe("Model comparison sorting", () => {
-  test.each(["context", "intelligence", "coding", "agentic", "newest", "oldest"] as SortOption[])(
-    "%s keeps missing values last in both directions",
-    (sort) => {
-      for (const direction of ["ascending", "descending"] as SortDirection[]) {
-        const result = [...models].sort((a, b) => compareModels(a, b, sort, direction));
-        expect(result.map((m) => m.name)).toEqual(
-          direction === "ascending" ? ["Beta", "Alpha", "Unknown"] : ["Alpha", "Beta", "Unknown"],
-        );
-      }
-    },
-  );
+  test.each([
+    "context",
+    "price",
+    "intelligence",
+    "coding",
+    "agentic",
+    "newest",
+    "oldest",
+  ] as SortOption[])("%s keeps missing values last in both directions", (sort) => {
+    for (const direction of ["ascending", "descending"] as SortDirection[]) {
+      const result = [...models].sort((a, b) => compareModels(a, b, sort, direction));
+      expect(result.map((m) => m.name)).toEqual(
+        direction === "ascending" ? ["Beta", "Alpha", "Unknown"] : ["Alpha", "Beta", "Unknown"],
+      );
+    }
+  });
   test("name can be sorted in both directions", () => {
     expect(
       [...models].sort((a, b) => compareModels(a, b, "name", "ascending")).map((m) => m.name),
@@ -59,5 +67,6 @@ describe("Model comparison sorting", () => {
     expect(defaultSortDirection("oldest")).toBe("ascending");
     expect(defaultSortDirection("name")).toBe("ascending");
     expect(defaultSortDirection("intelligence")).toBe("descending");
+    expect(defaultSortDirection("price")).toBe("ascending");
   });
 });

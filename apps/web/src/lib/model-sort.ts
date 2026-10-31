@@ -4,6 +4,7 @@ export type SortOption =
   | "newest"
   | "oldest"
   | "context"
+  | "price"
   | "name"
   | "intelligence"
   | "coding"
@@ -14,12 +15,18 @@ export const defaultModelSort: SortOption = "newest";
 export const defaultModelDirection: SortDirection = "descending";
 
 export function defaultSortDirection(sort: SortOption): SortDirection {
-  return sort === "name" || sort === "oldest" ? "ascending" : "descending";
+  return sort === "name" || sort === "oldest" || sort === "price" ? "ascending" : "descending";
 }
 
 type SortableModel = Pick<
   ModelSummary,
-  "name" | "contextLength" | "intelligenceScore" | "codingScore" | "agenticScore" | "created"
+  | "name"
+  | "contextLength"
+  | "promptPrice"
+  | "intelligenceScore"
+  | "codingScore"
+  | "agenticScore"
+  | "created"
 >;
 
 export function compareModels(
@@ -35,6 +42,8 @@ export function compareModels(
     switch (sort) {
       case "context":
         return model.contextLength > 0 ? model.contextLength : null;
+      case "price":
+        return model.promptPrice;
       case "intelligence":
         return model.intelligenceScore;
       case "coding":

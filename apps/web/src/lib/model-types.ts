@@ -43,6 +43,9 @@ export interface ModelSummary {
   isStealth: boolean;
   modelType: string | null;
   topics: string[];
+  embeddingDimensions: number[];
+  /** Paid list price per input token in USD; the free offers themselves cost nothing. */
+  promptPrice: number | null;
   intelligenceScore: number | null;
   codingScore: number | null;
   agenticScore: number | null;

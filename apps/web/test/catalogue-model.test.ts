@@ -20,6 +20,8 @@ test("catalogue payload preserves mixed funding labels without shipping API setu
     isStealth: false,
     modelType: null,
     topics: [],
+    embeddingDimensions: [],
+    promptPrice: null,
     intelligenceScore: null,
     codingScore: null,
     agenticScore: null,

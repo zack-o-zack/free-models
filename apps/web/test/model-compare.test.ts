@@ -91,6 +91,8 @@ describe("getBestIndexes", () => {
     isStealth: false,
     modelType: null,
     topics: [],
+    embeddingDimensions: [],
+    promptPrice: null,
     intelligenceScore: null,
     codingScore: null,
     agenticScore: null,
