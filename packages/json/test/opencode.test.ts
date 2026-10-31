@@ -106,6 +106,13 @@ describe("OpenCode Zen discovery", () => {
               protocol: "openai",
             },
             limits: openCodeLimits,
+            compliance: {
+              zdr: false,
+              no_training: false,
+              data_retention: true,
+              countries: ["US"],
+              description: "Preview model retains prompts and outputs",
+            },
           },
           {
             model_id: "suffix-free",

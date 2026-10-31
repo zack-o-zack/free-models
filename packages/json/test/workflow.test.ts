@@ -38,9 +38,9 @@ const fixtureZOffers = [
   },
 ];
 
-function runFixtureCli(workspace: string, command: string) {
+function runFixtureCli(workspace: string, command: string, ...args: string[]) {
   return Bun.spawnSync({
-    cmd: [process.execPath, fixtureCliPath, command, "--workspace", workspace],
+    cmd: [process.execPath, fixtureCliPath, command, "--workspace", workspace, ...args],
     env: {
       ...process.env,
       CATALOGUE_FIXTURE_DIRECTORY: join(workspace, "provider-fixtures"),
@@ -285,6 +285,48 @@ describe("manual identity workflow", () => {
       expect(await Bun.file(fixtureZSnapshotPath).text()).toBe(previousFixtureZSnapshot);
       expect(await Bun.file(unresolvedPath).text()).toBe(previousUnresolved);
       expect(await Bun.file(publicPath).text()).toBe(previousPublic);
+    });
+  });
+
+  test("keeps a failing provider's committed snapshot when failures are tolerated", async () => {
+    await withWorkspace(async (workspace) => {
+      expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
+      const fixtureASnapshotPath = join(workspace, "catalogue/snapshots/fixture-a.json");
+      const fixtureZSnapshotPath = join(workspace, "catalogue/snapshots/fixture-z.json");
+      const failuresPath = join(workspace, "discovery-failures.json");
+      const previousFixtureASnapshot = await Bun.file(fixtureASnapshotPath).text();
+
+      await writeJson(join(workspace, "provider-fixtures/fixture-a.json"), {
+        offers: [fixtureAOffers[0], fixtureAOffers[0]],
+      });
+      await writeJson(join(workspace, "provider-fixtures/fixture-z.json"), {
+        offers: [fixtureZOffers[0]],
+      });
+      const discovery = runFixtureCli(workspace, "discover", "--failures", failuresPath);
+      expect(discovery.exitCode).toBe(0);
+      expect(decoder.decode(discovery.stderr)).toContain(
+        "Kept committed snapshot for fixture-a: Provider fixture-a validation failed",
+      );
+      expect(await Bun.file(fixtureASnapshotPath).text()).toBe(previousFixtureASnapshot);
+      const fixtureZ = await Bun.file(fixtureZSnapshotPath).json();
+      expect(fixtureZ.offers.map((offer: DiscoveredOffer) => offer.model_id)).toEqual([
+        "zeta/beta-free",
+      ]);
+      const { failures } = await Bun.file(failuresPath).json();
+      expect(failures).toHaveLength(1);
+      expect(failures[0].provider).toBe("fixture-a");
+    });
+  });
+
+  test("keeps offer compliance in discovered snapshots", async () => {
+    await withWorkspace(async (workspace) => {
+      const compliance = { zdr: true, no_training: true, data_retention: false, countries: ["US"] };
+      await writeJson(join(workspace, "provider-fixtures/fixture-z.json"), {
+        offers: [{ ...fixtureZOffers[0], compliance }],
+      });
+      expect(runFixtureCli(workspace, "discover").exitCode).toBe(0);
+      const fixtureZ = await Bun.file(join(workspace, "catalogue/snapshots/fixture-z.json")).json();
+      expect(fixtureZ.offers[0].compliance).toEqual(compliance);
     });
   });
 

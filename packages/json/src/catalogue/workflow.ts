@@ -35,12 +35,36 @@ import {
   loadCatalogueState,
 } from "./state.ts";
 
+export interface ProviderDiscoveryFailure {
+  readonly provider: string;
+  readonly error: string;
+}
+
+export interface DiscoverOptions {
+  // Keeps the committed snapshot of a failing provider instead of failing the whole run.
+  readonly keepFailedProviders?: boolean;
+}
+
+export interface DiscoverResult {
+  readonly unresolvedCount: number;
+  readonly failures: readonly ProviderDiscoveryFailure[];
+}
+
 export async function discover(
   paths: CataloguePaths,
   providers: readonly ModelProvider[],
   modelsDevRegistry?: ModelsDevRegistry,
-): Promise<number> {
-  const snapshots = await discoverSnapshots(providers, modelsDevRegistry);
+  options: DiscoverOptions = {},
+): Promise<DiscoverResult> {
+  const { snapshots, failures } = await discoverSnapshots(providers, modelsDevRegistry);
+  if (failures[0] && !options.keepFailedProviders) throw failures[0].cause;
+  for (const failure of failures) {
+    if (!(await Bun.file(paths.snapshot(failure.provider)).exists())) throw failure.cause;
+  }
+  if (failures.length * 2 > providers.length)
+    throw new Error(
+      `Discovery failed for ${failures.length} of ${providers.length} providers: ${failures.map((failure) => failure.provider).join(", ")}`,
+    );
   const state = await loadCatalogueState(paths, providers, snapshots);
   const unresolved = computeUnresolved(state);
 
@@ -52,7 +76,10 @@ export async function discover(
     { path: paths.unresolved, contents: serializeJson(unresolved) },
   ]);
 
-  return countUnresolved(unresolved);
+  return {
+    unresolvedCount: countUnresolved(unresolved),
+    failures: failures.map(({ provider, cause }) => ({ provider, error: cause.message })),
+  };
 }
 
 export async function reconcile(
@@ -218,7 +245,10 @@ function stripReservedMetadataFields(
 async function discoverSnapshots(
   providers: readonly ModelProvider[],
   modelsDevRegistry?: ModelsDevRegistry,
-): Promise<ReadonlyMap<string, ProviderSnapshot>> {
+): Promise<{
+  snapshots: ReadonlyMap<string, ProviderSnapshot>;
+  failures: { provider: string; cause: Error }[];
+}> {
   const providerIds = new Set<string>();
   for (const provider of providers) {
     if (!providerIdSchema.safeParse(provider.id).success) {
@@ -232,7 +262,7 @@ async function discoverSnapshots(
 
   const modelsDev = modelsDevRegistry ?? (await getCachedModelsDevRegistry());
 
-  const discovered = await Promise.all(
+  const settled = await Promise.allSettled(
     providers.map(async (provider) => {
       let discoveredOffers: readonly DiscoveredOffer[];
       try {
@@ -265,7 +295,25 @@ async function discoverSnapshots(
     }),
   );
 
-  return new Map(discovered.sort(([left], [right]) => compareStrings(left, right)));
+  const discovered: (readonly [string, ProviderSnapshot])[] = [];
+  const failures: { provider: string; cause: Error }[] = [];
+  settled.forEach((result, index) => {
+    const provider = providers[index]?.id ?? "unknown";
+    if (result.status === "fulfilled") discovered.push(result.value);
+    else
+      failures.push({
+        provider,
+        cause:
+          result.reason instanceof Error
+            ? result.reason
+            : providerStageError(provider, "discovery", result.reason),
+      });
+  });
+
+  return {
+    snapshots: new Map(discovered.sort(([left], [right]) => compareStrings(left, right))),
+    failures,
+  };
 }
 
 function providerStageError(providerId: string, stage: string, error: unknown): Error {
@@ -286,6 +334,7 @@ function normalizeOffers(providerId: string, offers: DiscoveredOffer[]): Discove
         name: offer.name,
         connection: sortJsonObject(offer.connection),
         limits: offer.limits,
+        ...(offer.compliance ? { compliance: offer.compliance } : {}),
       };
     })
     .sort((left, right) => compareStrings(left.model_id, right.model_id));
