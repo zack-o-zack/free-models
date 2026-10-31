@@ -1,6 +1,10 @@
 import { describe, expect, test } from "bun:test";
 import { z } from "zod";
-import { freeReviewer, reviewerTiers } from "../src/automation/inference.ts";
+import {
+  catalogueReviewer,
+  reviewerTiers,
+  SUBSCRIPTION_REVIEWERS,
+} from "../src/automation/inference.ts";
 import { assertMergeCandidate } from "../src/automation/merge.ts";
 import {
   allowedCataloguePath,
@@ -252,7 +256,13 @@ function reviewerPool() {
       ),
     }) as unknown as CatalogueState;
   const env = { OPENCODE_API_KEY: "oc", MISTRAL_FREE_API_KEY: "mi", COHERE_TRIAL_API_KEY: "co" };
-  return { baseline: build(offers), live: build(offers), unavailable: new Set<string>(), env };
+  return {
+    baseline: build(offers),
+    live: build(offers),
+    unavailable: new Set<string>(),
+    env,
+    subscription: [],
+  };
 }
 
 test("reviewer tiers prefer OpenCode, then rank providers and models by catalogued intelligence", () => {
@@ -293,7 +303,7 @@ test("reviewer tiers keep unscored chat models when upstream drops benchmarks", 
 
 test("reviewer falls back across provider tiers and records every attempt", async () => {
   const seen: string[] = [];
-  const review = freeReviewer(reviewerPool(), async (_url, init) => {
+  const review = catalogueReviewer(reviewerPool(), async (_url, init) => {
     const { model } = JSON.parse(String(init.body)) as { model: string };
     seen.push(model);
     if (model === "mid-free") return new Response("quota", { status: 403 });
@@ -307,12 +317,49 @@ test("reviewer falls back across provider tiers and records every attempt", asyn
     { model: "opencode/mid-free", outcome: "HTTP 403" },
     { model: "mistral/mistral-medium-3.5", outcome: "answered" },
   ]);
-  expect(() => freeReviewer({ ...reviewerPool(), env: {} })).toThrow("No catalogued free reviewer");
+  expect(() => catalogueReviewer({ ...reviewerPool(), env: {} })).toThrow("No catalogued reviewer");
+});
+
+test("reviewer tries the OpenCode Go subscription before free models", async () => {
+  const pool = { ...reviewerPool(), subscription: SUBSCRIPTION_REVIEWERS };
+  expect(reviewerTiers(pool).map((tier) => tier.map((offer) => offer.model))).toEqual([
+    ["deepseek-v4-pro", "claude-haiku-5-5"],
+    ["smart-free", "mid-free"],
+    ["mistral-medium-3.5"],
+    ["command-a"],
+  ]);
+  expect(reviewerTiers({ ...pool, env: { ...pool.env, OPENCODE_API_KEY: undefined } })[0]).toEqual([
+    expect.objectContaining({ provider: "mistral" }),
+  ]);
+  const requests: { url: string; init: RequestInit }[] = [];
+  const review = catalogueReviewer(pool, async (url, init) => {
+    requests.push({ url, init });
+    if (url.endsWith("/chat/completions") && requests.length === 1)
+      return new Response("bad gateway", { status: 502 });
+    return Response.json({ content: [{ type: "text", text: '{"approve":true}' }] });
+  });
+  const verdict = await review("diff", z.object({ approve: z.boolean() }));
+  expect(verdict).toEqual({ model: "opencode-go/claude-haiku-5-5", result: { approve: true } });
+  expect(requests.map(({ url }) => url)).toEqual([
+    "https://opencode.ai/inference/go/openai/v1/chat/completions",
+    "https://opencode.ai/inference/go/anthropic/v1/messages",
+  ]);
+  const [openAi, anthropic] = requests.map(({ init }) => init.headers as Record<string, string>);
+  expect(openAi?.["x-opencode-session"]).toBeString();
+  expect(anthropic).toMatchObject({
+    "x-api-key": "oc",
+    "anthropic-version": "2023-06-01",
+    "x-opencode-session": openAi?.["x-opencode-session"],
+  });
+  expect(JSON.parse(String(requests[1]?.init.body))).toMatchObject({
+    model: "claude-haiku-5-5",
+    messages: [{ role: "user", content: "diff" }],
+  });
 });
 
 test("reviewer skips providers with account-wide errors on later requests", async () => {
   const seen: string[] = [];
-  const review = freeReviewer(reviewerPool(), async (_url, init) => {
+  const review = catalogueReviewer(reviewerPool(), async (_url, init) => {
     const { model } = JSON.parse(String(init.body)) as { model: string };
     seen.push(model);
     if (model.endsWith("-free")) return new Response("quota", { status: 429 });

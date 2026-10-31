@@ -10,7 +10,7 @@ import {
 import { computeUnresolved, loadCatalogueState } from "../catalogue/state.ts";
 import { reconcile } from "../catalogue/workflow.ts";
 import { providerRegistry } from "../providers/registry.ts";
-import { freeReviewer, type ReviewAttempt } from "./inference.ts";
+import { catalogueReviewer, type ReviewAttempt } from "./inference.ts";
 import {
   allowedCataloguePath,
   decideHolds,
@@ -198,7 +198,7 @@ try {
     let reviewer: string | undefined;
     if (reviewable.length) {
       try {
-        const review = freeReviewer(reviewerPool);
+        const review = catalogueReviewer(reviewerPool);
         reviewAttempts = review.attempts;
         const verdict = await review(
           `Check each proposed identity against its upstream model ID. Preserve versions, quantization and variants. Decide each proposal independently. Return {"decisions":[{"provider":string,"id":string,"approve":boolean,"reason":string}]} with one decision per proposal.\n${JSON.stringify(reviewable)}`,
@@ -334,7 +334,7 @@ try {
           .map((offer) => ({ provider, model_id: offer.model_id }));
       });
       const { accepted } = await readJson(repairPath, repairSchema, { accepted: {} });
-      const review = freeReviewer(reviewerPool);
+      const review = catalogueReviewer(reviewerPool);
       reviewAttempts = review.attempts;
       const verdicts = [];
       for (const [index, part] of parts.entries()) {
