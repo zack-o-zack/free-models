@@ -84,15 +84,16 @@ const OPENCODE_GO = "https://opencode.ai/inference/go";
 // OPENCODE_API_KEY as OpenCode free models and are fixed here rather than read from the catalogue.
 export const SUBSCRIPTION_REVIEWERS: readonly SubscriptionReviewer[] = [
   {
-    model: "deepseek-v4-pro",
-    protocol: "openai",
-    endpoint: `${OPENCODE_GO}/openai/v1/chat/completions`,
-    contextLength: 1_000_000,
-  },
-  {
     model: "claude-haiku-5-5",
     protocol: "anthropic",
     endpoint: `${OPENCODE_GO}/anthropic/v1/messages`,
+    contextLength: 1_000_000,
+  },
+  // Slower on full diff parts, so it is the fallback.
+  {
+    model: "deepseek-v4-pro",
+    protocol: "openai",
+    endpoint: `${OPENCODE_GO}/openai/v1/chat/completions`,
     contextLength: 1_000_000,
   },
 ];

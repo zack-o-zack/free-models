@@ -323,7 +323,7 @@ test("reviewer falls back across provider tiers and records every attempt", asyn
 test("reviewer tries the OpenCode Go subscription before free models", async () => {
   const pool = { ...reviewerPool(), subscription: SUBSCRIPTION_REVIEWERS };
   expect(reviewerTiers(pool).map((tier) => tier.map((offer) => offer.model))).toEqual([
-    ["deepseek-v4-pro", "claude-haiku-5-5"],
+    ["claude-haiku-5-5", "deepseek-v4-pro"],
     ["smart-free", "mid-free"],
     ["mistral-medium-3.5"],
     ["command-a"],
@@ -334,30 +334,38 @@ test("reviewer tries the OpenCode Go subscription before free models", async () 
   const requests: { url: string; init: RequestInit }[] = [];
   const review = catalogueReviewer(pool, async (url, init) => {
     requests.push({ url, init });
-    if (url.endsWith("/chat/completions") && requests.length === 1)
+    if (url.endsWith("/messages"))
       return Response.json({ error: { code: "upstream_error", message: "x" } }, { status: 502 });
-    return Response.json({ content: [{ type: "text", text: '{"approve":true}' }] });
+    return Response.json({ choices: [{ message: { content: '{"approve":true}' } }] });
   });
   const verdict = await review("diff", z.object({ approve: z.boolean() }));
-  expect(verdict).toEqual({ model: "opencode-go/claude-haiku-5-5", result: { approve: true } });
+  expect(verdict).toEqual({ model: "opencode-go/deepseek-v4-pro", result: { approve: true } });
   expect(requests.map(({ url }) => url)).toEqual([
-    "https://opencode.ai/inference/go/openai/v1/chat/completions",
     "https://opencode.ai/inference/go/anthropic/v1/messages",
+    "https://opencode.ai/inference/go/openai/v1/chat/completions",
   ]);
   expect(review.attempts[0]).toEqual({
-    model: "opencode-go/deepseek-v4-pro",
+    model: "opencode-go/claude-haiku-5-5",
     outcome: "HTTP 502 upstream_error",
   });
-  const [openAi, anthropic] = requests.map(({ init }) => init.headers as Record<string, string>);
-  expect(openAi?.["x-opencode-session"]).toBeString();
-  expect(anthropic).toMatchObject({
-    "x-api-key": "oc",
-    "anthropic-version": "2023-06-01",
-    "x-opencode-session": openAi?.["x-opencode-session"],
-  });
-  expect(JSON.parse(String(requests[1]?.init.body))).toMatchObject({
+  const [anthropic, openAi] = requests.map(({ init }) => init.headers as Record<string, string>);
+  expect(anthropic?.["x-opencode-session"]).toBeString();
+  expect(anthropic).toMatchObject({ "x-api-key": "oc", "anthropic-version": "2023-06-01" });
+  expect(openAi?.["x-opencode-session"]).toBe(anthropic?.["x-opencode-session"]);
+  expect(JSON.parse(String(requests[0]?.init.body))).toMatchObject({
     model: "claude-haiku-5-5",
     messages: [{ role: "user", content: "diff" }],
+  });
+  const anthropicReview = catalogueReviewer(pool, async () =>
+    Response.json({
+      content: [
+        { type: "thinking", thinking: "", signature: "s" },
+        { type: "text", text: '{"approve":false}' },
+      ],
+    }),
+  );
+  expect((await anthropicReview("diff", z.object({ approve: z.boolean() }))).result).toEqual({
+    approve: false,
   });
 });
 
