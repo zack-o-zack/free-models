@@ -41,6 +41,8 @@ export interface ModelSummary {
   supportsReasoning: boolean;
   supportsTools: boolean;
   isStealth: boolean;
+  modelType: string | null;
+  topics: string[];
   intelligenceScore: number | null;
   codingScore: number | null;
   agenticScore: number | null;

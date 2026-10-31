@@ -89,6 +89,8 @@ describe("getBestIndexes", () => {
     supportsReasoning: false,
     supportsTools: false,
     isStealth: false,
+    modelType: null,
+    topics: [],
     intelligenceScore: null,
     codingScore: null,
     agenticScore: null,

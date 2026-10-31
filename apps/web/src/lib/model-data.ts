@@ -8,6 +8,8 @@ interface RawModel {
   id: string;
   name: string;
   description?: string;
+  model_type?: string;
+  topics?: string[];
   context_length?: number;
   created?: number;
   architecture?: {
@@ -193,6 +195,8 @@ function toModelSummary(model: RawModel): ModelSummary {
       supportedParameters.some((parameter) => parameter.includes("reasoning")),
     supportsTools: supportedParameters.includes("tools"),
     isStealth: model.id.startsWith("stealth:"),
+    modelType: model.model_type ?? null,
+    topics: model.topics ?? [],
     intelligenceScore: model.benchmarks?.artificial_analysis?.intelligence_index ?? null,
     codingScore: model.benchmarks?.artificial_analysis?.coding_index ?? null,
     agenticScore: model.benchmarks?.artificial_analysis?.agentic_index ?? null,

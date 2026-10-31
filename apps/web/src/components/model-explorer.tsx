@@ -40,6 +40,12 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { EntityKind } from "@/lib/catalogue-entities";
+import {
+  type BenchmarkRange,
+  getActiveBenchmarkFilters,
+  getBenchmarkFilterOptions,
+  matchesBenchmarkFilters,
+} from "@/lib/model-benchmark-filters";
 import { getModelFilterOptions } from "@/lib/model-filter-options";
 import {
   compareModels,
@@ -113,14 +119,28 @@ export function ModelExplorer({
   const [selectedPublishers, setSelectedPublishers] = useState<string[]>([]);
   const [selectedProviders, setSelectedProviders] = useState<string[]>([]);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+  const [benchmarkRanges, setBenchmarkRanges] = useState<Partial<Record<string, BenchmarkRange>>>(
+    {},
+  );
   const [zdrOnly, setZdrOnly] = useState(false);
   const {
     inputs: inputOptions,
     outputs,
     contextSteps,
     regions: regionOptions,
+    topics: topicOptions,
     zdrCount,
   } = useMemo(() => getModelFilterOptions(models), [models]);
+  const benchmarkOptions = useMemo(() => getBenchmarkFilterOptions(models), [models]);
+  const activeBenchmarks = useMemo(
+    () =>
+      getActiveBenchmarkFilters(
+        [...benchmarkOptions.artificialAnalysis, ...benchmarkOptions.designArena],
+        benchmarkRanges,
+      ),
+    [benchmarkOptions, benchmarkRanges],
+  );
   const [selectedContextRange, setContextRange] = useState<[number, number] | null>(null);
   const contextRange = useMemo<[number, number]>(
     () =>
@@ -175,6 +195,8 @@ export function ModelExplorer({
   const isContextFiltered = contextRange[0] > 0 || contextRange[1] < contextSteps.length - 1;
   const activeFilterCount =
     selectedInputs.length +
+    selectedTopics.length +
+    activeBenchmarks.length +
     selectedPublishers.length +
     selectedProviders.length +
     selectedRegions.length +
@@ -236,10 +258,14 @@ export function ModelExplorer({
           selectedProviders.some((provider) => model.providers.includes(provider))) &&
         matchesContext &&
         matchesZdr &&
-        matchesRegion
+        matchesRegion &&
+        (selectedTopics.length === 0 ||
+          selectedTopics.some((topic) => model.topics.includes(topic))) &&
+        matchesBenchmarkFilters(model, activeBenchmarks)
       );
     });
   }, [
+    activeBenchmarks,
     contextRange,
     contextSteps,
     models,
@@ -248,6 +274,7 @@ export function ModelExplorer({
     selectedProviders,
     selectedPublishers,
     selectedRegions,
+    selectedTopics,
     zdrOnly,
   ]);
 
@@ -300,6 +327,16 @@ export function ModelExplorer({
     );
   }
 
+  function toggleTopic(topic: string) {
+    setSelectedTopics((current) =>
+      current.includes(topic) ? current.filter((value) => value !== topic) : [...current, topic],
+    );
+  }
+
+  function setBenchmarkRange(id: string, range: BenchmarkRange) {
+    setBenchmarkRanges((current) => ({ ...current, [id]: range }));
+  }
+
   function toggleZdr() {
     setZdrOnly((current) => !current);
   }
@@ -309,16 +346,23 @@ export function ModelExplorer({
     setSelectedPublishers([]);
     setSelectedProviders([]);
     setSelectedRegions([]);
+    setSelectedTopics([]);
+    setBenchmarkRanges({});
     setZdrOnly(false);
     setContextRange(null);
   }
 
   const filterProps = {
+    artificialAnalysisOptions: benchmarkOptions.artificialAnalysis,
+    designArenaOptions: benchmarkOptions.designArena,
+    benchmarkRanges,
     selectedInputs,
     selectedPublishers,
     selectedProviders,
     selectedRegions,
+    selectedTopics,
     regionOptions,
+    topicOptions,
     zdrOnly,
     zdrCount,
     contextRange,
@@ -329,10 +373,12 @@ export function ModelExplorer({
     providerNames: liveProviderNames,
     providerDocs,
     activeFilterCount,
+    onBenchmarkRangeChange: setBenchmarkRange,
     onToggleInput: toggleInput,
     onTogglePublisher: togglePublisher,
     onToggleProvider: toggleProvider,
     onToggleRegion: toggleRegion,
+    onToggleTopic: toggleTopic,
     onToggleZdr: toggleZdr,
     onContextRangeChange: setContextRange,
     onClear: clearFilters,
@@ -407,8 +453,8 @@ export function ModelExplorer({
                     <SheetHeader>
                       <SheetTitle>Filter models</SheetTitle>
                       <SheetDescription>
-                        Filter by input type, data privacy, hosting region, provider, and context
-                        size.
+                        Filter by topic, input type, data privacy, hosting region, provider, and
+                        context size.
                       </SheetDescription>
                     </SheetHeader>
                     <ScrollArea className="min-h-0 flex-1 px-4 pb-4">
