@@ -9,6 +9,7 @@ export interface CataloguePaths {
   readonly canonicalMetadata: string;
   readonly mappingsDirectory: string;
   readonly snapshotsDirectory: string;
+  readonly topics: string;
   readonly unresolved: string;
   readonly publicCatalogue: string;
   readonly changelog: string;
@@ -28,6 +29,7 @@ export function cataloguePaths(workspace: string): CataloguePaths {
     canonicalMetadata: join(dataDirectory, "canonical-metadata.json"),
     mappingsDirectory,
     snapshotsDirectory,
+    topics: join(dataDirectory, "topics.json"),
     unresolved: join(dataDirectory, "unresolved.json"),
     publicCatalogue: join(absoluteWorkspace, "free-models.json"),
     changelog: join(dataDirectory, "changelog.json"),

@@ -1,4 +1,5 @@
 import { canonicalModelWithGeneratedFields } from "./canonical.ts";
+import { withDerivedFields } from "./derived.ts";
 import { compareStrings, serializeJson, sortJsonObject } from "./files.ts";
 import {
   CATALOGUE_SCHEMA_VERSION,
@@ -74,7 +75,10 @@ function buildCatalogue(state: CatalogueState): Catalogue {
       );
 
       return {
-        ...canonicalModelWithGeneratedFields(canonical, metadataById.get(canonicalId) ?? {}),
+        ...withDerivedFields(
+          canonicalModelWithGeneratedFields(canonical, metadataById.get(canonicalId) ?? {}),
+          state.topicOverrides,
+        ),
         providers,
       };
     });
