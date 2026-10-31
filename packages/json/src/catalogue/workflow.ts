@@ -7,6 +7,7 @@ import type {
 import { getCachedModelsDevRegistry, type ModelsDevRegistry } from "../providers/models-dev.ts";
 import type { ModelProvider } from "../providers/provider.ts";
 import { normalizeCanonicalMetadata, RESERVED_CANONICAL_FIELDS } from "./canonical.ts";
+import { catalogueContractViolations } from "./contract.ts";
 import type { CataloguePaths } from "./files.ts";
 import {
   compareStrings,
@@ -172,6 +173,11 @@ export async function check(
 
   if (actualPublicText !== renderer.render(state)) {
     throw new Error("Public catalogue is stale; run the render command");
+  }
+
+  const violations = catalogueContractViolations(result.data.models);
+  if (violations.length > 0) {
+    throw new Error(`Public catalogue breaks the model type contract:\n${violations.join("\n")}`);
   }
 }
 

@@ -128,6 +128,12 @@ export const providerMappingsSchema = z
   })
   .strict();
 
+export const topicOverridesSchema = z
+  .object({
+    overrides: z.record(canonicalModelIdSchema, z.array(z.string().min(1))),
+  })
+  .strict();
+
 export const unresolvedSchema = z
   .object({
     providers: z.record(providerIdSchema, z.array(z.string().min(1))),
@@ -172,4 +178,5 @@ export type OfferLimits = z.infer<typeof limitsSchema>;
 export type ProviderDoc = z.infer<typeof providerDocSchema>;
 export type ProviderMappings = z.infer<typeof providerMappingsSchema>;
 export type ProviderSnapshot = z.infer<typeof providerSnapshotSchema>;
+export type TopicOverrides = z.infer<typeof topicOverridesSchema>;
 export type Unresolved = z.infer<typeof unresolvedSchema>;

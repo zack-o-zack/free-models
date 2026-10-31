@@ -24,6 +24,8 @@ test("empty catalogues and missing context have a safe unfiltered range", () => 
     outputs: [],
     contextSteps: [0],
     regions: [],
+    categories: [],
+    topics: [],
     zdrCount: 0,
   });
   expect(
@@ -76,5 +78,59 @@ test("computes region and ZDR counts from model connections", () => {
   expect(options.regions).toEqual([
     { value: "US", label: "United States", flag: "🇺🇸", count: 2 },
     { value: "EU", label: "European Union", flag: "🇪🇺", count: 1 },
+  ]);
+});
+
+test("counts categories from model types and skips untyped models", () => {
+  const options = getModelFilterOptions([
+    {
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+      contextLength: 4096,
+      modelType: "chat",
+    },
+    {
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+      contextLength: 8192,
+      modelType: "chat",
+    },
+    {
+      inputModalities: ["text"],
+      outputModalities: ["embeddings"],
+      contextLength: 0,
+      modelType: "embedding",
+    },
+    { inputModalities: ["text"], outputModalities: ["text"], contextLength: 0, modelType: null },
+  ]);
+
+  expect(options.categories).toEqual([
+    { value: "chat", label: "Chat", count: 2 },
+    { value: "embedding", label: "Embedding", count: 1 },
+  ]);
+});
+
+test("counts topics per model and sorts them by count, then label", () => {
+  const options = getModelFilterOptions([
+    {
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+      contextLength: 4096,
+      topics: ["programming", "agents"],
+    },
+    {
+      inputModalities: ["text"],
+      outputModalities: ["text"],
+      contextLength: 8192,
+      topics: ["programming", "creative_writing", "programming"],
+    },
+    { inputModalities: ["text"], outputModalities: ["text"], contextLength: 0, topics: [] },
+    { inputModalities: ["text"], outputModalities: ["text"], contextLength: 0 },
+  ]);
+
+  expect(options.topics).toEqual([
+    { value: "programming", label: "Programming", count: 2 },
+    { value: "agents", label: "Agents", count: 1 },
+    { value: "creative_writing", label: "Creative Writing", count: 1 },
   ]);
 });

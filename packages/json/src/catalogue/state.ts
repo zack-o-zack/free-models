@@ -11,14 +11,19 @@ import {
   type ProviderSnapshot,
   providerMappingsSchema,
   providerSnapshotSchema,
+  type TopicOverrides,
+  topicOverridesSchema,
   type Unresolved,
 } from "./schema.ts";
+import { MODEL_TOPIC_SLUGS } from "./topics.ts";
 
 export interface CatalogueState {
   readonly canonicalModels: CanonicalModels;
   readonly metadata: CanonicalMetadataFile;
   readonly mappings: ReadonlyMap<string, ProviderMappings>;
   readonly snapshots: ReadonlyMap<string, ProviderSnapshot>;
+  /** Curated topic lists that replace the rule result, keyed by canonical model ID. */
+  readonly topicOverrides?: ReadonlyMap<string, readonly string[]>;
 }
 
 export interface ResolvedCatalogueOffer {
@@ -51,6 +56,13 @@ export async function loadCatalogueState(
     : { metadata: [] };
   validateUniqueMetadataEntries(metadata);
 
+  const topicsFile = Bun.file(paths.topics);
+  const topics: TopicOverrides = (await topicsFile.exists())
+    ? await readValidatedJson(paths.topics, topicOverridesSchema, "Topic overrides")
+    : { overrides: {} };
+  validateTopicOverrides(topics, canonicalModels);
+  const topicOverrides = new Map(Object.entries(topics.overrides));
+
   const mappings = new Map<string, ProviderMappings>();
   const snapshots = new Map<string, ProviderSnapshot>();
 
@@ -78,7 +90,7 @@ export async function loadCatalogueState(
     mappings.set(provider.id, mapping);
   }
 
-  return { canonicalModels, metadata, mappings, snapshots };
+  return { canonicalModels, metadata, mappings, snapshots, topicOverrides };
 }
 
 export function computeUnresolved(state: CatalogueState): Unresolved {
@@ -185,6 +197,23 @@ export function metadataById(
   metadata: CanonicalMetadataFile,
 ): ReadonlyMap<string, Readonly<Record<string, import("./schema.ts").JsonValue>>> {
   return new Map(metadata.metadata.map((entry) => [entry.id, entry.metadata]));
+}
+
+function validateTopicOverrides(topics: TopicOverrides, canonicalModels: CanonicalModels): void {
+  const canonicalIds = new Set(canonicalModels.models.map(({ id }) => id));
+  for (const [canonicalId, slugs] of Object.entries(topics.overrides)) {
+    if (!canonicalIds.has(canonicalId)) {
+      throw new Error(`Topic overrides reference unknown canonical model ${canonicalId}`);
+    }
+    for (const slug of slugs) {
+      if (!MODEL_TOPIC_SLUGS.has(slug)) {
+        throw new Error(`Topic overrides for ${canonicalId} use unknown topic ${slug}`);
+      }
+    }
+    if (new Set(slugs).size !== slugs.length) {
+      throw new Error(`Topic overrides for ${canonicalId} repeat a topic`);
+    }
+  }
 }
 
 function validateUniqueMetadataEntries(metadata: CanonicalMetadataFile): void {

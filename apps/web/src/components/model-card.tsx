@@ -1,6 +1,16 @@
 "use client";
 
-import { Bot, BrainCircuit, Code2, EyeOff, Gauge, Server } from "lucide-react";
+import {
+  Bot,
+  BrainCircuit,
+  Code2,
+  EyeOff,
+  Gauge,
+  Layers,
+  Ruler,
+  Server,
+  ShieldCheck,
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type MouseEvent, memo } from "react";
@@ -13,6 +23,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { entityHref, publisherSlug } from "@/lib/catalogue-entities";
+import { getModelCardDetails } from "@/lib/model-card-details";
 import { formatBenchmarkScore, formatContext, modelDisplayName } from "@/lib/model-format";
 import { getProviderFundingLabel } from "@/lib/model-funding";
 import { modelHref } from "@/lib/model-path";
@@ -34,6 +45,7 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
   const href = modelHref(model.id);
   const providerLogoUrl = publisherFaviconUrl(model.id.split("/")[0]);
   const displayName = modelDisplayName(model);
+  const details = getModelCardDetails(model);
 
   function handleCardClick(event: MouseEvent<HTMLDivElement>) {
     if (
@@ -125,6 +137,27 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
                     value={formatContext(model.contextLength)}
                   />
                 )}
+                {details.embeddingDimensions && (
+                  <BenchmarkMetric
+                    icon={Ruler}
+                    label="Embedding dimensions"
+                    value={details.embeddingDimensions}
+                  />
+                )}
+                {details.outputs && (
+                  <BenchmarkMetric
+                    icon={Layers}
+                    label="Output modalities"
+                    value={details.outputs}
+                  />
+                )}
+                {details.zdr && (
+                  <BenchmarkMetric
+                    icon={ShieldCheck}
+                    label="Zero data retention available from at least one provider"
+                    value="ZDR"
+                  />
+                )}
                 {model.intelligenceScore !== null && (
                   <BenchmarkMetric
                     icon={BrainCircuit}
@@ -156,6 +189,15 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
         <p className="line-clamp-2 max-w-4xl text-[15px] leading-6 text-muted-foreground">
           {model.description}
         </p>
+        {details.topics.length > 0 && (
+          <div className="flex flex-wrap items-center gap-1.5">
+            {details.topics.map(({ value, label }) => (
+              <Badge key={value} variant="outline">
+                {label}
+              </Badge>
+            ))}
+          </div>
+        )}
         <div className="flex flex-wrap items-center gap-1.5">
           {model.providers.map((provider) => (
             <ProviderBadge

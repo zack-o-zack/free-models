@@ -1,0 +1,17 @@
+{
+  "overrides": {
+    "meta-llama/llama-4-maverick": [],
+    "meta-llama/llama-4-scout": [],
+    "mistralai/codestral-embed-2505": ["programming"],
+    "nvidia/ising-calibration-1-35b-a3b": ["science"],
+    "nvidia/ising-calibration-1.5-31b": ["science"],
+    "nvidia/nemotron-3.5-content-safety": [],
+    "nvidia/riva-translate-4b-instruct-v2": ["translation"],
+    "qwen/qwen-flash-character": ["roleplay"],
+    "qwen/qwen3-max-thinking": [],
+    "voyage/voyage-code-2": ["programming"],
+    "voyage/voyage-code-3": ["programming"],
+    "voyage/voyage-finance-2": ["finance"],
+    "voyage/voyage-law-2": ["legal"]
+  }
+}

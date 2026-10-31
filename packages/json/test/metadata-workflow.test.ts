@@ -358,4 +358,20 @@ describe("canonical metadata refresh", () => {
       ]);
     });
   });
+
+  test("check rejects a rendered model that breaks its type contract", async () => {
+    await withWorkspace(async (workspace) => {
+      await reviewOffers(workspace);
+      await writeJson(join(workspace, "catalogue/canonical-metadata.json"), {
+        metadata: [{ id: "acme/alpha", metadata: { model_type: "transcription" } }],
+      });
+
+      expect(runFixtureCli(workspace, "render").exitCode).toBe(0);
+      const check = runFixtureCli(workspace, "check");
+      expect(check.exitCode).toBe(1);
+      expect(decoder.decode(check.stderr)).toContain(
+        "acme/alpha is transcription but has no architecture.input_modalities",
+      );
+    });
+  });
 });
