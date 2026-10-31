@@ -135,6 +135,11 @@ describe("derived fields", () => {
     expect(plain).toEqual({ id: "acme/plain", name: "Plain" });
   });
 
+  test("recomputes topics instead of keeping a source value", () => {
+    const model = withDerivedFields({ id: "acme/plain", name: "Plain", topics: ["legal"] });
+    expect(model.topics).toBeUndefined();
+  });
+
   test("derives topics after model_type", () => {
     expect(
       withDerivedFields({

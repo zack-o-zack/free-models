@@ -3,7 +3,8 @@ import { assignModelTopics } from "./topics.ts";
 
 /**
  * Fields that render derives from the catalogue's own metadata, so each render keeps them
- * current for new and changed models. Source values always win over derived values.
+ * current for new and changed models. Source `model_type` and `embedding_dimensions` win over
+ * derived values; `topics` is always recomputed from the rules and `catalogue/topics.json`.
  */
 export function withDerivedFields<
   T extends { id: string; name: string } & Record<string, JsonValue>,
@@ -30,6 +31,7 @@ export function withDerivedFields<
     { id: model.id, name: model.name, description: model.description, model_type: modelType },
     topicOverrides,
   );
+  delete result.topics;
   if (topics.length > 0) {
     result.topics = topics;
   }
