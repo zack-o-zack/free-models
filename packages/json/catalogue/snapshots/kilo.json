@@ -249,66 +249,6 @@
       }
     },
     {
-      "model_id": "poolside/laguna-s-2.1:free",
-      "name": "Poolside: Laguna S 2.1 (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "KILO_API_KEY"
-          ]
-        },
-        "base_url": "https://api.kilo.ai/api/gateway",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / hour"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "kilo",
-          "openrouter"
-        ],
-        "description": "Free models may log prompts and outputs",
-        "conditional": true
-      }
-    },
-    {
-      "model_id": "poolside/laguna-xs-2.1:free",
-      "name": "Poolside: Laguna XS 2.1 (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "KILO_API_KEY"
-          ]
-        },
-        "base_url": "https://api.kilo.ai/api/gateway",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / hour"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "kilo",
-          "openrouter"
-        ],
-        "description": "Free models may log prompts and outputs",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "recursive/flint-v1.0:free",
       "name": "Recursive: Flint (free)",
       "connection": {

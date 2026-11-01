@@ -1,16 +1,81 @@
 {
-  "generatedAt": "2026-10-31T08:30:47.720Z",
+  "generatedAt": "2026-11-01T09:22:43.521Z",
   "windowDays": 30,
-  "since": "2026-10-01T08:30:47.720Z",
+  "since": "2026-10-02T09:22:43.521Z",
   "totalAdded": 432,
-  "totalRemoved": 95,
+  "totalRemoved": 100,
   "totalProvidersAdded": 8,
   "totalProvidersRemoved": 0,
   "entries": [
     {
-      "id": "working-cohere-remove-north-mini-code-1-0",
+      "id": "working-kilo-remove-poolside/laguna-s-2.1:free",
+      "date": "2026-11-01",
+      "timestamp": "2026-11-01T09:22:43.521Z",
+      "provider": "kilo",
+      "providerName": "Kilo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "poolside/laguna-s-2.1:free",
+      "modelName": "Poolside: Laguna S 2.1 (free)",
+      "canonicalId": "poolside/laguna-s-2.1",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-kilo-remove-poolside/laguna-xs-2.1:free",
+      "date": "2026-11-01",
+      "timestamp": "2026-11-01T09:22:43.521Z",
+      "provider": "kilo",
+      "providerName": "Kilo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "poolside/laguna-xs-2.1:free",
+      "modelName": "Poolside: Laguna XS 2.1 (free)",
+      "canonicalId": "poolside/laguna-xs-2.1",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-openrouter-remove-poolside/laguna-s-2.1:free",
+      "date": "2026-11-01",
+      "timestamp": "2026-11-01T09:22:43.521Z",
+      "provider": "openrouter",
+      "providerName": "OpenRouter",
+      "type": "removed",
+      "category": "model",
+      "modelId": "poolside/laguna-s-2.1:free",
+      "modelName": "Poolside: Laguna S 2.1 (free)",
+      "canonicalId": "poolside/laguna-s-2.1",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-openrouter-remove-poolside/laguna-xs-2.1:free",
+      "date": "2026-11-01",
+      "timestamp": "2026-11-01T09:22:43.521Z",
+      "provider": "openrouter",
+      "providerName": "OpenRouter",
+      "type": "removed",
+      "category": "model",
+      "modelId": "poolside/laguna-xs-2.1:free",
+      "modelName": "Poolside: Laguna XS 2.1 (free)",
+      "canonicalId": "poolside/laguna-xs-2.1",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-vercel-remove-convaiinnovations/laya-free",
+      "date": "2026-11-01",
+      "timestamp": "2026-11-01T09:22:43.521Z",
+      "provider": "vercel",
+      "providerName": "Vercel AI Gateway",
+      "type": "removed",
+      "category": "model",
+      "modelId": "convaiinnovations/laya-free",
+      "modelName": "Laya (Free)",
+      "canonicalId": "convaiinnovations/laya",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "fdf6c25-cohere-remove-north-mini-code-1-0",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "cohere",
       "providerName": "Cohere",
       "type": "removed",
@@ -18,12 +83,13 @@
       "modelId": "north-mini-code-1-0",
       "modelName": "North mini code 1 0",
       "canonicalId": "cohere/north-mini-code",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-cohere-remove-north-small-translate-09-2026",
+      "id": "fdf6c25-cohere-remove-north-small-translate-09-2026",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "cohere",
       "providerName": "Cohere",
       "type": "removed",
@@ -31,12 +97,13 @@
       "modelId": "north-small-translate-09-2026",
       "modelName": "North small translate 09 2026",
       "canonicalId": "cohere/north-small-translate-09-2026",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-add-gemini-embedding-001",
+      "id": "fdf6c25-gemini-add-gemini-embedding-001",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "added",
@@ -44,12 +111,13 @@
       "modelId": "gemini-embedding-001",
       "modelName": "Gemini Embedding",
       "canonicalId": "google/gemini-embedding-001",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-kilo-remove-nvidia/nemotron-3-super-120b-a12b:free",
+      "id": "fdf6c25-kilo-remove-nvidia/nemotron-3-super-120b-a12b:free",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "kilo",
       "providerName": "Kilo",
       "type": "removed",
@@ -57,12 +125,13 @@
       "modelId": "nvidia/nemotron-3-super-120b-a12b:free",
       "modelName": "NVIDIA: Nemotron 3 Super (free)",
       "canonicalId": "nvidia/nemotron-3-super-120b-a12b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-llm7-remove-minimax-m2.7",
+      "id": "fdf6c25-llm7-remove-minimax-m2.7",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "llm7",
       "providerName": "LLM7",
       "type": "removed",
@@ -70,12 +139,13 @@
       "modelId": "minimax-m2.7",
       "modelName": "Minimax m2.7",
       "canonicalId": "minimax/minimax-m2.7",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-nous-remove-meituan/longcat-2.0:free",
+      "id": "fdf6c25-nous-remove-meituan/longcat-2.0:free",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "nous",
       "providerName": "Nous Portal",
       "type": "removed",
@@ -83,12 +153,13 @@
       "modelId": "meituan/longcat-2.0:free",
       "modelName": "Meituan: LongCat 2.0",
       "canonicalId": "meituan/longcat-2.0",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-nvidia-add-mistralai/mistral-large-4-1t-a52b",
+      "id": "fdf6c25-nvidia-add-mistralai/mistral-large-4-1t-a52b",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "nvidia",
       "providerName": "NVIDIA",
       "type": "added",
@@ -96,12 +167,13 @@
       "modelId": "mistralai/mistral-large-4-1t-a52b",
       "modelName": "Mistral Large 4",
       "canonicalId": "mistralai/mistral-large-4-1t-a52b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-nvidia-remove-z-ai/glm-5-3",
+      "id": "fdf6c25-nvidia-remove-z-ai/glm-5-3",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "nvidia",
       "providerName": "NVIDIA",
       "type": "removed",
@@ -109,12 +181,13 @@
       "modelId": "z-ai/glm-5-3",
       "modelName": "glm-5-3",
       "canonicalId": "z-ai/glm-5.3",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-opencode-remove-jev-1.13-free",
+      "id": "fdf6c25-opencode-remove-jev-1.13-free",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "opencode",
       "providerName": "OpenCode",
       "type": "removed",
@@ -122,12 +195,13 @@
       "modelId": "jev-1.13-free",
       "modelName": "Jev 1.13 Free",
       "canonicalId": "typesafe/jev-1.13",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-openrouter-remove-baseten/elephant-1:free",
+      "id": "fdf6c25-openrouter-remove-baseten/elephant-1:free",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "openrouter",
       "providerName": "OpenRouter",
       "type": "removed",
@@ -135,12 +209,13 @@
       "modelId": "baseten/elephant-1:free",
       "modelName": "Baseten: Elephant 1 (free)",
       "canonicalId": "baseten/elephant-1",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-openrouter-remove-baseten/mammoth-1:free",
+      "id": "fdf6c25-openrouter-remove-baseten/mammoth-1:free",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "openrouter",
       "providerName": "OpenRouter",
       "type": "removed",
@@ -148,12 +223,13 @@
       "modelId": "baseten/mammoth-1:free",
       "modelName": "Baseten: Mammoth 1 (free)",
       "canonicalId": "baseten/mammoth-1",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-openrouter-remove-inception/mercury-decide:free",
+      "id": "fdf6c25-openrouter-remove-inception/mercury-decide:free",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "openrouter",
       "providerName": "OpenRouter",
       "type": "removed",
@@ -161,12 +237,13 @@
       "modelId": "inception/mercury-decide:free",
       "modelName": "Inception: Mercury Decide (free)",
       "canonicalId": "inception/mercury-decide",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-openrouter-remove-nvidia/nemotron-3-super-120b-a12b:free",
+      "id": "fdf6c25-openrouter-remove-nvidia/nemotron-3-super-120b-a12b:free",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "openrouter",
       "providerName": "OpenRouter",
       "type": "removed",
@@ -174,12 +251,13 @@
       "modelId": "nvidia/nemotron-3-super-120b-a12b:free",
       "modelName": "NVIDIA: Nemotron 3 Super (free)",
       "canonicalId": "nvidia/nemotron-3-super-120b-a12b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-arcee-ai/trinity-large-thinking",
+      "id": "fdf6c25-vercel-remove-arcee-ai/trinity-large-thinking",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -187,12 +265,13 @@
       "modelId": "arcee-ai/trinity-large-thinking",
       "modelName": "Trinity Large Thinking",
       "canonicalId": "arcee-ai/trinity-large-thinking",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-baseten/joey-1",
+      "id": "fdf6c25-vercel-add-baseten/joey-1",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -200,12 +279,13 @@
       "modelId": "baseten/joey-1",
       "modelName": "Joey-1",
       "canonicalId": "baseten/joey-1",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-flash-v2",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-flash-v2",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -213,12 +293,13 @@
       "modelId": "elevenlabs/eleven-flash-v2",
       "modelName": "Eleven Flash v2",
       "canonicalId": "elevenlabs/eleven-flash-v2",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-flash-v2.5",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-flash-v2.5",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -226,12 +307,13 @@
       "modelId": "elevenlabs/eleven-flash-v2.5",
       "modelName": "Eleven Flash v2.5",
       "canonicalId": "elevenlabs/eleven-flash-v2.5",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-multilingual-v2",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-multilingual-v2",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -239,12 +321,13 @@
       "modelId": "elevenlabs/eleven-multilingual-v2",
       "modelName": "Eleven Multilingual v2",
       "canonicalId": "elevenlabs/eleven-multilingual-v2",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-realtime-v1-max",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-realtime-v1-max",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -252,12 +335,13 @@
       "modelId": "elevenlabs/eleven-realtime-v1-max",
       "modelName": "Eleven Realtime v1 Max",
       "canonicalId": "elevenlabs/eleven-realtime-v1-max",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-realtime-v1-mini",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-realtime-v1-mini",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -265,12 +349,13 @@
       "modelId": "elevenlabs/eleven-realtime-v1-mini",
       "modelName": "Eleven Realtime v1 Mini",
       "canonicalId": "elevenlabs/eleven-realtime-v1-mini",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-v3",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-v3",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -278,12 +363,13 @@
       "modelId": "elevenlabs/eleven-v3",
       "modelName": "Eleven v3",
       "canonicalId": "elevenlabs/eleven-v3",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-v3-conversational",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-v3-conversational",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -291,12 +377,13 @@
       "modelId": "elevenlabs/eleven-v3-conversational",
       "modelName": "Eleven v3 Conversational",
       "canonicalId": "elevenlabs/eleven-v3-conversational",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-v4",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-v4",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -304,12 +391,13 @@
       "modelId": "elevenlabs/eleven-v4",
       "modelName": "Eleven v4",
       "canonicalId": "elevenlabs/eleven-v4",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/eleven-v4-turbo",
+      "id": "fdf6c25-vercel-add-elevenlabs/eleven-v4-turbo",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -317,12 +405,13 @@
       "modelId": "elevenlabs/eleven-v4-turbo",
       "modelName": "Eleven v4 Turbo",
       "canonicalId": "elevenlabs/eleven-v4-turbo",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/music-v2",
+      "id": "fdf6c25-vercel-add-elevenlabs/music-v2",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -330,12 +419,13 @@
       "modelId": "elevenlabs/music-v2",
       "modelName": "Eleven Music v2",
       "canonicalId": "elevenlabs/music-v2",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/music-v2.5",
+      "id": "fdf6c25-vercel-add-elevenlabs/music-v2.5",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -343,12 +433,13 @@
       "modelId": "elevenlabs/music-v2.5",
       "modelName": "Eleven Music v2.5",
       "canonicalId": "elevenlabs/music-v2.5",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/scribe-v2",
+      "id": "fdf6c25-vercel-add-elevenlabs/scribe-v2",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -356,12 +447,13 @@
       "modelId": "elevenlabs/scribe-v2",
       "modelName": "Scribe v2",
       "canonicalId": "elevenlabs/scribe-v2",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/scribe-v2-realtime",
+      "id": "fdf6c25-vercel-add-elevenlabs/scribe-v2-realtime",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -369,12 +461,13 @@
       "modelId": "elevenlabs/scribe-v2-realtime",
       "modelName": "Scribe v2 Realtime",
       "canonicalId": "elevenlabs/scribe-v2-realtime",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-elevenlabs/sound-effects-v2",
+      "id": "fdf6c25-vercel-add-elevenlabs/sound-effects-v2",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -382,12 +475,13 @@
       "modelId": "elevenlabs/sound-effects-v2",
       "modelName": "Eleven Sound Effects v2",
       "canonicalId": "elevenlabs/sound-effects-v2",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-inclusionai/ling-3.1-flash-1019",
+      "id": "fdf6c25-vercel-add-inclusionai/ling-3.1-flash-1019",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -395,12 +489,13 @@
       "modelId": "inclusionai/ling-3.1-flash-1019",
       "modelName": "Ling 3.1 Flash 1019",
       "canonicalId": "inclusionai/ling-3.1-flash-1019",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-openai/gpt-live-transcribe",
+      "id": "fdf6c25-vercel-add-openai/gpt-live-transcribe",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -408,12 +503,13 @@
       "modelId": "openai/gpt-live-transcribe",
       "modelName": "GPT Live Transcribe",
       "canonicalId": "openai/gpt-live-transcribe",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-add-openai/gpt-transcribe",
+      "id": "fdf6c25-vercel-add-openai/gpt-transcribe",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "added",
@@ -421,12 +517,13 @@
       "modelId": "openai/gpt-transcribe",
       "modelName": "GPT Transcribe",
       "canonicalId": "openai/gpt-transcribe",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-poolside/laguna-s-2.1-free",
+      "id": "fdf6c25-vercel-remove-poolside/laguna-s-2.1-free",
       "date": "2026-10-31",
-      "timestamp": "2026-10-31T08:30:47.720Z",
+      "timestamp": "2026-10-31T08:31:10Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -434,7 +531,8 @@
       "modelId": "poolside/laguna-s-2.1-free",
       "modelName": "Laguna S 2.1 Free",
       "canonicalId": "poolside/laguna-s-2.1",
-      "commitMessage": "Working directory changes"
+      "commitHash": "fdf6c25",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
       "id": "7323f13-nous-remove-meituan/longcat-2.5-preview:free",

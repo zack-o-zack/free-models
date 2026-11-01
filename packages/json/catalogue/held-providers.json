@@ -1,8 +1,12 @@
 {
   "providers": {
+    "nous": {
+      "since": "2026-11-01",
+      "reason": "2 of 6 offers removed"
+    },
     "onomeo": {
       "since": "2026-10-31",
-      "reason": "15 of 15 offers removed"
+      "reason": "discovery failed: Provider onomeo discovery failed: Onomeo info response contains no free models"
     },
     "routeway": {
       "since": "2026-10-31",

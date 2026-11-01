@@ -1685,29 +1685,9 @@
       },
       "limits": {
         "terms": [
-          "Free — no credits used"
+          "Free with $5 monthly credits"
         ],
-        "funding": "no_credits"
-      }
-    },
-    {
-      "model_id": "convaiinnovations/laya-free",
-      "name": "Laya (Free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh",
-        "model_type": "decision",
-        "protocol": "vercel-ai-gateway"
-      },
-      "limits": {
-        "terms": [
-          "Free — no credits used"
-        ],
-        "funding": "no_credits"
+        "funding": "monthly_credits"
       }
     },
     {
