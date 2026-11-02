@@ -1,8 +1,5 @@
-import Link from "next/link";
-
-import { Icons } from "@/components/icons";
+import { GitHubStarButton } from "@/components/github-link";
 import { siteConfig } from "@/lib/config";
-import { formatCount } from "@/lib/format-count";
 import type { ModelSummary } from "@/lib/model-types";
 import { homeDescription } from "@/lib/page-content";
 import styles from "./hero-typographic-broadsheet.module.css";
@@ -109,25 +106,7 @@ export function HeroTypographicBroadsheet({ models, githubStars, description }: 
               {displayDescription}
             </p>
             <div className={styles.actions}>
-              <Link
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={
-                  githubStars > 0
-                    ? `Star Free Models on GitHub. ${githubStars.toLocaleString()} stars.`
-                    : "Star Free Models on GitHub"
-                }
-                className={`${styles.starCta} inline-flex items-center justify-center rounded-full bg-primary text-base font-semibold text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring`}
-              >
-                <Icons.gitHub className={styles.starIcon} />
-                <span>Star on GitHub</span>
-                {githubStars > 0 && (
-                  <span className={styles.starCount} aria-hidden="true">
-                    {formatCount(githubStars)}
-                  </span>
-                )}
-              </Link>
+              <GitHubStarButton stars={githubStars} />
             </div>
           </div>
           <RequestFlow featured={getFeaturedModels(models)} />
