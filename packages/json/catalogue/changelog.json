@@ -1,16 +1,68 @@
 {
-  "generatedAt": "2026-11-01T09:22:43.521Z",
+  "generatedAt": "2026-11-02T09:37:11.772Z",
   "windowDays": 30,
-  "since": "2026-10-02T09:22:43.521Z",
-  "totalAdded": 432,
-  "totalRemoved": 100,
+  "since": "2026-10-03T09:37:11.772Z",
+  "totalAdded": 435,
+  "totalRemoved": 101,
   "totalProvidersAdded": 8,
   "totalProvidersRemoved": 0,
   "entries": [
     {
-      "id": "working-kilo-remove-poolside/laguna-s-2.1:free",
+      "id": "working-bazaarlink-remove-reflection/beam:free",
+      "date": "2026-11-02",
+      "timestamp": "2026-11-02T09:37:11.772Z",
+      "provider": "bazaarlink",
+      "providerName": "BazaarLink",
+      "type": "removed",
+      "category": "model",
+      "modelId": "reflection/beam:free",
+      "modelName": "Beam (free)",
+      "canonicalId": "reflection/beam-1.0-501b-a23b",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-llm7-add-DeepSeek-V4-Flash-0731",
+      "date": "2026-11-02",
+      "timestamp": "2026-11-02T09:37:11.772Z",
+      "provider": "llm7",
+      "providerName": "LLM7",
+      "type": "added",
+      "category": "model",
+      "modelId": "DeepSeek-V4-Flash-0731",
+      "modelName": "Deepseek v4 flash 0731",
+      "canonicalId": "deepseek/deepseek-v4-flash-0731",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-llm7-add-GLM-5.3-Flash",
+      "date": "2026-11-02",
+      "timestamp": "2026-11-02T09:37:11.772Z",
+      "provider": "llm7",
+      "providerName": "LLM7",
+      "type": "added",
+      "category": "model",
+      "modelId": "GLM-5.3-Flash",
+      "modelName": "Glm 5.3 flash",
+      "canonicalId": "z-ai/glm-5.3-flash",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-llm7-add-minimax-m2.7",
+      "date": "2026-11-02",
+      "timestamp": "2026-11-02T09:37:11.772Z",
+      "provider": "llm7",
+      "providerName": "LLM7",
+      "type": "added",
+      "category": "model",
+      "modelId": "minimax-m2.7",
+      "modelName": "Minimax m2.7",
+      "canonicalId": "minimax/minimax-m2.7",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "4148348-kilo-remove-poolside/laguna-s-2.1:free",
       "date": "2026-11-01",
-      "timestamp": "2026-11-01T09:22:43.521Z",
+      "timestamp": "2026-11-01T09:23:07Z",
       "provider": "kilo",
       "providerName": "Kilo",
       "type": "removed",
@@ -18,12 +70,13 @@
       "modelId": "poolside/laguna-s-2.1:free",
       "modelName": "Poolside: Laguna S 2.1 (free)",
       "canonicalId": "poolside/laguna-s-2.1",
-      "commitMessage": "Working directory changes"
+      "commitHash": "4148348",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-kilo-remove-poolside/laguna-xs-2.1:free",
+      "id": "4148348-kilo-remove-poolside/laguna-xs-2.1:free",
       "date": "2026-11-01",
-      "timestamp": "2026-11-01T09:22:43.521Z",
+      "timestamp": "2026-11-01T09:23:07Z",
       "provider": "kilo",
       "providerName": "Kilo",
       "type": "removed",
@@ -31,12 +84,13 @@
       "modelId": "poolside/laguna-xs-2.1:free",
       "modelName": "Poolside: Laguna XS 2.1 (free)",
       "canonicalId": "poolside/laguna-xs-2.1",
-      "commitMessage": "Working directory changes"
+      "commitHash": "4148348",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-openrouter-remove-poolside/laguna-s-2.1:free",
+      "id": "4148348-openrouter-remove-poolside/laguna-s-2.1:free",
       "date": "2026-11-01",
-      "timestamp": "2026-11-01T09:22:43.521Z",
+      "timestamp": "2026-11-01T09:23:07Z",
       "provider": "openrouter",
       "providerName": "OpenRouter",
       "type": "removed",
@@ -44,12 +98,13 @@
       "modelId": "poolside/laguna-s-2.1:free",
       "modelName": "Poolside: Laguna S 2.1 (free)",
       "canonicalId": "poolside/laguna-s-2.1",
-      "commitMessage": "Working directory changes"
+      "commitHash": "4148348",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-openrouter-remove-poolside/laguna-xs-2.1:free",
+      "id": "4148348-openrouter-remove-poolside/laguna-xs-2.1:free",
       "date": "2026-11-01",
-      "timestamp": "2026-11-01T09:22:43.521Z",
+      "timestamp": "2026-11-01T09:23:07Z",
       "provider": "openrouter",
       "providerName": "OpenRouter",
       "type": "removed",
@@ -57,12 +112,13 @@
       "modelId": "poolside/laguna-xs-2.1:free",
       "modelName": "Poolside: Laguna XS 2.1 (free)",
       "canonicalId": "poolside/laguna-xs-2.1",
-      "commitMessage": "Working directory changes"
+      "commitHash": "4148348",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-vercel-remove-convaiinnovations/laya-free",
+      "id": "4148348-vercel-remove-convaiinnovations/laya-free",
       "date": "2026-11-01",
-      "timestamp": "2026-11-01T09:22:43.521Z",
+      "timestamp": "2026-11-01T09:23:07Z",
       "provider": "vercel",
       "providerName": "Vercel AI Gateway",
       "type": "removed",
@@ -70,7 +126,8 @@
       "modelId": "convaiinnovations/laya-free",
       "modelName": "Laya (Free)",
       "canonicalId": "convaiinnovations/laya",
-      "commitMessage": "Working directory changes"
+      "commitHash": "4148348",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
       "id": "fdf6c25-cohere-remove-north-mini-code-1-0",
