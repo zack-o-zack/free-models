@@ -401,6 +401,14 @@
       "name": "DeepSeek V4.1 Flash 1017 Fast"
     },
     {
+      "id": "deepseek/fetch",
+      "name": "DeepSeek Fetch"
+    },
+    {
+      "id": "deepseek/search",
+      "name": "DeepSeek Search"
+    },
+    {
       "id": "dots-studio/dots-3-note-preview",
       "name": "Dots Studio: Dots3-Note Preview"
     },
@@ -719,6 +727,10 @@
     {
       "id": "meituan/longcat-2.0",
       "name": "Meituan: LongCat 2.0"
+    },
+    {
+      "id": "meituan/longcat-2.5",
+      "name": "LongCat 2.5"
     },
     {
       "id": "meituan/longcat-2.5-preview",
@@ -1663,6 +1675,10 @@
     {
       "id": "stealth:union-alpha",
       "name": "Union Alpha"
+    },
+    {
+      "id": "stealth/crouton-alpha",
+      "name": "Crouton Alpha"
     },
     {
       "id": "stepfun/step-3.7-flash",

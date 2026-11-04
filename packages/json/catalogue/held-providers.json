@@ -1,16 +1,12 @@
 {
   "providers": {
-    "nous": {
-      "since": "2026-11-01",
-      "reason": "2 of 6 offers removed"
+    "gemini": {
+      "since": "2026-11-04",
+      "reason": "discovery failed: Provider gemini discovery failed: Gemini API pricing contains no models with free standard-tier inference"
     },
-    "onomeo": {
-      "since": "2026-10-31",
-      "reason": "discovery failed: Provider onomeo discovery failed: Onomeo info response contains no free models"
-    },
-    "routeway": {
-      "since": "2026-10-31",
-      "reason": "2 of 9 offers removed"
+    "kilo": {
+      "since": "2026-11-04",
+      "reason": "4 of 12 offers removed"
     }
   }
 }

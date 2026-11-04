@@ -9,38 +9,6 @@
   },
   "offers": [
     {
-      "model_id": "deepseek-v4-flash:free",
-      "name": "DeepSeek: DeepSeek V4 Flash (Free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "ROUTEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://api.routeway.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "200 req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "routeway",
-          "aws",
-          "google"
-        ],
-        "description": "Upstream providers may retain or use prompts",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "gemma-4-26b-a4b-it-chimerax:free",
       "name": "Gemma 4 26b A4b It Chimerax (Free)",
       "connection": {
@@ -203,38 +171,6 @@
     {
       "model_id": "gemma-4-26b-a4b-it-musica:free",
       "name": "Gemma 4 26b A4b It Musica (Free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "ROUTEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://api.routeway.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "200 req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "routeway",
-          "aws",
-          "google"
-        ],
-        "description": "Upstream providers may retain or use prompts",
-        "conditional": true
-      }
-    },
-    {
-      "model_id": "minimax-m2.7:free",
-      "name": "MiniMax: MiniMax M2.7 (Free)",
       "connection": {
         "auth": {
           "env": [
