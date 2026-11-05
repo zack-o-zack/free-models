@@ -1053,6 +1053,10 @@
       "name": "MoonshotAI: Kimi K3"
     },
     {
+      "id": "moonshotai/kimi-k3_1-pro",
+      "name": "kimi-k3.1-pro"
+    },
+    {
       "id": "morph/morph-v3-fast",
       "name": "Morph V3 Fast"
     },

@@ -164,37 +164,6 @@
       }
     },
     {
-      "model_id": "meta/llama-3.2-11b-vision-instruct",
-      "name": "llama-3.2-11b-vision-instruct",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "nvidia"
-        ],
-        "description": "Trial interactions are retained and monitored on US servers"
-      }
-    },
-    {
       "model_id": "meta/llama-3.2-90b-vision-instruct",
       "name": "llama-3.2-90b-vision-instruct",
       "connection": {
@@ -321,6 +290,37 @@
     {
       "model_id": "mistralai/mistral-large-4-1t-a52b",
       "name": "Mistral Large 4",
+      "connection": {
+        "auth": {
+          "env": [
+            "NVIDIA_API_KEY"
+          ]
+        },
+        "base_url": "https://integrate.api.nvidia.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "40 req / min",
+          "10k req / day"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "nvidia"
+        ],
+        "description": "Trial interactions are retained and monitored on US servers"
+      }
+    },
+    {
+      "model_id": "moonshotai/kimi-k3_1-pro",
+      "name": "kimi-k3.1-pro",
       "connection": {
         "auth": {
           "env": [

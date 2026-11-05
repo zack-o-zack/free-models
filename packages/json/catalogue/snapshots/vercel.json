@@ -6255,26 +6255,6 @@
       }
     },
     {
-      "model_id": "spacexai/grok-voice-think-fast-2.0",
-      "name": "Grok Voice Think Fast 2.0",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh",
-        "model_type": "realtime",
-        "protocol": "vercel-ai-gateway"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
       "model_id": "stealth/glyph-cluster",
       "name": "Glyph Cluster",
       "connection": {
