@@ -69,8 +69,8 @@
       }
     },
     {
-      "model_id": "liquid/lfm-2.5-2.6b:free",
-      "name": "LiquidAI: LFM2.5-2.6B (free)",
+      "model_id": "liquid/lfm-3-1.7b:free",
+      "name": "LiquidAI: LFM3-1.7B (free)",
       "connection": {
         "auth": {
           "env": [
@@ -159,36 +159,6 @@
       }
     },
     {
-      "model_id": "nvidia/nemotron-3.5-content-safety:free",
-      "name": "NVIDIA: Nemotron 3.5 Content Safety (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "KILO_API_KEY"
-          ]
-        },
-        "base_url": "https://api.kilo.ai/api/gateway",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / hour"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "kilo",
-          "openrouter",
-          "nvidia"
-        ],
-        "description": "NVIDIA trial endpoint logs prompts and outputs"
-      }
-    },
-    {
       "model_id": "nvidia/nemotron-3.5-lightning:free",
       "name": "NVIDIA: Nemotron 3.5 Lightning (free)",
       "connection": {
@@ -249,36 +219,6 @@
       }
     },
     {
-      "model_id": "recursive/flint-v1.0:free",
-      "name": "Recursive: Flint (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "KILO_API_KEY"
-          ]
-        },
-        "base_url": "https://api.kilo.ai/api/gateway",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "200 req / hour"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "kilo",
-          "openrouter"
-        ],
-        "description": "Free models may log prompts and outputs",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "reflection/beam-free",
       "name": "Reflection: Beam 1.0 (free)",
       "connection": {
@@ -309,8 +249,8 @@
       }
     },
     {
-      "model_id": "stealth/glyph-cluster",
-      "name": "Stealth: Glyph Cluster (free)",
+      "model_id": "stealth/crouton-alpha",
+      "name": "Crouton Alpha",
       "connection": {
         "auth": {
           "env": [
@@ -339,8 +279,8 @@
       }
     },
     {
-      "model_id": "xingchen-agi/xing4.0-29b-a4b:free",
-      "name": "XingChen: Xing4.0 29B A4B (free)",
+      "model_id": "stealth/glyph-cluster",
+      "name": "Stealth: Glyph Cluster (free)",
       "connection": {
         "auth": {
           "env": [

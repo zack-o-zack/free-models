@@ -27,7 +27,8 @@ export const canonicalModelIdSchema = z
   .string()
   .regex(
     /^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\/[a-z0-9]+(?:[._-][a-z0-9]+)*|stealth:[a-z0-9]+(?:[._-][a-z0-9]+)*)$/,
-  );
+  )
+  .refine((id) => !id.startsWith("stealth/"), "Stealth canonical IDs must use stealth:<slug>");
 
 export const limitsSchema = z
   .object({

@@ -9,6 +9,35 @@
   },
   "offers": [
     {
+      "model_id": "meituan/longcat-2.5:free",
+      "name": "LongCat-2.5:Free",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "nous"
+        ],
+        "description": "Prompts and completions may be logged and used for training"
+      }
+    },
+    {
       "model_id": "reflection/beam-1.0-501b-a23b:free",
       "name": "Reflection: Beam 1.0 501B A23B",
       "connection": {

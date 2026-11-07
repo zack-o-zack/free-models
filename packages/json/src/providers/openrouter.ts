@@ -72,7 +72,7 @@ export class OpenRouterProvider implements ModelProvider, CanonicalMetadataProvi
       const modelId = model.id as string;
       if (
         modelId.startsWith(OPENROUTER_ROUTER_PREFIX) ||
-        !modelId.endsWith(OPENROUTER_FREE_SUFFIX)
+        (!modelId.endsWith(OPENROUTER_FREE_SUFFIX) && !isZeroPricedStealthModel(model))
       ) {
         continue;
       }
@@ -231,6 +231,21 @@ function withoutId(model: Record<string, JsonValue>): Record<string, JsonValue> 
   return Object.fromEntries(Object.entries(model).filter(([key]) => key !== "id"));
 }
 
+function isZeroPricedStealthModel(model: Record<string, JsonValue>): boolean {
+  if (typeof model.id !== "string" || !model.id.startsWith("stealth/")) return false;
+  const pricing = jsonObjectSchema.safeParse(model.pricing);
+  if (!pricing.success) return false;
+  const isZero = (value: JsonValue | undefined) =>
+    typeof value === "number"
+      ? value === 0
+      : typeof value === "string" && value.trim() !== "" && Number(value) === 0;
+  return (
+    isZero(pricing.data.prompt) &&
+    isZero(pricing.data.completion) &&
+    Object.values(pricing.data).every(isZero)
+  );
+}
+
 /**
  * Resolve the OpenRouter source record for a canonical model, always preferring
  * the paid canonical entry over any `:free` alias.
@@ -238,8 +253,9 @@ function withoutId(model: Record<string, JsonValue>): Record<string, JsonValue> 
  * Candidate order:
  * 1. paid variant of the resolved OpenRouter offer (strip `:free`)
  * 2. canonical model ID as-is (paid)
- * 3. OpenRouter offer ID as-is (`:free` record, free pricing/limits)
- * 4. canonical ID with `:free` suffix (last resort)
+ * 3. upstream stealth spelling and reviewed aliases from other offer providers
+ * 4. OpenRouter offer ID as-is (`:free` record, free pricing/limits)
+ * 5. canonical ID with `:free` suffix (last resort)
  */
 function findSourceModel(
   sourceById: ReadonlyMap<string, Record<string, JsonValue>>,
@@ -259,10 +275,22 @@ function findSourceModel(
     push(stripFreeSuffix(openRouterOffer.offer.model_id));
   }
   push(canonicalId);
+  const upstreamId = canonicalId.replace(/^stealth:/, "stealth/");
+  push(upstreamId);
+  const publisher = canonicalId.includes("/") ? canonicalId.split("/")[0] : undefined;
+  for (const { provider, offer } of offers) {
+    if (provider === "openrouter") continue;
+    const alias = stripFreeSuffix(offer.model_id)
+      .replace(/-free$/, "")
+      .replace(/^@cf\//, "");
+    if (alias.includes("/")) push(alias);
+    else if (publisher) push(`${publisher}/${alias}`);
+  }
   if (openRouterOffer) {
     push(openRouterOffer.offer.model_id);
   }
   push(`${canonicalId}${OPENROUTER_FREE_SUFFIX}`);
+  push(`${upstreamId}${OPENROUTER_FREE_SUFFIX}`);
 
   for (const id of candidates) {
     const source = sourceById.get(id);
@@ -270,6 +298,15 @@ function findSourceModel(
       return source;
     }
   }
+  // Some provider IDs are the publisher's Hugging Face ID rather than OpenRouter's alias.
+  const published = [...sourceById.values()].filter(
+    (source) =>
+      typeof source.hugging_face_id === "string" &&
+      source.hugging_face_id.toLowerCase() === canonicalId &&
+      typeof source.id === "string" &&
+      !source.id.endsWith(OPENROUTER_FREE_SUFFIX),
+  );
+  if (published.length === 1) return published[0];
   return undefined;
 }
 

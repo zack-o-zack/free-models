@@ -104,7 +104,11 @@ export async function refreshMetadata(
   const unresolved = computeUnresolved(state);
   assertNoUnresolved(unresolved);
 
-  const activeModels = activeCanonicalModels(state);
+  const previous = new Map(state.metadata.metadata.map((entry) => [entry.id, entry.metadata]));
+  const activeModels = activeCanonicalModels(state).map((active) => {
+    const previousMetadata = previous.get(active.model.id);
+    return { ...active, ...(previousMetadata ? { previousMetadata } : {}) };
+  });
   let results: ReadonlyMap<string, CanonicalMetadata>;
   try {
     results = await metadataProvider.enrich(activeModels);

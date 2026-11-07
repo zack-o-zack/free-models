@@ -43,6 +43,39 @@ const SAMPLE_PRICING_HTML = `
 </article>
 `;
 
+test("discovers unsuffixed models with an explicit full-discount deal", async () => {
+  const html = `<article id="crouton-alpha-free"><span>100%</span><code>crouton-alpha</code>
+    <dt>Term</dt><dd>while the stealth preview lasts</dd><p>1000 requests a day</p></article>`;
+  const provider = new CommandCodeProvider({
+    fetch: async (url) =>
+      url === COMMANDCODE_MODELS_URL
+        ? Response.json({
+            object: "list",
+            data: [
+              { id: "stealth/crouton-alpha", name: "Crouton Alpha" },
+              { id: "other/paid", name: "Paid" },
+            ],
+          })
+        : new Response(html),
+  });
+  const offers = await provider.discover(new Map());
+  expect(offers.map((offer) => offer.model_id)).toEqual(["stealth/crouton-alpha"]);
+  expect(offers[0]?.limits.terms).toEqual(["1k req / day"]);
+});
+
+test("short documented deals do not approve ambiguous or similarly named models", () => {
+  const deals = new Map([["crouton-alpha", { terms: ["1000 req / day"] }]]);
+  const models = [
+    { id: "stealth/crouton-alpha" },
+    { id: "other/crouton-alpha" },
+    { id: "stealth/crouton-alpha-pro" },
+    { id: "vendor/known:free" },
+  ];
+  expect(
+    parseCommandCodeModels({ object: "list", data: models }, deals).map((model) => model.id),
+  ).toEqual(["vendor/known:free"]);
+});
+
 test("discovers free models and parses deal limits dynamically", async () => {
   const provider = new CommandCodeProvider({
     fetch: async (url, init) => {

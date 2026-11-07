@@ -2504,6 +2504,25 @@
       }
     },
     {
+      "model_id": "humansand/ampersand-v0.1",
+      "name": "Ampersand v0.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free — no credits used"
+        ],
+        "funding": "no_credits"
+      }
+    },
+    {
       "model_id": "inception/mercury-2",
       "name": "Mercury 2",
       "connection": {
@@ -5714,6 +5733,26 @@
         ],
         "description": "Upstream providers may retain data unless training is disabled",
         "conditional": true
+      }
+    },
+    {
+      "model_id": "parallel/parallel-decisions-fast",
+      "name": "Decisions Fast",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
       }
     },
     {
