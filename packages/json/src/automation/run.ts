@@ -201,7 +201,7 @@ try {
         const review = catalogueReviewer(reviewerPool);
         reviewAttempts = review.attempts;
         const verdict = await review(
-          `Check each proposed identity against its upstream model ID. Preserve versions, quantization and variants. Decide each proposal independently. Return {"decisions":[{"provider":string,"id":string,"approve":boolean,"reason":string}]} with one decision per proposal and each reason under 300 characters.\n${JSON.stringify(reviewable)}`,
+          `Check each proposed identity against its upstream model ID. Preserve versions, quantization and variants. Provider namespaces can be publisher aliases; reuse reviewed identities rather than creating duplicates. Stealth canonical IDs use stealth:<slug>, even when a provider uses stealth/<slug>. Decline conflicting evidence. Decide each proposal independently. Return {"decisions":[{"provider":string,"id":string,"approve":boolean,"reason":string}]} with one decision per proposal and each reason under 300 characters.\n${JSON.stringify(reviewable)}`,
           z
             .object({
               decisions: z.array(

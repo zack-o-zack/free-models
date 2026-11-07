@@ -66,7 +66,7 @@ export class CommandCodeProvider implements ModelProvider {
       auth: { env },
     };
 
-    return parseCommandCodeModels(payload)
+    return parseCommandCodeModels(payload, deals)
       .map((model) => {
         const modelId = model.id as string;
         const modelName =
@@ -86,7 +86,10 @@ export class CommandCodeProvider implements ModelProvider {
   }
 }
 
-export function parseCommandCodeModels(payload: unknown): Record<string, JsonValue>[] {
+export function parseCommandCodeModels(
+  payload: unknown,
+  deals: ReadonlyMap<string, OfferLimits> = new Map(),
+): Record<string, JsonValue>[] {
   const envelope = jsonObjectSchema.safeParse(payload);
   if (!envelope.success || envelope.data.object !== "list" || !Array.isArray(envelope.data.data)) {
     throw new Error(
@@ -115,15 +118,25 @@ export function parseCommandCodeModels(payload: unknown): Record<string, JsonVal
     }
     seen.add(modelId);
 
-    if (isFreeCommandCodeModel(modelId)) {
-      models.push(model);
-    }
+    models.push(model);
   }
 
-  if (models.length === 0) {
+  const documented = new Set<string>();
+  for (const dealId of deals.keys()) {
+    const exact = models.find((model) => model.id === dealId);
+    const matches = exact
+      ? [exact]
+      : models.filter((model) => (model.id as string).split("/").at(-1) === dealId);
+    const [match] = matches;
+    if (matches.length === 1 && match) documented.add(match.id as string);
+  }
+  const freeModels = models.filter(
+    (model) => isFreeCommandCodeModel(model.id as string) || documented.has(model.id as string),
+  );
+  if (freeModels.length === 0) {
     throw new Error("CommandCode models response contains no free models");
   }
-  return models;
+  return freeModels;
 }
 
 export function isFreeCommandCodeModel(modelId: string): boolean {

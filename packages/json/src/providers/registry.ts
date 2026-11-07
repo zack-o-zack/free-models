@@ -1,3 +1,5 @@
+import { withMetadataFallback } from "../metadata/provider.ts";
+import { VercelMetadataProvider } from "../metadata/vercel.ts";
 import { AnyApiProvider } from "./anyapi.ts";
 import { BazaarLinkProvider } from "./bazaarlink.ts";
 import { CloudflareProvider } from "./cloudflare.ts";
@@ -47,4 +49,7 @@ export const providerRegistry = defineProviderRegistry(
   new CommandCodeProvider(),
 );
 
-export const metadataProvider = openRouterProvider;
+export const metadataProvider = withMetadataFallback(
+  openRouterProvider,
+  new VercelMetadataProvider(),
+);

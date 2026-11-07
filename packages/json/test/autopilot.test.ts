@@ -48,7 +48,7 @@ describe("catalogue autopilot policy", () => {
   test("grounds new canonical identities and aliases in namespaced upstream IDs", () => {
     const data = state(["vendor/new:free"]);
     expect(identityCandidates(data, offer("new-free"))).toEqual([
-      { id: "vendor/new", name: "vendor/new:free" },
+      { id: "vendor/new", name: "vendor/new" },
     ]);
     expect(identityCandidates(data, offer("unknown"))).toEqual([]);
     expect(identityCandidates(state(["vendor/new", "other/new"]), offer("new"))).toHaveLength(2);
@@ -68,13 +68,51 @@ describe("catalogue autopilot policy", () => {
     ]);
     mappings.set("third", { provider: "third", mappings: { "vendor/beam": "vendor/model" } });
     expect(identityCandidates(data, offer("vendor/beam:free"))).toEqual([
-      { id: "vendor/beam", name: "vendor/beam:free" },
+      { id: "vendor/beam-1.0", name: "Beam 1.0" },
+      { id: "vendor/model", name: "Model" },
+    ]);
+  });
+  test("uses stealth canonical IDs for new upstream stealth models and their aliases", () => {
+    const data = state(["stealth/crouton-alpha:free"]);
+    const expected = [{ id: "stealth:crouton-alpha", name: "Crouton Alpha" }];
+    const upstream = data.snapshots.get("fixture")?.offers[0];
+    if (!upstream) throw new Error("Missing stealth fixture");
+    upstream.name = "Crouton Alpha (free)";
+    expect(identityCandidates(data, upstream)).toEqual(expected);
+    expect(identityCandidates(data, offer("crouton-alpha-free"))).toEqual(expected);
+    data.canonicalModels.models.push(...expected);
+    expect(identityCandidates(data, upstream)).toEqual(expected);
+    expect(identityCandidates(data, offer("crouton-alpha"))).toEqual(expected);
+  });
+  test("reuses publisher aliases established by reviewed mappings", () => {
+    const base = state(["minimaxai/minimax-m3.1-flash"]);
+    const data = { ...base, mappings: new Map(base.mappings) };
+    data.canonicalModels.models.push(
+      { id: "minimax/minimax-m3", name: "MiniMax M3" },
+      { id: "minimax/minimax-m3.1-flash", name: "MiniMax M3.1 Flash" },
+    );
+    data.mappings.set("nvidia", {
+      provider: "nvidia",
+      mappings: { "minimaxai/minimax-m3": "minimax/minimax-m3" },
+    });
+    expect(identityCandidates(data, offer("minimaxai/minimax-m3.1-flash"))).toEqual([
+      { id: "minimax/minimax-m3.1-flash", name: "MiniMax M3.1 Flash" },
+    ]);
+    expect(identityCandidates(state(["other/model"]), offer("other/model"))).toEqual([
+      { id: "other/model", name: "other/model" },
     ]);
   });
   test("preserves reviewed canonical names", () => {
     expect(identityCandidates(state(), offer("vendor/model:free"))).toEqual([
       { id: "vendor/model", name: "Model" },
     ]);
+  });
+  test("defers conflicting mappings even when the upstream spelling is a canonical ID", () => {
+    const data = state();
+    data.canonicalModels.models.push({ id: "vendor/other", name: "Other" });
+    const mappings = new Map(data.mappings);
+    mappings.set("other", { provider: "other", mappings: { "vendor/model:free": "vendor/other" } });
+    expect(identityCandidates({ ...data, mappings }, offer("vendor/model"))).toHaveLength(2);
   });
   test("restores edited or removed identities and mappings while keeping additions", () => {
     const before = state();

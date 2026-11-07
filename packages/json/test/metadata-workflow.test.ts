@@ -134,10 +134,12 @@ describe("canonical metadata refresh", () => {
         {
           model: { id: "acme/alpha", name: "Alpha" },
           offers: [{ provider: "fixture-a", offer: fixtureAOffers[0] }],
+          previousMetadata: { old_generated: "remove me" },
         },
         {
           model: { id: "zeta/beta", name: "Beta" },
           offers: [{ provider: "fixture-z", offer: fixtureZOffers[0] }],
+          previousMetadata: { stale_only: true, nested: { stale: "whole record" } },
         },
       ]);
 

@@ -265,6 +265,38 @@
       }
     },
     {
+      "model_id": "liquid/lfm-3-1.7b:free",
+      "name": "LiquidAI: LFM3-1.7B (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "liquid"
+        ],
+        "description": "Free endpoints may log prompts and completions"
+      }
+    },
+    {
       "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2:free",
       "name": "NVIDIA: Llama Nemotron Embed VL 1B V2 (free)",
       "connection": {
@@ -585,6 +617,26 @@
       }
     },
     {
+      "model_id": "parallel/decisions-fast:free",
+      "name": "Parallel: Decisions Fast (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
+      }
+    },
+    {
       "model_id": "recursive/flint-v1.0:free",
       "name": "Recursive: Flint (free)",
       "connection": {
@@ -646,6 +698,26 @@
           "respan"
         ],
         "description": "Free endpoints may log prompts and completions"
+      }
+    },
+    {
+      "model_id": "stealth/crouton-alpha",
+      "name": "Crouton Alpha",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
       }
     },
     {

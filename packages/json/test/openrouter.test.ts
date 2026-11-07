@@ -55,6 +55,26 @@ async function withWorkspace(run: (workspace: string) => Promise<void>): Promise
 }
 
 describe("OpenRouter discovery", () => {
+  test("includes unsuffixed stealth offers only when every published price is zero", async () => {
+    const models = [
+      { id: "stealth/crouton-alpha", pricing: { prompt: "0", completion: "0" } },
+      { id: "stealth/paid", pricing: { prompt: "0", completion: "1" } },
+      { id: "stealth/image-charge", pricing: { prompt: "0", completion: "0", image: "1" } },
+      { id: "stealth/missing-output", pricing: { prompt: "0" } },
+      { id: "stealth/unknown" },
+      { id: "stealth/empty-prices", pricing: { prompt: "", completion: "" } },
+      { id: "openrouter/free", pricing: { prompt: "0", completion: "0" } },
+    ];
+    const provider = new OpenRouterProvider({
+      fetch: async (url) =>
+        url === OPENROUTER_LIMITS_URL
+          ? new Response(limitsSource)
+          : Response.json({ data: models }),
+    });
+    expect((await provider.discover(new Map())).map((offer) => offer.model_id)).toEqual([
+      "stealth/crouton-alpha",
+    ]);
+  });
   test("discovers only concrete :free variants through the catalogue CLI", async () => {
     await withWorkspace(async (workspace) => {
       const discovery = runFixtureCli(workspace, validFixturePath);
@@ -180,6 +200,78 @@ describe("OpenRouter discovery", () => {
 });
 
 describe("OpenRouter canonical metadata", () => {
+  test("resolves an exact published model identity and defers ambiguous variants", async () => {
+    const source = {
+      id: "mistralai/mistral-large-4-0",
+      hugging_face_id: "mistralai/Mistral-Large-4-1T-A52B",
+      context_length: 1048576,
+    };
+    const records = [source];
+    const provider = new OpenRouterProvider({
+      fetch: async () => Response.json({ data: records }),
+    });
+    const model = {
+      model: { id: "mistralai/mistral-large-4-1t-a52b", name: "Mistral Large 4" },
+      offers: [],
+    };
+    expect((await provider.enrich([model])).get(model.model.id)?.context_length).toBe(1048576);
+    records.push({ ...source, id: "mistralai/mistral-large-4-thinking" });
+    expect((await provider.enrich([model])).has(model.model.id)).toBe(false);
+  });
+  test("uses reviewed native offer aliases without guessing model versions", async () => {
+    const provider = new OpenRouterProvider({
+      fetch: async () =>
+        Response.json({
+          data: [
+            { id: "mistralai/voxtral-mini-transcribe-3-0", context_length: 32000 },
+            { id: "mistralai/voxtral-mini-transcribe-4-0", context_length: 64000 },
+          ],
+        }),
+    });
+    const offer = {
+      model_id: "voxtral-mini-transcribe-3-0",
+      name: "Voxtral Mini Transcribe 3",
+      connection: { base_url: "https://api.mistral.ai/v1", protocol: "openai" },
+      limits: fixtureLimits,
+    };
+    expect(
+      await provider.enrich([
+        {
+          model: { id: "mistralai/voxtral-mini-transcribe-3", name: offer.name },
+          offers: [{ provider: "mistral", offer }],
+        },
+      ]),
+    ).toEqual(new Map([["mistralai/voxtral-mini-transcribe-3", { context_length: 32000 }]]));
+  });
+  test("resolves stealth canonical IDs to upstream records for other offer providers", async () => {
+    const provider = new OpenRouterProvider({
+      fetch: async () =>
+        Response.json({
+          data: [{ id: "stealth/crouton-alpha", context_length: 1048576 }],
+        }),
+    });
+    expect(
+      await provider.enrich([
+        {
+          model: { id: "stealth:crouton-alpha", name: "Crouton Alpha" },
+          offers: [
+            {
+              provider: "nous",
+              offer: {
+                model_id: "stealth/crouton-alpha",
+                name: "Crouton Alpha",
+                connection: {
+                  base_url: "https://inference-api.nousresearch.com/v1",
+                  protocol: "openai",
+                },
+                limits: fixtureLimits,
+              },
+            },
+          ],
+        },
+      ]),
+    ).toEqual(new Map([["stealth:crouton-alpha", { context_length: 1048576 }]]));
+  });
   test("retrieves source fields by resolved OpenRouter offer ID", async () => {
     const provider = new OpenRouterProvider({
       fetch: async (url) => {

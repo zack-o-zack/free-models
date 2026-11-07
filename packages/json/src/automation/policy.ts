@@ -1,3 +1,4 @@
+import { normalizeCanonicalModelName } from "../catalogue/canonical.ts";
 import {
   type CanonicalModel,
   canonicalModelIdSchema,
@@ -10,7 +11,12 @@ export function identityId(id: string): string {
   return id
     .replace(/^@cf\//, "")
     .replace(/(?::free|-free)$/, "")
-    .toLowerCase();
+    .toLowerCase()
+    .replace(/^stealth\//, "stealth:");
+}
+
+function modelSlug(id: string): string {
+  return id.startsWith("stealth:") ? id.slice("stealth:".length) : (id.split("/").at(-1) ?? id);
 }
 
 export function identityCandidates(
@@ -19,7 +25,6 @@ export function identityCandidates(
 ): CanonicalModel[] {
   const id = identityId(offer.model_id);
   const existing = state.canonicalModels.models.filter((model) => model.id === id);
-  if (existing.length) return existing;
   // Reuse what other providers already map the same normalized ID to, when they all agree.
   const mapped = new Set<string>();
   for (const mapping of state.mappings.values()) {
@@ -27,25 +32,43 @@ export function identityCandidates(
       if (identityId(modelId) === id) mapped.add(target);
     }
   }
-  const [consensus] = mapped;
-  const agreed = state.canonicalModels.models.find((model) => model.id === consensus);
-  if (mapped.size === 1 && agreed) return [agreed];
+  if (mapped.size) {
+    return state.canonicalModels.models
+      .filter((model) => mapped.has(model.id) || model.id === id)
+      .sort((a, b) => a.id.localeCompare(b.id));
+  }
+  if (existing.length) return existing;
+  // A reviewed publisher alias can identify the same exact model slug at another provider.
+  // Matching a bare slug across unrelated publishers would merge different models.
+  const [publisher, slug] = id.split("/");
+  if (slug) {
+    const aliases = new Set<string>();
+    for (const mapping of state.mappings.values()) {
+      for (const [modelId, target] of Object.entries(mapping.mappings)) {
+        const [sourcePublisher, sourceSlug] = identityId(modelId).split("/");
+        const [targetPublisher, targetSlug] = target.split("/");
+        if (sourcePublisher === publisher && sourceSlug === targetSlug && targetPublisher)
+          aliases.add(`${targetPublisher}/${slug}`);
+      }
+    }
+    const reviewed = state.canonicalModels.models.filter((model) => aliases.has(model.id));
+    if (reviewed.length) return reviewed.sort((a, b) => a.id.localeCompare(b.id));
+  }
   const candidates = new Map<string, CanonicalModel>();
   for (const model of state.canonicalModels.models) {
-    if (model.id.split("/").at(-1) === id) candidates.set(model.id, model);
+    if (modelSlug(model.id) === id) candidates.set(model.id, model);
   }
   // Only namespaced upstream IDs can establish a new identity. Short aliases need corroboration.
   for (const snapshot of state.snapshots.values()) {
     for (const evidence of snapshot.offers) {
       const evidenceId = identityId(evidence.model_id);
-      if (!canonicalModelIdSchema.safeParse(evidenceId).success || !evidenceId.includes("/"))
-        continue;
-      if (evidenceId !== id && evidenceId.split("/").at(-1) !== id) continue;
+      if (!canonicalModelIdSchema.safeParse(evidenceId).success) continue;
+      if (evidenceId !== id && modelSlug(evidenceId) !== id) continue;
       candidates.set(
         evidenceId,
         state.canonicalModels.models.find((model) => model.id === evidenceId) ?? {
           id: evidenceId,
-          name: evidence.name.replace(/\s*\(free\)|\s+free$/gi, "").trim(),
+          name: normalizeCanonicalModelName(evidence.name),
         },
       );
     }

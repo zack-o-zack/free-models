@@ -4,6 +4,13 @@ import {
   normalizeCanonicalMetadata,
   normalizeCanonicalModelName,
 } from "../src/catalogue/canonical.ts";
+import { canonicalModelIdSchema } from "../src/catalogue/schema.ts";
+
+test("reserves the stealth namespace for colon-prefixed canonical IDs", () => {
+  expect(canonicalModelIdSchema.safeParse("stealth:crouton-alpha").success).toBe(true);
+  expect(canonicalModelIdSchema.safeParse("stealth/crouton-alpha").success).toBe(false);
+  expect(canonicalModelIdSchema.safeParse("minimax/minimax-m3.1-flash").success).toBe(true);
+});
 
 describe("canonical model names", () => {
   test("remove free access qualifiers from trailing name suffixes", () => {

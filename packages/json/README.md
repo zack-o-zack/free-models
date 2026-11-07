@@ -54,9 +54,20 @@ Reconcile maps each provider model ID to a reviewed canonical model ID. It repor
 bun run catalogue:reconcile
 ```
 
+Stealth models use canonical IDs such as `stealth:crouton-alpha`. Provider API IDs keep
+their original spelling, such as `stealth/crouton-alpha` or `crouton-alpha-free`.
+OpenRouter also lists some stealth previews without a `:free` suffix; discovery includes
+these only when input, output, and every other published price are zero.
+CommandCode also accepts unsuffixed IDs covered by a published 100% discount. A short deal
+name must match one API model exactly; similar names and ambiguous matches are excluded.
+
 ## 3. Refresh
 
 Refresh updates canonical model records with current metadata.
+OpenRouter is the preferred source. Models it does not list use metadata from their reviewed
+Vercel offers, including native audio types and tool entries. Missing or incomplete source
+records retain their existing metadata.
+Fallback updates preserve fields that the secondary source does not supply.
 
 ```sh
 bun run catalogue:refresh
@@ -103,10 +114,11 @@ input and output prices, use non-tiered billing, and appear on its public
 [pricing page](https://novita.ai/pricing). This excludes internal model IDs with placeholder
 zero prices. Inference uses `NOVITA_API_KEY` with `https://api.novita.ai/openai`.
 
-Vercel discovery includes language models with zero input, output, and any additional prices.
-Inference uses `AI_GATEWAY_API_KEY` with `https://ai-gateway.vercel.sh/v1`. The
-[$5 monthly credit allowance](https://vercel.com/docs/ai-gateway/pricing) applies only to eligible
-models; it is not used to classify paid models as free. Non-chat endpoints are excluded.
+Vercel discovery reads explicit free-tier eligibility from the public model catalogue. It labels
+offers using the [$5 monthly credit allowance](https://vercel.com/docs/ai-gateway/pricing)
+separately from models whose API prices are all zero. Native types such as speech, embeddings,
+and tools keep their own connection details. Inference uses `AI_GATEWAY_API_KEY` with
+`https://ai-gateway.vercel.sh/v1` for chat and `https://ai-gateway.vercel.sh` for native types.
 Both providers have account- or model-dependent limits; offers direct users to their dashboards.
 ## Catalogue autopilot
 
@@ -124,7 +136,8 @@ pull-request and Actions write permissions. No external agent service is configu
    changed a connection. A held provider keeps its committed snapshot and is recorded in
    `catalogue/held-providers.json`. If the same anomaly persists for three days, it is accepted.
 4. Derive identity candidates from namespaced provider IDs, existing reviewed identities and
-   agreeing existing mappings. Ask a reviewer model to approve each single-candidate mapping
+   agreeing existing mappings, including reviewed publisher aliases and stealth IDs. Conflicting
+   mappings stay ambiguous instead of creating another identity. Ask a reviewer model to approve each single-candidate mapping
    on its own. Approved mappings are applied through an atomic file transaction. Ambiguous,
    declined or unreviewed offers are left out of the proposal and retried on the next run.
 5. Reconcile, refresh metadata, and ask a reviewer model to review the catalogue change.

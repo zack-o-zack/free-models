@@ -633,6 +633,10 @@
       "name": "Hugging Face: DistilBERT SST-2 Int8"
     },
     {
+      "id": "humansand/ampersand-v0.1",
+      "name": "Humans&: Ampersand v0.1"
+    },
+    {
       "id": "ibm-granite/granite-4.0-h-micro",
       "name": "IBM: Granite 4.0 Micro"
     },
@@ -723,6 +727,10 @@
     {
       "id": "liquid/lfm-2.5-embedding-350m",
       "name": "LiquidAI: LFM2.5-Embedding-350M"
+    },
+    {
+      "id": "liquid/lfm-3-1.7b",
+      "name": "LiquidAI: LFM3-1.7B"
     },
     {
       "id": "meituan/longcat-2.0",
@@ -889,10 +897,6 @@
       "name": "MiniMax: MiniMax M3.1 Flash"
     },
     {
-      "id": "minimaxai/minimax-m3.1-flash",
-      "name": "minimax-m3.1-flash"
-    },
-    {
       "id": "mistralai/codestral-2508",
       "name": "Mistral: Codestral 2508"
     },
@@ -1053,8 +1057,8 @@
       "name": "MoonshotAI: Kimi K3"
     },
     {
-      "id": "moonshotai/kimi-k3_1-pro",
-      "name": "kimi-k3.1-pro"
+      "id": "moonshotai/kimi-k3.1-pro",
+      "name": "MoonshotAI: Kimi K3.1 Pro"
     },
     {
       "id": "morph/morph-v3-fast",
@@ -1409,6 +1413,10 @@
       "name": "Ornith: Ornith 1.5 122B"
     },
     {
+      "id": "parallel/decisions-fast",
+      "name": "Parallel: Decisions Fast"
+    },
+    {
       "id": "parallel/search",
       "name": "Parallel Web Search"
     },
@@ -1665,8 +1673,16 @@
       "name": "Cat Jam"
     },
     {
+      "id": "stealth:crouton-alpha",
+      "name": "Crouton Alpha"
+    },
+    {
       "id": "stealth:glyph-cluster",
       "name": "Stealth: Glyph Cluster"
+    },
+    {
+      "id": "stealth:iceman",
+      "name": "Iceman"
     },
     {
       "id": "stealth:ll-alpha",
@@ -1679,10 +1695,6 @@
     {
       "id": "stealth:union-alpha",
       "name": "Union Alpha"
-    },
-    {
-      "id": "stealth/crouton-alpha",
-      "name": "Crouton Alpha"
     },
     {
       "id": "stepfun/step-3.7-flash",
@@ -1727,6 +1739,10 @@
     {
       "id": "thinkingmachines/inkling",
       "name": "Thinking Machines: Inkling"
+    },
+    {
+      "id": "thinkingmachines/inkling-2-small",
+      "name": "Thinking Machines: Inkling 2 Small"
     },
     {
       "id": "thinkingmachines/inkling-small",
