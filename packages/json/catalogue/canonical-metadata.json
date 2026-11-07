@@ -3878,7 +3878,7 @@
         "pricing": {
           "completion": "0.0000003",
           "input_cache_read": "0.000000035",
-          "prompt": "0.000000059"
+          "prompt": "0.0000000514"
         },
         "reasoning": {
           "default_effort": "high",
@@ -7842,6 +7842,7 @@
           "include_reasoning",
           "logit_bias",
           "logprobs",
+          "max_completion_tokens",
           "max_tokens",
           "min_p",
           "presence_penalty",
@@ -15971,135 +15972,6 @@
       }
     },
     {
-      "id": "nvidia/nemotron-3_5-embed-1b",
-      "metadata": {
-        "architecture": {
-          "input_modalities": [
-            "text",
-            "image"
-          ],
-          "instruct_type": null,
-          "modality": "text+image->embeddings",
-          "output_modalities": [
-            "embeddings"
-          ],
-          "tokenizer": "Other"
-        },
-        "canonical_slug": "nvidia/nemotron-3.5-embed-1b-20261021",
-        "context_length": 32768,
-        "created": 1792591670,
-        "default_parameters": {},
-        "description": "Nemotron 3.5 Embed 1B is a multimodal embedding model from NVIDIA for multilingual retrieval over text and document page images (tables, charts, infographics). Queries are text and documents can be...",
-        "endpoints": [
-          "/api/v1/embeddings"
-        ],
-        "expiration_date": null,
-        "hugging_face_id": null,
-        "knowledge_cutoff": null,
-        "links": {
-          "details": "/api/v1/models/nvidia/nemotron-3.5-embed-1b-20261021/endpoints"
-        },
-        "per_request_limits": null,
-        "pricing": {
-          "completion": "0",
-          "prompt": "0"
-        },
-        "supported_parameters": [],
-        "supported_voices": null,
-        "top_provider": {
-          "context_length": 32768,
-          "is_moderated": false,
-          "max_completion_tokens": 29491
-        }
-      }
-    },
-    {
-      "id": "nvidia/nemotron-3_5-embed-8b",
-      "metadata": {
-        "architecture": {
-          "input_modalities": [
-            "text",
-            "image"
-          ],
-          "instruct_type": null,
-          "modality": "text+image->embeddings",
-          "output_modalities": [
-            "embeddings"
-          ],
-          "tokenizer": "Other"
-        },
-        "canonical_slug": "nvidia/nemotron-3.5-embed-8b-20261021",
-        "context_length": 32768,
-        "created": 1792591666,
-        "default_parameters": {},
-        "description": "Nemotron 3.5 Embed 8B is a multimodal embedding model from NVIDIA for multilingual retrieval over text and document page images (tables, charts, infographics). Queries are text and documents can be...",
-        "endpoints": [
-          "/api/v1/embeddings"
-        ],
-        "expiration_date": null,
-        "hugging_face_id": null,
-        "knowledge_cutoff": null,
-        "links": {
-          "details": "/api/v1/models/nvidia/nemotron-3.5-embed-8b-20261021/endpoints"
-        },
-        "per_request_limits": null,
-        "pricing": {
-          "completion": "0",
-          "prompt": "0"
-        },
-        "supported_parameters": [],
-        "supported_voices": null,
-        "top_provider": {
-          "context_length": 32768,
-          "is_moderated": false,
-          "max_completion_tokens": 29491
-        }
-      }
-    },
-    {
-      "id": "nvidia/nemotron-3_5-rerank-8b",
-      "metadata": {
-        "architecture": {
-          "input_modalities": [
-            "text",
-            "image"
-          ],
-          "instruct_type": null,
-          "modality": "text+image->rerank",
-          "output_modalities": [
-            "rerank"
-          ],
-          "tokenizer": "Other"
-        },
-        "canonical_slug": "nvidia/nemotron-3.5-rerank-8b-20261021",
-        "context_length": 32768,
-        "created": 1792591657,
-        "default_parameters": {},
-        "description": "",
-        "endpoints": [
-          "/api/v1/rerank"
-        ],
-        "expiration_date": null,
-        "hugging_face_id": null,
-        "knowledge_cutoff": null,
-        "links": {
-          "details": "/api/v1/models/nvidia/nemotron-3.5-rerank-8b-20261021/endpoints"
-        },
-        "per_request_limits": null,
-        "pricing": {
-          "completion": "0",
-          "prompt": "0"
-        },
-        "supported_parameters": [],
-        "supported_voices": null,
-        "top_provider": {
-          "context_length": 32768,
-          "is_moderated": false,
-          "max_completion_tokens": 29491
-        }
-      }
-    },
-    {
       "id": "nvidia/nemotron-3-embed-1b",
       "metadata": {
         "architecture": {
@@ -16892,6 +16764,135 @@
           "context_length": 1048576,
           "is_moderated": false,
           "max_completion_tokens": 943718
+        }
+      }
+    },
+    {
+      "id": "nvidia/nemotron-3_5-embed-1b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "instruct_type": null,
+          "modality": "text+image->embeddings",
+          "output_modalities": [
+            "embeddings"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "nvidia/nemotron-3.5-embed-1b-20261021",
+        "context_length": 32768,
+        "created": 1792591670,
+        "default_parameters": {},
+        "description": "Nemotron 3.5 Embed 1B is a multimodal embedding model from NVIDIA for multilingual retrieval over text and document page images (tables, charts, infographics). Queries are text and documents can be...",
+        "endpoints": [
+          "/api/v1/embeddings"
+        ],
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/nvidia/nemotron-3.5-embed-1b-20261021/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 32768,
+          "is_moderated": false,
+          "max_completion_tokens": 29491
+        }
+      }
+    },
+    {
+      "id": "nvidia/nemotron-3_5-embed-8b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "instruct_type": null,
+          "modality": "text+image->embeddings",
+          "output_modalities": [
+            "embeddings"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "nvidia/nemotron-3.5-embed-8b-20261021",
+        "context_length": 32768,
+        "created": 1792591666,
+        "default_parameters": {},
+        "description": "Nemotron 3.5 Embed 8B is a multimodal embedding model from NVIDIA for multilingual retrieval over text and document page images (tables, charts, infographics). Queries are text and documents can be...",
+        "endpoints": [
+          "/api/v1/embeddings"
+        ],
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/nvidia/nemotron-3.5-embed-8b-20261021/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 32768,
+          "is_moderated": false,
+          "max_completion_tokens": 29491
+        }
+      }
+    },
+    {
+      "id": "nvidia/nemotron-3_5-rerank-8b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image"
+          ],
+          "instruct_type": null,
+          "modality": "text+image->rerank",
+          "output_modalities": [
+            "rerank"
+          ],
+          "tokenizer": "Other"
+        },
+        "canonical_slug": "nvidia/nemotron-3.5-rerank-8b-20261021",
+        "context_length": 32768,
+        "created": 1792591657,
+        "default_parameters": {},
+        "description": "",
+        "endpoints": [
+          "/api/v1/rerank"
+        ],
+        "expiration_date": null,
+        "hugging_face_id": null,
+        "knowledge_cutoff": null,
+        "links": {
+          "details": "/api/v1/models/nvidia/nemotron-3.5-rerank-8b-20261021/endpoints"
+        },
+        "per_request_limits": null,
+        "pricing": {
+          "completion": "0",
+          "prompt": "0"
+        },
+        "supported_parameters": [],
+        "supported_voices": null,
+        "top_provider": {
+          "context_length": 32768,
+          "is_moderated": false,
+          "max_completion_tokens": 29491
         }
       }
     },
@@ -19095,9 +19096,9 @@
         },
         "per_request_limits": null,
         "pricing": {
-          "completion": "0.000000037",
-          "input_cache_read": "0.000000009",
-          "prompt": "0.00000001"
+          "completion": "0.000000065",
+          "input_cache_read": "0.000000016",
+          "prompt": "0.000000017"
         },
         "reasoning": {
           "default_effort": "medium",
