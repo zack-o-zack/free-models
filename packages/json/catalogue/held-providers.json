@@ -1,20 +1,8 @@
 {
   "providers": {
-    "commandcode": {
-      "since": "2026-11-05",
-      "reason": "1 of 3 offers removed"
-    },
-    "gemini": {
-      "since": "2026-11-04",
-      "reason": "discovery failed: Provider gemini discovery failed: Gemini API pricing contains no models with free standard-tier inference"
-    },
-    "kilo": {
-      "since": "2026-11-04",
-      "reason": "4 of 12 offers removed"
-    },
-    "onomeo": {
-      "since": "2026-11-05",
-      "reason": "discovery failed: Provider onomeo discovery failed: Onomeo info response contains no free models"
+    "llm7": {
+      "since": "2026-11-09",
+      "reason": "4 of 7 offers removed"
     }
   }
 }

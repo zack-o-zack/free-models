@@ -105,38 +105,6 @@
       }
     },
     {
-      "model_id": "reflection/beam-free:free",
-      "name": "Beam Free (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "BAZAARLINK_API_KEY"
-          ]
-        },
-        "base_url": "https://api.bazaarlink.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "10 req / min (no credit)",
-          "60 weighted units / day (no credit)",
-          "20 req / min (with credit)",
-          "120 weighted units / day (with credit)",
-          "20 req / min (site-wide)",
-          "2 concurrent req / account"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [],
-        "description": "Upstream providers may retain or use prompts",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "stealth/glyph-cluster:free",
       "name": "Glyph Cluster (free)",
       "connection": {
