@@ -1094,37 +1094,6 @@
       }
     },
     {
-      "model_id": "nvidia/nemotron-voicechat",
-      "name": "nemotron-voicechat",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "nvidia"
-        ],
-        "description": "Trial interactions are retained and monitored on US servers"
-      }
-    },
-    {
       "model_id": "nvidia/riva-translate-4b-instruct-v2",
       "name": "riva-translate-4b-instruct-v2",
       "connection": {

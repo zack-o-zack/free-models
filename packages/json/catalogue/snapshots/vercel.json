@@ -2988,6 +2988,38 @@
       }
     },
     {
+      "model_id": "meta/muse-ember",
+      "name": "Muse Ember",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "meta"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
       "model_id": "meta/muse-spark-open",
       "name": "Muse Spark Open",
       "connection": {
@@ -4076,6 +4108,66 @@
         },
         "base_url": "https://ai-gateway.vercel.sh/v1",
         "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "nace-ai/drex-max-finance",
+      "name": "Drex Max Finance",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "nace-ai/drex-max-v1.1",
+      "name": "Drex Max v1.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "nace-ai/drex-v2.0",
+      "name": "Drex 2.0",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
       },
       "limits": {
         "terms": [

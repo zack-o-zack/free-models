@@ -809,6 +809,10 @@
       "name": "Meta: M2M100 1.2B"
     },
     {
+      "id": "meta/muse-ember",
+      "name": "Muse Ember"
+    },
+    {
       "id": "meta/muse-glimmer-30b",
       "name": "Meta: Muse Glimmer 30B"
     },
@@ -1071,6 +1075,18 @@
     {
       "id": "myshell-ai/melotts",
       "name": "Myshell AI: MeloTTS"
+    },
+    {
+      "id": "nace-ai/drex-max-finance",
+      "name": "Drex Max Finance"
+    },
+    {
+      "id": "nace-ai/drex-max-v1.1",
+      "name": "Drex Max v1.1"
+    },
+    {
+      "id": "nace-ai/drex-v2.0",
+      "name": "Drex 2.0"
     },
     {
       "id": "nex-agi/nex-n2.5-mini",

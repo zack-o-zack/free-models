@@ -1,16 +1,146 @@
 {
-  "generatedAt": "2026-11-09T09:55:30.006Z",
+  "generatedAt": "2026-11-10T09:58:55.180Z",
   "windowDays": 30,
-  "since": "2026-10-10T09:55:30.006Z",
-  "totalAdded": 454,
-  "totalRemoved": 156,
+  "since": "2026-10-11T09:58:55.180Z",
+  "totalAdded": 459,
+  "totalRemoved": 161,
   "totalProvidersAdded": 8,
   "totalProvidersRemoved": 0,
   "entries": [
     {
-      "id": "working-bazaarlink-remove-reflection/beam-free:free",
+      "id": "working-kilo-remove-stealth/crouton-alpha",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "kilo",
+      "providerName": "Kilo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "stealth/crouton-alpha",
+      "modelName": "Crouton Alpha",
+      "canonicalId": "stealth:crouton-alpha",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-nous-remove-stealth/crouton-alpha",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "nous",
+      "providerName": "Nous Portal",
+      "type": "removed",
+      "category": "model",
+      "modelId": "stealth/crouton-alpha",
+      "modelName": "Crouton Alpha",
+      "canonicalId": "stealth:crouton-alpha",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-nvidia-remove-nvidia/nemotron-voicechat",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "nvidia",
+      "providerName": "NVIDIA",
+      "type": "removed",
+      "category": "model",
+      "modelId": "nvidia/nemotron-voicechat",
+      "modelName": "nemotron-voicechat",
+      "canonicalId": "nvidia/nemotron-voicechat",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-opencode-remove-crouton-alpha-free",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "opencode",
+      "providerName": "OpenCode",
+      "type": "removed",
+      "category": "model",
+      "modelId": "crouton-alpha-free",
+      "modelName": "Crouton Alpha Free",
+      "canonicalId": "stealth:crouton-alpha",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-opencode-add-minimax-m3.1-flash-free",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "opencode",
+      "providerName": "OpenCode",
+      "type": "added",
+      "category": "model",
+      "modelId": "minimax-m3.1-flash-free",
+      "modelName": "MiniMax M3.1 Flash Free",
+      "canonicalId": "minimax/minimax-m3.1-flash",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-openrouter-remove-stealth/crouton-alpha",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "openrouter",
+      "providerName": "OpenRouter",
+      "type": "removed",
+      "category": "model",
+      "modelId": "stealth/crouton-alpha",
+      "modelName": "Crouton Alpha",
+      "canonicalId": "stealth:crouton-alpha",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-vercel-add-meta/muse-ember",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "vercel",
+      "providerName": "Vercel AI Gateway",
+      "type": "added",
+      "category": "model",
+      "modelId": "meta/muse-ember",
+      "modelName": "Muse Ember",
+      "canonicalId": "meta/muse-ember",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-vercel-add-nace-ai/drex-max-finance",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "vercel",
+      "providerName": "Vercel AI Gateway",
+      "type": "added",
+      "category": "model",
+      "modelId": "nace-ai/drex-max-finance",
+      "modelName": "Drex Max Finance",
+      "canonicalId": "nace-ai/drex-max-finance",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-vercel-add-nace-ai/drex-max-v1.1",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "vercel",
+      "providerName": "Vercel AI Gateway",
+      "type": "added",
+      "category": "model",
+      "modelId": "nace-ai/drex-max-v1.1",
+      "modelName": "Drex Max v1.1",
+      "canonicalId": "nace-ai/drex-max-v1.1",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-vercel-add-nace-ai/drex-v2.0",
+      "date": "2026-11-10",
+      "timestamp": "2026-11-10T09:58:55.180Z",
+      "provider": "vercel",
+      "providerName": "Vercel AI Gateway",
+      "type": "added",
+      "category": "model",
+      "modelId": "nace-ai/drex-v2.0",
+      "modelName": "Drex 2.0",
+      "canonicalId": "nace-ai/drex-v2.0",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "e1fa601-bazaarlink-remove-reflection/beam-free:free",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "bazaarlink",
       "providerName": "BazaarLink",
       "type": "removed",
@@ -18,12 +148,13 @@
       "modelId": "reflection/beam-free:free",
       "modelName": "Beam Free (free)",
       "canonicalId": "reflection/beam-1.0-501b-a23b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-2.5-flash",
+      "id": "e1fa601-gemini-remove-gemini-2.5-flash",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -31,12 +162,13 @@
       "modelId": "gemini-2.5-flash",
       "modelName": "Gemini 2.5 Flash",
       "canonicalId": "google/gemini-2.5-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-2.5-flash-native-audio-preview-12-2025",
+      "id": "e1fa601-gemini-remove-gemini-2.5-flash-native-audio-preview-12-2025",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -44,12 +176,13 @@
       "modelId": "gemini-2.5-flash-native-audio-preview-12-2025",
       "modelName": "Gemini 2.5 Flash Native Audio (Live API)",
       "canonicalId": "google/gemini-2.5-flash-native-audio-preview",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-2.5-flash-preview-tts",
+      "id": "e1fa601-gemini-remove-gemini-2.5-flash-preview-tts",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -57,12 +190,13 @@
       "modelId": "gemini-2.5-flash-preview-tts",
       "modelName": "Gemini 2.5 Flash Preview TTS",
       "canonicalId": "google/gemini-2.5-flash-preview-tts",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-2.5-pro",
+      "id": "e1fa601-gemini-remove-gemini-2.5-pro",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -70,12 +204,13 @@
       "modelId": "gemini-2.5-pro",
       "modelName": "Gemini 2.5 Pro",
       "canonicalId": "google/gemini-2.5-pro",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3-flash-preview",
+      "id": "e1fa601-gemini-remove-gemini-3-flash-preview",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -83,12 +218,13 @@
       "modelId": "gemini-3-flash-preview",
       "modelName": "Gemini 3 Flash Preview",
       "canonicalId": "google/gemini-3-flash-preview",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.1-flash-lite",
+      "id": "e1fa601-gemini-remove-gemini-3.1-flash-lite",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -96,12 +232,13 @@
       "modelId": "gemini-3.1-flash-lite",
       "modelName": "Gemini 3.1 Flash-Lite",
       "canonicalId": "google/gemini-3.1-flash-lite",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.1-flash-live-preview",
+      "id": "e1fa601-gemini-remove-gemini-3.1-flash-live-preview",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -109,12 +246,13 @@
       "modelId": "gemini-3.1-flash-live-preview",
       "modelName": "Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking, and Gemini 3.1 Flash Live Preview",
       "canonicalId": "google/gemini-3.1-flash-live-preview",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.1-flash-tts-preview",
+      "id": "e1fa601-gemini-remove-gemini-3.1-flash-tts-preview",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -122,12 +260,13 @@
       "modelId": "gemini-3.1-flash-tts-preview",
       "modelName": "Gemini 3.1 Flash TTS Preview",
       "canonicalId": "google/gemini-3.1-flash-tts-preview",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.5-flash-lite",
+      "id": "e1fa601-gemini-remove-gemini-3.5-flash-lite",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -135,12 +274,13 @@
       "modelId": "gemini-3.5-flash-lite",
       "modelName": "Gemini 3.5 Flash-Lite",
       "canonicalId": "google/gemini-3.5-flash-lite",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.5-live-translate-preview",
+      "id": "e1fa601-gemini-remove-gemini-3.5-live-translate-preview",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -148,12 +288,13 @@
       "modelId": "gemini-3.5-live-translate-preview",
       "modelName": "Gemini 3.5 Live Translate",
       "canonicalId": "google/gemini-3.5-live-translate-preview",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.5-transcribe",
+      "id": "e1fa601-gemini-remove-gemini-3.5-transcribe",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -161,12 +302,13 @@
       "modelId": "gemini-3.5-transcribe",
       "modelName": "Gemini 3.5 Transcribe",
       "canonicalId": "google/gemini-3.5-transcribe",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.5-transcribe-live",
+      "id": "e1fa601-gemini-remove-gemini-3.5-transcribe-live",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -174,12 +316,13 @@
       "modelId": "gemini-3.5-transcribe-live",
       "modelName": "Gemini 3.5 Transcribe Live",
       "canonicalId": "google/gemini-3.5-transcribe-live",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.6-flash",
+      "id": "e1fa601-gemini-remove-gemini-3.6-flash",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -187,12 +330,13 @@
       "modelId": "gemini-3.6-flash",
       "modelName": "Gemini 3.6 Flash",
       "canonicalId": "google/gemini-3.6-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.8-flash",
+      "id": "e1fa601-gemini-remove-gemini-3.8-flash",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -200,12 +344,13 @@
       "modelId": "gemini-3.8-flash",
       "modelName": "Gemini 3.8 Flash",
       "canonicalId": "google/gemini-3.8-flash",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.8-flash-lite-tts",
+      "id": "e1fa601-gemini-remove-gemini-3.8-flash-lite-tts",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -213,12 +358,13 @@
       "modelId": "gemini-3.8-flash-lite-tts",
       "modelName": "Gemini 3.8 Flash-Lite TTS",
       "canonicalId": "google/gemini-3.8-flash-lite-tts",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.8-flash-tts",
+      "id": "e1fa601-gemini-remove-gemini-3.8-flash-tts",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -226,12 +372,13 @@
       "modelId": "gemini-3.8-flash-tts",
       "modelName": "Gemini 3.8 Flash TTS",
       "canonicalId": "google/gemini-3.8-flash-tts",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.8-live",
+      "id": "e1fa601-gemini-remove-gemini-3.8-live",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -239,12 +386,13 @@
       "modelId": "gemini-3.8-live",
       "modelName": "Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking, and Gemini 3.1 Flash Live Preview",
       "canonicalId": "google/gemini-3.8-live",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-3.8-live-extended-thinking",
+      "id": "e1fa601-gemini-remove-gemini-3.8-live-extended-thinking",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -252,12 +400,13 @@
       "modelId": "gemini-3.8-live-extended-thinking",
       "modelName": "Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking, and Gemini 3.1 Flash Live Preview",
       "canonicalId": "google/gemini-3.8-live-extended-thinking",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-embedding-001",
+      "id": "e1fa601-gemini-remove-gemini-embedding-001",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -265,12 +414,13 @@
       "modelId": "gemini-embedding-001",
       "modelName": "Gemini Embedding",
       "canonicalId": "google/gemini-embedding-001",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-robotics-er-2-preview",
+      "id": "e1fa601-gemini-remove-gemini-robotics-er-2-preview",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -278,12 +428,13 @@
       "modelId": "gemini-robotics-er-2-preview",
       "modelName": "Gemini Robotics ER 2 Preview",
       "canonicalId": "google/gemini-robotics-er-2-preview",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-gemini-remove-gemini-robotics-er-2-streaming-preview",
+      "id": "e1fa601-gemini-remove-gemini-robotics-er-2-streaming-preview",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "gemini",
       "providerName": "Gemini",
       "type": "removed",
@@ -291,12 +442,13 @@
       "modelId": "gemini-robotics-er-2-streaming-preview",
       "modelName": "Gemini Robotics ER 2 Streaming Preview",
       "canonicalId": "google/gemini-robotics-er-2-streaming-preview",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-kilo-remove-reflection/beam-free",
+      "id": "e1fa601-kilo-remove-reflection/beam-free",
       "date": "2026-11-09",
-      "timestamp": "2026-11-09T09:55:30.006Z",
+      "timestamp": "2026-11-09T09:55:47Z",
       "provider": "kilo",
       "providerName": "Kilo",
       "type": "removed",
@@ -304,7 +456,8 @@
       "modelId": "reflection/beam-free",
       "modelName": "Reflection: Beam 1.0 (free)",
       "canonicalId": "reflection/beam-1.0-501b-a23b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "e1fa601",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
       "id": "a34e848-commandcode-remove-poolside/laguna-s-2.1-free",
