@@ -9,6 +9,10 @@
       "name": "AISingapore: Gemma Sea Lion V4 27B"
     },
     {
+      "id": "alibaba/qwen3.6-35b-a3b",
+      "name": "Qwen 3.6 35B A3B"
+    },
+    {
       "id": "amazon/nova-2-lite-v1",
       "name": "Amazon: Nova 2 Lite"
     },
