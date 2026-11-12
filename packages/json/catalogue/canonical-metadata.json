@@ -42,42 +42,6 @@
       }
     },
     {
-      "id": "alibaba/qwen3.6-35b-a3b",
-      "metadata": {
-        "architecture": {
-          "input_modalities": [
-            "text",
-            "image",
-            "video"
-          ],
-          "output_modalities": [
-            "text"
-          ]
-        },
-        "context_length": 262144,
-        "description": "Qwen 3.6 35B A3B is a mixture-of-experts model with 35 billion total parameters and 3 billion active parameters, built for coding, reasoning, and tool-based workflows.",
-        "metadata_source": {
-          "model_id": "alibaba/qwen3.6-35b-a3b",
-          "url": "https://ai-gateway.vercel.sh/v1/models"
-        },
-        "model_type": "chat",
-        "supported_parameters": [
-          "max_tokens",
-          "temperature",
-          "stop",
-          "tools",
-          "tool_choice",
-          "reasoning",
-          "include_reasoning",
-          "response_format",
-          "structured_outputs"
-        ],
-        "top_provider": {
-          "max_completion_tokens": 65536
-        }
-      }
-    },
-    {
       "id": "amazon/nova-2-lite-v1",
       "metadata": {
         "architecture": {
@@ -22162,6 +22126,42 @@
           "context_length": 262144,
           "is_moderated": false,
           "max_completion_tokens": 81920
+        }
+      }
+    },
+    {
+      "id": "qwen/qwen3.6-35b-a3b",
+      "metadata": {
+        "architecture": {
+          "input_modalities": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        },
+        "context_length": 262144,
+        "description": "Qwen 3.6 35B A3B is a mixture-of-experts model with 35 billion total parameters and 3 billion active parameters, built for coding, reasoning, and tool-based workflows.",
+        "metadata_source": {
+          "model_id": "alibaba/qwen3.6-35b-a3b",
+          "url": "https://ai-gateway.vercel.sh/v1/models"
+        },
+        "model_type": "chat",
+        "supported_parameters": [
+          "max_tokens",
+          "temperature",
+          "stop",
+          "tools",
+          "tool_choice",
+          "reasoning",
+          "include_reasoning",
+          "response_format",
+          "structured_outputs"
+        ],
+        "top_provider": {
+          "max_completion_tokens": 65536
         }
       }
     },
