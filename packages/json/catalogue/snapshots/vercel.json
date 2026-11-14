@@ -4172,25 +4172,6 @@
       }
     },
     {
-      "model_id": "nvidia/nemotron-3-nano-30b-a3b",
-      "name": "Nemotron 3 Nano 30B A3B",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      }
-    },
-    {
       "model_id": "nvidia/nemotron-3-super-120b-a12b",
       "name": "NVIDIA Nemotron 3 Super 120B A12B",
       "connection": {
@@ -5823,6 +5804,25 @@
       }
     },
     {
+      "model_id": "paperinstruments/ultramarine-1-flash",
+      "name": "Ultramarine 1 Flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "parallel/parallel-decisions-fast",
       "name": "Decisions Fast",
       "connection": {
@@ -5896,8 +5896,74 @@
       }
     },
     {
+      "model_id": "perplexity/pplx-decider-flash-v1.3",
+      "name": "Decider Flash V1.3",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "perplexity"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
       "model_id": "perplexity/pplx-decider-v1.2",
       "name": "Decider V1.2 27B",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US"
+        ],
+        "subprocessors": [
+          "perplexity"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "perplexity/pplx-decider-v1.3",
+      "name": "Decider V1.3",
       "connection": {
         "auth": {
           "env": [
@@ -5988,39 +6054,6 @@
         ],
         "subprocessors": [
           "perplexity"
-        ],
-        "description": "Upstream providers may retain data unless training is disabled",
-        "conditional": true
-      }
-    },
-    {
-      "model_id": "poolside/laguna-s-2.1",
-      "name": "Laguna S 2.1",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "EU"
-        ],
-        "subprocessors": [
-          "poolside"
         ],
         "description": "Upstream providers may retain data unless training is disabled",
         "conditional": true
@@ -6517,6 +6550,25 @@
     {
       "model_id": "thinkingmachines/inkling",
       "name": "Inkling",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "thinkingmachines/inkling-2-small",
+      "name": "Inkling 2 Small",
       "connection": {
         "auth": {
           "env": [
