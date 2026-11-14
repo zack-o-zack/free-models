@@ -219,8 +219,38 @@
       }
     },
     {
+      "model_id": "reflection/beam-free",
+      "name": "Reflection: Beam 1.0 (Free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "KILO_API_KEY"
+          ]
+        },
+        "base_url": "https://api.kilo.ai/api/gateway",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "200 req / hour"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "kilo",
+          "openrouter"
+        ],
+        "description": "Free models may log prompts and outputs",
+        "conditional": true
+      }
+    },
+    {
       "model_id": "stealth/glyph-cluster",
-      "name": "Stealth: Glyph Cluster (free)",
+      "name": "Glyph Cluster",
       "connection": {
         "auth": {
           "env": [

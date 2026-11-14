@@ -40,37 +40,6 @@
       }
     },
     {
-      "model_id": "google/diffusiongemma-26b-a4b-it",
-      "name": "diffusiongemma-26b-a4b-it",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "nvidia"
-        ],
-        "description": "Trial interactions are retained and monitored on US servers"
-      }
-    },
-    {
       "model_id": "google/gemma-4-31b-it",
       "name": "gemma-4-31b-it",
       "connection": {

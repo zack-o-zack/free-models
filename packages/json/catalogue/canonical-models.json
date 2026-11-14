@@ -489,6 +489,10 @@
       "name": "Google: DiffusionGemma 26B A4B"
     },
     {
+      "id": "google/embeddinggemma-2",
+      "name": "Google: Embeddinggemma 2"
+    },
+    {
       "id": "google/gemini-2.5-flash",
       "name": "Google: Gemini 2.5 Flash"
     },
@@ -1429,6 +1433,10 @@
       "name": "Ornith: Ornith 1.5 122B"
     },
     {
+      "id": "paperinstruments/ultramarine-1-flash",
+      "name": "Ultramarine 1 Flash"
+    },
+    {
       "id": "parallel/decisions-fast",
       "name": "Parallel: Decisions Fast"
     },
@@ -1441,12 +1449,20 @@
       "name": "Perplexity: Decider Flash V1.2 4B"
     },
     {
+      "id": "perplexity/pplx-decider-flash-v1.3",
+      "name": "Decider Flash V1.3"
+    },
+    {
       "id": "perplexity/pplx-decider-v1.1-27b",
       "name": "Perplexity: Decider V1.1 27B"
     },
     {
       "id": "perplexity/pplx-decider-v1.2",
       "name": "Perplexity: Decider V1.2 27B"
+    },
+    {
+      "id": "perplexity/pplx-decider-v1.3",
+      "name": "Decider V1.3"
     },
     {
       "id": "perplexity/search",
