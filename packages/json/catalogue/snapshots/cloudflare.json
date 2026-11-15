@@ -768,6 +768,39 @@
       }
     },
     {
+      "model_id": "@cf/google/embeddinggemma-2",
+      "name": "Google: Embeddinggemma 2",
+      "connection": {
+        "auth": {
+          "env": [
+            "CLOUDFLARE_ACCOUNT_ID",
+            "CLOUDFLARE_API_KEY"
+          ]
+        },
+        "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/run",
+        "protocol": "cloudflare"
+      },
+      "limits": {
+        "terms": [
+          "10k neurons / day"
+        ]
+      },
+      "compliance": {
+        "zdr": true,
+        "no_training": true,
+        "data_retention": false,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "cloudflare"
+        ],
+        "description": "Zero data retention and no model training on edge GPUs",
+        "edge": true
+      }
+    },
+    {
       "model_id": "@cf/google/gemma-3-12b-it",
       "name": "Google: Gemma 3 12b it",
       "connection": {

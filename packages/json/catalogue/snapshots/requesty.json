@@ -77,41 +77,6 @@
       }
     },
     {
-      "model_id": "novita/inclusionai/ling-3.0-tiny",
-      "name": "Novita: Inclusionai: Ling 3.0 tiny",
-      "connection": {
-        "auth": {
-          "env": [
-            "REQUESTY_API_KEY"
-          ]
-        },
-        "base_url": "https://router.requesty.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min (new orgs)",
-          "200 req / day (new orgs)",
-          "60 req / min (paying orgs)",
-          "1k req / day (paying orgs)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "requesty",
-          "aws",
-          "novita"
-        ],
-        "description": "Free plan logs up to 30 days and may train on prompts"
-      }
-    },
-    {
       "model_id": "novita/ling-3.1-flash",
       "name": "Novita: Ling 3.1 flash",
       "connection": {
@@ -252,78 +217,8 @@
       }
     },
     {
-      "model_id": "nvidia/nemotron-3-super-120b-a12b",
-      "name": "Nvidia: Nemotron 3 super 120b a12b",
-      "connection": {
-        "auth": {
-          "env": [
-            "REQUESTY_API_KEY"
-          ]
-        },
-        "base_url": "https://router.requesty.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min (new orgs)",
-          "200 req / day (new orgs)",
-          "60 req / min (paying orgs)",
-          "1k req / day (paying orgs)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "requesty",
-          "aws",
-          "nvidia"
-        ],
-        "description": "Free plan logs up to 30 days and may train on prompts"
-      }
-    },
-    {
       "model_id": "nvidia/nemotron-3-ultra-550b-a55b",
       "name": "Nvidia: Nemotron 3 ultra 550b a55b",
-      "connection": {
-        "auth": {
-          "env": [
-            "REQUESTY_API_KEY"
-          ]
-        },
-        "base_url": "https://router.requesty.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min (new orgs)",
-          "200 req / day (new orgs)",
-          "60 req / min (paying orgs)",
-          "1k req / day (paying orgs)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "requesty",
-          "aws",
-          "nvidia"
-        ],
-        "description": "Free plan logs up to 30 days and may train on prompts"
-      }
-    },
-    {
-      "model_id": "nvidia/nemotron-3.5-content-safety",
-      "name": "Nvidia: Nemotron 3.5 content safety",
       "connection": {
         "auth": {
           "env": [
@@ -387,76 +282,6 @@
           "requesty",
           "aws",
           "nvidia"
-        ],
-        "description": "Free plan logs up to 30 days and may train on prompts"
-      }
-    },
-    {
-      "model_id": "poolside/laguna-m.1",
-      "name": "Poolside: Laguna m.1",
-      "connection": {
-        "auth": {
-          "env": [
-            "REQUESTY_API_KEY"
-          ]
-        },
-        "base_url": "https://router.requesty.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min (new orgs)",
-          "200 req / day (new orgs)",
-          "60 req / min (paying orgs)",
-          "1k req / day (paying orgs)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "requesty",
-          "aws",
-          "poolside"
-        ],
-        "description": "Free plan logs up to 30 days and may train on prompts"
-      }
-    },
-    {
-      "model_id": "poolside/laguna-xs.2",
-      "name": "Poolside: Laguna xs.2",
-      "connection": {
-        "auth": {
-          "env": [
-            "REQUESTY_API_KEY"
-          ]
-        },
-        "base_url": "https://router.requesty.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min (new orgs)",
-          "200 req / day (new orgs)",
-          "60 req / min (paying orgs)",
-          "1k req / day (paying orgs)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "requesty",
-          "aws",
-          "poolside"
         ],
         "description": "Free plan logs up to 30 days and may train on prompts"
       }

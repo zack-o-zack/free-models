@@ -1,32 +1,3 @@
 {
-  "providers": {
-    "bazaarlink": {
-      "since": "2026-11-11",
-      "reason": "discovery failed: Provider bazaarlink discovery failed: BazaarLink models request failed with HTTP status 520"
-    },
-    "commandcode": {
-      "since": "2026-11-10",
-      "reason": "2 of 3 offers removed"
-    },
-    "gemini": {
-      "since": "2026-11-10",
-      "reason": "discovery failed: Provider gemini discovery failed: Gemini API pricing contains no models with free standard-tier inference"
-    },
-    "llm7": {
-      "since": "2026-11-09",
-      "reason": "4 of 7 offers removed"
-    },
-    "nous": {
-      "since": "2026-11-11",
-      "reason": "1 of 4 offers removed"
-    },
-    "onomeo": {
-      "since": "2026-11-10",
-      "reason": "discovery failed: Provider onomeo discovery failed: Onomeo info response contains no free models"
-    },
-    "requesty": {
-      "since": "2026-11-11",
-      "reason": "5 of 13 offers removed"
-    }
-  }
+  "providers": {}
 }

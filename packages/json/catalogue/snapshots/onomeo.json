@@ -7,5 +7,166 @@
     "pricing": "https://onomeo.com/models#pricing",
     "rate_limit": "https://onomeo.com/integrations#billing"
   },
-  "offers": []
+  "offers": [
+    {
+      "model_id": "glm-4.7-flash",
+      "name": "Glm 4.7 flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "onomeo",
+          "cloudflare",
+          "railway"
+        ],
+        "description": "Keeps 30-day excerpts and upstream providers may train",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "glm-5.2",
+      "name": "Glm 5.2",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "onomeo",
+          "cloudflare",
+          "railway"
+        ],
+        "description": "Keeps 30-day excerpts and upstream providers may train",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "glm-5.3",
+      "name": "Glm 5.3",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "onomeo",
+          "cloudflare",
+          "railway"
+        ],
+        "description": "Keeps 30-day excerpts and upstream providers may train",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "gpt-oss-120b",
+      "name": "Gpt oss 120b",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "onomeo",
+          "cloudflare",
+          "railway"
+        ],
+        "description": "Keeps 30-day excerpts and upstream providers may train",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "qwen3.8-27b",
+      "name": "Qwen3.8 27b",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "onomeo",
+          "cloudflare",
+          "railway"
+        ],
+        "description": "Keeps 30-day excerpts and upstream providers may train",
+        "conditional": true
+      }
+    }
+  ]
 }

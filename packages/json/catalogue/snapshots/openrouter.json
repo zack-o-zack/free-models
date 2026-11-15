@@ -201,70 +201,6 @@
       }
     },
     {
-      "model_id": "liquid/lfm-2.5-2.6b:free",
-      "name": "LiquidAI: LFM2.5-2.6B (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "liquid"
-        ],
-        "description": "Free endpoints may log prompts and completions"
-      }
-    },
-    {
-      "model_id": "liquid/lfm-2.5-embedding-350m:free",
-      "name": "LiquidAI: LFM2.5-Embedding-350M (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "liquid"
-        ],
-        "description": "Free endpoints may log prompts and completions"
-      }
-    },
-    {
       "model_id": "liquid/lfm-3-1.7b:free",
       "name": "LiquidAI: LFM3-1.7B (free)",
       "connection": {
@@ -614,26 +550,6 @@
           "nvidia"
         ],
         "description": "Free endpoints may log prompts and completions"
-      }
-    },
-    {
-      "model_id": "parallel/decisions-fast:free",
-      "name": "Parallel: Decisions Fast (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
       }
     },
     {
