@@ -1769,6 +1769,10 @@
       "name": "Hy3"
     },
     {
+      "id": "tencent/hy4-flash",
+      "name": "Tencent Hy4 Flash"
+    },
+    {
       "id": "tencent/hy4-preview",
       "name": "Tencent: Hy4 preview"
     },

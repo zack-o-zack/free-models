@@ -4,6 +4,7 @@
     "codestral-latest": "mistralai/codestral-2508",
     "deepseek-v4-flash": "deepseek/deepseek-v4-flash",
     "deepseek-v4-pro": "deepseek/deepseek-v4-pro-0813",
+    "deepseek-v4.1-flash": "deepseek/deepseek-v4.1-flash",
     "gemini-3.1-flash-lite": "google/gemini-3.1-flash-lite",
     "gemini-3.5-flash": "google/gemini-3.5-flash",
     "gemini-3.5-flash-lite": "google/gemini-3.5-flash-lite",

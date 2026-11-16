@@ -133,68 +133,6 @@
       }
     },
     {
-      "model_id": "meta/llama-3.2-90b-vision-instruct",
-      "name": "llama-3.2-90b-vision-instruct",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "nvidia"
-        ],
-        "description": "Trial interactions are retained and monitored on US servers"
-      }
-    },
-    {
-      "model_id": "meta/llama-guard-4-12b",
-      "name": "llama-guard-4-12b",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "nvidia"
-        ],
-        "description": "Trial interactions are retained and monitored on US servers"
-      }
-    },
-    {
       "model_id": "meta/muse-glimmer-30b",
       "name": "muse-glimmer-30b",
       "connection": {
@@ -414,37 +352,6 @@
     {
       "model_id": "nvidia/body-pose",
       "name": "3D Body Pose",
-      "connection": {
-        "auth": {
-          "env": [
-            "NVIDIA_API_KEY"
-          ]
-        },
-        "base_url": "https://integrate.api.nvidia.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "40 req / min",
-          "10k req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "nvidia"
-        ],
-        "description": "Trial interactions are retained and monitored on US servers"
-      }
-    },
-    {
-      "model_id": "nvidia/cosmos-transfer2_5-2b",
-      "name": "cosmos-transfer2.5-2b",
       "connection": {
         "auth": {
           "env": [

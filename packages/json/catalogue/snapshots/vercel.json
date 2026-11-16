@@ -6491,6 +6491,25 @@
       }
     },
     {
+      "model_id": "tencent/hy4-flash",
+      "name": "Tencent Hy4 Flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "thinkingmachines/inkling",
       "name": "Inkling",
       "connection": {
