@@ -629,6 +629,14 @@
       "name": "hexgrad: Kokoro 82M"
     },
     {
+      "id": "heygen/heygen-decision-1",
+      "name": "HeyGen Decision 1"
+    },
+    {
+      "id": "heygen/heygen-decision-1-turbo",
+      "name": "HeyGen Decision 1 Turbo"
+    },
+    {
       "id": "heygen/heygen-voice-1-turbo",
       "name": "HeyGen: HeyGen Voice Turbo"
     },

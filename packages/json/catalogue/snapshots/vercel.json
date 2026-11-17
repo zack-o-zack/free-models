@@ -2499,6 +2499,46 @@
       }
     },
     {
+      "model_id": "heygen/heygen-decision-1",
+      "name": "HeyGen Decision 1",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "heygen/heygen-decision-1-turbo",
+      "name": "HeyGen Decision 1 Turbo",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "humansand/ampersand-v0.1",
       "name": "Ampersand v0.1",
       "connection": {
@@ -6178,6 +6218,25 @@
           "Free with $5 monthly credits"
         ],
         "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "recursive/flint-v1.0",
+      "name": "Flint",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "Free — no credits used"
+        ],
+        "funding": "no_credits"
       }
     },
     {
