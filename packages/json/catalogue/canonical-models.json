@@ -729,6 +729,14 @@
       "name": "Liquid: D1 Ultra"
     },
     {
+      "id": "liquid/d1.2",
+      "name": "Liquid d1.2"
+    },
+    {
+      "id": "liquid/d1.2-ultra",
+      "name": "Liquid d1.2 Ultra"
+    },
+    {
       "id": "liquid/lfm-2.5-2.6b",
       "name": "LiquidAI: LFM2.5-2.6B"
     },
@@ -841,12 +849,24 @@
       "name": "Muse Spark Open"
     },
     {
+      "id": "microsoft/decision-1.1",
+      "name": "Decision-1.1"
+    },
+    {
       "id": "microsoft/mai-image-2.6",
       "name": "MAI-Image-2.6"
     },
     {
       "id": "microsoft/mai-image-2.6-flash",
       "name": "MAI-Image-2.6-Flash"
+    },
+    {
+      "id": "microsoft/mai-image-2.7",
+      "name": "MAI-Image-2.7"
+    },
+    {
+      "id": "microsoft/mai-image-2.7-flash",
+      "name": "MAI-Image-2.7-Flash"
     },
     {
       "id": "microsoft/mai-transcribe-2",

@@ -42,39 +42,6 @@
       }
     },
     {
-      "model_id": "alibaba/qwen-3-235b",
-      "name": "Qwen3 235B A22B",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "CN"
-        ],
-        "subprocessors": [
-          "alibaba"
-        ],
-        "description": "Upstream providers may retain data unless training is disabled",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "alibaba/qwen-3-30b",
       "name": "Qwen3-30B-A3B",
       "connection": {
@@ -110,39 +77,6 @@
     {
       "model_id": "alibaba/qwen-3-32b",
       "name": "Qwen 3 32B",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "CN"
-        ],
-        "subprocessors": [
-          "alibaba"
-        ],
-        "description": "Upstream providers may retain data unless training is disabled",
-        "conditional": true
-      }
-    },
-    {
-      "model_id": "alibaba/qwen3-coder",
-      "name": "Qwen3 Coder 480B A35B Instruct",
       "connection": {
         "auth": {
           "env": [
@@ -377,39 +311,6 @@
     {
       "model_id": "alibaba/qwen3-next-80b-a3b-instruct",
       "name": "Qwen3 Next 80B A3B Instruct",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "CN"
-        ],
-        "subprocessors": [
-          "alibaba"
-        ],
-        "description": "Upstream providers may retain data unless training is disabled",
-        "conditional": true
-      }
-    },
-    {
-      "model_id": "alibaba/qwen3-next-80b-a3b-thinking",
-      "name": "Qwen3 Next 80B A3B Thinking",
       "connection": {
         "auth": {
           "env": [
@@ -2768,6 +2669,46 @@
       }
     },
     {
+      "model_id": "liquid/d1.2",
+      "name": "Liquid d1.2",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
+      "model_id": "liquid/d1.2-ultra",
+      "name": "Liquid d1.2 Ultra",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      }
+    },
+    {
       "model_id": "liquid/lfm2.5-24b-a2b",
       "name": "LFM2.5-24B-A2B",
       "connection": {
@@ -3030,6 +2971,40 @@
       }
     },
     {
+      "model_id": "microsoft/decision-1.1",
+      "name": "Decision-1.1",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "decision",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
       "model_id": "microsoft/mai-image-2.6",
       "name": "MAI-Image-2.6",
       "connection": {
@@ -3066,6 +3041,74 @@
     {
       "model_id": "microsoft/mai-image-2.6-flash",
       "name": "MAI-Image-2.6-Flash",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "image",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "microsoft/mai-image-2.7",
+      "name": "MAI-Image-2.7",
+      "connection": {
+        "auth": {
+          "env": [
+            "AI_GATEWAY_API_KEY"
+          ]
+        },
+        "base_url": "https://ai-gateway.vercel.sh",
+        "model_type": "image",
+        "protocol": "vercel-ai-gateway"
+      },
+      "limits": {
+        "terms": [
+          "Free with $5 monthly credits"
+        ],
+        "funding": "monthly_credits"
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [
+          "US",
+          "EU"
+        ],
+        "subprocessors": [
+          "azure"
+        ],
+        "description": "Upstream providers may retain data unless training is disabled",
+        "conditional": true
+      }
+    },
+    {
+      "model_id": "microsoft/mai-image-2.7-flash",
+      "name": "MAI-Image-2.7-Flash",
       "connection": {
         "auth": {
           "env": [
@@ -3302,74 +3345,8 @@
       }
     },
     {
-      "model_id": "minimax/minimax-m2",
-      "name": "MiniMax M2",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "CN"
-        ],
-        "subprocessors": [
-          "minimax"
-        ],
-        "description": "Upstream providers may retain data unless training is disabled",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "minimax/minimax-m2.1",
       "name": "MiniMax M2.1",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "CN"
-        ],
-        "subprocessors": [
-          "minimax"
-        ],
-        "description": "Upstream providers may retain data unless training is disabled",
-        "conditional": true
-      }
-    },
-    {
-      "model_id": "minimax/minimax-m2.1-lightning",
-      "name": "MiniMax M2.1 Lightning",
       "connection": {
         "auth": {
           "env": [
@@ -3434,74 +3411,8 @@
       }
     },
     {
-      "model_id": "minimax/minimax-m2.5-highspeed",
-      "name": "MiniMax M2.5 High Speed",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "CN"
-        ],
-        "subprocessors": [
-          "minimax"
-        ],
-        "description": "Upstream providers may retain data unless training is disabled",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "minimax/minimax-m2.7",
       "name": "MiniMax M2.7",
-      "connection": {
-        "auth": {
-          "env": [
-            "AI_GATEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://ai-gateway.vercel.sh/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Free with $5 monthly credits"
-        ],
-        "funding": "monthly_credits"
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "US",
-          "CN"
-        ],
-        "subprocessors": [
-          "minimax"
-        ],
-        "description": "Upstream providers may retain data unless training is disabled",
-        "conditional": true
-      }
-    },
-    {
-      "model_id": "minimax/minimax-m2.7-highspeed",
-      "name": "MiniMax M2.7 High Speed",
       "connection": {
         "auth": {
           "env": [

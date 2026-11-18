@@ -3,6 +3,10 @@
     "gemini": {
       "since": "2026-11-16",
       "reason": "discovery failed: Provider gemini discovery failed: Gemini API pricing contains no models with free standard-tier inference"
+    },
+    "novita": {
+      "since": "2026-11-18",
+      "reason": "provider disappeared or emptied"
     }
   }
 }
