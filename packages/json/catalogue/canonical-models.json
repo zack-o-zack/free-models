@@ -169,6 +169,10 @@
       "name": "Cloudflare: Clairic"
     },
     {
+      "id": "cloudflare/clairic-flash",
+      "name": "Cloudflare: Clairic flash"
+    },
+    {
       "id": "cloudflare/clef",
       "name": "Cloudflare: Clef"
     },
