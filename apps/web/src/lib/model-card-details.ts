@@ -1,11 +1,9 @@
 import type { CatalogueModel } from "@/lib/model-types";
 import { modelHasZdr } from "@/lib/provider-compliance";
 
-const MAX_CARD_TOPICS = 3;
 const OUTPUT_DETAIL_TYPES = new Set(["image", "speech", "realtime", "video"]);
 
 export interface ModelCardDetails {
-  readonly topics: { readonly value: string; readonly label: string }[];
   readonly embeddingDimensions: string | null;
   readonly outputs: string | null;
   readonly zdr: boolean;
@@ -27,14 +25,10 @@ export function formatEmbeddingDimensions(dimensions: readonly number[]): string
 export function getModelCardDetails(
   model: Pick<
     CatalogueModel,
-    "id" | "modelType" | "topics" | "embeddingDimensions" | "outputModalities" | "connections"
+    "id" | "modelType" | "embeddingDimensions" | "outputModalities" | "connections"
   >,
 ): ModelCardDetails {
   return {
-    // Topics are stored in taxonomy order, so the first ones are the card's top topics.
-    topics: model.topics
-      .slice(0, MAX_CARD_TOPICS)
-      .map((value) => ({ value, label: titleCase(value) })),
     embeddingDimensions:
       model.modelType === "embedding" ? formatEmbeddingDimensions(model.embeddingDimensions) : null,
     outputs:

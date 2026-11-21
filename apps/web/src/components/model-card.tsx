@@ -189,15 +189,6 @@ export const ModelCard = memo(function ModelCard({ model }: { model: CatalogueMo
         <p className="line-clamp-2 max-w-4xl text-[15px] leading-6 text-muted-foreground">
           {model.description}
         </p>
-        {details.topics.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5">
-            {details.topics.map(({ value, label }) => (
-              <Badge key={value} variant="outline">
-                {label}
-              </Badge>
-            ))}
-          </div>
-        )}
         <div className="flex flex-wrap items-center gap-1.5">
           {model.providers.map((provider) => (
             <ProviderBadge
