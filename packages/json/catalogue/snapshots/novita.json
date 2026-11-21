@@ -6,37 +6,5 @@
     "overview": "https://novita.ai/",
     "pricing": "https://novita.ai/pricing"
   },
-  "offers": [
-    {
-      "model_id": "apodex/apodex-1.1-mini",
-      "name": "Apodex 1.1 Mini",
-      "connection": {
-        "auth": {
-          "env": [
-            "NOVITA_API_KEY"
-          ]
-        },
-        "base_url": "https://api.novita.ai/openai",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "Rate limits vary by model and account; check the Novita console"
-        ]
-      },
-      "compliance": {
-        "zdr": true,
-        "no_training": true,
-        "data_retention": false,
-        "countries": [
-          "US"
-        ],
-        "subprocessors": [
-          "novita",
-          "aws"
-        ],
-        "description": "API content is not retained and not used for model training"
-      }
-    }
-  ]
+  "offers": []
 }
