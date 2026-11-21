@@ -4,26 +4,12 @@ import { formatEmbeddingDimensions, getModelCardDetails } from "../src/lib/model
 const base = {
   id: "maker/model",
   modelType: "chat",
-  topics: [] as string[],
   embeddingDimensions: [] as number[],
   outputModalities: ["text"],
   connections: [] as { provider: string }[],
 };
 
 describe("model card details", () => {
-  test("shows at most three topics with labels", () => {
-    expect(
-      getModelCardDetails({
-        ...base,
-        topics: ["programming", "agents", "math", "creative_writing"],
-      }).topics,
-    ).toEqual([
-      { value: "programming", label: "Programming" },
-      { value: "agents", label: "Agents" },
-      { value: "math", label: "Math" },
-    ]);
-  });
-
   test("shows embedding dimensions only for embedding models", () => {
     expect(
       getModelCardDetails({ ...base, modelType: "embedding", embeddingDimensions: [1024] })
