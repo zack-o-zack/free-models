@@ -41,38 +41,6 @@
       }
     },
     {
-      "model_id": "glm-5.2",
-      "name": "Glm 5.2",
-      "connection": {
-        "auth": {
-          "env": [
-            "ONOMEO_API_KEY"
-          ]
-        },
-        "base_url": "https://onomeo.com/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "12 req / min",
-          "30 req / 5 hr"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "onomeo",
-          "cloudflare",
-          "railway"
-        ],
-        "description": "Keeps 30-day excerpts and upstream providers may train",
-        "conditional": true
-      }
-    },
-    {
       "model_id": "glm-5.3",
       "name": "Glm 5.3",
       "connection": {
