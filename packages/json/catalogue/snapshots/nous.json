@@ -38,8 +38,66 @@
       }
     },
     {
+      "model_id": "qwen/qwen4-max:free",
+      "name": "Qwen: Qwen4 Max (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "nous"
+        ],
+        "description": "Prompts and completions may be logged and used for training"
+      }
+    },
+    {
       "model_id": "stepfun/step-3.7-flash:free",
-      "name": "StepFun: Step 3.7 Flash",
+      "name": "StepFun: Step 3.7 Flash (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "NOUS_API_KEY"
+          ]
+        },
+        "base_url": "https://inference-api.nousresearch.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "50 req / min",
+          "500k tok / min"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "nous"
+        ],
+        "description": "Prompts and completions may be logged and used for training"
+      }
+    },
+    {
+      "model_id": "tencent/hy4-flash:free",
+      "name": "Tencent: Hy4 flash (free)",
       "connection": {
         "auth": {
           "env": [
@@ -68,7 +126,7 @@
     },
     {
       "model_id": "upstage/solar-mini4:free",
-      "name": "Upstage: Solar Mini 4",
+      "name": "Upstage: Solar Mini 4 (free)",
       "connection": {
         "auth": {
           "env": [

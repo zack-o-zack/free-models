@@ -1,12 +1,14 @@
 {
   "provider": "kilo",
   "mappings": {
+    "baidu/ernie-5.5-flash-preview:free": "baidu/ernie-5.5-flash-preview",
     "cohere/north-mini-code:free": "cohere/north-mini-code",
     "dots-studio/dots-3-note-preview:free": "dots-studio/dots-3-note-preview",
     "inclusionai/ling-3.0-flash-fin:free": "inclusionai/ling-3.0-flash-fin",
     "inclusionai/ling-3.0-flash-sante:free": "inclusionai/ling-3.0-flash-sante",
     "inclusionai/ling-3.0-flash-vl:free": "inclusionai/ling-3.0-flash-vl",
     "inclusionai/ling-3.1-flash": "inclusionai/ling-3.1-flash",
+    "inclusionai/ling-3.2-flash:free": "inclusionai/ling-3.2-flash",
     "liquid/lfm-2.5-2.6b:free": "liquid/lfm-2.5-2.6b",
     "liquid/lfm-3-1.7b:free": "liquid/lfm-3-1.7b",
     "minimax/minimax-m3.1-flash:free": "minimax/minimax-m3.1-flash",
@@ -18,6 +20,7 @@
     "nvidia/nemotron-3.5-content-safety:free": "nvidia/nemotron-3.5-content-safety",
     "nvidia/nemotron-3.5-lightning:free": "nvidia/nemotron-3.5-lightning",
     "nvidia/nemotron-3.5-super-vl:free": "nvidia/nemotron-3.5-super-vl",
+    "particle-ai/particle-1:free": "particle-ai/particle-1",
     "poolside/laguna-s-2.1:free": "poolside/laguna-s-2.1",
     "poolside/laguna-xs-2.1:free": "poolside/laguna-xs-2.1",
     "recursive/flint-v1.0:free": "recursive/flint-v1.0",

@@ -57,6 +57,10 @@
       "name": "BAAI: bge-small-en-v1.5"
     },
     {
+      "id": "baidu/ernie-5.5-flash-preview",
+      "name": "Baidu: ERNIE-5.5-Flash-Preview"
+    },
+    {
       "id": "baseten/elephant-1",
       "name": "Baseten: Elephant 1"
     },
@@ -707,6 +711,10 @@
     {
       "id": "inclusionai/ling-3.1-flash-1019",
       "name": "Ling 3.1 Flash 1019"
+    },
+    {
+      "id": "inclusionai/ling-3.2-flash",
+      "name": "inclusionAI: Ling 3.2 Flash"
     },
     {
       "id": "inference-net/schematron-v2-small",
@@ -1481,6 +1489,10 @@
       "name": "Parallel Web Search"
     },
     {
+      "id": "particle-ai/particle-1",
+      "name": "Particle AI: Particle-1"
+    },
+    {
       "id": "perplexity/pplx-decider-flash-v1.2",
       "name": "Perplexity: Decider Flash V1.2 4B"
     },
@@ -1657,6 +1669,10 @@
       "name": "Qwen 3.8 Omni Flash"
     },
     {
+      "id": "qwen/qwen4-max",
+      "name": "Qwen: Qwen4 Max"
+    },
+    {
       "id": "qwen/qwq-32b",
       "name": "Qwen: QwQ 32B"
     },
@@ -1679,6 +1695,10 @@
     {
       "id": "recraft/recraft-v4.1-flash",
       "name": "Recraft V4.1 Flash"
+    },
+    {
+      "id": "recraft/recraft-v4.1-flash-v2",
+      "name": "Recraft: Recraft V4.1 Flash V2"
     },
     {
       "id": "recraft/recraft-v4.1-utility",

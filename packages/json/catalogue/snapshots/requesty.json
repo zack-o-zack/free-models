@@ -42,41 +42,6 @@
       }
     },
     {
-      "model_id": "mistral/leanstral-1-5",
-      "name": "Mistral: Leanstral 1 5",
-      "connection": {
-        "auth": {
-          "env": [
-            "REQUESTY_API_KEY"
-          ]
-        },
-        "base_url": "https://router.requesty.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min (new orgs)",
-          "200 req / day (new orgs)",
-          "60 req / min (paying orgs)",
-          "1k req / day (paying orgs)"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [
-          "EU"
-        ],
-        "subprocessors": [
-          "requesty",
-          "aws",
-          "mistral"
-        ],
-        "description": "Free plan logs up to 30 days and may train on prompts"
-      }
-    },
-    {
       "model_id": "novita/ling-3.1-flash",
       "name": "Novita: Ling 3.1 flash",
       "connection": {

@@ -9,6 +9,32 @@
   },
   "offers": [
     {
+      "model_id": "recursive/flint-v1.0:free",
+      "name": "Flint",
+      "connection": {
+        "auth": {
+          "env": [
+            "CMD_API_KEY"
+          ]
+        },
+        "base_url": "https://api.commandcode.ai/provider/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "1k req / day"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [],
+        "description": "Free models retain prompts up to 30 days"
+      }
+    },
+    {
       "model_id": "stealth/glyph-cluster:free",
       "name": "Glyph Cluster",
       "connection": {
