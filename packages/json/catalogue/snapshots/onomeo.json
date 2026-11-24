@@ -73,6 +73,38 @@
       }
     },
     {
+      "model_id": "llama-4-scout",
+      "name": "Llama 4 scout",
+      "connection": {
+        "auth": {
+          "env": [
+            "ONOMEO_API_KEY"
+          ]
+        },
+        "base_url": "https://onomeo.com/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "12 req / min",
+          "30 req / 5 hr"
+        ]
+      },
+      "compliance": {
+        "zdr": false,
+        "no_training": false,
+        "data_retention": true,
+        "countries": [],
+        "subprocessors": [
+          "onomeo",
+          "cloudflare",
+          "railway"
+        ],
+        "description": "Keeps 30-day excerpts and upstream providers may train",
+        "conditional": true
+      }
+    },
+    {
       "model_id": "qwen3.8-27b",
       "name": "Qwen3.8 27b",
       "connection": {
