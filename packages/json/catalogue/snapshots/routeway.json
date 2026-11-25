@@ -231,38 +231,6 @@
         "description": "Upstream providers may retain or use prompts",
         "conditional": true
       }
-    },
-    {
-      "model_id": "muse-glimmer-30b:free",
-      "name": "Meta: Glimmer 30B (Free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "ROUTEWAY_API_KEY"
-          ]
-        },
-        "base_url": "https://api.routeway.ai/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "200 req / day"
-        ]
-      },
-      "compliance": {
-        "zdr": false,
-        "no_training": false,
-        "data_retention": true,
-        "countries": [],
-        "subprocessors": [
-          "routeway",
-          "aws",
-          "google"
-        ],
-        "description": "Upstream providers may retain or use prompts",
-        "conditional": true
-      }
     }
   ]
 }

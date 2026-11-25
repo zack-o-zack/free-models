@@ -8,9 +8,17 @@
       "since": "2026-11-24",
       "reason": "2 of 5 offers removed"
     },
+    "nous": {
+      "since": "2026-11-25",
+      "reason": "1 of 4 offers removed"
+    },
+    "onomeo": {
+      "since": "2026-11-25",
+      "reason": "3 of 4 offers removed"
+    },
     "vercel": {
       "since": "2026-11-23",
-      "reason": "discovery failed: Provider vercel discovery failed: [\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"chat\",\n      \"image\",\n      \"embedding\",\n      \"transcription\",\n      \"realtime\",\n      \"reranking\",\n      \"speech\",\n      \"tool\",\n      \"decision\",\n      \"video\"\n    ],\n    \"path\": [\n      314,\n      \"type\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"chat\\\"|\\\"image\\\"|\\\"embedding\\\"|\\\"transcription\\\"|\\\"realtime\\\"|\\\"reranking\\\"|\\\"speech\\\"|\\\"tool\\\"|\\\"decision\\\"|\\\"video\\\"\"\n  }\n]"
+      "reason": "discovery failed: Provider vercel discovery failed: [\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"chat\",\n      \"image\",\n      \"embedding\",\n      \"transcription\",\n      \"realtime\",\n      \"reranking\",\n      \"speech\",\n      \"tool\",\n      \"decision\",\n      \"video\"\n    ],\n    \"path\": [\n      342,\n      \"type\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"chat\\\"|\\\"image\\\"|\\\"embedding\\\"|\\\"transcription\\\"|\\\"realtime\\\"|\\\"reranking\\\"|\\\"speech\\\"|\\\"tool\\\"|\\\"decision\\\"|\\\"video\\\"\"\n  }\n]"
     }
   }
 }

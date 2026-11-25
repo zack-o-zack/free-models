@@ -1,16 +1,81 @@
 {
-  "generatedAt": "2026-11-24T12:36:57.059Z",
+  "generatedAt": "2026-11-25T11:27:01.656Z",
   "windowDays": 30,
-  "since": "2026-10-25T12:36:57.059Z",
+  "since": "2026-10-26T11:27:01.656Z",
   "totalAdded": 99,
-  "totalRemoved": 413,
+  "totalRemoved": 418,
   "totalProvidersAdded": 0,
   "totalProvidersRemoved": 0,
   "entries": [
     {
-      "id": "working-nous-remove-qwen/qwen4-max:free",
+      "id": "working-kilo-remove-dots-studio/dots-3-note-preview:free",
+      "date": "2026-11-25",
+      "timestamp": "2026-11-25T11:27:01.656Z",
+      "provider": "kilo",
+      "providerName": "Kilo",
+      "type": "removed",
+      "category": "model",
+      "modelId": "dots-studio/dots-3-note-preview:free",
+      "modelName": "Dots Studio: Dots3-Note Preview (free)",
+      "canonicalId": "dots-studio/dots-3-note-preview",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-nvidia-remove-google/gemma-4-31b-it",
+      "date": "2026-11-25",
+      "timestamp": "2026-11-25T11:27:01.656Z",
+      "provider": "nvidia",
+      "providerName": "NVIDIA",
+      "type": "removed",
+      "category": "model",
+      "modelId": "google/gemma-4-31b-it",
+      "modelName": "gemma-4-31b-it",
+      "canonicalId": "google/gemma-4-31b-it",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-nvidia-remove-meta/muse-glimmer-30b",
+      "date": "2026-11-25",
+      "timestamp": "2026-11-25T11:27:01.656Z",
+      "provider": "nvidia",
+      "providerName": "NVIDIA",
+      "type": "removed",
+      "category": "model",
+      "modelId": "meta/muse-glimmer-30b",
+      "modelName": "muse-glimmer-30b",
+      "canonicalId": "meta/muse-glimmer-30b",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-openrouter-remove-dots-studio/dots-3-note-preview:free",
+      "date": "2026-11-25",
+      "timestamp": "2026-11-25T11:27:01.656Z",
+      "provider": "openrouter",
+      "providerName": "OpenRouter",
+      "type": "removed",
+      "category": "model",
+      "modelId": "dots-studio/dots-3-note-preview:free",
+      "modelName": "Dots Studio: Dots3-Note Preview (free)",
+      "canonicalId": "dots-studio/dots-3-note-preview",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-routeway-remove-muse-glimmer-30b:free",
+      "date": "2026-11-25",
+      "timestamp": "2026-11-25T11:27:01.656Z",
+      "provider": "routeway",
+      "providerName": "Routeway",
+      "type": "removed",
+      "category": "model",
+      "modelId": "muse-glimmer-30b:free",
+      "modelName": "Meta: Glimmer 30B (Free)",
+      "canonicalId": "meta/muse-glimmer-30b",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "34f41c8-nous-remove-qwen/qwen4-max:free",
       "date": "2026-11-24",
-      "timestamp": "2026-11-24T12:36:57.059Z",
+      "timestamp": "2026-11-24T12:37:14Z",
       "provider": "nous",
       "providerName": "Nous Portal",
       "type": "removed",
@@ -18,12 +83,13 @@
       "modelId": "qwen/qwen4-max:free",
       "modelName": "Qwen: Qwen4 Max (free)",
       "canonicalId": "qwen/qwen4-max",
-      "commitMessage": "Working directory changes"
+      "commitHash": "34f41c8",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
-      "id": "working-onomeo-add-llama-4-scout",
+      "id": "34f41c8-onomeo-add-llama-4-scout",
       "date": "2026-11-24",
-      "timestamp": "2026-11-24T12:36:57.059Z",
+      "timestamp": "2026-11-24T12:37:14Z",
       "provider": "onomeo",
       "providerName": "Onomeo",
       "type": "added",
@@ -31,7 +97,8 @@
       "modelId": "llama-4-scout",
       "modelName": "Llama 4 scout",
       "canonicalId": "meta-llama/llama-4-scout",
-      "commitMessage": "Working directory changes"
+      "commitHash": "34f41c8",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
       "id": "4dfc965-commandcode-add-recursive/flint-v1.0:free",
