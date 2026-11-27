@@ -1,16 +1,55 @@
 {
-  "generatedAt": "2026-11-26T11:01:35.268Z",
+  "generatedAt": "2026-11-27T10:59:06.896Z",
   "windowDays": 30,
-  "since": "2026-10-27T11:01:35.268Z",
+  "since": "2026-10-28T10:59:06.896Z",
   "totalAdded": 95,
-  "totalRemoved": 404,
+  "totalRemoved": 407,
   "totalProvidersAdded": 0,
   "totalProvidersRemoved": 0,
   "entries": [
     {
-      "id": "working-bazaarlink-add-reflection/beam-free:free",
+      "id": "working-llm7-remove-DeepSeek-V4-Flash-0731",
+      "date": "2026-11-27",
+      "timestamp": "2026-11-27T10:59:06.896Z",
+      "provider": "llm7",
+      "providerName": "LLM7",
+      "type": "removed",
+      "category": "model",
+      "modelId": "DeepSeek-V4-Flash-0731",
+      "modelName": "Deepseek v4 flash 0731",
+      "canonicalId": "deepseek/deepseek-v4-flash-0731",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-llm7-remove-minimax-m2.7",
+      "date": "2026-11-27",
+      "timestamp": "2026-11-27T10:59:06.896Z",
+      "provider": "llm7",
+      "providerName": "LLM7",
+      "type": "removed",
+      "category": "model",
+      "modelId": "minimax-m2.7",
+      "modelName": "Minimax m2.7",
+      "canonicalId": "minimax/minimax-m2.7",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "working-llm7-remove-mistral-Nemo-Instruct-2407",
+      "date": "2026-11-27",
+      "timestamp": "2026-11-27T10:59:06.896Z",
+      "provider": "llm7",
+      "providerName": "LLM7",
+      "type": "removed",
+      "category": "model",
+      "modelId": "mistral-Nemo-Instruct-2407",
+      "modelName": "Mistral nemo instruct 2407",
+      "canonicalId": "mistralai/mistral-nemo",
+      "commitMessage": "Working directory changes"
+    },
+    {
+      "id": "efe79d4-bazaarlink-add-reflection/beam-free:free",
       "date": "2026-11-26",
-      "timestamp": "2026-11-26T11:01:35.268Z",
+      "timestamp": "2026-11-26T11:01:59Z",
       "provider": "bazaarlink",
       "providerName": "BazaarLink",
       "type": "added",
@@ -18,7 +57,8 @@
       "modelId": "reflection/beam-free:free",
       "modelName": "Beam Free (free)",
       "canonicalId": "reflection/beam-1.0-501b-a23b",
-      "commitMessage": "Working directory changes"
+      "commitHash": "efe79d4",
+      "commitMessage": "chore: update free model catalogue"
     },
     {
       "id": "581b598-kilo-remove-dots-studio/dots-3-note-preview:free",
