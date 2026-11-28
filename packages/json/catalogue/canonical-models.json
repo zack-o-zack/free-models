@@ -29,6 +29,10 @@
       "name": "Titan Text Embeddings V2"
     },
     {
+      "id": "antdigital/lingdt-decision-fast-1.0",
+      "name": "Ant Digital: LingDT Decision Fast 1.0"
+    },
+    {
       "id": "apodex/apodex-1.1-mini",
       "name": "Apodex: Apodex 1.1 Mini"
     },

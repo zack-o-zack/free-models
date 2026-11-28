@@ -1,6 +1,7 @@
 {
   "provider": "openrouter",
   "mappings": {
+    "antdigital/lingdt-decision-fast-1.0:free": "antdigital/lingdt-decision-fast-1.0",
     "apodex/apodex-1.1-mini:free": "apodex/apodex-1.1-mini",
     "baidu/ernie-5.5-flash-preview:free": "baidu/ernie-5.5-flash-preview",
     "baseten/elephant-1:free": "baseten/elephant-1",

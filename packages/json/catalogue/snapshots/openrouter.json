@@ -9,6 +9,26 @@
   },
   "offers": [
     {
+      "model_id": "antdigital/lingdt-decision-fast-1.0:free",
+      "name": "Ant Digital: LingDT Decision Fast 1.0 (free)",
+      "connection": {
+        "auth": {
+          "env": [
+            "OPENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://openrouter.ai/api/v1",
+        "protocol": "openai"
+      },
+      "limits": {
+        "terms": [
+          "20 req / min",
+          "50 req / day (< $10 credits)",
+          "1k req / day (>= $10 credits)"
+        ]
+      }
+    },
+    {
       "model_id": "baidu/ernie-5.5-flash-preview:free",
       "name": "Baidu: ERNIE-5.5-Flash-Preview (free)",
       "connection": {
@@ -154,26 +174,6 @@
           "heygen"
         ],
         "description": "Free endpoints may log prompts and completions"
-      }
-    },
-    {
-      "model_id": "inclusionai/ling-3.2-flash:free",
-      "name": "inclusionAI: Ling 3.2 Flash (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
       }
     },
     {
@@ -507,26 +507,6 @@
     {
       "model_id": "perplexity/pplx-decider-v1.3:free",
       "name": "Perplexity: Decider V1.3 (free)",
-      "connection": {
-        "auth": {
-          "env": [
-            "OPENROUTER_API_KEY"
-          ]
-        },
-        "base_url": "https://openrouter.ai/api/v1",
-        "protocol": "openai"
-      },
-      "limits": {
-        "terms": [
-          "20 req / min",
-          "50 req / day (< $10 credits)",
-          "1k req / day (>= $10 credits)"
-        ]
-      }
-    },
-    {
-      "model_id": "recraft/recraft-v4.1-flash-v2:free",
-      "name": "Recraft: Recraft V4.1 Flash V2 (free)",
       "connection": {
         "auth": {
           "env": [

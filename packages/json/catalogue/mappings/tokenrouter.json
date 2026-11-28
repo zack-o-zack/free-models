@@ -1,6 +1,7 @@
 {
   "provider": "tokenrouter",
   "mappings": {
+    "deepseek/deepseek-v4.1-flash-1017-free": "deepseek/deepseek-v4.1-flash-1017",
     "z-ai/glm-5.3-free": "z-ai/glm-5.3"
   }
 }

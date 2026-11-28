@@ -7,5 +7,28 @@
     "pricing": "https://api.tokenrouter.com/api/pricing",
     "rate_limit": "https://www.tokenrouter.com/docs/"
   },
-  "offers": []
+  "offers": [
+    {
+      "model_id": "deepseek/deepseek-v4.1-flash-1017-free",
+      "name": "Deepseek: Deepseek v4.1 flash 1017",
+      "connection": {
+        "auth": {
+          "env": [
+            "TOKENROUTER_API_KEY"
+          ]
+        },
+        "base_url": "https://api.tokenrouter.com/v1",
+        "protocol": "openai",
+        "supported_endpoint_types": [
+          "openai",
+          "openai-response"
+        ]
+      },
+      "limits": {
+        "terms": [
+          "8 req / min"
+        ]
+      }
+    }
+  ]
 }
